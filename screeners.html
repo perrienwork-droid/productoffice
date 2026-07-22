@@ -61,49 +61,6 @@
 </head>
 <body>
 
-<div class="password-gate" id="passwordGate">
-  <div class="gate-box">
-    <div class="lock-icon">&#128274;</div>
-    <h2>This case study is <strong>under wraps</strong></h2>
-    <p>The Neurodivergent Traits Screener write-up covers clinical measurement decisions I keep close. Enter the password if you have it, or request access below.</p>
-    <div class="gate-input-wrap">
-      <input type="password" id="gatePassword" placeholder="Password" autocomplete="off">
-      <button type="button" id="gateSubmit">Unlock</button>
-    </div>
-    <div class="gate-error" id="gateError"></div>
-    <div class="gate-back">
-      <a href="mailto:perrien.work@gmail.com?subject=Access%20request%3A%20Clinical%20Screeners%20case%20study">Request access &rarr;</a>
-      &nbsp;&middot;&nbsp;
-      <a href="index.html#work">&larr; Back to all work</a>
-    </div>
-  </div>
-</div>
-<script>
-(function(){
-  var KEY = 'pto-screeners-unlocked';
-  var PASSWORD = 'malgo2026';
-  var gate = document.getElementById('passwordGate');
-  if (sessionStorage.getItem(KEY) === '1') { gate.classList.add('hidden'); }
-
-  var input = document.getElementById('gatePassword');
-  var button = document.getElementById('gateSubmit');
-  var error = document.getElementById('gateError');
-
-  function tryUnlock() {
-    if (input.value.trim().toLowerCase() === PASSWORD) {
-      sessionStorage.setItem(KEY, '1');
-      gate.classList.add('hidden');
-      error.textContent = '';
-    } else {
-      error.textContent = "That password isn't right — try again, or request access.";
-    }
-  }
-
-  button.addEventListener('click', tryUnlock);
-  input.addEventListener('keydown', function(e){ if (e.key === 'Enter') tryUnlock(); });
-})();
-</script>
-
 <div class="nav-wrap">
 <nav>
   <a href="index.html" class="logo" aria-label="The Product Office home">
