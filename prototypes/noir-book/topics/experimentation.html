@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Experimentation &amp; A/B Testing — Noir Book</title>
+  <link rel="stylesheet" href="../css/shared.css">
+  <link rel="stylesheet" href="../css/topic.css">
+  <script src="../js/theme.js"></script>
+  <script src="../js/topic-nav.js"></script>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="site-nav subpage-nav" data-discipline="pm">
+    <div class="nav-inner">
+      <a href="../index.html" class="site-logo">
+        <span class="logo-mark">PM</span>
+        <span class="nav-title">Noir Book</span>
+      </a>
+      <a href="../index.html" class="nav-back-link">&#8592; Library</a>
+      <div class="nav-filters">
+        <button class="disc-toggle ux-toggle active" data-disc="ux" onclick="toggleDisc('ux')" title="UX Design">
+          <span class="disc-dot disc-dot-ux"></span><span class="disc-label">UX Design</span><span class="disc-code">(UX)</span>
+        </button>
+        <button class="disc-toggle pm-toggle active" data-disc="pm" onclick="toggleDisc('pm')" title="Product Management">
+          <span class="disc-dot disc-dot-pm"></span><span class="disc-label">Product</span><span class="disc-code">(PM)</span>
+        </button>
+        <button class="disc-toggle mk-toggle active" data-disc="mk" onclick="toggleDisc('mk')" title="Marketing &amp; Growth">
+          <span class="disc-dot disc-dot-mk"></span><span class="disc-label">Marketing</span><span class="disc-code">(MK)</span>
+        </button>
+        <button class="disc-toggle cs-toggle active" data-disc="cs" onclick="toggleDisc('cs')" title="Content Strategy">
+          <span class="disc-dot disc-dot-cs"></span><span class="disc-label">Content</span><span class="disc-code">(CS)</span>
+        </button>
+        <div class="search-box nav-search-box">
+          <div class="nav-search-wrap">
+            <div class="nav-search-pills" id="navSearchPills"></div>
+            <input type="text" id="navSearchInput" placeholder="Search..." autocomplete="off"
+              oninput="topicNavSearch(this.value)"
+              onkeydown="handleNavSearchKey(event)"
+              onfocus="handleNavSearchFocus()"
+              onblur="handleNavSearchBlur()">
+            <button type="button" class="nav-search-clear" id="navSearchClear" onclick="clearNavSearch()" aria-label="Clear search">&times;</button>
+          </div>
+          <div class="search-dropdown" id="navSearchDropdown"></div>
+        </div>
+      </div>
+      <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle theme">&#9790;</button>
+      <button class="burger-btn" id="burgerBtn" onclick="openBurger()" aria-label="Menu">
+        <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="2" y1="4" x2="16" y2="4"/><line x1="2" y1="9" x2="16" y2="9"/><line x1="2" y1="14" x2="16" y2="14"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Burger Menu Overlay -->
+  <div class="burger-overlay" id="burgerOverlay" onclick="closeBurger(event)">
+    <div class="burger-panel" onclick="event.stopPropagation()">
+      <div class="burger-panel-header">
+        <h3>Menu</h3>
+        <button class="burger-close" onclick="closeBurger()" aria-label="Close">&times;</button>
+      </div>
+      <div class="burger-search">
+        <input type="text" id="burgerSearchInput" placeholder="Search topics, methods..." autocomplete="off" oninput="burgerSearch(this.value)">
+        <div class="burger-search-results" id="burgerSearchResults"></div>
+      </div>
+      <div class="burger-links">
+        <a href="../index.html">&#8592; Back to Library</a>
+        <a href="../design-system.html">Design System</a>
+        <a href="../request-topic.html">Suggest a topic or improvement</a>
+      </div>
+      <div class="burger-toc-section">
+        <p class="burger-toc-title">On this page</p>
+        <ul class="burger-toc-list">
+        <li><a href="#what-and-why" data-section="theory">What experimentation is and why it matters</a></li>
+        <li><a href="#experiment-methods" data-section="practical">Experiment methods</a></li>
+        <li><a href="#experimentation-culture" data-section="practical">Building an experimentation culture</a></li>
+        <li><a href="#templates-and-checklists" data-section="practical">Templates and checklists</a></li>
+        <li><a href="#real-world-examples" data-section="examples">Real-world examples</a></li>
+        <li><a href="#common-pitfalls" data-section="practical">Common pitfalls</a></li>
+        <li><a href="#when-to-use" data-section="practical">When to experiment</a></li>
+        <li><a href="#connections">Connected topics in your library</a></li>
+        <li><a href="#deep-dive">Deep-dive appendix</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Topic Header -->
+  <header class="topic-header container">
+    <div class="breadcrumb">
+      <a href="../index.html">Library</a>
+      <span class="sep">&#8250;</span>
+      <span class="breadcrumb-disc breadcrumb-pm">Product Management</span>
+      <span class="sep">&#8250;</span>
+      <span>Tier 2 — Specialized</span>
+      <span class="sep">&#8250;</span>
+      <span>Experimentation &amp; A/B Testing</span>
+    </div>
+    <div class="topic-meta">
+      <span class="tier-badge tier2">Tier 2</span>
+      <span style="font-size:14px;color:var(--ink-muted)">Topic PM.2.01</span>
+    </div>
+    <h1>Experimentation &amp; A/B Testing</h1>
+    <p class="topic-subtitle">Test hypotheses rigorously. Experiment design, statistical significance, guardrail metrics, and building an experimentation culture beyond button-color tests.</p>
+    <div class="content-splits">
+      <span class="split-badge theory">25% Theory</span>
+      <span class="split-badge practical">50% Methods &amp; Templates</span>
+      <span class="split-badge examples">25% Examples</span>
+    </div>
+  </header>
+
+  <!-- Reading Progress Bar -->
+  <div class="reading-progress" id="readingProgress"></div>
+
+  <!-- Main Layout -->
+  <div class="container">
+    <div class="topic-layout">
+
+      <!-- Sidebar: Table of Contents -->
+      <aside class="topic-sidebar">
+        <nav class="toc">
+          <p class="sidebar-topic-title">Experimentation &amp; A/B Testing</p>
+          <p class="toc-title">On this page</p>
+          <ul class="toc-list">
+            <li><a href="#what-and-why" data-section="theory">What experimentation is and why it matters</a></li>
+            <li><a href="#experiment-methods" data-section="practical">Experiment methods</a></li>
+            <li><a href="#experimentation-culture" data-section="practical">Building an experimentation culture</a></li>
+            <li><a href="#templates-and-checklists" data-section="practical">Templates and checklists</a></li>
+            <li><a href="#real-world-examples" data-section="examples">Real-world examples</a></li>
+            <li><a href="#common-pitfalls" data-section="practical">Common pitfalls</a></li>
+            <li><a href="#when-to-use" data-section="practical">When to experiment</a></li>
+            <li><a href="#connections">Connected topics in your library</a></li>
+            <li><a href="#deep-dive">Deep-dive appendix</a></li>
+          </ul>
+        </nav>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="topic-main topic-content">
+
+        <div class="section-marker" id="what-and-why">
+          <span class="split-badge theory">Theory</span>
+          <span class="marker-line"></span>
+        </div>
+
+        <section data-section="theory">
+  <h2>What experimentation is and why it matters</h2>
+
+<p>Experimentation is the practice of making product decisions based on controlled tests rather than opinions, intuition, or the highest-paid person's preference. An experiment answers a specific question — "Does changing the CTA from 'Start free trial' to 'Try it free' increase signup rate?" — with measurable evidence. It's the scientific method applied to product development.</p>
+
+<p>A/B testing is the most common experiment format: show version A to one group, version B to another, and measure which performs better. But experimentation is broader than A/B tests. It includes multivariate tests (testing multiple changes simultaneously), feature rollouts with holdback groups, fake door tests (measuring demand before building), and sequential experiments (adapting as data comes in).</p>
+
+<p>The PM's role in experimentation isn't running the statistics — it's deciding what questions are worth testing, designing experiments that produce trustworthy answers, and building an organizational culture where decisions are informed by evidence rather than authority. A PM who can't distinguish a well-designed experiment from a poorly designed one will make decisions on noise instead of signal.</p>
+
+<div class="callout info">
+  <p class="callout-title">Why this matters for your projects</p>
+  <p>Without experimentation, product decisions are based on whoever argues most convincingly. With experimentation, the product argues for itself. The team that runs 50 well-designed experiments per year will outperform the team that ships 50 features based on intuition — because the first team learns what works and doubles down, while the second team ships blindly and hopes. Experimentation is the mechanism that turns opinions into knowledge.</p>
+</div>
+
+<h3 id="when-not-to-test">When not to A/B test</h3>
+
+<p>Not everything should be tested. A/B testing has costs: it takes time (you need statistical significance), it requires traffic (small products can't run meaningful tests), and it biases toward incremental improvements over bold bets. Some decisions should just be made.</p>
+
+<p><strong>Don't test when:</strong> The change is a clear improvement with no plausible downside (fixing a broken form). You don't have enough traffic for statistical significance in a reasonable timeframe. The decision is strategic and long-term — you can't A/B test a product vision. The change affects too few users to produce meaningful data. You're testing something trivial — the opportunity cost of running the test exceeds the value of the answer.</p>
+
+<p><strong>Do test when:</strong> The outcome is uncertain and the stakes are meaningful. Two reasonable approaches exist and the team disagrees. You're optimizing a high-traffic flow (onboarding, checkout, activation). The change could have unintended negative effects. You want to build confidence before rolling out broadly.</p>
+
+</section>
+
+        <div class="section-marker" id="experiment-methods">
+          <span class="split-badge practical">Practical</span>
+          <span class="marker-line"></span>
+        </div>
+
+        <section data-section="practical">
+  <h2>Experiment methods</h2>
+
+<div class="method-card">
+  <h4>Hypothesis Template <span class="method-tag">Foundation</span></h4>
+  <p class="method-when">Use when: Starting any experiment. A clear hypothesis prevents fishing for results and ensures you know what you're testing before you test it.</p>
+  <div class="template-box">
+    <div class="template-header">
+      <span class="template-label">Template</span>
+      <span class="template-title">Experiment Hypothesis</span>
+    </div>
+    <div class="template-grid">
+      <div class="template-field">
+        <div class="template-field-label">We believe that</div>
+        <div class="template-field-hint">[Specific change]. "Simplifying the signup form from 5 fields to 3."</div>
+      </div>
+      <div class="template-field">
+        <div class="template-field-label">Will result in</div>
+        <div class="template-field-hint">[Measurable outcome]. "A 15% increase in signup completion rate."</div>
+      </div>
+      <div class="template-field">
+        <div class="template-field-label">Because</div>
+        <div class="template-field-hint">[Evidence-based reasoning]. "Session recordings show 40% of users abandon at the company-size field, which we don't need for initial signup."</div>
+      </div>
+      <div class="template-field">
+        <div class="template-field-label">We'll measure</div>
+        <div class="template-field-hint">[Primary metric + counter-metric]. "Signup completion rate (primary), 7-day activation rate (counter — ensure quality doesn't drop)."</div>
+      </div>
+      <div class="template-field">
+        <div class="template-field-label">We need</div>
+        <div class="template-field-hint">[Sample size and duration]. "5,000 users per variant, ~2 weeks at current traffic."</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="method-card">
+  <h4>Sample Size and Duration <span class="method-tag">Statistical Foundation</span></h4>
+  <p class="method-when">Use when: Planning any A/B test. Running a test without adequate sample size is worse than not testing — it gives you false confidence in meaningless results.</p>
+  <p>Three variables determine how long your test needs to run: <strong>baseline conversion rate</strong> (your current metric), <strong>minimum detectable effect</strong> (the smallest improvement worth detecting — typically 5–10% relative change), and <strong>statistical significance level</strong> (usually 95%, meaning a 5% chance the result is random noise).</p>
+  <p>A rough rule of thumb: to detect a 10% relative improvement on a 5% conversion rate at 95% significance, you need approximately 30,000 users per variant. At 1,000 users per day per variant, that's 30 days. If your traffic is lower, you either need to run longer, accept a larger minimum detectable effect, or test a change likely to produce a bigger effect.</p>
+  <div class="callout warning">
+    <p class="callout-title">Common mistake</p>
+    <p>Peeking at results before the test reaches its planned sample size, then stopping early because the result "looks significant." This is called the peeking problem and it dramatically inflates false positive rates. If you check results daily and stop when they look good, your actual significance level might be 20–30% instead of 5%. Either commit to a fixed sample size or use sequential testing methods designed for continuous monitoring.</p>
+  </div>
+</div>
+
+<div class="method-card">
+  <h4>Guardrail Metrics <span class="method-tag">Safety Check</span></h4>
+  <p class="method-when">Use when: Running any experiment. Guardrails prevent you from "winning" the experiment while harming the product.</p>
+  <p>Every experiment needs three types of metrics: the <strong>primary metric</strong> (what you're trying to improve), <strong>secondary metrics</strong> (related outcomes you want to track), and <strong>guardrail metrics</strong> (things that must not degrade).</p>
+  <p><strong>Example:</strong> Testing a more aggressive onboarding flow. Primary: activation rate. Secondary: time-to-first-value, feature discovery rate. Guardrails: support ticket volume (must not increase by &gt;10%), 30-day retention (must not decrease), page load time (must stay under 3s).</p>
+  <p>If the primary metric improves but a guardrail degrades, the experiment fails — even if the primary lift is impressive. Guardrails prevent you from optimizing locally while causing global harm.</p>
+</div>
+
+<div class="method-card">
+  <h4>Sequential Testing <span class="method-tag">Advanced</span></h4>
+  <p class="method-when">Use when: You need to monitor results continuously without inflating false positives. Useful when you can't afford to wait for a fixed sample size (urgent decisions, limited traffic).</p>
+  <p>Sequential testing methods (like always-valid p-values or Bayesian approaches) are designed to be checked at any point during the test without inflating error rates. They adjust the significance threshold based on how many times you've looked at the data.</p>
+  <p>The trade-off: sequential tests typically require 20–30% more total samples than fixed-horizon tests to reach the same conclusion. You pay for the flexibility to peek with slightly longer run times.</p>
+</div>
+
+<div class="method-card">
+  <h4>Multi-Armed Bandit <span class="method-tag">Optimization</span></h4>
+  <p class="method-when">Use when: You want to optimize while testing — gradually shifting traffic toward the winning variant rather than waiting for the test to conclude. Best for revenue-sensitive flows where a losing variant costs real money.</p>
+  <p>A bandit algorithm starts with equal traffic to all variants, then gradually increases traffic to the variant that's performing best. This minimizes regret (the opportunity cost of showing the losing variant) but sacrifices some statistical rigor — you learn less about exactly how much better the winner is.</p>
+  <p>Use bandits for optimization (headline testing, pricing page layout). Use traditional A/B tests for learning (understanding why users behave differently, validating a hypothesis).</p>
+</div>
+
+<div class="method-card">
+  <h4>Experiment Post-Mortem <span class="method-tag">Learning Tool</span></h4>
+  <p class="method-when">Use when: After every experiment, whether it won, lost, or was inconclusive. The post-mortem is where experiments become institutional knowledge.</p>
+  <div class="template-box">
+    <div class="template-header">
+      <span class="template-label">Template</span>
+      <span class="template-title">Experiment Post-Mortem</span>
+    </div>
+    <div class="template-grid" style="grid-template-columns: 1fr 1fr;">
+      <div class="template-field">
+        <div class="template-field-label">Hypothesis</div>
+        <div class="template-field-hint">What we believed and why.</div>
+      </div>
+      <div class="template-field">
+        <div class="template-field-label">Result</div>
+        <div class="template-field-hint">Win / Lose / Inconclusive. Primary metric change with confidence interval.</div>
+      </div>
+      <div class="template-field">
+        <div class="template-field-label">Guardrail check</div>
+        <div class="template-field-hint">Did any guardrail degrade? If yes, the experiment is a loss regardless of primary metric.</div>
+      </div>
+      <div class="template-field">
+        <div class="template-field-label">What we learned</div>
+        <div class="template-field-hint">Beyond the metric: what did we learn about user behavior that informs future work?</div>
+      </div>
+      <div class="template-field">
+        <div class="template-field-label">Decision</div>
+        <div class="template-field-hint">Ship to 100% / Iterate and re-test / Abandon. With reasoning.</div>
+      </div>
+      <div class="template-field">
+        <div class="template-field-label">Follow-up experiments</div>
+        <div class="template-field-hint">What's the next question this result raises?</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</section>
+
+<section id="experimentation-culture" data-section="practical">
+  <h2>Building an experimentation culture</h2>
+
+<div class="method-card">
+  <h4>Experimentation Maturity Model <span class="method-tag">Assessment</span></h4>
+  <p class="method-when">Use when: Evaluating where your team stands and what to invest in next to build a stronger experimentation practice.</p>
+  <div class="process-steps">
+    <div class="process-step">
+      <div class="process-step-content">
+        <h4>Level 1: Ad hoc</h4>
+        <p>Experiments happen occasionally, driven by individual enthusiasm. No shared tooling, no standard process. Results are shared informally. Most decisions are still made without data.</p>
+      </div>
+    </div>
+    <div class="process-step">
+      <div class="process-step-content">
+        <h4>Level 2: Emerging</h4>
+        <p>A/B testing tool is in place. A few teams run experiments regularly. Hypothesis and post-mortem templates exist. But experimentation is optional — teams can ship without testing.</p>
+      </div>
+    </div>
+    <div class="process-step">
+      <div class="process-step-content">
+        <h4>Level 3: Systematic</h4>
+        <p>Most product changes in high-traffic flows are tested. Experiment results are reviewed in team meetings. A shared experiment log tracks learnings. Counter-metrics are standard practice.</p>
+      </div>
+    </div>
+    <div class="process-step">
+      <div class="process-step-content">
+        <h4>Level 4: Data-driven</h4>
+        <p>Experimentation is the default decision-making method. Cross-functional teams (PM, engineering, data science) collaborate on experiment design. An experimentation platform handles randomization, significance calculation, and reporting. The org runs 100+ experiments per year.</p>
+      </div>
+    </div>
+  </div>
+  <div class="callout tip">
+    <p class="callout-title">Practical tip</p>
+    <p>Most teams are at Level 1 or 2. Don't try to jump to Level 4 overnight. The highest-leverage move from Level 1 is standardizing the hypothesis template — just requiring people to write down what they expect before building changes the quality of decisions dramatically, even without statistical infrastructure.</p>
+  </div>
+</div>
+
+</section>
+
+<section id="templates-and-checklists" data-section="practical">
+  <h2>Templates and checklists</h2>
+
+<div class="template-box">
+  <div class="template-header">
+    <span class="template-label">Checklist</span>
+    <span class="template-title">Experiment Launch Readiness</span>
+  </div>
+  <ul class="checklist">
+    <li>Hypothesis written with specific change, expected outcome, and reasoning</li>
+    <li>Primary metric, secondary metrics, and guardrail metrics defined</li>
+    <li>Sample size calculated — test duration estimated</li>
+    <li>Randomization unit confirmed (user-level, session-level, account-level)</li>
+    <li>Control and treatment groups are comparable (no selection bias)</li>
+    <li>Instrumentation verified — metrics are being tracked correctly</li>
+    <li>Peeking protocol defined (fixed horizon or sequential testing)</li>
+    <li>Decision criteria defined up front — what constitutes a win, loss, or inconclusive result</li>
+    <li>Post-mortem scheduled regardless of outcome</li>
+  </ul>
+</div>
+
+</section>
+
+        <div class="section-marker" id="real-world-examples">
+          <span class="split-badge examples">Examples</span>
+          <span class="marker-line"></span>
+        </div>
+
+        <section data-section="examples">
+  <h2>Real-world examples</h2>
+
+<div class="case-study">
+  <p class="case-label">Case study</p>
+  <h4>Booking.com: 25,000 experiments per year</h4>
+  <p>Booking.com runs roughly 25,000 concurrent experiments at any time. Every product change — from button colors to entirely new features — is tested. The culture is built on a key principle: anyone can run an experiment without approval. This democratization means experiments happen at the speed of ideas, not at the speed of management review.</p>
+  <p>Their key insight: most experiments fail. About 90% of tests produce no significant improvement. But the 10% that win compound over time. Booking.com's product advantage isn't any single winning experiment — it's the velocity of learning across thousands of tests.</p>
+</div>
+
+<div class="case-study">
+  <p class="case-label">Case study</p>
+  <h4>Microsoft Bing: The $100M experiment</h4>
+  <p>A Bing engineer proposed a simple change to how ad headlines were displayed. The experiment showed a 12% increase in revenue — worth over $100M annually. The change had been in the backlog for months but was deprioritized because it seemed too simple to matter. When finally tested, the result was one of the largest single-experiment wins in Microsoft's history.</p>
+  <p>The lesson: you can't predict which experiments will win big. The team's job is to make experimentation cheap and fast enough that even "simple" ideas get tested. The $100M change would never have been approved through a traditional prioritization process — it was too small, too obvious, and too unlikely to seem worth engineering time.</p>
+</div>
+
+<div class="case-study">
+  <p class="case-label">Case study</p>
+  <h4>Airbnb: The experiment that almost killed search</h4>
+  <p>Airbnb ran an experiment on their search ranking algorithm. The primary metric improved significantly: search-to-booking conversion went up. They almost shipped it to 100% — until a data scientist noticed that the guardrail metric (host response rate) had dropped 8%. The new algorithm was showing more desirable listings, but those hosts were overwhelmed with requests and responding less. If shipped, it would have degraded the marketplace quality within weeks.</p>
+  <p>The lesson: primary metrics can lie. A "winning" experiment that degrades a guardrail is actually a losing experiment. Airbnb now requires guardrail metrics for every experiment, and no experiment ships if a guardrail degrades beyond the threshold.</p>
+</div>
+
+</section>
+
+<section id="common-pitfalls" data-section="practical">
+  <h2>Common pitfalls</h2>
+
+<div class="pitfall">
+  <div class="pitfall-icon">!</div>
+  <div>
+    <h4>HiPPO-driven experiments</h4>
+    <p>The Highest Paid Person's Opinion determines what gets tested and how results are interpreted. If the VP wants a feature and the experiment shows it doesn't work, the team "finds" a segment where it does work, or questions the methodology, or runs the test again hoping for different results. This destroys the entire point of experimentation. Experiments must be pre-committed: define the decision criteria before running the test, and honor the results.</p>
+  </div>
+</div>
+
+<div class="pitfall">
+  <div class="pitfall-icon">!</div>
+  <div>
+    <h4>Testing too many things at once</h4>
+    <p>Changing the headline, the CTA, the layout, and the color scheme in one experiment makes it impossible to know what caused the result. If the combined change wins, you can't isolate which element mattered. If it loses, you don't know if one element was great but the others dragged it down. Test one change at a time, or use proper multivariate testing designs that can attribute effects to individual elements.</p>
+  </div>
+</div>
+
+<div class="pitfall">
+  <div class="pitfall-icon">!</div>
+  <div>
+    <h4>Survivorship bias in experiment reviews</h4>
+    <p>Only discussing winning experiments creates a misleading picture. If you run 20 experiments and 18 are inconclusive, but you only present the 2 winners, leadership thinks experimentation has a 100% hit rate. Then they're confused when the next 5 experiments all lose. Share all results — including failures. The failures are where the deepest learning happens.</p>
+  </div>
+</div>
+
+<div class="pitfall">
+  <div class="pitfall-icon">!</div>
+  <div>
+    <h4>p-hacking and post-hoc analysis</h4>
+    <p>If you slice your data enough ways — by geography, device, user segment, time of day — you'll find a "significant" result somewhere. This is p-hacking: torturing the data until it confesses. If you didn't pre-specify the segment in your hypothesis, the result is exploratory (interesting, worth testing in a follow-up experiment) — not confirmatory (ready to ship). The distinction matters enormously for decision quality.</p>
+  </div>
+</div>
+
+</section>
+
+<section id="when-to-use" data-section="practical">
+  <h2>When to experiment</h2>
+
+<div class="callout info">
+  <p class="callout-title">Decision guidance</p>
+  <p><strong>A/B test when:</strong> The outcome is uncertain. The flow has enough traffic for significance in &lt;4 weeks. Two credible approaches exist. The change could have unintended negative effects. You want to build organizational confidence in a decision.</p>
+  <p><strong>Don't test when:</strong> The change is obviously correct (fixing a bug, meeting compliance requirements). You don't have enough traffic. The decision is strategic and long-term. The opportunity cost of running the test exceeds the value of the answer.</p>
+  <p><strong>Use alternative methods when:</strong> Traffic is too low for A/B testing — use qualitative research, usability testing, or before/after analysis with caution. The question is about user preferences — use surveys or interviews. The change is too risky for a percentage rollout — use a beta group.</p>
+</div>
+
+</section>
+
+<section id="connections">
+  <h2>Connected topics in your library</h2>
+
+<div class="cross-ref-grid">
+  <a href="#" class="cross-ref-card">
+    <span class="ref-number">PM.1.05</span>
+    <div class="ref-title">Product Metrics &amp; Analytics</div>
+    <div class="ref-reason">Metrics frameworks for choosing what to measure in experiments</div>
+  </a>
+  <a href="#" class="cross-ref-card">
+    <span class="ref-number">PM.2.10</span>
+    <div class="ref-title">Feature Flags &amp; Rollouts</div>
+    <div class="ref-reason">Technical infrastructure for running experiments</div>
+  </a>
+  <a href="#" class="cross-ref-card">
+    <span class="ref-number">PM.1.02</span>
+    <div class="ref-title">Product Discovery</div>
+    <div class="ref-reason">Experiments as a discovery validation tool</div>
+  </a>
+  <a href="#" class="cross-ref-card cross-discipline">
+    <span class="ref-number">UX.2.05</span>
+    <div class="ref-title">Data-Driven Design (UX)</div>
+    <div class="ref-reason">UX lens: A/B testing design variants, interpreting results for design</div>
+  </a>
+</div>
+
+<div class="deep-dive-section" id="deep-dive">
+          <div class="deep-dive-header">
+            <span class="deep-dive-badge">Deep Dive</span>
+            <h2 style="margin:0; border:none; padding:0;">Appendix</h2>
+          </div>
+
+  <details class="expandable">
+    <summary><span class="chevron"><svg viewBox="0 0 14 14"><polyline points="4,2 10,7 4,12"/></svg></span> Statistical concepts every PM should know</summary>
+    <div class="expand-content topic-content">
+      <h4>Statistical significance (p-value)</h4>
+      <p>The p-value answers: "If there were no real difference between variants, how likely would we see a result this extreme by random chance?" At p &lt; 0.05 (95% significance), there's less than a 5% chance the result is noise. But 5% is not zero — with 20 experiments, you'd expect one false positive. That's why replication and guardrails matter.</p>
+
+      <h4>Confidence intervals</h4>
+      <p>More useful than p-values for decision-making. A confidence interval tells you: "The true effect is most likely between X% and Y%." If the interval is [+2%, +8%], the effect is positive and at least +2%. If the interval is [-1%, +5%], the effect might be zero. Even if the p-value is significant, a narrow confidence interval tells you more about whether the effect is large enough to matter.</p>
+
+      <h4>Power</h4>
+      <p>Statistical power is the probability that your test will detect a real effect if one exists. A test with 80% power has a 20% chance of missing a real improvement. Underpowered tests are the silent killer of experimentation programs — the experiment runs, shows "no significant effect," and the team concludes the change doesn't work. But the test might have been too small to detect a real 5% improvement. Always calculate the required sample size before running a test.</p>
+
+      <h4>Multiple comparisons</h4>
+      <p>Testing 10 variants at 95% significance means a ~40% chance of at least one false positive. Correct for this with Bonferroni (divide your significance threshold by the number of comparisons) or use methods designed for multiple comparisons. Most experimentation platforms handle this automatically — check whether yours does.</p>
+    </div>
+  </details>
+
+  <details class="expandable">
+    <summary><span class="chevron"><svg viewBox="0 0 14 14"><polyline points="4,2 10,7 4,12"/></svg></span> Further reading</summary>
+    <div class="expand-content topic-content">
+      <p><strong>"Trustworthy Online Controlled Experiments" by Ron Kohavi et al.</strong> — The definitive book on A/B testing. Written by the team that built Microsoft's experimentation platform. Technical but essential for anyone serious about experimentation.</p>
+      <p><strong>"Experimentation Works" by Stefan Thomke</strong> — How companies like Booking.com, Amazon, and Microsoft built experimentation cultures. Less technical, more organizational.</p>
+      <p><strong>"Lean Analytics" by Alistair Croll &amp; Benjamin Yoskovitz</strong> — Connects experimentation to product stages. Practical guidance on what to test when.</p>
+    </div>
+  </details>
+
+</div>
+</section>
+
+<div class="topic-nav">
+  <a href="product-metrics.html" class="topic-nav-link prev">
+    <div class="nav-direction">Previous topic</div>
+    <div class="nav-title">&#8249; Product Metrics &amp; Analytics</div>
+  </a>
+  <a href="pricing.html" class="topic-nav-link next">
+    <div class="nav-direction">Next topic</div>
+    <div class="nav-title">Pricing &amp; Monetization Strategy &#8250;</div>
+  </a>
+</div>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer container">
+    <div class="footer-inner">
+      <p>Noir Book — Built for the work, not the shelf.</p>
+      <div class="footer-links">
+        <a href="../design-system.html">Design System</a>
+        <a href="../library-manifest.json">Manifest</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to Top -->
+  <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">&#8593;</button>
+
+  <!-- Floating Mobile TOC -->
+  <button class="mobile-toc-btn" id="mobileTocBtn" aria-label="Open table of contents">&#9776; Contents</button>
+  <div class="mobile-toc-overlay" id="mobileTocOverlay">
+    <div class="mobile-toc-panel">
+      <div class="mobile-toc-panel-header">
+        <h3>On this page</h3>
+        <button class="mobile-toc-close" id="mobileTocClose" aria-label="Close">&times;</button>
+      </div>
+      <ul class="mobile-toc-list">
+        <li><a href="#what-and-why" data-section="theory">What experimentation is and why it matters</a></li>
+        <li><a href="#experiment-methods" data-section="practical">Experiment methods</a></li>
+        <li><a href="#experimentation-culture" data-section="practical">Building an experimentation culture</a></li>
+        <li><a href="#templates-and-checklists" data-section="practical">Templates and checklists</a></li>
+        <li><a href="#real-world-examples" data-section="examples">Real-world examples</a></li>
+        <li><a href="#common-pitfalls" data-section="practical">Common pitfalls</a></li>
+        <li><a href="#when-to-use" data-section="practical">When to experiment</a></li>
+        <li><a href="#connections">Connected topics in your library</a></li>
+        <li><a href="#deep-dive">Deep-dive appendix</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    // Scrollspy: highlight active TOC item
+    const tocLinks = document.querySelectorAll('.toc-list a');
+    const sections = [];
+    tocLinks.forEach(link => {
+      const href = link.getAttribute('href');
+      if (!href || !href.startsWith('#')) return;
+      const el = document.getElementById(href.slice(1));
+      if (el) sections.push({ el, link });
+    });
+
+    // Reading progress bar
+    const progressBar = document.getElementById('readingProgress');
+    const backToTop = document.getElementById('backToTop');
+
+    function onScroll() {
+      let current = sections[0];
+      for (const s of sections) {
+        if (s.el.getBoundingClientRect().top <= 120) current = s;
+      }
+      tocLinks.forEach(l => l.classList.remove('active'));
+      if (current) current.link.classList.add('active');
+
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrolled = window.scrollY;
+      const progress = docHeight > 0 ? (scrolled / docHeight) * 100 : 0;
+      if (progressBar) progressBar.style.width = progress + '%';
+      if (backToTop) backToTop.classList.toggle('visible', scrolled > 400);
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    // Split badges: click to scroll to section
+    document.querySelectorAll('.content-splits .split-badge').forEach(function(badge) {
+      badge.addEventListener('click', function() {
+        var type = badge.classList.contains('theory') ? 'theory' : badge.classList.contains('practical') ? 'practical' : 'examples';
+        var target = document.querySelector('section[data-section="' + type + '"]');
+        if (target) {
+          var marker = target.previousElementSibling;
+          (marker && marker.classList.contains('section-marker') ? marker : target).scrollIntoView({behavior:'smooth'});
+        }
+      });
+    });
+  </script>
+
+  <script src="../js/checklist.js"></script>
+  <script src="../js/mobile-toc.js"></script>
+  <script src="../js/search.js"></script>
+  <script>
+    function openBurger(){document.getElementById('burgerOverlay').classList.add('open');document.body.style.overflow='hidden'}
+    function closeBurger(e){if(e&&e.target&&e.target!==document.getElementById('burgerOverlay'))return;document.getElementById('burgerOverlay').classList.remove('open');document.body.style.overflow=''}
+    function burgerSearch(q){
+      var r=document.getElementById('burgerSearchResults');
+      if(!q||q.length<2){r.innerHTML='';return}
+      var ql=q.toLowerCase(),matches=[];
+      if(typeof SEARCH_INDEX!=='undefined'){
+        SEARCH_INDEX.forEach(function(t){
+          var hit=t.topic.toLowerCase().indexOf(ql)>-1;
+          if(!hit)t.sections.forEach(function(s){if((s.title+' '+s.keywords).toLowerCase().indexOf(ql)>-1)hit=true});
+          if(hit)matches.push(t);
+        });
+      }
+      if(!matches.length){r.innerHTML='<p style="padding:8px 0;font-size:13px;color:var(--ink-muted)">No results</p>';return}
+      r.innerHTML=matches.slice(0,8).map(function(m){return '<a href="../'+m.url+'">'+m.topic+'<span class="bsr-disc">'+m.discipline+'</span></a>'}).join('');
+    }
+    document.addEventListener('keydown',function(e){if(e.key==='Escape'){closeBurger();var dd=document.getElementById('searchDropdown');if(dd)dd.classList.remove('visible');}});
+    // Close burger when clicking a TOC link
+    document.querySelectorAll('.burger-toc-list a').forEach(function(a){a.addEventListener('click',function(){closeBurger()})});
+    // Search typeahead
+    function topicSearch(q){
+      var dd=document.getElementById('searchDropdown');
+      if(!q||q.length<2||typeof SEARCH_INDEX==='undefined'){if(dd)dd.classList.remove('visible');return}
+      var ql=q.toLowerCase(),grouped={};
+      SEARCH_INDEX.forEach(function(t){
+        var hit=t.topic.toLowerCase().indexOf(ql)>-1,sHits=[],mHits=[];
+        t.sections.forEach(function(s){if((s.title+' '+s.keywords).toLowerCase().indexOf(ql)>-1)sHits.push(s)});
+        (t.methods||[]).forEach(function(m){if((m.name+' '+(m.keywords||'')).toLowerCase().indexOf(ql)>-1)mHits.push(m)});
+        if(!hit&&!sHits.length&&!mHits.length&&ql.length>=3&&typeof levenshtein==='function'){
+          var words=t.topic.toLowerCase().split(/ +/);
+          for(var i=0;i<words.length;i++){if(levenshtein(ql,words[i].substring(0,ql.length+1))<=1){hit=true;break}}
+        }
+        if(hit||sHits.length||mHits.length)grouped[t.topic]={url:'../'+t.url,disc:t.discipline||'',sections:sHits,methods:mHits,topicHit:hit};
+      });
+      var keys=Object.keys(grouped);
+      if(!keys.length){dd.innerHTML='<div class="search-empty">No results</div>';dd.classList.add('visible');return}
+      var html='';
+      keys.slice(0,8).forEach(function(topic){
+        var g=grouped[topic];
+        html+='<div class="search-group"><div class="search-group-title">'+topic+'</div>';
+        if(g.topicHit)html+='<a class="search-result" href="'+g.url+'"><span class="search-result-title">'+topic+'</span><span class="search-result-type practical">'+g.disc+'</span></a>';
+        g.sections.forEach(function(s){html+='<a class="search-result" href="'+g.url+'#'+s.id+'"><span class="search-result-title">'+s.title+'</span><span class="search-result-type '+s.type+'">'+s.type+'</span></a>'});
+        g.methods.slice(0,3).forEach(function(m){html+='<a class="search-result" href="'+g.url+'#'+m.section+'"><span class="search-result-title">'+m.name+'</span><span class="search-result-type practical">method</span></a>'});
+        html+='</div>';
+      });
+      dd.innerHTML=html;dd.classList.add('visible');
+    }
+    document.addEventListener('click',function(e){if(!e.target.closest('.search-box')){var dd=document.getElementById('searchDropdown');if(dd)dd.classList.remove('visible')}});
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Designing for AI Agents — Noir Book</title>
+  <link rel="stylesheet" href="../css/shared.css">
+  <link rel="stylesheet" href="../css/topic.css">
+  <script src="../js/theme.js"></script>
+  <script src="../js/topic-nav.js"></script>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="site-nav subpage-nav" data-discipline="ux">
+    <div class="nav-inner">
+      <a href="../index.html" class="site-logo">
+        <span class="logo-mark">UX</span>
+        <span class="nav-title">Noir Book</span>
+      </a>
+      <a href="../index.html" class="nav-back-link">&#8592; Library</a>
+      <div class="nav-filters">
+        <button class="disc-toggle ux-toggle active" data-disc="ux" onclick="toggleDisc('ux')" title="UX Design">
+          <span class="disc-dot disc-dot-ux"></span><span class="disc-label">UX Design</span><span class="disc-code">(UX)</span>
+        </button>
+        <button class="disc-toggle pm-toggle active" data-disc="pm" onclick="toggleDisc('pm')" title="Product Management">
+          <span class="disc-dot disc-dot-pm"></span><span class="disc-label">Product</span><span class="disc-code">(PM)</span>
+        </button>
+        <button class="disc-toggle mk-toggle active" data-disc="mk" onclick="toggleDisc('mk')" title="Marketing &amp; Growth">
+          <span class="disc-dot disc-dot-mk"></span><span class="disc-label">Marketing</span><span class="disc-code">(MK)</span>
+        </button>
+        <button class="disc-toggle cs-toggle active" data-disc="cs" onclick="toggleDisc('cs')" title="Content Strategy">
+          <span class="disc-dot disc-dot-cs"></span><span class="disc-label">Content</span><span class="disc-code">(CS)</span>
+        </button>
+        <div class="search-box nav-search-box">
+          <div class="nav-search-wrap">
+            <div class="nav-search-pills" id="navSearchPills"></div>
+            <input type="text" id="navSearchInput" placeholder="Search..." autocomplete="off"
+              oninput="topicNavSearch(this.value)"
+              onkeydown="handleNavSearchKey(event)"
+              onfocus="handleNavSearchFocus()"
+              onblur="handleNavSearchBlur()">
+            <button type="button" class="nav-search-clear" id="navSearchClear" onclick="clearNavSearch()" aria-label="Clear search">&times;</button>
+          </div>
+          <div class="search-dropdown" id="navSearchDropdown"></div>
+        </div>
+      </div>
+      <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle theme">&#9790;</button>
+      <button class="burger-btn" id="burgerBtn" onclick="openBurger()" aria-label="Menu">
+        <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="2" y1="4" x2="16" y2="4"/><line x1="2" y1="9" x2="16" y2="9"/><line x1="2" y1="14" x2="16" y2="14"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Burger Menu Overlay -->
+  <div class="burger-overlay" id="burgerOverlay" onclick="closeBurger(event)">
+    <div class="burger-panel" onclick="event.stopPropagation()">
+      <div class="burger-panel-header">
+        <h3>Menu</h3>
+        <button class="burger-close" onclick="closeBurger()" aria-label="Close">&times;</button>
+      </div>
+      <div class="burger-search">
+        <input type="text" id="burgerSearchInput" placeholder="Search topics, methods..." autocomplete="off" oninput="burgerSearch(this.value)">
+        <div class="burger-search-results" id="burgerSearchResults"></div>
+      </div>
+      <div class="burger-links">
+        <a href="../index.html">&#8592; Back to Library</a>
+        <a href="../design-system.html">Design System</a>
+        <a href="../request-topic.html">Suggest a topic or improvement</a>
+      </div>
+      <div class="burger-toc-section">
+        <p class="burger-toc-title">On this page</p>
+        <ul class="burger-toc-list">
+        <li><a href="#what-and-why" data-section="theory">What designing for AI agents means</a></li>
+        <li><a href="#dual-audience" data-section="practical">Dual-audience design</a></li>
+        <li><a href="#agent-interfaces" data-section="practical">Agent-readable interface patterns</a></li>
+        <li><a href="#handoffs" data-section="practical">Human-AI handoff design</a></li>
+        <li><a href="#testing" data-section="practical">Agent task completion testing</a></li>
+        <li><a href="#collaborative-actors" data-section="practical">Collaborative actor mapping</a></li>
+        <li><a href="#real-world-examples" data-section="examples">Real-world examples</a></li>
+        <li><a href="#pitfalls" data-section="practical">Common pitfalls</a></li>
+        <li><a href="#connections">Connected topics in your library</a></li>
+        <li><a href="#deep-dive">Deep-dive appendix</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Topic Header -->
+  <header class="topic-header container">
+    <div class="breadcrumb">
+      <a href="../index.html">Library</a>
+      <span class="sep">&#8250;</span>
+      <span class="breadcrumb-disc breadcrumb-ux">UX Design</span>
+      <span class="sep">&#8250;</span>
+      <span>Tier 3 — Situational</span>
+      <span class="sep">&#8250;</span>
+      <span>Designing for AI Agents</span>
+    </div>
+    <div class="topic-meta">
+      <span class="tier-badge tier3">Tier 3</span>
+      <span style="font-size:14px;color:var(--ink-muted)">Topic UX.3.09</span>
+    </div>
+    <h1>Designing for AI Agents</h1>
+    <p class="topic-subtitle">Design products that work for both human users and AI agents. Structured interfaces for agent interaction, human-AI handoff patterns, dual-audience design, and building products ready for an agent-mediated future.</p>
+    <div class="content-splits">
+      <span class="split-badge theory">30% Theory</span>
+      <span class="split-badge practical">45% Methods &amp; Templates</span>
+      <span class="split-badge examples">25% Examples</span>
+    </div>
+  </header>
+
+  <!-- Reading Progress Bar -->
+  <div class="reading-progress" id="readingProgress"></div>
+
+  <!-- Main Layout -->
+  <div class="container">
+    <div class="topic-layout">
+
+      <!-- Sidebar: Table of Contents -->
+      <aside class="topic-sidebar">
+        <nav class="toc">
+          <p class="sidebar-topic-title">Designing for AI Agents</p>
+          <p class="toc-title">On this page</p>
+          <ul class="toc-list">
+            <li><a href="#what-and-why" data-section="theory">What designing for AI agents means</a></li>
+            <li><a href="#dual-audience" data-section="practical">Dual-audience design</a></li>
+            <li><a href="#agent-interfaces" data-section="practical">Agent-readable interface patterns</a></li>
+            <li><a href="#handoffs" data-section="practical">Human-AI handoff design</a></li>
+            <li><a href="#testing" data-section="practical">Agent task completion testing</a></li>
+            <li><a href="#collaborative-actors" data-section="practical">Collaborative actor mapping</a></li>
+            <li><a href="#real-world-examples" data-section="examples">Real-world examples</a></li>
+            <li><a href="#pitfalls" data-section="practical">Common pitfalls</a></li>
+            <li><a href="#connections">Connected topics in your library</a></li>
+            <li><a href="#deep-dive">Deep-dive appendix</a></li>
+          </ul>
+        </nav>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="topic-main topic-content">
+
+        <div class="section-marker" id="what-and-why">
+          <span class="split-badge theory">Theory</span>
+          <span class="marker-line"></span>
+        </div>
+
+        <section data-section="theory">
+  <h2>What designing for AI agents means</h2>
+
+  <p>Products increasingly have two audiences: humans who interact through visual interfaces, and AI agents that act on behalf of users — booking travel, comparing products, filling forms, extracting data, completing workflows. This is not a future scenario; it's happening now. AI assistants browse websites, agents execute multi-step workflows, and automated systems consume APIs and parse interfaces to complete user-delegated tasks.</p>
+
+  <p>Designing for AI agents doesn't mean abandoning human-centered design. It means extending it to include a new kind of user — one that reads structure instead of visuals, acts on semantics instead of aesthetics, and needs predictable patterns instead of delightful surprises. The good news: many agent-friendly design practices (clean markup, structured data, consistent patterns, clear state management) also improve accessibility, SEO, and API quality. The challenge: when human and agent needs conflict, designers must navigate trade-offs deliberately.</p>
+
+  <div class="callout info">
+    <p class="callout-title">Agents vs. AI-powered features</p>
+    <p>UX.3.01 (AI for Designers) covers designing AI-powered features in your product — chatbots, recommendations, smart actions. This topic covers a different challenge: designing your product so that external AI agents can interact with it as users. The first is about embedding AI; the second is about being consumed by AI.</p>
+  </div>
+</section>
+
+        <div class="section-marker" id="dual-audience">
+          <span class="split-badge practical">Practical</span>
+          <span class="marker-line"></span>
+        </div>
+
+        <section data-section="practical">
+  <h2>Dual-audience design</h2>
+
+  <div class="method-card">
+    <h4>Dual-Audience Design Framework <span class="method-tag">Core Method</span></h4>
+    <p class="method-when">Use when: your product needs to serve both human users navigating visually and AI agents parsing structurally.</p>
+    <p>Dual-audience design operates on two layers simultaneously. <strong>The human layer</strong> is visual, emotional, and exploratory: layout, hierarchy, delight, progressive disclosure, motion, and the full toolkit of UX craft. <strong>The agent layer</strong> is structural, semantic, and task-oriented: clean HTML markup, structured data (schema.org, JSON-LD), consistent patterns, predictable state transitions, and machine-readable labels. For each feature, ask four questions: Can a human complete this task through the interface? Can an agent complete this task through the structure? Does optimizing for one audience degrade the experience for the other? Where should handoffs between agents and humans occur? <strong>Where the layers reinforce each other:</strong> Well-structured semantic HTML serves both screen readers and agents. Clear labeling helps both confused humans and parsing algorithms. Consistent patterns help both new users learning the interface and agents building reliable automations. <strong>Where they conflict:</strong> Dynamic, JavaScript-heavy interfaces may delight users but be opaque to agents. Visually rich product tours help humans learn but block agents from reaching tasks. CAPTCHAs protect against bots but also block legitimate agents acting on behalf of users.</p>
+  </div>
+</section>
+
+<section id="agent-interfaces" data-section="practical">
+  <h2>Agent-readable interface patterns</h2>
+
+  <div class="method-card">
+    <h4>Agent-Readable Interface Patterns <span class="method-tag">Core Method</span></h4>
+    <p class="method-when">Use when: making your product's interface parseable and actionable by AI agents.</p>
+    <p>Agents interact with products through structure, not pixels. Design patterns that support agent interaction: <strong>Semantic markup:</strong> Use HTML elements that convey meaning — &lt;nav&gt;, &lt;main&gt;, &lt;article&gt;, &lt;button&gt;, &lt;form&gt; — not generic &lt;div&gt;s with visual styling. Agents parse the DOM; semantic elements tell them what each part does. <strong>Structured data exposure:</strong> Add schema.org markup for products, prices, availability, reviews, events, and other structured content. This makes your content machine-readable without changing the visual interface. <strong>Consistent action patterns:</strong> Use standardized form patterns, consistent button labeling, and predictable state transitions. An agent that learns to complete checkout on your site should be able to complete a similar checkout after a redesign. <strong>Stable selectors:</strong> Use meaningful IDs and data attributes (data-action="add-to-cart", data-product-id="12345") that agents can target reliably. Avoid auto-generated class names that change with each build. <strong>Clear state communication:</strong> Make loading, error, success, and empty states distinguishable in markup, not just visually. Agents need to know if a page is still loading or if the result set is actually empty.</p>
+  </div>
+</section>
+
+<section id="handoffs" data-section="practical">
+  <h2>Human-AI handoff design</h2>
+
+  <div class="method-card">
+    <h4>Human-AI Handoff Design <span class="method-tag">Core Method</span></h4>
+    <p class="method-when">Use when: designing the transition points where AI agents need human input, approval, or intervention.</p>
+    <p>Not every task should be fully automated. Handoff design determines where agents operate autonomously and where humans intervene. <strong>Handoff triggers:</strong> Define clear conditions for agent-to-human handoffs: ambiguous choices (the agent found three similar products and can't determine the user's preference), high-stakes decisions (purchase above a threshold, irreversible actions), authentication requirements (CAPTCHA, biometric verification), and subjective judgment (selecting a gift, choosing a restaurant). <strong>Handoff quality:</strong> When an agent hands off to a human, it should transfer context — what it's tried, what it's found, and what decision it needs. A good handoff feels like a helpful colleague saying "I've narrowed it down to these three options and here's why" rather than starting the human from scratch. <strong>Human-to-agent return:</strong> After human intervention, the agent should be able to resume. This means preserving state: the human's selection, any form data entered, the current position in a multi-step flow. Design for round-trip interaction, not one-way handoffs. <strong>Trust calibration:</strong> Let users set their agent's autonomy level — "book anything under $200 automatically, ask me for anything above" — and show audit trails of agent actions so users can adjust trust over time.</p>
+  </div>
+</section>
+
+<section id="testing" data-section="practical">
+  <h2>Agent task completion testing</h2>
+
+  <div class="method-card">
+    <h4>Agent Task Completion Testing <span class="method-tag">Core Method</span></h4>
+    <p class="method-when">Use when: evaluating whether AI agents can successfully complete tasks in your product.</p>
+    <p>Agent testing is a new dimension of quality assurance. <strong>Task inventory:</strong> List every task a user might delegate to an agent — search, compare, purchase, fill a form, extract data, complete a workflow. Prioritize by frequency and delegation likelihood. <strong>Agent testing protocol:</strong> For each task, test with multiple AI agents (browser-based agents, API-based agents, different LLM providers) to identify where agents succeed, struggle, or fail entirely. Common failure points: dynamic content that loads after initial page render, CAPTCHAs and bot detection, non-standard form patterns, and ambiguous action labels. <strong>Success metrics:</strong> Task completion rate (percentage of tasks an agent can finish without human intervention), error rate (how often agents take wrong actions), time-to-completion (agent efficiency compared to human), and recovery rate (how often agents can recover from errors). <strong>Regression testing:</strong> Include agent task completion in your release testing checklist. A UI redesign or markup change that breaks agent interaction may be undetectable by visual QA.</p>
+  </div>
+</section>
+
+<section id="collaborative-actors" data-section="practical">
+  <h2>Collaborative actor mapping</h2>
+
+  <div class="method-card">
+    <h4>Collaborative Actor Mapping <span class="method-tag">Framework</span></h4>
+    <p class="method-when">Use when: designing experiences where multiple actors — humans, AI agents, automated systems — participate in the same workflow.</p>
+    <p>Traditional user flows show one actor (the user) interacting with one system (your product). Agent-mediated experiences involve multiple actors with different capabilities. Map them: <strong>Human user:</strong> Makes subjective decisions, provides preferences, approves high-stakes actions, handles edge cases. <strong>User's AI agent:</strong> Executes routine tasks, compares options, fills forms, monitors for changes. Acts within the user's delegated authority. <strong>Product's AI system:</strong> Your product's own AI — recommendations, personalization, automated responses. <strong>Product's human support:</strong> Customer service agents who handle escalations. <strong>The map:</strong> For each workflow step, identify which actor(s) participate, what they need to complete their part, and where handoffs occur. Then design the interfaces, APIs, and state management to support all actors. This is service design expanded to include machine actors — the same discipline, a wider cast.</p>
+  </div>
+</section>
+
+        <div class="section-marker" id="real-world-examples">
+          <span class="split-badge examples">Examples</span>
+          <span class="marker-line"></span>
+        </div>
+
+        <section data-section="examples">
+  <h2>Real-world examples</h2>
+
+  <div class="case-study">
+    <p class="case-label">Case study</p>
+    <h4>Airline booking: agents as power users</h4>
+    <p>Travel booking is one of the first domains where AI agents are acting on behalf of users at scale. Airlines that structured their booking flows with clean, semantic HTML, predictable form patterns, and machine-readable pricing data (schema.org/Flight) found that AI agents could search, compare, and book flights reliably. Airlines with heavily JavaScript-dependent interfaces, dynamic pricing that only rendered client-side, and inconsistent form structures saw agents fail frequently — leading to user frustration directed at the airline, not the agent.</p>
+    <p><strong>Why it matters:</strong> When an agent fails on your product, users blame your product — not the agent. Agent-friendliness is becoming a competitive advantage in high-delegation categories.</p>
+  </div>
+
+  <div class="case-study">
+    <p class="case-label">Case study</p>
+    <h4>API-first products: agent-native design</h4>
+    <p>Products like Stripe, Twilio, and Notion designed API-first, with human interfaces as one consumption layer. This architecture is inherently agent-friendly: well-documented APIs with consistent patterns let agents interact programmatically while humans interact visually, both working with the same underlying data and capabilities. The lesson: products that separate their capability layer (API) from their presentation layer (UI) are automatically better prepared for agent interaction.</p>
+    <p><strong>Why it works:</strong> API-first architecture doesn't require agents to parse HTML — they interact with clean, documented interfaces designed for programmatic consumption.</p>
+  </div>
+</section>
+
+<section id="pitfalls" data-section="practical">
+  <h2>Common pitfalls</h2>
+
+  <div class="pitfall">
+    <div class="pitfall-icon">!</div>
+    <div>
+      <h4>Treating agents as threats</h4>
+      <p>Not every automated interaction is a bot attack. Users increasingly delegate legitimate tasks to AI agents. Blocking all automated access with aggressive bot detection prevents users from using your product in the way they want. Design nuanced access policies: block malicious scraping, allow authenticated agent interaction on behalf of verified users.</p>
+    </div>
+  </div>
+
+  <div class="pitfall">
+    <div class="pitfall-icon">!</div>
+    <div>
+      <h4>Designing only for today's agents</h4>
+      <p>Agent capabilities are improving rapidly. An interface that today's agents can't handle may be trivial for next year's agents. Don't over-invest in workarounds for current agent limitations. Instead, invest in structural quality (semantic markup, clean APIs, consistent patterns) that serves both current and future agents.</p>
+    </div>
+  </div>
+
+  <div class="pitfall">
+    <div class="pitfall-icon">!</div>
+    <div>
+      <h4>Forgetting the human</h4>
+      <p>In the rush to be agent-friendly, don't degrade the human experience. An interface optimized for machine parsing at the expense of visual clarity, delight, and human usability has missed the point. Dual-audience design means serving both audiences well, not sacrificing one for the other.</p>
+    </div>
+  </div>
+</section>
+
+<section id="connections">
+  <h2>Connected topics in your library</h2>
+  <div class="cross-ref-grid">
+    <a href="ai-for-designers.html" class="cross-ref-card">
+      <span class="ref-number">Tier 3</span>
+      <div class="ref-title">AI for Designers</div>
+      <div class="ref-reason">Covers designing AI-powered features in your product. This topic covers designing products that AI agents interact with as users — different direction, complementary skills.</div>
+    </a>
+    <a href="accessibility.html" class="cross-ref-card">
+      <span class="ref-number">Tier 1</span>
+      <div class="ref-title">Accessibility</div>
+      <div class="ref-reason">Agent-friendly and accessible design share foundations: semantic markup, meaningful labels, consistent patterns, and keyboard operability.</div>
+    </a>
+    <a href="information-architecture.html" class="cross-ref-card">
+      <span class="ref-number">Tier 1</span>
+      <div class="ref-title">Information Architecture</div>
+      <div class="ref-reason">IA determines the structural findability that agents depend on. Well-organized, well-labeled content is both human-navigable and agent-parseable.</div>
+    </a>
+    <a href="service-design.html" class="cross-ref-card">
+      <span class="ref-number">Tier 2</span>
+      <div class="ref-title">Service Design</div>
+      <div class="ref-reason">Collaborative actor mapping extends service blueprints to include AI agents as actors in the service ecosystem.</div>
+    </a>
+  </div>
+
+  <div class="callout info">
+    <p class="callout-title">Cross-discipline connections</p>
+    <p><strong>PM.3.01 AI Product Management</strong> covers when to build for agent interaction and agent task completion metrics. <strong>CS.2.02 Content for AI Systems</strong> covers structuring content so AI agents can parse and act on it. <strong>MK.3.01 AI in Marketing</strong> covers how AI agents change discovery and positioning.</p>
+  </div>
+</section>
+
+<div class="deep-dive-section" id="deep-dive">
+          <div class="deep-dive-header">
+            <span class="deep-dive-badge">Deep Dive</span>
+            <h2 style="margin:0; border:none; padding:0;">Appendix</h2>
+          </div>
+
+  <details class="expandable">
+    <summary><span class="chevron"><svg viewBox="0 0 14 14"><polyline points="4,2 10,7 4,12"/></svg></span> Further reading</summary>
+    <div class="expand-content topic-content">
+      <h4>Essential reading</h4>
+      <p><strong>NN/g "Outcome-Oriented Design" research (2026)</strong> — Foundational research on designing for AI-generated interfaces and agent-mediated experiences.</p>
+      <p><strong>Schema.org documentation</strong> — The standard vocabulary for structured data that agents use to understand web content.</p>
+      <p><strong>Anthropic's Model Context Protocol (MCP)</strong> — An open standard for connecting AI agents to external tools and data sources, illustrating the architectural patterns agents use.</p>
+    </div>
+  </details>
+</div>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer container">
+    <div class="footer-inner">
+      <p>Noir Book — Built for the work, not the shelf.</p>
+      <div class="footer-links">
+        <a href="../design-system.html">Design System</a>
+        <a href="../library-manifest.json">Manifest</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to Top -->
+  <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">&#8593;</button>
+
+  <!-- Floating Mobile TOC -->
+  <button class="mobile-toc-btn" id="mobileTocBtn" aria-label="Open table of contents">&#9776; Contents</button>
+  <div class="mobile-toc-overlay" id="mobileTocOverlay">
+    <div class="mobile-toc-panel">
+      <div class="mobile-toc-panel-header">
+        <h3>On this page</h3>
+        <button class="mobile-toc-close" id="mobileTocClose" aria-label="Close">&times;</button>
+      </div>
+      <ul class="mobile-toc-list">
+        <li><a href="#what-and-why" data-section="theory">What designing for AI agents means</a></li>
+        <li><a href="#dual-audience" data-section="practical">Dual-audience design</a></li>
+        <li><a href="#agent-interfaces" data-section="practical">Agent-readable interface patterns</a></li>
+        <li><a href="#handoffs" data-section="practical">Human-AI handoff design</a></li>
+        <li><a href="#testing" data-section="practical">Agent task completion testing</a></li>
+        <li><a href="#collaborative-actors" data-section="practical">Collaborative actor mapping</a></li>
+        <li><a href="#real-world-examples" data-section="examples">Real-world examples</a></li>
+        <li><a href="#pitfalls" data-section="practical">Common pitfalls</a></li>
+        <li><a href="#connections">Connected topics in your library</a></li>
+        <li><a href="#deep-dive">Deep-dive appendix</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    // Scrollspy: highlight active TOC item
+    const tocLinks = document.querySelectorAll('.toc-list a');
+    const sections = [];
+    tocLinks.forEach(link => {
+      const href = link.getAttribute('href');
+      if (!href || !href.startsWith('#')) return;
+      const el = document.getElementById(href.slice(1));
+      if (el) sections.push({ el, link });
+    });
+
+    // Reading progress bar
+    const progressBar = document.getElementById('readingProgress');
+    const backToTop = document.getElementById('backToTop');
+
+    function onScroll() {
+      let current = sections[0];
+      for (const s of sections) {
+        if (s.el.getBoundingClientRect().top <= 120) current = s;
+      }
+      tocLinks.forEach(l => l.classList.remove('active'));
+      if (current) current.link.classList.add('active');
+
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrolled = window.scrollY;
+      const progress = docHeight > 0 ? (scrolled / docHeight) * 100 : 0;
+      if (progressBar) progressBar.style.width = progress + '%';
+      if (backToTop) backToTop.classList.toggle('visible', scrolled > 400);
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    // Split badges: click to scroll to section
+    document.querySelectorAll('.content-splits .split-badge').forEach(function(badge) {
+      badge.addEventListener('click', function() {
+        var type = badge.classList.contains('theory') ? 'theory' : badge.classList.contains('practical') ? 'practical' : 'examples';
+        var target = document.querySelector('section[data-section="' + type + '"]');
+        if (target) {
+          var marker = target.previousElementSibling;
+          (marker && marker.classList.contains('section-marker') ? marker : target).scrollIntoView({behavior:'smooth'});
+        }
+      });
+    });
+  </script>
+
+  <script src="../js/checklist.js"></script>
+  <script src="../js/mobile-toc.js"></script>
+  <script src="../js/search.js"></script>
+  <script>
+    function openBurger(){document.getElementById('burgerOverlay').classList.add('open');document.body.style.overflow='hidden'}
+    function closeBurger(e){if(e&&e.target&&e.target!==document.getElementById('burgerOverlay'))return;document.getElementById('burgerOverlay').classList.remove('open');document.body.style.overflow=''}
+    function burgerSearch(q){
+      var r=document.getElementById('burgerSearchResults');
+      if(!q||q.length<2){r.innerHTML='';return}
+      var ql=q.toLowerCase(),matches=[];
+      if(typeof SEARCH_INDEX!=='undefined'){
+        SEARCH_INDEX.forEach(function(t){
+          var hit=t.topic.toLowerCase().indexOf(ql)>-1;
+          if(!hit)t.sections.forEach(function(s){if((s.title+' '+s.keywords).toLowerCase().indexOf(ql)>-1)hit=true});
+          if(hit)matches.push(t);
+        });
+      }
+      if(!matches.length){r.innerHTML='<p style="padding:8px 0;font-size:13px;color:var(--ink-muted)">No results</p>';return}
+      r.innerHTML=matches.slice(0,8).map(function(m){return '<a href="../'+m.url+'">'+m.topic+'<span class="bsr-disc">'+m.discipline+'</span></a>'}).join('');
+    }
+    document.addEventListener('keydown',function(e){if(e.key==='Escape'){closeBurger();var dd=document.getElementById('searchDropdown');if(dd)dd.classList.remove('visible');}});
+    // Close burger when clicking a TOC link
+    document.querySelectorAll('.burger-toc-list a').forEach(function(a){a.addEventListener('click',function(){closeBurger()})});
+    // Search typeahead
+    function topicSearch(q){
+      var dd=document.getElementById('searchDropdown');
+      if(!q||q.length<2||typeof SEARCH_INDEX==='undefined'){if(dd)dd.classList.remove('visible');return}
+      var ql=q.toLowerCase(),grouped={};
+      SEARCH_INDEX.forEach(function(t){
+        var hit=t.topic.toLowerCase().indexOf(ql)>-1,sHits=[],mHits=[];
+        t.sections.forEach(function(s){if((s.title+' '+s.keywords).toLowerCase().indexOf(ql)>-1)sHits.push(s)});
+        (t.methods||[]).forEach(function(m){if((m.name+' '+(m.keywords||'')).toLowerCase().indexOf(ql)>-1)mHits.push(m)});
+        if(!hit&&!sHits.length&&!mHits.length&&ql.length>=3&&typeof levenshtein==='function'){
+          var words=t.topic.toLowerCase().split(/ +/);
+          for(var i=0;i<words.length;i++){if(levenshtein(ql,words[i].substring(0,ql.length+1))<=1){hit=true;break}}
+        }
+        if(hit||sHits.length||mHits.length)grouped[t.topic]={url:'../'+t.url,disc:t.discipline||'',sections:sHits,methods:mHits,topicHit:hit};
+      });
+      var keys=Object.keys(grouped);
+      if(!keys.length){dd.innerHTML='<div class="search-empty">No results</div>';dd.classList.add('visible');return}
+      var html='';
+      keys.slice(0,8).forEach(function(topic){
+        var g=grouped[topic];
+        html+='<div class="search-group"><div class="search-group-title">'+topic+'</div>';
+        if(g.topicHit)html+='<a class="search-result" href="'+g.url+'"><span class="search-result-title">'+topic+'</span><span class="search-result-type practical">'+g.disc+'</span></a>';
+        g.sections.forEach(function(s){html+='<a class="search-result" href="'+g.url+'#'+s.id+'"><span class="search-result-title">'+s.title+'</span><span class="search-result-type '+s.type+'">'+s.type+'</span></a>'});
+        g.methods.slice(0,3).forEach(function(m){html+='<a class="search-result" href="'+g.url+'#'+m.section+'"><span class="search-result-title">'+m.name+'</span><span class="search-result-type practical">method</span></a>'});
+        html+='</div>';
+      });
+      dd.innerHTML=html;dd.classList.add('visible');
+    }
+    document.addEventListener('click',function(e){if(!e.target.closest('.search-box')){var dd=document.getElementById('searchDropdown');if(dd)dd.classList.remove('visible')}});
+  </script>
+
+</body>
+</html>

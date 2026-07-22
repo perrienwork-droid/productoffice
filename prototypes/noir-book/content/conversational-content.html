@@ -1,0 +1,216 @@
+<!--
+TOPIC_ID: CS.3.04
+TOPIC_NUMBER: CS.3.04
+TITLE: Content for Conversational Interfaces
+SUBTITLE: Design content for chatbots, voice assistants, and conversational AI. Dialogue design, personality frameworks, conversation flows, and content management for non-screen interfaces.
+TIER: 3
+TIER_LABEL: Situational
+THEORY: 25
+PRACTICAL: 50
+EXAMPLES: 25
+-->
+
+<section id="what-and-why" data-section="theory">
+  <h2>What conversational content design covers</h2>
+
+  <p>Conversational interfaces — chatbots, voice assistants, AI agents, and conversational AI — require a fundamentally different content approach than screen-based design. Users don't scan a page and click; they speak or type a message and expect a response. The content designer's job shifts from structuring information for scanning to crafting dialogue that feels natural, handles ambiguity gracefully, and achieves the user's goal in as few turns as possible.</p>
+
+  <p>The challenge is that conversation is inherently unpredictable. A form has defined fields; a conversation can go anywhere. Users ask questions in unexpected ways, change their minds mid-conversation, provide incomplete information, or ask things outside the system's capability. Conversational content design is the craft of preparing for this unpredictability — not by scripting every possible exchange, but by building a framework of personality, patterns, and fallbacks that produces a coherent experience regardless of what the user says.</p>
+</section>
+
+<section id="conversation-design" data-section="practical">
+  <h2>Conversation design framework</h2>
+
+  <div class="method-card">
+    <h4>Conversation Design Framework <span class="method-tag">Core Method</span></h4>
+    <p class="method-when">Use when: planning the conversational experience for a chatbot, voice assistant, or AI agent from scratch.</p>
+    <p>Conversation design operates at three layers. <strong>Macro design</strong> (conversation architecture): What conversations can the system handle? Map the full scope of user intents — tasks the system can complete (booking, troubleshooting, ordering), questions it can answer (FAQ, account info, product details), and situations it must hand off to humans (complaints, complex issues, sales). Define the boundaries clearly — it's better to say "I can't help with that, but here's who can" than to attempt and fail. <strong>Meso design</strong> (conversation flows): For each intent, design the conversation flow — the sequence of turns needed to gather information, confirm understanding, and complete the task. Include happy path (user provides all needed info), repair paths (user gives incomplete or wrong info), and exit paths (user wants to stop or switch tasks). <strong>Micro design</strong> (individual messages): The actual words the system says. Each message must be self-contained (users can't scroll back in voice), concise (long messages lose users), and action-oriented (tell users what to do or choose next).</p>
+  </div>
+
+  <div class="method-card">
+    <h4>Dialogue Flow Mapping <span class="method-tag">Core Method</span></h4>
+    <p class="method-when">Use when: designing the turn-by-turn conversation structure for a specific user intent.</p>
+    <p>Dialogue flows map the paths a conversation can take. <strong>Intent recognition:</strong> How does the system determine what the user wants? Design for multiple phrasings of the same intent — "I want to cancel," "how do I cancel," "stop my subscription," and "I don't want this anymore" all mean the same thing. <strong>Slot filling:</strong> What information does the system need to complete the task? Design the gathering sequence to feel natural, not interrogative. Instead of asking 5 questions in a row, confirm what you already know ("I see you're on the Pro plan. Would you like to cancel that?"). <strong>Confirmation:</strong> Before taking action, confirm the user's intent — especially for irreversible actions. "I'll cancel your Pro plan effective today. You'll keep access until the end of your billing period. Want me to go ahead?" <strong>Branching:</strong> Where does the conversation fork? Each branch needs its own complete path, including error handling and escalation. <strong>Dead ends:</strong> Every conversation path must end somewhere — a completed task, a handoff, or a graceful close. No path should lead to silence.</p>
+  </div>
+</section>
+
+<section id="personality" data-section="practical">
+  <h2>Personality and voice</h2>
+
+  <div class="method-card">
+    <h4>Chatbot Personality Canvas <span class="method-tag">Core Method</span></h4>
+    <p class="method-when">Use when: defining a consistent personality for a conversational AI that feels authentic without being annoying.</p>
+    <p>Personality makes conversations feel human without pretending the system is human. <strong>Character traits (3–5):</strong> Define the personality attributes. "Helpful, knowledgeable, slightly playful, never pushy." Traits should be specific enough to guide writing decisions. "Friendly" is too vague; "warm but efficient — gets to the point without being cold" is actionable. <strong>Relationship to user:</strong> How does the system relate to the user? Helpful colleague, patient teacher, efficient assistant? This determines formality level, how much personality shows through, and when humor is appropriate. <strong>Knowledge boundaries:</strong> What does the personality know? A customer support bot shouldn't claim to know the user's feelings. An AI assistant shouldn't pretend to have preferences. Define what the personality can and can't credibly express. <strong>Anti-patterns:</strong> Define what the personality never does. "Never uses sarcasm," "never says 'I'm just a bot,'" "never makes promises the system can't keep." Anti-patterns prevent personality drift over time. <strong>Tone adaptation:</strong> The personality is consistent but the tone adapts. When the user is frustrated, reduce personality and increase empathy. When the user is casual, match their energy. When the user is confused, increase clarity and reduce cleverness.</p>
+  </div>
+</section>
+
+<section id="error-fallback" data-section="practical">
+  <h2>Error and fallback patterns</h2>
+
+  <div class="method-card">
+    <h4>Error &amp; Fallback Dialogue Patterns <span class="method-tag">Core Method</span></h4>
+    <p class="method-when">Use when: designing how the conversational system handles misunderstandings, failures, and out-of-scope requests.</p>
+    <p>Errors are the most important content to get right — they happen frequently and have the highest emotional stakes. <strong>No-match (didn't understand):</strong> "I didn't catch that. Could you rephrase?" is better than "Invalid input." After 2 failed attempts, offer alternatives: "I'm having trouble understanding. Would you like to try one of these: [specific options]?" After 3 failures, offer human escalation. <strong>No-input (silence/timeout):</strong> "Still there? Take your time — I'm here when you're ready." In voice interfaces, timeouts need audio cues (a gentle chime) before the system speaks again. <strong>Out of scope:</strong> "I can't help with that, but I can connect you with someone who can. Would you like that?" Never just say "I can't do that" without offering a path forward. <strong>System error:</strong> "Something went wrong on my end. Let me try that again." Don't blame the user. Don't expose technical details. Retry automatically when possible. <strong>Graceful degradation:</strong> When the system partially understands, confirm what it did understand before asking for clarification: "I got that you want to change your plan. Which plan were you thinking about?"</p>
+  </div>
+</section>
+
+<section id="voice-interfaces" data-section="practical">
+  <h2>Voice interface content</h2>
+
+  <div class="method-card">
+    <h4>Voice Interface Content Guidelines <span class="method-tag">Technique</span></h4>
+    <p class="method-when">Use when: designing content specifically for voice assistants and audio-only interfaces.</p>
+    <p>Voice interfaces impose constraints that text doesn't. <strong>No visual anchors:</strong> Users can't see options, scan a list, or re-read what was said. Limit choices to 3 per turn. Instead of "You can check your balance, make a transfer, pay a bill, set up direct deposit, or request a statement," say "Would you like to check your balance, make a transfer, or something else?" <strong>Memory burden:</strong> Users must remember what was said. Keep responses under 30 seconds of speech. For complex information, offer to send a text or email summary: "I found three flights. Want me to text you the details?" <strong>Disambiguation:</strong> Without visual context, ambiguous requests are harder to resolve. "Play Radiohead" could mean play any song by Radiohead or play the song called "Radiohead." Design clarification questions that narrow quickly without feeling interrogative. <strong>Prosody:</strong> Write for how words sound, not how they look. Read every response aloud. Words that look fine on screen can be hard to parse when spoken — abbreviations, acronyms, and numbers may need to be spelled out.</p>
+  </div>
+</section>
+
+<section id="conversational-analytics" data-section="practical">
+  <h2>Conversation analytics</h2>
+
+  <div class="method-card">
+    <h4>Conversation Analytics <span class="method-tag">Technique</span></h4>
+    <p class="method-when">Use when: measuring conversational AI effectiveness and identifying improvement opportunities.</p>
+    <p><strong>Task completion rate:</strong> The most important metric. Of users who started a conversation with intent X, how many successfully completed the task? Low completion rates indicate flow problems, missing capabilities, or poor error handling. <strong>Conversation length:</strong> How many turns does it take to complete common tasks? Fewer turns generally means better design — but not always. A conversation that completes in 2 turns because the system guessed wrong and the user gave up counts as 2-turn but is a failure. <strong>Fallback rate:</strong> How often does the system fail to understand and trigger fallback responses? High fallback rates on specific intents indicate training data gaps or poor intent recognition. <strong>Escalation rate:</strong> How often do conversations transfer to human agents? Track whether escalation is by design (complex issues) or by failure (system couldn't handle something it should have). <strong>User satisfaction:</strong> Post-conversation surveys ("Was this helpful?") provide direct signal. Track satisfaction by intent — a system might perform well on FAQs but poorly on account changes.</p>
+  </div>
+</section>
+
+<section id="content-management" data-section="practical">
+  <h2>Managing conversational content at scale</h2>
+
+  <div class="method-card">
+    <h4>Conversational Content Inventory <span class="method-tag">Technique</span></h4>
+    <p class="method-when">Use when: managing and updating the content behind a conversational interface as the product evolves.</p>
+    <p>Conversational content is harder to audit than page-based content because it's distributed across intents, responses, and flows rather than organized in pages. <strong>Response inventory:</strong> Maintain a complete inventory of every response the system can produce — mapped to the intent that triggers it, the conditions that select it, and the last time it was reviewed. <strong>Variant management:</strong> Most conversational systems have multiple response variants for the same intent (to avoid sounding robotic). Track all variants and ensure they all stay accurate when information changes. <strong>Deprecation:</strong> When a product feature changes, every conversational response referencing that feature must be updated. Tag responses with the features they reference so changes can be traced automatically. <strong>Testing:</strong> Regularly test conversation flows end-to-end, not just individual responses. A response that's correct in isolation may produce a confusing conversation when combined with other responses in a multi-turn flow.</p>
+  </div>
+</section>
+
+<section id="real-world-examples" data-section="examples">
+  <h2>Real-world examples</h2>
+
+  <div class="case-study">
+    <p class="case-label">Case study</p>
+    <h4>Google Assistant: personality at scale</h4>
+    <p>Google Assistant's content team maintains a detailed personality guide that defines how the assistant sounds across thousands of interactions. The personality is "helpful, honest, and optimistic" with specific guidance for hundreds of scenarios — how to respond to compliments, insults, existential questions, and edge cases. Critically, the personality guide includes "things the assistant never does" (never lies about being AI, never expresses political opinions, never makes promises about future capabilities) alongside positive guidelines. This anti-pattern documentation prevents personality drift as the team scales.</p>
+    <p><strong>Why it works:</strong> Personality is defined through specific behavioral guidelines, not abstract traits. Anti-patterns prevent consistency erosion at scale.</p>
+  </div>
+
+  <div class="case-study">
+    <p class="case-label">Case study</p>
+    <h4>Woebot: therapeutic conversation design</h4>
+    <p>Woebot, a mental health chatbot, demonstrates conversational design for high-stakes contexts. Every conversation flow was designed by clinical psychologists alongside conversation designers. The bot never diagnoses or prescribes — it uses structured therapeutic techniques (CBT) through conversation. Error handling is especially careful: if the bot detects crisis language, it immediately offers human crisis resources rather than attempting to help conversationally. The personality is warm but never claims to understand feelings it can't experience.</p>
+    <p><strong>Why it works:</strong> Clear capability boundaries, clinical expertise in conversation design, and error handling that prioritizes safety over task completion.</p>
+  </div>
+</section>
+
+<section id="pitfalls" data-section="practical">
+  <h2>Common pitfalls</h2>
+
+  <div class="pitfall">
+    <div class="pitfall-icon">!</div>
+    <div>
+      <h4>Trying to pass the Turing test</h4>
+      <p>Making a chatbot that pretends to be human creates trust problems when users discover the truth — and they always do. Be transparent about what the system is. "I'm an AI assistant" is fine. Then prove value through helpfulness, not deception.</p>
+    </div>
+  </div>
+
+  <div class="pitfall">
+    <div class="pitfall-icon">!</div>
+    <div>
+      <h4>Scripting every possible conversation</h4>
+      <p>You can't predict what users will say. Instead of scripting thousands of responses, build a flexible framework: strong intent recognition, good slot-filling logic, robust error handling, and a clear personality guide. The framework produces good conversations even for scenarios you didn't explicitly design for.</p>
+    </div>
+  </div>
+</section>
+
+<section id="connections">
+  <h2>Connected topics in your library</h2>
+  <div class="cross-ref-grid">
+    <a href="ux-writing.html" class="cross-ref-card">
+      <span class="ref-number">UX Tier 2</span>
+      <div class="ref-title">UX Writing &amp; Content Design</div>
+      <div class="ref-reason">UX writing craft applies to conversational content — but the constraints are different (no visual context, turn-based, unpredictable flow).</div>
+    </a>
+    <a href="designing-for-ai-agents.html" class="cross-ref-card">
+      <span class="ref-number">UX Tier 3</span>
+      <div class="ref-title">Designing for AI Agents</div>
+      <div class="ref-reason">AI agents interact through conversational interfaces — the content patterns here apply to agent-mediated experiences.</div>
+    </a>
+    <a href="content-design-systems.html" class="cross-ref-card">
+      <span class="ref-number">CS Tier 2</span>
+      <div class="ref-title">Content &amp; Design Systems</div>
+      <div class="ref-reason">Conversational content patterns (error messages, confirmations, personality) should be documented in the design system alongside visual components.</div>
+    </a>
+  </div>
+
+  <div class="callout info">
+    <p class="callout-title">Cross-discipline connections</p>
+    <p><strong>UX.4.02 Immersive &amp; Voice Interfaces</strong> covers interface design for voice and immersive experiences. <strong>UX.3.09 Designing for AI Agents</strong> covers designing products that AI agents interact with. This topic covers the content craft for conversational interfaces.</p>
+  </div>
+</section>
+
+<section id="deep-dive">
+  <h2>Deep-dive appendix</h2>
+
+  <details class="expandable">
+    <summary><span class="chevron"><svg viewBox="0 0 14 14"><polyline points="4,2 10,7 4,12"/></svg></span> Further reading</summary>
+    <div class="expand-content topic-content">
+      <h4>Essential reading</h4>
+      <p><strong>"Conversational Design" by Erika Hall</strong> — The foundational text on designing conversations as interfaces, with principles that apply to both human and AI conversations.</p>
+      <p><strong>"Designing Voice User Interfaces" by Cathy Pearl</strong> — Practical guide to voice interface design from a Google conversation design lead.</p>
+      <p><strong>Google's Conversation Design guidelines</strong> — Comprehensive, publicly available guidelines covering personality, flow design, and error handling for conversational AI.</p>
+    </div>
+  </details>
+</section>
+
+<!-- SEARCH_INDEX
+{
+  topic: "Content for Conversational Interfaces",
+  url: "topics/conversational-content.html",
+  tier: "Tier 3",
+  sections: [
+    { title: "What & why", id: "what-and-why", type: "theory", keywords: "conversational interfaces chatbot voice assistant dialogue" },
+    { title: "Conversation design", id: "conversation-design", type: "practical", keywords: "conversation design framework dialogue flow mapping intents" },
+    { title: "Personality and voice", id: "personality", type: "practical", keywords: "chatbot personality canvas traits tone adaptation" },
+    { title: "Error and fallback", id: "error-fallback", type: "practical", keywords: "error fallback no-match no-input out-of-scope graceful" },
+    { title: "Voice interface content", id: "voice-interfaces", type: "practical", keywords: "voice interface audio-only memory prosody" },
+    { title: "Conversation analytics", id: "conversational-analytics", type: "practical", keywords: "analytics task completion fallback rate escalation satisfaction" },
+    { title: "Managing content at scale", id: "content-management", type: "practical", keywords: "content inventory variant management deprecation testing" },
+    { title: "Real-world examples", id: "real-world-examples", type: "examples", keywords: "Google Assistant Woebot personality therapeutic" },
+    { title: "Common pitfalls", id: "pitfalls", type: "practical", keywords: "Turing test scripting framework" }
+  ],
+  methods: [
+    { name: "Conversation Design Framework", section: "conversation-design", keywords: "macro meso micro conversation architecture" },
+    { name: "Dialogue Flow Mapping", section: "conversation-design", keywords: "dialogue flow intents slot filling confirmation branching" },
+    { name: "Chatbot Personality Canvas", section: "personality", keywords: "personality traits relationship knowledge anti-patterns tone" },
+    { name: "Error & Fallback Dialogue Patterns", section: "error-fallback", keywords: "no-match no-input out-of-scope system error graceful" },
+    { name: "Voice Interface Content Guidelines", section: "voice-interfaces", keywords: "voice audio choices memory disambiguation prosody" },
+    { name: "Conversation Analytics", section: "conversational-analytics", keywords: "task completion fallback escalation satisfaction" },
+    { name: "Conversational Content Inventory", section: "content-management", keywords: "inventory variants deprecation testing" }
+  ]
+}
+SEARCH_INDEX -->
+
+<!-- MANIFEST
+{
+  "id": "CS.3.04",
+  "title": "Content for Conversational Interfaces",
+  "file": "topics/conversational-content.html",
+  "tier": 3,
+  "discipline": "CS",
+  "solves": [
+    "I need to write dialogue for a chatbot or voice assistant",
+    "I want a personality framework for conversational AI that feels consistent",
+    "I need to design conversation flows that handle edge cases gracefully",
+    "I want to manage and update conversational content at scale",
+    "I need to test and iterate on conversational content effectiveness"
+  ],
+  "methods": ["Conversation Design Framework", "Dialogue Flow Mapping", "Chatbot Personality Canvas", "Error & Fallback Dialogue Patterns", "Voice Interface Content Guidelines", "Conversation Analytics", "Conversational Content Inventory"],
+  "phase": "design",
+  "prerequisites": ["CS.1.01", "CS.1.04"],
+  "pairs_with": ["CS.2.07", "CS.2.02"],
+  "cross_discipline": ["UX.4.02", "UX.3.09"],
+  "depth": "methods",
+  "keywords": ["conversational design", "chatbot", "voice assistant", "dialogue", "personality", "conversation flow", "error handling", "fallback", "voice interface", "conversational AI"],
+  "review_interval": 90
+}
+MANIFEST -->

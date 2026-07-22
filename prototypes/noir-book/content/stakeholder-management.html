@@ -1,0 +1,368 @@
+<!--
+TOPIC_ID: PM.1.06
+TOPIC_NUMBER: PM.1.06
+TITLE: Stakeholder Management &amp; Influence
+SUBTITLE: Navigate organizational politics. Stakeholder mapping, managing up, building alignment, handling conflicting priorities, and influencing without authority.
+TIER: 1
+TIER_LABEL: Core Toolkit
+THEORY: 25
+PRACTICAL: 50
+EXAMPLES: 25
+-->
+
+<section id="what-and-why" data-section="theory">
+  <h2>What stakeholder management is and why it matters</h2>
+
+<p>Stakeholder management is the practice of identifying the people who can influence or are affected by your product decisions, understanding what they need, and building relationships that enable you to move fast without creating organizational friction. It's not manipulation — it's the organizational skill that lets good product decisions actually happen.</p>
+
+<p>PMs have a unique organizational challenge: you have responsibility without authority. You don't manage the engineers who build the product, the designers who shape it, or the salespeople who sell it. Yet you're accountable for the product's success. This means every decision requires influence — getting people to agree, compromise, or disagree-and-commit on a direction they might not have chosen themselves.</p>
+
+<p>The PM who ignores stakeholder management ships great specs that never get built, makes sound decisions that get overturned, and produces roadmaps that get rewritten by someone else. Technical skill without organizational skill produces frustration, not products.</p>
+
+<div class="callout info">
+  <p class="callout-title">Why this matters for your projects</p>
+  <p>Most product failures aren't caused by bad product decisions — they're caused by organizational dysfunction. A feature gets cut because a VP wasn't aligned. A launch gets delayed because sales wasn't briefed. A migration gets blocked because engineering leadership has different priorities. Stakeholder management prevents these failures by building the relationships and alignment before they become crises.</p>
+</div>
+
+</section>
+
+<section id="stakeholder-methods" data-section="practical">
+  <h2>Stakeholder methods</h2>
+
+<div class="method-card">
+  <h4>Stakeholder Map (Power/Interest) <span class="method-tag">Core Method</span></h4>
+  <p class="method-when">Use when: Starting a new initiative, joining a new team, or when you keep getting surprised by objections from people you didn't anticipate.</p>
+  <p>A 2×2 matrix plotting stakeholders by power (ability to influence the outcome) and interest (how much they care about the outcome). Each quadrant has a different engagement strategy:</p>
+  <p><strong>High power, high interest</strong> = Key players. Engage deeply. These people can make or break your initiative. Meet regularly, share progress, involve in decisions. Example: your VP, the engineering lead, the head of sales.</p>
+  <p><strong>High power, low interest</strong> = Keep satisfied. They don't care about details but can kill the project if surprised. Send concise updates. Never surprise them. Example: the CEO, the CFO, the board.</p>
+  <p><strong>Low power, high interest</strong> = Keep informed. They care deeply but can't directly influence outcomes. Share updates, listen to their input, give them visibility into decisions. Example: customer support agents, individual designers, end users.</p>
+  <p><strong>Low power, low interest</strong> = Monitor. Touch base occasionally but don't invest heavy engagement time. Example: adjacent team PMs, marketing coordinators.</p>
+  <div class="callout tip">
+    <p class="callout-title">Workshop format: Stakeholder mapping in a group</p>
+    <p>Run this as a 30–60 minute discovery workshop with 5–15 people. <strong>Step 1:</strong> Participants silently generate stakeholder names on sticky notes and post them to the wall (5 min). <strong>Step 2:</strong> Draw the power/interest matrix on a whiteboard and move the sticky notes to their positions as a group, debating placement as you go (15 min). <strong>Step 3:</strong> Discuss engagement strategies for each quadrant — who needs regular meetings, who needs concise updates, who just needs to know you exist (10 min). The silent generation phase prevents groupthink; the group positioning phase surfaces disagreements about who actually holds power.</p>
+  </div>
+</div>
+
+<div class="method-card">
+  <h4>Pain/Gain Map <span class="method-tag">Empathy Tool</span></h4>
+  <p class="method-when">Use when: You need to understand a specific stakeholder's motivations before a difficult conversation, negotiation, or alignment effort. Also useful when developing value propositions or communication strategies for a particular audience.</p>
+  <p>Pick a specific stakeholder or customer. Create two columns: Pains and Gains. Using that person as a lens, brainstorm their pain points (frustrations, fears, obstacles) in the left column and their gains (goals, motivations, what success looks like to them) in the right. Prioritize the points, then use them to frame your proposals in language that addresses their pains and amplifies their gains.</p>
+  <p>This is a 15–30 minute exercise for 3–10 people. The power is in the reframing: instead of thinking "how do I convince the VP of Sales to accept my roadmap," you think "what keeps the VP of Sales up at night, and how does my roadmap help with that?" When you present your roadmap in terms of their gains and pains, alignment happens naturally.</p>
+</div>
+
+<div class="method-card">
+  <h4>RACI Matrix <span class="method-tag">Clarity Tool</span></h4>
+  <p class="method-when">Use when: Multiple people think they own the same decision, or when nobody knows who's supposed to decide. Common at companies growing past 50 people.</p>
+  <p>For each major decision or deliverable, assign exactly one person to each role: <strong>R</strong>esponsible (does the work), <strong>A</strong>ccountable (owns the outcome — only one person), <strong>C</strong>onsulted (gives input before the decision), <strong>I</strong>nformed (told after the decision).</p>
+  <p>The most common failure mode: too many people in C (consulted), which creates decision-by-committee. The fix: limit C to 2–3 people maximum. If everyone needs to be consulted, nobody can move fast.</p>
+  <div class="callout tip">
+    <p class="callout-title">Practical tip</p>
+    <p>Don't build a RACI for everything — build one for the 5–10 decisions that keep causing confusion. "Who decides which features go in this release?" "Who approves pricing changes?" "Who decides whether to respond to a competitor feature?" These are the decisions where unclear ownership costs real time.</p>
+  </div>
+</div>
+
+<div class="method-card">
+  <h4>Pre-Mortem for Decisions <span class="method-tag">Risk Reduction</span></h4>
+  <p class="method-when">Use when: You're about to make a major decision and want to surface objections before they become after-the-fact criticisms.</p>
+  <p>Before committing to a decision, ask the group: "Imagine it's 6 months from now and this decision turned out badly. What went wrong?" This gives people permission to voice concerns without seeming negative — they're not saying "I think this is wrong," they're contributing to a hypothetical scenario.</p>
+  <p>Pre-mortems surface risks that optimism bias suppresses. The PM who asks "what could go wrong?" before committing to a direction prevents the stakeholder who says "I knew this was a bad idea" six months later.</p>
+</div>
+
+<div class="method-card">
+  <h4>Disagree-and-Commit Protocol <span class="method-tag">Decision Closure</span></h4>
+  <p class="method-when">Use when: The team can't reach consensus and a decision needs to be made. Prevents endless debate without creating resentment.</p>
+  <p>The protocol has three steps: (1) Everyone states their position and reasoning. (2) The decision-maker makes the call and explains the reasoning. (3) Everyone — including those who disagreed — commits to executing the decision fully. No passive resistance. No "I told you so" if it fails.</p>
+  <p>Disagree-and-commit only works if two conditions are met: people feel genuinely heard before the decision, and the decision-maker is clearly identified (RACI's "A"). Without the first, people feel steamrolled. Without the second, the decision gets relitigated.</p>
+</div>
+
+<div class="method-card">
+  <h4>Executive Update Template <span class="method-tag">Communication</span></h4>
+  <p class="method-when">Use when: You need to keep leadership informed without taking 30-minute meetings every week.</p>
+  <div class="template-box">
+    <div class="template-header">
+      <span class="template-label">Template</span>
+      <span class="template-title">Weekly Executive Update</span>
+    </div>
+    <div class="template-grid">
+      <div class="template-field">
+        <div class="template-field-label">Progress (2–3 bullets)</div>
+        <div class="template-field-hint">What shipped, what milestone was reached. Concrete, not vague. Include metrics.</div>
+      </div>
+      <div class="template-field">
+        <div class="template-field-label">Risks (1–2 bullets)</div>
+        <div class="template-field-hint">What could go wrong. Flag early, before it's a crisis. Include mitigation plan.</div>
+      </div>
+      <div class="template-field">
+        <div class="template-field-label">Decisions needed (0–1)</div>
+        <div class="template-field-hint">Only include if you genuinely need their input. Respect their time.</div>
+      </div>
+      <div class="template-field">
+        <div class="template-field-label">Next week (2 bullets)</div>
+        <div class="template-field-hint">What's coming. Helps them anticipate questions from their stakeholders.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="method-card">
+  <h4>Alignment Narrative <span class="method-tag">Persuasion Tool</span></h4>
+  <p class="method-when">Use when: You need buy-in from a skeptical stakeholder. Not a logical argument — a story that connects your proposal to what they care about.</p>
+  <p>Most alignment failures happen because the PM argues from their own perspective instead of the stakeholder's. A VP of Sales doesn't care about "improving the user experience" — they care about "reducing the demo-to-close cycle." Same initiative, different framing.</p>
+  <div class="process-steps">
+    <div class="process-step">
+      <div class="process-step-content">
+        <h4>Understand their goals</h4>
+        <p>What is this stakeholder measured on? What keeps them up at night? What did they promise their boss? Your proposal needs to connect to their success criteria, not yours.</p>
+      </div>
+    </div>
+    <div class="process-step">
+      <div class="process-step-content">
+        <h4>Frame the proposal in their language</h4>
+        <p>"This onboarding improvement reduces time-to-value, which shortens the sales cycle by letting prospects see value during the trial instead of needing a demo." Now the VP of Sales is your ally, not your obstacle.</p>
+      </div>
+    </div>
+    <div class="process-step">
+      <div class="process-step-content">
+        <h4>Address their concerns proactively</h4>
+        <p>Anticipate their objection ("But will this delay the enterprise feature?") and address it before they raise it. This shows you've considered their perspective, which builds trust even if they still disagree.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="method-card">
+  <h4>Ally-Finding Strategy <span class="method-tag">Influence Tool</span></h4>
+  <p class="method-when">Use when: you need an internal champion to sponsor a UX initiative and can't get traction through formal channels alone.</p>
+  <p>The best ally for a UX initiative isn't always a UX advocate — it's the person whose pain your initiative solves. Four high-potential ally archetypes: <strong>Salespeople frustrated with selling a hard-to-demo product.</strong> If prospects can't understand how the product helps them, the salesperson loses deals. A UX improvement that simplifies the demo-to-close cycle makes the salesperson your champion. <strong>Development managers watching their teams rewrite code.</strong> When design process gaps cause rework, dev managers pay the cost. A better-informed design process that gets closer on the first release saves their team's cycle time. <strong>Call-center managers frustrated by high volumes driven by poor design.</strong> A product with poor UX puts excessive burden on support. The call-center manager, always trying to keep costs down, will champion a redesign that reduces call volume. <strong>Content or product managers frustrated by features nobody uses.</strong> Wasted resources on unused features hurt their metrics. Research that identifies what users actually need makes them your sponsor.</p>
+  <p>The workflow: (1) choose UX findings with clear cost implications, (2) calculate the business impact using the research finding × cost formula, (3) find the person in charge of that cost, and (4) ask them to champion the project. This differs from the Alignment Narrative approach — you're not reframing a proposal for a skeptic, you're finding someone who already shares your pain and building a coalition.</p>
+</div>
+
+</section>
+
+<div class="template-box">
+  <div class="template-header">
+    <span class="template-label">Checklist</span>
+    <span class="template-title">Stakeholder Alignment Before Launch</span>
+  </div>
+  <ul class="checklist">
+    <li>Stakeholder map updated — key players identified and engaged</li>
+    <li>Decision-making roles clear (RACI) for all launch decisions</li>
+    <li>Sales briefed on positioning, pricing, and expected objections</li>
+    <li>Support briefed on known issues, workarounds, and escalation paths</li>
+    <li>Marketing has messaging, assets, and timeline</li>
+    <li>Engineering has rollout plan, feature flags, and rollback procedures</li>
+    <li>Legal/compliance has reviewed if required</li>
+    <li>Executive update sent — no surprises on launch day</li>
+    <li>Customer-facing teams know the launch date and can handle inquiries</li>
+    <li>Pre-mortem completed — top risks identified and mitigated</li>
+  </ul>
+</div>
+
+</section>
+
+<section id="real-world-examples" data-section="examples">
+  <h2>Real-world examples</h2>
+
+<div class="case-study">
+  <p class="case-label">Case study</p>
+  <h4>Managing up: The PM who saved a feature by framing it as a revenue initiative</h4>
+  <p>A PM at a B2B SaaS company needed to ship an improved search feature. Engineering time was scarce, and the CEO was focused on landing enterprise deals. Search improvement felt like a "nice to have" in that context. The PM reframed: "Enterprise prospects cite search quality in 4 of our last 7 lost deals. Improving search directly unblocks $800K in pipeline." Same feature, different stakeholder frame. The feature was approved within a week.</p>
+  <p>The lesson: the PM didn't change the feature or the reasoning — they changed the framing to match what the decision-maker cared about. This isn't manipulation; it's communication competence.</p>
+</div>
+
+<div class="case-study">
+  <p class="case-label">Case study</p>
+  <h4>Disagree-and-commit at Amazon</h4>
+  <p>Jeff Bezos documented disagree-and-commit in his 2016 shareholder letter. He described a case where a team proposed an Amazon Studios show he didn't believe in. Instead of blocking it, he wrote: "I disagree and commit. I hope it becomes the most watched thing we've ever made." The show could proceed without the drag of a reluctant CEO second-guessing every creative decision.</p>
+  <p>The principle works at every level. A PM who disagrees with the engineering approach but commits fully avoids the corrosive pattern of quiet undermining — mentioning concerns at every standup, escalating when problems arise, saying "I told you so" when things go wrong. Commit means commit.</p>
+</div>
+
+<div class="case-study">
+  <p class="case-label">Case study</p>
+  <h4>Cross-functional alignment at Figma</h4>
+  <p>When Figma launched multi-player editing (real-time collaboration), the product team needed alignment across engineering (technical complexity), design (interaction model for cursors and presence), sales (pricing implications — does each collaborator need a seat?), and marketing (positioning against Sketch and Adobe). Instead of running separate briefings, the PM created a single alignment document — a "collaboration brief" — that addressed each team's concerns in their own section, with clear RACI for every decision. The document became the single source of truth that prevented the "but I thought we decided..." conversations that derail cross-functional launches.</p>
+</div>
+
+</section>
+
+<section id="common-pitfalls" data-section="practical">
+  <h2>Common pitfalls</h2>
+
+<div class="pitfall">
+  <div class="pitfall-icon">!</div>
+  <div>
+    <h4>Treating stakeholder management as political maneuvering</h4>
+    <p>Stakeholder management isn't about manipulating people — it's about building shared understanding. If your approach is "how do I get them to agree with me," you're doing it wrong. If your approach is "how do I understand their perspective and find a path that serves the product and respects their concerns," you're doing it right. The first approach burns trust over time. The second builds it.</p>
+  </div>
+</div>
+
+<div class="pitfall">
+  <div class="pitfall-icon">!</div>
+  <div>
+    <h4>Surprising stakeholders</h4>
+    <p>The number one stakeholder management failure is surprising someone with information they should have had earlier. A VP who learns about a delayed launch in a company all-hands — rather than from you, privately, a week before — will never fully trust your communication again. Flag risks early, even when you're not sure. "I'm 70% sure we'll ship on time, but there's a 30% chance the API integration delays us by a week" is infinitely better than silence followed by "we're delayed."</p>
+  </div>
+</div>
+
+<div class="pitfall">
+  <div class="pitfall-icon">!</div>
+  <div>
+    <h4>Over-consulting</h4>
+    <p>Including too many people in decisions slows everything down and creates the illusion of shared ownership without actual ownership. Not every decision needs input from every stakeholder. Use the RACI to identify who needs to be consulted (2–3 people maximum) and who just needs to be informed after the decision is made.</p>
+  </div>
+</div>
+
+<div class="pitfall">
+  <div class="pitfall-icon">!</div>
+  <div>
+    <h4>Avoiding conflict</h4>
+    <p>Some PMs try to keep everyone happy by avoiding hard conversations. This creates artificial harmony — surface-level agreement that masks unresolved disagreements. Those disagreements surface later, usually at the worst possible time (during launch, in front of a customer, in a board meeting). Address disagreements early and directly. A productive conflict now prevents a destructive one later.</p>
+  </div>
+</div>
+
+</section>
+
+<section id="when-to-use" data-section="practical">
+  <h2>When to invest in stakeholder management</h2>
+
+<div class="callout info">
+  <p class="callout-title">Decision guidance</p>
+  <p><strong>Invest heavily when:</strong> Launching a major initiative. Joining a new team or company. Proposing a controversial direction. Working on cross-functional projects with 3+ teams involved. Your last initiative was blocked by organizational resistance.</p>
+  <p><strong>Invest lightly when:</strong> Working on a small, well-understood feature within your team. The team has strong shared context and established trust. The initiative is low-risk and easily reversible.</p>
+  <p><strong>Always do:</strong> Keep your stakeholder map current. Send weekly executive updates. Brief customer-facing teams before changes go live. Never surprise anyone who has power over your project.</p>
+</div>
+
+</section>
+
+<section id="connections">
+  <h2>Connected topics in your library</h2>
+
+<div class="cross-ref-grid">
+  <a href="#" class="cross-ref-card">
+    <span class="ref-number">PM.1.03</span>
+    <div class="ref-title">Roadmapping &amp; Prioritization</div>
+    <div class="ref-reason">Managing expectations around what's on the roadmap</div>
+  </a>
+  <a href="#" class="cross-ref-card">
+    <span class="ref-number">PM.1.07</span>
+    <div class="ref-title">Go-to-Market &amp; Launches</div>
+    <div class="ref-reason">Cross-functional alignment for launch coordination</div>
+  </a>
+  <a href="#" class="cross-ref-card">
+    <span class="ref-number">PM.4.06</span>
+    <div class="ref-title">Product Communication</div>
+    <div class="ref-reason">Writing and presenting to different audiences</div>
+  </a>
+  <a href="#" class="cross-ref-card">
+    <span class="ref-number">PM.2.11</span>
+    <div class="ref-title">Cross-Functional Collaboration</div>
+    <div class="ref-reason">Working with the product trio and beyond</div>
+  </a>
+</div>
+
+<section id="deep-dive">
+<h2>Deep-dive appendix</h2>
+
+  <details class="expandable">
+    <summary><span class="chevron"><svg viewBox="0 0 14 14"><polyline points="4,2 10,7 4,12"/></svg></span> Managing specific stakeholder types</summary>
+    <div class="expand-content topic-content">
+      <h4>The founder who's still the PM</h4>
+      <p>Many founders hire a PM but don't actually hand over product authority. Every decision gets second-guessed, overridden, or quietly reversed. The fix isn't to fight for authority — it's to become so useful that the founder naturally delegates. Start by documenting their implicit decisions ("You mentioned last week that we're focusing on SMBs — I've written that up as a strategy document. Does this capture it?"). Once you're the person who makes their thinking concrete, you become the person they trust with the decisions.</p>
+
+      <h4>The VP of Sales who wants custom features</h4>
+      <p>Sales leaders often push for customer-specific features to close deals. The PM's job is to distinguish between "this one customer needs it" and "this represents a pattern across our target market." Ask: "How many other prospects have asked for this? Would this feature close multiple deals, or just this one?" If it's a pattern, it belongs on the roadmap. If it's one-off, explore alternatives: professional services, configuration options, or API extensibility.</p>
+
+      <h4>The engineering lead who resists product direction</h4>
+      <p>Sometimes the friction is legitimate — the PM is proposing something technically impractical. Sometimes it's cultural — the engineer doesn't trust the PM's judgment. Either way, the fix is the same: involve them earlier. Engineers who help shape the direction are far more likely to commit to it than engineers who receive it as a decree. Co-discovery with your engineering lead is the highest-leverage stakeholder management investment a PM can make.</p>
+    </div>
+  </details>
+
+  <details class="expandable">
+    <summary><span class="chevron"><svg viewBox="0 0 14 14"><polyline points="4,2 10,7 4,12"/></svg></span> Further reading</summary>
+    <div class="expand-content topic-content">
+      <p><strong>"Radical Candor" by Kim Scott</strong> — How to give honest feedback while maintaining trust. The framework (Care Personally + Challenge Directly) applies directly to PM-stakeholder relationships.</p>
+      <p><strong>"Influence Without Authority" by Allan Cohen &amp; David Bradford</strong> — The academic treatment of how to get things done when you don't have positional power. Dense but comprehensive.</p>
+      <p><strong>"Crucial Conversations" by Patterson et al.</strong> — How to handle high-stakes disagreements productively. Useful for the moments when stakeholder alignment breaks down.</p>
+    </div>
+  </details>
+
+</section>
+</section>
+
+<div class="topic-nav">
+  <a href="requirements.html" class="topic-nav-link prev">
+    <div class="nav-direction">Previous topic</div>
+    <div class="nav-title">&#8249; Requirements: Stories, PRDs &amp; Specs</div>
+  </a>
+  <a href="agile-pm.html" class="topic-nav-link next">
+    <div class="nav-direction">Next topic</div>
+    <div class="nav-title">Agile Product Management &#8250;</div>
+  </a>
+</div>
+
+<!-- SEARCH_INDEX
+{
+    topic: "Stakeholder Management & Influence",
+    url: "topics/stakeholder-management.html",
+    tier: "Tier 1",
+    sections: [
+      { title: "What it is & why it matters", id: "what-and-why", type: "theory", keywords: "stakeholder management influence authority responsibility politics organizational" },
+      { title: "Stakeholder methods", id: "stakeholder-methods", type: "practical", keywords: "stakeholder map power interest RACI pre-mortem disagree commit alignment narrative" },
+      { title: "Templates and checklists", id: "templates-and-checklists", type: "practical", keywords: "alignment before launch checklist executive update" },
+      { title: "Real-world examples", id: "real-world-examples", type: "examples", keywords: "managing up framing revenue Amazon disagree commit Figma alignment" },
+      { title: "Common pitfalls", id: "common-pitfalls", type: "practical", keywords: "political surprising over-consulting avoiding conflict" },
+      { title: "When to invest", id: "when-to-use", type: "practical", keywords: "major launch cross-functional new team" },
+      { title: "Deep-dive appendix", id: "deep-dive", type: "deep-dive", keywords: "founder VP sales engineering lead further reading Radical Candor" }
+    ],
+    methods: [
+      { name: "Stakeholder Map", section: "stakeholder-methods", keywords: "power interest 2x2 key players keep satisfied informed monitor engagement workshop" },
+      { name: "Pain/Gain Map", section: "stakeholder-methods", keywords: "pain gain empathy motivations pains gains value proposition communication strategy" },
+      { name: "RACI Matrix", section: "stakeholder-methods", keywords: "responsible accountable consulted informed decision clarity ownership" },
+      { name: "Pre-Mortem", section: "stakeholder-methods", keywords: "pre-mortem risk surface objections imagine failure six months" },
+      { name: "Disagree-and-Commit", section: "stakeholder-methods", keywords: "disagree commit consensus decision closure Bezos Amazon protocol" },
+      { name: "Executive Update Template", section: "stakeholder-methods", keywords: "weekly update progress risks decisions next week concise leadership" },
+      { name: "Alignment Narrative", section: "stakeholder-methods", keywords: "persuasion framing stakeholder language goals concerns buy-in" },
+      { name: "Ally-Finding Strategy", section: "stakeholder-methods", keywords: "ally champion sponsor internal frustration salespeople dev managers call center UX cost business impact coalition" }
+    ]
+  }
+SEARCH_INDEX -->
+
+<!-- MANIFEST
+{
+  "id": "PM.1.06",
+  "title": "Stakeholder Management & Influence",
+  "file": "topics/stakeholder-management.html",
+  "tier": 1,
+  "discipline": "PM",
+  "solves": [
+    "I need to get buy-in from a skeptical executive",
+    "I want to manage conflicting requests from sales, support, and engineering",
+    "I need to say no to the CEO's pet feature without damaging the relationship",
+    "I want to build trust with engineering leads who've been burned by previous PMs",
+    "I need to align five teams on a shared priority",
+    "I need to find an internal champion to sponsor a UX initiative"
+  ],
+  "methods": [
+    "Stakeholder Map (Power/Interest)",
+    "Pain/Gain Map",
+    "RACI Matrix",
+    "Pre-Mortem for Decisions",
+    "Disagree-and-Commit Protocol",
+    "Executive Update Template",
+    "Alignment Narrative",
+    "Ally-Finding Strategy"
+  ],
+  "phase": "ongoing",
+  "prerequisites": [],
+  "pairs_with": ["PM.1.03", "PM.1.07", "PM.4.06", "UX.4.04"],
+  "cross_discipline": ["UX.4.04"],
+  "depth": "methods",
+  "keywords": [
+    "stakeholder", "management", "influence", "authority", "alignment",
+    "RACI", "pre-mortem", "disagree commit", "managing up",
+    "executive", "cross-functional", "buy-in", "politics", "ally", "champion", "sponsor"
+  ]
+,
+  "sources": ["nng"]
+}
+MANIFEST -->

@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Retention, Churn &amp; Customer Success — Noir Book</title>
+  <link rel="stylesheet" href="../css/shared.css">
+  <link rel="stylesheet" href="../css/topic.css">
+  <script src="../js/theme.js"></script>
+  <script src="../js/topic-nav.js"></script>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="site-nav subpage-nav" data-discipline="pm">
+    <div class="nav-inner">
+      <a href="../index.html" class="site-logo">
+        <span class="logo-mark">PM</span>
+        <span class="nav-title">Noir Book</span>
+      </a>
+      <a href="../index.html" class="nav-back-link">&#8592; Library</a>
+      <div class="nav-filters">
+        <button class="disc-toggle ux-toggle active" data-disc="ux" onclick="toggleDisc('ux')" title="UX Design">
+          <span class="disc-dot disc-dot-ux"></span><span class="disc-label">UX Design</span><span class="disc-code">(UX)</span>
+        </button>
+        <button class="disc-toggle pm-toggle active" data-disc="pm" onclick="toggleDisc('pm')" title="Product Management">
+          <span class="disc-dot disc-dot-pm"></span><span class="disc-label">Product</span><span class="disc-code">(PM)</span>
+        </button>
+        <button class="disc-toggle mk-toggle active" data-disc="mk" onclick="toggleDisc('mk')" title="Marketing &amp; Growth">
+          <span class="disc-dot disc-dot-mk"></span><span class="disc-label">Marketing</span><span class="disc-code">(MK)</span>
+        </button>
+        <button class="disc-toggle cs-toggle active" data-disc="cs" onclick="toggleDisc('cs')" title="Content Strategy">
+          <span class="disc-dot disc-dot-cs"></span><span class="disc-label">Content</span><span class="disc-code">(CS)</span>
+        </button>
+        <div class="search-box nav-search-box">
+          <div class="nav-search-wrap">
+            <div class="nav-search-pills" id="navSearchPills"></div>
+            <input type="text" id="navSearchInput" placeholder="Search..." autocomplete="off"
+              oninput="topicNavSearch(this.value)"
+              onkeydown="handleNavSearchKey(event)"
+              onfocus="handleNavSearchFocus()"
+              onblur="handleNavSearchBlur()">
+            <button type="button" class="nav-search-clear" id="navSearchClear" onclick="clearNavSearch()" aria-label="Clear search">&times;</button>
+          </div>
+          <div class="search-dropdown" id="navSearchDropdown"></div>
+        </div>
+      </div>
+      <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle theme">&#9790;</button>
+      <button class="burger-btn" id="burgerBtn" onclick="openBurger()" aria-label="Menu">
+        <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="2" y1="4" x2="16" y2="4"/><line x1="2" y1="9" x2="16" y2="9"/><line x1="2" y1="14" x2="16" y2="14"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Burger Menu Overlay -->
+  <div class="burger-overlay" id="burgerOverlay" onclick="closeBurger(event)">
+    <div class="burger-panel" onclick="event.stopPropagation()">
+      <div class="burger-panel-header">
+        <h3>Menu</h3>
+        <button class="burger-close" onclick="closeBurger()" aria-label="Close">&times;</button>
+      </div>
+      <div class="burger-search">
+        <input type="text" id="burgerSearchInput" placeholder="Search topics, methods..." autocomplete="off" oninput="burgerSearch(this.value)">
+        <div class="burger-search-results" id="burgerSearchResults"></div>
+      </div>
+      <div class="burger-links">
+        <a href="../index.html">&#8592; Back to Library</a>
+        <a href="../design-system.html">Design System</a>
+        <a href="../request-topic.html">Suggest a topic or improvement</a>
+      </div>
+      <div class="burger-toc-section">
+        <p class="burger-toc-title">On this page</p>
+        <ul class="burger-toc-list">
+        <li><a href="#what-and-why" data-section="theory">What retention and churn analysis is and why it matters</a></li>
+        <li><a href="#retention-models" data-section="theory">Retention models and measurement</a></li>
+        <li><a href="#churn-analysis" data-section="practical">Churn root-cause analysis</a></li>
+        <li><a href="#health-scoring" data-section="practical">Customer health scoring</a></li>
+        <li><a href="#interventions" data-section="practical">At-risk interventions</a></li>
+        <li><a href="#examples" data-section="examples">Real-world examples</a></li>
+        <li><a href="#pitfalls" data-section="practical">Common pitfalls</a></li>
+        <li><a href="#connections">Connected topics in your library</a></li>
+        <li><a href="#deep-dive">Deep-dive appendix</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Topic Header -->
+  <header class="topic-header container">
+    <div class="breadcrumb">
+      <a href="../index.html">Library</a>
+      <span class="sep">&#8250;</span>
+      <span class="breadcrumb-disc breadcrumb-pm">Product Management</span>
+      <span class="sep">&#8250;</span>
+      <span>Tier 2 — Specialized</span>
+      <span class="sep">&#8250;</span>
+      <span>Retention</span>
+    </div>
+    <div class="topic-meta">
+      <span class="tier-badge tier2">Tier 2</span>
+      <span style="font-size:14px;color:var(--ink-muted)">Topic PM.2.09</span>
+    </div>
+    <h1>Retention, Churn &amp; Customer Success</h1>
+    <p class="topic-subtitle">Keep the users you've earned. Churn analysis, retention curves, customer health scoring, and designing interventions that prevent churn before it happens.</p>
+    <div class="content-splits">
+      <span class="split-badge theory">25% Theory</span>
+      <span class="split-badge practical">50% Methods &amp; Templates</span>
+      <span class="split-badge examples">25% Examples</span>
+    </div>
+  </header>
+
+  <!-- Reading Progress Bar -->
+  <div class="reading-progress" id="readingProgress"></div>
+
+  <!-- Main Layout -->
+  <div class="container">
+    <div class="topic-layout">
+
+      <!-- Sidebar: Table of Contents -->
+      <aside class="topic-sidebar">
+        <nav class="toc">
+          <p class="sidebar-topic-title">Retention, Churn &amp; Customer Success</p>
+          <p class="toc-title">On this page</p>
+          <ul class="toc-list">
+            <li><a href="#what-and-why" data-section="theory">What retention and churn analysis is and why it matters</a></li>
+            <li><a href="#retention-models" data-section="theory">Retention models and measurement</a></li>
+            <li><a href="#churn-analysis" data-section="practical">Churn root-cause analysis</a></li>
+            <li><a href="#health-scoring" data-section="practical">Customer health scoring</a></li>
+            <li><a href="#interventions" data-section="practical">At-risk interventions</a></li>
+            <li><a href="#examples" data-section="examples">Real-world examples</a></li>
+            <li><a href="#pitfalls" data-section="practical">Common pitfalls</a></li>
+            <li><a href="#connections">Connected topics in your library</a></li>
+            <li><a href="#deep-dive">Deep-dive appendix</a></li>
+          </ul>
+        </nav>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="topic-main topic-content">
+
+        <div class="section-marker" id="what-and-why">
+          <span class="split-badge theory">Theory</span>
+          <span class="marker-line"></span>
+        </div>
+
+        <section data-section="theory">
+  <h2>What retention and churn analysis is and why it matters</h2>
+
+<p>Retention is the measure of how many users continue using your product over time. Churn is its inverse — the rate at which users stop. Together, they determine whether your product is a leaky bucket (acquiring users faster than you lose them) or a growing reservoir (each cohort contributes lasting value). For SaaS and subscription businesses, retention is the single most important driver of long-term revenue: a 5% improvement in retention can increase lifetime value by 25-95%, because each retained user generates revenue for months or years longer.</p>
+
+<p>The PM's role in retention isn't running customer success calls — it's understanding <em>why</em> users churn, <em>which</em> users are at risk, and <em>what</em> product changes reduce churn at scale. A support team saves one customer at a time. A PM who fixes the activation flow or eliminates a critical pain point saves thousands.</p>
+
+<p>Churn is also a diagnostic tool. High churn in the first week signals an activation problem — users don't reach the "aha moment." High churn in month 3-6 signals a depth problem — the product doesn't deliver enough ongoing value. High churn among enterprise accounts signals a fit problem — the product may not meet enterprise needs. Each pattern points to a different product intervention.</p>
+</section>
+
+<section id="retention-models" data-section="theory">
+  <h2>Retention models and measurement</h2>
+
+<p>There are three ways to measure retention, and each tells a different story. <strong>N-day retention</strong> measures what percentage of users return on exactly day N (day 1, day 7, day 30). This is standard for mobile apps and daily-use products. <strong>Bounded retention</strong> (also called "rolling" or "bracket" retention) measures whether users returned at least once during a period (week 1, week 2, month 1). This suits products with irregular usage patterns. <strong>Unbounded retention</strong> measures whether users who signed up N days ago are still active as of today. This suits SaaS products tracking ongoing subscription health.</p>
+
+<p>For subscription businesses, add <strong>revenue retention</strong>: Net Revenue Retention (NRR) = (starting MRR + expansion - contraction - churn) / starting MRR. An NRR above 100% means existing customers generate more revenue over time even without new acquisitions. NRR above 120% is considered excellent for B2B SaaS. This metric captures the full picture: some "retained" users may downgrade (contraction) while others upgrade (expansion).</p>
+</section>
+
+        <div class="section-marker" id="churn-analysis">
+          <span class="split-badge practical">Practical</span>
+          <span class="marker-line"></span>
+        </div>
+
+        <section data-section="practical">
+  <h2>Churn root-cause analysis</h2>
+
+<div class="method-card">
+  <h4>Churn Root-Cause Framework <span class="method-tag">Core Method</span></h4>
+  <p class="method-when">Use when: you know your churn rate but don't know why users leave.</p>
+  <p>Segment churn by timing and cause.</p>
+<ul>
+  <li><strong>Early churn (0-30 days)</strong> — users who never activated. Causes: poor onboarding, unclear value proposition, product-market mismatch.</li>
+  <li><strong>Mid-term churn (1-6 months)</strong> — users who activated but didn't form a habit. Causes: insufficient depth, missing features, better alternatives.</li>
+  <li><strong>Late churn (6+ months)</strong> — users who were engaged but stopped. Causes: changing needs, budget cuts, organizational change, competitor switch.</li>
+</ul>
+  <p>For each segment, gather data from: exit surveys (what's the #1 reason you're leaving?), support tickets in the 30 days before churn, usage patterns before churn (declining login frequency, fewer features used), and win-back interviews (what would bring you back?). The synthesis should produce 3-5 root causes ranked by frequency and impact. Focus product investment on the top 2 — trying to fix all causes simultaneously fixes none.</p>
+</div>
+
+<div class="method-card">
+  <h4>Retention Curve Analysis <span class="method-tag">Core Method</span></h4>
+  <p class="method-when">Use when: you need to visualize and diagnose retention patterns across cohorts.</p>
+  <p>Plot retention curves for each signup cohort (monthly or weekly). The X-axis is time since signup, the Y-axis is percentage still active. A healthy retention curve drops steeply in the first period (some users were never a fit), then flattens into a stable "retention plateau" — the percentage of users who will stick around long-term. If your curve never flattens, you don't have product-market fit yet.</p>
+  <p>Compare curves across cohorts to see if retention is improving over time. If January's cohort retains at 30% and June's cohort retains at 40% at the same point in their lifecycle, your product improvements are working. If curves are identical or declining, new features aren't moving the retention needle.</p>
+</div>
+
+<div class="method-card">
+  <h4>Cohort Retention Table <span class="method-tag">Tool</span></h4>
+  <p class="method-when">Use when: presenting retention data to stakeholders in a structured format.</p>
+  <p>A cohort table shows signup cohorts as rows and time periods as columns, with each cell showing the retention percentage. Color-code cells (green for above target, red for below) to make patterns visible at a glance. The diagonal pattern reveals trends: if recent cohorts show higher retention in early periods, product improvements are landing. If the bottom-right cells are declining, you have an emerging problem even if top-line retention looks stable.</p>
+</div>
+</section>
+
+<section id="health-scoring" data-section="practical">
+  <h2>Customer health scoring</h2>
+
+<div class="method-card">
+  <h4>Customer Health Score <span class="method-tag">Core Method</span></h4>
+  <p class="method-when">Use when: you want to predict which users or accounts are at risk before they churn.</p>
+  <p>A health score combines leading indicators into a single composite metric per user or account. Common inputs: <strong>Usage frequency</strong> (declining logins or sessions), <strong>Feature breadth</strong> (using fewer features over time), <strong>Support sentiment</strong> (increasing ticket volume or negative CSAT), <strong>Engagement depth</strong> (superficial vs. deep product usage), and <strong>Contract signals</strong> (approaching renewal without expansion discussion).</p>
+  <p>Weight each input based on correlation with actual churn. If declining login frequency predicts 60% of churn but support tickets only predict 15%, weight accordingly. Set thresholds: "Healthy" (score 80+), "At risk" (50-79), "Critical" (below 50). Route critical accounts to customer success for intervention. Review the model quarterly — the inputs that predict churn shift as your product evolves.</p>
+</div>
+
+<div class="callout tip">
+  <p class="callout-title">Practical tip</p>
+  <p>The most reliable churn predictor for most products is a drop in "core action frequency" — whatever action defines active engagement. For Slack, it's messages sent. For a CRM, it's contacts updated. For an analytics tool, it's queries run. Find your core action, measure its trend line per user, and flag users whose frequency drops 50%+ from their personal baseline. This single signal often outperforms complex multi-variable health scores.</p>
+</div>
+</section>
+
+<section id="interventions" data-section="practical">
+  <h2>At-risk interventions</h2>
+
+<div class="method-card">
+  <h4>At-Risk Intervention Design <span class="method-tag">Core Method</span></h4>
+  <p class="method-when">Use when: you've identified at-risk users and need to bring them back.</p>
+  <p>Match the intervention to the churn cause.</p>
+<ul>
+  <li><strong>Activation failures</strong> — trigger re-engagement emails with "what you missed" content, offer a setup call, or simplify the onboarding path.</li>
+  <li><strong>Feature gaps</strong> — notify at-risk users when the missing feature ships ("You asked, we built it").</li>
+  <li><strong>Declining engagement</strong> — surface new use cases ("Did you know you can also...?"), share success stories from similar users.</li>
+  <li><strong>Competitor switch risk</strong> — proactively reach out with differentiation messaging, offer a business review meeting.</li>
+</ul>
+  <p>Design interventions as experiments: control group (no intervention) vs. treatment group (intervention). Measure whether the intervention actually reduces churn or just delays it. A common trap is interventions that save users for one more month but don't address the underlying problem.</p>
+</div>
+
+<div class="method-card">
+  <h4>Net Revenue Retention Modeling <span class="method-tag">Framework</span></h4>
+  <p class="method-when">Use when: planning revenue growth and understanding the impact of retention improvements.</p>
+  <p>Model NRR by projecting: current MRR, expected expansion (upsells, usage growth), expected contraction (downgrades), and expected churn. Then model scenarios: "What happens to NRR if we reduce early churn by 20%?" "What if we increase expansion revenue by 15%?" This shows stakeholders that improving retention from 90% to 95% can have a larger revenue impact than acquiring thousands of new users — because retained users compound.</p>
+</div>
+</section>
+
+        <div class="section-marker" id="examples">
+          <span class="split-badge examples">Examples</span>
+          <span class="marker-line"></span>
+        </div>
+
+        <section data-section="examples">
+  <h2>Real-world examples</h2>
+
+<div class="case-study">
+  <p class="case-label">Case study</p>
+  <h4>Superhuman: The retention-first product strategy</h4>
+  <p>Superhuman, the email client, famously wouldn't launch publicly until they achieved a specific retention threshold. They used Sean Ellis's product-market fit survey ("How would you feel if you could no longer use this product?") as a leading indicator of retention. They iterated on the product until 40%+ of users said "very disappointed" — a threshold correlated with strong retention curves. Only then did they scale acquisition.</p>
+  <p><strong>Why it works:</strong> They recognized that scaling a product with poor retention is pouring water into a leaky bucket. By fixing retention first, every acquired user had higher lifetime value, making acquisition economics work even at premium pricing.</p>
+</div>
+
+<div class="case-study">
+  <p class="case-label">Case study</p>
+  <h4>HubSpot: Health scoring at scale</h4>
+  <p>HubSpot's customer health scoring system combines product usage data (features used, login frequency, integrations active), support data (ticket volume, CSAT scores), and commercial data (contract value, renewal date, expansion conversations). The health score is surfaced to customer success managers in real-time, triggering playbooks: healthy accounts get expansion outreach, at-risk accounts get proactive check-ins, critical accounts get executive escalation. The model is recalibrated quarterly based on which inputs actually predicted churn in the previous period.</p>
+  <p><strong>Why it works:</strong> By automating the detection and routing, HubSpot's CS team spends time on interventions rather than analysis. The PM contribution was designing which product signals feed the health model and building the in-product triggers (onboarding nudges, feature discovery prompts) that complement human outreach.</p>
+</div>
+</section>
+
+<section id="pitfalls" data-section="practical">
+  <h2>Common pitfalls</h2>
+
+<div class="pitfall">
+  <div class="pitfall-icon">!</div>
+  <div>
+    <h4>Measuring retention wrong for your product type</h4>
+    <p>Using daily retention for a tax-filing product that's used once a year. Using monthly retention for a messaging app that should be used daily. Match your retention measurement to your product's natural usage frequency. If you're unsure, look at the distribution of time between sessions for engaged users — that's your natural cadence.</p>
+  </div>
+</div>
+
+<div class="pitfall">
+  <div class="pitfall-icon">!</div>
+  <div>
+    <h4>Treating all churn equally</h4>
+    <p>A free user who churns after 3 days is very different from an enterprise customer who churns after 18 months. Segment churn analysis by user type, plan tier, and tenure. The interventions for each segment are completely different, and blending them into one churn rate hides the actionable patterns.</p>
+  </div>
+</div>
+
+<div class="pitfall">
+  <div class="pitfall-icon">!</div>
+  <div>
+    <h4>Saving users instead of fixing the product</h4>
+    <p>Customer success teams excel at saving individual accounts through heroic effort — extra support, custom workarounds, executive attention. But if you need hero saves to retain customers, your product has a problem. Use CS intervention data as product input: if 30% of saves involve the same workaround, that workaround should become a product feature.</p>
+  </div>
+</div>
+</section>
+
+<section id="connections">
+  <h2>Connected topics in your library</h2>
+  <div class="cross-ref-grid">
+    <a href="product-metrics.html" class="cross-ref-card">
+      <span class="ref-number">PM Tier 1</span>
+      <div class="ref-title">Product Metrics &amp; Analytics</div>
+      <div class="ref-reason">Retention metrics are a subset of the broader metrics framework — this goes deeper on the retention dimension.</div>
+    </a>
+    <a href="growth-plg.html" class="cross-ref-card">
+      <span class="ref-number">PM Tier 2</span>
+      <div class="ref-title">Growth &amp; PLG</div>
+      <div class="ref-reason">Growth without retention is a leaky bucket. PLG activation directly impacts early retention.</div>
+    </a>
+    <a href="product-adoption.html" class="cross-ref-card">
+      <span class="ref-number">UX Tier 3</span>
+      <div class="ref-title">Product Adoption (UX)</div>
+      <div class="ref-reason">UX lens on retention — onboarding design, habit formation, and retention-driving UI patterns.</div>
+    </a>
+    <div class="cross-ref-card">
+      <span class="ref-number">MK Tier 2</span>
+      <div class="ref-title">Lifecycle Marketing &amp; Email</div>
+      <div class="ref-reason">Marketing lifecycle communication complements in-product retention interventions.</div>
+    </div>
+  </div>
+</section>
+
+<div class="deep-dive-section" id="deep-dive">
+          <div class="deep-dive-header">
+            <span class="deep-dive-badge">Deep Dive</span>
+            <h2 style="margin:0; border:none; padding:0;">Appendix</h2>
+          </div>
+  <details class="expandable">
+    <summary><span class="chevron"><svg viewBox="0 0 14 14"><polyline points="4,2 10,7 4,12"/></svg></span> Survival analysis for PMs</summary>
+    <div class="expand-content topic-content">
+      <h4>Beyond simple retention rates</h4>
+      <p>Survival analysis (from medical statistics) models the probability of a user "surviving" (remaining active) over time. Unlike simple retention rates, survival curves handle censored data — users who signed up recently and haven't had time to churn yet. A Kaplan-Meier curve plots survival probability over time, giving you a more statistically rigorous view than raw retention percentages. The hazard rate tells you the instantaneous risk of churn at any given point in the user lifecycle — useful for identifying exactly when users are most vulnerable.</p>
+      <h4>When to use survival analysis</h4>
+      <p>Use survival analysis when: you have users at different lifecycle stages and want to compare them fairly, you want to predict when (not just whether) a user will churn, or you want to understand whether a product change shifted the timing of churn or actually prevented it.</p>
+    </div>
+  </details>
+  <details class="expandable">
+    <summary><span class="chevron"><svg viewBox="0 0 14 14"><polyline points="4,2 10,7 4,12"/></svg></span> Further reading and resources</summary>
+    <div class="expand-content topic-content">
+      <h4>Essential reading</h4>
+      <p><strong>"Retention Point" by Robert Skrob</strong> — Practical retention strategies for subscription businesses.</p>
+      <p><strong>"Hooked" by Nir Eyal</strong> — The habit-forming product framework, relevant to designing for retention.</p>
+      <p><strong>Reforge's Retention & Engagement series</strong> — Deep, practitioner-focused content on retention measurement and improvement.</p>
+    </div>
+  </details>
+</div>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer container">
+    <div class="footer-inner">
+      <p>Noir Book — Built for the work, not the shelf.</p>
+      <div class="footer-links">
+        <a href="../design-system.html">Design System</a>
+        <a href="../library-manifest.json">Manifest</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to Top -->
+  <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">&#8593;</button>
+
+  <!-- Floating Mobile TOC -->
+  <button class="mobile-toc-btn" id="mobileTocBtn" aria-label="Open table of contents">&#9776; Contents</button>
+  <div class="mobile-toc-overlay" id="mobileTocOverlay">
+    <div class="mobile-toc-panel">
+      <div class="mobile-toc-panel-header">
+        <h3>On this page</h3>
+        <button class="mobile-toc-close" id="mobileTocClose" aria-label="Close">&times;</button>
+      </div>
+      <ul class="mobile-toc-list">
+        <li><a href="#what-and-why" data-section="theory">What retention and churn analysis is and why it matters</a></li>
+        <li><a href="#retention-models" data-section="theory">Retention models and measurement</a></li>
+        <li><a href="#churn-analysis" data-section="practical">Churn root-cause analysis</a></li>
+        <li><a href="#health-scoring" data-section="practical">Customer health scoring</a></li>
+        <li><a href="#interventions" data-section="practical">At-risk interventions</a></li>
+        <li><a href="#examples" data-section="examples">Real-world examples</a></li>
+        <li><a href="#pitfalls" data-section="practical">Common pitfalls</a></li>
+        <li><a href="#connections">Connected topics in your library</a></li>
+        <li><a href="#deep-dive">Deep-dive appendix</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    // Scrollspy: highlight active TOC item
+    const tocLinks = document.querySelectorAll('.toc-list a');
+    const sections = [];
+    tocLinks.forEach(link => {
+      const href = link.getAttribute('href');
+      if (!href || !href.startsWith('#')) return;
+      const el = document.getElementById(href.slice(1));
+      if (el) sections.push({ el, link });
+    });
+
+    // Reading progress bar
+    const progressBar = document.getElementById('readingProgress');
+    const backToTop = document.getElementById('backToTop');
+
+    function onScroll() {
+      let current = sections[0];
+      for (const s of sections) {
+        if (s.el.getBoundingClientRect().top <= 120) current = s;
+      }
+      tocLinks.forEach(l => l.classList.remove('active'));
+      if (current) current.link.classList.add('active');
+
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrolled = window.scrollY;
+      const progress = docHeight > 0 ? (scrolled / docHeight) * 100 : 0;
+      if (progressBar) progressBar.style.width = progress + '%';
+      if (backToTop) backToTop.classList.toggle('visible', scrolled > 400);
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    // Split badges: click to scroll to section
+    document.querySelectorAll('.content-splits .split-badge').forEach(function(badge) {
+      badge.addEventListener('click', function() {
+        var type = badge.classList.contains('theory') ? 'theory' : badge.classList.contains('practical') ? 'practical' : 'examples';
+        var target = document.querySelector('section[data-section="' + type + '"]');
+        if (target) {
+          var marker = target.previousElementSibling;
+          (marker && marker.classList.contains('section-marker') ? marker : target).scrollIntoView({behavior:'smooth'});
+        }
+      });
+    });
+  </script>
+
+  <script src="../js/checklist.js"></script>
+  <script src="../js/mobile-toc.js"></script>
+  <script src="../js/search.js"></script>
+  <script>
+    function openBurger(){document.getElementById('burgerOverlay').classList.add('open');document.body.style.overflow='hidden'}
+    function closeBurger(e){if(e&&e.target&&e.target!==document.getElementById('burgerOverlay'))return;document.getElementById('burgerOverlay').classList.remove('open');document.body.style.overflow=''}
+    function burgerSearch(q){
+      var r=document.getElementById('burgerSearchResults');
+      if(!q||q.length<2){r.innerHTML='';return}
+      var ql=q.toLowerCase(),matches=[];
+      if(typeof SEARCH_INDEX!=='undefined'){
+        SEARCH_INDEX.forEach(function(t){
+          var hit=t.topic.toLowerCase().indexOf(ql)>-1;
+          if(!hit)t.sections.forEach(function(s){if((s.title+' '+s.keywords).toLowerCase().indexOf(ql)>-1)hit=true});
+          if(hit)matches.push(t);
+        });
+      }
+      if(!matches.length){r.innerHTML='<p style="padding:8px 0;font-size:13px;color:var(--ink-muted)">No results</p>';return}
+      r.innerHTML=matches.slice(0,8).map(function(m){return '<a href="../'+m.url+'">'+m.topic+'<span class="bsr-disc">'+m.discipline+'</span></a>'}).join('');
+    }
+    document.addEventListener('keydown',function(e){if(e.key==='Escape'){closeBurger();var dd=document.getElementById('searchDropdown');if(dd)dd.classList.remove('visible');}});
+    // Close burger when clicking a TOC link
+    document.querySelectorAll('.burger-toc-list a').forEach(function(a){a.addEventListener('click',function(){closeBurger()})});
+    // Search typeahead
+    function topicSearch(q){
+      var dd=document.getElementById('searchDropdown');
+      if(!q||q.length<2||typeof SEARCH_INDEX==='undefined'){if(dd)dd.classList.remove('visible');return}
+      var ql=q.toLowerCase(),grouped={};
+      SEARCH_INDEX.forEach(function(t){
+        var hit=t.topic.toLowerCase().indexOf(ql)>-1,sHits=[],mHits=[];
+        t.sections.forEach(function(s){if((s.title+' '+s.keywords).toLowerCase().indexOf(ql)>-1)sHits.push(s)});
+        (t.methods||[]).forEach(function(m){if((m.name+' '+(m.keywords||'')).toLowerCase().indexOf(ql)>-1)mHits.push(m)});
+        if(!hit&&!sHits.length&&!mHits.length&&ql.length>=3&&typeof levenshtein==='function'){
+          var words=t.topic.toLowerCase().split(/ +/);
+          for(var i=0;i<words.length;i++){if(levenshtein(ql,words[i].substring(0,ql.length+1))<=1){hit=true;break}}
+        }
+        if(hit||sHits.length||mHits.length)grouped[t.topic]={url:'../'+t.url,disc:t.discipline||'',sections:sHits,methods:mHits,topicHit:hit};
+      });
+      var keys=Object.keys(grouped);
+      if(!keys.length){dd.innerHTML='<div class="search-empty">No results</div>';dd.classList.add('visible');return}
+      var html='';
+      keys.slice(0,8).forEach(function(topic){
+        var g=grouped[topic];
+        html+='<div class="search-group"><div class="search-group-title">'+topic+'</div>';
+        if(g.topicHit)html+='<a class="search-result" href="'+g.url+'"><span class="search-result-title">'+topic+'</span><span class="search-result-type practical">'+g.disc+'</span></a>';
+        g.sections.forEach(function(s){html+='<a class="search-result" href="'+g.url+'#'+s.id+'"><span class="search-result-title">'+s.title+'</span><span class="search-result-type '+s.type+'">'+s.type+'</span></a>'});
+        g.methods.slice(0,3).forEach(function(m){html+='<a class="search-result" href="'+g.url+'#'+m.section+'"><span class="search-result-title">'+m.name+'</span><span class="search-result-type practical">method</span></a>'});
+        html+='</div>';
+      });
+      dd.innerHTML=html;dd.classList.add('visible');
+    }
+    document.addEventListener('click',function(e){if(!e.target.closest('.search-box')){var dd=document.getElementById('searchDropdown');if(dd)dd.classList.remove('visible')}});
+  </script>
+
+</body>
+</html>

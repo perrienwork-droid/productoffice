@@ -1,0 +1,209 @@
+<!--
+TOPIC_ID: PM.3.05
+TOPIC_NUMBER: PM.3.05
+TITLE: Internationalization &amp; Localization
+SUBTITLE: Go global. Market selection, localization strategy, cultural adaptation, and the product infrastructure for multiple languages, currencies, and regulations.
+TIER: 3
+TIER_LABEL: Situational
+THEORY: 25
+PRACTICAL: 50
+EXAMPLES: 25
+-->
+
+<section id="what-and-why" data-section="theory">
+  <h2>What internationalization and localization mean for PMs</h2>
+
+<p>Internationalization (i18n) is building the technical infrastructure that enables your product to work in multiple languages, currencies, and regions. Localization (l10n) is adapting the product for a specific market — translating content, adjusting formats, and respecting cultural norms. i18n is engineering work done once. l10n is ongoing work done per market. The PM's job is deciding <em>which</em> markets, <em>when</em>, and <em>how deep</em> the localization should go.</p>
+
+<p>The decision to internationalize is a strategic bet: each new market requires translation, legal compliance (GDPR, local data laws), payment integration (local payment methods), support (timezone-appropriate, language-capable), and marketing localization. The revenue potential must justify these costs. A product that earns $50K/month in the US won't necessarily earn $50K/month in Germany — the market might be smaller, the competition different, the willingness to pay lower, or the cultural fit poor.</p>
+</section>
+
+<section id="market-selection" data-section="practical">
+  <h2>Market selection and prioritization</h2>
+
+<div class="method-card">
+  <h4>Market Selection Matrix <span class="method-tag">Core Method</span></h4>
+  <p class="method-when">Use when: deciding which international markets to enter first.</p>
+  <p>Score potential markets on:</p>
+<ul>
+  <li><strong>Market size</strong> — TAM for your product category in that market.</li>
+  <li><strong>Language overlap</strong> — English-speaking markets (UK, Australia, Canada) require no translation.</li>
+  <li><strong>Existing demand signals</strong> — organic traffic, inbound inquiries, existing users from that region.</li>
+  <li><strong>Competitive landscape</strong> — is the market open or dominated by local incumbents?</li>
+  <li><strong>Regulatory complexity</strong> — GDPR (EU), LGPD (Brazil), PIPL (China) add compliance requirements.</li>
+  <li><strong>Payment infrastructure</strong> — can users pay with local methods? Credit cards aren't universal.</li>
+</ul>
+  <p>Start with the market that has the highest score on demand signals and lowest on regulatory complexity. The UK, Canada, and Australia are common first targets for US-based products (English, similar business culture, familiar payment methods). EU markets offer large TAM but require GDPR compliance. Asian markets offer massive scale but often require deep localization and local partnerships.</p>
+</div>
+
+<div class="method-card">
+  <h4>i18n Readiness Audit <span class="method-tag">Core Method</span></h4>
+  <p class="method-when">Use when: assessing whether your product's codebase can support internationalization.</p>
+  <p>Audit:</p>
+<ul>
+  <li><strong>String externalization</strong> — are all user-facing strings in a translation file, or hard-coded? Hard-coded strings are the #1 i18n blocker.</li>
+  <li><strong>Date/time formatting</strong> — do you handle different date formats (MM/DD/YYYY vs DD/MM/YYYY), time zones, and calendar systems?</li>
+  <li><strong>Number formatting</strong> — decimal separators (US: 1,000.50 vs EU: 1.000,50), currency symbols, and their placement (before vs after).</li>
+  <li><strong>RTL support</strong> — can your UI render right-to-left for Arabic and Hebrew?</li>
+  <li><strong>Text expansion</strong> — German text is typically 30% longer than English. Do your UI components handle this without breaking?</li>
+  <li><strong>Character encoding</strong> — does your system handle Unicode, including CJK characters, emoji, and accented characters?</li>
+</ul>
+</div>
+</section>
+
+<section id="localization-strategy" data-section="practical">
+  <h2>Localization depth and strategy</h2>
+
+<div class="method-card">
+  <h4>Localization Priority Framework <span class="method-tag">Framework</span></h4>
+  <p class="method-when">Use when: deciding how deeply to localize for a specific market.</p>
+  <p>Localization has levels: <strong>Level 1 — Language</strong>: translate all UI strings and help documentation. This is the minimum for non-English markets. <strong>Level 2 — Formats</strong>: local date/time, numbers, currencies, address formats, phone number formats. <strong>Level 3 — Content</strong>: localized marketing, onboarding flows, example data, and templates. <strong>Level 4 — Cultural adaptation</strong>: imagery, color meanings, metaphors, humor, and social norms adapted for local culture. <strong>Level 5 — Market-specific features</strong>: local payment methods (iDEAL in Netherlands, PIX in Brazil), local integrations (WeChat in China), and region-specific compliance features.</p>
+  <p>Level 1-2 is the minimum for serious market entry. Level 3 significantly improves conversion. Level 4-5 is necessary for markets with strong cultural differences or local competitors.</p>
+</div>
+
+<div class="method-card">
+  <h4>Cultural Adaptation Checklist <span class="method-tag">Tool</span></h4>
+  <p class="method-when">Use when: localizing beyond language translation.</p>
+  <p>Check:</p>
+<ul>
+  <li><strong>Colors</strong> — red means danger in the West, good fortune in China. Green means "go" in the US, can mean Islam in some contexts.</li>
+  <li><strong>Icons</strong> — a mailbox icon looks different in every country. A thumbs-up is offensive in some cultures.</li>
+  <li><strong>Imagery</strong> — stock photos should reflect local demographics. A US-centric team photo won't resonate in Japan.</li>
+  <li><strong>Examples and templates</strong> — sample data should use local names, addresses, and scenarios.</li>
+  <li><strong>Legal copy</strong> — terms of service, privacy policy, and disclaimers must comply with local laws, not just be translated from English.</li>
+  <li><strong>Social proof</strong> — testimonials and case studies from local or culturally similar companies carry more weight than US-only references.</li>
+</ul>
+</div>
+
+<div class="method-card">
+  <h4>Multi-Currency Architecture <span class="method-tag">Technique</span></h4>
+  <p class="method-when">Use when: supporting pricing and payments in multiple currencies.</p>
+  <p>Decisions to make:</p>
+<ul>
+  <li><strong>Display currency</strong> — show prices in the user's local currency (using exchange rates) or set fixed prices per currency? Fixed prices are more predictable for users but require manual price updates when exchange rates shift.</li>
+  <li><strong>Billing currency</strong> — bill in local currency (requires local payment processing) or in USD/EUR with conversion at charge time? Local billing reduces friction but adds complexity.</li>
+  <li><strong>Revenue recognition</strong> — how do you report multi-currency revenue internally? Usually convert to a base currency (USD) at transaction-time exchange rate for consistency.</li>
+</ul>
+</div>
+
+<div class="callout tip">
+  <p class="callout-title">Practical tip</p>
+  <p>Don't rely solely on machine translation. For UI strings, professional human translation is worth the investment — awkward translations make your product feel untrustworthy. For help documentation, machine translation with human review is a reasonable middle ground. For marketing content, always use human translators who understand the local market — ideally native speakers who live there.</p>
+</div>
+</section>
+
+<section id="examples" data-section="examples">
+  <h2>Real-world examples</h2>
+
+<div class="case-study">
+  <p class="case-label">Case study</p>
+  <h4>Spotify: Market-by-market launch strategy</h4>
+  <p>Spotify's international expansion was deliberate and market-specific. They launched in Sweden first (home market), then expanded to other Nordics, then UK, then Europe, then US, then globally. Each market launch included local music catalog licensing (the hardest part), local payment methods, localized playlists and recommendations, and market-specific marketing. They didn't just translate the app — they hired local editorial teams who curated playlists for local taste.</p>
+  <p><strong>Why it works:</strong> Music is deeply cultural. A Swedish playlist algorithm wouldn't work in Brazil. By investing in local editorial teams and local catalog deals, Spotify made the product feel native in each market, not like a US import with subtitles.</p>
+</div>
+</section>
+
+<section id="pitfalls" data-section="practical">
+  <h2>Common pitfalls</h2>
+
+<div class="pitfall">
+  <div class="pitfall-icon">!</div>
+  <div>
+    <h4>Retrofitting i18n after building for one language</h4>
+    <p>Hard-coding English strings throughout your codebase and then trying to extract them later is one of the most painful engineering projects. If there's any chance you'll localize, externalize strings from day one. It's trivial to do upfront and incredibly expensive to retrofit.</p>
+  </div>
+</div>
+
+<div class="pitfall">
+  <div class="pitfall-icon">!</div>
+  <div>
+    <h4>Assuming your home market's UX works everywhere</h4>
+    <p>Left-to-right text flow, credit card payments, email-based authentication, and Monday-first calendars are not universal. Test with users in each target market, not just with translated screenshots reviewed by your team.</p>
+  </div>
+</div>
+</section>
+
+<section id="connections">
+  <h2>Connected topics in your library</h2>
+  <div class="cross-ref-grid">
+    <a href="product-strategy.html" class="cross-ref-card">
+      <span class="ref-number">PM Tier 1</span>
+      <div class="ref-title">Product Strategy &amp; Vision</div>
+      <div class="ref-reason">Internationalization is a strategic decision — which markets to enter and when.</div>
+    </a>
+    <a href="go-to-market.html" class="cross-ref-card">
+      <span class="ref-number">PM Tier 1</span>
+      <div class="ref-title">Go-to-Market &amp; Launches</div>
+      <div class="ref-reason">Each new market is effectively a product launch with its own GTM plan.</div>
+    </a>
+    <a href="enterprise-regulated-pm.html" class="cross-ref-card">
+      <span class="ref-number">PM Tier 3</span>
+      <div class="ref-title">Enterprise &amp; Regulated PM</div>
+      <div class="ref-reason">Each new country brings regulatory requirements (GDPR, local data laws).</div>
+    </a>
+    <div class="cross-ref-card">
+      <span class="ref-number">MK Tier 3</span>
+      <div class="ref-title">International &amp; Multicultural Marketing</div>
+      <div class="ref-reason">Marketing localization is the external-facing complement to product i18n.</div>
+    </div>
+  </div>
+</section>
+
+<section id="deep-dive">
+  <h2>Deep-dive appendix</h2>
+  <details class="expandable">
+    <summary><span class="chevron"><svg viewBox="0 0 14 14"><polyline points="4,2 10,7 4,12"/></svg></span> Further reading and resources</summary>
+    <div class="expand-content topic-content">
+      <h4>Essential reading</h4>
+      <p><strong>"The Culture Map" by Erin Meyer</strong> — Cultural dimensions that affect how people work, communicate, and make decisions across countries.</p>
+      <p><strong>W3C Internationalization guidelines</strong> — Technical standards for building i18n-ready web applications.</p>
+    </div>
+  </details>
+</section>
+
+<!-- SEARCH_INDEX
+{
+  topic: "Internationalization & Localization",
+  url: "topics/i18n-localization.html",
+  tier: "Tier 3",
+  discipline: "PM",
+  sections: [
+    { title: "What i18n and l10n mean for PMs", id: "what-and-why", type: "theory", keywords: "internationalization localization i18n l10n global" },
+    { title: "Market selection", id: "market-selection", type: "practical", keywords: "market selection priority international expansion" },
+    { title: "Localization strategy", id: "localization-strategy", type: "practical", keywords: "localization depth translation cultural adaptation" },
+    { title: "Real-world examples", id: "examples", type: "examples", keywords: "Spotify international launch market" },
+    { title: "Common pitfalls", id: "pitfalls", type: "practical", keywords: "retrofit hard-code UX assumption" }
+  ],
+  methods: [
+    { name: "Market Selection Matrix", section: "market-selection", keywords: "market selection TAM demand regulatory" },
+    { name: "i18n Readiness Audit", section: "market-selection", keywords: "i18n audit string date RTL encoding" },
+    { name: "Localization Priority Framework", section: "localization-strategy", keywords: "localization level language format content culture" },
+    { name: "Cultural Adaptation Checklist", section: "localization-strategy", keywords: "culture color icon imagery legal social" },
+    { name: "Multi-Currency Architecture", section: "localization-strategy", keywords: "currency billing display conversion pricing" }
+  ]
+}
+SEARCH_INDEX -->
+
+<!-- MANIFEST
+{
+  "id": "PM.3.05",
+  "title": "Internationalization & Localization",
+  "file": "topics/i18n-localization.html",
+  "tier": 3,
+  "discipline": "PM",
+  "solves": [
+    "I need to decide which international markets to enter first",
+    "I want to plan localization for a product expansion",
+    "I need to support multiple languages and RTL scripts",
+    "I want to adapt for cultural differences without separate products",
+    "I need multi-currency pricing and local payment methods"
+  ],
+  "methods": ["Market Selection Matrix", "i18n Readiness Audit", "Localization Priority Framework", "Cultural Adaptation Checklist", "Multi-Currency Architecture"],
+  "phase": "design",
+  "prerequisites": ["PM.1.01"],
+  "pairs_with": ["PM.1.07", "PM.3.03"],
+  "cross_discipline": ["MK.3.04"],
+  "depth": "methods",
+  "keywords": ["internationalization", "localization", "i18n", "l10n", "translation", "currency", "RTL", "market selection", "cultural adaptation", "global"]
+}
+MANIFEST -->

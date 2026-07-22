@@ -1,0 +1,284 @@
+<!--
+TOPIC_ID: UX.2.14
+TOPIC_NUMBER: UX.2.14
+TITLE: Forms &amp; Data Entry
+SUBTITLE: Design forms that reduce cognitive load and prevent errors. Inline validation, multi-step flows, conditional logic, error reporting, and the research-backed patterns that make data entry fast and accurate.
+TIER: 2
+TIER_LABEL: Specialized
+THEORY: 20
+PRACTICAL: 55
+EXAMPLES: 25
+-->
+
+<section id="what-and-why" data-section="theory">
+  <h2>What form design is and why it matters</h2>
+
+  <p>Forms are where users do the hardest work in your product. Every other screen is consumption — reading, browsing, scanning. Forms demand production — typing, choosing, remembering, deciding. Because forms require effort, they're where friction compounds: every unnecessary field, confusing label, or unhelpful error message increases the chance that a user abandons the task or submits bad data. The research is consistent: form optimization produces larger conversion gains than almost any other interface improvement, because you're reducing friction at the exact moment the user is trying to give you something valuable.</p>
+
+  <p>Form design is not a subset of UI patterns — it's a dedicated specialty with its own research base, its own failure modes, and its own testing methods. A form that looks clean in a mockup can fail catastrophically with real users entering real data under real-world conditions (autocomplete interference, mobile keyboards, accessibility requirements, international address formats). The craft is in the details.</p>
+</section>
+
+<section id="form-structure" data-section="practical">
+  <h2>Form structure and layout</h2>
+
+  <div class="method-card">
+    <h4>Form Structure Framework <span class="method-tag">Core Method</span></h4>
+    <p class="method-when">Use when: designing any form with more than 3 fields, or redesigning a form with high abandonment.</p>
+    <p>Three principles govern form structure: <strong>Grouping:</strong> Related fields belong together visually and semantically. Group personal information, group payment details, group shipping details. Use whitespace or subtle dividers — not heavy borders — to separate groups. Ungrouped forms feel longer than grouped forms with the same number of fields. <strong>Sequencing:</strong> Order fields by the user's mental model, not your database schema. Name before email. Street before city. Start with the easiest fields (name, email) to build momentum before harder ones (payment, custom configuration). <strong>Pacing:</strong> Long forms need breathing room. If a form has 15+ fields, consider multi-step flows — but only if the steps map to meaningful mental stages (your details → your preferences → review). Arbitrary pagination ("step 1 of 7") creates anxiety about how much work remains without reducing perceived complexity.</p>
+  </div>
+
+  <div class="callout info">
+    <p class="callout-title">Single column wins</p>
+    <p>Research consistently shows that single-column forms outperform multi-column layouts. Two-column forms create ambiguous reading order (left-to-right or top-to-bottom?) and increase completion time. The exception: very short, closely related fields like city/state/zip, which users expect side-by-side.</p>
+  </div>
+</section>
+
+<section id="labels-inputs" data-section="practical">
+  <h2>Labels, placeholders, and input types</h2>
+
+  <div class="method-card">
+    <h4>Input Type Selection Matrix <span class="method-tag">Technique</span></h4>
+    <p class="method-when">Use when: choosing between text inputs, dropdowns, radio buttons, checkboxes, and other input types.</p>
+    <p>The right input type reduces errors and speeds completion. <strong>Text input:</strong> Use for open-ended data — names, emails, free-text responses. Never use when options are known and limited. <strong>Radio buttons:</strong> Use for 2–5 mutually exclusive options. Always visible, no interaction required to see choices. Superior to dropdowns for small option sets. <strong>Dropdowns:</strong> Use for 6+ options where the list is too long for radio buttons. Avoid for fewer than 5 options — the extra click wastes time. <strong>Checkboxes:</strong> Use for non-exclusive selections. Each option is independent. <strong>Toggle switches:</strong> Use for binary on/off states with immediate effect. Don't use in forms that have a submit button — toggles imply instant action. <strong>Date inputs:</strong> Use native date pickers for relative dates (appointment booking). Use separate day/month/year fields for known dates (birthdate) — users type known dates faster than they navigate calendar widgets. <strong>Address fields:</strong> Use address autocomplete (Google Places, Mapbox) to reduce typing and prevent formatting errors. Fall back to structured fields (street, city, state, zip) with country-appropriate formats.</p>
+  </div>
+
+  <div class="callout warning">
+    <p class="callout-title">Placeholders are not labels</p>
+    <p>Placeholder text inside input fields disappears when users start typing, removing the instruction at the moment it's most needed. Users with filled forms can't scan to verify their entries because all labels are hidden. Use visible labels above fields. Placeholders can supplement labels with format hints ("e.g., john@example.com") but must never replace them.</p>
+  </div>
+</section>
+
+<section id="validation" data-section="practical">
+  <h2>Inline validation</h2>
+
+  <div class="method-card">
+    <h4>Inline Validation Patterns <span class="method-tag">Core Method</span></h4>
+    <p class="method-when">Use when: implementing real-time field validation without frustrating users who are still typing.</p>
+    <p>Inline validation can improve form completion by 22% — or destroy it if implemented poorly. The key is timing. <strong>Validate on blur (when the user leaves the field):</strong> This is the safest default. The user has finished their entry and is ready for feedback. Validating while they type (on input) creates premature error messages — "Invalid email" when they've only typed "joh" is annoying and patronizing. <strong>Exception — positive validation on input:</strong> For password strength meters and format-sensitive fields (phone numbers, credit cards), showing progressive validation as the user types is helpful because it guides formatting in real time. <strong>Success confirmation:</strong> Show a subtle green checkmark when a field passes validation. This builds confidence and momentum. Don't over-celebrate — a checkmark is enough; a full "Great job!" message for each field is condescending. <strong>Error placement:</strong> Show error messages directly below the field, not in a summary at the top of the form. Users look at the field they're fixing, not at the top of the page. Use color (red) plus an icon (!) plus text — color alone fails for colorblind users.</p>
+  </div>
+</section>
+
+<section id="multi-step" data-section="practical">
+  <h2>Multi-step form architecture</h2>
+
+  <div class="method-card">
+    <h4>Multi-Step Form Architecture <span class="method-tag">Core Method</span></h4>
+    <p class="method-when">Use when: a form has 10+ fields and you need to reduce perceived complexity without losing context.</p>
+    <p>Multi-step forms break a long form into manageable stages. Done well, they reduce abandonment by 20–30%. Done poorly, they increase it. <strong>Step boundaries should be meaningful:</strong> Each step represents a mental stage of the task — "Your information" → "Your preferences" → "Review and confirm." Don't split a form into arbitrary pages just to make each page shorter. <strong>Progress indicators:</strong> Show where users are and how much remains. Numbered steps ("Step 2 of 4") work for linear flows. Progress bars work when steps vary in length. Label each step with its purpose, not just a number. <strong>Preserve context:</strong> Users should be able to go back to previous steps without losing data. Show a summary of completed steps so users don't worry about whether their earlier entries were saved. <strong>Save progress:</strong> For long flows (applications, onboarding), save progress automatically so users can return later. Show "draft saved" confirmation. <strong>The single-page alternative:</strong> Sometimes a long single-page form with clear section headers and a sticky progress indicator outperforms a multi-step flow — especially when users want to review everything before submitting. Test both.</p>
+  </div>
+</section>
+
+<section id="conditional-logic" data-section="practical">
+  <h2>Conditional logic and dynamic fields</h2>
+
+  <div class="method-card">
+    <h4>Conditional Logic Design <span class="method-tag">Technique</span></h4>
+    <p class="method-when">Use when: form fields need to show, hide, or change based on previous user selections.</p>
+    <p>Conditional logic makes forms adaptive — showing only the fields relevant to each user's situation. <strong>Show/hide fields:</strong> When a user selects "Business" instead of "Personal," show company name and tax ID fields. Animate the appearance so the change doesn't feel like a page jump. <strong>Progressive disclosure in forms:</strong> Start with the minimum required fields and reveal additional options only when relevant. "Do you have a promo code?" with a text link that reveals the field is better than showing an empty promo code field to everyone. <strong>Dependent dropdowns:</strong> Country → State → City cascades need instant loading — delay between selections feels broken. Pre-load the most common second-level options. <strong>Branching flows:</strong> When a selection changes the entire subsequent path (e.g., "Are you an individual or organization?" leading to completely different forms), clearly communicate that the form is adapting to their situation. Don't silently change the number of remaining steps.</p>
+  </div>
+</section>
+
+<section id="error-reporting" data-section="practical">
+  <h2>Error prevention and reporting</h2>
+
+  <div class="method-card">
+    <h4>Error Prevention Checklist <span class="method-tag">Core Method</span></h4>
+    <p class="method-when">Use when: designing or auditing a form to minimize user errors before they happen.</p>
+    <p>The best error message is one the user never sees. Prevention strategies: <strong>Smart defaults:</strong> Pre-fill fields with the most common or most likely value — default country based on IP, default date to today, default quantity to 1. <strong>Format guidance:</strong> Show expected format before the user types — "MM/DD/YYYY" near date fields, "(555) 555-5555" near phone fields. <strong>Input masking:</strong> Automatically format input as the user types — add dashes to phone numbers, spaces to credit card numbers, slashes to dates. <strong>Constrained input:</strong> Use number inputs for numeric fields, email inputs for email (which trigger the right mobile keyboard), and character limits for fixed-length codes. <strong>Confirmation for destructive actions:</strong> Before clearing a long form, require explicit confirmation. Before submitting an irreversible form, show a review summary. <strong>Undo over confirmation:</strong> Where possible, let users undo a submission rather than requiring them to confirm it. "Your order has been placed. Undo within 30 seconds" is less friction than a "Are you sure?" dialog.</p>
+  </div>
+
+  <div class="method-card">
+    <h4>Error Message Guidelines <span class="method-tag">Core Method</span></h4>
+    <p class="method-when">Use when: writing error messages for form validation failures.</p>
+    <p>Error messages must answer three questions: what happened, why it happened, and how to fix it. <strong>What:</strong> Identify the specific field and the specific problem — "Email address is invalid" not "There was an error." <strong>Why:</strong> Explain the constraint — "Email must include @ and a domain" not just "Invalid format." <strong>How to fix:</strong> Tell the user what to do — "Enter a valid email like name@example.com" not "Please try again." Additional guidelines: use plain language (no error codes in user-facing messages), don't blame the user ("You entered an invalid email" → "This email address doesn't look right"), preserve the user's input so they can edit rather than retype, and mark required fields before submission, not after.</p>
+  </div>
+</section>
+
+<section id="form-analytics" data-section="practical">
+  <h2>Form analytics</h2>
+
+  <div class="method-card">
+    <h4>Form Analytics Setup <span class="method-tag">Technique</span></h4>
+    <p class="method-when">Use when: diagnosing why a form has high abandonment or low completion rates.</p>
+    <p>Form-level analytics reveal problems invisible in mockups. Track: <strong>Field-level drop-off:</strong> Which field is the last one users interact with before abandoning? That field is your biggest problem — it might be confusing, require information users don't have, or feel too invasive. <strong>Field completion time:</strong> Fields that take significantly longer than expected indicate confusion or difficulty. A name field taking 15 seconds might mean the label is unclear. <strong>Error frequency by field:</strong> Which fields generate the most validation errors? High error rates indicate unclear expectations or poor input design. <strong>Correction rate:</strong> How often do users go back and change a field after initially completing it? High correction rates suggest the field's purpose or format wasn't clear on first attempt. <strong>Abandonment timing:</strong> Do users abandon after seeing the form (too long/intimidating) or partway through (specific field problem)? These have different solutions.</p>
+  </div>
+</section>
+
+<section id="templates" data-section="practical">
+  <h2>Templates and checklists</h2>
+
+  <div class="template-box">
+    <div class="template-header">
+      <span class="template-label">Checklist</span>
+      <span class="template-title">Form Design Review</span>
+    </div>
+    <ul class="checklist">
+      <li>Every field has a visible label (not just a placeholder)</li>
+      <li>Fields are in single-column layout (except short related fields like city/state/zip)</li>
+      <li>Related fields are grouped with clear visual separation</li>
+      <li>Required fields are marked before the user attempts to submit</li>
+      <li>Optional fields are clearly marked or removed entirely</li>
+      <li>Input types match the data (email keyboard for email, number pad for numbers)</li>
+      <li>Inline validation fires on blur, not on input (except progressive validation)</li>
+      <li>Error messages appear directly below the field, with color + icon + text</li>
+      <li>Error messages explain what went wrong and how to fix it</li>
+      <li>Smart defaults are set for fields with common values</li>
+      <li>Format guidance is shown before the user types</li>
+      <li>Users can go back without losing data in multi-step forms</li>
+      <li>The primary action button is clearly distinguished from secondary actions</li>
+      <li>The form is tested with screen readers and keyboard-only navigation</li>
+      <li>Mobile form experience uses appropriate input types for native keyboards</li>
+    </ul>
+  </div>
+</section>
+
+<section id="real-world-examples" data-section="examples">
+  <h2>Real-world examples</h2>
+
+  <div class="case-study">
+    <p class="case-label">Case study</p>
+    <h4>Stripe Checkout: the invisible form</h4>
+    <p>Stripe's checkout form minimizes perceived complexity through aggressive smart defaults and progressive disclosure. The form starts with just an email field. After email entry, payment fields appear with card number auto-detection (Visa, Mastercard icons update in real time), automatic formatting (spaces in card numbers, slash in expiry), and address fields that autocomplete from the card's billing address. The form adapts to the payment method — Apple Pay users see a single button instead of fields. Error messages are specific and constructive ("Your card was declined. Try a different payment method" rather than "Error: transaction failed"). The result: one of the highest conversion checkout experiences in e-commerce.</p>
+    <p><strong>Why it works:</strong> Every design decision reduces input effort — auto-detection, auto-formatting, pre-filling, and showing only the fields each user actually needs.</p>
+  </div>
+
+  <div class="case-study">
+    <p class="case-label">Case study</p>
+    <h4>TurboTax: making complex forms feel simple</h4>
+    <p>Tax filing is inherently complex — hundreds of potential fields, branching logic, and legal requirements. TurboTax transforms this into a conversational multi-step flow: one question at a time, plain-language explanations alongside every field, conditional logic that skips entire sections based on earlier answers, and a running refund estimate that shows the impact of each entry. Progress is saved automatically and users can return anytime. The interview-style approach makes a terrifying process manageable by reducing cognitive load to a single decision at a time.</p>
+    <p><strong>Why it works:</strong> Conversational pacing transforms a 200-field form into 40 simple questions by using conditional logic to skip irrelevant fields and plain language to replace tax jargon.</p>
+  </div>
+</section>
+
+<section id="pitfalls" data-section="practical">
+  <h2>Common pitfalls</h2>
+
+  <div class="pitfall">
+    <div class="pitfall-icon">!</div>
+    <div>
+      <h4>Asking for information you don't need</h4>
+      <p>Every field has a cost — cognitive load, time, and privacy concern. Audit your form: for each field, ask "what happens if we remove this?" If the answer is "nothing breaks," remove it. Optional fields that nobody fills out are noise. Fields that collect data "in case we need it later" erode trust now. The highest-converting forms are the shortest forms.</p>
+    </div>
+  </div>
+
+  <div class="pitfall">
+    <div class="pitfall-icon">!</div>
+    <div>
+      <h4>Validating too eagerly</h4>
+      <p>Showing "Invalid email" after the user types two characters is hostile. Validating on every keystroke creates a stream of error messages while the user is still typing. Validate on blur (when the user leaves the field) as the default. The only exception: progressive formatting feedback (password strength, credit card formatting) where real-time guidance helps.</p>
+    </div>
+  </div>
+
+  <div class="pitfall">
+    <div class="pitfall-icon">!</div>
+    <div>
+      <h4>Resetting the form on error</h4>
+      <p>Clearing all fields when submission fails punishes users for making a mistake. Preserve every field the user filled in and highlight only the fields that need attention. A user who entered 15 fields correctly should not have to re-enter them because field 16 had a validation error.</p>
+    </div>
+  </div>
+</section>
+
+<section id="connections">
+  <h2>Connected topics in your library</h2>
+  <div class="cross-ref-grid">
+    <a href="usability.html" class="cross-ref-card">
+      <span class="ref-number">Tier 1</span>
+      <div class="ref-title">Usability</div>
+      <div class="ref-reason">Form design is applied usability. Nielsen's heuristics — error prevention, recognition over recall, flexibility — directly govern form decisions.</div>
+    </a>
+    <a href="ui-design-patterns.html" class="cross-ref-card">
+      <span class="ref-number">Tier 1</span>
+      <div class="ref-title">UI Design Patterns</div>
+      <div class="ref-reason">Multi-step forms, dropdowns, toggles, and input patterns are all part of the broader UI pattern library.</div>
+    </a>
+    <a href="accessibility.html" class="cross-ref-card">
+      <span class="ref-number">Tier 1</span>
+      <div class="ref-title">Accessibility</div>
+      <div class="ref-reason">Form accessibility is critical — label associations, error announcements, keyboard navigation, and ARIA attributes for custom inputs.</div>
+    </a>
+    <a href="data-driven-design.html" class="cross-ref-card">
+      <span class="ref-number">Tier 2</span>
+      <div class="ref-title">Data-Driven Design</div>
+      <div class="ref-reason">Form analytics (field-level drop-off, error rates, completion time) feed directly into data-driven optimization.</div>
+    </a>
+  </div>
+</section>
+
+<section id="deep-dive">
+  <h2>Deep-dive appendix</h2>
+
+  <details class="expandable">
+    <summary><span class="chevron"><svg viewBox="0 0 14 14"><polyline points="4,2 10,7 4,12"/></svg></span> Specialized form patterns</summary>
+    <div class="expand-content topic-content">
+      <h4>Address forms</h4>
+      <p>International address formats vary dramatically — Japan puts the postal code first, the UK has no state field, Germany uses street number after street name. Use country detection to adapt field labels and order. Google Places Autocomplete handles most cases but needs fallback manual entry for addresses not in its database.</p>
+      <h4>Payment forms</h4>
+      <p>PCI compliance constrains payment form design. Card number fields should auto-format with spaces (4111 1111 1111 1111), detect card type from the first digits (Visa starts with 4, Mastercard with 5), and show the card brand icon. CVV fields should show a tooltip with the card image indicating where to find the code. Expiry fields work best as MM/YY with auto-slash.</p>
+    </div>
+  </details>
+
+  <details class="expandable">
+    <summary><span class="chevron"><svg viewBox="0 0 14 14"><polyline points="4,2 10,7 4,12"/></svg></span> Further reading</summary>
+    <div class="expand-content topic-content">
+      <h4>Essential reading</h4>
+      <p><strong>"Form Design Patterns" by Adam Silver</strong> — The definitive guide to accessible, usable form design with real-world code examples.</p>
+      <p><strong>"Web Form Design" by Luke Wroblewski</strong> — The original research-backed guide to form design. Many findings still hold.</p>
+      <p><strong>Baymard Institute checkout research</strong> — The largest collection of e-commerce form UX research, with benchmark data across hundreds of sites.</p>
+    </div>
+  </details>
+</section>
+
+<!-- SEARCH_INDEX
+{
+  topic: "Forms & Data Entry",
+  url: "topics/forms-data-entry.html",
+  tier: "Tier 2",
+  sections: [
+    { title: "What & why", id: "what-and-why", type: "theory", keywords: "forms data entry friction conversion abandonment" },
+    { title: "Form structure", id: "form-structure", type: "practical", keywords: "grouping sequencing pacing single column layout" },
+    { title: "Labels and inputs", id: "labels-inputs", type: "practical", keywords: "labels placeholders input types radio dropdown checkbox toggle date address" },
+    { title: "Inline validation", id: "validation", type: "practical", keywords: "inline validation blur timing error success confirmation" },
+    { title: "Multi-step forms", id: "multi-step", type: "practical", keywords: "multi-step wizard progress indicator save progress steps" },
+    { title: "Conditional logic", id: "conditional-logic", type: "practical", keywords: "conditional show hide dynamic fields branching progressive disclosure" },
+    { title: "Error prevention and reporting", id: "error-reporting", type: "practical", keywords: "error prevention smart defaults format guidance error messages" },
+    { title: "Form analytics", id: "form-analytics", type: "practical", keywords: "analytics drop-off completion time error frequency abandonment" },
+    { title: "Templates & checklists", id: "templates", type: "practical", keywords: "form design review checklist" },
+    { title: "Real-world examples", id: "real-world-examples", type: "examples", keywords: "Stripe checkout TurboTax conversational form" },
+    { title: "Common pitfalls", id: "pitfalls", type: "practical", keywords: "unnecessary fields eager validation form reset" }
+  ],
+  methods: [
+    { name: "Form Structure Framework", section: "form-structure", keywords: "grouping sequencing pacing single column" },
+    { name: "Input Type Selection Matrix", section: "labels-inputs", keywords: "radio dropdown checkbox toggle date address text" },
+    { name: "Inline Validation Patterns", section: "validation", keywords: "blur timing positive validation error placement" },
+    { name: "Multi-Step Form Architecture", section: "multi-step", keywords: "wizard steps progress save context" },
+    { name: "Conditional Logic Design", section: "conditional-logic", keywords: "show hide dynamic branching dependent" },
+    { name: "Error Prevention Checklist", section: "error-reporting", keywords: "defaults format guidance masking constraints" },
+    { name: "Error Message Guidelines", section: "error-reporting", keywords: "what why how fix plain language" },
+    { name: "Form Analytics Setup", section: "form-analytics", keywords: "drop-off completion time error frequency" }
+  ]
+}
+SEARCH_INDEX -->
+
+<!-- MANIFEST
+{
+  "id": "UX.2.14",
+  "title": "Forms & Data Entry",
+  "file": "topics/forms-data-entry.html",
+  "tier": 2,
+  "discipline": "UX",
+  "solves": [
+    "I need to design a multi-step form that doesn't overwhelm users",
+    "I want to reduce form abandonment rates",
+    "I need to implement inline validation without frustrating users",
+    "I want to handle conditional logic cleanly",
+    "I need to design date inputs, address fields, and other specialized entry patterns",
+    "I want to write error messages that help users recover quickly"
+  ],
+  "methods": ["Form Structure Framework", "Input Type Selection Matrix", "Inline Validation Patterns", "Multi-Step Form Architecture", "Conditional Logic Design", "Error Prevention Checklist", "Error Message Guidelines", "Form Analytics Setup"],
+  "phase": "design",
+  "prerequisites": ["UX.1.04", "UX.1.05"],
+  "pairs_with": ["UX.1.04", "UX.1.05", "UX.1.07", "UX.2.05"],
+  "depth": "methods",
+  "keywords": ["forms", "data entry", "validation", "inline validation", "multi-step", "error messages", "conditional logic", "input types", "form abandonment", "checkout", "progressive disclosure"]
+}
+MANIFEST -->

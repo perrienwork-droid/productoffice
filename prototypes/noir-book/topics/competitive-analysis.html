@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Competitive Analysis &amp; Market Positioning — Noir Book</title>
+  <link rel="stylesheet" href="../css/shared.css">
+  <link rel="stylesheet" href="../css/topic.css">
+  <script src="../js/theme.js"></script>
+  <script src="../js/topic-nav.js"></script>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="site-nav subpage-nav" data-discipline="pm">
+    <div class="nav-inner">
+      <a href="../index.html" class="site-logo">
+        <span class="logo-mark">PM</span>
+        <span class="nav-title">Noir Book</span>
+      </a>
+      <a href="../index.html" class="nav-back-link">&#8592; Library</a>
+      <div class="nav-filters">
+        <button class="disc-toggle ux-toggle active" data-disc="ux" onclick="toggleDisc('ux')" title="UX Design">
+          <span class="disc-dot disc-dot-ux"></span><span class="disc-label">UX Design</span><span class="disc-code">(UX)</span>
+        </button>
+        <button class="disc-toggle pm-toggle active" data-disc="pm" onclick="toggleDisc('pm')" title="Product Management">
+          <span class="disc-dot disc-dot-pm"></span><span class="disc-label">Product</span><span class="disc-code">(PM)</span>
+        </button>
+        <button class="disc-toggle mk-toggle active" data-disc="mk" onclick="toggleDisc('mk')" title="Marketing &amp; Growth">
+          <span class="disc-dot disc-dot-mk"></span><span class="disc-label">Marketing</span><span class="disc-code">(MK)</span>
+        </button>
+        <button class="disc-toggle cs-toggle active" data-disc="cs" onclick="toggleDisc('cs')" title="Content Strategy">
+          <span class="disc-dot disc-dot-cs"></span><span class="disc-label">Content</span><span class="disc-code">(CS)</span>
+        </button>
+        <div class="search-box nav-search-box">
+          <div class="nav-search-wrap">
+            <div class="nav-search-pills" id="navSearchPills"></div>
+            <input type="text" id="navSearchInput" placeholder="Search..." autocomplete="off"
+              oninput="topicNavSearch(this.value)"
+              onkeydown="handleNavSearchKey(event)"
+              onfocus="handleNavSearchFocus()"
+              onblur="handleNavSearchBlur()">
+            <button type="button" class="nav-search-clear" id="navSearchClear" onclick="clearNavSearch()" aria-label="Clear search">&times;</button>
+          </div>
+          <div class="search-dropdown" id="navSearchDropdown"></div>
+        </div>
+      </div>
+      <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle theme">&#9790;</button>
+      <button class="burger-btn" id="burgerBtn" onclick="openBurger()" aria-label="Menu">
+        <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="2" y1="4" x2="16" y2="4"/><line x1="2" y1="9" x2="16" y2="9"/><line x1="2" y1="14" x2="16" y2="14"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Burger Menu Overlay -->
+  <div class="burger-overlay" id="burgerOverlay" onclick="closeBurger(event)">
+    <div class="burger-panel" onclick="event.stopPropagation()">
+      <div class="burger-panel-header">
+        <h3>Menu</h3>
+        <button class="burger-close" onclick="closeBurger()" aria-label="Close">&times;</button>
+      </div>
+      <div class="burger-search">
+        <input type="text" id="burgerSearchInput" placeholder="Search topics, methods..." autocomplete="off" oninput="burgerSearch(this.value)">
+        <div class="burger-search-results" id="burgerSearchResults"></div>
+      </div>
+      <div class="burger-links">
+        <a href="../index.html">&#8592; Back to Library</a>
+        <a href="../design-system.html">Design System</a>
+        <a href="../request-topic.html">Suggest a topic or improvement</a>
+      </div>
+      <div class="burger-toc-section">
+        <p class="burger-toc-title">On this page</p>
+        <ul class="burger-toc-list">
+        <li><a href="#what-and-why" data-section="theory">What competitive analysis is and why it matters</a></li>
+        <li><a href="#competitive-methods" data-section="practical">Competitive analysis methods</a></li>
+        <li><a href="#templates-and-checklists" data-section="practical">Templates and checklists</a></li>
+        <li><a href="#real-world-examples" data-section="examples">Real-world examples</a></li>
+        <li><a href="#common-pitfalls" data-section="practical">Common pitfalls</a></li>
+        <li><a href="#when-to-use" data-section="practical">When to do competitive analysis</a></li>
+        <li><a href="#connections">Connected topics in your library</a></li>
+        <li><a href="#deep-dive">Deep-dive appendix</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Topic Header -->
+  <header class="topic-header container">
+    <div class="breadcrumb">
+      <a href="../index.html">Library</a>
+      <span class="sep">&#8250;</span>
+      <span class="breadcrumb-disc breadcrumb-pm">Product Management</span>
+      <span class="sep">&#8250;</span>
+      <span>Tier 1 — Core Toolkit</span>
+      <span class="sep">&#8250;</span>
+      <span>Competitive Analysis &amp; Market Positioning</span>
+    </div>
+    <div class="topic-meta">
+      <span class="tier-badge tier1">Tier 1</span>
+      <span style="font-size:14px;color:var(--ink-muted)">Topic PM.1.08</span>
+    </div>
+    <h1>Competitive Analysis &amp; Market Positioning</h1>
+    <p class="topic-subtitle">Know the landscape. Competitive intelligence frameworks, market mapping, differentiation strategy, and turning competitor knowledge into product decisions.</p>
+    <div class="content-splits">
+      <span class="split-badge theory">25% Theory</span>
+      <span class="split-badge practical">50% Methods &amp; Templates</span>
+      <span class="split-badge examples">25% Examples</span>
+    </div>
+  </header>
+
+  <!-- Reading Progress Bar -->
+  <div class="reading-progress" id="readingProgress"></div>
+
+  <!-- Main Layout -->
+  <div class="container">
+    <div class="topic-layout">
+
+      <!-- Sidebar: Table of Contents -->
+      <aside class="topic-sidebar">
+        <nav class="toc">
+          <p class="sidebar-topic-title">Competitive Analysis &amp; Market Positioning</p>
+          <p class="toc-title">On this page</p>
+          <ul class="toc-list">
+            <li><a href="#what-and-why" data-section="theory">What competitive analysis is and why it matters</a></li>
+            <li><a href="#competitive-methods" data-section="practical">Competitive analysis methods</a></li>
+            <li><a href="#templates-and-checklists" data-section="practical">Templates and checklists</a></li>
+            <li><a href="#real-world-examples" data-section="examples">Real-world examples</a></li>
+            <li><a href="#common-pitfalls" data-section="practical">Common pitfalls</a></li>
+            <li><a href="#when-to-use" data-section="practical">When to do competitive analysis</a></li>
+            <li><a href="#connections">Connected topics in your library</a></li>
+            <li><a href="#deep-dive">Deep-dive appendix</a></li>
+          </ul>
+        </nav>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="topic-main topic-content">
+
+        <div class="section-marker" id="what-and-why">
+          <span class="split-badge theory">Theory</span>
+          <span class="marker-line"></span>
+        </div>
+
+        <section data-section="theory">
+  <h2>What competitive analysis is and why it matters</h2>
+
+<p>Competitive analysis is the practice of understanding the alternatives your users have — and using that understanding to make better product decisions. It's not about copying competitors or reacting to their every move. It's about knowing the landscape well enough to differentiate intentionally rather than accidentally.</p>
+
+<p>Your competitors aren't who you think they are. A project management tool's competitors include not just Asana and Monday but also spreadsheets, email threads, sticky notes, and "just remembering things." These non-obvious alternatives often hold the largest market share because they're already embedded in user behavior. A competitive analysis that only looks at direct competitors misses the most important competition.</p>
+
+<p>Competitive analysis serves three PM functions: strategic positioning (how we differentiate), opportunity identification (where competitors leave gaps), and threat assessment (when to respond and when to ignore). The output isn't a feature comparison matrix — it's a strategic understanding that informs roadmap decisions.</p>
+
+<div class="callout info">
+  <p class="callout-title">Why this matters for your projects</p>
+  <p>Ignorance of the competitive landscape leads to two failures: building something a competitor already does well (wasting effort on parity features) and missing opportunities that competitors have overlooked (not capitalizing on gaps). Competitive awareness — not obsession — helps you invest your limited resources where they'll create the most differentiation.</p>
+</div>
+
+</section>
+
+        <div class="section-marker" id="competitive-methods">
+          <span class="split-badge practical">Practical</span>
+          <span class="marker-line"></span>
+        </div>
+
+        <section data-section="practical">
+  <h2>Competitive analysis methods</h2>
+
+<div class="method-card">
+  <h4>Competitive Feature Matrix <span class="method-tag">Baseline Tool</span></h4>
+  <p class="method-when">Use when: Starting competitive analysis, onboarding to a new market, or preparing sales enablement materials.</p>
+  <p>A grid with competitors on one axis and capabilities on the other. For each cell, mark whether the competitor has the capability (and how well). But here's the critical distinction: organize by user need, not by feature name. "Can users schedule reports?" is better than "Has report scheduling?" because it focuses on the job, not the implementation.</p>
+  <div class="callout warning">
+    <p class="callout-title">Common mistake</p>
+    <p>Feature matrices create a false sense of competition as a checklist. Having fewer checkmarks doesn't mean you're losing. Products win on overall experience, not feature count. Use the matrix to identify gaps, not to create a parity roadmap.</p>
+  </div>
+</div>
+
+<div class="method-card">
+  <h4>Market Map (2×2 Positioning) <span class="method-tag">Strategic Tool</span></h4>
+  <p class="method-when">Use when: You need to identify whitespace in the market or communicate your positioning to stakeholders.</p>
+  <p>Plot competitors on a 2×2 with two dimensions that matter to your target users. Choose dimensions where your product can credibly occupy a unique position. Common dimension pairs: ease of use vs. power, price vs. feature depth, individual vs. team, general-purpose vs. specialized.</p>
+  <p>The value of the map isn't the plot — it's the choice of axes. The axes you choose reveal your strategic perspective. If you place yourself on "simple ↔ powerful" you're saying that's the trade-off that matters. A competitor might choose "standalone ↔ integrated" because they see a different strategic landscape. Both can be right for different segments.</p>
+</div>
+
+<div class="method-card">
+  <h4>Win/Loss Analysis <span class="method-tag">Evidence-Based</span></h4>
+  <p class="method-when">Use when: You have a sales team and want to understand why prospects choose you — or choose a competitor.</p>
+  <p>Interview recent wins (customers who chose you) and recent losses (prospects who chose a competitor) to understand the decision drivers. The win interviews reveal your actual strengths (which may differ from what you think they are). The loss interviews reveal the reasons you're losing — pricing, features, trust, integration, or something unexpected.</p>
+  <div class="process-steps">
+    <div class="process-step">
+      <div class="process-step-content">
+        <h4>Interview 5 wins and 5 losses per quarter</h4>
+        <p>Have someone other than the salesperson conduct the interview — customers are more honest with a neutral party. Ask: "Walk me through your evaluation process. What alternatives did you consider? What was the deciding factor?"</p>
+      </div>
+    </div>
+    <div class="process-step">
+      <div class="process-step-content">
+        <h4>Extract patterns, not anecdotes</h4>
+        <p>One loss to a competitor on "better API documentation" is an anecdote. Five losses mentioning developer experience is a pattern that should influence the roadmap.</p>
+      </div>
+    </div>
+    <div class="process-step">
+      <div class="process-step-content">
+        <h4>Share findings cross-functionally</h4>
+        <p>Win/loss insights affect product (what to build), marketing (how to position), and sales (how to pitch). A quarterly win/loss report shared across all three creates a shared competitive understanding.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="method-card">
+  <h4>Competitive Teardown <span class="method-tag">Deep Analysis</span></h4>
+  <p class="method-when">Use when: A specific competitor is winning deals you should be winning, or a new competitor has entered your market.</p>
+  <p>Sign up for the competitor's product. Use it for real tasks — not a 5-minute demo, but a genuine attempt to accomplish what your users accomplish. Document: the onboarding experience (time to first value), the core workflow (how it handles the primary use case), the failure points (where it breaks or frustrates), and the delighters (where it exceeds expectations).</p>
+  <p>The goal isn't to copy — it's to understand their design philosophy and identify where your approach is genuinely better. If they're faster to set up but less flexible for complex use cases, that informs your positioning: you don't compete on time-to-setup; you compete on depth for power users.</p>
+</div>
+
+<div class="method-card">
+  <h4>Competitive Response Playbook <span class="method-tag">Operational</span></h4>
+  <p class="method-when">Use when: You need a protocol for how to respond when competitors launch features, change pricing, or get press coverage.</p>
+  <div class="process-steps">
+    <div class="process-step">
+      <div class="process-step-content">
+        <h4>Tier the response</h4>
+        <p><strong>Ignore:</strong> Minor feature updates that don't affect your positioning. Most competitor moves fall here. <strong>Monitor:</strong> Significant launches that might affect deal velocity. Track win/loss data for the next 4 weeks. <strong>Respond:</strong> Major competitive threats that directly challenge your core differentiation. Rare — maybe 1–2 per year.</p>
+      </div>
+    </div>
+    <div class="process-step">
+      <div class="process-step-content">
+        <h4>Never respond reactively</h4>
+        <p>If a competitor launches a feature and you immediately add it to your roadmap, you've let them set your strategy. Instead: evaluate the competitive move against your strategy. Does it change the landscape enough to warrant a response? Usually, the answer is no — your users chose you for different reasons than the competitor's users chose them.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="method-card">
+  <h4>Positioning Statement (April Dunford) <span class="method-tag">Differentiation</span></h4>
+  <p class="method-when">Use when: You need to articulate what makes your product different in a way that resonates with your target customer — not just what it does, but why it's the right choice for them.</p>
+  <p>April Dunford's positioning framework asks five questions in sequence:</p>
+  <p><strong>1. Competitive alternatives:</strong> What would customers do if your product didn't exist? (Not just direct competitors — all alternatives including manual processes.)</p>
+  <p><strong>2. Unique attributes:</strong> What do you have that alternatives don't? (Features, capabilities, approach, experience.)</p>
+  <p><strong>3. Value:</strong> What value do those attributes deliver to customers? (Not features — outcomes.)</p>
+  <p><strong>4. Target customers:</strong> Who cares most about that value? (Be specific — which segment finds your unique value irresistible?)</p>
+  <p><strong>5. Market category:</strong> What market do customers put you in? (This frames expectations — being in the "CRM" category creates different expectations than "sales automation.")</p>
+</div>
+
+</section>
+
+<section id="templates-and-checklists" data-section="practical">
+  <h2>Templates and checklists</h2>
+
+<div class="template-box">
+  <div class="template-header">
+    <span class="template-label">Checklist</span>
+    <span class="template-title">Competitive Intelligence Baseline</span>
+  </div>
+  <ul class="checklist">
+    <li>Top 3–5 direct competitors identified and profiles maintained</li>
+    <li>Indirect competitors and non-obvious alternatives mapped</li>
+    <li>Active accounts on all major competitors (sign up, use regularly)</li>
+    <li>Competitor review sites monitored monthly (G2, Capterra, Product Hunt)</li>
+    <li>Win/loss interviews conducted quarterly (5 wins, 5 losses minimum)</li>
+    <li>Positioning statement written using the Dunford framework</li>
+    <li>Competitive response tiers defined (ignore / monitor / respond)</li>
+    <li>Competitive insights shared with sales and marketing quarterly</li>
+    <li>Market map updated when new competitors emerge or positioning shifts</li>
+  </ul>
+</div>
+
+</section>
+
+        <div class="section-marker" id="real-world-examples">
+          <span class="split-badge examples">Examples</span>
+          <span class="marker-line"></span>
+        </div>
+
+        <section data-section="examples">
+  <h2>Real-world examples</h2>
+
+<div class="case-study">
+  <p class="case-label">Case study</p>
+  <h4>HEY Email: Positioning against the incumbent</h4>
+  <p>When Basecamp launched HEY (an email client), they faced an impossible-seeming competitive landscape: Gmail is free and dominant. HEY's positioning didn't try to be "better Gmail" — it positioned against Gmail's business model. "Gmail is free because you're the product. HEY charges $99/year because you're the customer, not the product." This positioned HEY's weakness (it costs money) as a strength (alignment of incentives).</p>
+  <p>The market map was effectively: free/ad-supported vs. paid/privacy-first, and consumer vs. professional. HEY occupied the paid/professional quadrant that Gmail had abandoned. The competitive analysis revealed that the gap wasn't features — it was philosophy.</p>
+</div>
+
+<div class="case-study">
+  <p class="case-label">Case study</p>
+  <h4>Figma vs. Sketch: Winning on the non-obvious dimension</h4>
+  <p>When Figma launched, Sketch was the dominant design tool. A feature matrix would have shown Sketch winning on nearly every dimension — more plugins, more refined vector tools, a larger community. Figma's competitive analysis identified a dimension that Sketch barely considered: collaboration. Sketch was a single-player tool; Figma was multiplayer. Instead of competing on Sketch's terms (better design features), Figma competed on a new dimension where Sketch couldn't easily follow.</p>
+  <p>The market map axes shifted from "feature depth vs. ease of use" (where Sketch won) to "individual vs. collaborative" (where Figma owned a new position). Reframing the competitive landscape is sometimes more powerful than winning within the existing frame.</p>
+</div>
+
+<div class="case-study">
+  <p class="case-label">Case study</p>
+  <h4>Linear: Competing with Jira by doing less</h4>
+  <p>Linear entered the issue tracking market dominated by Jira (Atlassian). Instead of matching Jira's feature set, Linear's competitive strategy was explicit reduction: faster performance (every interaction under 50ms), opinionated defaults (less configuration), and a focused scope (software teams only, not every team in the org). Their competitive teardown of Jira identified that Jira's greatest weakness was the complexity accumulated from serving every possible use case. Linear's positioning: "The issue tracker for teams that care about speed and craft."</p>
+</div>
+
+</section>
+
+<section id="common-pitfalls" data-section="practical">
+  <h2>Common pitfalls</h2>
+
+<div class="pitfall">
+  <div class="pitfall-icon">!</div>
+  <div>
+    <h4>Feature parity as strategy</h4>
+    <p>"They have it, so we need it" is not strategy — it's followership. If every product in the market converges on the same features, customers choose on price, brand, or switching cost — none of which are product advantages. Invest in differentiation, not parity.</p>
+  </div>
+</div>
+
+<div class="pitfall">
+  <div class="pitfall-icon">!</div>
+  <div>
+    <h4>Competitor obsession</h4>
+    <p>Checking competitor release notes daily, panicking at every new feature, and reshuffling the roadmap every time a competitor makes a move. This is exhausting and counterproductive. Your customers chose you for reasons that don't change when a competitor launches a feature. Check competitors quarterly. Act on patterns, not individual announcements.</p>
+  </div>
+</div>
+
+<div class="pitfall">
+  <div class="pitfall-icon">!</div>
+  <div>
+    <h4>Only analyzing direct competitors</h4>
+    <p>The biggest competitive threat is often not the company that looks most like you — it's the status quo. Spreadsheets, email, paper, doing nothing. If 60% of your market uses spreadsheets instead of any tool, your real competitive battle is against inertia, not against the other tool vendor with 5% market share.</p>
+  </div>
+</div>
+
+</section>
+
+<section id="when-to-use" data-section="practical">
+  <h2>When to do competitive analysis</h2>
+
+<div class="callout info">
+  <p class="callout-title">Decision guidance</p>
+  <p><strong>Deep competitive analysis when:</strong> Entering a new market. A significant new competitor emerges. Your win rate is declining. Annual or bi-annual strategy planning.</p>
+  <p><strong>Ongoing competitive monitoring:</strong> Monthly review of competitor updates, review sites, and community forums. Quarterly win/loss interviews. Keep competitor accounts active.</p>
+  <p><strong>Don't overdo it when:</strong> You're pre-PMF. At this stage, your biggest competitor is "doesn't care about this problem" — focus on validating the problem, not mapping the competitive landscape.</p>
+</div>
+
+</section>
+
+<section id="connections">
+  <h2>Connected topics in your library</h2>
+
+<div class="cross-ref-grid">
+  <a href="#" class="cross-ref-card">
+    <span class="ref-number">PM.1.01</span>
+    <div class="ref-title">Product Strategy &amp; Vision</div>
+    <div class="ref-reason">Competitive insights inform strategic positioning</div>
+  </a>
+  <a href="#" class="cross-ref-card">
+    <span class="ref-number">PM.1.09</span>
+    <div class="ref-title">Problem Framing &amp; Sizing</div>
+    <div class="ref-reason">Market sizing includes competitive landscape assessment</div>
+  </a>
+  <a href="#" class="cross-ref-card">
+    <span class="ref-number">PM.1.02</span>
+    <div class="ref-title">Product Discovery</div>
+    <div class="ref-reason">Competitive discovery as part of the research toolkit</div>
+  </a>
+  <a href="#" class="cross-ref-card cross-discipline">
+    <span class="ref-number">MK.1.01</span>
+    <div class="ref-title">Positioning &amp; Messaging (MK)</div>
+    <div class="ref-reason">MK lens: external positioning and messaging to market</div>
+  </a>
+</div>
+
+<div class="deep-dive-section" id="deep-dive">
+          <div class="deep-dive-header">
+            <span class="deep-dive-badge">Deep Dive</span>
+            <h2 style="margin:0; border:none; padding:0;">Appendix</h2>
+          </div>
+
+  <details class="expandable">
+    <summary><span class="chevron"><svg viewBox="0 0 14 14"><polyline points="4,2 10,7 4,12"/></svg></span> Further reading</summary>
+    <div class="expand-content topic-content">
+      <p><strong>"Obviously Awesome" by April Dunford</strong> — The definitive book on product positioning. Practical, opinionated, and directly applicable to competitive differentiation. The best PM book on this topic.</p>
+      <p><strong>"Blue Ocean Strategy" by W. Chan Kim &amp; Ren&eacute;e Mauborgne</strong> — How to create uncontested market space instead of competing in crowded markets. The "value innovation" framework is useful for identifying non-obvious competitive positioning.</p>
+      <p><strong>"Competitive Strategy" by Michael Porter</strong> — The academic classic. Five Forces, value chain analysis, generic strategies. Dense but foundational. Read the first three chapters for the core frameworks.</p>
+    </div>
+  </details>
+
+</div>
+</section>
+
+<div class="topic-nav">
+  <a href="agile-pm.html" class="topic-nav-link prev">
+    <div class="nav-direction">Previous topic</div>
+    <div class="nav-title">&#8249; Agile Product Management</div>
+  </a>
+  <a href="go-to-market.html" class="topic-nav-link next">
+    <div class="nav-direction">Next topic</div>
+    <div class="nav-title">Go-to-Market &amp; Product Launches &#8250;</div>
+  </a>
+</div>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer container">
+    <div class="footer-inner">
+      <p>Noir Book — Built for the work, not the shelf.</p>
+      <div class="footer-links">
+        <a href="../design-system.html">Design System</a>
+        <a href="../library-manifest.json">Manifest</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to Top -->
+  <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">&#8593;</button>
+
+  <!-- Floating Mobile TOC -->
+  <button class="mobile-toc-btn" id="mobileTocBtn" aria-label="Open table of contents">&#9776; Contents</button>
+  <div class="mobile-toc-overlay" id="mobileTocOverlay">
+    <div class="mobile-toc-panel">
+      <div class="mobile-toc-panel-header">
+        <h3>On this page</h3>
+        <button class="mobile-toc-close" id="mobileTocClose" aria-label="Close">&times;</button>
+      </div>
+      <ul class="mobile-toc-list">
+        <li><a href="#what-and-why" data-section="theory">What competitive analysis is and why it matters</a></li>
+        <li><a href="#competitive-methods" data-section="practical">Competitive analysis methods</a></li>
+        <li><a href="#templates-and-checklists" data-section="practical">Templates and checklists</a></li>
+        <li><a href="#real-world-examples" data-section="examples">Real-world examples</a></li>
+        <li><a href="#common-pitfalls" data-section="practical">Common pitfalls</a></li>
+        <li><a href="#when-to-use" data-section="practical">When to do competitive analysis</a></li>
+        <li><a href="#connections">Connected topics in your library</a></li>
+        <li><a href="#deep-dive">Deep-dive appendix</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    // Scrollspy: highlight active TOC item
+    const tocLinks = document.querySelectorAll('.toc-list a');
+    const sections = [];
+    tocLinks.forEach(link => {
+      const href = link.getAttribute('href');
+      if (!href || !href.startsWith('#')) return;
+      const el = document.getElementById(href.slice(1));
+      if (el) sections.push({ el, link });
+    });
+
+    // Reading progress bar
+    const progressBar = document.getElementById('readingProgress');
+    const backToTop = document.getElementById('backToTop');
+
+    function onScroll() {
+      let current = sections[0];
+      for (const s of sections) {
+        if (s.el.getBoundingClientRect().top <= 120) current = s;
+      }
+      tocLinks.forEach(l => l.classList.remove('active'));
+      if (current) current.link.classList.add('active');
+
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrolled = window.scrollY;
+      const progress = docHeight > 0 ? (scrolled / docHeight) * 100 : 0;
+      if (progressBar) progressBar.style.width = progress + '%';
+      if (backToTop) backToTop.classList.toggle('visible', scrolled > 400);
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    // Split badges: click to scroll to section
+    document.querySelectorAll('.content-splits .split-badge').forEach(function(badge) {
+      badge.addEventListener('click', function() {
+        var type = badge.classList.contains('theory') ? 'theory' : badge.classList.contains('practical') ? 'practical' : 'examples';
+        var target = document.querySelector('section[data-section="' + type + '"]');
+        if (target) {
+          var marker = target.previousElementSibling;
+          (marker && marker.classList.contains('section-marker') ? marker : target).scrollIntoView({behavior:'smooth'});
+        }
+      });
+    });
+  </script>
+
+  <script src="../js/checklist.js"></script>
+  <script src="../js/mobile-toc.js"></script>
+  <script src="../js/search.js"></script>
+  <script>
+    function openBurger(){document.getElementById('burgerOverlay').classList.add('open');document.body.style.overflow='hidden'}
+    function closeBurger(e){if(e&&e.target&&e.target!==document.getElementById('burgerOverlay'))return;document.getElementById('burgerOverlay').classList.remove('open');document.body.style.overflow=''}
+    function burgerSearch(q){
+      var r=document.getElementById('burgerSearchResults');
+      if(!q||q.length<2){r.innerHTML='';return}
+      var ql=q.toLowerCase(),matches=[];
+      if(typeof SEARCH_INDEX!=='undefined'){
+        SEARCH_INDEX.forEach(function(t){
+          var hit=t.topic.toLowerCase().indexOf(ql)>-1;
+          if(!hit)t.sections.forEach(function(s){if((s.title+' '+s.keywords).toLowerCase().indexOf(ql)>-1)hit=true});
+          if(hit)matches.push(t);
+        });
+      }
+      if(!matches.length){r.innerHTML='<p style="padding:8px 0;font-size:13px;color:var(--ink-muted)">No results</p>';return}
+      r.innerHTML=matches.slice(0,8).map(function(m){return '<a href="../'+m.url+'">'+m.topic+'<span class="bsr-disc">'+m.discipline+'</span></a>'}).join('');
+    }
+    document.addEventListener('keydown',function(e){if(e.key==='Escape'){closeBurger();var dd=document.getElementById('searchDropdown');if(dd)dd.classList.remove('visible');}});
+    // Close burger when clicking a TOC link
+    document.querySelectorAll('.burger-toc-list a').forEach(function(a){a.addEventListener('click',function(){closeBurger()})});
+    // Search typeahead
+    function topicSearch(q){
+      var dd=document.getElementById('searchDropdown');
+      if(!q||q.length<2||typeof SEARCH_INDEX==='undefined'){if(dd)dd.classList.remove('visible');return}
+      var ql=q.toLowerCase(),grouped={};
+      SEARCH_INDEX.forEach(function(t){
+        var hit=t.topic.toLowerCase().indexOf(ql)>-1,sHits=[],mHits=[];
+        t.sections.forEach(function(s){if((s.title+' '+s.keywords).toLowerCase().indexOf(ql)>-1)sHits.push(s)});
+        (t.methods||[]).forEach(function(m){if((m.name+' '+(m.keywords||'')).toLowerCase().indexOf(ql)>-1)mHits.push(m)});
+        if(!hit&&!sHits.length&&!mHits.length&&ql.length>=3&&typeof levenshtein==='function'){
+          var words=t.topic.toLowerCase().split(/ +/);
+          for(var i=0;i<words.length;i++){if(levenshtein(ql,words[i].substring(0,ql.length+1))<=1){hit=true;break}}
+        }
+        if(hit||sHits.length||mHits.length)grouped[t.topic]={url:'../'+t.url,disc:t.discipline||'',sections:sHits,methods:mHits,topicHit:hit};
+      });
+      var keys=Object.keys(grouped);
+      if(!keys.length){dd.innerHTML='<div class="search-empty">No results</div>';dd.classList.add('visible');return}
+      var html='';
+      keys.slice(0,8).forEach(function(topic){
+        var g=grouped[topic];
+        html+='<div class="search-group"><div class="search-group-title">'+topic+'</div>';
+        if(g.topicHit)html+='<a class="search-result" href="'+g.url+'"><span class="search-result-title">'+topic+'</span><span class="search-result-type practical">'+g.disc+'</span></a>';
+        g.sections.forEach(function(s){html+='<a class="search-result" href="'+g.url+'#'+s.id+'"><span class="search-result-title">'+s.title+'</span><span class="search-result-type '+s.type+'">'+s.type+'</span></a>'});
+        g.methods.slice(0,3).forEach(function(m){html+='<a class="search-result" href="'+g.url+'#'+m.section+'"><span class="search-result-title">'+m.name+'</span><span class="search-result-type practical">method</span></a>'});
+        html+='</div>';
+      });
+      dd.innerHTML=html;dd.classList.add('visible');
+    }
+    document.addEventListener('click',function(e){if(!e.target.closest('.search-box')){var dd=document.getElementById('searchDropdown');if(dd)dd.classList.remove('visible')}});
+  </script>
+
+</body>
+</html>

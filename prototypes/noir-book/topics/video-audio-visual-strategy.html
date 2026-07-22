@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Video, Audio &amp; Visual Content Strategy — Noir Book</title>
+  <link rel="stylesheet" href="../css/shared.css">
+  <link rel="stylesheet" href="../css/topic.css">
+  <script src="../js/theme.js"></script>
+  <script src="../js/topic-nav.js"></script>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="site-nav subpage-nav" data-discipline="cs">
+    <div class="nav-inner">
+      <a href="../index.html" class="site-logo">
+        <span class="logo-mark">CS</span>
+        <span class="nav-title">Noir Book</span>
+      </a>
+      <a href="../index.html" class="nav-back-link">&#8592; Library</a>
+      <div class="nav-filters">
+        <button class="disc-toggle ux-toggle active" data-disc="ux" onclick="toggleDisc('ux')" title="UX Design">
+          <span class="disc-dot disc-dot-ux"></span><span class="disc-label">UX Design</span><span class="disc-code">(UX)</span>
+        </button>
+        <button class="disc-toggle pm-toggle active" data-disc="pm" onclick="toggleDisc('pm')" title="Product Management">
+          <span class="disc-dot disc-dot-pm"></span><span class="disc-label">Product</span><span class="disc-code">(PM)</span>
+        </button>
+        <button class="disc-toggle mk-toggle active" data-disc="mk" onclick="toggleDisc('mk')" title="Marketing &amp; Growth">
+          <span class="disc-dot disc-dot-mk"></span><span class="disc-label">Marketing</span><span class="disc-code">(MK)</span>
+        </button>
+        <button class="disc-toggle cs-toggle active" data-disc="cs" onclick="toggleDisc('cs')" title="Content Strategy">
+          <span class="disc-dot disc-dot-cs"></span><span class="disc-label">Content</span><span class="disc-code">(CS)</span>
+        </button>
+        <div class="search-box nav-search-box">
+          <div class="nav-search-wrap">
+            <div class="nav-search-pills" id="navSearchPills"></div>
+            <input type="text" id="navSearchInput" placeholder="Search..." autocomplete="off"
+              oninput="topicNavSearch(this.value)"
+              onkeydown="handleNavSearchKey(event)"
+              onfocus="handleNavSearchFocus()"
+              onblur="handleNavSearchBlur()">
+            <button type="button" class="nav-search-clear" id="navSearchClear" onclick="clearNavSearch()" aria-label="Clear search">&times;</button>
+          </div>
+          <div class="search-dropdown" id="navSearchDropdown"></div>
+        </div>
+      </div>
+      <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle theme">&#9790;</button>
+      <button class="burger-btn" id="burgerBtn" onclick="openBurger()" aria-label="Menu">
+        <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="2" y1="4" x2="16" y2="4"/><line x1="2" y1="9" x2="16" y2="9"/><line x1="2" y1="14" x2="16" y2="14"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Burger Menu Overlay -->
+  <div class="burger-overlay" id="burgerOverlay" onclick="closeBurger(event)">
+    <div class="burger-panel" onclick="event.stopPropagation()">
+      <div class="burger-panel-header">
+        <h3>Menu</h3>
+        <button class="burger-close" onclick="closeBurger()" aria-label="Close">&times;</button>
+      </div>
+      <div class="burger-search">
+        <input type="text" id="burgerSearchInput" placeholder="Search topics, methods..." autocomplete="off" oninput="burgerSearch(this.value)">
+        <div class="burger-search-results" id="burgerSearchResults"></div>
+      </div>
+      <div class="burger-links">
+        <a href="../index.html">&#8592; Back to Library</a>
+        <a href="../design-system.html">Design System</a>
+        <a href="../request-topic.html">Suggest a topic or improvement</a>
+      </div>
+      <div class="burger-toc-section">
+        <p class="burger-toc-title">On this page</p>
+        <ul class="burger-toc-list">
+        <li><a href="#what-and-why" data-section="theory">What multimedia content strategy covers</a></li>
+        <li><a href="#video-strategy" data-section="practical">Video content strategy</a></li>
+        <li><a href="#podcast-strategy" data-section="practical">Podcast and audio content</a></li>
+        <li><a href="#visual-content" data-section="practical">Visual content guidelines</a></li>
+        <li><a href="#repurposing" data-section="practical">Content repurposing</a></li>
+        <li><a href="#production" data-section="practical">Multimedia production pipeline</a></li>
+        <li><a href="#video-seo" data-section="practical">Multimedia discoverability</a></li>
+        <li><a href="#real-world-examples" data-section="examples">Real-world examples</a></li>
+        <li><a href="#pitfalls" data-section="practical">Common pitfalls</a></li>
+        <li><a href="#connections">Connected topics in your library</a></li>
+        <li><a href="#deep-dive">Deep-dive appendix</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Topic Header -->
+  <header class="topic-header container">
+    <div class="breadcrumb">
+      <a href="../index.html">Library</a>
+      <span class="sep">&#8250;</span>
+      <span class="breadcrumb-disc breadcrumb-cs">Content Strategy</span>
+      <span class="sep">&#8250;</span>
+      <span>Tier 3 — Situational</span>
+      <span class="sep">&#8250;</span>
+      <span>Video</span>
+    </div>
+    <div class="topic-meta">
+      <span class="tier-badge tier3">Tier 3</span>
+      <span style="font-size:14px;color:var(--ink-muted)">Topic CS.3.03</span>
+    </div>
+    <h1>Video, Audio &amp; Visual Content Strategy</h1>
+    <p class="topic-subtitle">Extend content strategy beyond text. Video content planning, podcast strategy, visual content guidelines, and the production workflows for multimedia content.</p>
+    <div class="content-splits">
+      <span class="split-badge theory">20% Theory</span>
+      <span class="split-badge practical">55% Methods &amp; Templates</span>
+      <span class="split-badge examples">25% Examples</span>
+    </div>
+  </header>
+
+  <!-- Reading Progress Bar -->
+  <div class="reading-progress" id="readingProgress"></div>
+
+  <!-- Main Layout -->
+  <div class="container">
+    <div class="topic-layout">
+
+      <!-- Sidebar: Table of Contents -->
+      <aside class="topic-sidebar">
+        <nav class="toc">
+          <p class="sidebar-topic-title">Video, Audio &amp; Visual Content Strategy</p>
+          <p class="toc-title">On this page</p>
+          <ul class="toc-list">
+            <li><a href="#what-and-why" data-section="theory">What multimedia content strategy covers</a></li>
+            <li><a href="#video-strategy" data-section="practical">Video content strategy</a></li>
+            <li><a href="#podcast-strategy" data-section="practical">Podcast and audio content</a></li>
+            <li><a href="#visual-content" data-section="practical">Visual content guidelines</a></li>
+            <li><a href="#repurposing" data-section="practical">Content repurposing</a></li>
+            <li><a href="#production" data-section="practical">Multimedia production pipeline</a></li>
+            <li><a href="#video-seo" data-section="practical">Multimedia discoverability</a></li>
+            <li><a href="#real-world-examples" data-section="examples">Real-world examples</a></li>
+            <li><a href="#pitfalls" data-section="practical">Common pitfalls</a></li>
+            <li><a href="#connections">Connected topics in your library</a></li>
+            <li><a href="#deep-dive">Deep-dive appendix</a></li>
+          </ul>
+        </nav>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="topic-main topic-content">
+
+        <div class="section-marker" id="what-and-why">
+          <span class="split-badge theory">Theory</span>
+          <span class="marker-line"></span>
+        </div>
+
+        <section data-section="theory">
+  <h2>What multimedia content strategy covers</h2>
+
+  <p>Content strategy has traditionally centered on text, but multimedia content — video, audio, and visual assets — is now central to how organizations communicate. Video tutorials outperform written guides for many learning tasks. Podcasts build audience relationships that blog posts can't. Visual content (illustrations, diagrams, photography) communicates complex ideas faster than paragraphs. The challenge isn't whether to create multimedia content but how to do it strategically: which formats serve which goals, how to produce at sustainable scale, and how to integrate multimedia into a broader content ecosystem rather than treating each format as a separate program.</p>
+
+  <p>Multimedia content is expensive to produce and expensive to update. A blog post that's outdated can be rewritten in hours; a video with outdated UI screenshots requires re-recording, re-editing, and re-publishing. This makes strategic planning more important, not less — the cost of producing the wrong multimedia content is much higher than the cost of writing the wrong article.</p>
+</section>
+
+        <div class="section-marker" id="video-strategy">
+          <span class="split-badge practical">Practical</span>
+          <span class="marker-line"></span>
+        </div>
+
+        <section data-section="practical">
+  <h2>Video content strategy</h2>
+
+  <div class="method-card">
+    <h4>Video Content Strategy Framework <span class="method-tag">Core Method</span></h4>
+    <p class="method-when">Use when: planning a video content program that complements your written content strategy.</p>
+    <p>Not everything should be a video. Use video where it has a distinct advantage over text. <strong>Best for video:</strong> Process demonstration (showing how to do something in a product), emotional storytelling (customer stories, brand narrative), complex visual concepts (architecture diagrams in motion, data flow), and relationship building (expert interviews, team introductions). <strong>Not ideal for video:</strong> Reference content (specifications, API docs — users need to search and scan, which text handles better), frequently updated content (re-shooting video for every product change is unsustainable), and content consumed in sound-sensitive environments (office, commute). <strong>Video types by purpose:</strong> Product demos (conversion), tutorials (adoption), webinars (lead gen), customer stories (trust), brand films (awareness), short-form social (discovery). Map each type to your content funnel and define how many of each you can sustain.</p>
+  </div>
+
+  <div class="method-card">
+    <h4>Thumbnail &amp; Cover Art Guidelines <span class="method-tag">Technique</span></h4>
+    <p class="method-when">Use when: ensuring video and audio content is visually discoverable and consistent with brand.</p>
+    <p>Thumbnails are the content's first impression — they determine whether someone clicks. <strong>Consistency:</strong> Use a template system with brand colors, consistent typography, and a recognizable visual style. A user should be able to identify your thumbnails without reading the title. <strong>Legibility:</strong> Thumbnails are viewed at small sizes — often 120×68 pixels on mobile. Text must be large enough to read at thumbnail size. Limit to 3–5 words maximum. <strong>Contrast:</strong> High contrast between text and background. Avoid placing text over busy images. <strong>Emotional cues:</strong> Faces (especially with expressive emotions) increase click-through on most platforms. Show the outcome, not the process — the finished dashboard, not the editing interface.</p>
+  </div>
+</section>
+
+<section id="podcast-strategy" data-section="practical">
+  <h2>Podcast and audio content</h2>
+
+  <div class="method-card">
+    <h4>Podcast Planning Template <span class="method-tag">Core Method</span></h4>
+    <p class="method-when">Use when: launching a podcast or audio content program with a sustainable production cadence.</p>
+    <p><strong>Format definition:</strong> Interview (lowest barrier to entry, relies on guest quality), solo/monologue (highest production quality needed, relies on host expertise), panel/roundtable (engaging but hard to edit), narrative/documentary (highest production cost, highest quality ceiling). Choose based on your team's strengths and available production resources. <strong>Cadence:</strong> Consistency matters more than frequency. A biweekly show that never misses is better than a weekly show that goes on unexplained hiatuses. Plan for sustainability — factor in vacation, holidays, and production delays. <strong>Episode structure:</strong> Define a repeatable episode architecture: intro (hook, what's coming), segments (2–3 defined sections), and outro (summary, call to action, next episode preview). Structure makes production faster and gives listeners predictable expectations. <strong>Distribution:</strong> Publish to all major platforms (Apple, Spotify, YouTube, RSS). Repurpose audio into text (transcripts, blog posts) and short-form clips (social media). <strong>Measurement:</strong> Downloads, completion rate, subscriber growth, and — most importantly — whether listeners take the actions the podcast is designed to drive.</p>
+  </div>
+
+  <div class="method-card">
+    <h4>Transcript-First Production Method <span class="method-tag">Technique</span></h4>
+    <p class="method-when">Use when: maximizing the value of audio and video content through repurposing.</p>
+    <p>Every piece of audio or video content should produce a transcript — either by scripting first or transcribing after. Transcripts enable: searchability (audio content is invisible to search engines without text), accessibility (deaf and hard-of-hearing users, non-native speakers, sound-off environments), repurposing (blog posts, social quotes, documentation, email content), and translation (text is faster and cheaper to translate than audio). <strong>Transcript-first workflow:</strong> For planned content, write the script or detailed outline first, then record. This produces tighter content and makes post-production transcription a simple review step. <strong>Post-production transcription:</strong> For interviews and unscripted content, use AI transcription (now highly accurate for clear audio) with human review for accuracy, speaker attribution, and formatting.</p>
+  </div>
+</section>
+
+<section id="visual-content" data-section="practical">
+  <h2>Visual content guidelines</h2>
+
+  <div class="method-card">
+    <h4>Visual Content Guidelines <span class="method-tag">Core Method</span></h4>
+    <p class="method-when">Use when: establishing standards for illustrations, photography, diagrams, and other visual content across your organization.</p>
+    <p>Visual content needs the same strategic rigor as written content. <strong>Illustration style:</strong> Define a consistent illustration style — flat, isometric, hand-drawn, photographic — and document it with examples and anti-examples. Inconsistent illustration styles make a brand feel fragmented. <strong>Photography:</strong> Define photography guidelines: subjects (people, products, environments), composition rules, color treatment, and diversity requirements. Stock photography guidelines should specify what's acceptable and what feels too generic. <strong>Diagrams and infographics:</strong> Define a diagramming style: colors, line weights, typography, icon sets. Technical diagrams should be consistent enough that users can learn the visual language and apply it across different content. <strong>Screenshots:</strong> For product documentation, define screenshot standards: browser chrome (include or crop?), window size, annotations (callout style, arrow style, numbering), and a process for updating when the UI changes. <strong>Asset management:</strong> All visual assets need metadata (alt text, source, usage rights, expiration) and a storage system (DAM or structured folder hierarchy) so they can be found and reused.</p>
+  </div>
+</section>
+
+<section id="repurposing" data-section="practical">
+  <h2>Content repurposing</h2>
+
+  <div class="method-card">
+    <h4>Content Repurposing Workflow <span class="method-tag">Technique</span></h4>
+    <p class="method-when">Use when: creating multiple content formats from a single source without duplicating effort.</p>
+    <p>Repurposing isn't just reformatting — it's adapting content for different contexts and audiences. <strong>From long to short:</strong> A webinar becomes a blog post summary, 3–5 social media clips, an email newsletter highlight, and a slide deck. <strong>From text to multimedia:</strong> A popular guide becomes a video tutorial, an infographic, and a podcast episode exploring the topic with guests. <strong>From multimedia to text:</strong> A video interview produces a transcript, a blog post with key quotes, and a documentation page with the methods discussed. <strong>Production planning:</strong> Plan repurposing before creating the source content, not after. If you know a webinar will become clips, structure it with natural segment breaks. If you know an article will become a video, write it with visual demonstrations in mind. <strong>Quality control:</strong> Repurposed content must meet the quality standard of its destination format. A transcript that's dumped into a blog post without editing is not content — it's a transcript. Each format has its own quality bar.</p>
+  </div>
+</section>
+
+<section id="production" data-section="practical">
+  <h2>Multimedia production pipeline</h2>
+
+  <div class="method-card">
+    <h4>Multimedia Production Pipeline <span class="method-tag">Technique</span></h4>
+    <p class="method-when">Use when: building a sustainable production process for video, audio, and visual content.</p>
+    <p>Multimedia production has higher fixed costs than text production — plan the pipeline before committing to a cadence. <strong>Pre-production:</strong> Scripting or outlining, guest coordination, asset preparation (slides, b-roll, graphics). This is where most quality is determined — a well-structured script produces a good video regardless of production polish. <strong>Production:</strong> Recording, filming, or creating. Define minimum quality standards: audio quality (the #1 factor in audience retention for video and audio), lighting, framing, and environment. Professional polish is nice but optional; professional audio is mandatory. <strong>Post-production:</strong> Editing, graphics, captions, transcription, thumbnail creation. This is the bottleneck for most teams — editing takes 3–5x the recording length. <strong>Publishing:</strong> Upload, metadata, descriptions, accessibility (captions, alt text), and distribution across platforms. <strong>Batch production:</strong> Record multiple episodes or videos in a single session to reduce setup time and maintain consistency. Batch pre-production, batch recording, batch editing — each handoff between phases is overhead you can minimize.</p>
+  </div>
+</section>
+
+<section id="video-seo" data-section="practical">
+  <h2>Multimedia discoverability</h2>
+
+  <div class="method-card">
+    <h4>Video SEO Optimization <span class="method-tag">Technique</span></h4>
+    <p class="method-when">Use when: making video and audio content findable through search and platform algorithms.</p>
+    <p>Video and audio are invisible to traditional search engines without text metadata. <strong>Titles and descriptions:</strong> Write for search intent, not cleverness. "How to set up SSO in [Product]" beats "Enterprise Authentication Made Easy." Include target keywords in the first 60 characters of the title. <strong>Transcripts and captions:</strong> Full transcripts make video content searchable. Upload SRT captions to every video platform — they improve both accessibility and SEO. <strong>Timestamps/chapters:</strong> YouTube, Spotify, and Apple Podcasts all support chapters. Add them — they improve user experience and appear in search results. <strong>Schema markup:</strong> Add VideoObject or AudioObject schema to pages hosting multimedia content. This enables rich results in Google search. <strong>Platform optimization:</strong> Each platform has its own algorithm. YouTube rewards watch time and session time; Spotify rewards completion rates; podcast apps reward subscriber retention. Optimize for the platform's primary metric.</p>
+  </div>
+</section>
+
+        <div class="section-marker" id="real-world-examples">
+          <span class="split-badge examples">Examples</span>
+          <span class="marker-line"></span>
+        </div>
+
+        <section data-section="examples">
+  <h2>Real-world examples</h2>
+
+  <div class="case-study">
+    <p class="case-label">Case study</p>
+    <h4>Figma: video content that drives product adoption</h4>
+    <p>Figma's YouTube channel is a product adoption engine, not a marketing channel. Their most-viewed content is practical — "How to use Auto Layout," "Components best practices" — directly helping users get value from the product. They maintain a consistent visual style (clean screen recordings with minimal talking-head) and a clear content hierarchy: getting started playlists for beginners, feature deep-dives for intermediate users, and advanced workflows for power users. Each video links to relevant documentation, creating a text-video loop that serves different learning preferences.</p>
+    <p><strong>Why it works:</strong> Video content is mapped to the product adoption funnel, uses a consistent production style, and integrates with text documentation rather than replacing it.</p>
+  </div>
+
+  <div class="case-study">
+    <p class="case-label">Case study</p>
+    <h4>Lenny's Newsletter + Podcast: multimedia content ecosystem</h4>
+    <p>Lenny Rachitsky built a content ecosystem where each format reinforces the others. The newsletter provides written analysis, the podcast provides expert conversations, and social clips from the podcast drive newsletter subscriptions. Crucially, each format stands alone — the podcast isn't a read-aloud of the newsletter, and the newsletter isn't a transcript of the podcast. Each format plays to its strengths while sharing an audience and brand.</p>
+    <p><strong>Why it works:</strong> Each format serves a different content need (analysis vs. conversation vs. discovery), and the formats cross-promote without being redundant.</p>
+  </div>
+</section>
+
+<section id="pitfalls" data-section="practical">
+  <h2>Common pitfalls</h2>
+
+  <div class="pitfall">
+    <div class="pitfall-icon">!</div>
+    <div>
+      <h4>Video for everything</h4>
+      <p>Video is expensive to produce and expensive to update. Before creating a video, ask: would this be better as a written guide with screenshots? Reference content, frequently updated content, and content users need to search within should usually stay as text. Reserve video for content where seeing and hearing genuinely helps.</p>
+    </div>
+  </div>
+
+  <div class="pitfall">
+    <div class="pitfall-icon">!</div>
+    <div>
+      <h4>Launching a podcast without a sustainable plan</h4>
+      <p>The "podfade" — a podcast that publishes enthusiastically for 8–12 episodes then goes silent — damages brand credibility. Before launching, plan for 20+ episodes, define a production cadence you can sustain long-term, and batch-produce a buffer of 3–4 episodes before your public launch.</p>
+    </div>
+  </div>
+</section>
+
+<section id="connections">
+  <h2>Connected topics in your library</h2>
+  <div class="cross-ref-grid">
+    <a href="content-strategy-foundations.html" class="cross-ref-card">
+      <span class="ref-number">CS Tier 1</span>
+      <div class="ref-title">Content Strategy Foundations</div>
+      <div class="ref-reason">Multimedia strategy is an extension of content strategy — the same frameworks (pillars, audiences, measurement) apply to video and audio.</div>
+    </a>
+    <a href="content-accessibility.html" class="cross-ref-card">
+      <span class="ref-number">CS Tier 2</span>
+      <div class="ref-title">Content Accessibility</div>
+      <div class="ref-reason">Multimedia accessibility (captions, transcripts, audio descriptions) is essential for inclusive content.</div>
+    </a>
+    <a href="multi-channel-orchestration.html" class="cross-ref-card">
+      <span class="ref-number">CS Tier 3</span>
+      <div class="ref-title">Multi-Channel Content Orchestration</div>
+      <div class="ref-reason">Multimedia content must be adapted and distributed across channels — the orchestration challenge amplifies with format variety.</div>
+    </a>
+  </div>
+
+  <div class="callout info">
+    <p class="callout-title">Cross-discipline connections</p>
+    <p><strong>MK.1.03 Content Marketing &amp; Strategy</strong> covers content distribution and audience reach. This topic covers the content strategy and production side of multimedia formats.</p>
+  </div>
+</section>
+
+<div class="deep-dive-section" id="deep-dive">
+          <div class="deep-dive-header">
+            <span class="deep-dive-badge">Deep Dive</span>
+            <h2 style="margin:0; border:none; padding:0;">Appendix</h2>
+          </div>
+
+  <details class="expandable">
+    <summary><span class="chevron"><svg viewBox="0 0 14 14"><polyline points="4,2 10,7 4,12"/></svg></span> Further reading</summary>
+    <div class="expand-content topic-content">
+      <h4>Essential reading</h4>
+      <p><strong>"YouTube Secrets" by Sean Cannell &amp; Benji Travis</strong> — While marketing-focused, the production and optimization principles apply to any video content strategy.</p>
+      <p><strong>"Out on the Wire" by Jessica Abel</strong> — The narrative craft behind great audio storytelling, with lessons from NPR, Radiolab, and This American Life.</p>
+    </div>
+  </details>
+</div>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer container">
+    <div class="footer-inner">
+      <p>Noir Book — Built for the work, not the shelf.</p>
+      <div class="footer-links">
+        <a href="../design-system.html">Design System</a>
+        <a href="../library-manifest.json">Manifest</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to Top -->
+  <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">&#8593;</button>
+
+  <!-- Floating Mobile TOC -->
+  <button class="mobile-toc-btn" id="mobileTocBtn" aria-label="Open table of contents">&#9776; Contents</button>
+  <div class="mobile-toc-overlay" id="mobileTocOverlay">
+    <div class="mobile-toc-panel">
+      <div class="mobile-toc-panel-header">
+        <h3>On this page</h3>
+        <button class="mobile-toc-close" id="mobileTocClose" aria-label="Close">&times;</button>
+      </div>
+      <ul class="mobile-toc-list">
+        <li><a href="#what-and-why" data-section="theory">What multimedia content strategy covers</a></li>
+        <li><a href="#video-strategy" data-section="practical">Video content strategy</a></li>
+        <li><a href="#podcast-strategy" data-section="practical">Podcast and audio content</a></li>
+        <li><a href="#visual-content" data-section="practical">Visual content guidelines</a></li>
+        <li><a href="#repurposing" data-section="practical">Content repurposing</a></li>
+        <li><a href="#production" data-section="practical">Multimedia production pipeline</a></li>
+        <li><a href="#video-seo" data-section="practical">Multimedia discoverability</a></li>
+        <li><a href="#real-world-examples" data-section="examples">Real-world examples</a></li>
+        <li><a href="#pitfalls" data-section="practical">Common pitfalls</a></li>
+        <li><a href="#connections">Connected topics in your library</a></li>
+        <li><a href="#deep-dive">Deep-dive appendix</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    // Scrollspy: highlight active TOC item
+    const tocLinks = document.querySelectorAll('.toc-list a');
+    const sections = [];
+    tocLinks.forEach(link => {
+      const href = link.getAttribute('href');
+      if (!href || !href.startsWith('#')) return;
+      const el = document.getElementById(href.slice(1));
+      if (el) sections.push({ el, link });
+    });
+
+    // Reading progress bar
+    const progressBar = document.getElementById('readingProgress');
+    const backToTop = document.getElementById('backToTop');
+
+    function onScroll() {
+      let current = sections[0];
+      for (const s of sections) {
+        if (s.el.getBoundingClientRect().top <= 120) current = s;
+      }
+      tocLinks.forEach(l => l.classList.remove('active'));
+      if (current) current.link.classList.add('active');
+
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrolled = window.scrollY;
+      const progress = docHeight > 0 ? (scrolled / docHeight) * 100 : 0;
+      if (progressBar) progressBar.style.width = progress + '%';
+      if (backToTop) backToTop.classList.toggle('visible', scrolled > 400);
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    // Split badges: click to scroll to section
+    document.querySelectorAll('.content-splits .split-badge').forEach(function(badge) {
+      badge.addEventListener('click', function() {
+        var type = badge.classList.contains('theory') ? 'theory' : badge.classList.contains('practical') ? 'practical' : 'examples';
+        var target = document.querySelector('section[data-section="' + type + '"]');
+        if (target) {
+          var marker = target.previousElementSibling;
+          (marker && marker.classList.contains('section-marker') ? marker : target).scrollIntoView({behavior:'smooth'});
+        }
+      });
+    });
+  </script>
+
+  <script src="../js/checklist.js"></script>
+  <script src="../js/mobile-toc.js"></script>
+  <script src="../js/search.js"></script>
+  <script>
+    function openBurger(){document.getElementById('burgerOverlay').classList.add('open');document.body.style.overflow='hidden'}
+    function closeBurger(e){if(e&&e.target&&e.target!==document.getElementById('burgerOverlay'))return;document.getElementById('burgerOverlay').classList.remove('open');document.body.style.overflow=''}
+    function burgerSearch(q){
+      var r=document.getElementById('burgerSearchResults');
+      if(!q||q.length<2){r.innerHTML='';return}
+      var ql=q.toLowerCase(),matches=[];
+      if(typeof SEARCH_INDEX!=='undefined'){
+        SEARCH_INDEX.forEach(function(t){
+          var hit=t.topic.toLowerCase().indexOf(ql)>-1;
+          if(!hit)t.sections.forEach(function(s){if((s.title+' '+s.keywords).toLowerCase().indexOf(ql)>-1)hit=true});
+          if(hit)matches.push(t);
+        });
+      }
+      if(!matches.length){r.innerHTML='<p style="padding:8px 0;font-size:13px;color:var(--ink-muted)">No results</p>';return}
+      r.innerHTML=matches.slice(0,8).map(function(m){return '<a href="../'+m.url+'">'+m.topic+'<span class="bsr-disc">'+m.discipline+'</span></a>'}).join('');
+    }
+    document.addEventListener('keydown',function(e){if(e.key==='Escape'){closeBurger();var dd=document.getElementById('searchDropdown');if(dd)dd.classList.remove('visible');}});
+    // Close burger when clicking a TOC link
+    document.querySelectorAll('.burger-toc-list a').forEach(function(a){a.addEventListener('click',function(){closeBurger()})});
+    // Search typeahead
+    function topicSearch(q){
+      var dd=document.getElementById('searchDropdown');
+      if(!q||q.length<2||typeof SEARCH_INDEX==='undefined'){if(dd)dd.classList.remove('visible');return}
+      var ql=q.toLowerCase(),grouped={};
+      SEARCH_INDEX.forEach(function(t){
+        var hit=t.topic.toLowerCase().indexOf(ql)>-1,sHits=[],mHits=[];
+        t.sections.forEach(function(s){if((s.title+' '+s.keywords).toLowerCase().indexOf(ql)>-1)sHits.push(s)});
+        (t.methods||[]).forEach(function(m){if((m.name+' '+(m.keywords||'')).toLowerCase().indexOf(ql)>-1)mHits.push(m)});
+        if(!hit&&!sHits.length&&!mHits.length&&ql.length>=3&&typeof levenshtein==='function'){
+          var words=t.topic.toLowerCase().split(/ +/);
+          for(var i=0;i<words.length;i++){if(levenshtein(ql,words[i].substring(0,ql.length+1))<=1){hit=true;break}}
+        }
+        if(hit||sHits.length||mHits.length)grouped[t.topic]={url:'../'+t.url,disc:t.discipline||'',sections:sHits,methods:mHits,topicHit:hit};
+      });
+      var keys=Object.keys(grouped);
+      if(!keys.length){dd.innerHTML='<div class="search-empty">No results</div>';dd.classList.add('visible');return}
+      var html='';
+      keys.slice(0,8).forEach(function(topic){
+        var g=grouped[topic];
+        html+='<div class="search-group"><div class="search-group-title">'+topic+'</div>';
+        if(g.topicHit)html+='<a class="search-result" href="'+g.url+'"><span class="search-result-title">'+topic+'</span><span class="search-result-type practical">'+g.disc+'</span></a>';
+        g.sections.forEach(function(s){html+='<a class="search-result" href="'+g.url+'#'+s.id+'"><span class="search-result-title">'+s.title+'</span><span class="search-result-type '+s.type+'">'+s.type+'</span></a>'});
+        g.methods.slice(0,3).forEach(function(m){html+='<a class="search-result" href="'+g.url+'#'+m.section+'"><span class="search-result-title">'+m.name+'</span><span class="search-result-type practical">method</span></a>'});
+        html+='</div>';
+      });
+      dd.innerHTML=html;dd.classList.add('visible');
+    }
+    document.addEventListener('click',function(e){if(!e.target.closest('.search-box')){var dd=document.getElementById('searchDropdown');if(dd)dd.classList.remove('visible')}});
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Complex Application &amp; Enterprise UX — Noir Book</title>
+  <link rel="stylesheet" href="../css/shared.css">
+  <link rel="stylesheet" href="../css/topic.css">
+  <script src="../js/theme.js"></script>
+  <script src="../js/topic-nav.js"></script>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="site-nav subpage-nav" data-discipline="ux">
+    <div class="nav-inner">
+      <a href="../index.html" class="site-logo">
+        <span class="logo-mark">UX</span>
+        <span class="nav-title">Noir Book</span>
+      </a>
+      <a href="../index.html" class="nav-back-link">&#8592; Library</a>
+      <div class="nav-filters">
+        <button class="disc-toggle ux-toggle active" data-disc="ux" onclick="toggleDisc('ux')" title="UX Design">
+          <span class="disc-dot disc-dot-ux"></span><span class="disc-label">UX Design</span><span class="disc-code">(UX)</span>
+        </button>
+        <button class="disc-toggle pm-toggle active" data-disc="pm" onclick="toggleDisc('pm')" title="Product Management">
+          <span class="disc-dot disc-dot-pm"></span><span class="disc-label">Product</span><span class="disc-code">(PM)</span>
+        </button>
+        <button class="disc-toggle mk-toggle active" data-disc="mk" onclick="toggleDisc('mk')" title="Marketing &amp; Growth">
+          <span class="disc-dot disc-dot-mk"></span><span class="disc-label">Marketing</span><span class="disc-code">(MK)</span>
+        </button>
+        <button class="disc-toggle cs-toggle active" data-disc="cs" onclick="toggleDisc('cs')" title="Content Strategy">
+          <span class="disc-dot disc-dot-cs"></span><span class="disc-label">Content</span><span class="disc-code">(CS)</span>
+        </button>
+        <div class="search-box nav-search-box">
+          <div class="nav-search-wrap">
+            <div class="nav-search-pills" id="navSearchPills"></div>
+            <input type="text" id="navSearchInput" placeholder="Search..." autocomplete="off"
+              oninput="topicNavSearch(this.value)"
+              onkeydown="handleNavSearchKey(event)"
+              onfocus="handleNavSearchFocus()"
+              onblur="handleNavSearchBlur()">
+            <button type="button" class="nav-search-clear" id="navSearchClear" onclick="clearNavSearch()" aria-label="Clear search">&times;</button>
+          </div>
+          <div class="search-dropdown" id="navSearchDropdown"></div>
+        </div>
+      </div>
+      <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle theme">&#9790;</button>
+      <button class="burger-btn" id="burgerBtn" onclick="openBurger()" aria-label="Menu">
+        <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="2" y1="4" x2="16" y2="4"/><line x1="2" y1="9" x2="16" y2="9"/><line x1="2" y1="14" x2="16" y2="14"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Burger Menu Overlay -->
+  <div class="burger-overlay" id="burgerOverlay" onclick="closeBurger(event)">
+    <div class="burger-panel" onclick="event.stopPropagation()">
+      <div class="burger-panel-header">
+        <h3>Menu</h3>
+        <button class="burger-close" onclick="closeBurger()" aria-label="Close">&times;</button>
+      </div>
+      <div class="burger-search">
+        <input type="text" id="burgerSearchInput" placeholder="Search topics, methods..." autocomplete="off" oninput="burgerSearch(this.value)">
+        <div class="burger-search-results" id="burgerSearchResults"></div>
+      </div>
+      <div class="burger-links">
+        <a href="../index.html">&#8592; Back to Library</a>
+        <a href="../design-system.html">Design System</a>
+        <a href="../request-topic.html">Suggest a topic or improvement</a>
+      </div>
+      <div class="burger-toc-section">
+        <p class="burger-toc-title">On this page</p>
+        <ul class="burger-toc-list">
+        <li><a href="#what-and-why" data-section="theory">What complex application UX is and why it's different</a></li>
+        <li><a href="#five-layers" data-section="theory">Five layers of complexity NN/g</a></li>
+        <li><a href="#expert-users" data-section="practical">Designing for expert users NN/g</a></li>
+        <li><a href="#domain-exclusiveness" data-section="theory">Domain exclusiveness and the knowledge gap NN/g</a></li>
+        <li><a href="#complexity-management" data-section="practical">Managing complexity</a></li>
+        <li><a href="#research-methods" data-section="practical">Research methods for complex domains NN/g</a></li>
+        <li><a href="#domain-immersion" data-section="practical">Domain immersion</a></li>
+        <li><a href="#patterns-learning" data-section="practical">Patterns: learning and efficiency NN/g</a></li>
+        <li><a href="#patterns-workflow" data-section="practical">Patterns: inquiry and workflow NN/g</a></li>
+        <li><a href="#patterns-information" data-section="practical">Patterns: information and sensemaking NN/g</a></li>
+        <li><a href="#evaluation-instruments" data-section="practical">Post-task evaluation instruments NN/g</a></li>
+        <li><a href="#workflows" data-section="practical">Complex workflows and multi-tool coordination</a></li>
+        <li><a href="#real-world-examples" data-section="examples">Real-world examples</a></li>
+        <li><a href="#pitfalls" data-section="practical">Common pitfalls</a></li>
+        <li><a href="#connections">Connected topics in your library</a></li>
+        <li><a href="#deep-dive">Deep-dive appendix</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Topic Header -->
+  <header class="topic-header container">
+    <div class="breadcrumb">
+      <a href="../index.html">Library</a>
+      <span class="sep">&#8250;</span>
+      <span class="breadcrumb-disc breadcrumb-ux">UX Design</span>
+      <span class="sep">&#8250;</span>
+      <span>Tier 2 — Specialized</span>
+      <span class="sep">&#8250;</span>
+      <span>Complex Application &amp; Enterprise UX</span>
+    </div>
+    <div class="topic-meta">
+      <span class="tier-badge tier2">Tier 2</span>
+      <span style="font-size:14px;color:var(--ink-muted)">Topic UX.2.13</span>
+    </div>
+    <h1>Complex Application &amp; Enterprise UX</h1>
+    <p class="topic-subtitle">Design for expert users in specialized domains. Complex workflows, high-stakes decision-making, multi-tool coordination, and managing massive datasets in environments where users know more about the domain than you do.</p>
+    <div class="content-splits">
+      <span class="split-badge theory">25% Theory</span>
+      <span class="split-badge practical">55% Methods &amp; Templates</span>
+      <span class="split-badge examples">20% Examples</span>
+    </div>
+  </header>
+
+  <!-- Reading Progress Bar -->
+  <div class="reading-progress" id="readingProgress"></div>
+
+  <!-- Main Layout -->
+  <div class="container">
+    <div class="topic-layout">
+
+      <!-- Sidebar: Table of Contents -->
+      <aside class="topic-sidebar">
+        <nav class="toc">
+          <p class="sidebar-topic-title">Complex Application &amp; Enterprise UX</p>
+          <p class="toc-title">On this page</p>
+          <ul class="toc-list">
+            <li><a href="#what-and-why" data-section="theory">What complex application UX is and why it's different</a></li>
+            <li><a href="#five-layers" data-section="theory">Five layers of complexity NN/g</a></li>
+            <li><a href="#expert-users" data-section="practical">Designing for expert users NN/g</a></li>
+            <li><a href="#domain-exclusiveness" data-section="theory">Domain exclusiveness and the knowledge gap NN/g</a></li>
+            <li><a href="#complexity-management" data-section="practical">Managing complexity</a></li>
+            <li><a href="#research-methods" data-section="practical">Research methods for complex domains NN/g</a></li>
+            <li><a href="#domain-immersion" data-section="practical">Domain immersion</a></li>
+            <li><a href="#patterns-learning" data-section="practical">Patterns: learning and efficiency NN/g</a></li>
+            <li><a href="#patterns-workflow" data-section="practical">Patterns: inquiry and workflow NN/g</a></li>
+            <li><a href="#patterns-information" data-section="practical">Patterns: information and sensemaking NN/g</a></li>
+            <li><a href="#evaluation-instruments" data-section="practical">Post-task evaluation instruments NN/g</a></li>
+            <li><a href="#workflows" data-section="practical">Complex workflows and multi-tool coordination</a></li>
+            <li><a href="#real-world-examples" data-section="examples">Real-world examples</a></li>
+            <li><a href="#pitfalls" data-section="practical">Common pitfalls</a></li>
+            <li><a href="#connections">Connected topics in your library</a></li>
+            <li><a href="#deep-dive">Deep-dive appendix</a></li>
+          </ul>
+        </nav>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="topic-main topic-content">
+
+        <div class="section-marker" id="what-and-why">
+          <span class="split-badge theory">Theory</span>
+          <span class="marker-line"></span>
+        </div>
+
+        <section data-section="theory">
+  <h2>What complex application UX is and why it's different</h2>
+
+  <p>Most UX guidance assumes consumer-grade interfaces: simple tasks, broad audiences, low learning curves. Complex application UX inverts these assumptions. Users are domain experts — radiologists, financial traders, air traffic controllers, data engineers — who spend 8+ hours daily in your tool. They need power, not simplicity. They'll invest weeks learning the interface if it makes them faster once they're proficient. Removing capabilities to reduce complexity insults their expertise and cripples their workflow.</p>
+
+  <p>A complex application supports trained or specialized users in carrying out broad, unstructured goals in nonlinear workflows. A generalist application enables nonspecialized users to complete largely discrete, linear tasks organized around well-structured goals. The difference isn't surface aesthetics — it's the fundamental nature of the work being supported. A coastal engineer using a geographic information system to model rising sea levels faces a categorically different design problem than a consumer ordering food delivery.</p>
+
+  <p>The challenge isn't making complex applications simple — it's making them <strong>learnable without being simplistic</strong>. As Don Norman put it: complexity is often necessary — the design challenge is to manage complexity so that it isn't complicated. Perceived simplicity (fewer controls and displays) and operational simplicity (controls that match the user's conceptual model) are different things. Reducing visible controls can actually <em>increase</em> operational complexity if it forces users to hunt for the tools they need.</p>
+
+  <div class="callout info">
+    <p class="callout-title">The spectrum, not the binary</p>
+    <p>Enterprise UX is not a separate discipline from consumer UX — it's a different point on the complexity spectrum. The same usability principles apply (consistency, feedback, error prevention), but the implementation differs dramatically. A consumer app hides complexity; an enterprise app manages it.</p>
+  </div>
+</section>
+
+<section id="five-layers" data-section="theory" data-source="NN/g">
+  <h2>Five layers of complexity <span class="source-label">NN/g</span></h2>
+
+  <p>Complexity in specialized applications doesn't come from one source — it stacks in layers that interact and compound. Understanding which layers apply to your product shapes every research and design decision.</p>
+
+  <div class="method-card" data-source="NN/g">
+    <h4>Five-Layer Complexity Framework <span class="method-tag">Framework</span></h4>
+    <p class="method-when">Use when: scoping a complex app project, explaining to stakeholders why standard UX approaches fall short, or diagnosing why an existing application feels overwhelming.</p>
+    <ul>
+  <li><strong>Integrative complexity</strong> — complex back-end architecture, legacy systems, technical debt, disparate data sources. When a record set started being captured 15 or 20 years ago, it lives in an old legacy system with different structure than current data. Designers must understand these constraints — they shape what's technically possible in the interface.</li>
+  <li><strong>Informational complexity</strong> — data volume, presentation, and analysis challenges. When analyses require gigabytes of data that take hours to process, the interface must support long-running operations, partial results, and multi-machine workflows.</li>
+  <li><strong>Intent complexity</strong> — unstructured goals, broad tasks, and decision-making with variable pathways. Pilots following electronic checklists need flexibility to skip inapplicable items — the system must support nonlinear execution of nominally sequential processes.</li>
+  <li><strong>Environmental complexity</strong> — collaboration, interruptions, distractions, and breaks in workflow. Medical practitioners have information flashing in front of them while simultaneously caring for the person next to the computer — distilling information to exactly what someone needs, exactly where they need it, is critical.</li>
+  <li><strong>Institutional complexity</strong> — cultural structures of roles, norms, attitudes, beliefs, and sources of power. Legacy organizations resist new approaches because existing processes are what made them successful, creating resistance to UX improvement even when the need is clear.</li>
+</ul>
+    <p>Multiple layers are typically at play simultaneously. A police car communication system involves integrative complexity (multiple input modalities — physical console, touchscreen, voice), informational complexity (real-time dispatch data), environmental complexity (driving while interacting), and institutional complexity (rigid protocols and chain of command). Map all active layers before choosing your approach.</p>
+  </div>
+</section>
+
+        <div class="section-marker" id="expert-users">
+          <span class="split-badge practical">Practical</span>
+          <span class="marker-line"></span>
+        </div>
+
+        <section data-section="practical" data-source="NN/g">
+  <h2>Designing for expert users <span class="source-label">NN/g</span></h2>
+
+  <div class="method-card" data-source="NN/g">
+    <h4>Expert User Archetype Framework <span class="method-tag">Core Method</span></h4>
+    <p class="method-when">Use when: your product serves users with vastly different expertise levels — from new hires to 20-year veterans.</p>
+    <p>Expert user populations aren't uniform. Three archetypes:</p>
+    <p><strong>The Legacy (long-time user)</strong> — has been using the software for many years and is skilled at specific methods, even if those aren't the most efficient. Limited understanding of the full breadth of functionality. A passionate feedback-provider who believes the app should be customized to their specific use cases. We marginalize them by saying "they don't want change" — in reality, we didn't support them with a good experience in the first place and we don't do a good job communicating the value of change or facilitating transitions. Design migration paths: support legacy keyboard shortcuts, offer familiar layout options, and provide power-user modes.</p>
+    <p><strong>The Legend (expert user)</strong> — a power user who utilizes accelerators, shortcuts, command-line interfaces, and macros. Has a high degree of pride associated with their platform expertise and values productivity above all. Demanding, outspoken, influential — and sometimes entitled. We marginalize them by saying "they love it, they have to use it, there's no competition" — in reality, they could easily become advocates of other tools as more innovative alternatives emerge. They need extensibility: custom views, saved workflows, macros, and API access.</p>
+    <p><strong>The Learner (novice user)</strong> — a domain expert who does not yet have platform expertise. Often blames themselves for system inadequacies, errors, and poor UX. Gets by through satisficing — memorizing and repeating steps without understanding why. We marginalize them by saying "they'll have to go through training anyway" — in reality, if we don't support them now, they'll never become fully productive. They need guided paths, contextual help, and progressive disclosure — but never at the expense of the power features the other archetypes depend on.</p>
+  </div>
+
+  <div class="callout warning" data-source="NN/g">
+    <p class="callout-title">Three excuses that enable bad enterprise UX</p>
+    <ul>
+  <li><strong>"No competition"</strong> — "We're the only product who can do X, so they have to use us." This breeds complacency and ignores that disruptive alternatives emerge constantly.</li>
+  <li><strong>"Change-resistant"</strong> — "Our users don't want the system to change." Users resist poorly communicated change to systems they've invested years learning — that's rational, not stubborn.</li>
+  <li><strong>"Forced training"</strong> — "It's okay for it to be difficult because they'll be trained on the software." Training compensates for bad design; it doesn't excuse it.</li>
+</ul>
+  </div>
+</section>
+
+<section id="domain-exclusiveness" data-section="theory" data-source="NN/g">
+  <h2>Domain exclusiveness and the knowledge gap <span class="source-label">NN/g</span></h2>
+
+  <p>Domain exclusiveness is the unavailability of domain knowledge to outsiders of a specific domain. It's the fundamental challenge of complex app UX: you're designing for work you don't fully understand, for users whose expertise you can't replicate.</p>
+
+  <div class="method-card" data-source="NN/g">
+    <h4>Domain Exclusiveness Model <span class="method-tag">Framework</span></h4>
+    <p class="method-when">Use when: assessing how much domain learning your team needs before meaningful design work can begin, or when deciding which research and evaluation methods to use.</p>
+    <p>Map your domain on two axes: <strong>level of specialization</strong> (how domain-specific the knowledge is) and <strong>level of training</strong> (how much formal training users have). This produces four quadrants. <strong>Popular</strong> (low specialization, low training) — e-commerce, e-government. Standard UX methods work well. <strong>Limited training</strong> (higher specialization, lower training) — professional sales, parking enforcement. Some domain learning needed but methods mostly transfer. <strong>Generalist</strong> (lower specialization, higher training) — general office work, project leadership. Users are skilled but the work is broadly accessible. <strong>Specialist</strong> (high specialization, high training) — medical care, emergency response, aerospace. This is where standard UX methods break down and you need adapted approaches.</p>
+    <p>The higher your domain scores on both axes, the more you need: domain experts embedded in your design process, adapted evaluation methods that leverage work-domain knowledge, and research conducted in the actual work environment rather than a usability lab.</p>
+  </div>
+</section>
+
+<section id="complexity-management" data-section="practical">
+  <h2>Managing complexity</h2>
+
+  <div class="method-card">
+    <h4>Complexity Audit <span class="method-tag">Core Method</span></h4>
+    <p class="method-when">Use when: evaluating whether interface complexity matches task complexity, or when users report feeling overwhelmed.</p>
+    <p>Not all complexity is bad — some complexity reflects genuinely complex work. The audit distinguishes: <strong>Essential complexity</strong> comes from the domain itself — a trading terminal needs real-time data feeds, order types, risk calculations, and position management because trading is complex. You can't remove this without removing capability. <strong>Incidental complexity</strong> comes from poor design — confusing navigation, inconsistent patterns, buried settings, unclear terminology. This can and should be eliminated. <strong>The audit process:</strong> For each screen, map every element to either a user task or a system requirement. Elements that don't map to either are candidates for removal. Elements that map to rare tasks are candidates for progressive disclosure. The goal isn't fewer elements — it's ensuring every element earns its screen space by supporting a real task at a frequency that justifies its visibility.</p>
+  </div>
+
+  <div class="method-card">
+    <h4>Clutter-Capability Balance <span class="method-tag">Technique</span></h4>
+    <p class="method-when">Use when: stakeholders ask you to "simplify" a complex interface, or when you need to add new features without increasing visual overwhelm.</p>
+    <p>The clutter-capability balance is the central tension of complex application design. Strategies: <strong>Progressive disclosure</strong> — show core tools by default, reveal advanced tools on demand. Two variants: <em>staged disclosure</em> shows only options relevant to the current task (useful for multi-step linear processes like forms or wizards); <em>responsive enabling</em> displays all options but enables only those relevant to the current context (maintaining spatial predictability while reducing cognitive load). <strong>Role-based defaults:</strong> Different user roles see different default views — an analyst sees data tools prominently, an administrator sees management tools. <strong>Customizable workspaces:</strong> Let users arrange panels, pin frequently used tools, and hide unused features — but don't rely on customization as a substitute for good defaults, because users forget what they've customized. <strong>Contextual tool surfacing:</strong> Show tools relevant to the current task. <strong>Density controls:</strong> Let users choose between compact (expert, more data visible) and comfortable (learner, more whitespace) display densities.</p>
+  </div>
+</section>
+
+<section id="research-methods" data-section="practical" data-source="NN/g">
+  <h2>Research methods for complex domains <span class="source-label">NN/g</span></h2>
+
+  <p>Standard UX research assumes you can observe discrete tasks, recruit representative users easily, and evaluate designs without domain expertise. In complex domains, all three assumptions break down. The understand phase must focus on usefulness (can the system support the real work?) rather than just usability (can users operate the interface?). Methods must be adapted.</p>
+
+  <div class="method-card" data-source="NN/g">
+    <h4>Contextual Inquiry (Complex Domains) <span class="method-tag">Core Method</span></h4>
+    <p class="method-when">Use when: you need to understand how expert users actually work in their environment, not how they describe their work in interviews.</p>
+    <p>Observe use of the application in the user's natural environment without providing instruction or explicit tasks. The process: an in-situ interview followed by a period of observation and questioning. This allows you to see unanticipated behaviors and the impact of environment, provides concrete data (as opposed to generalizations users give in interviews), and fosters trust and partnership. Watch for indicators of poor application support: makeshift notes or memory aids to track progress, painful cross-referencing across multiple screens, hunting down data from external sites, manual data conversions, interruptions from collaboration bottlenecks, and subjective signals like users mistrusting an overly automated system.</p>
+    <p>Gather data across four dimensions: <strong>Problem space</strong> (goal/constraint definition, triggers, underlying behavior patterns), <strong>environment</strong> (language, physical layout, company culture and norms), <strong>information</strong> (data sources, data flow, manipulation tools, shortcuts and workarounds), and <strong>subjective</strong> (effects of prior knowledge, cognitive aids users have created, frustrations).</p>
+  </div>
+
+  <div class="method-card" data-source="NN/g">
+    <h4>Work-Domain Analysis <span class="method-tag">Core Method</span></h4>
+    <p class="method-when">Use when: you need to understand the domain's functional structure independent of the current application — especially when designing for novel situations the current system doesn't support.</p>
+    <p>A framework for identifying and representing the functional properties of a work system (the first step of cognitive work analysis, per Vicente). Unlike task analysis, which specifies what goals should be achieved and how, work-domain analysis identifies the constraints that govern the purpose and function of the entire work system. The process: interviews with subject-matter experts combined with onsite observation, producing an abstraction hierarchy that maps from high-level purposes (why?) through abstract functions and physical functions (what?) down to physical forms (how?). This allows you to study a domain without centering on the application or tasks, helping create a framework for supporting novel situations that task analysis would miss.</p>
+  </div>
+
+  <div class="method-card" data-source="NN/g">
+    <h4>Cooperative Usability Testing <span class="method-tag">Core Method</span></h4>
+    <p class="method-when">Use when: standard usability testing misses domain-specific issues because you can't write realistic tasks or interpret expert behavior.</p>
+    <p>Users and evaluators join expertise to understand usability problems together. Two distinct phases: an <strong>interaction phase</strong> (observing use of the application, as in standard testing) followed by an <strong>interpretation phase</strong> (discussion of use guided by video replay of the session). The video provides recognition cues that help experts articulate automated or unconscious behaviors they wouldn't mention in a standard think-aloud. This is particularly valuable in highly specialized domains where evaluators lack the knowledge to identify domain-specific usability issues on their own.</p>
+  </div>
+
+  <div class="method-card" data-source="NN/g">
+    <h4>Group-Based Expert Walkthrough <span class="method-tag">Core Method</span></h4>
+    <p class="method-when">Use when: you need to evaluate a complex application but can't conduct full usability testing with enough domain experts.</p>
+    <p>Work-domain experts are included as evaluators in a pluralistic walkthrough, despite their lack of HCI or usability training. A usability professional leads a walkthrough session with a group of domain-expert evaluators (recommend 4-6), who identify and discuss potential issues as a group. Research findings: domain experts identify fewer but more highly-prioritized usability problems compared to usability professionals without domain expertise. They find equally valid but less thorough findings, and catch more domain-specific issues. The implication: use more domain experts to increase thoroughness, and combine with traditional heuristic evaluation for completeness.</p>
+  </div>
+
+  <div class="method-card" data-source="NN/g">
+    <h4>Requirements Specification (Complex Domains) <span class="method-tag">Technique</span></h4>
+    <p class="method-when">Use when: writing requirements for complex applications where vague usability requirements like "the product must be usable" give engineers nothing actionable.</p>
+    <p>Three strategies: <strong>Actively involve engineers in the research process.</strong> They need to see users struggle firsthand — an informed link between users and providers prevents requirements from being filtered through secondhand reports. <strong>Use multiple methods in tandem.</strong> Research on medical equipment found that usability testing and focus groups in tandem identify more useful requirements than either method alone — each catches issues the other misses. <strong>Include requirements for incremental testing.</strong> Instead of "the product must be usable," specify "conduct a usability evaluation at the prototype, alpha, and beta stages." If testing is in the contract, it has to happen.</p>
+  </div>
+
+  <div class="method-card" data-source="NN/g">
+    <h4>Expert User Recruiting <span class="method-tag">Technique</span></h4>
+    <p class="method-when">Use when: you need domain-expert participants for research but they're hard to find and access.</p>
+    <p>Four strategies:</p>
+<ul>
+  <li><strong>Make use of relationships</strong> — work with managers of key accounts to contact users directly.</li>
+  <li><strong>Go to them</strong> — find expert users at industry trade shows, advisory boards, or professional forums.</li>
+  <li><strong>Make your own</strong> — when you can't access real experts, train participants on the application or let them practice before testing (appropriate for evaluating learnability, not expertise).</li>
+  <li><strong>Go internal</strong> — use domain experts within your own organization as proxy participants. This violates standard best-practice (don't test with internal users), but in complex domains it's sometimes the only viable path to domain-specific feedback.</li>
+</ul>
+  </div>
+</section>
+
+<section id="domain-immersion" data-section="practical">
+  <h2>Domain immersion</h2>
+
+  <div class="method-card">
+    <h4>Domain Immersion Method <span class="method-tag">Framework</span></h4>
+    <p class="method-when">Use when: designing for a domain you don't fully understand — which is the norm for enterprise UX.</p>
+    <p>You can't design good enterprise UX from a conference room. The domain immersion method: <strong>Shadow users:</strong> Sit beside domain experts for full working days. Don't interrupt, don't suggest — watch. Note what they look at, what they click, what they say to colleagues, what makes them pause. <strong>Learn the vocabulary:</strong> Domain experts use precise terminology. Using the wrong word breaks trust instantly. Build a glossary. Use their words in your interface, not simplified alternatives (unless testing shows simplification helps). <strong>Understand the mental model:</strong> Experts have rich mental models built over years. Your interface should reflect their mental model, not impose a new one. If traders think in "positions" and "exposures," your interface should be organized around positions and exposures, not around "data views" and "settings." <strong>Identify the 80/20:</strong> Experts use 20% of features 80% of the time, but the remaining 80% of features are critical for specific situations. Design the 20% for speed and the 80% for findability.</p>
+  </div>
+</section>
+
+<section id="patterns-learning" data-section="practical" data-source="NN/g">
+  <h2>Patterns: learning and efficiency <span class="source-label">NN/g</span></h2>
+
+  <p>Complex app users face two quests: they want to start using the system immediately (learning-by-doing through safe exploration), and they need to transition from mediocre performance to true expertise. These patterns address both.</p>
+
+  <div class="method-card" data-source="NN/g">
+    <h4>Safe Exploration Patterns <span class="method-tag">Pattern Set</span></h4>
+    <p class="method-when">Use when: users need to learn by doing but fear making irreversible mistakes in a high-stakes system.</p>
+    <ul>
+  <li><strong>Enable incremental construction</strong> — provide real-time previews during incremental construction to help prevent errors. Without preview, users get unexpected errors with no indication of when or why the error occurred.</li>
+  <li><strong>Provide route knowledge</strong> — make users aware of potential paths they could take. Trees support uncertain navigation through deep hierarchies. Preview destinations to allow exploration of pathways without commitment.</li>
+  <li><strong>Design for spatial predictability</strong> — maintain placement of key functions and objects across modes and workspaces. When edit options appear on individual components in one context but transition to a global control in another, users lose their spatial map.</li>
+</ul>
+  </div>
+
+  <div class="method-card" data-source="NN/g">
+    <h4>Novice-to-Expert Transition <span class="method-tag">Pattern Set</span></h4>
+    <p class="method-when">Use when: users plateau at mediocre performance because the interface doesn't help them discover faster methods.</p>
+    <p>Users satisfice — they learn one way to do a task and stick with it, even when faster methods exist. The paradox of the active user: people are more motivated to start using things than to take time to learn about them. Three types of performance improvement to design for: <strong>Vocabulary extension</strong> (knowledge of available functions), <strong>intramodal improvement</strong> (getting better with one method), and <strong>intermodal improvement</strong> (transitioning to faster methods). Design strategies:</p>
+<ul>
+  <li><strong>Reveal accelerators in context</strong> — show keyboard shortcuts inline with core actions so users discover them naturally. <strong>Use super tooltips</strong> that increase discoverability for learners without impeding experts — but don't hinder accelerator discoverability by obscuring them beneath repetitive information.</li>
+  <li><strong>Use empty space for learning cues</strong> — help users discover unused features and provide in-context guidance for getting started.</li>
+  <li><strong>Use calm messaging for vocabulary extension</strong> — provide learning opportunities during periods of downtime, such as when the user is waiting for a long process.</li>
+  <li><strong>Make help controls "ready to hand"</strong> — available for use but not obstructing task completion.</li>
+</ul>
+  </div>
+
+  <div class="method-card" data-source="NN/g">
+    <h4>Customization and Efficiency Patterns <span class="method-tag">Pattern Set</span></h4>
+    <p class="method-when">Use when: expert users need to optimize for their specific workflow but overcustomization creates its own problems.</p>
+    <ul>
+  <li><strong>Allow customization but don't rely on it</strong> — users forget what's available in heavily customized systems. Personalization (done by the system, low effort) often delivers more value than customization (done by the user, high effort).</li>
+  <li><strong>Enable bulk actions</strong> — allow global object definition, global edits, value changes, and deletion. Bulk actions can use drag-and-drop but always ensure multiple methods are available.</li>
+  <li><strong>Enable automation for known mappings</strong> — but continue to allow user control; don't run automations without user knowledge.</li>
+  <li><strong>Design for optimal adaptability</strong> — the system should adapt to user context. An urban planner working in an area where feet is standard shouldn't have to manually override a meters default every time.</li>
+</ul>
+  </div>
+</section>
+
+<section id="patterns-workflow" data-section="practical" data-source="NN/g">
+  <h2>Patterns: inquiry and workflow <span class="source-label">NN/g</span></h2>
+
+  <p>Complex work follows patterns of inquiry — recognizable structures that organize problem-solvers' investigations. An IT specialist's inquiry follows detection (getting alerted, validating, formulating the problem) → diagnosis (drilling down, generating and testing hypotheses, collaborating) → repair (identifying a fix, simulating, implementing, confirming). Design must support these fluid, nonlinear patterns.</p>
+
+  <div class="method-card" data-source="NN/g">
+    <h4>Flexible Pathway Patterns <span class="method-tag">Pattern Set</span></h4>
+    <p class="method-when">Use when: user tasks involve variable sequences, looping, and skipping that rigid linear flows can't accommodate.</p>
+    <ul>
+  <li><strong>Allow flexibility in process</strong> — design for skipping ahead, looping back, and moving from any step to any other step. Sequence maps with clear signifiers enable fluid movement.</li>
+  <li><strong>Use wizards carefully</strong> — they help split complex processes into steps, but don't overly constrain: allow users to skip ahead and go back.</li>
+  <li><strong>Track and visualize decisions made</strong> — stacked analyses provide historical reference; allow regression to previous decisions.</li>
+  <li><strong>Offer multiple pathways</strong> — provide different modalities (menu, keyboard, command line) to accomplish the same task. But don't create multiple instances — don't list the same command or link to the same function in multiple places, which creates confusion rather than flexibility.</li>
+</ul>
+  </div>
+
+  <div class="method-card" data-source="NN/g">
+    <h4>Interruption and Resumption Patterns <span class="method-tag">Pattern Set</span></h4>
+    <p class="method-when">Use when: users face long waits, frequent interruptions, or need to pick up complex work after days or weeks away.</p>
+    <ul>
+  <li><strong>Help users resume tasks</strong> — enable continuation of work left incomplete.</li>
+  <li><strong>Use historical content with visual preview</strong> — when users cycle through many documents, file preview prevents costly wrong-file opens (especially when files take a long time to load).</li>
+  <li><strong>Make access points immediately available</strong> — provide descriptive re-entrance points for continuing work.</li>
+  <li><strong>Allow persistent dialogues</strong> — dialogues supporting repetitive tasks should persist until explicitly closed, preserving recent actions and attribute selection.</li>
+  <li><strong>Support comments and notes</strong> — allow open-ended comments for analyses and object creation; show previously created comments in context of workflow. Watch for makeshift external memory (sticky notes, separate spreadsheets) — these signal that the application doesn't adequately support thought tracking.</li>
+</ul>
+  </div>
+
+  <div class="method-card" data-source="NN/g">
+    <h4>Long-Wait Design Patterns <span class="method-tag">Pattern Set</span></h4>
+    <p class="method-when">Use when: analyses or processes take minutes, hours, or longer to complete.</p>
+    <p><strong>Provide context within progress indicators</strong> — be as specific as possible about remaining time and status. Communicate progress even when time estimates aren't feasible — users watch for any signal the system is still working (one urban planner described knowing her software hadn't crashed because a small globe icon was still spinning). <strong>Allow processes to run in the background.</strong> <strong>Provide contextual information upon completion</strong> for lengthy runtimes. <strong>Enable demi-analysis</strong> — allow users to run shortened versions of analyses before committing. A clinical trial analyst described running a quick "roll back" that gives basic preferential treatment results before committing to the full computation, letting them gut-check parameters and alter them if needed.</p>
+  </div>
+
+  <div class="method-card" data-source="NN/g">
+    <h4>Visual Momentum Patterns <span class="method-tag">Pattern Set</span></h4>
+    <p class="method-when">Use when: users work across multiple views, workspaces, or tools and lose context during transitions.</p>
+    <p>Visual momentum is a measure of the user's ability to extract and integrate information across displays.</p>
+<ul>
+  <li><strong>Coordinate transitions between views</strong> — use spatial dedication to increase visual momentum by keeping core functions in the same place across workspaces.</li>
+  <li><strong>Reduce unnecessary travel</strong> — dual-function menus reduce screen travel; in-menu search helps avoid list and overview screens. Providing truncated previews allows quick cross-comparison without losing place.</li>
+  <li><strong>Use modals with caution</strong> — they impede workflow when they block the user's ability to reference needed data or edit in context. A clinical trial researcher described being unable to see her variable values while a modal asked her to set ranges for those same variables.</li>
+</ul>
+  </div>
+</section>
+
+<section id="patterns-information" data-section="practical" data-source="NN/g">
+  <h2>Patterns: information and sensemaking <span class="source-label">NN/g</span></h2>
+
+  <p>Complex applications must reduce clutter without removing capability, enable transitions between primary and secondary information, and ensure important information stands out from competing noise.</p>
+
+  <div class="method-card" data-source="NN/g">
+    <h4>Information Reduction Patterns <span class="method-tag">Pattern Set</span></h4>
+    <p class="method-when">Use when: screens are cluttered but every element serves a purpose for some user or scenario.</p>
+    <ul>
+  <li><strong>Apply progressive disclosure deliberately</strong> — staged disclosure (showing only relevant options) works for linear processes; responsive enabling (displaying all options but enabling only relevant ones) works for nonlinear work where spatial predictability matters.</li>
+  <li><strong>Provide external memory</strong> — use staged disclosure to decrease working memory load without slowing users down.</li>
+  <li><strong>Use contextual menus</strong> — menus dependent on the selected object reduce permanent screen clutter, but they have low discoverability so ensure the same actions are available elsewhere.</li>
+  <li><strong>Avoid gratuitous graphics</strong> — decorative elements that don't convey information waste precious screen space.</li>
+  <li><strong>Follow icon guidelines</strong> — avoid icons that break conventions and mental models, are undifferentiated and indistinguishable from each other, or operate at an inappropriate level of abstraction.</li>
+</ul>
+  </div>
+
+  <div class="method-card" data-source="NN/g">
+    <h4>Information Layering Patterns <span class="method-tag">Pattern Set</span></h4>
+    <p class="method-when">Use when: dashboards or data-dense views need to balance overview with access to detail.</p>
+    <ul>
+  <li><strong>Enable access to supplemental information</strong> — super tooltips can preview secondary information without requiring commitment to visit another page. They can reveal more precise, detailed information on hover. But tooltips that simply repeat visible information create information pollution.</li>
+  <li><strong>Alter the state when a different view is needed</strong> — sustained altered states (clicks and drags to zoom, for example) change the element within the same dedicated space.</li>
+  <li><strong>Provide a convenient return path</strong> — lack of a return path violates the principle of safe exploration.</li>
+  <li><strong>Follow domain conventions</strong> — use relevant default values and allow defaults to be changed. An IT manager described manually converting seconds to minutes in Excel because the dashboard displayed call times in seconds with no way to change the unit — a failure to follow domain conventions.</li>
+</ul>
+  </div>
+
+  <div class="method-card" data-source="NN/g">
+    <h4>Visual Salience and Alerting Patterns <span class="method-tag">Pattern Set</span></h4>
+    <p class="method-when">Use when: critical information competes for attention with routine information, or when users miss important alerts.</p>
+    <ul>
+  <li><strong>Make important information salient</strong> — visual salience is the distinct perceptual quality that makes items stand out and grab attention. Low-contrast text is not the answer; it just forces more processing. An alternate strategy: reduce information density by eliminating non-data pixels rather than making data harder to read.</li>
+  <li><strong>Surface alerts effectively</strong> — increase visual salience of important notifications and surface the supplementary information necessary to make decisions. Allow flagging to separate critical from routine alerts.</li>
+  <li><strong>Design errors well</strong> — make errors visible and highly noticeable in both the message and the element indication. Present errors in real-time as they're made. Provide actionable context: "All sites were filtered from the analysis or marked as outliers" is helpful; a generic error code is not.</li>
+  <li><strong>Reserve confirmation dialogues</strong> — use only before committing to actions with serious consequences. Overuse trains users to click through without reading.</li>
+</ul>
+  </div>
+</section>
+
+<section id="evaluation-instruments" data-section="practical" data-source="NN/g">
+  <h2>Post-task evaluation instruments <span class="source-label">NN/g</span></h2>
+
+  <div class="method-card" data-source="NN/g">
+    <h4>Workload and Awareness Measurement <span class="method-tag">Technique</span></h4>
+    <p class="method-when">Use when: you need to measure the cognitive cost of using a complex application beyond simple task completion rates.</p>
+    <p>Standard usability metrics (time-on-task, error rate, completion rate) don't capture the full picture for complex applications. Two specialized instruments: <strong>NASA-TLX (Task Load Index)</strong> uses six dimensions to measure subjective workload: mental demand, physical demand, temporal demand, performance, effort, and frustration. Originally developed for aerospace, it's widely applicable to any high-cognitive-load work. <strong>SART (Situational Awareness Rating Technique)</strong> uses ten dimensions to measure situational awareness: instability, complexity, variability of the situation; arousal, concentration, focusing of attention; familiarity; information quantity and quality; and spare mental capacity. SART is particularly relevant for monitoring and decision-making applications where the user's awareness of the full situation — not just the screen — determines outcomes.</p>
+  </div>
+</section>
+
+<section id="workflows" data-section="practical">
+  <h2>Complex workflows and multi-tool coordination</h2>
+
+  <div class="method-card">
+    <h4>Multi-Tool Workflow Mapping <span class="method-tag">Core Method</span></h4>
+    <p class="method-when">Use when: users work across multiple tools, windows, or screens to complete their tasks.</p>
+    <p>Enterprise users rarely work in a single tool. A financial analyst uses a terminal, a spreadsheet, an email client, and a presentation tool in a single workflow. Accept the ecosystem — complex apps live in an ecosystem; users will prefer to do certain things elsewhere, and refusing to accept this causes tedious manual data entry and unnecessary window juggling. <strong>Map the full workflow:</strong> Observe how users combine tools. Where do they copy-paste between applications? Where do they switch contexts? Where do they lose information? <strong>Reduce context switching:</strong> Bring critical information from other tools into your interface — previews, embedded views, linked data. Don't try to replace the other tools; reduce the cost of switching. <strong>Support parallel work:</strong> Multi-monitor setups are standard. Design for side-by-side use: resizable panels, detachable windows, layouts that work at various widths. <strong>Session persistence:</strong> Expert users build complex contexts during long sessions. Preserve this state across sessions.</p>
+  </div>
+
+  <div class="method-card">
+    <h4>High-Stakes Error Prevention <span class="method-tag">Technique</span></h4>
+    <p class="method-when">Use when: user errors in your application have significant financial, legal, safety, or operational consequences.</p>
+    <p>In consumer apps, errors are annoying. In enterprise apps, errors can cost millions or endanger lives. Design accordingly: <strong>Confirmation scaling:</strong> Match confirmation friction to consequence severity. Low-stakes actions need no confirmation. Medium-stakes actions need a single confirmation. High-stakes actions (trade execution, patient medication, production deployment) need typed confirmation, time delays, or multi-person approval. <strong>Undo over prevent:</strong> Where possible, make actions reversible rather than requiring pre-approval. A 30-second undo window is less disruptive than a confirmation dialog. <strong>Audit trails:</strong> Record who did what, when, and why. This isn't just compliance — it's user confidence. Experts work faster when they know mistakes are traceable and reversible. <strong>Guardrails, not gates:</strong> Warn users approaching dangerous territory rather than blocking them.</p>
+  </div>
+</section>
+
+        <div class="section-marker" id="real-world-examples">
+          <span class="split-badge examples">Examples</span>
+          <span class="marker-line"></span>
+        </div>
+
+        <section data-section="examples">
+  <h2>Real-world examples</h2>
+
+  <div class="case-study">
+    <p class="case-label">Case study</p>
+    <h4>Bloomberg Terminal: density as a feature</h4>
+    <p>The Bloomberg Terminal is notoriously dense — every pixel shows data. This isn't bad design; it's expert design. Traders need simultaneous visibility of prices, news, positions, and analytics because their decisions depend on correlating information across domains in real time. The terminal supports extreme customization (users build their own multi-panel layouts), keyboard-driven navigation (faster than mouse for repetitive operations), and session persistence (a trader's carefully arranged workspace is preserved indefinitely). The learning curve is steep — weeks to become productive — but the terminal makes expert users extraordinarily efficient once proficient.</p>
+    <p><strong>Why it works:</strong> Bloomberg designed for expert throughput, not first-use simplicity. Every decision favors the user who spends 12 hours daily in the interface.</p>
+  </div>
+
+  <div class="case-study">
+    <p class="case-label">Case study</p>
+    <h4>Figma: complexity that grows with you</h4>
+    <p>Figma serves both beginners and advanced users through progressive complexity. The default interface is clean — basic shapes, text, frames. Advanced features (auto-layout, components, variables, dev mode) are discoverable through consistent patterns but don't clutter the default experience. The key design decision: advanced features use the same interaction patterns as basic ones (select → modify properties in the right panel), so learning new capabilities builds on existing knowledge rather than requiring new mental models.</p>
+    <p><strong>Why it works:</strong> Consistent interaction patterns across complexity levels mean users transfer their skills upward. Learning auto-layout feels like extending what you already know, not learning a new tool.</p>
+  </div>
+
+  <div class="case-study">
+    <p class="case-label">Case study</p>
+    <h4>First-responder vehicle systems: layered complexity in action</h4>
+    <p>Communication systems in police cars and ambulance reporting modules illustrate how multiple complexity layers compound. Officers interact with systems through original physical inputs, touchscreen, and voice command simultaneously (integrative complexity). They process real-time dispatch data (informational complexity) while driving (environmental complexity) under strict chain-of-command protocols (institutional complexity). The design challenge is providing the right information through the right modality at the right moment — a failure in any layer degrades performance in all of them.</p>
+    <p><strong>Why it matters:</strong> Multi-layer complexity requires design solutions that address each layer while considering their interactions. You can't solve environmental complexity in isolation from the information architecture.</p>
+  </div>
+
+  <div class="case-study">
+    <p class="case-label">Case study</p>
+    <h4>ERP satisficing: when users optimize around bad UX</h4>
+    <p>A supply chain materials planner using an ERP system described their workflow: navigating to a page that "looks more overcomplicated than it should be," clicking specific buttons without understanding what they did — just repeating what they were taught. The user memorized a sequence of clicks without understanding what any of the options meant — classic satisficing. This isn't a training problem; it's a design problem. The interface gives no indication of what each option does or why you'd choose it.</p>
+    <p><strong>Why it matters:</strong> Satisficing is the default behavior for Learner users in complex systems. If your interface requires understanding to use safely, you must design the understanding into the interface itself.</p>
+  </div>
+</section>
+
+<section id="pitfalls" data-section="practical">
+  <h2>Common pitfalls</h2>
+
+  <div class="pitfall">
+    <div class="pitfall-icon">!</div>
+    <div>
+      <h4>Designing for the demo, not the workflow</h4>
+      <p>Enterprise software often looks great in a sales demo — clean screens, simple flows, beautiful dashboards. Then real users encounter it and find that the workflows they need aren't supported, the data density is too low for actual work, and the "clean" interface hides the tools they need behind too many clicks. Design for the daily workflow, not the first impression.</p>
+    </div>
+  </div>
+
+  <div class="pitfall">
+    <div class="pitfall-icon">!</div>
+    <div>
+      <h4>Simplifying away power</h4>
+      <p>Consumer UX instincts say "remove complexity." In enterprise, removing complexity often means removing capability. A database tool that hides SQL behind a visual query builder helps beginners but cripples the experts who write complex joins daily. Always provide the power path alongside the guided path.</p>
+    </div>
+  </div>
+
+  <div class="pitfall">
+    <div class="pitfall-icon">!</div>
+    <div>
+      <h4>Applying generalist methods to specialist domains</h4>
+      <p>Standard usability testing assumes task pathways are linear and known, there's a "correct path," and a task ends when information is found. None of these hold in complex domains. Running standard usability tests on a clinical analytics platform or air traffic control system produces findings that miss the real usability issues entirely — the ones that only surface when the evaluator understands the domain.</p>
+    </div>
+  </div>
+
+  <div class="pitfall">
+    <div class="pitfall-icon">!</div>
+    <div>
+      <h4>Ignoring the ecosystem</h4>
+      <p>Complex app users don't live in your tool alone. An IT manager described rebuilding an Excel spreadsheet every January to manually transcribe data from a dashboard that couldn't export in the format she needed. The application refused to accept it lived in an ecosystem. Every hour users spend on manual data transfer between tools is a design failure.</p>
+    </div>
+  </div>
+</section>
+
+<section id="connections">
+  <h2>Connected topics in your library</h2>
+  <div class="cross-ref-grid">
+    <a href="dashboard-design.html" class="cross-ref-card">
+      <span class="ref-number">Tier 2</span>
+      <div class="ref-title">Dashboard &amp; Data-Dense Design</div>
+      <div class="ref-reason">Data-dense dashboards are the primary interface pattern in complex applications. Information layering and visual salience patterns apply directly.</div>
+    </a>
+    <a href="usability-testing.html" class="cross-ref-card">
+      <span class="ref-number">Tier 1</span>
+      <div class="ref-title">Usability Testing</div>
+      <div class="ref-reason">Cooperative usability testing and group-based expert walkthrough are adaptations of standard methods — understand the standard before adapting.</div>
+    </a>
+    <a href="usability.html" class="cross-ref-card">
+      <span class="ref-number">Tier 1</span>
+      <div class="ref-title">Usability</div>
+      <div class="ref-reason">Usability principles still apply — but the implementation differs. Error prevention in a consumer app means confirmation dialogs; in enterprise, it means guardrails, audit trails, and undo.</div>
+    </a>
+    <a href="accessibility.html" class="cross-ref-card">
+      <span class="ref-number">Tier 1</span>
+      <div class="ref-title">Accessibility</div>
+      <div class="ref-reason">Enterprise users include people with disabilities. Complex applications have unique accessibility challenges — keyboard navigation in dense interfaces, screen reader support for data tables.</div>
+    </a>
+    <a href="heuristic-evaluation.html" class="cross-ref-card">
+      <span class="ref-number">Tier 2</span>
+      <div class="ref-title">Heuristic Evaluation</div>
+      <div class="ref-reason">Group-based expert walkthrough extends heuristic evaluation by adding domain experts as evaluators — understanding both methods reveals what each catches and misses.</div>
+    </a>
+    <a href="user-research.html" class="cross-ref-card">
+      <span class="ref-number">Tier 1</span>
+      <div class="ref-title">User Research</div>
+      <div class="ref-reason">Contextual inquiry and work-domain analysis are specialized research methods — the general research foundations make the adaptations clearer.</div>
+    </a>
+  </div>
+
+  <div class="callout info">
+    <p class="callout-title">Cross-discipline connections</p>
+    <p><strong>PM.2.04 B2B Product Management</strong> covers the product decisions for enterprise products. <strong>PM.2.08 Technical Product Management</strong> covers the technical trade-offs. <strong>PM.1.06 Stakeholder Management &amp; Influence</strong> covers the institutional complexity layer — navigating organizational power structures and resistance. This topic covers the UX design and research craft for complex, expert-use applications.</p>
+  </div>
+</section>
+
+<div class="deep-dive-section" id="deep-dive">
+          <div class="deep-dive-header">
+            <span class="deep-dive-badge">Deep Dive</span>
+            <h2 style="margin:0; border:none; padding:0;">Appendix</h2>
+          </div>
+
+  <details class="expandable">
+    <summary><span class="chevron"><svg viewBox="0 0 14 14"><polyline points="4,2 10,7 4,12"/></svg></span> Further reading</summary>
+    <div class="expand-content topic-content">
+      <h4>Essential reading</h4>
+      <p><strong>"Interaction Design for Complex Problem Solving" by Barbara Mirel (2004)</strong> — The foundational text on designing for complex, nonlinear problem-solving. Introduces patterns of inquiry and critiques the limitations of task-based approaches.</p>
+      <p><strong>"Cognitive Work Analysis" by Kim Vicente (1999)</strong> — The definitive work on work-domain analysis and ecological interface design for complex systems.</p>
+      <p><strong>"Living with Complexity" by Don Norman (2011)</strong> — The argument for managing complexity rather than eliminating it. Introduces the perceived vs. operational simplicity distinction.</p>
+      <p><strong>"About Face" by Alan Cooper</strong> — The foundational text on interaction design for complex software, including persona-driven design for expert users.</p>
+      <p><strong>"Usability of Complex Information Systems" edited by Albers and Still (2011)</strong> — Collected research on evaluating and designing for complex information systems.</p>
+      <h4>Research references</h4>
+      <p><strong>Følstad, A. (2011). "Usability evaluation in exclusive domains."</strong> — Introduces domain exclusiveness as a framework and the specialization × training model for mapping domains.</p>
+      <p><strong>Frøkjær, E. and Hornbæk, K. (2005). "Cooperative Usability Testing."</strong> — The interaction-interpretation method for testing with domain experts.</p>
+      <p><strong>Cockburn, A., et al. (2014). "Supporting Novice to Expert Transitions."</strong> — Three types of performance improvement (vocabulary extension, intramodal, intermodal) and how interfaces can support each.</p>
+    </div>
+  </details>
+</div>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer container">
+    <div class="footer-inner">
+      <p>Noir Book — Built for the work, not the shelf.</p>
+      <div class="footer-links">
+        <a href="../design-system.html">Design System</a>
+        <a href="../library-manifest.json">Manifest</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to Top -->
+  <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">&#8593;</button>
+
+  <!-- Floating Mobile TOC -->
+  <button class="mobile-toc-btn" id="mobileTocBtn" aria-label="Open table of contents">&#9776; Contents</button>
+  <div class="mobile-toc-overlay" id="mobileTocOverlay">
+    <div class="mobile-toc-panel">
+      <div class="mobile-toc-panel-header">
+        <h3>On this page</h3>
+        <button class="mobile-toc-close" id="mobileTocClose" aria-label="Close">&times;</button>
+      </div>
+      <ul class="mobile-toc-list">
+        <li><a href="#what-and-why" data-section="theory">What complex application UX is and why it's different</a></li>
+        <li><a href="#five-layers" data-section="theory">Five layers of complexity NN/g</a></li>
+        <li><a href="#expert-users" data-section="practical">Designing for expert users NN/g</a></li>
+        <li><a href="#domain-exclusiveness" data-section="theory">Domain exclusiveness and the knowledge gap NN/g</a></li>
+        <li><a href="#complexity-management" data-section="practical">Managing complexity</a></li>
+        <li><a href="#research-methods" data-section="practical">Research methods for complex domains NN/g</a></li>
+        <li><a href="#domain-immersion" data-section="practical">Domain immersion</a></li>
+        <li><a href="#patterns-learning" data-section="practical">Patterns: learning and efficiency NN/g</a></li>
+        <li><a href="#patterns-workflow" data-section="practical">Patterns: inquiry and workflow NN/g</a></li>
+        <li><a href="#patterns-information" data-section="practical">Patterns: information and sensemaking NN/g</a></li>
+        <li><a href="#evaluation-instruments" data-section="practical">Post-task evaluation instruments NN/g</a></li>
+        <li><a href="#workflows" data-section="practical">Complex workflows and multi-tool coordination</a></li>
+        <li><a href="#real-world-examples" data-section="examples">Real-world examples</a></li>
+        <li><a href="#pitfalls" data-section="practical">Common pitfalls</a></li>
+        <li><a href="#connections">Connected topics in your library</a></li>
+        <li><a href="#deep-dive">Deep-dive appendix</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    // Scrollspy: highlight active TOC item
+    const tocLinks = document.querySelectorAll('.toc-list a');
+    const sections = [];
+    tocLinks.forEach(link => {
+      const href = link.getAttribute('href');
+      if (!href || !href.startsWith('#')) return;
+      const el = document.getElementById(href.slice(1));
+      if (el) sections.push({ el, link });
+    });
+
+    // Reading progress bar
+    const progressBar = document.getElementById('readingProgress');
+    const backToTop = document.getElementById('backToTop');
+
+    function onScroll() {
+      let current = sections[0];
+      for (const s of sections) {
+        if (s.el.getBoundingClientRect().top <= 120) current = s;
+      }
+      tocLinks.forEach(l => l.classList.remove('active'));
+      if (current) current.link.classList.add('active');
+
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrolled = window.scrollY;
+      const progress = docHeight > 0 ? (scrolled / docHeight) * 100 : 0;
+      if (progressBar) progressBar.style.width = progress + '%';
+      if (backToTop) backToTop.classList.toggle('visible', scrolled > 400);
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    // Split badges: click to scroll to section
+    document.querySelectorAll('.content-splits .split-badge').forEach(function(badge) {
+      badge.addEventListener('click', function() {
+        var type = badge.classList.contains('theory') ? 'theory' : badge.classList.contains('practical') ? 'practical' : 'examples';
+        var target = document.querySelector('section[data-section="' + type + '"]');
+        if (target) {
+          var marker = target.previousElementSibling;
+          (marker && marker.classList.contains('section-marker') ? marker : target).scrollIntoView({behavior:'smooth'});
+        }
+      });
+    });
+  </script>
+
+  <script src="../js/checklist.js"></script>
+  <script src="../js/mobile-toc.js"></script>
+  <script src="../js/search.js"></script>
+  <script>
+    function openBurger(){document.getElementById('burgerOverlay').classList.add('open');document.body.style.overflow='hidden'}
+    function closeBurger(e){if(e&&e.target&&e.target!==document.getElementById('burgerOverlay'))return;document.getElementById('burgerOverlay').classList.remove('open');document.body.style.overflow=''}
+    function burgerSearch(q){
+      var r=document.getElementById('burgerSearchResults');
+      if(!q||q.length<2){r.innerHTML='';return}
+      var ql=q.toLowerCase(),matches=[];
+      if(typeof SEARCH_INDEX!=='undefined'){
+        SEARCH_INDEX.forEach(function(t){
+          var hit=t.topic.toLowerCase().indexOf(ql)>-1;
+          if(!hit)t.sections.forEach(function(s){if((s.title+' '+s.keywords).toLowerCase().indexOf(ql)>-1)hit=true});
+          if(hit)matches.push(t);
+        });
+      }
+      if(!matches.length){r.innerHTML='<p style="padding:8px 0;font-size:13px;color:var(--ink-muted)">No results</p>';return}
+      r.innerHTML=matches.slice(0,8).map(function(m){return '<a href="../'+m.url+'">'+m.topic+'<span class="bsr-disc">'+m.discipline+'</span></a>'}).join('');
+    }
+    document.addEventListener('keydown',function(e){if(e.key==='Escape'){closeBurger();var dd=document.getElementById('searchDropdown');if(dd)dd.classList.remove('visible');}});
+    // Close burger when clicking a TOC link
+    document.querySelectorAll('.burger-toc-list a').forEach(function(a){a.addEventListener('click',function(){closeBurger()})});
+    // Search typeahead
+    function topicSearch(q){
+      var dd=document.getElementById('searchDropdown');
+      if(!q||q.length<2||typeof SEARCH_INDEX==='undefined'){if(dd)dd.classList.remove('visible');return}
+      var ql=q.toLowerCase(),grouped={};
+      SEARCH_INDEX.forEach(function(t){
+        var hit=t.topic.toLowerCase().indexOf(ql)>-1,sHits=[],mHits=[];
+        t.sections.forEach(function(s){if((s.title+' '+s.keywords).toLowerCase().indexOf(ql)>-1)sHits.push(s)});
+        (t.methods||[]).forEach(function(m){if((m.name+' '+(m.keywords||'')).toLowerCase().indexOf(ql)>-1)mHits.push(m)});
+        if(!hit&&!sHits.length&&!mHits.length&&ql.length>=3&&typeof levenshtein==='function'){
+          var words=t.topic.toLowerCase().split(/ +/);
+          for(var i=0;i<words.length;i++){if(levenshtein(ql,words[i].substring(0,ql.length+1))<=1){hit=true;break}}
+        }
+        if(hit||sHits.length||mHits.length)grouped[t.topic]={url:'../'+t.url,disc:t.discipline||'',sections:sHits,methods:mHits,topicHit:hit};
+      });
+      var keys=Object.keys(grouped);
+      if(!keys.length){dd.innerHTML='<div class="search-empty">No results</div>';dd.classList.add('visible');return}
+      var html='';
+      keys.slice(0,8).forEach(function(topic){
+        var g=grouped[topic];
+        html+='<div class="search-group"><div class="search-group-title">'+topic+'</div>';
+        if(g.topicHit)html+='<a class="search-result" href="'+g.url+'"><span class="search-result-title">'+topic+'</span><span class="search-result-type practical">'+g.disc+'</span></a>';
+        g.sections.forEach(function(s){html+='<a class="search-result" href="'+g.url+'#'+s.id+'"><span class="search-result-title">'+s.title+'</span><span class="search-result-type '+s.type+'">'+s.type+'</span></a>'});
+        g.methods.slice(0,3).forEach(function(m){html+='<a class="search-result" href="'+g.url+'#'+m.section+'"><span class="search-result-title">'+m.name+'</span><span class="search-result-type practical">method</span></a>'});
+        html+='</div>';
+      });
+      dd.innerHTML=html;dd.classList.add('visible');
+    }
+    document.addEventListener('click',function(e){if(!e.target.closest('.search-box')){var dd=document.getElementById('searchDropdown');if(dd)dd.classList.remove('visible')}});
+  </script>
+
+</body>
+</html>

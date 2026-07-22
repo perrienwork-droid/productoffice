@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gamification — Noir Book</title>
+  <link rel="stylesheet" href="../css/shared.css">
+  <link rel="stylesheet" href="../css/topic.css">
+  <script src="../js/theme.js"></script>
+  <script src="../js/topic-nav.js"></script>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="site-nav subpage-nav" data-discipline="ux">
+    <div class="nav-inner">
+      <a href="../index.html" class="site-logo">
+        <span class="logo-mark">UX</span>
+        <span class="nav-title">Noir Book</span>
+      </a>
+      <a href="../index.html" class="nav-back-link">&#8592; Library</a>
+      <div class="nav-filters">
+        <button class="disc-toggle ux-toggle active" data-disc="ux" onclick="toggleDisc('ux')" title="UX Design">
+          <span class="disc-dot disc-dot-ux"></span><span class="disc-label">UX Design</span><span class="disc-code">(UX)</span>
+        </button>
+        <button class="disc-toggle pm-toggle active" data-disc="pm" onclick="toggleDisc('pm')" title="Product Management">
+          <span class="disc-dot disc-dot-pm"></span><span class="disc-label">Product</span><span class="disc-code">(PM)</span>
+        </button>
+        <button class="disc-toggle mk-toggle active" data-disc="mk" onclick="toggleDisc('mk')" title="Marketing &amp; Growth">
+          <span class="disc-dot disc-dot-mk"></span><span class="disc-label">Marketing</span><span class="disc-code">(MK)</span>
+        </button>
+        <button class="disc-toggle cs-toggle active" data-disc="cs" onclick="toggleDisc('cs')" title="Content Strategy">
+          <span class="disc-dot disc-dot-cs"></span><span class="disc-label">Content</span><span class="disc-code">(CS)</span>
+        </button>
+        <div class="search-box nav-search-box">
+          <div class="nav-search-wrap">
+            <div class="nav-search-pills" id="navSearchPills"></div>
+            <input type="text" id="navSearchInput" placeholder="Search..." autocomplete="off"
+              oninput="topicNavSearch(this.value)"
+              onkeydown="handleNavSearchKey(event)"
+              onfocus="handleNavSearchFocus()"
+              onblur="handleNavSearchBlur()">
+            <button type="button" class="nav-search-clear" id="navSearchClear" onclick="clearNavSearch()" aria-label="Clear search">&times;</button>
+          </div>
+          <div class="search-dropdown" id="navSearchDropdown"></div>
+        </div>
+      </div>
+      <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle theme">&#9790;</button>
+      <button class="burger-btn" id="burgerBtn" onclick="openBurger()" aria-label="Menu">
+        <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="2" y1="4" x2="16" y2="4"/><line x1="2" y1="9" x2="16" y2="9"/><line x1="2" y1="14" x2="16" y2="14"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Burger Menu Overlay -->
+  <div class="burger-overlay" id="burgerOverlay" onclick="closeBurger(event)">
+    <div class="burger-panel" onclick="event.stopPropagation()">
+      <div class="burger-panel-header">
+        <h3>Menu</h3>
+        <button class="burger-close" onclick="closeBurger()" aria-label="Close">&times;</button>
+      </div>
+      <div class="burger-search">
+        <input type="text" id="burgerSearchInput" placeholder="Search topics, methods..." autocomplete="off" oninput="burgerSearch(this.value)">
+        <div class="burger-search-results" id="burgerSearchResults"></div>
+      </div>
+      <div class="burger-links">
+        <a href="../index.html">&#8592; Back to Library</a>
+        <a href="../design-system.html">Design System</a>
+        <a href="../request-topic.html">Suggest a topic or improvement</a>
+      </div>
+      <div class="burger-toc-section">
+        <p class="burger-toc-title">On this page</p>
+        <ul class="burger-toc-list">
+        <li><a href="#what-and-why" data-section="theory">What gamification is and isn't</a></li>
+        <li><a href="#core-mechanics" data-section="theory">Core game mechanics</a></li>
+        <li><a href="#player-types" data-section="practical">Player types and motivation</a></li>
+        <li><a href="#progression" data-section="practical">Progression system design</a></li>
+        <li><a href="#social-mechanics" data-section="practical">Social mechanics</a></li>
+        <li><a href="#when-it-fails" data-section="practical">When gamification fails</a></li>
+        <li><a href="#ethical-gamification" data-section="practical">Ethical gamification</a></li>
+        <li><a href="#real-world-examples" data-section="examples">Real-world examples</a></li>
+        <li><a href="#pitfalls" data-section="practical">Common pitfalls</a></li>
+        <li><a href="#connections">Connected topics in your library</a></li>
+        <li><a href="#deep-dive">Deep-dive appendix</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Topic Header -->
+  <header class="topic-header container">
+    <div class="breadcrumb">
+      <a href="../index.html">Library</a>
+      <span class="sep">&#8250;</span>
+      <span class="breadcrumb-disc breadcrumb-ux">UX Design</span>
+      <span class="sep">&#8250;</span>
+      <span>Tier 3 — Situational</span>
+      <span class="sep">&#8250;</span>
+      <span>Gamification</span>
+    </div>
+    <div class="topic-meta">
+      <span class="tier-badge tier3">Tier 3</span>
+      <span style="font-size:14px;color:var(--ink-muted)">Topic UX.3.05</span>
+    </div>
+    <h1>Gamification</h1>
+    <p class="topic-subtitle">Game mechanics applied to non-game contexts. Points, progress, challenges, and social dynamics — when they work and when they backfire.</p>
+    <div class="content-splits">
+      <span class="split-badge theory">30% Theory</span>
+      <span class="split-badge practical">45% Methods &amp; Templates</span>
+      <span class="split-badge examples">25% Examples</span>
+    </div>
+  </header>
+
+  <!-- Reading Progress Bar -->
+  <div class="reading-progress" id="readingProgress"></div>
+
+  <!-- Main Layout -->
+  <div class="container">
+    <div class="topic-layout">
+
+      <!-- Sidebar: Table of Contents -->
+      <aside class="topic-sidebar">
+        <nav class="toc">
+          <p class="sidebar-topic-title">Gamification</p>
+          <p class="toc-title">On this page</p>
+          <ul class="toc-list">
+            <li><a href="#what-and-why" data-section="theory">What gamification is and isn't</a></li>
+            <li><a href="#core-mechanics" data-section="theory">Core game mechanics</a></li>
+            <li><a href="#player-types" data-section="practical">Player types and motivation</a></li>
+            <li><a href="#progression" data-section="practical">Progression system design</a></li>
+            <li><a href="#social-mechanics" data-section="practical">Social mechanics</a></li>
+            <li><a href="#when-it-fails" data-section="practical">When gamification fails</a></li>
+            <li><a href="#ethical-gamification" data-section="practical">Ethical gamification</a></li>
+            <li><a href="#real-world-examples" data-section="examples">Real-world examples</a></li>
+            <li><a href="#pitfalls" data-section="practical">Common pitfalls</a></li>
+            <li><a href="#connections">Connected topics in your library</a></li>
+            <li><a href="#deep-dive">Deep-dive appendix</a></li>
+          </ul>
+        </nav>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="topic-main topic-content">
+
+        <div class="section-marker" id="what-and-why">
+          <span class="split-badge theory">Theory</span>
+          <span class="marker-line"></span>
+        </div>
+
+        <section data-section="theory">
+  <h2>What gamification is and isn't</h2>
+
+  <p>Gamification is the application of game mechanics — points, levels, challenges, progress bars, leaderboards, rewards — to non-game contexts to increase engagement, motivation, and behavior change. It works because these mechanics tap into fundamental human drives: the desire for mastery (getting better at something), autonomy (choosing your own path), purpose (contributing to something meaningful), and social connection (belonging to a group, competing with peers).</p>
+
+  <p>What gamification is not: adding points and badges to a bad product and hoping it becomes engaging. This is the most common and most damaging misunderstanding. Gamification is a motivational layer on top of genuine value — it amplifies existing reasons to use a product but cannot create reasons from nothing. A fitness app that gamifies workouts works because users already want to exercise; the game mechanics make the habit stickier. A corporate training platform that adds badges to boring content doesn't make the content less boring — it makes the badges meaningless.</p>
+
+  <div class="callout info">
+    <p class="callout-title">Intrinsic vs. extrinsic motivation</p>
+    <p>Game mechanics primarily provide extrinsic motivation (external rewards like points, badges, status). But sustainable engagement requires intrinsic motivation (internal satisfaction from the activity itself). The danger of poorly designed gamification is the "overjustification effect": when extrinsic rewards replace intrinsic motivation, removing the rewards kills engagement entirely. A reader who genuinely enjoys books but starts using a reading app with streak rewards may stop reading when the streak breaks — the extrinsic reward has crowded out the intrinsic joy. Design gamification that supports intrinsic motivation, not replaces it.</p>
+  </div>
+</section>
+
+<section id="core-mechanics" data-section="theory">
+  <h2>Core game mechanics</h2>
+
+  <div class="method-card">
+    <h4>Game Mechanics Vocabulary <span class="method-tag">Framework</span></h4>
+    <p class="method-when">Use when: choosing which mechanics to apply to your product.</p>
+    <p><strong>Points:</strong> Quantified feedback on activity. Effective when points map to meaningful progress, not just activity volume. <strong>Levels/tiers:</strong> Progressive milestones that unlock new capabilities or status. Effective when each level requires genuinely different skills or commitment. <strong>Badges/achievements:</strong> Recognition for specific accomplishments. Effective when they represent real mastery; meaningless when awarded for trivial actions. <strong>Progress bars:</strong> Visual representation of completion. One of the most reliable mechanics — people are motivated to fill incomplete bars (the Zeigarnik effect). <strong>Leaderboards:</strong> Competitive ranking among users. Motivating for the top 10%, demotivating for everyone else. Use cautiously. <strong>Challenges/quests:</strong> Structured tasks with clear objectives and rewards. Effective when they guide users toward valuable behaviors. <strong>Streaks:</strong> Consecutive-day engagement counters. Powerful habit builders but create anxiety when broken.</p>
+  </div>
+</section>
+
+        <div class="section-marker" id="player-types">
+          <span class="split-badge practical">Practical</span>
+          <span class="marker-line"></span>
+        </div>
+
+        <section data-section="practical">
+  <h2>Player types and motivation</h2>
+
+  <div class="method-card">
+    <h4>Player Motivation Analysis <span class="method-tag">Core Method</span></h4>
+    <p class="method-when">Use when: deciding which mechanics will resonate with your users.</p>
+    <p>Not all users respond to the same mechanics. Bartle's player types (originally for multiplayer games, widely adapted): <strong>Achievers</strong> want to complete challenges, earn rewards, and master the system. Respond to: points, badges, levels, progress tracking. <strong>Explorers</strong> want to discover and learn. Respond to: hidden features, easter eggs, unlockable content. <strong>Socializers</strong> want to interact with others. Respond to: team challenges, shared goals, social features. <strong>Competitors</strong> want to win and rank. Respond to: leaderboards, PvP challenges, public rankings. Most users are a mix. Design for the dominant type in your user base but include elements for others. An all-leaderboard design alienates non-competitive users (the majority).</p>
+  </div>
+</section>
+
+<section id="progression" data-section="practical">
+  <h2>Progression system design</h2>
+
+  <div class="method-card">
+    <h4>Progression System Design <span class="method-tag">Core Method</span></h4>
+    <p class="method-when">Use when: designing a system where users advance through levels, tiers, or stages.</p>
+    <p>A good progression system has: <strong>Clear milestones:</strong> Users always know what they're working toward and how far away it is. <strong>Increasing challenge:</strong> Each level requires more effort or skill than the last — but the reward also increases proportionally. <strong>Frequent early wins:</strong> The first few levels come quickly to build momentum. The gaps between levels gradually increase. <strong>Meaningful transitions:</strong> Reaching a new level should unlock something — a capability, content, recognition, or privilege — not just a number change. <strong>Visible progress:</strong> Progress bars, XP counters, and completion percentages provide continuous feedback between milestones. The pacing curve matters: too fast devalues achievement, too slow creates frustration.</p>
+  </div>
+
+  <div class="callout tip">
+    <p class="callout-title">The onboarding progression trap</p>
+    <p>Many products gamify onboarding with a "complete your profile" progress bar. This works when the steps genuinely help the user (import contacts, set preferences, connect accounts). It fails when the steps serve the company (add a photo, connect social media, enable notifications). Users can tell the difference between helpful setup and data harvesting dressed up as a game. The progress bar should track value received, not data extracted.</p>
+  </div>
+</section>
+
+<section id="social-mechanics" data-section="practical">
+  <h2>Social mechanics</h2>
+
+  <div class="method-card">
+    <h4>Social Gamification Patterns <span class="method-tag">Technique</span></h4>
+    <p class="method-when">Use when: using social dynamics to increase motivation and engagement.</p>
+    <p><strong>Team challenges:</strong> Group goals where individual contributions accumulate (a company step challenge where departments compete). More inclusive than individual leaderboards. <strong>Cooperative mechanics:</strong> Shared progress bars, group milestones, collaborative achievements. "The community has collectively logged 1 million kilometers." <strong>Social recognition:</strong> Public kudos, endorsements, peer-awarded badges. More meaningful than system-awarded badges because they represent human judgment. <strong>Mentorship mechanics:</strong> Senior users help junior users level up, earning recognition for teaching. Creates community and knowledge transfer simultaneously. <strong>Relative progress:</strong> "You're in the top 25% of users this month" — provides competitive context without the full demotivation of a ranked leaderboard.</p>
+  </div>
+</section>
+
+<section id="when-it-fails" data-section="practical">
+  <h2>When gamification fails</h2>
+
+  <div class="method-card">
+    <h4>Gamification Failure Patterns <span class="method-tag">Framework</span></h4>
+    <p class="method-when">Use when: evaluating whether your gamification is working or backfiring.</p>
+    <p><strong>Pointsification:</strong> Adding points to everything without meaningful connection to user goals. Points for logging in, points for clicking, points that can't be redeemed for anything. <strong>Badge inflation:</strong> So many badges that none carry meaning. If everyone has 50 badges, no badge signals achievement. <strong>Leaderboard depression:</strong> A public leaderboard dominated by power users that demotivates 90% of the user base. <strong>Streak anxiety:</strong> Streaks that punish missing one day instead of rewarding consistency — creating stress rather than motivation. <strong>Gaming the system:</strong> Users optimize for the metric (points) rather than the intended behavior (learning). If your language app gives equal points for reviewing old words and learning new ones, users will grind easy reviews.</p>
+  </div>
+</section>
+
+<section id="ethical-gamification" data-section="practical">
+  <h2>Ethical gamification</h2>
+
+  <div class="template-box">
+    <div class="template-header">
+      <span class="template-label">Checklist</span>
+      <span class="template-title">Ethical Gamification Review</span>
+    </div>
+    <ul class="checklist">
+      <li>Game mechanics encourage behaviors that genuinely benefit the user</li>
+      <li>Extrinsic rewards support (not replace) intrinsic motivation</li>
+      <li>Streaks can be recovered or paused without penalty</li>
+      <li>Leaderboards are opt-in or show relative position (top 25%) not full rankings</li>
+      <li>Progress is based on meaningful achievement, not just time spent</li>
+      <li>Users can disable gamification elements without losing core functionality</li>
+      <li>No dark patterns disguised as game mechanics (manufactured urgency, loss aversion traps)</li>
+      <li>Mechanics don't create compulsive usage patterns</li>
+    </ul>
+  </div>
+</section>
+
+        <div class="section-marker" id="real-world-examples">
+          <span class="split-badge examples">Examples</span>
+          <span class="marker-line"></span>
+        </div>
+
+        <section data-section="examples">
+  <h2>Real-world examples</h2>
+
+  <div class="case-study">
+    <p class="case-label">Case study</p>
+    <h4>Duolingo: the gold standard</h4>
+    <p>Duolingo combines nearly every gamification mechanic successfully: XP for completing lessons, streaks for daily consistency, leaderboards for competitive users, hearts (lives) that limit mistakes, crowns for mastery-based progression, and a league system with promotion/relegation. The mechanics work because the core activity — language learning — genuinely benefits users. Duolingo also demonstrates sophisticated balancing: streak freezes let users recover from missed days, leaderboard leagues reset weekly (preventing permanent demotivation), and the difficulty curve adapts to individual performance.</p>
+    <p><strong>Why it works:</strong> Gamification amplifies existing motivation (wanting to learn a language) rather than manufacturing motivation for an unwanted activity.</p>
+  </div>
+
+  <div class="case-study">
+    <p class="case-label">Case study</p>
+    <h4>Stack Overflow: reputation as social currency</h4>
+    <p>Stack Overflow's reputation system turns knowledge sharing into a game. Users earn points for helpful answers (upvotes), asking good questions, and editing content. Reputation unlocks privileges: at 15 points you can upvote, at 2,000 you can edit others' posts, at 10,000 you access moderation tools. This progression system creates a self-governing community — experienced users earn the tools to maintain quality. Badges recognize specific behaviors (answering your first question, earning 100 upvotes on one answer) and signal expertise to the community.</p>
+    <p><strong>Why it works:</strong> The gamification directly incentivizes the core value of the platform — sharing knowledge. Reputation has real meaning because it maps to community status and moderation capabilities.</p>
+  </div>
+</section>
+
+<section id="pitfalls" data-section="practical">
+  <h2>Common pitfalls</h2>
+
+  <div class="pitfall">
+    <div class="pitfall-icon">!</div>
+    <div>
+      <h4>Gamifying without understanding player motivation</h4>
+      <p>Adding leaderboards to a product used by people who are primarily motivated by mastery (not competition) alienates the user base. Research your users' motivations before choosing mechanics. The wrong mechanic is worse than no mechanic.</p>
+    </div>
+  </div>
+
+  <div class="pitfall">
+    <div class="pitfall-icon">!</div>
+    <div>
+      <h4>Rewarding activity instead of outcomes</h4>
+      <p>Points for logging in, badges for clicking buttons, levels based on time spent — these reward activity, not achievement. Users will game the metrics (leave the app open, click randomly) to earn rewards without engaging meaningfully. Reward completion, mastery, and outcomes instead.</p>
+    </div>
+  </div>
+</section>
+
+<section id="connections">
+  <h2>Connected topics in your library</h2>
+  <div class="cross-ref-grid">
+    <a href="behavioral-design.html" class="cross-ref-card">
+      <span class="ref-number">Tier 2</span>
+      <div class="ref-title">Behavioral Design &amp; Persuasion</div>
+      <div class="ref-reason">Gamification is applied behavioral design. Habit loops, variable rewards, and social proof are the mechanisms underlying game mechanics.</div>
+    </a>
+    <a href="cognitive-emotional-design.html" class="cross-ref-card">
+      <span class="ref-number">Tier 2</span>
+      <div class="ref-title">Cognitive &amp; Emotional Design</div>
+      <div class="ref-reason">Game mechanics exploit specific cognitive biases — loss aversion (streaks), the Zeigarnik effect (progress bars), social comparison (leaderboards).</div>
+    </a>
+    <a href="interaction-design.html" class="cross-ref-card">
+      <span class="ref-number">Tier 1</span>
+      <div class="ref-title">Interaction Design</div>
+      <div class="ref-reason">Gamification elements need polished micro-interactions — satisfying animations for achievements, progress bar fills, and level-up moments.</div>
+    </a>
+    <a href="data-driven-design.html" class="cross-ref-card">
+      <span class="ref-number">Tier 2</span>
+      <div class="ref-title">Data-Driven Design</div>
+      <div class="ref-reason">Gamification impact must be measured. Track whether mechanics increase the target behavior, not just engagement metrics.</div>
+    </a>
+  </div>
+</section>
+
+<div class="deep-dive-section" id="deep-dive">
+          <div class="deep-dive-header">
+            <span class="deep-dive-badge">Deep Dive</span>
+            <h2 style="margin:0; border:none; padding:0;">Appendix</h2>
+          </div>
+
+  <details class="expandable">
+    <summary><span class="chevron"><svg viewBox="0 0 14 14"><polyline points="4,2 10,7 4,12"/></svg></span> The Octalysis framework</summary>
+    <div class="expand-content topic-content">
+      <h4>Yu-kai Chou's eight core drives</h4>
+      <p>The Octalysis framework identifies eight core drives behind human motivation: Epic Meaning &amp; Calling (contributing to something bigger), Development &amp; Accomplishment (mastery, progress), Empowerment of Creativity &amp; Feedback (self-expression, experimentation), Ownership &amp; Possession (wanting to improve what you own), Social Influence &amp; Relatedness (social dynamics, mentorship), Scarcity &amp; Impatience (wanting what you can't have), Unpredictability &amp; Curiosity (wanting to find out what happens next), and Loss &amp; Avoidance (not wanting to lose progress or status). The framework maps each game mechanic to its underlying drive, helping designers choose mechanics that match their product's motivational context.</p>
+    </div>
+  </details>
+
+  <details class="expandable">
+    <summary><span class="chevron"><svg viewBox="0 0 14 14"><polyline points="4,2 10,7 4,12"/></svg></span> Further reading and resources</summary>
+    <div class="expand-content topic-content">
+      <h4>Essential reading</h4>
+      <p><strong>"Actionable Gamification" by Yu-kai Chou</strong> — The Octalysis framework in detail. More nuanced than most gamification books because it focuses on motivation, not just mechanics.</p>
+      <p><strong>"Reality Is Broken" by Jane McGonigal</strong> — Makes the case for applying game design thinking to real-world problems. Inspiring but read critically.</p>
+      <p><strong>"Drive" by Daniel Pink</strong> — The science of intrinsic motivation (autonomy, mastery, purpose). Essential background for understanding when gamification helps and when it hurts.</p>
+    </div>
+  </details>
+</div>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer container">
+    <div class="footer-inner">
+      <p>Noir Book — Built for the work, not the shelf.</p>
+      <div class="footer-links">
+        <a href="../design-system.html">Design System</a>
+        <a href="../library-manifest.json">Manifest</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to Top -->
+  <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">&#8593;</button>
+
+  <!-- Floating Mobile TOC -->
+  <button class="mobile-toc-btn" id="mobileTocBtn" aria-label="Open table of contents">&#9776; Contents</button>
+  <div class="mobile-toc-overlay" id="mobileTocOverlay">
+    <div class="mobile-toc-panel">
+      <div class="mobile-toc-panel-header">
+        <h3>On this page</h3>
+        <button class="mobile-toc-close" id="mobileTocClose" aria-label="Close">&times;</button>
+      </div>
+      <ul class="mobile-toc-list">
+        <li><a href="#what-and-why" data-section="theory">What gamification is and isn't</a></li>
+        <li><a href="#core-mechanics" data-section="theory">Core game mechanics</a></li>
+        <li><a href="#player-types" data-section="practical">Player types and motivation</a></li>
+        <li><a href="#progression" data-section="practical">Progression system design</a></li>
+        <li><a href="#social-mechanics" data-section="practical">Social mechanics</a></li>
+        <li><a href="#when-it-fails" data-section="practical">When gamification fails</a></li>
+        <li><a href="#ethical-gamification" data-section="practical">Ethical gamification</a></li>
+        <li><a href="#real-world-examples" data-section="examples">Real-world examples</a></li>
+        <li><a href="#pitfalls" data-section="practical">Common pitfalls</a></li>
+        <li><a href="#connections">Connected topics in your library</a></li>
+        <li><a href="#deep-dive">Deep-dive appendix</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    // Scrollspy: highlight active TOC item
+    const tocLinks = document.querySelectorAll('.toc-list a');
+    const sections = [];
+    tocLinks.forEach(link => {
+      const href = link.getAttribute('href');
+      if (!href || !href.startsWith('#')) return;
+      const el = document.getElementById(href.slice(1));
+      if (el) sections.push({ el, link });
+    });
+
+    // Reading progress bar
+    const progressBar = document.getElementById('readingProgress');
+    const backToTop = document.getElementById('backToTop');
+
+    function onScroll() {
+      let current = sections[0];
+      for (const s of sections) {
+        if (s.el.getBoundingClientRect().top <= 120) current = s;
+      }
+      tocLinks.forEach(l => l.classList.remove('active'));
+      if (current) current.link.classList.add('active');
+
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrolled = window.scrollY;
+      const progress = docHeight > 0 ? (scrolled / docHeight) * 100 : 0;
+      if (progressBar) progressBar.style.width = progress + '%';
+      if (backToTop) backToTop.classList.toggle('visible', scrolled > 400);
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    // Split badges: click to scroll to section
+    document.querySelectorAll('.content-splits .split-badge').forEach(function(badge) {
+      badge.addEventListener('click', function() {
+        var type = badge.classList.contains('theory') ? 'theory' : badge.classList.contains('practical') ? 'practical' : 'examples';
+        var target = document.querySelector('section[data-section="' + type + '"]');
+        if (target) {
+          var marker = target.previousElementSibling;
+          (marker && marker.classList.contains('section-marker') ? marker : target).scrollIntoView({behavior:'smooth'});
+        }
+      });
+    });
+  </script>
+
+  <script src="../js/checklist.js"></script>
+  <script src="../js/mobile-toc.js"></script>
+  <script src="../js/search.js"></script>
+  <script>
+    function openBurger(){document.getElementById('burgerOverlay').classList.add('open');document.body.style.overflow='hidden'}
+    function closeBurger(e){if(e&&e.target&&e.target!==document.getElementById('burgerOverlay'))return;document.getElementById('burgerOverlay').classList.remove('open');document.body.style.overflow=''}
+    function burgerSearch(q){
+      var r=document.getElementById('burgerSearchResults');
+      if(!q||q.length<2){r.innerHTML='';return}
+      var ql=q.toLowerCase(),matches=[];
+      if(typeof SEARCH_INDEX!=='undefined'){
+        SEARCH_INDEX.forEach(function(t){
+          var hit=t.topic.toLowerCase().indexOf(ql)>-1;
+          if(!hit)t.sections.forEach(function(s){if((s.title+' '+s.keywords).toLowerCase().indexOf(ql)>-1)hit=true});
+          if(hit)matches.push(t);
+        });
+      }
+      if(!matches.length){r.innerHTML='<p style="padding:8px 0;font-size:13px;color:var(--ink-muted)">No results</p>';return}
+      r.innerHTML=matches.slice(0,8).map(function(m){return '<a href="../'+m.url+'">'+m.topic+'<span class="bsr-disc">'+m.discipline+'</span></a>'}).join('');
+    }
+    document.addEventListener('keydown',function(e){if(e.key==='Escape'){closeBurger();var dd=document.getElementById('searchDropdown');if(dd)dd.classList.remove('visible');}});
+    // Close burger when clicking a TOC link
+    document.querySelectorAll('.burger-toc-list a').forEach(function(a){a.addEventListener('click',function(){closeBurger()})});
+    // Search typeahead
+    function topicSearch(q){
+      var dd=document.getElementById('searchDropdown');
+      if(!q||q.length<2||typeof SEARCH_INDEX==='undefined'){if(dd)dd.classList.remove('visible');return}
+      var ql=q.toLowerCase(),grouped={};
+      SEARCH_INDEX.forEach(function(t){
+        var hit=t.topic.toLowerCase().indexOf(ql)>-1,sHits=[],mHits=[];
+        t.sections.forEach(function(s){if((s.title+' '+s.keywords).toLowerCase().indexOf(ql)>-1)sHits.push(s)});
+        (t.methods||[]).forEach(function(m){if((m.name+' '+(m.keywords||'')).toLowerCase().indexOf(ql)>-1)mHits.push(m)});
+        if(!hit&&!sHits.length&&!mHits.length&&ql.length>=3&&typeof levenshtein==='function'){
+          var words=t.topic.toLowerCase().split(/ +/);
+          for(var i=0;i<words.length;i++){if(levenshtein(ql,words[i].substring(0,ql.length+1))<=1){hit=true;break}}
+        }
+        if(hit||sHits.length||mHits.length)grouped[t.topic]={url:'../'+t.url,disc:t.discipline||'',sections:sHits,methods:mHits,topicHit:hit};
+      });
+      var keys=Object.keys(grouped);
+      if(!keys.length){dd.innerHTML='<div class="search-empty">No results</div>';dd.classList.add('visible');return}
+      var html='';
+      keys.slice(0,8).forEach(function(topic){
+        var g=grouped[topic];
+        html+='<div class="search-group"><div class="search-group-title">'+topic+'</div>';
+        if(g.topicHit)html+='<a class="search-result" href="'+g.url+'"><span class="search-result-title">'+topic+'</span><span class="search-result-type practical">'+g.disc+'</span></a>';
+        g.sections.forEach(function(s){html+='<a class="search-result" href="'+g.url+'#'+s.id+'"><span class="search-result-title">'+s.title+'</span><span class="search-result-type '+s.type+'">'+s.type+'</span></a>'});
+        g.methods.slice(0,3).forEach(function(m){html+='<a class="search-result" href="'+g.url+'#'+m.section+'"><span class="search-result-title">'+m.name+'</span><span class="search-result-type practical">method</span></a>'});
+        html+='</div>';
+      });
+      dd.innerHTML=html;dd.classList.add('visible');
+    }
+    document.addEventListener('click',function(e){if(!e.target.closest('.search-box')){var dd=document.getElementById('searchDropdown');if(dd)dd.classList.remove('visible')}});
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>B2B Product Management — Noir Book</title>
+  <link rel="stylesheet" href="../css/shared.css">
+  <link rel="stylesheet" href="../css/topic.css">
+  <script src="../js/theme.js"></script>
+  <script src="../js/topic-nav.js"></script>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="site-nav subpage-nav" data-discipline="pm">
+    <div class="nav-inner">
+      <a href="../index.html" class="site-logo">
+        <span class="logo-mark">PM</span>
+        <span class="nav-title">Noir Book</span>
+      </a>
+      <a href="../index.html" class="nav-back-link">&#8592; Library</a>
+      <div class="nav-filters">
+        <button class="disc-toggle ux-toggle active" data-disc="ux" onclick="toggleDisc('ux')" title="UX Design">
+          <span class="disc-dot disc-dot-ux"></span><span class="disc-label">UX Design</span><span class="disc-code">(UX)</span>
+        </button>
+        <button class="disc-toggle pm-toggle active" data-disc="pm" onclick="toggleDisc('pm')" title="Product Management">
+          <span class="disc-dot disc-dot-pm"></span><span class="disc-label">Product</span><span class="disc-code">(PM)</span>
+        </button>
+        <button class="disc-toggle mk-toggle active" data-disc="mk" onclick="toggleDisc('mk')" title="Marketing &amp; Growth">
+          <span class="disc-dot disc-dot-mk"></span><span class="disc-label">Marketing</span><span class="disc-code">(MK)</span>
+        </button>
+        <button class="disc-toggle cs-toggle active" data-disc="cs" onclick="toggleDisc('cs')" title="Content Strategy">
+          <span class="disc-dot disc-dot-cs"></span><span class="disc-label">Content</span><span class="disc-code">(CS)</span>
+        </button>
+        <div class="search-box nav-search-box">
+          <div class="nav-search-wrap">
+            <div class="nav-search-pills" id="navSearchPills"></div>
+            <input type="text" id="navSearchInput" placeholder="Search..." autocomplete="off"
+              oninput="topicNavSearch(this.value)"
+              onkeydown="handleNavSearchKey(event)"
+              onfocus="handleNavSearchFocus()"
+              onblur="handleNavSearchBlur()">
+            <button type="button" class="nav-search-clear" id="navSearchClear" onclick="clearNavSearch()" aria-label="Clear search">&times;</button>
+          </div>
+          <div class="search-dropdown" id="navSearchDropdown"></div>
+        </div>
+      </div>
+      <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle theme">&#9790;</button>
+      <button class="burger-btn" id="burgerBtn" onclick="openBurger()" aria-label="Menu">
+        <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="2" y1="4" x2="16" y2="4"/><line x1="2" y1="9" x2="16" y2="9"/><line x1="2" y1="14" x2="16" y2="14"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Burger Menu Overlay -->
+  <div class="burger-overlay" id="burgerOverlay" onclick="closeBurger(event)">
+    <div class="burger-panel" onclick="event.stopPropagation()">
+      <div class="burger-panel-header">
+        <h3>Menu</h3>
+        <button class="burger-close" onclick="closeBurger()" aria-label="Close">&times;</button>
+      </div>
+      <div class="burger-search">
+        <input type="text" id="burgerSearchInput" placeholder="Search topics, methods..." autocomplete="off" oninput="burgerSearch(this.value)">
+        <div class="burger-search-results" id="burgerSearchResults"></div>
+      </div>
+      <div class="burger-links">
+        <a href="../index.html">&#8592; Back to Library</a>
+        <a href="../design-system.html">Design System</a>
+        <a href="../request-topic.html">Suggest a topic or improvement</a>
+      </div>
+      <div class="burger-toc-section">
+        <p class="burger-toc-title">On this page</p>
+        <ul class="burger-toc-list">
+        <li><a href="#what-and-why" data-section="theory">What B2B product management is and how it differs</a></li>
+        <li><a href="#b2b-methods" data-section="practical">B2B methods</a></li>
+        <li><a href="#sales-feedback" data-section="practical">Sales-product feedback loop</a></li>
+        <li><a href="#templates-and-checklists" data-section="practical">Templates and checklists</a></li>
+        <li><a href="#real-world-examples" data-section="examples">Real-world examples</a></li>
+        <li><a href="#common-pitfalls" data-section="practical">Common pitfalls</a></li>
+        <li><a href="#when-to-use" data-section="practical">When to go upmarket</a></li>
+        <li><a href="#connections">Connected topics in your library</a></li>
+        <li><a href="#deep-dive">Deep-dive appendix</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Topic Header -->
+  <header class="topic-header container">
+    <div class="breadcrumb">
+      <a href="../index.html">Library</a>
+      <span class="sep">&#8250;</span>
+      <span class="breadcrumb-disc breadcrumb-pm">Product Management</span>
+      <span class="sep">&#8250;</span>
+      <span>Tier 2 — Specialized</span>
+      <span class="sep">&#8250;</span>
+      <span>B2B Product Management</span>
+    </div>
+    <div class="topic-meta">
+      <span class="tier-badge tier2">Tier 2</span>
+      <span style="font-size:14px;color:var(--ink-muted)">Topic PM.2.04</span>
+    </div>
+    <h1>B2B Product Management</h1>
+    <p class="topic-subtitle">Products for businesses. Enterprise sales cycles, multi-persona products, procurement processes, and managing buyer vs. user tensions.</p>
+    <div class="content-splits">
+      <span class="split-badge theory">25% Theory</span>
+      <span class="split-badge practical">50% Methods &amp; Templates</span>
+      <span class="split-badge examples">25% Examples</span>
+    </div>
+  </header>
+
+  <!-- Reading Progress Bar -->
+  <div class="reading-progress" id="readingProgress"></div>
+
+  <!-- Main Layout -->
+  <div class="container">
+    <div class="topic-layout">
+
+      <!-- Sidebar: Table of Contents -->
+      <aside class="topic-sidebar">
+        <nav class="toc">
+          <p class="sidebar-topic-title">B2B Product Management</p>
+          <p class="toc-title">On this page</p>
+          <ul class="toc-list">
+            <li><a href="#what-and-why" data-section="theory">What B2B product management is and how it differs</a></li>
+            <li><a href="#b2b-methods" data-section="practical">B2B methods</a></li>
+            <li><a href="#sales-feedback" data-section="practical">Sales-product feedback loop</a></li>
+            <li><a href="#templates-and-checklists" data-section="practical">Templates and checklists</a></li>
+            <li><a href="#real-world-examples" data-section="examples">Real-world examples</a></li>
+            <li><a href="#common-pitfalls" data-section="practical">Common pitfalls</a></li>
+            <li><a href="#when-to-use" data-section="practical">When to go upmarket</a></li>
+            <li><a href="#connections">Connected topics in your library</a></li>
+            <li><a href="#deep-dive">Deep-dive appendix</a></li>
+          </ul>
+        </nav>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="topic-main topic-content">
+
+        <div class="section-marker" id="what-and-why">
+          <span class="split-badge theory">Theory</span>
+          <span class="marker-line"></span>
+        </div>
+
+        <section data-section="theory">
+  <h2>What B2B product management is and how it differs</h2>
+
+<p>B2B product management is the practice of building products that businesses buy and their employees use. The fundamental challenge: the person who buys is rarely the person who uses. A VP of Engineering buys the tool; individual engineers use it daily. Their needs, priorities, and pain points are different — sometimes contradictory. The buyer wants reporting, compliance, and cost control. The user wants speed, simplicity, and fewer meetings.</p>
+
+<p>This buyer-user gap shapes everything: feature prioritization (build for the buyer to close deals, or for the user to drive adoption?), pricing (per-seat hurts adoption but satisfies procurement), onboarding (the buyer needs an executive summary; the user needs a getting-started guide), and success metrics (buyer satisfaction is measured in renewal; user satisfaction is measured in daily active usage).</p>
+
+<p>B2B products also face the "strategic account" problem: a single enterprise customer paying $500K/year has enormous influence on the roadmap. Their feature requests feel urgent. But building for one customer's specific needs creates a product that serves one company well and the market poorly. The PM's job is distinguishing between requests that represent a market pattern and requests that represent one company's unique workflow.</p>
+
+<div class="callout info">
+  <p class="callout-title">Why this matters for your projects</p>
+  <p>The skills that make a great B2C PM can fail in B2B. B2C optimizes for individual delight and viral adoption. B2B optimizes for organizational value and procurement-friendly packaging. Understanding the differences — longer sales cycles, multi-stakeholder decisions, compliance requirements, and the politics of enterprise software adoption — is essential for anyone building products that businesses buy.</p>
+</div>
+
+</section>
+
+        <div class="section-marker" id="b2b-methods">
+          <span class="split-badge practical">Practical</span>
+          <span class="marker-line"></span>
+        </div>
+
+        <section data-section="practical">
+  <h2>B2B methods</h2>
+
+<div class="method-card">
+  <h4>Buyer vs. User Persona Separation <span class="method-tag">Core Framework</span></h4>
+  <p class="method-when">Use when: Feature requests conflict because different stakeholders want different things. The separation makes the conflict visible and resolvable.</p>
+  <p>Create separate personas for buyers (the person who signs the contract) and users (the people who use the product daily). Map each persona's goals, pain points, success criteria, and evaluation criteria. Then, for every feature decision, explicitly ask: "Does this serve the buyer, the user, or both?"</p>
+  <p>The healthy ratio varies by product stage: early products should heavily favor user experience (adoption drives expansion). Mature products need to balance both (retention requires user satisfaction; renewal requires buyer satisfaction). Products with &lt;50% of revenue from enterprise can lean user-first. Products with &gt;70% enterprise revenue must invest heavily in buyer-facing features.</p>
+</div>
+
+<div class="method-card">
+  <h4>Enterprise Feature Request Triage <span class="method-tag">Prioritization</span></h4>
+  <p class="method-when">Use when: Strategic accounts are requesting custom features and you need to decide what to build vs. decline.</p>
+  <div class="process-steps">
+    <div class="process-step">
+      <div class="process-step-content">
+        <h4>Pattern or one-off?</h4>
+        <p>Has this request come from 3+ customers independently? If yes, it's a pattern — evaluate for the roadmap. If it's from one customer, it's a one-off — explore alternatives (professional services, API extensibility, configuration options).</p>
+      </div>
+    </div>
+    <div class="process-step">
+      <div class="process-step-content">
+        <h4>Platform value or customer-specific?</h4>
+        <p>Will building this make the product better for all customers, or just this one? A custom SSO integration benefits all enterprise customers. A custom report format for one customer's internal system benefits only them.</p>
+      </div>
+    </div>
+    <div class="process-step">
+      <div class="process-step-content">
+        <h4>Revenue-justified?</h4>
+        <p>If the feature takes 3 months to build and the deal is worth $200K/year, the math might work. If the deal is $20K/year, it almost certainly doesn't — you'd be better off building features that attract 10 similar customers at $20K each.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="method-card">
+  <h4>Customer Advisory Board <span class="method-tag">Research Practice</span></h4>
+  <p class="method-when">Use when: You need structured input from enterprise customers on product direction without letting any single customer dominate the roadmap.</p>
+  <p>A CAB is 8–12 customers who meet quarterly to review product direction, provide feedback on upcoming features, and share their strategic priorities. Membership should represent your target segments — not just your biggest accounts. Include a mix of: happy power users, recently churned or at-risk customers (their feedback is the most valuable), and customers in your target expansion segment.</p>
+  <p>The CAB is not a feature request session. Frame discussions around problems and outcomes: "What's the biggest workflow challenge your team faces?" not "What features do you want?" This produces insights that inform strategy, not a wish list that becomes a roadmap.</p>
+</div>
+
+<div class="method-card">
+  <h4>Multi-Persona Journey Map <span class="method-tag">Design Tool</span></h4>
+  <p class="method-when">Use when: The product experience involves multiple roles (admin, manager, individual user) and you need to design for all of them coherently.</p>
+  <p>Map the journey for each persona through the same product workflow, side by side. An admin's onboarding journey (configure SSO, set up roles, invite users) is completely different from an individual user's onboarding journey (accept invite, complete profile, start first task). Both happen simultaneously. Both must work.</p>
+  <p>The multi-persona map reveals handoff points where one persona's action triggers another persona's experience. "Admin invites user" is a handoff — the quality of the invitation email, the signup flow, and the first-run experience all determine whether that user activates. These handoffs are often where B2B products fail because no single persona "owns" them.</p>
+</div>
+
+<div class="method-card">
+  <h4>Account-Level Health Scoring <span class="method-tag">Retention</span></h4>
+  <p class="method-when">Use when: You need to predict which enterprise accounts are at risk of churning and intervene before renewal conversations.</p>
+  <p>An account health score aggregates multiple signals: usage depth (how many features are used), usage breadth (how many users are active), engagement trend (increasing or decreasing over the last 90 days), support sentiment (ticket volume and CSAT), and NPS. Weight each signal based on historical correlation with churn.</p>
+  <p>The score's primary value is prioritization: customer success teams can't deeply engage with every account. The health score tells them where to focus — accounts with declining health scores that are 3–6 months from renewal. Intervene early, not at renewal time when it's too late.</p>
+</div>
+
+</section>
+
+<section id="sales-feedback" data-section="practical">
+  <h2>Sales-product feedback loop</h2>
+
+  <div class="method-card">
+    <h4>Sales-Product Feedback Loop <span class="method-tag">Core Method</span></h4>
+    <p class="method-when">Use when: sales teams have product feedback, feature requests, or competitive intelligence that should inform the roadmap — without letting sales drive the roadmap.</p>
+    <p>Sales teams talk to customers daily and have signal the product team needs — but raw sales feedback is noisy, biased toward the loudest customers and the deals they're trying to close. Build structured feedback loops: <strong>Win/loss analysis integration:</strong> After every significant deal (won or lost), capture the product-related factors. What features sealed the deal? What gaps caused the loss? Aggregate these quarterly to spot patterns. <strong>Feature request triage:</strong> Create a structured intake process: what's the customer asking for, what problem does it solve, how many customers have asked, what's the revenue at risk? Score requests by frequency × impact × strategic alignment, not by which sales rep shouts loudest. <strong>Customer advisory board mechanics:</strong> Run a CAB of 8–12 strategic customers meeting quarterly. Use structured agendas: validate upcoming roadmap themes, gather feedback on early concepts, understand evolving needs. The CAB is for strategic input, not for feature wishlists.</p>
+  </div>
+</section>
+
+<section id="templates-and-checklists" data-section="practical">
+  <h2>Templates and checklists</h2>
+
+<div class="template-box">
+  <div class="template-header">
+    <span class="template-label">Checklist</span>
+    <span class="template-title">Enterprise Readiness</span>
+  </div>
+  <ul class="checklist">
+    <li>SSO / SAML integration available</li>
+    <li>Role-based access control (RBAC) with admin, manager, and user roles</li>
+    <li>Audit log tracking user actions for compliance</li>
+    <li>Data export capability (customers must be able to leave)</li>
+    <li>SLA documented with uptime guarantees</li>
+    <li>Security questionnaire responses prepared (SOC 2, GDPR, etc.)</li>
+    <li>Procurement-friendly pricing (annual billing, PO/invoice support)</li>
+    <li>Admin dashboard with usage reporting</li>
+    <li>Dedicated support channel (not just email queue)</li>
+    <li>API available for integration with existing tools</li>
+  </ul>
+</div>
+
+</section>
+
+        <div class="section-marker" id="real-world-examples">
+          <span class="split-badge examples">Examples</span>
+          <span class="marker-line"></span>
+        </div>
+
+        <section data-section="examples">
+  <h2>Real-world examples</h2>
+
+<div class="case-study">
+  <p class="case-label">Case study</p>
+  <h4>Atlassian: Bottom-up enterprise without enterprise sales</h4>
+  <p>Atlassian built a $50B+ company with almost no traditional enterprise sales team. Individual developers adopted Jira and Confluence for free. Teams formed organically. When the organization reached a critical mass of users, an admin consolidated accounts into an enterprise plan. Atlassian's "enterprise features" (user management, security, compliance) were the upgrade trigger — not sales calls.</p>
+  <p>The B2B lesson: you can sell to enterprises without selling to enterprises. Build for the user, let adoption spread, then offer the buyer (IT admin, CTO) the management and compliance layer they need to formalize what's already happening.</p>
+</div>
+
+<div class="case-study">
+  <p class="case-label">Case study</p>
+  <h4>Salesforce: The strategic account trap (and how they escaped)</h4>
+  <p>Early Salesforce was heavily influenced by individual enterprise customers. Custom features, custom integrations, custom workflows — each large deal shaped the product. The result: a product that was incredible for 10 large customers and confusing for everyone else. Salesforce escaped by building a platform (Force.com/Lightning) that let enterprises customize without polluting the core product. Custom needs became custom apps on the platform, not custom features in the product.</p>
+  <p>The B2B lesson: when strategic accounts demand customization, the answer isn't always "build it" or "say no." Sometimes the answer is "build the platform that lets them build it themselves." This is expensive — but cheaper than maintaining 50 customer-specific codepaths.</p>
+</div>
+
+</section>
+
+<section id="common-pitfalls" data-section="practical">
+  <h2>Common pitfalls</h2>
+
+<div class="pitfall">
+  <div class="pitfall-icon">!</div>
+  <div>
+    <h4>Building for the buyer, forgetting the user</h4>
+    <p>A product that checks every buyer checkbox (SSO, audit logs, SOC 2 compliance) but frustrates daily users will eventually churn — users will find workarounds or push for alternatives. Enterprise renewal requires user satisfaction, not just buyer satisfaction. The admin signs the contract; the user determines whether it gets renewed.</p>
+  </div>
+</div>
+
+<div class="pitfall">
+  <div class="pitfall-icon">!</div>
+  <div>
+    <h4>Letting one customer become the roadmap</h4>
+    <p>When 30% of revenue comes from one customer, their feature requests feel non-negotiable. But building specifically for them creates customer concentration risk and product fragmentation. If that customer leaves, you're left with features nobody else needs. Diversify both revenue and feature input — no single customer should drive more than 15% of roadmap decisions.</p>
+  </div>
+</div>
+
+<div class="pitfall">
+  <div class="pitfall-icon">!</div>
+  <div>
+    <h4>Enterprise features as an afterthought</h4>
+    <p>Bolting SSO, RBAC, and audit logging onto a product designed for individuals creates a poor experience for both audiences. The admin experience feels like a separate product. The individual experience gets cluttered with enterprise UI elements. Plan for multi-persona from the beginning — even if you don't build enterprise features yet, architect the product so they can be added without a rewrite.</p>
+  </div>
+</div>
+
+</section>
+
+<section id="when-to-use" data-section="practical">
+  <h2>When to go upmarket</h2>
+
+<div class="callout info">
+  <p class="callout-title">Decision guidance</p>
+  <p><strong>Move upmarket when:</strong> Your best users are already in enterprise companies. Win/loss analysis shows enterprise deals lost to missing features (SSO, compliance). Your product's value proposition scales with team size — more seats = more value. You have the engineering capacity to build and maintain enterprise infrastructure.</p>
+  <p><strong>Stay downmarket when:</strong> Your product's value is strongest for individuals or small teams. Enterprise requirements would fundamentally change the product experience. You don't have the support infrastructure for enterprise SLAs. The revenue opportunity doesn't justify the engineering investment.</p>
+</div>
+
+</section>
+
+<section id="connections">
+  <h2>Connected topics in your library</h2>
+
+<div class="cross-ref-grid">
+  <a href="#" class="cross-ref-card">
+    <span class="ref-number">PM.1.06</span>
+    <div class="ref-title">Stakeholder Management</div>
+    <div class="ref-reason">Managing enterprise stakeholders with competing needs</div>
+  </a>
+  <a href="#" class="cross-ref-card">
+    <span class="ref-number">PM.2.02</span>
+    <div class="ref-title">Pricing &amp; Monetization</div>
+    <div class="ref-reason">Enterprise pricing, packaging, and procurement</div>
+  </a>
+  <a href="#" class="cross-ref-card">
+    <span class="ref-number">PM.2.09</span>
+    <div class="ref-title">Retention &amp; Churn</div>
+    <div class="ref-reason">Enterprise retention, health scoring, renewal management</div>
+  </a>
+</div>
+
+<div class="deep-dive-section" id="deep-dive">
+          <div class="deep-dive-header">
+            <span class="deep-dive-badge">Deep Dive</span>
+            <h2 style="margin:0; border:none; padding:0;">Appendix</h2>
+          </div>
+  <details class="expandable">
+    <summary><span class="chevron"><svg viewBox="0 0 14 14"><polyline points="4,2 10,7 4,12"/></svg></span> Further reading</summary>
+    <div class="expand-content topic-content">
+      <p><strong>"Crossing the Chasm" by Geoffrey Moore</strong> — The classic on selling technology products to mainstream enterprise customers. The chasm between early adopters and early majority is particularly relevant for B2B products moving upmarket.</p>
+      <p><strong>"The Challenger Sale" by Dixon &amp; Adamson</strong> — How enterprise sales actually works. Useful for PMs who need to understand the sales motion their product supports.</p>
+    </div>
+  </details>
+</div>
+</section>
+
+<div class="topic-nav">
+  <a href="growth-plg.html" class="topic-nav-link prev">
+    <div class="nav-direction">Previous topic</div>
+    <div class="nav-title">&#8249; Growth &amp; PLG</div>
+  </a>
+  <a href="platform-api-pm.html" class="topic-nav-link next">
+    <div class="nav-direction">Next topic</div>
+    <div class="nav-title">Platform &amp; API PM &#8250;</div>
+  </a>
+</div>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer container">
+    <div class="footer-inner">
+      <p>Noir Book — Built for the work, not the shelf.</p>
+      <div class="footer-links">
+        <a href="../design-system.html">Design System</a>
+        <a href="../library-manifest.json">Manifest</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to Top -->
+  <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">&#8593;</button>
+
+  <!-- Floating Mobile TOC -->
+  <button class="mobile-toc-btn" id="mobileTocBtn" aria-label="Open table of contents">&#9776; Contents</button>
+  <div class="mobile-toc-overlay" id="mobileTocOverlay">
+    <div class="mobile-toc-panel">
+      <div class="mobile-toc-panel-header">
+        <h3>On this page</h3>
+        <button class="mobile-toc-close" id="mobileTocClose" aria-label="Close">&times;</button>
+      </div>
+      <ul class="mobile-toc-list">
+        <li><a href="#what-and-why" data-section="theory">What B2B product management is and how it differs</a></li>
+        <li><a href="#b2b-methods" data-section="practical">B2B methods</a></li>
+        <li><a href="#sales-feedback" data-section="practical">Sales-product feedback loop</a></li>
+        <li><a href="#templates-and-checklists" data-section="practical">Templates and checklists</a></li>
+        <li><a href="#real-world-examples" data-section="examples">Real-world examples</a></li>
+        <li><a href="#common-pitfalls" data-section="practical">Common pitfalls</a></li>
+        <li><a href="#when-to-use" data-section="practical">When to go upmarket</a></li>
+        <li><a href="#connections">Connected topics in your library</a></li>
+        <li><a href="#deep-dive">Deep-dive appendix</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    // Scrollspy: highlight active TOC item
+    const tocLinks = document.querySelectorAll('.toc-list a');
+    const sections = [];
+    tocLinks.forEach(link => {
+      const href = link.getAttribute('href');
+      if (!href || !href.startsWith('#')) return;
+      const el = document.getElementById(href.slice(1));
+      if (el) sections.push({ el, link });
+    });
+
+    // Reading progress bar
+    const progressBar = document.getElementById('readingProgress');
+    const backToTop = document.getElementById('backToTop');
+
+    function onScroll() {
+      let current = sections[0];
+      for (const s of sections) {
+        if (s.el.getBoundingClientRect().top <= 120) current = s;
+      }
+      tocLinks.forEach(l => l.classList.remove('active'));
+      if (current) current.link.classList.add('active');
+
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrolled = window.scrollY;
+      const progress = docHeight > 0 ? (scrolled / docHeight) * 100 : 0;
+      if (progressBar) progressBar.style.width = progress + '%';
+      if (backToTop) backToTop.classList.toggle('visible', scrolled > 400);
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    // Split badges: click to scroll to section
+    document.querySelectorAll('.content-splits .split-badge').forEach(function(badge) {
+      badge.addEventListener('click', function() {
+        var type = badge.classList.contains('theory') ? 'theory' : badge.classList.contains('practical') ? 'practical' : 'examples';
+        var target = document.querySelector('section[data-section="' + type + '"]');
+        if (target) {
+          var marker = target.previousElementSibling;
+          (marker && marker.classList.contains('section-marker') ? marker : target).scrollIntoView({behavior:'smooth'});
+        }
+      });
+    });
+  </script>
+
+  <script src="../js/checklist.js"></script>
+  <script src="../js/mobile-toc.js"></script>
+  <script src="../js/search.js"></script>
+  <script>
+    function openBurger(){document.getElementById('burgerOverlay').classList.add('open');document.body.style.overflow='hidden'}
+    function closeBurger(e){if(e&&e.target&&e.target!==document.getElementById('burgerOverlay'))return;document.getElementById('burgerOverlay').classList.remove('open');document.body.style.overflow=''}
+    function burgerSearch(q){
+      var r=document.getElementById('burgerSearchResults');
+      if(!q||q.length<2){r.innerHTML='';return}
+      var ql=q.toLowerCase(),matches=[];
+      if(typeof SEARCH_INDEX!=='undefined'){
+        SEARCH_INDEX.forEach(function(t){
+          var hit=t.topic.toLowerCase().indexOf(ql)>-1;
+          if(!hit)t.sections.forEach(function(s){if((s.title+' '+s.keywords).toLowerCase().indexOf(ql)>-1)hit=true});
+          if(hit)matches.push(t);
+        });
+      }
+      if(!matches.length){r.innerHTML='<p style="padding:8px 0;font-size:13px;color:var(--ink-muted)">No results</p>';return}
+      r.innerHTML=matches.slice(0,8).map(function(m){return '<a href="../'+m.url+'">'+m.topic+'<span class="bsr-disc">'+m.discipline+'</span></a>'}).join('');
+    }
+    document.addEventListener('keydown',function(e){if(e.key==='Escape'){closeBurger();var dd=document.getElementById('searchDropdown');if(dd)dd.classList.remove('visible');}});
+    // Close burger when clicking a TOC link
+    document.querySelectorAll('.burger-toc-list a').forEach(function(a){a.addEventListener('click',function(){closeBurger()})});
+    // Search typeahead
+    function topicSearch(q){
+      var dd=document.getElementById('searchDropdown');
+      if(!q||q.length<2||typeof SEARCH_INDEX==='undefined'){if(dd)dd.classList.remove('visible');return}
+      var ql=q.toLowerCase(),grouped={};
+      SEARCH_INDEX.forEach(function(t){
+        var hit=t.topic.toLowerCase().indexOf(ql)>-1,sHits=[],mHits=[];
+        t.sections.forEach(function(s){if((s.title+' '+s.keywords).toLowerCase().indexOf(ql)>-1)sHits.push(s)});
+        (t.methods||[]).forEach(function(m){if((m.name+' '+(m.keywords||'')).toLowerCase().indexOf(ql)>-1)mHits.push(m)});
+        if(!hit&&!sHits.length&&!mHits.length&&ql.length>=3&&typeof levenshtein==='function'){
+          var words=t.topic.toLowerCase().split(/ +/);
+          for(var i=0;i<words.length;i++){if(levenshtein(ql,words[i].substring(0,ql.length+1))<=1){hit=true;break}}
+        }
+        if(hit||sHits.length||mHits.length)grouped[t.topic]={url:'../'+t.url,disc:t.discipline||'',sections:sHits,methods:mHits,topicHit:hit};
+      });
+      var keys=Object.keys(grouped);
+      if(!keys.length){dd.innerHTML='<div class="search-empty">No results</div>';dd.classList.add('visible');return}
+      var html='';
+      keys.slice(0,8).forEach(function(topic){
+        var g=grouped[topic];
+        html+='<div class="search-group"><div class="search-group-title">'+topic+'</div>';
+        if(g.topicHit)html+='<a class="search-result" href="'+g.url+'"><span class="search-result-title">'+topic+'</span><span class="search-result-type practical">'+g.disc+'</span></a>';
+        g.sections.forEach(function(s){html+='<a class="search-result" href="'+g.url+'#'+s.id+'"><span class="search-result-title">'+s.title+'</span><span class="search-result-type '+s.type+'">'+s.type+'</span></a>'});
+        g.methods.slice(0,3).forEach(function(m){html+='<a class="search-result" href="'+g.url+'#'+m.section+'"><span class="search-result-title">'+m.name+'</span><span class="search-result-type practical">method</span></a>'});
+        html+='</div>';
+      });
+      dd.innerHTML=html;dd.classList.add('visible');
+    }
+    document.addEventListener('click',function(e){if(!e.target.closest('.search-box')){var dd=document.getElementById('searchDropdown');if(dd)dd.classList.remove('visible')}});
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Event Marketing &amp; Webinars — Noir Book</title>
+  <link rel="stylesheet" href="../css/shared.css">
+  <link rel="stylesheet" href="../css/topic.css">
+  <script src="../js/theme.js"></script>
+  <script src="../js/topic-nav.js"></script>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="site-nav subpage-nav" data-discipline="mk">
+    <div class="nav-inner">
+      <a href="../index.html" class="site-logo">
+        <span class="logo-mark">MK</span>
+        <span class="nav-title">Noir Book</span>
+      </a>
+      <a href="../index.html" class="nav-back-link">&#8592; Library</a>
+      <div class="nav-filters">
+        <button class="disc-toggle ux-toggle active" data-disc="ux" onclick="toggleDisc('ux')" title="UX Design">
+          <span class="disc-dot disc-dot-ux"></span><span class="disc-label">UX Design</span><span class="disc-code">(UX)</span>
+        </button>
+        <button class="disc-toggle pm-toggle active" data-disc="pm" onclick="toggleDisc('pm')" title="Product Management">
+          <span class="disc-dot disc-dot-pm"></span><span class="disc-label">Product</span><span class="disc-code">(PM)</span>
+        </button>
+        <button class="disc-toggle mk-toggle active" data-disc="mk" onclick="toggleDisc('mk')" title="Marketing &amp; Growth">
+          <span class="disc-dot disc-dot-mk"></span><span class="disc-label">Marketing</span><span class="disc-code">(MK)</span>
+        </button>
+        <button class="disc-toggle cs-toggle active" data-disc="cs" onclick="toggleDisc('cs')" title="Content Strategy">
+          <span class="disc-dot disc-dot-cs"></span><span class="disc-label">Content</span><span class="disc-code">(CS)</span>
+        </button>
+        <div class="search-box nav-search-box">
+          <div class="nav-search-wrap">
+            <div class="nav-search-pills" id="navSearchPills"></div>
+            <input type="text" id="navSearchInput" placeholder="Search..." autocomplete="off"
+              oninput="topicNavSearch(this.value)"
+              onkeydown="handleNavSearchKey(event)"
+              onfocus="handleNavSearchFocus()"
+              onblur="handleNavSearchBlur()">
+            <button type="button" class="nav-search-clear" id="navSearchClear" onclick="clearNavSearch()" aria-label="Clear search">&times;</button>
+          </div>
+          <div class="search-dropdown" id="navSearchDropdown"></div>
+        </div>
+      </div>
+      <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle theme">&#9790;</button>
+      <button class="burger-btn" id="burgerBtn" onclick="openBurger()" aria-label="Menu">
+        <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="2" y1="4" x2="16" y2="4"/><line x1="2" y1="9" x2="16" y2="9"/><line x1="2" y1="14" x2="16" y2="14"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Burger Menu Overlay -->
+  <div class="burger-overlay" id="burgerOverlay" onclick="closeBurger(event)">
+    <div class="burger-panel" onclick="event.stopPropagation()">
+      <div class="burger-panel-header">
+        <h3>Menu</h3>
+        <button class="burger-close" onclick="closeBurger()" aria-label="Close">&times;</button>
+      </div>
+      <div class="burger-search">
+        <input type="text" id="burgerSearchInput" placeholder="Search topics, methods..." autocomplete="off" oninput="burgerSearch(this.value)">
+        <div class="burger-search-results" id="burgerSearchResults"></div>
+      </div>
+      <div class="burger-links">
+        <a href="../index.html">&#8592; Back to Library</a>
+        <a href="../design-system.html">Design System</a>
+        <a href="../request-topic.html">Suggest a topic or improvement</a>
+      </div>
+      <div class="burger-toc-section">
+        <p class="burger-toc-title">On this page</p>
+        <ul class="burger-toc-list">
+        <li><a href="#what-and-why" data-section="theory">What event marketing is and why live moments matter</a></li>
+        <li><a href="#webinars" data-section="practical">Webinar programs</a></li>
+        <li><a href="#conferences" data-section="practical">Conference strategy</a></li>
+        <li><a href="#virtual-hybrid" data-section="practical">Virtual and hybrid events</a></li>
+        <li><a href="#community-events" data-section="practical">Community events</a></li>
+        <li><a href="#repurposing" data-section="practical">Event content repurposing</a></li>
+        <li><a href="#examples" data-section="examples">Event marketing in practice</a></li>
+        <li><a href="#pitfalls" data-section="practical">Common pitfalls</a></li>
+        <li><a href="#connected-topics" data-section="theory">Connected topics</a></li>
+        <li><a href="#appendix" data-section="theory">Deep-dive appendix</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Topic Header -->
+  <header class="topic-header container">
+    <div class="breadcrumb">
+      <a href="../index.html">Library</a>
+      <span class="sep">&#8250;</span>
+      <span class="breadcrumb-disc breadcrumb-mk">Marketing &amp; Growth</span>
+      <span class="sep">&#8250;</span>
+      <span>Tier 2 — Specialized</span>
+      <span class="sep">&#8250;</span>
+      <span>Event Marketing &amp; Webinars</span>
+    </div>
+    <div class="topic-meta">
+      <span class="tier-badge tier2">Tier 2</span>
+      <span style="font-size:14px;color:var(--ink-muted)">Topic MK.2.10</span>
+    </div>
+    <h1>Event Marketing &amp; Webinars</h1>
+    <p class="topic-subtitle">Create moments that matter. Event strategy, webinar programs, conference presence, and measuring whether events justify their cost.</p>
+    <div class="content-splits">
+      <span class="split-badge theory">20% Theory</span>
+      <span class="split-badge practical">55% Methods &amp; Templates</span>
+      <span class="split-badge examples">25% Examples</span>
+    </div>
+  </header>
+
+  <!-- Reading Progress Bar -->
+  <div class="reading-progress" id="readingProgress"></div>
+
+  <!-- Main Layout -->
+  <div class="container">
+    <div class="topic-layout">
+
+      <!-- Sidebar: Table of Contents -->
+      <aside class="topic-sidebar">
+        <nav class="toc">
+          <p class="sidebar-topic-title">Event Marketing &amp; Webinars</p>
+          <p class="toc-title">On this page</p>
+          <ul class="toc-list">
+            <li><a href="#what-and-why" data-section="theory">What event marketing is and why live moments matter</a></li>
+            <li><a href="#webinars" data-section="practical">Webinar programs</a></li>
+            <li><a href="#conferences" data-section="practical">Conference strategy</a></li>
+            <li><a href="#virtual-hybrid" data-section="practical">Virtual and hybrid events</a></li>
+            <li><a href="#community-events" data-section="practical">Community events</a></li>
+            <li><a href="#repurposing" data-section="practical">Event content repurposing</a></li>
+            <li><a href="#examples" data-section="examples">Event marketing in practice</a></li>
+            <li><a href="#pitfalls" data-section="practical">Common pitfalls</a></li>
+            <li><a href="#connected-topics" data-section="theory">Connected topics</a></li>
+            <li><a href="#appendix" data-section="theory">Deep-dive appendix</a></li>
+          </ul>
+        </nav>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="topic-main topic-content">
+
+        <div class="section-marker" id="what-and-why">
+          <span class="split-badge theory">Theory</span>
+          <span class="marker-line"></span>
+        </div>
+
+        <section data-section="theory">
+  <h2>What event marketing is and why live moments matter</h2>
+
+<p>Event marketing is the practice of creating or participating in live experiences — webinars, conferences, workshops, community meetups, and virtual summits — to build relationships, generate leads, and establish authority. In a world saturated with asynchronous content, live events offer something different: immediacy, interaction, and the social proof of shared experience. A prospect who spends 45 minutes in your webinar is more engaged than one who skims a blog post. A handshake at a conference creates connection that a LinkedIn message can't.</p>
+
+<p>Events occupy a unique position in the marketing mix because they compress the funnel. A well-designed event can build awareness, create consideration, and drive conversion in a single interaction. A conference talk establishes authority (awareness), the booth conversation explores fit (consideration), and the follow-up demo closes the deal (conversion) — all within 48 hours. No other marketing channel moves this fast from first touch to committed prospect.</p>
+
+<p>The challenge is cost. Events are expensive — sponsorships, booths, travel, production, and the team time required to plan and execute. The ROI question is constant and legitimate: is this conference worth $30,000? Is this webinar program worth the weekly production time? The answer depends on whether you're measuring events as a lead source (often disappointing) or as a relationship accelerator (often transformative). The companies that get the most from events measure the latter.</p>
+</section>
+
+        <div class="section-marker" id="webinars">
+          <span class="split-badge practical">Practical</span>
+          <span class="marker-line"></span>
+        </div>
+
+        <section data-section="practical">
+  <h2>Webinar programs</h2>
+
+<div class="method-card">
+  <h4>Webinar Production Checklist <span class="method-tag">Core Method</span></h4>
+  <p class="method-when">Use when: planning and executing a webinar. A checklist prevents the scrambling that turns a potentially great webinar into a mediocre one.</p>
+  <p><strong>4 weeks before.</strong> Define the topic, format, and target audience. Choose a topic that solves a specific problem for your audience — not a product demo disguised as a webinar. "How to Cut Reporting Time by 50% (Real Examples)" attracts registrants; "New Features in Product X" attracts only existing customers. Book speakers, choose a platform (Zoom, Livestorm, Demio, or similar), and set the date (Tuesday-Thursday, 11am-2pm in your primary timezone typically performs best).</p>
+  <p><strong>3 weeks before.</strong> Create the registration landing page, write promotional emails (3-email sequence: announcement, reminder, final push), prepare social media promotion, and begin outreach to partners who might co-promote. If you have a co-marketing partner, align on promotion responsibilities now.</p>
+  <p><strong>2 weeks before.</strong> Start promotion. Send first email. Post on social channels. Ask speakers to promote to their networks. If using paid promotion, launch ads with the registration page as the landing page.</p>
+  <p><strong>1 week before.</strong> Send reminder email to registrants. Finalize presentation slides. Prepare speaker talking points. Test the technology — audio, video, screen sharing, polls, Q&A functionality. Run a dry run with speakers if it's their first time on the platform.</p>
+  <p><strong>Day of.</strong> Send a 1-hour-before reminder email with the join link. Start the session 5 minutes early for a tech check. Record the session. Engage the chat: ask questions, run polls, acknowledge comments by name. End with a clear CTA and a link to the next step.</p>
+  <p><strong>Post-webinar.</strong> Send the recording to all registrants (attendees and no-shows — no-shows are still leads). Follow up with attendees who asked questions or engaged heavily. Add all registrants to the appropriate nurture sequence. Repurpose the content: blog post summary, social media clips, audio podcast version.</p>
+</div>
+
+<div class="method-card">
+  <h4>Webinar Format Options <span class="method-tag">Specialized Method</span></h4>
+  <p class="method-when">Use when: choosing the right webinar format. Not every webinar needs to be a 60-minute presentation with Q&A.</p>
+  <p><strong>Expert presentation (45-60 min).</strong> The classic format. One or two speakers present on a topic, followed by Q&A. Best for thought leadership and educational content. Risk: can feel like a lecture.</p>
+  <p><strong>Panel discussion (45-60 min).</strong> 3-4 panelists discuss a topic with a moderator. Best for exploring different perspectives on a trending issue. Risk: needs a strong moderator to prevent rambling.</p>
+  <p><strong>Workshop/interactive (60-90 min).</strong> Attendees work through an exercise live — building a template, running an audit, completing a framework. Best for deep engagement and demonstrating expertise. Risk: requires strong facilitation and smaller attendance works better.</p>
+  <p><strong>AMA / fireside chat (30-45 min).</strong> A conversational format where the audience drives the agenda through questions. Best for executive engagement and community building. Risk: needs enough submitted questions to fill the time — seed with prepared questions from the team.</p>
+  <p><strong>Quick hit (15-20 min).</strong> Short, focused sessions on a single tactical topic. Best for busy audiences who won't commit to an hour. Higher attendance rates, easier to produce regularly. Risk: limited depth.</p>
+</div>
+</section>
+
+<section id="conferences" data-section="practical">
+  <h2>Conference strategy</h2>
+
+<div class="method-card">
+  <h4>Conference Sponsorship ROI Calculator <span class="method-tag">Core Method</span></h4>
+  <p class="method-when">Use when: evaluating whether a conference sponsorship is worth the investment. Conferences are expensive — this framework ensures the decision is data-driven, not FOMO-driven.</p>
+  <p>Calculate the full cost: sponsorship fee + booth design and setup + travel and lodging for the team + swag and promotional materials + team time (opportunity cost of 3-5 people out of office for 3-5 days). Total this number — it's usually 2-3x the sponsorship fee alone.</p>
+  <p>Now calculate the required return: If the total cost is $30,000 and your average customer lifetime value is $15,000, you need to source at least 2 customers from the event to break even. If your conversion rate from conference lead to customer is 5%, you need 40 qualified leads. If 500 relevant attendees visit your booth, that's an 8% conversation-to-lead rate — achievable but not automatic.</p>
+  <p>Questions to evaluate before committing: (1) Is our target audience actually attending? Check the attendee list from prior years, speaker topics, and organizer demographic data. (2) Are our competitors sponsoring? If yes, absence might be noticed. If no, the audience might not be our market. (3) Do we have a unique angle? A booth with a demo that solves a visible problem outperforms a booth with a banner and candy. (4) Can we secure a speaking slot? The combination of sponsorship + speaking dramatically increases ROI — speakers have built-in audience attention.</p>
+</div>
+
+<div class="method-card">
+  <h4>Event Follow-Up Cadence <span class="method-tag">Core Method</span></h4>
+  <p class="method-when">Use when: converting conference conversations into pipeline. The follow-up is where most conference ROI is won or lost.</p>
+  <p>The follow-up window is 48-72 hours. After that, attendees have returned to their regular routines and the urgency fades. The cadence:</p>
+  <p><strong>Day 1 (day after the event).</strong> Personal email to hot leads — people who expressed specific interest, asked for a demo, or had a detailed conversation. Reference the specific conversation: "Great talking about your attribution challenges at the booth yesterday. Here's the case study I mentioned."</p>
+  <p><strong>Day 2-3.</strong> Batch email to warm leads — people who scanned a badge, picked up swag, or had a brief conversation. Include a value-add (recording of your talk, a relevant resource) rather than a sales pitch. "Thanks for stopping by at [Conference]. Here's the framework we discussed in our talk — [link]."</p>
+  <p><strong>Week 2.</strong> Nurture sequence for all event leads who didn't convert to a meeting. Add them to a targeted drip (not the general newsletter) that references the event and provides value. "We shared these 3 insights at [Conference] that attendees found most useful…"</p>
+  <p>Tag all conference leads in your CRM with the event name and lead quality tier (hot/warm/cold) so you can track event-sourced pipeline and compare ROI across events.</p>
+</div>
+</section>
+
+<section id="virtual-hybrid" data-section="practical">
+  <h2>Virtual and hybrid events</h2>
+
+<div class="method-card">
+  <h4>Virtual Event Platform Selection <span class="method-tag">Specialized Method</span></h4>
+  <p class="method-when">Use when: hosting a multi-session virtual event (beyond a single webinar). Platform choice affects attendee experience, engagement metrics, and production complexity.</p>
+  <p>Evaluate virtual event platforms on: (1) Attendee experience — is the interface intuitive, or do attendees need a tutorial before joining? (2) Engagement features — chat, polls, Q&A, networking rooms, breakout sessions. (3) Production quality — can you pre-record sessions, switch between speakers smoothly, and add branding? (4) Data and analytics — attendee engagement scores, session attendance, content downloads, and lead data export. (5) Integration — does it connect to your CRM, marketing automation, and webinar tools? (6) Pricing — per-attendee models can get expensive at scale; flat-rate models are more predictable.</p>
+  <p>For smaller events (under 200 attendees), a well-produced Zoom webinar with good moderation is often sufficient. For larger events (500+), dedicated platforms like Hopin, Goldcast, or Welcome provide better engagement and networking capabilities.</p>
+</div>
+</section>
+
+<section id="community-events" data-section="practical">
+  <h2>Community events</h2>
+
+<div class="method-card">
+  <h4>Community Event Playbook <span class="method-tag">Specialized Method</span></h4>
+  <p class="method-when">Use when: building a recurring event series for your user community — meetups, workshops, or user groups that deepen relationships and build loyalty.</p>
+  <p>Community events differ from marketing events in purpose: they're designed to help your existing community succeed, not to generate new leads. The lead generation happens as a side effect of community members inviting colleagues and sharing their experience. Design principles: (1) User-generated content — let community members present their use cases, not your marketing team. This scales content production and makes the community feel owned by its members. (2) Small and intimate — 20-50 people creates better conversation than 500 people in a lecture hall. (3) Consistent cadence — monthly or quarterly events build habit and expectation. (4) Low production overhead — a Zoom room, a speaker, and a moderator. Don't let production complexity prevent consistency. (5) Community input on topics — poll your community to choose topics for upcoming sessions.</p>
+</div>
+</section>
+
+<section id="repurposing" data-section="practical">
+  <h2>Event content repurposing</h2>
+
+<div class="method-card">
+  <h4>Event Content Repurposing <span class="method-tag">Core Method</span></h4>
+  <p class="method-when">Use when: maximizing the ROI of event content. A single webinar or conference talk can generate weeks of marketing content.</p>
+  <p>The repurposing chain: (1) Full recording → on-demand webinar page (gated or ungated). (2) Recording → 3-5 short video clips (60-90 seconds each) for social media. (3) Content → blog post summarizing key insights. (4) Key quotes → social media graphics. (5) Slides → SlideShare or downloadable PDF. (6) Audio → podcast episode. (7) Q&A section → FAQ blog post or help center article. (8) Data or frameworks presented → infographic. A single 45-minute webinar can produce 8-12 content assets across channels. Plan the repurposing chain before the event so you capture everything needed during production.</p>
+</div>
+</section>
+
+        <div class="section-marker" id="examples">
+          <span class="split-badge examples">Examples</span>
+          <span class="marker-line"></span>
+        </div>
+
+        <section data-section="examples">
+  <h2>Event marketing in practice</h2>
+
+<div class="case-study">
+  <div class="case-label">Pattern: The webinar series that became a pipeline machine</div>
+  <p>A marketing analytics company launched a monthly webinar series: "The Marketing Measurement Hour." Each session featured a 30-minute presentation on a specific analytics challenge (attribution modeling, incrementality testing, channel mix optimization) followed by 15 minutes of live Q&A. They promoted each webinar to their email list (35,000 subscribers) and through LinkedIn. Average attendance: 180 per session. The key innovation: they scored attendees by engagement (poll participation, questions asked, chat activity) and routed high-engagement attendees to sales within 24 hours. Over 12 months, the webinar series generated 340 sales-qualified leads at a cost per lead 70% lower than their paid acquisition channels.</p>
+</div>
+
+<div class="case-study">
+  <div class="case-label">Pattern: The conference presence that was all talk (in the best way)</div>
+  <p>A cybersecurity startup couldn't afford the $25,000 booth sponsorship at their industry's main conference. Instead, they submitted 6 speaking proposals and landed 2 sessions. They sent 3 team members (vs. 8 for booth sponsors) with the mission: attend every relevant session, engage in hallway conversations, and host an invite-only dinner for 20 target prospects. Total cost: $8,000 (travel, dinner, materials). Pipeline generated: $320,000 in qualified opportunities — more than any booth sponsor reported. The speaking slots provided credibility, and the small dinner created deeper relationships than any 3-minute booth conversation could. The lesson: at conferences, depth of engagement beats breadth of exposure.</p>
+</div>
+
+<div class="case-study">
+  <div class="case-label">Pattern: The community event that drove organic growth</div>
+  <p>A design tool launched a monthly "Design Crit" event: a virtual session where community members presented their work-in-progress for peer feedback. Each session was facilitated by a team member but the content was entirely user-generated. Attendance grew from 15 to 120 over 8 months through word of mouth alone. The events drove three business outcomes: (1) retention — participants who attended 3+ events had 45% lower churn, (2) expansion — participants who saw other members using advanced features adopted those features at 2x the rate of non-participants, and (3) acquisition — 30% of participants were invited by existing members, representing a zero-cost acquisition channel of pre-qualified users.</p>
+</div>
+</section>
+
+<section id="pitfalls" data-section="practical">
+  <h2>Common pitfalls</h2>
+
+<div class="pitfall">
+  <span class="pitfall-icon">⚠</span>
+  <p><strong>Treating webinars as product demos.</strong> A webinar titled "Product X: What's New in Q2" attracts only existing customers. A webinar titled "3 Ways Marketing Teams Are Cutting Reporting Time in Half" attracts prospects. Webinars should solve audience problems, with your product mentioned naturally — not be product demos with a webinar label.</p>
+</div>
+
+<div class="pitfall">
+  <span class="pitfall-icon">⚠</span>
+  <p><strong>Sponsoring every conference.</strong> FOMO-driven conference sponsorships waste budget. Evaluate each event with the ROI calculator above. It's better to go deep at 2 conferences than to have a small booth at 6.</p>
+</div>
+
+<div class="pitfall">
+  <span class="pitfall-icon">⚠</span>
+  <p><strong>Neglecting the follow-up.</strong> The event isn't the end — it's the beginning of the relationship. Companies that invest $30,000 in a conference booth and then send a generic "thanks for visiting" email are throwing away most of the event's value. Personal, timely, reference-specific follow-up is where conference leads become pipeline.</p>
+</div>
+
+<div class="pitfall">
+  <span class="pitfall-icon">⚠</span>
+  <p><strong>Measuring registrations instead of outcomes.</strong> 500 webinar registrations with 100 attendees and 0 conversions is not a successful webinar. Measure the funnel: registrations → attendance rate → engagement rate → follow-up meetings booked → pipeline generated. Each stage tells you where to improve.</p>
+</div>
+</section>
+
+<section id="connected-topics" data-section="theory">
+  <h2>Connected topics</h2>
+
+  <div class="cross-ref-grid">
+    <a href="content-marketing.html" class="cross-ref-card">
+      <span class="ref-number">MK Tier 1</span>
+      <div class="ref-title">Content Marketing &amp; Strategy</div>
+      <div class="ref-reason">Events as a content format — and the repurposing chain that turns one event into a dozen content assets.</div>
+    </a>
+    <a href="partnerships.html" class="cross-ref-card">
+      <span class="ref-number">MK Tier 2</span>
+      <div class="ref-title">Partnerships &amp; Co-Marketing</div>
+      <div class="ref-reason">Co-hosted webinars and joint conference events as partnership activation.</div>
+    </a>
+    <a href="lifecycle-email.html" class="cross-ref-card">
+      <span class="ref-number">MK Tier 2</span>
+      <div class="ref-title">Lifecycle Marketing &amp; Email</div>
+      <div class="ref-reason">Email sequences for event promotion, follow-up, and nurturing event-sourced leads.</div>
+    </a>
+  </div>
+</section>
+
+<section id="appendix" data-section="theory">
+  <h2>Deep-dive appendix</h2>
+  <details class="expandable">
+    <summary><span class="chevron"><svg viewBox="0 0 14 14"><polyline points="4,2 10,7 4,12"/></svg></span> Further reading and resources</summary>
+    <div class="expand-content topic-content">
+      <h4>Essential reading</h4>
+      <p><strong>"The Art of Gathering" by Priya Parker</strong> — Principles of designing gatherings that are meaningful and memorable, applicable to any event format.</p>
+      <p><strong>"Event Marketing" by Alex Plaxen</strong> — Practical guide to event strategy, execution, and measurement for B2B marketers.</p>
+      <p><strong>CMX Hub (cmxhub.com)</strong> — Community and resources for community-driven event strategies.</p>
+    </div>
+  </details>
+</section>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer container">
+    <div class="footer-inner">
+      <p>Noir Book — Built for the work, not the shelf.</p>
+      <div class="footer-links">
+        <a href="../design-system.html">Design System</a>
+        <a href="../library-manifest.json">Manifest</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to Top -->
+  <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">&#8593;</button>
+
+  <!-- Floating Mobile TOC -->
+  <button class="mobile-toc-btn" id="mobileTocBtn" aria-label="Open table of contents">&#9776; Contents</button>
+  <div class="mobile-toc-overlay" id="mobileTocOverlay">
+    <div class="mobile-toc-panel">
+      <div class="mobile-toc-panel-header">
+        <h3>On this page</h3>
+        <button class="mobile-toc-close" id="mobileTocClose" aria-label="Close">&times;</button>
+      </div>
+      <ul class="mobile-toc-list">
+        <li><a href="#what-and-why" data-section="theory">What event marketing is and why live moments matter</a></li>
+        <li><a href="#webinars" data-section="practical">Webinar programs</a></li>
+        <li><a href="#conferences" data-section="practical">Conference strategy</a></li>
+        <li><a href="#virtual-hybrid" data-section="practical">Virtual and hybrid events</a></li>
+        <li><a href="#community-events" data-section="practical">Community events</a></li>
+        <li><a href="#repurposing" data-section="practical">Event content repurposing</a></li>
+        <li><a href="#examples" data-section="examples">Event marketing in practice</a></li>
+        <li><a href="#pitfalls" data-section="practical">Common pitfalls</a></li>
+        <li><a href="#connected-topics" data-section="theory">Connected topics</a></li>
+        <li><a href="#appendix" data-section="theory">Deep-dive appendix</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    // Scrollspy: highlight active TOC item
+    const tocLinks = document.querySelectorAll('.toc-list a');
+    const sections = [];
+    tocLinks.forEach(link => {
+      const href = link.getAttribute('href');
+      if (!href || !href.startsWith('#')) return;
+      const el = document.getElementById(href.slice(1));
+      if (el) sections.push({ el, link });
+    });
+
+    // Reading progress bar
+    const progressBar = document.getElementById('readingProgress');
+    const backToTop = document.getElementById('backToTop');
+
+    function onScroll() {
+      let current = sections[0];
+      for (const s of sections) {
+        if (s.el.getBoundingClientRect().top <= 120) current = s;
+      }
+      tocLinks.forEach(l => l.classList.remove('active'));
+      if (current) current.link.classList.add('active');
+
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrolled = window.scrollY;
+      const progress = docHeight > 0 ? (scrolled / docHeight) * 100 : 0;
+      if (progressBar) progressBar.style.width = progress + '%';
+      if (backToTop) backToTop.classList.toggle('visible', scrolled > 400);
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    // Split badges: click to scroll to section
+    document.querySelectorAll('.content-splits .split-badge').forEach(function(badge) {
+      badge.addEventListener('click', function() {
+        var type = badge.classList.contains('theory') ? 'theory' : badge.classList.contains('practical') ? 'practical' : 'examples';
+        var target = document.querySelector('section[data-section="' + type + '"]');
+        if (target) {
+          var marker = target.previousElementSibling;
+          (marker && marker.classList.contains('section-marker') ? marker : target).scrollIntoView({behavior:'smooth'});
+        }
+      });
+    });
+  </script>
+
+  <script src="../js/checklist.js"></script>
+  <script src="../js/mobile-toc.js"></script>
+  <script src="../js/search.js"></script>
+  <script>
+    function openBurger(){document.getElementById('burgerOverlay').classList.add('open');document.body.style.overflow='hidden'}
+    function closeBurger(e){if(e&&e.target&&e.target!==document.getElementById('burgerOverlay'))return;document.getElementById('burgerOverlay').classList.remove('open');document.body.style.overflow=''}
+    function burgerSearch(q){
+      var r=document.getElementById('burgerSearchResults');
+      if(!q||q.length<2){r.innerHTML='';return}
+      var ql=q.toLowerCase(),matches=[];
+      if(typeof SEARCH_INDEX!=='undefined'){
+        SEARCH_INDEX.forEach(function(t){
+          var hit=t.topic.toLowerCase().indexOf(ql)>-1;
+          if(!hit)t.sections.forEach(function(s){if((s.title+' '+s.keywords).toLowerCase().indexOf(ql)>-1)hit=true});
+          if(hit)matches.push(t);
+        });
+      }
+      if(!matches.length){r.innerHTML='<p style="padding:8px 0;font-size:13px;color:var(--ink-muted)">No results</p>';return}
+      r.innerHTML=matches.slice(0,8).map(function(m){return '<a href="../'+m.url+'">'+m.topic+'<span class="bsr-disc">'+m.discipline+'</span></a>'}).join('');
+    }
+    document.addEventListener('keydown',function(e){if(e.key==='Escape'){closeBurger();var dd=document.getElementById('searchDropdown');if(dd)dd.classList.remove('visible');}});
+    // Close burger when clicking a TOC link
+    document.querySelectorAll('.burger-toc-list a').forEach(function(a){a.addEventListener('click',function(){closeBurger()})});
+    // Search typeahead
+    function topicSearch(q){
+      var dd=document.getElementById('searchDropdown');
+      if(!q||q.length<2||typeof SEARCH_INDEX==='undefined'){if(dd)dd.classList.remove('visible');return}
+      var ql=q.toLowerCase(),grouped={};
+      SEARCH_INDEX.forEach(function(t){
+        var hit=t.topic.toLowerCase().indexOf(ql)>-1,sHits=[],mHits=[];
+        t.sections.forEach(function(s){if((s.title+' '+s.keywords).toLowerCase().indexOf(ql)>-1)sHits.push(s)});
+        (t.methods||[]).forEach(function(m){if((m.name+' '+(m.keywords||'')).toLowerCase().indexOf(ql)>-1)mHits.push(m)});
+        if(!hit&&!sHits.length&&!mHits.length&&ql.length>=3&&typeof levenshtein==='function'){
+          var words=t.topic.toLowerCase().split(/ +/);
+          for(var i=0;i<words.length;i++){if(levenshtein(ql,words[i].substring(0,ql.length+1))<=1){hit=true;break}}
+        }
+        if(hit||sHits.length||mHits.length)grouped[t.topic]={url:'../'+t.url,disc:t.discipline||'',sections:sHits,methods:mHits,topicHit:hit};
+      });
+      var keys=Object.keys(grouped);
+      if(!keys.length){dd.innerHTML='<div class="search-empty">No results</div>';dd.classList.add('visible');return}
+      var html='';
+      keys.slice(0,8).forEach(function(topic){
+        var g=grouped[topic];
+        html+='<div class="search-group"><div class="search-group-title">'+topic+'</div>';
+        if(g.topicHit)html+='<a class="search-result" href="'+g.url+'"><span class="search-result-title">'+topic+'</span><span class="search-result-type practical">'+g.disc+'</span></a>';
+        g.sections.forEach(function(s){html+='<a class="search-result" href="'+g.url+'#'+s.id+'"><span class="search-result-title">'+s.title+'</span><span class="search-result-type '+s.type+'">'+s.type+'</span></a>'});
+        g.methods.slice(0,3).forEach(function(m){html+='<a class="search-result" href="'+g.url+'#'+m.section+'"><span class="search-result-title">'+m.name+'</span><span class="search-result-type practical">method</span></a>'});
+        html+='</div>';
+      });
+      dd.innerHTML=html;dd.classList.add('visible');
+    }
+    document.addEventListener('click',function(e){if(!e.target.closest('.search-box')){var dd=document.getElementById('searchDropdown');if(dd)dd.classList.remove('visible')}});
+  </script>
+
+</body>
+</html>

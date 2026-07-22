@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Service Design — Noir Book</title>
+  <link rel="stylesheet" href="../css/shared.css">
+  <link rel="stylesheet" href="../css/topic.css">
+  <script src="../js/theme.js"></script>
+  <script src="../js/topic-nav.js"></script>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="site-nav subpage-nav" data-discipline="ux">
+    <div class="nav-inner">
+      <a href="../index.html" class="site-logo">
+        <span class="logo-mark">UX</span>
+        <span class="nav-title">Noir Book</span>
+      </a>
+      <a href="../index.html" class="nav-back-link">&#8592; Library</a>
+      <div class="nav-filters">
+        <button class="disc-toggle ux-toggle active" data-disc="ux" onclick="toggleDisc('ux')" title="UX Design">
+          <span class="disc-dot disc-dot-ux"></span><span class="disc-label">UX Design</span><span class="disc-code">(UX)</span>
+        </button>
+        <button class="disc-toggle pm-toggle active" data-disc="pm" onclick="toggleDisc('pm')" title="Product Management">
+          <span class="disc-dot disc-dot-pm"></span><span class="disc-label">Product</span><span class="disc-code">(PM)</span>
+        </button>
+        <button class="disc-toggle mk-toggle active" data-disc="mk" onclick="toggleDisc('mk')" title="Marketing &amp; Growth">
+          <span class="disc-dot disc-dot-mk"></span><span class="disc-label">Marketing</span><span class="disc-code">(MK)</span>
+        </button>
+        <button class="disc-toggle cs-toggle active" data-disc="cs" onclick="toggleDisc('cs')" title="Content Strategy">
+          <span class="disc-dot disc-dot-cs"></span><span class="disc-label">Content</span><span class="disc-code">(CS)</span>
+        </button>
+        <div class="search-box nav-search-box">
+          <div class="nav-search-wrap">
+            <div class="nav-search-pills" id="navSearchPills"></div>
+            <input type="text" id="navSearchInput" placeholder="Search..." autocomplete="off"
+              oninput="topicNavSearch(this.value)"
+              onkeydown="handleNavSearchKey(event)"
+              onfocus="handleNavSearchFocus()"
+              onblur="handleNavSearchBlur()">
+            <button type="button" class="nav-search-clear" id="navSearchClear" onclick="clearNavSearch()" aria-label="Clear search">&times;</button>
+          </div>
+          <div class="search-dropdown" id="navSearchDropdown"></div>
+        </div>
+      </div>
+      <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle theme">&#9790;</button>
+      <button class="burger-btn" id="burgerBtn" onclick="openBurger()" aria-label="Menu">
+        <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="2" y1="4" x2="16" y2="4"/><line x1="2" y1="9" x2="16" y2="9"/><line x1="2" y1="14" x2="16" y2="14"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Burger Menu Overlay -->
+  <div class="burger-overlay" id="burgerOverlay" onclick="closeBurger(event)">
+    <div class="burger-panel" onclick="event.stopPropagation()">
+      <div class="burger-panel-header">
+        <h3>Menu</h3>
+        <button class="burger-close" onclick="closeBurger()" aria-label="Close">&times;</button>
+      </div>
+      <div class="burger-search">
+        <input type="text" id="burgerSearchInput" placeholder="Search topics, methods..." autocomplete="off" oninput="burgerSearch(this.value)">
+        <div class="burger-search-results" id="burgerSearchResults"></div>
+      </div>
+      <div class="burger-links">
+        <a href="../index.html">&#8592; Back to Library</a>
+        <a href="../design-system.html">Design System</a>
+        <a href="../request-topic.html">Suggest a topic or improvement</a>
+      </div>
+      <div class="burger-toc-section">
+        <p class="burger-toc-title">On this page</p>
+        <ul class="burger-toc-list">
+        <li><a href="#what-and-why" data-section="theory">What service design is and how it differs from UX</a></li>
+        <li><a href="#principles" data-section="theory">Service design principles</a></li>
+        <li><a href="#service-blueprint" data-section="practical">Service blueprinting</a></li>
+        <li><a href="#touchpoints" data-section="practical">Touchpoint inventory and channel mapping</a></li>
+        <li><a href="#stakeholder-mapping" data-section="practical">Stakeholder mapping</a></li>
+        <li><a href="#systems-thinking" data-section="practical">Systems thinking for designers</a></li>
+        <li><a href="#prototyping-services" data-section="practical">Service prototyping</a></li>
+        <li><a href="#omnichannel" data-section="practical">Omnichannel and journey orchestration</a></li>
+        <li><a href="#templates" data-section="practical">Templates and checklists</a></li>
+        <li><a href="#real-world-examples" data-section="examples">Real-world examples</a></li>
+        <li><a href="#pitfalls" data-section="practical">Common pitfalls</a></li>
+        <li><a href="#connections">Connected topics in your library</a></li>
+        <li><a href="#deep-dive">Deep-dive appendix</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Topic Header -->
+  <header class="topic-header container">
+    <div class="breadcrumb">
+      <a href="../index.html">Library</a>
+      <span class="sep">&#8250;</span>
+      <span class="breadcrumb-disc breadcrumb-ux">UX Design</span>
+      <span class="sep">&#8250;</span>
+      <span>Tier 2 — Specialized</span>
+      <span class="sep">&#8250;</span>
+      <span>Service Design</span>
+    </div>
+    <div class="topic-meta">
+      <span class="tier-badge tier2">Tier 2</span>
+      <span style="font-size:14px;color:var(--ink-muted)">Topic UX.2.06</span>
+    </div>
+    <h1>Service Design</h1>
+    <p class="topic-subtitle">Beyond screens. Designing end-to-end services across touchpoints, channels, and backstage operations. Systems thinking applied to experiences.</p>
+    <div class="content-splits">
+      <span class="split-badge theory">25% Theory</span>
+      <span class="split-badge practical">50% Methods &amp; Templates</span>
+      <span class="split-badge examples">25% Examples</span>
+    </div>
+  </header>
+
+  <!-- Reading Progress Bar -->
+  <div class="reading-progress" id="readingProgress"></div>
+
+  <!-- Main Layout -->
+  <div class="container">
+    <div class="topic-layout">
+
+      <!-- Sidebar: Table of Contents -->
+      <aside class="topic-sidebar">
+        <nav class="toc">
+          <p class="sidebar-topic-title">Service Design</p>
+          <p class="toc-title">On this page</p>
+          <ul class="toc-list">
+            <li><a href="#what-and-why" data-section="theory">What service design is and how it differs from UX</a></li>
+            <li><a href="#principles" data-section="theory">Service design principles</a></li>
+            <li><a href="#service-blueprint" data-section="practical">Service blueprinting</a></li>
+            <li><a href="#touchpoints" data-section="practical">Touchpoint inventory and channel mapping</a></li>
+            <li><a href="#stakeholder-mapping" data-section="practical">Stakeholder mapping</a></li>
+            <li><a href="#systems-thinking" data-section="practical">Systems thinking for designers</a></li>
+            <li><a href="#prototyping-services" data-section="practical">Service prototyping</a></li>
+            <li><a href="#omnichannel" data-section="practical">Omnichannel and journey orchestration</a></li>
+            <li><a href="#templates" data-section="practical">Templates and checklists</a></li>
+            <li><a href="#real-world-examples" data-section="examples">Real-world examples</a></li>
+            <li><a href="#pitfalls" data-section="practical">Common pitfalls</a></li>
+            <li><a href="#connections">Connected topics in your library</a></li>
+            <li><a href="#deep-dive">Deep-dive appendix</a></li>
+          </ul>
+        </nav>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="topic-main topic-content">
+
+        <div class="section-marker" id="what-and-why">
+          <span class="split-badge theory">Theory</span>
+          <span class="marker-line"></span>
+        </div>
+
+        <section data-section="theory">
+  <h2>What service design is and how it differs from UX</h2>
+
+  <p>Service design is the practice of designing the entire service experience — not just the digital interface, but every touchpoint a user interacts with across all channels, including the behind-the-scenes operations that make the experience possible. A UX designer might design the checkout flow; a service designer designs the entire purchase experience from discovery through delivery, returns, and support.</p>
+
+  <p>The key shift is scope. UX design typically focuses on a single product or interface. Service design zooms out to the ecosystem: how do the website, mobile app, physical store, call center, email communications, and delivery process work together? Where are the seams between channels? Where do handoffs fail? Service design also looks backstage — the internal processes, employee tools, and organizational structures that enable (or hinder) the customer experience.</p>
+
+  <div class="callout info">
+    <p class="callout-title">The stage metaphor</p>
+    <p>Service design borrows theater terminology. <strong>Frontstage:</strong> Everything the customer sees and interacts with — the app, the store, the support call. <strong>Backstage:</strong> Everything that happens behind the scenes to make the frontstage work — inventory systems, employee training, fulfillment processes. <strong>Support processes:</strong> The infrastructure that enables backstage operations — IT systems, supply chains, policies. Great service design aligns all three layers.</p>
+  </div>
+</section>
+
+<section id="principles" data-section="theory">
+  <h2>Service design principles</h2>
+
+  <div class="method-card">
+    <h4>Five Principles of Service Design <span class="method-tag">Framework</span></h4>
+    <p class="method-when">Use this to evaluate or guide any service design effort.</p>
+    <p><strong>1. User-centered:</strong> Start with user research, not organizational structure. The service should be designed around the customer's journey, not your department boundaries. <strong>2. Co-creative:</strong> Involve all stakeholders — customers, frontline staff, back-office teams, management — in the design process. <strong>3. Sequencing:</strong> A service is a sequence of interrelated actions over time. Design the timeline, not just individual moments. <strong>4. Evidencing:</strong> Make intangible services tangible through physical and digital evidence — confirmation emails, receipts, progress updates. <strong>5. Holistic:</strong> Consider the entire environment — physical, digital, social, organizational — that the service operates within.</p>
+  </div>
+</section>
+
+        <div class="section-marker" id="service-blueprint">
+          <span class="split-badge practical">Practical</span>
+          <span class="marker-line"></span>
+        </div>
+
+        <section data-section="practical">
+  <h2>Service blueprinting</h2>
+
+  <div class="method-card">
+    <h4>Service Blueprint <span class="method-tag">Core Method</span></h4>
+    <p class="method-when">Use when: mapping the full service experience including frontstage, backstage, and support processes.</p>
+    <p>A service blueprint is a diagram that shows the service from four perspectives simultaneously. <strong>Customer actions:</strong> What the customer does at each step (the journey). <strong>Frontstage interactions:</strong> What the customer sees — the touchpoints (app screens, store interactions, emails). <strong>Backstage actions:</strong> What employees and systems do behind the scenes to support the frontstage (processing orders, routing support tickets). <strong>Support processes:</strong> The infrastructure that enables backstage (databases, logistics, training programs). The horizontal axis is time. Vertical lanes separate the four layers. The line of visibility separates what the customer sees from what they don't.</p>
+  </div>
+
+  <div class="callout tip">
+    <p class="callout-title">The line of visibility</p>
+    <p>The most important insight in a service blueprint is the line of visibility — the boundary between what customers see and what they don't. Problems below the line of visibility (slow internal processes, disconnected systems, untrained staff) manifest above the line as customer pain points (long wait times, inconsistent information, poor service). Fixing frontstage symptoms without addressing backstage causes is a common service design mistake.</p>
+  </div>
+</section>
+
+<section id="touchpoints" data-section="practical">
+  <h2>Touchpoint inventory and channel mapping</h2>
+
+  <div class="method-card">
+    <h4>Touchpoint Inventory <span class="method-tag">Core Method</span></h4>
+    <p class="method-when">Use when: understanding all the ways a customer interacts with your service.</p>
+    <p>List every touchpoint across all channels: website pages, mobile app screens, emails (transactional + marketing), push notifications, phone calls, chat, physical locations, packaging, invoices, social media interactions. For each touchpoint, document: the channel, the purpose, the customer's emotional state, the backstage process that supports it, and the current quality (working well / needs improvement / broken). A touchpoint inventory reveals gaps (moments where no communication happens but should) and redundancies (multiple channels delivering conflicting information).</p>
+  </div>
+</section>
+
+<section id="stakeholder-mapping" data-section="practical">
+  <h2>Stakeholder mapping</h2>
+
+  <div class="method-card">
+    <h4>Stakeholder Map <span class="method-tag">Core Method</span></h4>
+    <p class="method-when">Use when: understanding who is involved in delivering the service and how they relate to each other.</p>
+    <p>Map every person and team involved in the service: customers (segments), frontline staff, back-office teams, partners, suppliers, regulators. Draw the relationships between them — who serves whom, who depends on whom, where information flows, where it doesn't. Stakeholder maps reveal organizational silos that create service gaps. If the support team can't see order history because it's in a different system, that's a stakeholder relationship problem that manifests as a customer experience problem.</p>
+  </div>
+</section>
+
+<section id="systems-thinking" data-section="practical">
+  <h2>Systems thinking for designers</h2>
+
+  <div class="method-card">
+    <h4>Systems Thinking Approach <span class="method-tag">Framework</span></h4>
+    <p class="method-when">Use when: dealing with complex, interconnected problems that don't have isolated solutions.</p>
+    <p>Systems thinking looks at the whole rather than individual parts. Key concepts for service designers: <strong>Feedback loops:</strong> How does changing one part of the service affect other parts? Faster delivery might increase returns if quality control is bypassed. <strong>Emergent behavior:</strong> The system behaves in ways that individual components don't predict. A great app + great delivery + terrible returns process = a frustrating overall experience. <strong>Leverage points:</strong> Small changes in the right place produce large effects. Fixing the handoff between sales and support might have more impact than redesigning either team's process individually.</p>
+  </div>
+</section>
+
+<section id="prototyping-services" data-section="practical">
+  <h2>Service prototyping</h2>
+
+  <div class="method-card">
+    <h4>Desktop Walkthrough <span class="method-tag">Core Method</span></h4>
+    <p class="method-when">Use when: testing a service concept before implementing anything.</p>
+    <p>Build a miniature model of the service environment using LEGO figures, cardboard props, or simple sketches on a table. Walk through the customer journey step by step, moving figures between touchpoints, acting out interactions. It sounds low-tech — and it is — but it reveals flow problems, handoff failures, and missing touchpoints that are invisible in documents. The physical manipulation forces you to think sequentially and spatially about the service.</p>
+  </div>
+
+  <div class="method-card">
+    <h4>Bodystorming <span class="method-tag">Core Method</span></h4>
+    <p class="method-when">Use when: designing physical or multi-channel service experiences.</p>
+    <p>Physically act out the service experience in a simulated environment. Set up a space that represents the service context (a mock store, a mock reception area). Have team members play the roles of customers and staff. Walk through scenarios. Bodystorming reveals physical and spatial issues — sightlines, wayfinding, queue management, uncomfortable waiting areas — that no amount of screen-based design can uncover.</p>
+  </div>
+</section>
+
+<section id="omnichannel" data-section="practical">
+  <h2>Omnichannel and journey orchestration</h2>
+
+  <div class="method-card">
+    <h4>Omnichannel Design Principles <span class="method-tag">Framework</span></h4>
+    <p class="method-when">Use when: designing services that span multiple channels (web, mobile, phone, in-person, email) and need to feel coherent.</p>
+    <p>Omnichannel is not "be present on every channel." It's four design principles applied across channels. <strong>Seamlessness:</strong> Users can start a task on one channel and continue on another without restarting — a support conversation begun on chat continues on email, a cart built on mobile is waiting on desktop. This requires shared state infrastructure, not just visual consistency. <strong>Context optimization:</strong> Each channel plays to its strengths — mobile for quick actions and notifications, desktop for complex tasks, phone for emotional or complicated issues, in-person for high-stakes decisions. Don't force the same experience everywhere. <strong>Orchestration:</strong> Channels coordinate rather than compete — an email confirms what happened in the app, a push notification doesn't duplicate what's already on screen, a phone agent knows what the user just tried online. <strong>Collaboration:</strong> Multiple actors (user, agent, AI, system) can participate in the same journey across channels, with clear handoffs and shared context.</p>
+  </div>
+
+  <div class="method-card">
+    <h4>Journey Orchestration <span class="method-tag">Core Method</span></h4>
+    <p class="method-when">Use when: moving from mapping customer journeys to actively managing them in real time.</p>
+    <p>Traditional journey mapping is a design artifact — a static representation of the experience. Journey orchestration is an operational practice — continuously monitoring, measuring, and intervening in customer journeys as they happen. Three components: <strong>Continuous journey management</strong> treats journeys as living systems, not one-time maps. Journey maps are updated with real behavioral data, not just workshop assumptions. Instrumentation tracks where users actually are in the journey, not where you expect them to be. <strong>Journey-level ownership</strong> assigns accountability for end-to-end journeys, not just touchpoints. Most organizations optimize individual channels (the app team improves the app, the email team improves emails) while the cross-channel journey degrades. Journey owners have authority across channels. <strong>Journey health metrics</strong> measure success at the journey level: end-to-end completion time, channel-switching frequency (high switching often signals frustration), journey abandonment points, and journey satisfaction scores.</p>
+  </div>
+
+  <div class="method-card">
+    <h4>AI-Era Service Design <span class="method-tag">Framework</span></h4>
+    <p class="method-when">Use when: designing services where AI actors participate alongside humans — as chatbots, recommendation engines, automated decision-makers, or proactive agents.</p>
+    <p>AI introduces new actors into service ecosystems, changing the design space fundamentally. <strong>AI as service actor:</strong> Service blueprints now need AI lanes alongside customer and employee lanes. Map where AI handles interactions autonomously, where it assists human agents, and where it should hand off completely. Define the AI actor's persona: tone, capability boundaries, escalation triggers. <strong>AI-to-AI interactions:</strong> Increasingly, services involve AI systems coordinating with each other — a booking agent negotiating with an airline's pricing system, a customer's AI assistant communicating with a company's support bot. Design for these machine-to-machine handoffs as carefully as human ones. <strong>AI trust in service ecosystems:</strong> Users calibrate trust in AI differently across service contexts — they'll trust AI for flight check-in but not for medical diagnosis. Map trust requirements per journey stage and design transparency, control, and failure recovery accordingly. The core service design challenge remains the same: who does what, when, and how do they coordinate? AI just adds a powerful new actor to the cast.</p>
+  </div>
+</section>
+
+<section id="templates" data-section="practical">
+  <h2>Templates and checklists</h2>
+
+  <div class="template-box">
+    <div class="template-header">
+      <span class="template-label">Template</span>
+      <span class="template-title">Service Blueprint Canvas</span>
+    </div>
+    <div class="template-grid">
+      <div class="template-field">
+        <div class="template-field-label">Customer actions</div>
+        <p>[What the customer does at each stage of the journey]</p>
+      </div>
+      <div class="template-field">
+        <div class="template-field-label">Frontstage (line of interaction)</div>
+        <p>[Touchpoints the customer interacts with — screens, people, environments]</p>
+      </div>
+      <div class="template-field">
+        <div class="template-field-label">Backstage (line of visibility)</div>
+        <p>[Employee actions and systems the customer doesn't see]</p>
+      </div>
+      <div class="template-field">
+        <div class="template-field-label">Support processes (line of internal interaction)</div>
+        <p>[Infrastructure, tools, policies that enable backstage]</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="template-box">
+    <div class="template-header">
+      <span class="template-label">Checklist</span>
+      <span class="template-title">Service Design Readiness</span>
+    </div>
+    <ul class="checklist">
+      <li>All customer touchpoints inventoried across all channels</li>
+      <li>Service blueprint maps frontstage, backstage, and support processes</li>
+      <li>Handoffs between channels are designed (not just individual channel experiences)</li>
+      <li>Employee/staff perspective included (they deliver the service)</li>
+      <li>Failure points identified with recovery plans</li>
+      <li>Service evidence designed (confirmations, receipts, status updates)</li>
+      <li>Metrics defined for the service as a whole, not just individual touchpoints</li>
+    </ul>
+  </div>
+</section>
+
+        <div class="section-marker" id="real-world-examples">
+          <span class="split-badge examples">Examples</span>
+          <span class="marker-line"></span>
+        </div>
+
+        <section data-section="examples">
+  <h2>Real-world examples</h2>
+
+  <div class="case-study">
+    <p class="case-label">Case study</p>
+    <h4>IKEA: the designed retail experience</h4>
+    <p>IKEA's store experience is service design in action. The customer journey is deliberately choreographed: guided path through showrooms (inspiration) → marketplace (selection) → self-serve warehouse (collection) → checkout → food court (reward). Each stage is a designed touchpoint. Backstage: the flat-pack model enables self-serve warehouse retrieval. Support: the logistics system that ensures stock availability matches the guided path. The IKEA app bridges online and in-store: save items online, find them in the warehouse with location codes. The seams between channels are designed, not accidental.</p>
+    <p><strong>Why it works:</strong> Every element — physical layout, inventory system, app, food court — is designed as part of one service, not as independent channels.</p>
+  </div>
+
+  <div class="case-study">
+    <p class="case-label">Case study</p>
+    <h4>UK Government Digital Service: end-to-end service transformation</h4>
+    <p>GDS doesn't just redesign government websites — they redesign entire services. "Register to vote" isn't a web form; it's a service that spans the website, local government offices, the electoral register database, and confirmation communications. GDS service blueprints map the full journey, including the backstage processes at local councils. This revealed that many "digital" problems were actually process problems: councils had different procedures, creating inconsistent experiences despite the same website. The fix was service-level, not UI-level: standardized processes backed by shared tooling.</p>
+    <p><strong>Why it works:</strong> Service design revealed that the problem was in backstage processes, not frontstage design. No amount of UI polish would have fixed it.</p>
+  </div>
+
+  <div class="case-study">
+    <p class="case-label">Case study</p>
+    <h4>Starbucks: the third place experience</h4>
+    <p>Starbucks designed a service, not a product. The "third place" concept (not home, not work) shaped every service decision: comfortable furniture, free Wi-Fi, personalized drinks, names on cups, consistent atmosphere across locations. The mobile app extends the service: order ahead, skip the line, earn rewards — each feature designed to fit into the broader service experience. The blueprint reveals how backstage operations (barista training, store layout standards, supply chain for consistent ingredients) support the frontstage promise.</p>
+    <p><strong>Why it works:</strong> The service concept ("third place") drives every touchpoint decision, creating coherence that a feature-by-feature approach would never achieve.</p>
+  </div>
+</section>
+
+<section id="pitfalls" data-section="practical">
+  <h2>Common pitfalls</h2>
+
+  <div class="pitfall">
+    <div class="pitfall-icon">!</div>
+    <div>
+      <h4>Designing channels independently</h4>
+      <p>A great website + a great app + great customer support does not equal a great service if they don't work together. Users switch between channels: start on mobile, continue on desktop, call support when stuck. If each channel is designed in isolation, the handoffs between them are the weakest points in the experience.</p>
+    </div>
+  </div>
+
+  <div class="pitfall">
+    <div class="pitfall-icon">!</div>
+    <div>
+      <h4>Ignoring the backstage</h4>
+      <p>Service blueprints that only map the customer journey are just fancy journey maps. The value of service design is in connecting frontstage to backstage — understanding how internal processes enable or undermine the customer experience. If your blueprint doesn't show what happens below the line of visibility, it's incomplete.</p>
+    </div>
+  </div>
+
+  <div class="pitfall">
+    <div class="pitfall-icon">!</div>
+    <div>
+      <h4>Forgetting the staff experience</h4>
+      <p>Employees deliver the service. If their tools are frustrating, their processes are fragmented, and their training is inadequate, the customer experience will reflect it. Service design must include the employee experience — their tools, workflows, information access, and emotional labor — as a first-class concern.</p>
+    </div>
+  </div>
+</section>
+
+<section id="connections">
+  <h2>Connected topics in your library</h2>
+  <div class="cross-ref-grid">
+    <a href="journey-mapping.html" class="cross-ref-card">
+      <span class="ref-number">Tier 1</span>
+      <div class="ref-title">Journey Mapping</div>
+      <div class="ref-reason">Journey maps feed into service blueprints. The journey is the frontstage layer of the blueprint.</div>
+    </a>
+    <a href="design-thinking.html" class="cross-ref-card">
+      <span class="ref-number">Tier 1</span>
+      <div class="ref-title">Design Thinking</div>
+      <div class="ref-reason">Service design applies Design Thinking at an organizational scale — same empathy-first approach, broader scope.</div>
+    </a>
+    <a href="user-research.html" class="cross-ref-card">
+      <span class="ref-number">Tier 1</span>
+      <div class="ref-title">User Research</div>
+      <div class="ref-reason">Service design research extends to observing the full service ecosystem, not just screen interactions.</div>
+    </a>
+    <a href="information-architecture.html" class="cross-ref-card">
+      <span class="ref-number">Tier 1</span>
+      <div class="ref-title">Information Architecture</div>
+      <div class="ref-reason">Service design is IA at the organizational level — organizing touchpoints, channels, and information flows.</div>
+    </a>
+  </div>
+</section>
+
+<div class="deep-dive-section" id="deep-dive">
+          <div class="deep-dive-header">
+            <span class="deep-dive-badge">Deep Dive</span>
+            <h2 style="margin:0; border:none; padding:0;">Appendix</h2>
+          </div>
+
+  <details class="expandable">
+    <summary><span class="chevron"><svg viewBox="0 0 14 14"><polyline points="4,2 10,7 4,12"/></svg></span> Service design in the double diamond</summary>
+    <div class="expand-content topic-content">
+      <h4>How the double diamond applies to services</h4>
+      <p>The double diamond (Discover → Define → Develop → Deliver) maps naturally to service design. Discover: research the full service ecosystem (customer journeys, staff experiences, backstage operations). Define: identify the critical pain points and opportunities across the system. Develop: prototype service concepts (desktop walkthroughs, bodystorming, piloting). Deliver: implement across all touchpoints simultaneously — a phased rollout that ensures channel coherence.</p>
+    </div>
+  </details>
+
+  <details class="expandable">
+    <summary><span class="chevron"><svg viewBox="0 0 14 14"><polyline points="4,2 10,7 4,12"/></svg></span> Further reading and resources</summary>
+    <div class="expand-content topic-content">
+      <h4>Essential reading</h4>
+      <p><strong>"This Is Service Design Doing" by Stickdorn, Hormess, Lawrence &amp; Schneider</strong> — The definitive practitioner's guide. Covers methods, tools, and case studies from every stage of service design.</p>
+      <p><strong>"Service Design: From Insight to Implementation" by Polaine, Løvlie &amp; Reason</strong> — Bridges theory and practice with a focus on how services work as systems.</p>
+      <p><strong>"Good Services" by Lou Downe</strong> — 15 principles of good service design, written from the perspective of UK Government Digital Service. Practical and opinionated.</p>
+    </div>
+  </details>
+</div>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer container">
+    <div class="footer-inner">
+      <p>Noir Book — Built for the work, not the shelf.</p>
+      <div class="footer-links">
+        <a href="../design-system.html">Design System</a>
+        <a href="../library-manifest.json">Manifest</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to Top -->
+  <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">&#8593;</button>
+
+  <!-- Floating Mobile TOC -->
+  <button class="mobile-toc-btn" id="mobileTocBtn" aria-label="Open table of contents">&#9776; Contents</button>
+  <div class="mobile-toc-overlay" id="mobileTocOverlay">
+    <div class="mobile-toc-panel">
+      <div class="mobile-toc-panel-header">
+        <h3>On this page</h3>
+        <button class="mobile-toc-close" id="mobileTocClose" aria-label="Close">&times;</button>
+      </div>
+      <ul class="mobile-toc-list">
+        <li><a href="#what-and-why" data-section="theory">What service design is and how it differs from UX</a></li>
+        <li><a href="#principles" data-section="theory">Service design principles</a></li>
+        <li><a href="#service-blueprint" data-section="practical">Service blueprinting</a></li>
+        <li><a href="#touchpoints" data-section="practical">Touchpoint inventory and channel mapping</a></li>
+        <li><a href="#stakeholder-mapping" data-section="practical">Stakeholder mapping</a></li>
+        <li><a href="#systems-thinking" data-section="practical">Systems thinking for designers</a></li>
+        <li><a href="#prototyping-services" data-section="practical">Service prototyping</a></li>
+        <li><a href="#omnichannel" data-section="practical">Omnichannel and journey orchestration</a></li>
+        <li><a href="#templates" data-section="practical">Templates and checklists</a></li>
+        <li><a href="#real-world-examples" data-section="examples">Real-world examples</a></li>
+        <li><a href="#pitfalls" data-section="practical">Common pitfalls</a></li>
+        <li><a href="#connections">Connected topics in your library</a></li>
+        <li><a href="#deep-dive">Deep-dive appendix</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    // Scrollspy: highlight active TOC item
+    const tocLinks = document.querySelectorAll('.toc-list a');
+    const sections = [];
+    tocLinks.forEach(link => {
+      const href = link.getAttribute('href');
+      if (!href || !href.startsWith('#')) return;
+      const el = document.getElementById(href.slice(1));
+      if (el) sections.push({ el, link });
+    });
+
+    // Reading progress bar
+    const progressBar = document.getElementById('readingProgress');
+    const backToTop = document.getElementById('backToTop');
+
+    function onScroll() {
+      let current = sections[0];
+      for (const s of sections) {
+        if (s.el.getBoundingClientRect().top <= 120) current = s;
+      }
+      tocLinks.forEach(l => l.classList.remove('active'));
+      if (current) current.link.classList.add('active');
+
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrolled = window.scrollY;
+      const progress = docHeight > 0 ? (scrolled / docHeight) * 100 : 0;
+      if (progressBar) progressBar.style.width = progress + '%';
+      if (backToTop) backToTop.classList.toggle('visible', scrolled > 400);
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    // Split badges: click to scroll to section
+    document.querySelectorAll('.content-splits .split-badge').forEach(function(badge) {
+      badge.addEventListener('click', function() {
+        var type = badge.classList.contains('theory') ? 'theory' : badge.classList.contains('practical') ? 'practical' : 'examples';
+        var target = document.querySelector('section[data-section="' + type + '"]');
+        if (target) {
+          var marker = target.previousElementSibling;
+          (marker && marker.classList.contains('section-marker') ? marker : target).scrollIntoView({behavior:'smooth'});
+        }
+      });
+    });
+  </script>
+
+  <script src="../js/checklist.js"></script>
+  <script src="../js/mobile-toc.js"></script>
+  <script src="../js/search.js"></script>
+  <script>
+    function openBurger(){document.getElementById('burgerOverlay').classList.add('open');document.body.style.overflow='hidden'}
+    function closeBurger(e){if(e&&e.target&&e.target!==document.getElementById('burgerOverlay'))return;document.getElementById('burgerOverlay').classList.remove('open');document.body.style.overflow=''}
+    function burgerSearch(q){
+      var r=document.getElementById('burgerSearchResults');
+      if(!q||q.length<2){r.innerHTML='';return}
+      var ql=q.toLowerCase(),matches=[];
+      if(typeof SEARCH_INDEX!=='undefined'){
+        SEARCH_INDEX.forEach(function(t){
+          var hit=t.topic.toLowerCase().indexOf(ql)>-1;
+          if(!hit)t.sections.forEach(function(s){if((s.title+' '+s.keywords).toLowerCase().indexOf(ql)>-1)hit=true});
+          if(hit)matches.push(t);
+        });
+      }
+      if(!matches.length){r.innerHTML='<p style="padding:8px 0;font-size:13px;color:var(--ink-muted)">No results</p>';return}
+      r.innerHTML=matches.slice(0,8).map(function(m){return '<a href="../'+m.url+'">'+m.topic+'<span class="bsr-disc">'+m.discipline+'</span></a>'}).join('');
+    }
+    document.addEventListener('keydown',function(e){if(e.key==='Escape'){closeBurger();var dd=document.getElementById('searchDropdown');if(dd)dd.classList.remove('visible');}});
+    // Close burger when clicking a TOC link
+    document.querySelectorAll('.burger-toc-list a').forEach(function(a){a.addEventListener('click',function(){closeBurger()})});
+    // Search typeahead
+    function topicSearch(q){
+      var dd=document.getElementById('searchDropdown');
+      if(!q||q.length<2||typeof SEARCH_INDEX==='undefined'){if(dd)dd.classList.remove('visible');return}
+      var ql=q.toLowerCase(),grouped={};
+      SEARCH_INDEX.forEach(function(t){
+        var hit=t.topic.toLowerCase().indexOf(ql)>-1,sHits=[],mHits=[];
+        t.sections.forEach(function(s){if((s.title+' '+s.keywords).toLowerCase().indexOf(ql)>-1)sHits.push(s)});
+        (t.methods||[]).forEach(function(m){if((m.name+' '+(m.keywords||'')).toLowerCase().indexOf(ql)>-1)mHits.push(m)});
+        if(!hit&&!sHits.length&&!mHits.length&&ql.length>=3&&typeof levenshtein==='function'){
+          var words=t.topic.toLowerCase().split(/ +/);
+          for(var i=0;i<words.length;i++){if(levenshtein(ql,words[i].substring(0,ql.length+1))<=1){hit=true;break}}
+        }
+        if(hit||sHits.length||mHits.length)grouped[t.topic]={url:'../'+t.url,disc:t.discipline||'',sections:sHits,methods:mHits,topicHit:hit};
+      });
+      var keys=Object.keys(grouped);
+      if(!keys.length){dd.innerHTML='<div class="search-empty">No results</div>';dd.classList.add('visible');return}
+      var html='';
+      keys.slice(0,8).forEach(function(topic){
+        var g=grouped[topic];
+        html+='<div class="search-group"><div class="search-group-title">'+topic+'</div>';
+        if(g.topicHit)html+='<a class="search-result" href="'+g.url+'"><span class="search-result-title">'+topic+'</span><span class="search-result-type practical">'+g.disc+'</span></a>';
+        g.sections.forEach(function(s){html+='<a class="search-result" href="'+g.url+'#'+s.id+'"><span class="search-result-title">'+s.title+'</span><span class="search-result-type '+s.type+'">'+s.type+'</span></a>'});
+        g.methods.slice(0,3).forEach(function(m){html+='<a class="search-result" href="'+g.url+'#'+m.section+'"><span class="search-result-title">'+m.name+'</span><span class="search-result-type practical">method</span></a>'});
+        html+='</div>';
+      });
+      dd.innerHTML=html;dd.classList.add('visible');
+    }
+    document.addEventListener('click',function(e){if(!e.target.closest('.search-box')){var dd=document.getElementById('searchDropdown');if(dd)dd.classList.remove('visible')}});
+  </script>
+
+</body>
+</html>

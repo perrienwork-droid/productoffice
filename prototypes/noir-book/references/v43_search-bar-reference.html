@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Search Bar — Component Reference</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --font-body: 'Outfit', -apple-system, sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+    --paper: #F5F0E8;
+    --paper-warm: #EDE7DB;
+    --ink: #1A1714;
+    --ink-soft: #3D3830;
+    --ink-medium: #574E44;
+    --ink-light: #5C544C;
+    --ink-hairline: #DDD8CF;
+    --teal: #1B6B5A;
+    --rust: #C4391C;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: var(--font-body);
+    background: var(--paper);
+    color: var(--ink);
+    padding: 40px;
+    max-width: 900px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+  h1 { font-size: 2rem; font-weight: 700; margin-bottom: 8px; }
+  .subtitle { font-size: 1rem; color: var(--ink-medium); margin-bottom: 40px; }
+  h2 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-top: 48px;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--ink-hairline);
+  }
+  h3 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-top: 24px;
+    margin-bottom: 8px;
+    color: var(--ink-soft);
+  }
+  p { margin-bottom: 12px; font-size: 15px; }
+  code {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    background: var(--paper-warm);
+    padding: 2px 6px;
+    border-radius: 4px;
+  }
+  .rule-block {
+    background: var(--paper-warm);
+    border-left: 3px solid var(--ink);
+    padding: 16px 20px;
+    margin: 16px 0;
+    font-size: 14px;
+    border-radius: 0 8px 8px 0;
+  }
+  .rule-block p { margin-bottom: 6px; }
+  .rule-block p:last-child { margin-bottom: 0; }
+  .label {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 2px 8px;
+    border-radius: 999px;
+    margin-right: 6px;
+    position: relative;
+    top: -1px;
+  }
+  .label-css { background: #E4F2EE; color: var(--teal); }
+  .label-js { background: #FCEAE5; color: var(--rust); }
+  .label-html { background: #EBF0F6; color: #2E4A6E; }
+  .label-ux { background: #FDF5E0; color: #9C6D00; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    font-size: 14px;
+  }
+  th, td {
+    text-align: left;
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--ink-hairline);
+  }
+  th {
+    font-weight: 600;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--ink-medium);
+  }
+  td code { font-size: 12px; }
+  .diagram {
+    background: white;
+    border: 1px solid var(--ink-hairline);
+    border-radius: 10px;
+    padding: 24px;
+    margin: 16px 0;
+    text-align: center;
+    font-size: 13px;
+    color: var(--ink-medium);
+    line-height: 2.2;
+  }
+  .diagram .layer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+  .diagram .box {
+    background: var(--paper-warm);
+    border: 1px solid var(--ink-hairline);
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 500;
+  }
+  .diagram .arrow {
+    color: var(--ink-light);
+    font-size: 16px;
+  }
+  .state-table td:first-child { font-weight: 600; white-space: nowrap; }
+  hr { border: none; border-top: 1px solid var(--ink-hairline); margin: 40px 0; }
+</style>
+</head>
+<body>
+
+<h1>Search bar — component reference</h1>
+<p class="subtitle">All rules governing the search bar, dropdown, pills, and related interactions on the library homepage.</p>
+
+<h2>1. Anatomy</h2>
+
+<div class="diagram">
+  <div style="margin-bottom: 12px; font-weight: 600; color: var(--ink-soft);">Visual stack (top → bottom)</div>
+  <div class="layer"><div class="box">Search input wrap</div></div>
+  <div class="arrow">↓</div>
+  <div class="layer"><div class="box">Search hint</div></div>
+  <div class="arrow">↓</div>
+  <div class="layer"><div class="box">Topic pills (hidden by default)</div></div>
+  <div class="arrow" style="margin-top: 8px;">↕ overlays on top ↕</div>
+  <div class="layer"><div class="box" style="border-color: var(--ink); border-width: 2px;">Search dropdown (absolute positioned)</div></div>
+</div>
+
+<h3>Inside the search input</h3>
+<p>The input wrap (<code>.search-input-wrap</code>) is a flex container. It holds two types of children:</p>
+
+<div class="rule-block">
+  <p><span class="label label-html">HTML</span> <strong>Phrase pills</strong> — one per locked search phrase, rendered inside <code>#searchPhrasePills</code>. Each pill has a × remove button.</p>
+  <p><span class="label label-html">HTML</span> <strong>Text input</strong> — the actual <code>&lt;input&gt;</code> element. Fills remaining space via <code>flex:1</code>.</p>
+</div>
+
+<h3>Outside the search input</h3>
+
+<div class="rule-block">
+  <p><span class="label label-html">HTML</span> <strong>Clear button</strong> (<code>.search-clear</code>) — absolute-positioned inside <code>.search-box</code>, appears when input has content.</p>
+  <p><span class="label label-html">HTML</span> <strong>Search hint</strong> — "Press Enter to lock a phrase · Use comma to add another". Dismissed permanently after first phrase is locked (localStorage).</p>
+  <p><span class="label label-html">HTML</span> <strong>Topic pills row</strong> (<code>.search-pills-wrap</code>) — horizontally scrollable row of 24 pre-validated topic shortcuts. Hidden by default, revealed on focus.</p>
+  <p><span class="label label-html">HTML</span> <strong>Search dropdown</strong> (<code>.search-dropdown</code>) — absolute-positioned below the input, overlays everything. Contains structured results.</p>
+</div>
+
+
+<h2>2. States &amp; transitions</h2>
+
+<table class="state-table">
+  <thead>
+    <tr><th>State</th><th>Trigger</th><th>What changes</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Idle</td>
+      <td>Default / blur with empty input</td>
+      <td>No shadow. Pills hidden. Dropdown hidden. Placeholder visible.</td>
+    </tr>
+    <tr>
+      <td>Focused</td>
+      <td><code>onfocus</code> on input</td>
+      <td>Soft shadow appears on input. Pills row slides open (max-height transition). Dropdown still hidden until 2+ chars typed.</td>
+    </tr>
+    <tr>
+      <td>Typing</td>
+      <td><code>oninput</code>, value ≥ 2 chars</td>
+      <td>Dropdown opens with live results. <code>showSearchDropdown(q)</code> called on every keystroke.</td>
+    </tr>
+    <tr>
+      <td>Phrase locked</td>
+      <td>Enter key or comma</td>
+      <td>Text → phrase pill inside input. Input cleared. Dropdown dismissed. <code>applyFilters()</code> runs. Pills row stays visible. Card grid filters.</td>
+    </tr>
+    <tr>
+      <td>Multi-phrase</td>
+      <td>Lock additional phrases</td>
+      <td>Multiple pills stack inside input wrap (flex-wrap). Placeholder changes to "Add another phrase…"</td>
+    </tr>
+    <tr>
+      <td>Blur (with phrases)</td>
+      <td><code>onblur</code>, phrases exist</td>
+      <td>Pills row stays visible. Shadow stays. <code>search-focused</code> class retained.</td>
+    </tr>
+    <tr>
+      <td>Blur (empty)</td>
+      <td><code>onblur</code>, no phrases, empty input</td>
+      <td>Pills row collapses (200ms delay). Shadow removed. <code>search-focused</code> class removed.</td>
+    </tr>
+    <tr>
+      <td>Cleared</td>
+      <td>Click × clear button</td>
+      <td>All phrases removed. Input emptied. Dropdown hidden. Pills row collapses. All cards restored to tier grids. <code>search-focused</code> removed.</td>
+    </tr>
+  </tbody>
+</table>
+
+
+<h2>3. Search logic</h2>
+
+<h3>Core function: <code>searchDeep(q)</code></h3>
+<p>Single shared function used by both the dropdown preview and the persistent section results below the card grid. Guarantees identical results in both locations.</p>
+
+<div class="rule-block">
+  <p><span class="label label-js">JS</span> <strong>Input:</strong> raw query string <code>q</code></p>
+  <p><span class="label label-js">JS</span> <strong>Output:</strong> <code>{ groups: [...], solves: [...] }</code></p>
+  <p><span class="label label-js">JS</span> <strong>Data source:</strong> <code>SEARCH_INDEX</code> — loaded from <code>search-index.js</code>. Contains all topics with their sections, methods, and keywords.</p>
+</div>
+
+<h3>Matching algorithm</h3>
+<div class="rule-block">
+  <p><span class="label label-js">JS</span> Query is split into content words via <code>getContentWords()</code> — strips stopwords, punctuation, and short tokens.</p>
+  <p><span class="label label-js">JS</span> Each word is matched against the haystack using <code>fuzzyWordMatch()</code> — a word-based substring/prefix match, not semantic.</p>
+  <p><span class="label label-js">JS</span> Fallback: if no fuzzy match found, tries Levenshtein distance ≤ 1 for typo tolerance.</p>
+</div>
+
+<h3>Scoring</h3>
+<table>
+  <thead>
+    <tr><th>Match type</th><th>Points</th><th>Meaning</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Topic-level hit</td><td>10</td><td>Query matches the topic's title/keywords</td></tr>
+    <tr><td>Section hit</td><td>3 (each)</td><td>Query matches a section title/keywords within the topic</td></tr>
+    <tr><td>Method hit</td><td>2 (each)</td><td>Query matches a method name/keywords within the topic</td></tr>
+  </tbody>
+</table>
+<p>Groups are sorted by total score descending — more matches rank higher.</p>
+
+<h3>Card relevance scoring (within search results grid)</h3>
+<table>
+  <thead>
+    <tr><th>Signal</th><th>Points</th><th>Example</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Title exact match</td><td>+50</td><td>Searching "Product Marketing" → card titled "Product Marketing"</td></tr>
+    <tr><td>Title contains phrase</td><td>+30</td><td>Searching "product" → card titled "Product Marketing"</td></tr>
+    <tr><td>Phrase in title</td><td>+20</td><td>Phrase found in h3 title text</td></tr>
+    <tr><td>Phrase in title+desc</td><td>+10</td><td>Phrase found in title or description</td></tr>
+    <tr><td>Phrase in keywords only</td><td>+3</td><td>Phrase found in data-topic or solves, not title/desc</td></tr>
+  </tbody>
+</table>
+<p>Cards within each tier (exact / also relevant / partial) are sorted by this relevance score.</p>
+
+
+<h2>4. Dropdown structure</h2>
+
+<p>The dropdown renders three groups, in order:</p>
+
+<table>
+  <thead>
+    <tr><th>Group</th><th>Label</th><th>Content</th><th>Cap</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>1</td><td>"matches your need"</td><td>Solves hits — teal badge, direct problem matches</td><td>No cap</td></tr>
+    <tr><td>2</td><td>"topics"</td><td>Topic-level matches — disc prefix + topic name + disc badge</td><td>6 topics</td></tr>
+    <tr><td>3</td><td>"sections &amp; methods"</td><td>Section/method hits grouped under parent topic. Type badges (THEORY, PRACTICAL, METHOD, EXAMPLES). Anchor links.</td><td>8 topic groups</td></tr>
+  </tbody>
+</table>
+
+<div class="rule-block">
+  <p><span class="label label-ux">UX</span> Group labels have <code>padding: 10px 20px 4px</code> — aligned with the 20px left padding of result items.</p>
+  <p><span class="label label-css">CSS</span> Dropdown has <code>border-radius: 10px</code>, <code>border: 1px solid var(--ink)</code>, and wide blurry shadow: <code>0 8px 40px rgba(26,23,20,0.15), 0 2px 12px rgba(26,23,20,0.08)</code>.</p>
+  <p><span class="label label-css">CSS</span> <code>max-height: 400px; overflow-y: auto</code> — scrolls internally.</p>
+</div>
+
+<h3>Dropdown interactions</h3>
+<div class="rule-block">
+  <p><span class="label label-js">JS</span> Clicking a topic result: navigates to the topic page.</p>
+  <p><span class="label label-js">JS</span> Clicking a section/method result: navigates to topic page with anchor.</p>
+  <p><span class="label label-js">JS</span> Clicking a "solves" result: locks the phrase (same as pressing Enter).</p>
+  <p><span class="label label-js">JS</span> Dropdown is dismissed when: phrase is locked, input is cleared, or focus leaves the search area.</p>
+</div>
+
+
+<h2>5. Topic pills</h2>
+
+<div class="rule-block">
+  <p><span class="label label-ux">UX</span> <strong>24 validated pills.</strong> Every pill has been tested against the full card haystack using the same <code>getContentWords → fuzzyWordMatch</code> logic. All 24 return 1–9 card results.</p>
+  <p><span class="label label-css">CSS</span> <strong>Hidden by default.</strong> Pills wrap has <code>max-height: 0; overflow: hidden; opacity: 0</code>. Revealed via <code>.search-focused</code> class on parent.</p>
+  <p><span class="label label-css">CSS</span> <strong>Transition:</strong> <code>max-height 0.25s, opacity 0.2s, margin 0.25s</code></p>
+  <p><span class="label label-css">CSS</span> <strong>z-index: 2</strong> — sits above search bar shadow but below dropdown (z-index: 200).</p>
+  <p><span class="label label-css">CSS</span> <strong>Style:</strong> <code>border-radius: 999px</code> (full pill), <code>border: 1px solid var(--ink-hairline)</code>, horizontal scroll with fade gradient on right edge.</p>
+</div>
+
+<h3>Pill visibility rules</h3>
+<table>
+  <thead>
+    <tr><th>Condition</th><th>Pills visible?</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Page load, search empty</td><td>No</td></tr>
+    <tr><td>Search input focused</td><td>Yes (slide open)</td></tr>
+    <tr><td>Input blurred, no phrases, input empty</td><td>No (collapse after 200ms delay)</td></tr>
+    <tr><td>Input blurred, phrases active</td><td>Yes (stays open)</td></tr>
+    <tr><td>All phrases cleared</td><td>No (collapse)</td></tr>
+  </tbody>
+</table>
+
+
+<h2>6. Card grid behavior when searching</h2>
+
+<div class="rule-block">
+  <p><span class="label label-js">JS</span> Cards move from their original tier grids into a flat <code>#searchResultsGrid</code>.</p>
+  <p><span class="label label-js">JS</span> Cards are bucketed into three tiers based on match quality:</p>
+</div>
+
+<table>
+  <thead>
+    <tr><th>Tier</th><th>data-search-tier</th><th>Condition</th><th>Visual</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Exact</td><td>1</td><td>All phrases match in title+desc</td><td>Full opacity, no label</td></tr>
+    <tr><td>Strong</td><td>2</td><td>All phrases match, some in keywords only</td><td>Full opacity, "Also relevant" label above</td></tr>
+    <tr><td>Partial</td><td>3</td><td>Only some phrases match</td><td>Dimmed (opacity 0.55), "Partial matches" label</td></tr>
+  </tbody>
+</table>
+
+<p>Within each tier, cards are sorted by relevance score (title exact match > title contains > desc match > keyword match).</p>
+
+<h3>Heading above card grid</h3>
+<div class="rule-block">
+  <p><span class="label label-css">CSS</span> <code>TOPICS MATCHING "X" · N results</code> — shown when search phrases are active.</p>
+  <p><span class="label label-css">CSS</span> Style: 11px uppercase, hairline after. Class <code>.search-heading</code>.</p>
+</div>
+
+<h3>Persistent section results below card grid</h3>
+<div class="rule-block">
+  <p><span class="label label-js">JS</span> Calls same <code>searchDeep()</code> function — identical results to dropdown.</p>
+  <p><span class="label label-ux">UX</span> <code>SECTIONS MATCHING "X" · N results</code> heading. Flat list, no cap (dropdown caps at 8 groups).</p>
+  <p><span class="label label-css">CSS</span> One row per hit: section name + type badge + parent topic name. Hairline separators, hover highlight, anchor links.</p>
+  <p><span class="label label-css">CSS</span> Overflow protection: <code>text-overflow: ellipsis</code>, <code>min-width: 0</code>, <code>flex-shrink</code> on name/topic columns.</p>
+</div>
+
+<h3>Restoring cards on clear</h3>
+<div class="rule-block">
+  <p><span class="label label-js">JS</span> Each card stores its original tier grid ID in <code>data-orig-tier</code> before moving.</p>
+  <p><span class="label label-js">JS</span> On clear: cards are moved back to their original <code>#tier-N .topic-grid</code> container.</p>
+  <p><span class="label label-js">JS</span> Tier labels and search heading are removed.</p>
+</div>
+
+
+<h2>7. Docked filter bar (replaces dual search inputs)</h2>
+
+<p>On desktop, when the user scrolls past the hero, the entire filter bar (search + pills + tier links) is reparented into the nav bar. There is no separate nav search input.</p>
+
+<div class="rule-block">
+  <p><span class="label label-js">JS</span> <code>dockFilterBar()</code> moves the filter bar element into <code>.nav-inner</code> and adds class <code>.docked</code> + <code>.scrolled</code> on the nav.</p>
+  <p><span class="label label-js">JS</span> <code>undockFilterBar()</code> reverses: moves filter bar back to page flow, removes classes.</p>
+  <p><span class="label label-js">JS</span> A placeholder div preserves the original height to prevent layout jump.</p>
+  <p><span class="label label-js">JS</span> On mobile (≤768px), docking is skipped entirely — the filter bar stays in page flow.</p>
+  <p><span class="label label-css">CSS</span> Scrolled nav flips to page colors (<code>background: var(--paper)</code>). Logo becomes vertical: 44×44 mark on top, "The Black / Book" in two lines below (Playfair Display 900, 11px).</p>
+  <p><span class="label label-js">JS</span> <code>syncSearch()</code> still exists but syncs the single input with card grid filtering, not two separate inputs.</p>
+</div>
+
+
+<h2>8. Subpage nav search</h2>
+
+<p>Every topic page has a search input in the nav bar (<code>#navSearchInput</code> inside <code>.nav-search-box</code>) alongside four discipline pill buttons (UX, PM, MK, CS).</p>
+
+<div class="rule-block">
+  <p><span class="label label-js">JS</span> <strong>Discipline filtering.</strong> Pill buttons toggle <code>activeDiscs</code> state (same interaction as homepage: single-click toggles, double-click isolates). Search results from <code>topicNavSearch()</code> are filtered by active disciplines before display.</p>
+  <p><span class="label label-html">HTML</span> Pills are <code>&lt;button&gt;</code> elements with <code>data-disc</code> attribute and <code>onclick="toggleDisc('xx')"</code>.</p>
+  <p><span class="label label-css">CSS</span> On mobile (≤768px): disc pills are hidden, search + theme toggle + burger all equalized to 40px height. Search expands on focus (hides nav title temporarily via <code>.search-expanded</code> class).</p>
+  <p><span class="label label-js">JS</span> The burger panel has its own independent search (<code>#burgerSearchInput</code>) which does NOT filter by discipline — it always searches all topics.</p>
+</div>
+
+
+<h2>9. Shadow &amp; z-index stack</h2>
+
+<table>
+  <thead>
+    <tr><th>Element</th><th>z-index</th><th>Shadow</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Search input (focused)</td><td>auto</td><td><code>0 4px 24px rgba(26,23,20,0.12), 0 1px 6px rgba(26,23,20,0.06)</code></td></tr>
+    <tr><td>Topic pills row</td><td>2</td><td>None — sits above input shadow</td></tr>
+    <tr><td>Filter bar (sticky)</td><td>90</td><td>None</td></tr>
+    <tr><td>Search dropdown</td><td>200</td><td><code>0 8px 40px rgba(26,23,20,0.15), 0 2px 12px rgba(26,23,20,0.08)</code></td></tr>
+    <tr><td>Filter toast</td><td>300</td><td>None</td></tr>
+  </tbody>
+</table>
+
+
+<h2>10. Styling tokens</h2>
+
+<table>
+  <thead>
+    <tr><th>Element</th><th>border-radius</th><th>Border</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Search input wrap</td><td>10px</td><td>1px solid var(--ink)</td></tr>
+    <tr><td>Search dropdown</td><td>10px</td><td>1px solid var(--ink)</td></tr>
+    <tr><td>Phrase pills (inside input)</td><td>999px</td><td>1px solid var(--ink-faint)</td></tr>
+    <tr><td>Topic pills (below input)</td><td>999px</td><td>1px solid var(--ink-hairline)</td></tr>
+    <tr><td>Clear button</td><td>none</td><td>none</td></tr>
+  </tbody>
+</table>
+
+<hr>
+<p style="font-size: 13px; color: var(--ink-medium);">Last updated: Session 12, March 31 2026. Library v38.</p>
+
+</body>
+</html>

@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UX Writing &amp; Content Design — Noir Book</title>
+  <link rel="stylesheet" href="../css/shared.css">
+  <link rel="stylesheet" href="../css/topic.css">
+  <script src="../js/theme.js"></script>
+  <script src="../js/topic-nav.js"></script>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="site-nav subpage-nav" data-discipline="ux">
+    <div class="nav-inner">
+      <a href="../index.html" class="site-logo">
+        <span class="logo-mark">UX</span>
+        <span class="nav-title">Noir Book</span>
+      </a>
+      <a href="../index.html" class="nav-back-link">&#8592; Library</a>
+      <div class="nav-filters">
+        <button class="disc-toggle ux-toggle active" data-disc="ux" onclick="toggleDisc('ux')" title="UX Design">
+          <span class="disc-dot disc-dot-ux"></span><span class="disc-label">UX Design</span><span class="disc-code">(UX)</span>
+        </button>
+        <button class="disc-toggle pm-toggle active" data-disc="pm" onclick="toggleDisc('pm')" title="Product Management">
+          <span class="disc-dot disc-dot-pm"></span><span class="disc-label">Product</span><span class="disc-code">(PM)</span>
+        </button>
+        <button class="disc-toggle mk-toggle active" data-disc="mk" onclick="toggleDisc('mk')" title="Marketing &amp; Growth">
+          <span class="disc-dot disc-dot-mk"></span><span class="disc-label">Marketing</span><span class="disc-code">(MK)</span>
+        </button>
+        <button class="disc-toggle cs-toggle active" data-disc="cs" onclick="toggleDisc('cs')" title="Content Strategy">
+          <span class="disc-dot disc-dot-cs"></span><span class="disc-label">Content</span><span class="disc-code">(CS)</span>
+        </button>
+        <div class="search-box nav-search-box">
+          <div class="nav-search-wrap">
+            <div class="nav-search-pills" id="navSearchPills"></div>
+            <input type="text" id="navSearchInput" placeholder="Search..." autocomplete="off"
+              oninput="topicNavSearch(this.value)"
+              onkeydown="handleNavSearchKey(event)"
+              onfocus="handleNavSearchFocus()"
+              onblur="handleNavSearchBlur()">
+            <button type="button" class="nav-search-clear" id="navSearchClear" onclick="clearNavSearch()" aria-label="Clear search">&times;</button>
+          </div>
+          <div class="search-dropdown" id="navSearchDropdown"></div>
+        </div>
+      </div>
+      <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle theme">&#9790;</button>
+      <button class="burger-btn" id="burgerBtn" onclick="openBurger()" aria-label="Menu">
+        <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="2" y1="4" x2="16" y2="4"/><line x1="2" y1="9" x2="16" y2="9"/><line x1="2" y1="14" x2="16" y2="14"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Burger Menu Overlay -->
+  <div class="burger-overlay" id="burgerOverlay" onclick="closeBurger(event)">
+    <div class="burger-panel" onclick="event.stopPropagation()">
+      <div class="burger-panel-header">
+        <h3>Menu</h3>
+        <button class="burger-close" onclick="closeBurger()" aria-label="Close">&times;</button>
+      </div>
+      <div class="burger-search">
+        <input type="text" id="burgerSearchInput" placeholder="Search topics, methods..." autocomplete="off" oninput="burgerSearch(this.value)">
+        <div class="burger-search-results" id="burgerSearchResults"></div>
+      </div>
+      <div class="burger-links">
+        <a href="../index.html">&#8592; Back to Library</a>
+        <a href="../design-system.html">Design System</a>
+        <a href="../request-topic.html">Suggest a topic or improvement</a>
+      </div>
+      <div class="burger-toc-section">
+        <p class="burger-toc-title">On this page</p>
+        <ul class="burger-toc-list">
+        <li><a href="#what-and-why" data-section="theory">What UX writing is and why words are interface</a></li>
+        <li><a href="#voice-and-tone" data-section="theory">Voice and tone frameworks</a></li>
+        <li><a href="#microcopy" data-section="practical">Microcopy patterns</a></li>
+        <li><a href="#error-messages" data-section="practical">Error messages that help</a></li>
+        <li><a href="#empty-states" data-section="practical">Empty states and zero-data screens</a></li>
+        <li><a href="#onboarding-copy" data-section="practical">Onboarding copy</a></li>
+        <li><a href="#content-first" data-section="practical">Content-first design process</a></li>
+        <li><a href="#accessibility-localization" data-section="practical">Writing for accessibility and localization</a></li>
+        <li><a href="#genai-content" data-section="practical">GenAI content design</a></li>
+        <li><a href="#templates" data-section="practical">Templates and checklists</a></li>
+        <li><a href="#real-world-examples" data-section="examples">Real-world examples</a></li>
+        <li><a href="#pitfalls" data-section="practical">Common pitfalls</a></li>
+        <li><a href="#connections">Connected topics in your library</a></li>
+        <li><a href="#deep-dive">Deep-dive appendix</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Topic Header -->
+  <header class="topic-header container">
+    <div class="breadcrumb">
+      <a href="../index.html">Library</a>
+      <span class="sep">&#8250;</span>
+      <span class="breadcrumb-disc breadcrumb-ux">UX Design</span>
+      <span class="sep">&#8250;</span>
+      <span>Tier 2 — Specialized</span>
+      <span class="sep">&#8250;</span>
+      <span>UX Writing &amp; Content Design</span>
+    </div>
+    <div class="topic-meta">
+      <span class="tier-badge tier2">Tier 2</span>
+      <span style="font-size:14px;color:var(--ink-muted)">Topic UX.2.10</span>
+    </div>
+    <h1>UX Writing &amp; Content Design</h1>
+    <p class="topic-subtitle">Microcopy, error messages, button labels, onboarding copy, empty states, and tone of voice. The words inside the interface.</p>
+    <div class="content-splits">
+      <span class="split-badge theory">20% Theory</span>
+      <span class="split-badge practical">55% Methods &amp; Templates</span>
+      <span class="split-badge examples">25% Examples</span>
+    </div>
+  </header>
+
+  <!-- Reading Progress Bar -->
+  <div class="reading-progress" id="readingProgress"></div>
+
+  <!-- Main Layout -->
+  <div class="container">
+    <div class="topic-layout">
+
+      <!-- Sidebar: Table of Contents -->
+      <aside class="topic-sidebar">
+        <nav class="toc">
+          <p class="sidebar-topic-title">UX Writing &amp; Content Design</p>
+          <p class="toc-title">On this page</p>
+          <ul class="toc-list">
+            <li><a href="#what-and-why" data-section="theory">What UX writing is and why words are interface</a></li>
+            <li><a href="#voice-and-tone" data-section="theory">Voice and tone frameworks</a></li>
+            <li><a href="#microcopy" data-section="practical">Microcopy patterns</a></li>
+            <li><a href="#error-messages" data-section="practical">Error messages that help</a></li>
+            <li><a href="#empty-states" data-section="practical">Empty states and zero-data screens</a></li>
+            <li><a href="#onboarding-copy" data-section="practical">Onboarding copy</a></li>
+            <li><a href="#content-first" data-section="practical">Content-first design process</a></li>
+            <li><a href="#accessibility-localization" data-section="practical">Writing for accessibility and localization</a></li>
+            <li><a href="#genai-content" data-section="practical">GenAI content design</a></li>
+            <li><a href="#templates" data-section="practical">Templates and checklists</a></li>
+            <li><a href="#real-world-examples" data-section="examples">Real-world examples</a></li>
+            <li><a href="#pitfalls" data-section="practical">Common pitfalls</a></li>
+            <li><a href="#connections">Connected topics in your library</a></li>
+            <li><a href="#deep-dive">Deep-dive appendix</a></li>
+          </ul>
+        </nav>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="topic-main topic-content">
+
+<!-- ============================================ -->
+
+<!-- ============================================ -->
+
+        <div class="section-marker" id="what-and-why">
+          <span class="split-badge theory">Theory</span>
+          <span class="marker-line"></span>
+        </div>
+
+        <section data-section="theory">
+  <h2>What UX writing is and why words are interface</h2>
+
+  <p>UX writing is the practice of crafting the text that appears within a product's interface — button labels, form field labels, error messages, tooltips, onboarding instructions, empty states, confirmation dialogs, loading messages, navigation labels, and notification copy. It's not marketing copy (which persuades people to use the product) or documentation (which explains how the product works after the fact). UX writing is the text that <em>is</em> the interface. In many interactions, words are the primary way the product communicates.</p>
+
+  <p>Every unclear label, every confusing error message, every vague tooltip is a micro-failure of design. When a button says "Submit" instead of "Place order," users hesitate. When an error says "Invalid input" instead of "Phone number needs 10 digits," users get stuck. When an empty state says "No items found" instead of "You haven't added any recipes yet — start by browsing popular collections," users don't know what to do next. These small text decisions compound into the overall feeling of a product — clear, helpful, and trustworthy, or confusing, cold, and frustrating.</p>
+
+  <div class="callout info">
+    <p class="callout-title">Content design vs. UX writing</p>
+    <p><strong>UX writing</strong> typically refers to crafting the specific text strings within an interface. <strong>Content design</strong> is broader — it includes deciding what content should exist, what format it should take (text? video? interactive?), and how content is structured across the product. A content designer might decide that an onboarding flow needs a progress indicator with short descriptions at each step; a UX writer crafts those specific descriptions. In practice, one person often does both.</p>
+  </div>
+</section>
+
+<section id="voice-and-tone" data-section="theory">
+  <h2>Voice and tone frameworks</h2>
+
+  <div class="method-card">
+    <h4>Voice &amp; Tone Framework <span class="method-tag">Core Method</span></h4>
+    <p class="method-when">Use when: establishing or documenting how your product communicates.</p>
+    <p><strong>Voice</strong> is your product's personality — it stays consistent across all contexts. Is your product friendly or formal? Playful or serious? Expert or approachable? Voice is like a person's character: it doesn't change based on the situation. <strong>Tone</strong> adjusts to context while maintaining the same voice. A friendly product has a celebratory tone when a user completes a milestone, a reassuring tone when something goes wrong, and a straightforward tone during critical tasks like payment. Define 3–5 voice attributes (e.g., "Clear, confident, warm, and occasionally witty") and document how tone shifts across contexts (success, error, onboarding, routine use, sensitive moments).</p>
+  </div>
+
+  <div class="callout tip">
+    <p class="callout-title">The "this but not that" method</p>
+    <p>Define voice attributes as pairs: "Friendly but not casual. Confident but not arrogant. Helpful but not patronizing. Concise but not curt." This prevents misinterpretation. "Playful" alone could mean anything from dad jokes to irreverent sarcasm. "Playful but not silly — we use humor to reduce friction, not to perform" gives writers a clear boundary.</p>
+  </div>
+</section>
+
+<!-- ============================================ -->
+
+<!-- ============================================ -->
+
+        <div class="section-marker" id="microcopy">
+          <span class="split-badge practical">Practical</span>
+          <span class="marker-line"></span>
+        </div>
+
+        <section data-section="practical">
+  <h2>Microcopy patterns</h2>
+
+  <div class="method-card">
+    <h4>Button Labels <span class="method-tag">Core Method</span></h4>
+    <p class="method-when">Use when: writing text for any clickable action.</p>
+    <p>Button labels should describe what happens when clicked, from the user's perspective. <strong>Be specific:</strong> "Save changes" not "Submit." "Add to cart" not "Continue." "Send message" not "OK." <strong>Start with a verb:</strong> "Create project," "Download report," "Cancel subscription." <strong>Match the action to the consequence:</strong> If clicking deletes something permanently, "Delete forever" is clearer than "Remove." <strong>Avoid ambiguity in paired buttons:</strong> "Save / Discard" is clearer than "Yes / No" because users don't have to re-read the dialog to remember what "Yes" means. Never use "Click here" — it's both inaccessible (screen readers) and meaningless.</p>
+  </div>
+
+  <div class="method-card">
+    <h4>Form Labels and Help Text <span class="method-tag">Core Method</span></h4>
+    <p class="method-when">Use when: designing form fields with labels, placeholders, and instructions.</p>
+    <p><strong>Labels</strong> should be short and unambiguous: "Full name" not "Please enter your full name as it appears on your ID." <strong>Placeholder text</strong> is not a substitute for labels — it disappears when users start typing, removing the very instruction they need. Use placeholders for format examples only: "e.g., jane@company.com." <strong>Help text</strong> goes below the field: "Must be at least 8 characters with one number." Only add help text when the label isn't self-explanatory. <strong>Optional vs. required:</strong> Mark the minority — if most fields are required, mark optional ones "(optional)." If most are optional, mark required ones "(required)" or with an asterisk.</p>
+  </div>
+
+  <div class="method-card">
+    <h4>Tooltips and Contextual Help <span class="method-tag">Technique</span></h4>
+    <p class="method-when">Use when: a brief explanation can prevent user confusion without cluttering the interface.</p>
+    <p>Tooltips should answer one question the user might have at that moment. Keep them under 150 characters — if you need more, use an expandable section or link to documentation. Write for the confused user, not the expert: "Messages older than 30 days will be permanently deleted" not "Retention policy: 30d TTL." Avoid tooltips on mobile (hover doesn't exist on touch) — use inline help text instead. Don't hide critical information in tooltips; if users need it to complete a task, it should be visible by default.</p>
+  </div>
+</section>
+
+<section id="error-messages" data-section="practical">
+  <h2>Error messages that help</h2>
+
+  <div class="method-card">
+    <h4>Error Message Framework <span class="method-tag">Core Method</span></h4>
+    <p class="method-when">Use when: writing error messages for any failure state.</p>
+    <p>Every error message should answer three questions: <strong>What happened?</strong> (The problem, in plain language.) <strong>Why did it happen?</strong> (The cause, if it helps the user understand.) <strong>What can the user do about it?</strong> (The fix, as a specific action.) Bad: "Error 403." Better: "You don't have access to this file." Best: "You don't have access to this file. Ask the file owner for permission, or try a different account." Tone matters too: avoid blaming the user ("You entered an invalid email") — reframe as the system's responsibility ("We didn't recognize that email format. Try name@company.com").</p>
+  </div>
+
+  <div class="callout warning">
+    <p class="callout-title">Error messages people actually see</p>
+    <p>The most critical error messages are often the least considered. 404 pages, payment failures, expired sessions, rate limits, and server errors are frequently left as developer defaults. These are exactly the moments when clear, helpful copy matters most — the user is already frustrated, and a cold technical message makes it worse. Audit every error state in your product and write specific, actionable copy for each one.</p>
+  </div>
+</section>
+
+<section id="empty-states" data-section="practical">
+  <h2>Empty states and zero-data screens</h2>
+
+  <div class="method-card">
+    <h4>Empty State Design <span class="method-tag">Core Method</span></h4>
+    <p class="method-when">Use when: a screen has no content to display — on first use, after deletion, or when search returns nothing.</p>
+    <p>An empty state is a teaching moment disguised as nothing. There are three types: <strong>First-use empty</strong> (the user hasn't created anything yet) — explain what this area is for and provide a clear CTA to get started. "This is where your projects live. Create your first project to get started." <strong>Cleared empty</strong> (the user deleted or completed everything) — congratulate or confirm. "All caught up! No pending reviews." <strong>No-results empty</strong> (a search or filter returned nothing) — suggest alternatives. "No results for 'wirefrme.' Did you mean 'wireframe'? Or try browsing all templates." Never show a blank page with no explanation. Empty states are prime real estate for onboarding, education, and encouraging the next action.</p>
+  </div>
+</section>
+
+<section id="onboarding-copy" data-section="practical">
+  <h2>Onboarding copy</h2>
+
+  <div class="method-card">
+    <h4>Progressive Onboarding Copy <span class="method-tag">Technique</span></h4>
+    <p class="method-when">Use when: guiding new users through their first experience with your product.</p>
+    <p>Onboarding copy should be as short as possible and as long as necessary. Front-load the value proposition: tell users what they'll gain, not what they need to do. "Track your fitness progress in one place" is more motivating than "Step 1: Create a profile." Use progressive disclosure — don't dump all instructions at once. Teach features at the moment of first use, not in a pre-emptive tutorial. Keep instructional text scannable: one idea per screen, one action per step. Avoid jargon — new users don't know your product's vocabulary yet. "Boards" means nothing until users see one; call it "a board for organizing your tasks" the first time.</p>
+  </div>
+</section>
+
+<section id="content-first" data-section="practical">
+  <h2>Content-first design process</h2>
+
+  <div class="method-card">
+    <h4>Content-First Wireframing <span class="method-tag">Technique</span></h4>
+    <p class="method-when">Use when: designing a new screen or flow and wanting to ensure copy and layout work together.</p>
+    <p>Instead of designing layouts with "Lorem ipsum" and filling in copy later, start with the content. Write the actual heading, body text, button labels, help text, and error messages before opening a design tool. Put the real content into the wireframe. This reveals problems early: the heading is too long for the header, the help text doesn't fit below the field, the button label creates an awkward layout at certain widths. Content-first design also prevents the common problem of final copy being squeezed into spaces designed for placeholder text that was conveniently short.</p>
+  </div>
+
+  <div class="callout tip">
+    <p class="callout-title">Stress-test with real content</p>
+    <p>Always test your designs with the longest reasonable content. A name field works with "Jane" — does it work with "Alexandra Konstantinidou-Papageorgiou"? An error message fits when it's "Invalid email" — does it fit when it's "This email is already associated with an account. Try signing in instead, or use a different email address"? Design for the longest case, celebrate the short one.</p>
+  </div>
+</section>
+
+<section id="accessibility-localization" data-section="practical">
+  <h2>Writing for accessibility and localization</h2>
+
+  <div class="method-card">
+    <h4>Accessible Content Checklist <span class="method-tag">Technique</span></h4>
+    <p class="method-when">Use when: ensuring your copy works for all users, including those using assistive technology.</p>
+    <p><strong>Link text:</strong> "Read the accessibility guidelines" not "Click here." Screen readers navigate by links — "click here" tells them nothing. <strong>Alt text:</strong> Describe the image's content and purpose, not its appearance: "Bar chart showing sales growth from $1M to $3M over 2023–2025" not "Image of a chart." <strong>Heading hierarchy:</strong> Use h1 → h2 → h3 in order; don't skip levels. <strong>Plain language:</strong> Write at an 8th-grade reading level when possible. Avoid idioms, metaphors, and culture-specific references that don't translate. <strong>Error identification:</strong> Errors must be described in text, not just color — "Required field" not just a red border.</p>
+  </div>
+
+  <div class="method-card">
+    <h4>Localization-Ready Copy <span class="method-tag">Technique</span></h4>
+    <p class="method-when">Use when: your product will be translated or already serves multilingual users.</p>
+    <p>Translated text is often 30–50% longer than English. German and French expand significantly; Japanese and Chinese may contract. Design layouts with expansion room. Avoid embedding text in images — it can't be translated. Don't concatenate strings ("You have " + count + " messages") — word order changes across languages. Use complete sentences with variables: "You have {count} messages." Avoid puns, idioms, and cultural references that don't translate: "piece of cake" is meaningless in many languages. Date formats, number formats, currency symbols, and reading direction all vary — never hardcode these.</p>
+  </div>
+</section>
+
+<section id="genai-content" data-section="practical">
+  <h2>GenAI content design</h2>
+
+  <div class="method-card">
+    <h4>AI-Generated Content Standards <span class="method-tag">Framework</span></h4>
+    <p class="method-when">Use when: your product uses AI to generate user-facing text — summaries, suggestions, explanations, chat responses — and you need to ensure quality and consistency.</p>
+    <p>AI-generated content needs to follow the same writing principles as human-written interface copy, but it introduces new challenges. <strong>Apply web writing best practices:</strong> AI outputs should be scannable (front-load key information), concise (no padding or filler phrases), and action-oriented (tell users what to do, not just what happened). Prompt engineering should enforce these standards at generation time, not rely on post-processing. <strong>Voice consistency:</strong> AI outputs must match your product's established voice and tone. Without explicit guardrails, AI defaults to its own voice — often more formal, more verbose, and less distinctive than your brand voice. Build voice attributes (word lists, tone guidelines, banned phrases) into system prompts. <strong>Error transparency:</strong> When AI generates content, users need to know it's AI-generated, especially for factual claims, recommendations, or decisions. Design clear attribution labels and confidence signals. <strong>Content review workflows:</strong> Define which AI outputs ship without human review (low-stakes, templated) and which require editorial oversight (customer-facing, high-stakes, novel situations).</p>
+  </div>
+
+  <div class="callout info">
+    <p class="callout-title">Content strategy vs. UX writing</p>
+    <p>UX writing is the craft of interface copy — microcopy, error messages, button labels, onboarding text. Content strategy is the organizational discipline of how content is structured, governed, and maintained. Both are essential; they're different skills. If you're solving content problems at the system level (governance, content models, editorial workflow, AI content pipelines), see <strong>CS.1.04 Content Design &amp; Readability</strong> for the content strategy perspective. For integrating content patterns into design systems, see <strong>CS.2.07 Content &amp; Design Systems</strong>.</p>
+  </div>
+</section>
+
+<section id="templates" data-section="practical">
+  <h2>Templates and checklists</h2>
+
+  <div class="template-box">
+    <div class="template-header">
+      <span class="template-label">Checklist</span>
+      <span class="template-title">UX Copy Review</span>
+    </div>
+    <ul class="checklist">
+      <li>Button labels start with a verb and describe what happens when clicked</li>
+      <li>Error messages explain what happened, why, and what to do next</li>
+      <li>No placeholder text is used as a substitute for labels</li>
+      <li>Empty states explain what the area is for and provide a next action</li>
+      <li>Tooltips are under 150 characters and answer one specific question</li>
+      <li>Loading messages set expectations about wait time when possible</li>
+      <li>Confirmation dialogs state the consequence, not just "Are you sure?"</li>
+      <li>Success messages confirm what happened and what comes next</li>
+      <li>All link text is descriptive (no "click here" or "learn more" in isolation)</li>
+      <li>Copy is tested at maximum reasonable length in all layouts</li>
+      <li>Tone matches the emotional context (celebration, error, routine, sensitive)</li>
+    </ul>
+  </div>
+
+  <div class="template-box">
+    <div class="template-header">
+      <span class="template-label">Template</span>
+      <span class="template-title">Voice &amp; Tone Documentation</span>
+    </div>
+    <div class="template-grid">
+      <div class="template-field">
+        <div class="template-field-label">Voice attributes</div>
+        <p>[3–5 adjectives, e.g., "Clear, warm, confident, occasionally witty"]</p>
+      </div>
+      <div class="template-field">
+        <div class="template-field-label">This but not that</div>
+        <p>[e.g., "Friendly but not casual. Confident but not arrogant."]</p>
+      </div>
+      <div class="template-field">
+        <div class="template-field-label">Tone in success moments</div>
+        <p>[e.g., "Celebratory but brief. Acknowledge the win, suggest next step."]</p>
+      </div>
+      <div class="template-field">
+        <div class="template-field-label">Tone in error moments</div>
+        <p>[e.g., "Calm and helpful. Never blame the user. Always offer a fix."]</p>
+      </div>
+      <div class="template-field">
+        <div class="template-field-label">Tone in sensitive moments</div>
+        <p>[e.g., "Respectful, no humor. Account deletion, billing issues, personal data."]</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+        <div class="section-marker" id="real-world-examples">
+          <span class="split-badge examples">Examples</span>
+          <span class="marker-line"></span>
+        </div>
+
+        <section data-section="examples">
+  <h2>Real-world examples</h2>
+
+  <div class="case-study">
+    <p class="case-label">Case study</p>
+    <h4>Stripe: developer-friendly error messages</h4>
+    <p>Stripe's API error messages are a masterclass in helpful copy for a technical audience. Instead of generic HTTP status codes, every error includes: a human-readable message, the specific parameter that caused the issue, a machine-readable error code, and a link to documentation with examples. The dashboard extends this to non-technical users: payment failure emails explain what happened in plain language, suggest common fixes, and provide a direct link to retry. Even decline reasons are translated from bank codes into actionable guidance.</p>
+    <p><strong>Why it works:</strong> Each error message reduces support tickets by answering the question before the user asks it. The tone is informative without being condescending, matching Stripe's voice of confident expertise.</p>
+  </div>
+
+  <div class="case-study">
+    <p class="case-label">Case study</p>
+    <h4>Mailchimp: voice and tone at scale</h4>
+    <p>Mailchimp's Content Style Guide (publicly available) is one of the most referenced voice and tone documents in the industry. It defines voice attributes ("fun but not childish, confident but not cocky"), provides tone guidance for specific situations (compliance alerts are serious and direct; campaign success is celebratory), and includes a searchable library of word choices ("log in" not "log on," "email" not "e-mail"). The guide covers everything from button labels to legal text, ensuring consistency across hundreds of screens.</p>
+    <p><strong>Why it works:</strong> By documenting voice and tone in detail, Mailchimp maintains consistent copy across a large product team. New writers can produce on-brand copy without guessing.</p>
+  </div>
+
+  <div class="case-study">
+    <p class="case-label">Case study</p>
+    <h4>Slack: empty states that teach</h4>
+    <p>Slack's empty states do double duty as onboarding. A new channel shows "This is the very beginning of the #design channel" with suggestions to set a topic, add people, or start a conversation. The search empty state suggests search tips. The file browser empty state explains how files shared in messages appear there. Each empty state treats the blank space as an opportunity to educate rather than leaving users looking at nothing.</p>
+    <p><strong>Why it works:</strong> Empty states turn "there's nothing here" into "here's what this will become." Users learn the product's capabilities at the moment they're most relevant.</p>
+  </div>
+</section>
+
+<section id="pitfalls" data-section="practical">
+  <h2>Common pitfalls</h2>
+
+  <div class="pitfall">
+    <div class="pitfall-icon">!</div>
+    <div>
+      <h4>Copy as an afterthought</h4>
+      <p>Designing with Lorem ipsum and writing copy at the end leads to text that doesn't fit, labels that are too long, and error messages written by engineers in the codebase. Involve a writer from the wireframe stage. If you don't have a dedicated writer, the designer writes the copy — but it must be real copy from the start.</p>
+    </div>
+  </div>
+
+  <div class="pitfall">
+    <div class="pitfall-icon">!</div>
+    <div>
+      <h4>Trying too hard to be clever</h4>
+      <p>Witty 404 pages are fine. Witty error messages during payment failures are not. Humor in microcopy should reduce friction, not create it. If the user has to decode a joke to understand what happened, you've prioritized personality over clarity. Cleverness is a seasoning, not the main course.</p>
+    </div>
+  </div>
+
+  <div class="pitfall">
+    <div class="pitfall-icon">!</div>
+    <div>
+      <h4>Inconsistent terminology</h4>
+      <p>Calling it "Projects" in the sidebar, "Workspaces" in settings, and "Your stuff" in the empty state destroys user confidence. Create a product vocabulary — a single canonical term for each concept — and enforce it everywhere. A content glossary shared between design, engineering, and marketing prevents drift.</p>
+    </div>
+  </div>
+</section>
+
+<section id="connections">
+  <h2>Connected topics in your library</h2>
+  <div class="cross-ref-grid">
+    <a href="usability.html" class="cross-ref-card">
+      <span class="ref-number">Tier 1</span>
+      <div class="ref-title">Usability</div>
+      <div class="ref-reason">Error prevention, recognition over recall, and help documentation are usability heuristics that live or die by the quality of the copy.</div>
+    </a>
+    <a href="accessibility.html" class="cross-ref-card">
+      <span class="ref-number">Tier 1</span>
+      <div class="ref-title">Accessibility in Practice</div>
+      <div class="ref-reason">Alt text, link text, heading hierarchy, and plain language are all both accessibility requirements and UX writing best practices.</div>
+    </a>
+    <a href="cognitive-emotional-design.html" class="cross-ref-card">
+      <span class="ref-number">Tier 2</span>
+      <div class="ref-title">Cognitive &amp; Emotional Design</div>
+      <div class="ref-reason">Words trigger emotional responses. Error messages create anxiety or reassurance. Onboarding copy builds confidence or confusion. Tone is emotional design.</div>
+    </a>
+    <a href="interaction-design.html" class="cross-ref-card">
+      <span class="ref-number">Tier 1</span>
+      <div class="ref-title">Interaction Design</div>
+      <div class="ref-reason">Loading messages, state transitions, and feedback copy are the textual layer of interaction design. Words and animations work together.</div>
+    </a>
+  </div>
+</section>
+
+<div class="deep-dive-section" id="deep-dive">
+          <div class="deep-dive-header">
+            <span class="deep-dive-badge">Deep Dive</span>
+            <h2 style="margin:0; border:none; padding:0;">Appendix</h2>
+          </div>
+
+  <details class="expandable">
+    <summary><span class="chevron"><svg viewBox="0 0 14 14"><polyline points="4,2 10,7 4,12"/></svg></span> Building a content style guide</summary>
+    <div class="expand-content topic-content">
+      <h4>What to include</h4>
+      <p>A content style guide is a reference document for anyone who writes interface text. Minimum viable guide: voice attributes (3–5 adjectives with "this but not that" pairs), a product vocabulary (canonical terms for all core concepts), capitalization rules (sentence case vs. title case), date and time formats, number formatting, and 10–15 examples of good vs. bad copy for common patterns (errors, buttons, confirmations). Expanded guide: add tone guidance per context, localization rules, accessibility requirements, and a word list (banned words, preferred alternatives).</p>
+      <h4>Keeping it alive</h4>
+      <p>The biggest risk is creating a beautiful guide that nobody reads. Make it searchable, link to it from design tools and code review checklists, and update it when decisions are made. Treat the style guide as a product — it needs maintenance, feedback mechanisms, and evangelism. Mailchimp's guide succeeds partly because it's public — external accountability creates internal discipline.</p>
+    </div>
+  </details>
+
+  <details class="expandable">
+    <summary><span class="chevron"><svg viewBox="0 0 14 14"><polyline points="4,2 10,7 4,12"/></svg></span> Further reading and resources</summary>
+    <div class="expand-content topic-content">
+      <h4>Essential reading</h4>
+      <p><strong>"Microcopy: The Complete Guide" by Kinneret Yifrah</strong> — The most comprehensive resource on interface writing. Covers every microcopy pattern with hundreds of before/after examples.</p>
+      <p><strong>"Writing Is Designing" by Michael J. Metts and Andy Welfle</strong> — Makes the case for content design as a design discipline. Practical methods for integrating writing into the design process.</p>
+      <p><strong>"Content Design" by Sarah Winters (Richards)</strong> — The GOV.UK content design methodology. Focused on clarity, plain language, and evidence-based writing.</p>
+      <h4>Reference guides</h4>
+      <p><strong>Mailchimp Content Style Guide</strong> — Publicly available and widely referenced. An excellent starting point for creating your own.</p>
+      <p><strong>Microsoft Writing Style Guide</strong> — Comprehensive guide covering interface text, documentation, and accessibility writing.</p>
+    </div>
+  </details>
+</div>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer container">
+    <div class="footer-inner">
+      <p>Noir Book — Built for the work, not the shelf.</p>
+      <div class="footer-links">
+        <a href="../design-system.html">Design System</a>
+        <a href="../library-manifest.json">Manifest</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to Top -->
+  <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">&#8593;</button>
+
+  <!-- Floating Mobile TOC -->
+  <button class="mobile-toc-btn" id="mobileTocBtn" aria-label="Open table of contents">&#9776; Contents</button>
+  <div class="mobile-toc-overlay" id="mobileTocOverlay">
+    <div class="mobile-toc-panel">
+      <div class="mobile-toc-panel-header">
+        <h3>On this page</h3>
+        <button class="mobile-toc-close" id="mobileTocClose" aria-label="Close">&times;</button>
+      </div>
+      <ul class="mobile-toc-list">
+        <li><a href="#what-and-why" data-section="theory">What UX writing is and why words are interface</a></li>
+        <li><a href="#voice-and-tone" data-section="theory">Voice and tone frameworks</a></li>
+        <li><a href="#microcopy" data-section="practical">Microcopy patterns</a></li>
+        <li><a href="#error-messages" data-section="practical">Error messages that help</a></li>
+        <li><a href="#empty-states" data-section="practical">Empty states and zero-data screens</a></li>
+        <li><a href="#onboarding-copy" data-section="practical">Onboarding copy</a></li>
+        <li><a href="#content-first" data-section="practical">Content-first design process</a></li>
+        <li><a href="#accessibility-localization" data-section="practical">Writing for accessibility and localization</a></li>
+        <li><a href="#genai-content" data-section="practical">GenAI content design</a></li>
+        <li><a href="#templates" data-section="practical">Templates and checklists</a></li>
+        <li><a href="#real-world-examples" data-section="examples">Real-world examples</a></li>
+        <li><a href="#pitfalls" data-section="practical">Common pitfalls</a></li>
+        <li><a href="#connections">Connected topics in your library</a></li>
+        <li><a href="#deep-dive">Deep-dive appendix</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    // Scrollspy: highlight active TOC item
+    const tocLinks = document.querySelectorAll('.toc-list a');
+    const sections = [];
+    tocLinks.forEach(link => {
+      const href = link.getAttribute('href');
+      if (!href || !href.startsWith('#')) return;
+      const el = document.getElementById(href.slice(1));
+      if (el) sections.push({ el, link });
+    });
+
+    // Reading progress bar
+    const progressBar = document.getElementById('readingProgress');
+    const backToTop = document.getElementById('backToTop');
+
+    function onScroll() {
+      let current = sections[0];
+      for (const s of sections) {
+        if (s.el.getBoundingClientRect().top <= 120) current = s;
+      }
+      tocLinks.forEach(l => l.classList.remove('active'));
+      if (current) current.link.classList.add('active');
+
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrolled = window.scrollY;
+      const progress = docHeight > 0 ? (scrolled / docHeight) * 100 : 0;
+      if (progressBar) progressBar.style.width = progress + '%';
+      if (backToTop) backToTop.classList.toggle('visible', scrolled > 400);
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    // Split badges: click to scroll to section
+    document.querySelectorAll('.content-splits .split-badge').forEach(function(badge) {
+      badge.addEventListener('click', function() {
+        var type = badge.classList.contains('theory') ? 'theory' : badge.classList.contains('practical') ? 'practical' : 'examples';
+        var target = document.querySelector('section[data-section="' + type + '"]');
+        if (target) {
+          var marker = target.previousElementSibling;
+          (marker && marker.classList.contains('section-marker') ? marker : target).scrollIntoView({behavior:'smooth'});
+        }
+      });
+    });
+  </script>
+
+  <script src="../js/checklist.js"></script>
+  <script src="../js/mobile-toc.js"></script>
+  <script src="../js/search.js"></script>
+  <script>
+    function openBurger(){document.getElementById('burgerOverlay').classList.add('open');document.body.style.overflow='hidden'}
+    function closeBurger(e){if(e&&e.target&&e.target!==document.getElementById('burgerOverlay'))return;document.getElementById('burgerOverlay').classList.remove('open');document.body.style.overflow=''}
+    function burgerSearch(q){
+      var r=document.getElementById('burgerSearchResults');
+      if(!q||q.length<2){r.innerHTML='';return}
+      var ql=q.toLowerCase(),matches=[];
+      if(typeof SEARCH_INDEX!=='undefined'){
+        SEARCH_INDEX.forEach(function(t){
+          var hit=t.topic.toLowerCase().indexOf(ql)>-1;
+          if(!hit)t.sections.forEach(function(s){if((s.title+' '+s.keywords).toLowerCase().indexOf(ql)>-1)hit=true});
+          if(hit)matches.push(t);
+        });
+      }
+      if(!matches.length){r.innerHTML='<p style="padding:8px 0;font-size:13px;color:var(--ink-muted)">No results</p>';return}
+      r.innerHTML=matches.slice(0,8).map(function(m){return '<a href="../'+m.url+'">'+m.topic+'<span class="bsr-disc">'+m.discipline+'</span></a>'}).join('');
+    }
+    document.addEventListener('keydown',function(e){if(e.key==='Escape'){closeBurger();var dd=document.getElementById('searchDropdown');if(dd)dd.classList.remove('visible');}});
+    // Close burger when clicking a TOC link
+    document.querySelectorAll('.burger-toc-list a').forEach(function(a){a.addEventListener('click',function(){closeBurger()})});
+    // Search typeahead
+    function topicSearch(q){
+      var dd=document.getElementById('searchDropdown');
+      if(!q||q.length<2||typeof SEARCH_INDEX==='undefined'){if(dd)dd.classList.remove('visible');return}
+      var ql=q.toLowerCase(),grouped={};
+      SEARCH_INDEX.forEach(function(t){
+        var hit=t.topic.toLowerCase().indexOf(ql)>-1,sHits=[],mHits=[];
+        t.sections.forEach(function(s){if((s.title+' '+s.keywords).toLowerCase().indexOf(ql)>-1)sHits.push(s)});
+        (t.methods||[]).forEach(function(m){if((m.name+' '+(m.keywords||'')).toLowerCase().indexOf(ql)>-1)mHits.push(m)});
+        if(!hit&&!sHits.length&&!mHits.length&&ql.length>=3&&typeof levenshtein==='function'){
+          var words=t.topic.toLowerCase().split(/ +/);
+          for(var i=0;i<words.length;i++){if(levenshtein(ql,words[i].substring(0,ql.length+1))<=1){hit=true;break}}
+        }
+        if(hit||sHits.length||mHits.length)grouped[t.topic]={url:'../'+t.url,disc:t.discipline||'',sections:sHits,methods:mHits,topicHit:hit};
+      });
+      var keys=Object.keys(grouped);
+      if(!keys.length){dd.innerHTML='<div class="search-empty">No results</div>';dd.classList.add('visible');return}
+      var html='';
+      keys.slice(0,8).forEach(function(topic){
+        var g=grouped[topic];
+        html+='<div class="search-group"><div class="search-group-title">'+topic+'</div>';
+        if(g.topicHit)html+='<a class="search-result" href="'+g.url+'"><span class="search-result-title">'+topic+'</span><span class="search-result-type practical">'+g.disc+'</span></a>';
+        g.sections.forEach(function(s){html+='<a class="search-result" href="'+g.url+'#'+s.id+'"><span class="search-result-title">'+s.title+'</span><span class="search-result-type '+s.type+'">'+s.type+'</span></a>'});
+        g.methods.slice(0,3).forEach(function(m){html+='<a class="search-result" href="'+g.url+'#'+m.section+'"><span class="search-result-title">'+m.name+'</span><span class="search-result-type practical">method</span></a>'});
+        html+='</div>';
+      });
+      dd.innerHTML=html;dd.classList.add('visible');
+    }
+    document.addEventListener('click',function(e){if(!e.target.closest('.search-box')){var dd=document.getElementById('searchDropdown');if(dd)dd.classList.remove('visible')}});
+  </script>
+
+</body>
+</html>

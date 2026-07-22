@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Marketing Career — Noir Book</title>
+  <link rel="stylesheet" href="../css/shared.css">
+  <link rel="stylesheet" href="../css/topic.css">
+  <script src="../js/theme.js"></script>
+  <script src="../js/topic-nav.js"></script>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="site-nav subpage-nav" data-discipline="mk">
+    <div class="nav-inner">
+      <a href="../index.html" class="site-logo">
+        <span class="logo-mark">MK</span>
+        <span class="nav-title">Noir Book</span>
+      </a>
+      <a href="../index.html" class="nav-back-link">&#8592; Library</a>
+      <div class="nav-filters">
+        <button class="disc-toggle ux-toggle active" data-disc="ux" onclick="toggleDisc('ux')" title="UX Design">
+          <span class="disc-dot disc-dot-ux"></span><span class="disc-label">UX Design</span><span class="disc-code">(UX)</span>
+        </button>
+        <button class="disc-toggle pm-toggle active" data-disc="pm" onclick="toggleDisc('pm')" title="Product Management">
+          <span class="disc-dot disc-dot-pm"></span><span class="disc-label">Product</span><span class="disc-code">(PM)</span>
+        </button>
+        <button class="disc-toggle mk-toggle active" data-disc="mk" onclick="toggleDisc('mk')" title="Marketing &amp; Growth">
+          <span class="disc-dot disc-dot-mk"></span><span class="disc-label">Marketing</span><span class="disc-code">(MK)</span>
+        </button>
+        <button class="disc-toggle cs-toggle active" data-disc="cs" onclick="toggleDisc('cs')" title="Content Strategy">
+          <span class="disc-dot disc-dot-cs"></span><span class="disc-label">Content</span><span class="disc-code">(CS)</span>
+        </button>
+        <div class="search-box nav-search-box">
+          <div class="nav-search-wrap">
+            <div class="nav-search-pills" id="navSearchPills"></div>
+            <input type="text" id="navSearchInput" placeholder="Search..." autocomplete="off"
+              oninput="topicNavSearch(this.value)"
+              onkeydown="handleNavSearchKey(event)"
+              onfocus="handleNavSearchFocus()"
+              onblur="handleNavSearchBlur()">
+            <button type="button" class="nav-search-clear" id="navSearchClear" onclick="clearNavSearch()" aria-label="Clear search">&times;</button>
+          </div>
+          <div class="search-dropdown" id="navSearchDropdown"></div>
+        </div>
+      </div>
+      <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle theme">&#9790;</button>
+      <button class="burger-btn" id="burgerBtn" onclick="openBurger()" aria-label="Menu">
+        <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="2" y1="4" x2="16" y2="4"/><line x1="2" y1="9" x2="16" y2="9"/><line x1="2" y1="14" x2="16" y2="14"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Burger Menu Overlay -->
+  <div class="burger-overlay" id="burgerOverlay" onclick="closeBurger(event)">
+    <div class="burger-panel" onclick="event.stopPropagation()">
+      <div class="burger-panel-header">
+        <h3>Menu</h3>
+        <button class="burger-close" onclick="closeBurger()" aria-label="Close">&times;</button>
+      </div>
+      <div class="burger-search">
+        <input type="text" id="burgerSearchInput" placeholder="Search topics, methods..." autocomplete="off" oninput="burgerSearch(this.value)">
+        <div class="burger-search-results" id="burgerSearchResults"></div>
+      </div>
+      <div class="burger-links">
+        <a href="../index.html">&#8592; Back to Library</a>
+        <a href="../design-system.html">Design System</a>
+        <a href="../request-topic.html">Suggest a topic or improvement</a>
+      </div>
+      <div class="burger-toc-section">
+        <p class="burger-toc-title">On this page</p>
+        <ul class="burger-toc-list">
+        <li><a href="#what-and-why" data-section="theory">What a marketing career looks like today</a></li>
+        <li><a href="#specializations" data-section="theory">Marketing specializations</a></li>
+        <li><a href="#progression" data-section="practical">Career progression</a></li>
+        <li><a href="#ai-adaptation" data-section="practical">Staying relevant as AI changes marketing</a></li>
+        <li><a href="#examples" data-section="examples">Marketing careers in practice</a></li>
+        <li><a href="#pitfalls" data-section="practical">Common pitfalls</a></li>
+        <li><a href="#connected-topics" data-section="theory">Connected topics</a></li>
+        <li><a href="#appendix" data-section="theory">Deep-dive appendix</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Topic Header -->
+  <header class="topic-header container">
+    <div class="breadcrumb">
+      <a href="../index.html">Library</a>
+      <span class="sep">&#8250;</span>
+      <span class="breadcrumb-disc breadcrumb-mk">Marketing &amp; Growth</span>
+      <span class="sep">&#8250;</span>
+      <span>Tier 4 — Reference</span>
+      <span class="sep">&#8250;</span>
+      <span>The Marketing Career</span>
+    </div>
+    <div class="topic-meta">
+      <span class="tier-badge tier4">Tier 4</span>
+      <span style="font-size:14px;color:var(--ink-muted)">Topic MK.4.05</span>
+    </div>
+    <h1>The Marketing Career</h1>
+    <p class="topic-subtitle">Navigate your path. Marketing specializations, career progression, building a marketing portfolio, and the evolving role of marketing in tech companies.</p>
+    <div class="content-splits">
+      <span class="split-badge theory">35% Theory</span>
+      <span class="split-badge practical">45% Methods &amp; Templates</span>
+      <span class="split-badge examples">20% Examples</span>
+    </div>
+  </header>
+
+  <!-- Reading Progress Bar -->
+  <div class="reading-progress" id="readingProgress"></div>
+
+  <!-- Main Layout -->
+  <div class="container">
+    <div class="topic-layout">
+
+      <!-- Sidebar: Table of Contents -->
+      <aside class="topic-sidebar">
+        <nav class="toc">
+          <p class="sidebar-topic-title">The Marketing Career</p>
+          <p class="toc-title">On this page</p>
+          <ul class="toc-list">
+            <li><a href="#what-and-why" data-section="theory">What a marketing career looks like today</a></li>
+            <li><a href="#specializations" data-section="theory">Marketing specializations</a></li>
+            <li><a href="#progression" data-section="practical">Career progression</a></li>
+            <li><a href="#ai-adaptation" data-section="practical">Staying relevant as AI changes marketing</a></li>
+            <li><a href="#examples" data-section="examples">Marketing careers in practice</a></li>
+            <li><a href="#pitfalls" data-section="practical">Common pitfalls</a></li>
+            <li><a href="#connected-topics" data-section="theory">Connected topics</a></li>
+            <li><a href="#appendix" data-section="theory">Deep-dive appendix</a></li>
+          </ul>
+        </nav>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="topic-main topic-content">
+
+        <div class="section-marker" id="what-and-why">
+          <span class="split-badge theory">Theory</span>
+          <span class="marker-line"></span>
+        </div>
+
+        <section data-section="theory">
+  <h2>What a marketing career looks like today</h2>
+
+<p>Marketing careers are unusually varied. Unlike engineering (where the skill tree is relatively clear) or sales (where the path from SDR to VP is well-established), marketing offers a dozen distinct specializations, each with its own skill set, career ladder, and market dynamics. A content marketer, a performance marketer, and a product marketer share a discipline name but do fundamentally different work, use different tools, and are evaluated on different metrics. This breadth is both the opportunity and the challenge: you can find a niche that fits your strengths, but navigating the options requires deliberate career design.</p>
+
+<p>The marketing field is also undergoing structural change. AI tools are automating tasks that defined entry-level marketing roles five years ago — writing first drafts, generating ad variants, analyzing campaign data, creating visual assets. This doesn't eliminate marketing careers; it shifts the skill premium from execution to judgment. The marketer who can write a competent blog post is less differentiated than the marketer who can decide which blog post to write, for which audience, distributed through which channel, measured by which metric. Strategy, taste, and decision-making are becoming more valuable as execution becomes more automated.</p>
+
+<p>Marketing careers in tech companies also face a perception challenge. In many organizations, marketing is seen as a cost center rather than a growth driver — the team that makes slides and buys ads. Marketing professionals who can connect their work to revenue, articulate strategic value, and measure impact earn both respect and career advancement. This requires not just marketing skill but the ability to communicate in the language of the business.</p>
+</section>
+
+<section id="specializations" data-section="theory">
+  <h2>Marketing specializations</h2>
+
+<div class="method-card">
+  <h4>Specialization Assessment <span class="method-tag">Core Method</span></h4>
+  <p class="method-when">Use when: deciding which area of marketing to specialize in, evaluating a role change, or advising someone entering the field. The right specialization depends on your strengths, interests, and market dynamics — not just what's trending.</p>
+  <p><strong>Content marketing.</strong> Creating and distributing valuable content to attract, educate, and convert an audience. Requires: strong writing, editorial judgment, SEO understanding, analytics comfort. Career path: Content Writer → Content Strategist → Head of Content → VP of Marketing (content-led companies). Best for: people who love writing, have subject-matter curiosity, and think in editorial calendars. Market trend: AI is automating content production; the premium is shifting to content strategy, editorial voice, and distribution.</p>
+  <p><strong>Performance / growth marketing.</strong> Running paid acquisition, optimizing conversion funnels, and scaling channels with measurable ROI. Requires: analytical thinking, comfort with data, platform expertise (Google, Meta, LinkedIn), experimentation mindset. Career path: Paid Media Specialist → Growth Manager → Head of Growth → VP of Growth. Best for: people who love data, enjoy optimization puzzles, and get satisfaction from measurable results. Market trend: platform changes (privacy, cookie deprecation) are shifting the game; first-party data and creative quality matter more than targeting precision.</p>
+  <p><strong>Product marketing.</strong> Positioning products, enabling sales, and orchestrating launches. Requires: strategic thinking, strong writing, stakeholder management, competitive intelligence. Career path: PMM → Senior PMM → Group PMM → Head of Product Marketing → CMO. Best for: people who like working cross-functionally, enjoy the intersection of product and market, and are comfortable with ambiguity. Market trend: product marketing is growing in importance as SaaS markets mature and differentiation becomes harder.</p>
+  <p><strong>Brand marketing.</strong> Building brand identity, voice, creative campaigns, and long-term brand equity. Requires: creative judgment, visual sensibility, storytelling ability, agency management. Career path: Brand Manager → Senior Brand Manager → Director of Brand → VP of Brand → CMO. Best for: people with creative instincts, strong aesthetic sense, and comfort with qualitative measurement. Market trend: brand is re-emerging as a competitive advantage as performance channels become more expensive and commoditized.</p>
+  <p><strong>Marketing operations.</strong> Managing marketing technology, data infrastructure, analytics, and processes. Requires: technical aptitude, CRM expertise, data analysis, process design. Career path: Marketing Ops Specialist → Marketing Ops Manager → Director of Marketing Ops → VP of Revenue Operations. Best for: people who love systems, data architecture, and making things work efficiently. Market trend: rapidly growing specialization as the MarTech stack becomes more complex and data quality becomes more critical.</p>
+  <p><strong>Communications / PR.</strong> Media relations, corporate communications, thought leadership, and reputation management. Requires: writing skill, relationship building, news judgment, crisis management. Career path: Communications Specialist → PR Manager → Director of Communications → VP of Communications → CCO. Best for: people who enjoy storytelling, relationship management, and navigating organizational politics. Market trend: traditional PR is evolving toward content-driven and social-first communications.</p>
+</div>
+
+<div class="method-card">
+  <h4>T-Shaped Marketer Framework <span class="method-tag">Core Method</span></h4>
+  <p class="method-when">Use when: planning your skill development. The T-shaped marketer has broad foundational knowledge across marketing (the horizontal bar) and deep expertise in one or two specializations (the vertical bars).</p>
+  <p><strong>The horizontal bar (breadth).</strong> Every marketer should understand: positioning and messaging fundamentals, how different channels work (even ones they don't specialize in), basic analytics and attribution, the customer journey, and how marketing connects to sales and product. This breadth ensures you can collaborate across specializations, participate in strategic conversations, and eventually lead a multi-function team.</p>
+  <p><strong>The vertical bars (depth).</strong> Choose one or two areas where you develop deep expertise. Depth means you can: diagnose complex problems in your domain, teach others, form opinions based on experience (not just best practices), and produce high-quality work that specialists would respect. Depth is what makes you valuable — breadth makes you versatile.</p>
+  <p><strong>Building the T.</strong> Early career: focus on breadth through generalist roles or rotational programs. Exposure to multiple functions helps you identify which areas resonate. Mid-career: develop depth in your chosen specialization. Take on progressively challenging projects, study the craft deeply, build a portfolio of work. Senior career: expand the T — add a second vertical bar or shift toward leadership, where breadth becomes critical again.</p>
+</div>
+</section>
+
+        <div class="section-marker" id="progression">
+          <span class="split-badge practical">Practical</span>
+          <span class="marker-line"></span>
+        </div>
+
+        <section data-section="practical">
+  <h2>Career progression</h2>
+
+<div class="method-card">
+  <h4>Marketing Career Map <span class="method-tag">Core Method</span></h4>
+  <p class="method-when">Use when: planning your career progression or evaluating your next role. Marketing career paths are less standardized than engineering or product — understanding the common trajectories helps you navigate intentionally.</p>
+  <p><strong>Individual contributor track.</strong> Specialist → Senior Specialist → Staff/Principal. This path rewards deepening expertise without taking on management responsibility. Staff-level marketers are recognized experts in their specialization — they set strategy for their domain, mentor others, and influence the broader marketing approach. Not every company has this track, but it's growing in prevalence. Best for: people who love the craft, want to stay close to the work, and aren't drawn to people management.</p>
+  <p><strong>Management track.</strong> Manager → Director → VP → CMO. This path trades hands-on execution for team leadership, strategy, and organizational influence. At the manager level, you're still involved in the work. At the director level, you're setting strategy and developing people. At the VP/CMO level, you're a business leader who happens to lead marketing — board communication, budget defense, cross-functional leadership, and company strategy become the job. Best for: people who get energy from developing others, enjoy organizational complexity, and can step back from execution without losing touch.</p>
+  <p><strong>Cross-functional transitions.</strong> Marketing skills transfer to adjacent roles: Product Marketing → Product Management (common at mid-career), Content Marketing → Editorial/Media leadership, Growth Marketing → General Management, Brand Marketing → Creative Agency leadership, Marketing Ops → Revenue Operations. The most successful transitions leverage what you know while filling the gaps in the new domain. A marketer moving to PM brings customer understanding and communication skills; they need to develop technical judgment and prioritization frameworks.</p>
+</div>
+
+<div class="method-card">
+  <h4>Marketing Portfolio Guide <span class="method-tag">Core Method</span></h4>
+  <p class="method-when">Use when: building or updating your portfolio for job applications, promotions, or freelance positioning. Unlike design (where portfolios are standard), marketing portfolios are less common — which means having one is a significant differentiator.</p>
+  <p><strong>What to include.</strong> 3-5 case studies that demonstrate strategic thinking, execution quality, and measurable results. Each case study should cover: the business context (what was the challenge?), your approach (what strategy did you develop and why?), the execution (what did you actually do?), and the results (what happened, with specific metrics?). Include the thinking behind decisions, not just the outcomes — hiring managers and clients want to see how you approach problems, not just that things worked out.</p>
+  <p><strong>Show range and depth.</strong> Include at least one project that shows strategic thinking (a positioning exercise, a marketing plan, a channel strategy) and at least one that shows execution craft (a campaign you built, content you created, a conversion optimization you ran). If you're a specialist, show depth in your domain; if you're a generalist, show versatility across channels.</p>
+  <p><strong>Handle confidentiality.</strong> You can often share work direction and results without disclosing confidential details. "Repositioned the product from a general-purpose platform to a vertical solution for healthcare, resulting in 3x pipeline growth in the target segment" shares the story without revealing proprietary strategy. Ask employers about their content sharing policies or anonymize details when necessary.</p>
+  <p><strong>Format.</strong> A personal website with case study pages is ideal. A Google Slides or PDF deck works for job applications. LinkedIn posts that walk through your thinking on specific projects function as a lightweight portfolio. Whatever the format, make it easy to access, easy to read, and focused on the work — not on the template design.</p>
+</div>
+</section>
+
+<section id="ai-adaptation" data-section="practical">
+  <h2>Staying relevant as AI changes marketing</h2>
+
+<div class="method-card">
+  <h4>Skill Gap Analysis <span class="method-tag">Core Method</span></h4>
+  <p class="method-when">Use when: evaluating which skills to invest in as AI tools automate parts of marketing execution. Not all marketing skills are equally automatable — understanding where the premium is shifting helps you invest your development time wisely.</p>
+  <p><strong>Skills becoming commoditized by AI.</strong> First-draft copywriting, basic graphic design, routine data analysis, simple SEO keyword research, ad variant generation, email template creation, social media scheduling. These remain useful foundational skills, but they no longer differentiate. If your primary value is producing things AI can produce, your market value is declining.</p>
+  <p><strong>Skills with increasing premium.</strong> Strategic judgment (which segment to target, which message will resonate, which channel to invest in), creative direction (knowing what's good, not just generating what's possible), customer empathy (understanding motivations that don't appear in data), cross-functional leadership (aligning product, sales, and marketing), brand voice and taste (the indefinable quality that makes marketing feel distinctive rather than generic), and experimentation design (knowing what to test and how to interpret results).</p>
+  <p><strong>New skills to develop.</strong> AI tool fluency (using AI as a multiplier for your existing skills, not a replacement), prompt engineering for marketing (directing AI to produce on-brand, strategically aligned output), AI output editing (recognizing and fixing the subtle ways AI-generated content fails — generic phrasing, missing context, hallucinated claims), and data literacy (as AI generates more data, the ability to interpret it strategically becomes more valuable).</p>
+  <p>The meta-skill: learning speed. The AI landscape is changing faster than any skill list can capture. Marketers who stay relevant are those who continuously experiment with new tools, adapt their workflow, and invest in the judgment skills that AI amplifies rather than replaces.</p>
+</div>
+</section>
+
+        <div class="section-marker" id="examples">
+          <span class="split-badge examples">Examples</span>
+          <span class="marker-line"></span>
+        </div>
+
+        <section data-section="examples">
+  <h2>Marketing careers in practice</h2>
+
+<div class="case-study">
+  <div class="case-label">Pattern: The generalist who found her specialization</div>
+  <p>A marketer spent her first three years as the sole marketer at two startups — doing everything from writing blog posts to running paid ads to designing landing pages. She enjoyed all of it but didn't feel like she was building deep expertise. At her third company, she noticed she consistently gravitated toward the strategic work: positioning new features, building sales decks, training sales reps on competitive messaging. A mentor pointed out she was naturally doing product marketing. She pursued a PMM role at a mid-stage company, leveraged her generalist background to understand how positioning affected every channel, and advanced to Head of Product Marketing within three years. The generalist years weren't wasted — they gave her the cross-functional context that made her a more effective specialist.</p>
+</div>
+
+<div class="case-study">
+  <div class="case-label">Pattern: The performance marketer who adapted to the AI shift</div>
+  <p>A paid media specialist with 5 years of experience saw AI tools automate most of his daily workflow — ad copy generation, bid optimization, audience targeting, and creative testing were increasingly handled by platform algorithms. Instead of competing with automation, he shifted his focus to the work AI couldn't do: defining the strategic framework for which audiences to target and why, designing the experimentation program that tested new channels and messages, and building the measurement infrastructure that connected ad spend to revenue. His title changed from "Paid Media Manager" to "Growth Strategy Lead," and his value to the organization increased because he focused on the decisions rather than the execution.</p>
+</div>
+
+<div class="case-study">
+  <div class="case-label">Pattern: The portfolio that opened doors</div>
+  <p>A marketing manager applying for a senior role at a competitive SaaS company was one of 200 applicants. She spent a weekend building a personal website with three case studies: a repositioning project that doubled trial conversion, a content strategy that built a 50,000-subscriber newsletter, and a launch campaign that generated press coverage in three industry publications. Each case study walked through her strategic thinking, the decisions she made, and the results with specific metrics. The hiring manager later told her that fewer than 10 of the 200 applicants had a portfolio — and hers was the reason she got an interview ahead of candidates with bigger brand names on their résumé.</p>
+</div>
+</section>
+
+<section id="pitfalls" data-section="practical">
+  <h2>Common pitfalls</h2>
+
+<div class="pitfall">
+  <span class="pitfall-icon">⚠</span>
+  <p><strong>Specializing too early.</strong> Locking into paid media at 23 because your first job was in performance marketing limits your strategic perspective. Spend your first 2-3 years building breadth before choosing depth. You can't make an informed specialization decision without exposure to multiple areas.</p>
+</div>
+
+<div class="pitfall">
+  <span class="pitfall-icon">⚠</span>
+  <p><strong>Chasing job titles over skill development.</strong> A "VP of Marketing" title at a 10-person startup where you're the only marketer doesn't make you a VP. It makes you a generalist marketer with an inflated title. Prioritize roles where you'll learn — working under a strong marketing leader who can develop you is more valuable than a title bump at a company where marketing is an afterthought.</p>
+</div>
+
+<div class="pitfall">
+  <span class="pitfall-icon">⚠</span>
+  <p><strong>Ignoring the business context.</strong> Marketers who can only talk about marketing — campaigns, creative, channels — plateau below the executive level. The marketers who advance to VP and CMO are those who understand the business: revenue models, unit economics, competitive dynamics, and product strategy. Learn to speak the language of the CEO and CFO, not just the CMO.</p>
+</div>
+
+<div class="pitfall">
+  <span class="pitfall-icon">⚠</span>
+  <p><strong>Resisting AI instead of adapting.</strong> "AI can't replace real marketing" is true for strategic and creative work — and irrelevant for the execution work that many marketers spend most of their time doing. Marketers who refuse to use AI tools fall behind those who use them to operate at 2x speed on execution, freeing time for the strategic work that humans do better.</p>
+</div>
+</section>
+
+<section id="connected-topics" data-section="theory">
+  <h2>Connected topics</h2>
+
+  <div class="cross-ref-grid">
+    <a href="marketing-leadership.html" class="cross-ref-card">
+      <span class="ref-number">MK Tier 4</span>
+      <div class="ref-title">Marketing Leadership &amp; Team Building</div>
+      <div class="ref-reason">The management track destination — what marketing leadership actually involves day-to-day.</div>
+    </a>
+    <a href="ai-marketing.html" class="cross-ref-card">
+      <span class="ref-number">MK Tier 3</span>
+      <div class="ref-title">AI in Marketing</div>
+      <div class="ref-reason">Understanding AI's impact on marketing practice — essential context for career planning.</div>
+    </a>
+    <a href="pm-career.html" class="cross-ref-card">
+      <span class="ref-number">PM Tier 4</span>
+      <div class="ref-title">The PM Career</div>
+      <div class="ref-reason">Adjacent career path — product management is one of the most common marketing career transitions.</div>
+    </a>
+    <a href="portfolio.html" class="cross-ref-card">
+      <span class="ref-number">UX Tier 4</span>
+      <div class="ref-title">Build a Standout Portfolio</div>
+      <div class="ref-reason">Portfolio-building principles from design — applicable to marketing case study portfolios.</div>
+    </a>
+  </div>
+</section>
+
+<section id="appendix" data-section="theory">
+  <h2>Deep-dive appendix</h2>
+  <details class="expandable">
+    <summary><span class="chevron"><svg viewBox="0 0 14 14"><polyline points="4,2 10,7 4,12"/></svg></span> Further reading and resources</summary>
+    <div class="expand-content topic-content">
+      <h4>Essential reading</h4>
+      <p><strong>"The Marketing Book" by Jason McDonald</strong> — Broad introduction to marketing disciplines and career paths, useful for orientation and early-career planning.</p>
+      <p><strong>"Range" by David Epstein</strong> — Not marketing-specific, but makes the case for generalist exploration before specialization — directly relevant to marketing career design.</p>
+      <p><strong>"Marketing Artificial Intelligence" by Paul Roetzer and Mike Kaput</strong> — Overview of how AI is transforming marketing roles and what marketers need to adapt.</p>
+    </div>
+  </details>
+</section>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer container">
+    <div class="footer-inner">
+      <p>Noir Book — Built for the work, not the shelf.</p>
+      <div class="footer-links">
+        <a href="../design-system.html">Design System</a>
+        <a href="../library-manifest.json">Manifest</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to Top -->
+  <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">&#8593;</button>
+
+  <!-- Floating Mobile TOC -->
+  <button class="mobile-toc-btn" id="mobileTocBtn" aria-label="Open table of contents">&#9776; Contents</button>
+  <div class="mobile-toc-overlay" id="mobileTocOverlay">
+    <div class="mobile-toc-panel">
+      <div class="mobile-toc-panel-header">
+        <h3>On this page</h3>
+        <button class="mobile-toc-close" id="mobileTocClose" aria-label="Close">&times;</button>
+      </div>
+      <ul class="mobile-toc-list">
+        <li><a href="#what-and-why" data-section="theory">What a marketing career looks like today</a></li>
+        <li><a href="#specializations" data-section="theory">Marketing specializations</a></li>
+        <li><a href="#progression" data-section="practical">Career progression</a></li>
+        <li><a href="#ai-adaptation" data-section="practical">Staying relevant as AI changes marketing</a></li>
+        <li><a href="#examples" data-section="examples">Marketing careers in practice</a></li>
+        <li><a href="#pitfalls" data-section="practical">Common pitfalls</a></li>
+        <li><a href="#connected-topics" data-section="theory">Connected topics</a></li>
+        <li><a href="#appendix" data-section="theory">Deep-dive appendix</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    // Scrollspy: highlight active TOC item
+    const tocLinks = document.querySelectorAll('.toc-list a');
+    const sections = [];
+    tocLinks.forEach(link => {
+      const href = link.getAttribute('href');
+      if (!href || !href.startsWith('#')) return;
+      const el = document.getElementById(href.slice(1));
+      if (el) sections.push({ el, link });
+    });
+
+    // Reading progress bar
+    const progressBar = document.getElementById('readingProgress');
+    const backToTop = document.getElementById('backToTop');
+
+    function onScroll() {
+      let current = sections[0];
+      for (const s of sections) {
+        if (s.el.getBoundingClientRect().top <= 120) current = s;
+      }
+      tocLinks.forEach(l => l.classList.remove('active'));
+      if (current) current.link.classList.add('active');
+
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrolled = window.scrollY;
+      const progress = docHeight > 0 ? (scrolled / docHeight) * 100 : 0;
+      if (progressBar) progressBar.style.width = progress + '%';
+      if (backToTop) backToTop.classList.toggle('visible', scrolled > 400);
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    // Split badges: click to scroll to section
+    document.querySelectorAll('.content-splits .split-badge').forEach(function(badge) {
+      badge.addEventListener('click', function() {
+        var type = badge.classList.contains('theory') ? 'theory' : badge.classList.contains('practical') ? 'practical' : 'examples';
+        var target = document.querySelector('section[data-section="' + type + '"]');
+        if (target) {
+          var marker = target.previousElementSibling;
+          (marker && marker.classList.contains('section-marker') ? marker : target).scrollIntoView({behavior:'smooth'});
+        }
+      });
+    });
+  </script>
+
+  <script src="../js/checklist.js"></script>
+  <script src="../js/mobile-toc.js"></script>
+  <script src="../js/search.js"></script>
+  <script>
+    function openBurger(){document.getElementById('burgerOverlay').classList.add('open');document.body.style.overflow='hidden'}
+    function closeBurger(e){if(e&&e.target&&e.target!==document.getElementById('burgerOverlay'))return;document.getElementById('burgerOverlay').classList.remove('open');document.body.style.overflow=''}
+    function burgerSearch(q){
+      var r=document.getElementById('burgerSearchResults');
+      if(!q||q.length<2){r.innerHTML='';return}
+      var ql=q.toLowerCase(),matches=[];
+      if(typeof SEARCH_INDEX!=='undefined'){
+        SEARCH_INDEX.forEach(function(t){
+          var hit=t.topic.toLowerCase().indexOf(ql)>-1;
+          if(!hit)t.sections.forEach(function(s){if((s.title+' '+s.keywords).toLowerCase().indexOf(ql)>-1)hit=true});
+          if(hit)matches.push(t);
+        });
+      }
+      if(!matches.length){r.innerHTML='<p style="padding:8px 0;font-size:13px;color:var(--ink-muted)">No results</p>';return}
+      r.innerHTML=matches.slice(0,8).map(function(m){return '<a href="../'+m.url+'">'+m.topic+'<span class="bsr-disc">'+m.discipline+'</span></a>'}).join('');
+    }
+    document.addEventListener('keydown',function(e){if(e.key==='Escape'){closeBurger();var dd=document.getElementById('searchDropdown');if(dd)dd.classList.remove('visible');}});
+    // Close burger when clicking a TOC link
+    document.querySelectorAll('.burger-toc-list a').forEach(function(a){a.addEventListener('click',function(){closeBurger()})});
+    // Search typeahead
+    function topicSearch(q){
+      var dd=document.getElementById('searchDropdown');
+      if(!q||q.length<2||typeof SEARCH_INDEX==='undefined'){if(dd)dd.classList.remove('visible');return}
+      var ql=q.toLowerCase(),grouped={};
+      SEARCH_INDEX.forEach(function(t){
+        var hit=t.topic.toLowerCase().indexOf(ql)>-1,sHits=[],mHits=[];
+        t.sections.forEach(function(s){if((s.title+' '+s.keywords).toLowerCase().indexOf(ql)>-1)sHits.push(s)});
+        (t.methods||[]).forEach(function(m){if((m.name+' '+(m.keywords||'')).toLowerCase().indexOf(ql)>-1)mHits.push(m)});
+        if(!hit&&!sHits.length&&!mHits.length&&ql.length>=3&&typeof levenshtein==='function'){
+          var words=t.topic.toLowerCase().split(/ +/);
+          for(var i=0;i<words.length;i++){if(levenshtein(ql,words[i].substring(0,ql.length+1))<=1){hit=true;break}}
+        }
+        if(hit||sHits.length||mHits.length)grouped[t.topic]={url:'../'+t.url,disc:t.discipline||'',sections:sHits,methods:mHits,topicHit:hit};
+      });
+      var keys=Object.keys(grouped);
+      if(!keys.length){dd.innerHTML='<div class="search-empty">No results</div>';dd.classList.add('visible');return}
+      var html='';
+      keys.slice(0,8).forEach(function(topic){
+        var g=grouped[topic];
+        html+='<div class="search-group"><div class="search-group-title">'+topic+'</div>';
+        if(g.topicHit)html+='<a class="search-result" href="'+g.url+'"><span class="search-result-title">'+topic+'</span><span class="search-result-type practical">'+g.disc+'</span></a>';
+        g.sections.forEach(function(s){html+='<a class="search-result" href="'+g.url+'#'+s.id+'"><span class="search-result-title">'+s.title+'</span><span class="search-result-type '+s.type+'">'+s.type+'</span></a>'});
+        g.methods.slice(0,3).forEach(function(m){html+='<a class="search-result" href="'+g.url+'#'+m.section+'"><span class="search-result-title">'+m.name+'</span><span class="search-result-type practical">method</span></a>'});
+        html+='</div>';
+      });
+      dd.innerHTML=html;dd.classList.add('visible');
+    }
+    document.addEventListener('click',function(e){if(!e.target.closest('.search-box')){var dd=document.getElementById('searchDropdown');if(dd)dd.classList.remove('visible')}});
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,684 @@
+<!--
+TOPIC_ID: PM.1.01
+TOPIC_NUMBER: PM.1.01
+TITLE: Product Strategy &amp; Vision
+SUBTITLE: Define where you're going and why. Vision statements, strategy frameworks, competitive positioning, and translating company mission into product direction that teams can execute against.
+TIER: 1
+TIER_LABEL: Core Toolkit
+THEORY: 25
+PRACTICAL: 50
+EXAMPLES: 25
+-->
+
+<!-- SECTION: What & Why (Theory — ~25%) -->
+<section id="what-product-strategy-is-and-why-it-matters" data-section="theory">
+  <h2>What product strategy is and why it matters</h2>
+
+<p>Product strategy is the set of choices that define what your product will be, who it's for, and how it wins. It sits between company strategy (where the business is going) and execution (what you build this quarter). Without it, you have a feature factory — a team that ships things without knowing why those things matter or whether they add up to anything coherent.</p>
+
+<p>A product strategy answers four questions that every PM must be able to articulate clearly: <strong>Who</strong> is this product for? <strong>What</strong> problem does it solve for them? <strong>Why</strong> will they choose it over alternatives? <strong>How</strong> does serving these users create value for the business? If you can't answer all four, you don't have a strategy — you have a wish list.</p>
+
+<p>Strategy is not a roadmap. A roadmap is a sequence of things you plan to build. Strategy is the logic that decides what belongs on the roadmap and what doesn't. Two PMs can look at the same backlog and prioritize completely differently depending on their strategy. That's not a bug — it's the point. Strategy is how you make trade-offs consistently, even when individual decisions are hard.</p>
+
+<div class="callout info">
+  <p class="callout-title">Why this matters for your projects</p>
+  <p>Products without strategy drift. They accumulate features that each made sense individually but don't add up to a coherent experience. The checkout team optimizes for speed. The onboarding team optimizes for engagement. The enterprise team adds features that confuse individual users. Without a shared strategy, every team optimizes locally and the product fragments globally. Strategy is the connective tissue that turns a collection of features into a product with a point of view.</p>
+</div>
+
+<h3 id="strategy-vs-vision-vs-mission">Strategy vs. vision vs. mission</h3>
+
+<p>These terms get confused constantly. Here's how they differ and how they connect.</p>
+
+<p><strong>Mission</strong> is why your company exists. It's stable over decades. Google's mission — "organize the world's information and make it universally accessible and useful" — has been the same since 1998. Missions are deliberately broad. They don't tell you what to build; they tell you what you're ultimately trying to achieve.</p>
+
+<p><strong>Vision</strong> is where you're going — a vivid description of the future you're working toward. It's aspirational and time-bound (3–5 years). A good vision is specific enough that you could tell whether you've achieved it. "Every small business owner can manage their finances in 10 minutes a day" is a vision. "Be the best fintech company" is not — there's no way to know when you've arrived.</p>
+
+<p><strong>Strategy</strong> is how you get from here to there — the set of choices that define your approach. It includes who you serve, what you build for them, what you deliberately don't build, and how you win against alternatives. Strategy is the plan, vision is the destination, mission is the reason for the journey.</p>
+
+<h3 id="the-strategy-execution-gap">The strategy-execution gap</h3>
+
+<p>Most product strategies fail not because the strategy is wrong but because it never reaches the people making daily decisions. A beautiful strategy deck that lives in a Google Drive folder nobody opens is worse than no strategy at all — it creates the illusion of alignment while everyone interprets direction differently.</p>
+
+<p>The gap usually manifests in three ways. First,</p>
+<ul>
+  <li><strong>the strategy is too abstract</strong> — "be the platform of choice for developers" sounds directional but doesn't help a PM decide between two backlog items on Tuesday morning. Second,.</li>
+  <li><strong>the strategy never gets translated into principles</strong> — specific guidelines like "optimize for time-to-first-value, not feature count" that people can apply without checking with leadership. Third,.</li>
+  <li><strong>the strategy never gets updated</strong> — the market shifts, the company pivots, but the strategy document still reflects last year's assumptions.</li>
+</ul>
+
+<p>Closing this gap is a core PM responsibility. Every framework in this topic is designed to produce strategy that's concrete enough to guide daily decisions, not just annual planning.</p>
+
+</section>
+
+<!-- SECTION: Core Frameworks (Practical — ~50%) -->
+<section id="core-strategy-frameworks" data-section="practical">
+  <h2>Core strategy frameworks</h2>
+
+<p>Strategy frameworks are tools for structured thinking, not fill-in-the-blank templates. Each framework below highlights different aspects of the strategic question. Use the one that matches your situation — or combine elements from several. The goal is always the same: a clear set of choices that your team can execute against.</p>
+
+<div class="method-card">
+  <h4>Product Vision Statement <span class="method-tag">Foundation</span></h4>
+  <p class="method-when">Use when: Starting a new product, redefining an existing product's direction, or aligning a team that's lost clarity on where they're headed.</p>
+  <p>A product vision describes the future your product is working toward — not what the product does today, but the world it creates when it succeeds. The best visions are vivid, aspirational, and specific enough to guide decisions. They answer: "If we succeed, what's different about the world?"</p>
+  <div class="template-box">
+    <div class="template-header">
+      <span class="template-label">Template</span>
+      <span class="template-title">Product Vision Statement</span>
+    </div>
+    <div class="template-grid">
+      <div class="template-field">
+        <div class="template-field-label">For [target user]</div>
+        <div class="template-field-hint">Be specific — not "businesses" but "marketing teams at 50–500 person B2B SaaS companies"</div>
+      </div>
+      <div class="template-field">
+        <div class="template-field-label">Who [key problem or need]</div>
+        <div class="template-field-hint">Describe the situation they're in, not the solution they want</div>
+      </div>
+      <div class="template-field">
+        <div class="template-field-label">Our product is a [category]</div>
+        <div class="template-field-hint">Name the market category so people can anchor to existing mental models</div>
+      </div>
+      <div class="template-field">
+        <div class="template-field-label">That [key benefit]</div>
+        <div class="template-field-hint">The primary outcome users care about — what changes for them</div>
+      </div>
+      <div class="template-field">
+        <div class="template-field-label">Unlike [current alternatives]</div>
+        <div class="template-field-hint">What users do today to solve this problem (competitors, manual processes, doing nothing)</div>
+      </div>
+      <div class="template-field">
+        <div class="template-field-label">We [key differentiator]</div>
+        <div class="template-field-hint">The one thing you do fundamentally differently — your right to win</div>
+      </div>
+    </div>
+  </div>
+  <p><strong>Example:</strong> "For product teams at growth-stage startups who struggle to connect user behavior to business outcomes, our product is a product analytics platform that lets anyone answer data questions in minutes without writing SQL. Unlike Mixpanel and Amplitude, we auto-instrument events so teams get value on day one without an analytics engineering team."</p>
+  <div class="callout tip">
+    <p class="callout-title">Practical tip</p>
+    <p>Test your vision statement by sharing it with a new team member and asking them to describe what the product does and who it's for. If they can't, the vision isn't clear enough. A good vision should be repeatable from memory after hearing it once.</p>
+  </div>
+</div>
+
+<div class="method-card">
+  <h4>Product Strategy Stack <span class="method-tag">Core Framework</span></h4>
+  <p class="method-when">Use when: You need to connect company mission down to quarterly execution and make the whole chain visible.</p>
+  <p>The strategy stack is a hierarchy that connects high-level intent to daily work. Each layer constrains the one below it, ensuring that every feature ties back to a strategic choice. Gibson Biddle (former Netflix VP Product) popularized this approach.</p>
+  <div class="process-steps">
+    <div class="process-step">
+      <div class="process-step-content">
+        <h4>Layer 1: Company mission</h4>
+        <p>The enduring purpose. Stable over years. You inherit this — you don't define it as a PM. Example: "Make professional quality design accessible to everyone" (Canva).</p>
+      </div>
+    </div>
+    <div class="process-step">
+      <div class="process-step-content">
+        <h4>Layer 2: Product vision (3–5 year horizon)</h4>
+        <p>Where the product is heading. Aspirational, vivid, time-bound. Example: "By 2027, Canva is how every team creates visual content — not just designers, but marketers, salespeople, and executives."</p>
+      </div>
+    </div>
+    <div class="process-step">
+      <div class="process-step-content">
+        <h4>Layer 3: Product strategy (1–2 year horizon)</h4>
+        <p>The choices that define your approach. Who you serve, what you build, what you don't, how you win. Example: "We win by expanding from individual users to team workflows. We prioritize collaboration features over advanced design tools."</p>
+      </div>
+    </div>
+    <div class="process-step">
+      <div class="process-step-content">
+        <h4>Layer 4: Product principles</h4>
+        <p>Decision-making guidelines derived from strategy. These are the "in case of conflict" rules. Example: "When in doubt, optimize for the non-designer user. If a feature requires design training to use, it's too complex."</p>
+      </div>
+    </div>
+    <div class="process-step">
+      <div class="process-step-content">
+        <h4>Layer 5: Goals (quarterly)</h4>
+        <p>OKRs or KPIs that measure progress on the strategy. Example: "Increase team workspace adoption from 15% to 30% of active users."</p>
+      </div>
+    </div>
+    <div class="process-step">
+      <div class="process-step-content">
+        <h4>Layer 6: Roadmap and backlog</h4>
+        <p>The specific features and projects that deliver on goals. Everything here should trace up through the stack. If it can't, question why it's on the roadmap.</p>
+      </div>
+    </div>
+  </div>
+  <div class="callout warning">
+    <p class="callout-title">Common mistake</p>
+    <p>Most teams jump from mission directly to roadmap, skipping layers 2–4. This creates a roadmap that looks busy but lacks strategic coherence. If you can't articulate the strategy layer, everything below it is essentially random.</p>
+  </div>
+</div>
+
+<div class="method-card">
+  <h4>Playing to Win Framework <span class="method-tag">Strategic Choice Cascade</span></h4>
+  <p class="method-when">Use when: You need to make hard strategic trade-offs and commit to a specific competitive position, especially in crowded markets.</p>
+  <p>Developed by A.G. Lafley (P&amp;G CEO) and Roger Martin, Playing to Win defines strategy as five interconnected choices. Each choice constrains the next, creating a coherent system rather than a collection of independent decisions.</p>
+  <div class="process-steps">
+    <div class="process-step">
+      <div class="process-step-content">
+        <h4>1. What is our winning aspiration?</h4>
+        <p>Not just "be successful" but a specific definition of winning that you'd recognize if you achieved it. "Be the default analytics tool for product teams under 100 employees" is a winning aspiration. "Be a great analytics company" is not.</p>
+      </div>
+    </div>
+    <div class="process-step">
+      <div class="process-step-content">
+        <h4>2. Where will we play?</h4>
+        <p>Which customers, geographies, product categories, and channels will you focus on — and which will you deliberately ignore? This is the hardest choice because it requires saying no. "We serve growth-stage B2B SaaS companies in North America and Europe" means you're not serving enterprise, not serving consumer, and not serving Asia-Pacific. Yet.</p>
+      </div>
+    </div>
+    <div class="process-step">
+      <div class="process-step-content">
+        <h4>3. How will we win?</h4>
+        <p>Your competitive advantage in the arena you've chosen. This is your unique value proposition — the thing you do that competitors can't easily copy. Cost leadership, differentiation, or a specific capability advantage. "We win with self-serve onboarding that delivers value in under 5 minutes, while competitors require sales calls and implementation projects."</p>
+      </div>
+    </div>
+    <div class="process-step">
+      <div class="process-step-content">
+        <h4>4. What capabilities must we have?</h4>
+        <p>The specific abilities your organization needs to win the way you've chosen. If your strategy is "self-serve simplicity," you need world-class onboarding design, auto-instrumentation technology, and a support model that doesn't require account managers.</p>
+      </div>
+    </div>
+    <div class="process-step">
+      <div class="process-step-content">
+        <h4>5. What management systems are required?</h4>
+        <p>The structures, processes, and metrics that support the capabilities. How you measure success, how you make decisions, how you allocate resources. This layer ensures the strategy is actually executable, not just aspirational.</p>
+      </div>
+    </div>
+  </div>
+  <p>The power of this framework is the cascade: each choice reinforces the others. If you change "where will we play," the entire cascade needs re-evaluation. This makes the system robust — it's hard to make one inconsistent change without noticing.</p>
+</div>
+
+<div class="method-card">
+  <h4>Strategic Bet Framework <span class="method-tag">Decision Tool</span></h4>
+  <p class="method-when">Use when: You need to evaluate whether a new opportunity, market expansion, or product investment fits your strategy — and communicate the reasoning to stakeholders.</p>
+  <p>Every strategic initiative is a bet. The Strategic Bet Framework makes the bet explicit so you can evaluate it honestly rather than rationalizing a decision you've already made emotionally.</p>
+  <div class="template-box">
+    <div class="template-header">
+      <span class="template-label">Template</span>
+      <span class="template-title">Strategic Bet Canvas</span>
+    </div>
+    <div class="template-grid">
+      <div class="template-field">
+        <div class="template-field-label">The bet</div>
+        <div class="template-field-hint">One sentence describing what you're proposing. "We will build a self-serve analytics product for SMBs."</div>
+      </div>
+      <div class="template-field">
+        <div class="template-field-label">We believe this because</div>
+        <div class="template-field-hint">2–3 evidence-backed assumptions. Customer research, market data, competitive gaps.</div>
+      </div>
+      <div class="template-field">
+        <div class="template-field-label">We will know it's working when</div>
+        <div class="template-field-hint">Concrete success metrics with thresholds. "500 paying customers within 6 months."</div>
+      </div>
+      <div class="template-field">
+        <div class="template-field-label">The riskiest assumption is</div>
+        <div class="template-field-hint">The one thing that, if wrong, kills the bet. This is what you test first.</div>
+      </div>
+      <div class="template-field">
+        <div class="template-field-label">We'll invest</div>
+        <div class="template-field-hint">Resources, timeline, opportunity cost. What are you not doing to pursue this?</div>
+      </div>
+      <div class="template-field">
+        <div class="template-field-label">The exit criteria</div>
+        <div class="template-field-hint">When do you kill the bet? Define failure conditions up front, before sunk cost bias kicks in.</div>
+      </div>
+    </div>
+  </div>
+  <div class="callout tip">
+    <p class="callout-title">Practical tip</p>
+    <p>Write the exit criteria before you start executing. Once you're invested — emotionally and financially — it's nearly impossible to define honest failure conditions. Do it when you're still objective.</p>
+  </div>
+</div>
+
+<div class="method-card">
+  <h4>Jobs-to-be-Done Strategy <span class="method-tag">User-Centered Strategy</span></h4>
+  <p class="method-when">Use when: You need to ground your strategy in what users actually need rather than what competitors are building. Especially powerful when entering new markets or repositioning.</p>
+  <p>JTBD (Clayton Christensen) frames strategy around the "jobs" customers hire your product to do. A job is a progress that a customer is trying to make in a given circumstance. It's not a feature request — it's the underlying need that drives behavior.</p>
+  <div class="process-steps">
+    <div class="process-step">
+      <div class="process-step-content">
+        <h4>Identify the job</h4>
+        <p>Interview customers about moments of change — when they switched to your product, when they left a competitor, when they started using a workaround. The "switching moment" reveals the job. Milkshakes get "hired" for the morning commute — not because they're delicious but because they're a convenient, slow-to-finish breakfast that keeps one hand free for driving.</p>
+      </div>
+    </div>
+    <div class="process-step">
+      <div class="process-step-content">
+        <h4>Map the competitive landscape by job</h4>
+        <p>Your real competitors aren't who you think. A budgeting app's competitor isn't just other budgeting apps — it's spreadsheets, paper envelopes, doing nothing, and asking a financially savvy friend. Mapping by job reveals the true competitive set and often exposes whitespace.</p>
+      </div>
+    </div>
+    <div class="process-step">
+      <div class="process-step-content">
+        <h4>Align product decisions to the job</h4>
+        <p>Every feature should make the product better at the job customers hire it for. Features that don't serve the core job — no matter how cool — dilute the product. This is how you say no with confidence: "That feature doesn't serve the job our customers hire us for."</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="method-card">
+  <h4>Product Principles <span class="method-tag">Decision Guide</span></h4>
+  <p class="method-when">Use when: Your strategy is defined but teams still struggle with daily trade-offs. Principles translate strategy into "in case of conflict" rules.</p>
+  <p>Product principles are the operating beliefs that guide decisions when the strategy alone isn't specific enough. They're most useful when they resolve real tensions — two reasonable approaches that pull in different directions.</p>
+  <p><strong>Bad principles</strong> are truisms nobody would disagree with: "We build high-quality products." "We put users first." These don't help because they don't exclude anything.</p>
+  <p><strong>Good principles</strong> have an opposite that a reasonable team might actually choose:</p>
+  <div class="process-steps">
+    <div class="process-step">
+      <div class="process-step-content">
+        <h4>"Ship fast and iterate" vs. "Get it right before shipping"</h4>
+        <p>Both are valid strategies. If your principle is "ship fast and iterate," you're telling teams to accept rough edges in exchange for speed to market. This guides hundreds of micro-decisions about polish, edge cases, and launch readiness.</p>
+      </div>
+    </div>
+    <div class="process-step">
+      <div class="process-step-content">
+        <h4>"Optimize for power users" vs. "Optimize for new users"</h4>
+        <p>When a feature serves experts but confuses beginners, which way do you lean? The principle answers this without escalation. Slack chose "make the default experience simple" — progressive disclosure, not everything at once.</p>
+      </div>
+    </div>
+    <div class="process-step">
+      <div class="process-step-content">
+        <h4>"Build for scale" vs. "Do things that don't scale"</h4>
+        <p>Early-stage products need to do unscalable things (manual onboarding, concierge service) to learn. Later-stage products need infrastructure. The principle signals where you are and what matters now.</p>
+      </div>
+    </div>
+  </div>
+  <div class="callout tip">
+    <p class="callout-title">Practical tip</p>
+    <p>Limit yourself to 5–7 principles. More than that and nobody remembers them. Write them as short, opinionated statements — not paragraphs. Post them where the team will see them daily. If nobody ever refers to a principle during a decision, it's not doing its job.</p>
+  </div>
+</div>
+
+<div class="method-card">
+  <h4>Strategy Narrative <span class="method-tag">Communication Tool</span></h4>
+  <p class="method-when">Use when: You need to communicate your product strategy to the team, leadership, investors, or new hires in a way that's compelling and memorable.</p>
+  <p>A strategy narrative is a 2–4 page written document (not a slide deck) that tells the story of your strategy. The format forces clarity — you can't hide behind bullet points and buzzwords when writing in prose. Amazon's 6-pager tradition exists precisely because narrative writing exposes fuzzy thinking.</p>
+  <div class="process-steps">
+    <div class="process-step">
+      <div class="process-step-content">
+        <h4>The world as it is</h4>
+        <p>Describe the current landscape: what users struggle with, how the market works today, what's changing. Use specific data and real customer quotes. Make the reader feel the problem.</p>
+      </div>
+    </div>
+    <div class="process-step">
+      <div class="process-step-content">
+        <h4>The world as it could be</h4>
+        <p>Paint the vision. What does the world look like if your product succeeds? Be vivid and specific. "Marketing teams spend 3 hours per week on reporting instead of 15" is more compelling than "we reduce reporting time."</p>
+      </div>
+    </div>
+    <div class="process-step">
+      <div class="process-step-content">
+        <h4>Our approach</h4>
+        <p>The strategic choices you've made: who you serve, what you build, how you win. Include what you've deliberately chosen not to do — this demonstrates strategic clarity.</p>
+      </div>
+    </div>
+    <div class="process-step">
+      <div class="process-step-content">
+        <h4>How we'll know it's working</h4>
+        <p>The metrics and milestones that indicate progress. Connect each metric back to a strategic choice. "Team workspace adoption" measures whether you're winning on collaboration. "Time-to-first-insight" measures whether self-serve simplicity is working.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+</section>
+
+<!-- SECTION: Templates & Checklists -->
+<section id="templates-and-checklists" data-section="practical">
+  <h2>Templates and checklists</h2>
+
+<div class="template-box">
+  <div class="template-header">
+    <span class="template-label">Checklist</span>
+    <span class="template-title">Product Strategy Readiness</span>
+  </div>
+  <ul class="checklist">
+    <li>Target user clearly defined — specific enough to exclude people</li>
+    <li>Core problem articulated as a user need, not a product feature</li>
+    <li>Competitive landscape mapped — including non-obvious alternatives (spreadsheets, manual processes, doing nothing)</li>
+    <li>Differentiation defined — the one thing you do that competitors can't easily copy</li>
+    <li>Product principles written — 5–7 opinionated statements that resolve real trade-offs</li>
+    <li>Success metrics identified — leading indicators you can measure quarterly</li>
+    <li>"What we don't do" list exists — deliberate exclusions, not just priorities</li>
+    <li>Strategy narrative written and shared — not a deck, a written document</li>
+    <li>Every roadmap item traces back to a strategic choice</li>
+    <li>Team members can articulate the strategy without referencing a document</li>
+  </ul>
+</div>
+
+<div class="template-box">
+  <div class="template-header">
+    <span class="template-label">Template</span>
+    <span class="template-title">Strategy One-Pager</span>
+  </div>
+  <div class="template-grid">
+    <div class="template-field">
+      <div class="template-field-label">Vision (one sentence)</div>
+      <div class="template-field-hint">The future you're building toward. Aspirational, vivid, time-bound.</div>
+    </div>
+    <div class="template-field">
+      <div class="template-field-label">Target user</div>
+      <div class="template-field-hint">Who exactly. Job title, company stage, situation, pain level.</div>
+    </div>
+    <div class="template-field">
+      <div class="template-field-label">Core problem</div>
+      <div class="template-field-hint">The one problem you solve better than anyone. Stated as a user need.</div>
+    </div>
+    <div class="template-field">
+      <div class="template-field-label">How we win</div>
+      <div class="template-field-hint">Your competitive advantage. The moat. What's hard to copy.</div>
+    </div>
+    <div class="template-field">
+      <div class="template-field-label">Key metrics</div>
+      <div class="template-field-hint">2–3 numbers that indicate whether the strategy is working.</div>
+    </div>
+    <div class="template-field">
+      <div class="template-field-label">What we don't do</div>
+      <div class="template-field-hint">Deliberate exclusions. Markets, features, user segments you've chosen to ignore.</div>
+    </div>
+    <div class="template-field">
+      <div class="template-field-label">Principles (3–5)</div>
+      <div class="template-field-hint">Trade-off resolvers. Short, opinionated, memorable.</div>
+    </div>
+  </div>
+</div>
+
+<div class="template-box">
+  <div class="template-header">
+    <span class="template-label">Template</span>
+    <span class="template-title">Strategy Review Agenda (Quarterly)</span>
+  </div>
+  <div class="template-grid">
+    <div class="template-field">
+      <div class="template-field-label">What's changed in the market?</div>
+      <div class="template-field-hint">New competitors, shifting customer needs, regulatory changes, technology shifts.</div>
+    </div>
+    <div class="template-field">
+      <div class="template-field-label">What did we learn this quarter?</div>
+      <div class="template-field-hint">Customer insights, experiment results, wins and losses. Evidence, not opinions.</div>
+    </div>
+    <div class="template-field">
+      <div class="template-field-label">Are our strategic bets paying off?</div>
+      <div class="template-field-hint">Check each active bet against its success criteria. Honest assessment.</div>
+    </div>
+    <div class="template-field">
+      <div class="template-field-label">Do our principles still hold?</div>
+      <div class="template-field-hint">Have we encountered situations where a principle led to the wrong decision?</div>
+    </div>
+    <div class="template-field">
+      <div class="template-field-label">What should we start, stop, or continue?</div>
+      <div class="template-field-hint">One concrete action per category. Don't review without deciding.</div>
+    </div>
+  </div>
+</div>
+
+</section>
+
+<!-- SECTION: Real-World Examples (~25%) -->
+<section id="real-world-examples" data-section="examples">
+  <h2>Real-world examples</h2>
+
+<div class="case-study">
+  <p class="case-label">Case study</p>
+  <h4>Stripe: "Increase the GDP of the internet" — strategy as a filter</h4>
+  <p>Stripe's vision — to increase the GDP of the internet — sounds impossibly broad. But it functions as a remarkably effective strategic filter. Every product decision gets tested against it: does this make it easier for businesses to operate online? If yes, it fits. If no, it doesn't matter how interesting the opportunity is.</p>
+  <p>This vision led Stripe to build not just payment processing but Atlas (company incorporation), Billing (subscription management), Connect (marketplace payments), and Climate (carbon removal through commerce). Each expansion makes sense under the vision even though they seem unrelated from a traditional product category perspective.</p>
+  <p>The strategic lesson: a broad vision paired with disciplined execution creates coherent expansion. Stripe didn't try to build everything at once — they started with the developer payments API, proved it, then expanded into adjacent "GDP of the internet" territory methodically. The vision was broad; the execution was sequential and deliberate.</p>
+</div>
+
+<div class="case-study">
+  <p class="case-label">Case study</p>
+  <h4>Superhuman: "The fastest email experience ever made" — radical narrowing</h4>
+  <p>Rahul Vohra at Superhuman made a strategic choice most PMs would find terrifying: build a premium email client ($30/month) for a single user segment — high-volume professionals who spend 3+ hours per day in email. No free tier. No casual users. No mobile-first. Desktop speed, keyboard shortcuts, and workflow optimization above all else.</p>
+  <p>This narrow strategy enabled decisions that a broad email product could never make. They could skip features that most email clients consider essential (offline support, a polished mobile app) because their target users are at their desk, online, all day. They could invest deeply in speed — every interaction completes in under 100ms — because they're not spreading engineering resources across platforms.</p>
+  <p>The strategic lesson: saying no to the majority creates the space to be extraordinary for the few. Superhuman's strategy is a masterclass in "where will we play" — they chose a small arena and dominated it completely. The customers they target don't compare them to Gmail; they compare them to nothing, because nothing else serves their specific job.</p>
+</div>
+
+<div class="case-study">
+  <p class="case-label">Case study</p>
+  <h4>Notion: Platform strategy through user-generated templates</h4>
+  <p>Notion's strategy evolved from "a better note-taking app" to "the workspace that adapts to how your team thinks." The strategic insight was that instead of building specific tools (project management, wikis, docs), they'd build a flexible system of building blocks (databases, pages, toggles, relations) and let users compose their own tools.</p>
+  <p>This strategy had a crucial flywheel effect: users created templates (CRM systems, OKR trackers, content calendars) and shared them publicly. Each template was effectively a free marketing channel that demonstrated Notion's flexibility to a new audience segment. The platform strategy meant that Notion could enter new categories (project management, knowledge base, CRM) without building dedicated features for each — the users built them.</p>
+  <p>The strategic lesson: platform strategies trade short-term feature specificity for long-term category expansion. Notion is worse than Jira at project management. But it's good enough at project management while also being a wiki, a docs tool, and a database — and that "good enough at many things" position is strategically powerful when teams want fewer tools, not better ones.</p>
+</div>
+
+</section>
+
+<!-- SECTION: Common Pitfalls -->
+<section id="common-pitfalls" data-section="practical">
+  <h2>Common pitfalls</h2>
+
+<div class="pitfall">
+  <div class="pitfall-icon">!</div>
+  <div>
+    <h4>Confusing strategy with goals</h4>
+    <p>"Grow revenue by 40%" is a goal, not a strategy. It tells you what you want to achieve but nothing about how to achieve it. A strategy explains the approach: "We'll grow revenue by expanding into mid-market teams through a self-serve team plan, reducing our dependence on enterprise sales." Every strategy should be falsifiable — someone could disagree with the approach, which is what makes it a real choice.</p>
+  </div>
+</div>
+
+<div class="pitfall">
+  <div class="pitfall-icon">!</div>
+  <div>
+    <h4>Strategy by consensus</h4>
+    <p>Strategy requires hard trade-offs. If you try to make everyone happy — "we'll serve both SMBs and enterprise, we'll be both simple and powerful, we'll prioritize both growth and retention" — you end up with no strategy at all. Good strategy is uncomfortable because it means deliberately not doing things that seem reasonable. If no one on the team disagrees with any part of your strategy, it's probably not specific enough.</p>
+  </div>
+</div>
+
+<div class="pitfall">
+  <div class="pitfall-icon">!</div>
+  <div>
+    <h4>The strategy-in-a-drawer problem</h4>
+    <p>A strategy document that's reviewed once during annual planning and then forgotten is worse than no strategy. It creates false alignment — everyone thinks they're on the same page, but they've each interpreted the vague strategy differently. Strategy must be referenced in weekly decisions, sprint planning, and design reviews. If you can't point to a specific strategic choice during a prioritization debate, the strategy isn't doing its job.</p>
+  </div>
+</div>
+
+<div class="pitfall">
+  <div class="pitfall-icon">!</div>
+  <div>
+    <h4>Mistaking competitive parity for strategy</h4>
+    <p>"Match competitor X's feature set" is not a strategy — it's abdication. You're letting the competitor define your product. Competitive awareness matters, but your strategy should be based on your unique understanding of user needs, not a feature comparison matrix. The most dangerous competitors are the ones doing something completely different from you, not the ones building similar features.</p>
+  </div>
+</div>
+
+<div class="pitfall">
+  <div class="pitfall-icon">!</div>
+  <div>
+    <h4>Changing strategy too frequently</h4>
+    <p>Strategy needs time to work. Pivoting quarterly because results aren't immediate means you never learn whether any approach works. Distinguish between strategic patience (holding course while learning) and strategic stubbornness (ignoring evidence that the approach is wrong). A useful rule: change tactics frequently, change strategy rarely, and change vision almost never.</p>
+  </div>
+</div>
+
+</section>
+
+<!-- SECTION: When to Use This -->
+<section id="when-to-use" data-section="practical">
+  <h2>When to use product strategy</h2>
+
+<div class="callout info">
+  <p class="callout-title">Decision guidance</p>
+  <p><strong>Use strategy frameworks when:</strong> Starting a new product or product line. Entering a new market or segment. Your team can't agree on what to build next. Feature requests are pulling the product in multiple directions. You're about to do annual or quarterly planning. A major competitive threat has emerged. The product feels directionless despite shipping lots of features.</p>
+  <p><strong>Don't use them when:</strong> You have clear product-market fit and just need to execute. You're in a hyper-growth phase where the strategy is working and the bottleneck is engineering capacity. You're doing a focused sprint on a specific problem where the strategic context is already clear.</p>
+  <p><strong>Adapt them when:</strong> You're a solo PM or early-stage founder — you don't need all the layers of the strategy stack. Use the vision statement and 3–5 principles. Skip the formal narrative. Write the strategy on a single page and keep it updated as you learn.</p>
+</div>
+
+</section>
+
+<!-- SECTION: Connections -->
+<section id="connections">
+  <h2>Connected topics in your library</h2>
+
+<div class="cross-ref-grid">
+  <a href="#" class="cross-ref-card">
+    <span class="ref-number">PM.1.09</span>
+    <div class="ref-title">Problem Framing &amp; Opportunity Sizing</div>
+    <div class="ref-reason">Size the opportunities your strategy identifies</div>
+  </a>
+  <a href="#" class="cross-ref-card">
+    <span class="ref-number">PM.1.02</span>
+    <div class="ref-title">Product Discovery &amp; Customer Research</div>
+    <div class="ref-reason">Validate strategic assumptions with evidence</div>
+  </a>
+  <a href="#" class="cross-ref-card">
+    <span class="ref-number">PM.1.03</span>
+    <div class="ref-title">Roadmapping &amp; Prioritization</div>
+    <div class="ref-reason">Translate strategy into a buildable plan</div>
+  </a>
+  <a href="#" class="cross-ref-card">
+    <span class="ref-number">PM.1.08</span>
+    <div class="ref-title">Competitive Analysis &amp; Positioning</div>
+    <div class="ref-reason">Understand the landscape your strategy operates in</div>
+  </a>
+  <a href="#" class="cross-ref-card">
+    <span class="ref-number">PM.1.05</span>
+    <div class="ref-title">Product Metrics &amp; Analytics</div>
+    <div class="ref-reason">Measure whether your strategy is working</div>
+  </a>
+  <a href="#" class="cross-ref-card">
+    <span class="ref-number">PM.2.12</span>
+    <div class="ref-title">OKRs, Goals &amp; Accountability</div>
+    <div class="ref-reason">Connect strategy to quarterly goals</div>
+  </a>
+</div>
+
+<!-- SECTION: Deep Dive Appendix -->
+<section id="deep-dive">
+<h2>Deep-dive appendix</h2>
+<p>Extended material for when you want to go deeper. Advanced frameworks, organizational dynamics, and additional perspectives on product strategy.</p>
+
+  <details class="expandable">
+    <summary><span class="chevron"><svg viewBox="0 0 14 14"><polyline points="4,2 10,7 4,12"/></svg></span> Strategy for different product stages</summary>
+    <div class="expand-content topic-content">
+      <h4>Pre-product-market fit (0 to 1)</h4>
+      <p>At this stage, your "strategy" is a hypothesis. You don't know enough to make definitive strategic choices. The primary strategic activity is rapid learning: talking to potential users, building MVPs, and iterating on your value proposition. Don't invest in a formal strategy stack — use a vision statement and a list of assumptions to test. Your strategy changes weekly based on what you learn. This is healthy, not chaotic.</p>
+      <p>The strategic question at this stage isn't "how do we win?" but "have we found a problem worth solving?" Your entire strategic focus should be narrowed to achieving product-market fit — the moment when a specific group of users demonstrates strong, organic demand for your product.</p>
+
+      <h4>Growth stage (1 to N)</h4>
+      <p>You've found product-market fit. Now your strategy needs to scale what works. This is where the Playing to Win framework becomes most useful — you need to define your arena, commit to a competitive approach, and build the capabilities to execute. Key strategic tensions at this stage: expanding the user base without diluting what made early users love the product; adding features without losing simplicity; building for scale without over-engineering prematurely.</p>
+      <p>The most common strategic mistake at this stage is premature diversification — entering adjacent markets before deeply owning your core market. Resist the temptation to expand until your core is defensible.</p>
+
+      <h4>Mature product (N to N+1)</h4>
+      <p>Growth is slowing. Your strategy shifts from acquisition to retention, expansion revenue, and platform plays. The strategic question becomes: "How do we create more value for existing users?" This often means building ecosystem features (integrations, APIs, marketplaces) that increase switching costs and create network effects.</p>
+      <p>At this stage, you also need a "second act" strategy — what's the next major bet that can reignite growth? This is where the Strategic Bet Framework is most useful. Place 2–3 deliberate bets with clear success criteria and kill dates. Don't bet the whole company on any single initiative.</p>
+    </div>
+  </details>
+
+  <details class="expandable">
+    <summary><span class="chevron"><svg viewBox="0 0 14 14"><polyline points="4,2 10,7 4,12"/></svg></span> Navigating strategy with founders and executives</summary>
+    <div class="expand-content topic-content">
+      <h4>When the founder IS the strategy</h4>
+      <p>At many startups, product strategy lives in the founder's head. It's never written down, it shifts based on the latest conversation, and it's communicated inconsistently. As a PM in this situation, your job isn't to create strategy — it's to extract, document, and pressure-test the founder's intuition.</p>
+      <p>Run a strategy extraction session: sit with the founder for 90 minutes and ask the Playing to Win questions. Write their answers in real time. Share the document back and ask: "Is this what you mean?" This process often reveals contradictions the founder hasn't noticed ("We're serving SMBs" while also "our biggest deal is a Fortune 500 enterprise"). Surfacing these contradictions is the most valuable strategic work a PM can do in a founder-led company.</p>
+
+      <h4>Managing strategic disagreements with leadership</h4>
+      <p>Sometimes you genuinely disagree with the strategy — you think leadership is going after the wrong market, or investing in the wrong capability. The wrong move is to quietly execute a strategy you don't believe in. The right move is to articulate your alternative clearly: "Here's what I'd recommend, here's the evidence, and here's what we'd need to believe for it to work." Then, once a decision is made, disagree and commit. Execute the chosen strategy fully, even if it wasn't your preference. Half-hearted execution of a good strategy always loses to full commitment to a mediocre one.</p>
+
+      <h4>Strategy for platform/infrastructure PMs</h4>
+      <p>If you own a platform, your "users" are internal teams, and your "product" is capabilities they build on. Your strategy still needs the same elements — who you serve, what you build, how you win — but the framing is different. Your vision might be: "Any product team can ship a new feature with authentication, payments, and analytics without building any of those systems themselves." Your competitive set includes build-it-yourself and third-party SaaS tools. Your success metric is internal adoption rate, not revenue.</p>
+    </div>
+  </details>
+
+  <details class="expandable">
+    <summary><span class="chevron"><svg viewBox="0 0 14 14"><polyline points="4,2 10,7 4,12"/></svg></span> Further reading and resources</summary>
+    <div class="expand-content topic-content">
+      <h4>Essential reading</h4>
+      <p><strong>"Playing to Win" by A.G. Lafley &amp; Roger Martin</strong> — The definitive book on strategic choice cascades. Originally written for corporate strategy but directly applicable to product strategy. Short, practical, and the most useful strategy book a PM can read.</p>
+      <p><strong>"Good Strategy Bad Strategy" by Richard Rumelt</strong> — Explains why most strategies are bad (they're goals in disguise) and what makes strategy actually good (a diagnosis, a guiding policy, and coherent action). The chapter on "bad strategy" alone is worth the read.</p>
+      <p><strong>"Inspired" by Marty Cagan</strong> — The product management bible. Chapters on product vision, product strategy, and product principles provide the PM-specific lens on strategic thinking.</p>
+      <p><strong>"Competing Against Luck" by Clayton Christensen</strong> — The Jobs-to-be-Done framework applied to strategy. Reframes competitive analysis around customer progress rather than product features.</p>
+
+      <h4>Key concepts to explore</h4>
+      <p><strong>Porter's Five Forces</strong> — Still useful for understanding competitive dynamics, even though the framework was designed for industry analysis, not product strategy. Particularly valuable for understanding supplier power (platform risk) and threat of substitutes (non-obvious competition).</p>
+      <p><strong>Wardley Mapping</strong> — A technique for mapping the value chain and understanding which components are commoditizing. Useful for deciding where to build vs. buy vs. integrate, and for anticipating market evolution.</p>
+      <p><strong>DHM Model (Gibson Biddle)</strong> — Delight users in Hard-to-copy, Margin-enhancing ways. A simple framework for evaluating whether a strategic initiative creates sustainable competitive advantage.</p>
+    </div>
+  </details>
+
+</section>
+</section>
+
+<!-- Topic Navigation -->
+<div class="topic-nav">
+  <div></div>
+  <a href="problem-framing.html" class="topic-nav-link next">
+    <div class="nav-direction">Next topic</div>
+    <div class="nav-title">Problem Framing &amp; Opportunity Sizing &#8250;</div>
+  </a>
+</div>
+
+<!-- SEARCH_INDEX
+{
+    topic: "Product Strategy & Vision",
+    url: "topics/product-strategy.html",
+    tier: "Tier 1",
+    sections: [
+      { title: "What it is & why it matters", id: "what-product-strategy-is-and-why-it-matters", type: "theory", keywords: "strategy vision mission product direction trade-offs coherence alignment" },
+      { title: "Strategy vs vision vs mission", id: "strategy-vs-vision-vs-mission", type: "theory", keywords: "mission vision strategy difference hierarchy purpose direction approach" },
+      { title: "Strategy-execution gap", id: "the-strategy-execution-gap", type: "theory", keywords: "execution gap alignment principles translation abstract concrete daily decisions" },
+      { title: "Core strategy frameworks", id: "core-strategy-frameworks", type: "practical", keywords: "frameworks tools structured thinking strategic choices" },
+      { title: "Templates and checklists", id: "templates-and-checklists", type: "practical", keywords: "strategy readiness one-pager quarterly review template checklist" },
+      { title: "Real-world examples", id: "real-world-examples", type: "examples", keywords: "Stripe Superhuman Notion case study strategy execution" },
+      { title: "Common pitfalls", id: "common-pitfalls", type: "practical", keywords: "mistakes goals consensus parity changing frequency drawer problem" },
+      { title: "When to use this", id: "when-to-use", type: "practical", keywords: "decision guidance when not adapt solo founder early stage" },
+      { title: "Deep-dive appendix", id: "deep-dive", type: "deep-dive", keywords: "product stages growth mature founder executives platform further reading Lafley Martin Rumelt Cagan Christensen" }
+    ],
+    methods: [
+      { name: "Product Vision Statement", section: "core-strategy-frameworks", keywords: "vision target user differentiator category benefit positioning" },
+      { name: "Product Strategy Stack", section: "core-strategy-frameworks", keywords: "Gibson Biddle Netflix layers mission vision strategy principles goals roadmap hierarchy cascade" },
+      { name: "Playing to Win Framework", section: "core-strategy-frameworks", keywords: "Lafley Roger Martin P&G winning aspiration where play how win capabilities management systems cascade" },
+      { name: "Strategic Bet Framework", section: "core-strategy-frameworks", keywords: "bet canvas assumptions riskiest exit criteria investment opportunity evaluation" },
+      { name: "Jobs-to-be-Done Strategy", section: "core-strategy-frameworks", keywords: "JTBD Christensen hiring switching moment milkshake jobs competitive landscape progress" },
+      { name: "Product Principles", section: "core-strategy-frameworks", keywords: "principles trade-off rules decision guide opinionated tensions conflicts" },
+      { name: "Strategy Narrative", section: "core-strategy-frameworks", keywords: "narrative 6-pager Amazon written document story prose communication world as it is could be" }
+    ]
+  }
+SEARCH_INDEX -->
+
+<!-- MANIFEST
+{
+  "id": "PM.1.01",
+  "title": "Product Strategy & Vision",
+  "file": "topics/product-strategy.html",
+  "tier": 1,
+  "discipline": "PM",
+  "solves": [
+    "I need to articulate a clear product vision that aligns my team",
+    "I want to connect product decisions to business strategy",
+    "I need to evaluate whether a new opportunity fits our strategy",
+    "I want to define product principles that guide trade-off decisions",
+    "I need to create a strategic narrative for investors or leadership"
+  ],
+  "methods": [
+    "Product Vision Statement",
+    "Product Strategy Stack",
+    "Playing to Win Framework",
+    "Strategic Bet Framework",
+    "Jobs-to-be-Done Strategy",
+    "Product Principles",
+    "Strategy Narrative"
+  ],
+  "phase": "discovery",
+  "prerequisites": [],
+  "pairs_with": [
+    "PM.1.09",
+    "PM.1.02",
+    "PM.1.03"
+  ],
+  "cross_discipline": [],
+  "depth": "framework",
+  "keywords": [
+    "product strategy",
+    "vision",
+    "mission",
+    "strategic choice",
+    "competitive advantage",
+    "product principles",
+    "Playing to Win",
+    "Lafley",
+    "Martin",
+    "Gibson Biddle",
+    "strategy stack",
+    "JTBD",
+    "strategic bet",
+    "narrative",
+    "direction",
+    "trade-offs"
+  ]
+}
+MANIFEST -->

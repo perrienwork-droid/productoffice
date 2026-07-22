@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Platform &amp; API Product Management — Noir Book</title>
+  <link rel="stylesheet" href="../css/shared.css">
+  <link rel="stylesheet" href="../css/topic.css">
+  <script src="../js/theme.js"></script>
+  <script src="../js/topic-nav.js"></script>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="site-nav subpage-nav" data-discipline="pm">
+    <div class="nav-inner">
+      <a href="../index.html" class="site-logo">
+        <span class="logo-mark">PM</span>
+        <span class="nav-title">Noir Book</span>
+      </a>
+      <a href="../index.html" class="nav-back-link">&#8592; Library</a>
+      <div class="nav-filters">
+        <button class="disc-toggle ux-toggle active" data-disc="ux" onclick="toggleDisc('ux')" title="UX Design">
+          <span class="disc-dot disc-dot-ux"></span><span class="disc-label">UX Design</span><span class="disc-code">(UX)</span>
+        </button>
+        <button class="disc-toggle pm-toggle active" data-disc="pm" onclick="toggleDisc('pm')" title="Product Management">
+          <span class="disc-dot disc-dot-pm"></span><span class="disc-label">Product</span><span class="disc-code">(PM)</span>
+        </button>
+        <button class="disc-toggle mk-toggle active" data-disc="mk" onclick="toggleDisc('mk')" title="Marketing &amp; Growth">
+          <span class="disc-dot disc-dot-mk"></span><span class="disc-label">Marketing</span><span class="disc-code">(MK)</span>
+        </button>
+        <button class="disc-toggle cs-toggle active" data-disc="cs" onclick="toggleDisc('cs')" title="Content Strategy">
+          <span class="disc-dot disc-dot-cs"></span><span class="disc-label">Content</span><span class="disc-code">(CS)</span>
+        </button>
+        <div class="search-box nav-search-box">
+          <div class="nav-search-wrap">
+            <div class="nav-search-pills" id="navSearchPills"></div>
+            <input type="text" id="navSearchInput" placeholder="Search..." autocomplete="off"
+              oninput="topicNavSearch(this.value)"
+              onkeydown="handleNavSearchKey(event)"
+              onfocus="handleNavSearchFocus()"
+              onblur="handleNavSearchBlur()">
+            <button type="button" class="nav-search-clear" id="navSearchClear" onclick="clearNavSearch()" aria-label="Clear search">&times;</button>
+          </div>
+          <div class="search-dropdown" id="navSearchDropdown"></div>
+        </div>
+      </div>
+      <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle theme">&#9790;</button>
+      <button class="burger-btn" id="burgerBtn" onclick="openBurger()" aria-label="Menu">
+        <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="2" y1="4" x2="16" y2="4"/><line x1="2" y1="9" x2="16" y2="9"/><line x1="2" y1="14" x2="16" y2="14"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Burger Menu Overlay -->
+  <div class="burger-overlay" id="burgerOverlay" onclick="closeBurger(event)">
+    <div class="burger-panel" onclick="event.stopPropagation()">
+      <div class="burger-panel-header">
+        <h3>Menu</h3>
+        <button class="burger-close" onclick="closeBurger()" aria-label="Close">&times;</button>
+      </div>
+      <div class="burger-search">
+        <input type="text" id="burgerSearchInput" placeholder="Search topics, methods..." autocomplete="off" oninput="burgerSearch(this.value)">
+        <div class="burger-search-results" id="burgerSearchResults"></div>
+      </div>
+      <div class="burger-links">
+        <a href="../index.html">&#8592; Back to Library</a>
+        <a href="../design-system.html">Design System</a>
+        <a href="../request-topic.html">Suggest a topic or improvement</a>
+      </div>
+      <div class="burger-toc-section">
+        <p class="burger-toc-title">On this page</p>
+        <ul class="burger-toc-list">
+        <li><a href="#what-and-why" data-section="theory">What platform &amp; API product management is and why it matters</a></li>
+        <li><a href="#platform-types" data-section="theory">Platform types and ecosystem models</a></li>
+        <li><a href="#api-design" data-section="practical">API design principles</a></li>
+        <li><a href="#developer-experience" data-section="practical">Developer experience (DX)</a></li>
+        <li><a href="#versioning" data-section="practical">Versioning and backward compatibility</a></li>
+        <li><a href="#ecosystem-strategy" data-section="practical">Ecosystem and partner strategy</a></li>
+        <li><a href="#metrics" data-section="practical">Platform-specific metrics</a></li>
+        <li><a href="#examples" data-section="examples">Real-world examples</a></li>
+        <li><a href="#pitfalls" data-section="practical">Common pitfalls</a></li>
+        <li><a href="#connections">Connected topics in your library</a></li>
+        <li><a href="#deep-dive">Deep-dive appendix</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Topic Header -->
+  <header class="topic-header container">
+    <div class="breadcrumb">
+      <a href="../index.html">Library</a>
+      <span class="sep">&#8250;</span>
+      <span class="breadcrumb-disc breadcrumb-pm">Product Management</span>
+      <span class="sep">&#8250;</span>
+      <span>Tier 2 — Specialized</span>
+      <span class="sep">&#8250;</span>
+      <span>Platform &amp; API Product Management</span>
+    </div>
+    <div class="topic-meta">
+      <span class="tier-badge tier2">Tier 2</span>
+      <span style="font-size:14px;color:var(--ink-muted)">Topic PM.2.05</span>
+    </div>
+    <h1>Platform &amp; API Product Management</h1>
+    <p class="topic-subtitle">Build for builders. API design, developer experience, ecosystem strategy, versioning, and managing products where your users are other engineers.</p>
+    <div class="content-splits">
+      <span class="split-badge theory">25% Theory</span>
+      <span class="split-badge practical">50% Methods &amp; Templates</span>
+      <span class="split-badge examples">25% Examples</span>
+    </div>
+  </header>
+
+  <!-- Reading Progress Bar -->
+  <div class="reading-progress" id="readingProgress"></div>
+
+  <!-- Main Layout -->
+  <div class="container">
+    <div class="topic-layout">
+
+      <!-- Sidebar: Table of Contents -->
+      <aside class="topic-sidebar">
+        <nav class="toc">
+          <p class="sidebar-topic-title">Platform &amp; API Product Management</p>
+          <p class="toc-title">On this page</p>
+          <ul class="toc-list">
+            <li><a href="#what-and-why" data-section="theory">What platform &amp; API product management is and why it matters</a></li>
+            <li><a href="#platform-types" data-section="theory">Platform types and ecosystem models</a></li>
+            <li><a href="#api-design" data-section="practical">API design principles</a></li>
+            <li><a href="#developer-experience" data-section="practical">Developer experience (DX)</a></li>
+            <li><a href="#versioning" data-section="practical">Versioning and backward compatibility</a></li>
+            <li><a href="#ecosystem-strategy" data-section="practical">Ecosystem and partner strategy</a></li>
+            <li><a href="#metrics" data-section="practical">Platform-specific metrics</a></li>
+            <li><a href="#examples" data-section="examples">Real-world examples</a></li>
+            <li><a href="#pitfalls" data-section="practical">Common pitfalls</a></li>
+            <li><a href="#connections">Connected topics in your library</a></li>
+            <li><a href="#deep-dive">Deep-dive appendix</a></li>
+          </ul>
+        </nav>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="topic-main topic-content">
+
+        <div class="section-marker" id="what-and-why">
+          <span class="split-badge theory">Theory</span>
+          <span class="marker-line"></span>
+        </div>
+
+        <section data-section="theory">
+  <h2>What platform &amp; API product management is and why it matters</h2>
+
+<p>Platform and API product management is the discipline of building products whose primary users are other developers and whose primary value is enabling others to build on top of your system. Instead of designing screens for end users, you design contracts — API endpoints, SDKs, webhooks, documentation — that other engineers consume programmatically. Your "UI" is a reference doc, your "onboarding flow" is a quickstart guide, and your "feature request" is a pull request on your SDK.</p>
+
+<p>This discipline matters because platforms create compounding value. Every integration built on your API extends your product's reach without your team writing a line of code. Stripe doesn't process payments for every merchant directly — it provides the API that lets thousands of developers build payment flows into their own products. Twilio doesn't make phone calls — it lets other products make phone calls. The leverage is enormous, but so is the cost of getting it wrong: a breaking API change can destroy trust overnight, and a poorly documented SDK can kill adoption before it starts.</p>
+
+<p>The PM's role in platform products is fundamentally different from consumer or even enterprise PM. You manage a developer community, not a user base. You track integration count and API call volume, not DAU. You worry about backward compatibility and semantic versioning, not pixel-perfect designs. And your most important skill isn't storytelling to executives — it's technical empathy for the engineers who depend on your platform for their livelihood.</p>
+</section>
+
+<section id="platform-types" data-section="theory">
+  <h2>Platform types and ecosystem models</h2>
+
+<p>Not all platforms are alike, and the PM approach differs by type. An <strong>integration platform</strong> (Zapier, Workato) connects existing products together — your job is making connections easy and reliable. An <strong>infrastructure platform</strong> (AWS, Stripe, Twilio) provides building blocks developers compose into products — your job is reliability, performance, and documentation. A <strong>marketplace platform</strong> (Shopify App Store, Salesforce AppExchange) hosts third-party apps that extend a core product — your job is managing quality, discovery, and revenue sharing. A <strong>developer tool platform</strong> (GitHub, Vercel) provides workflow tools developers use directly — your job is removing friction from the development experience itself.</p>
+
+<p>Each type has different success metrics. Integration platforms measure connection count and data volume. Infrastructure platforms measure API call volume, latency, and uptime. Marketplace platforms measure app installs, developer revenue, and buyer satisfaction. Developer tool platforms measure active developers, builds per day, and time-to-deploy. Know which type you're building before defining your metrics.</p>
+</section>
+
+        <div class="section-marker" id="api-design">
+          <span class="split-badge practical">Practical</span>
+          <span class="marker-line"></span>
+        </div>
+
+        <section data-section="practical">
+  <h2>API design principles</h2>
+
+<div class="method-card">
+  <h4>REST API Design Review <span class="method-tag">Core Method</span></h4>
+  <p class="method-when">Use when: designing new endpoints or reviewing existing API surface area.</p>
+  <p>A well-designed REST API follows predictable patterns: resources as nouns (<code>/users</code>, <code>/orders</code>), HTTP methods as verbs (GET, POST, PUT, DELETE), consistent naming conventions (plural nouns, kebab-case), and standard status codes (200, 201, 400, 404, 422, 500). The PM's job isn't writing the OpenAPI spec — it's ensuring the API models the domain correctly. If your mental model of the domain is wrong, the API will be wrong, and every developer who integrates will fight the abstraction.</p>
+  <p>Review every endpoint against three questions: (1) Does this resource name match how developers think about the domain? (2) Can a developer guess what this endpoint does without reading docs? (3) Is the response shape consistent with every other endpoint? If any answer is no, redesign before shipping.</p>
+</div>
+
+<div class="method-card">
+  <h4>GraphQL vs. REST Decision Framework <span class="method-tag">Framework</span></h4>
+  <p class="method-when">Use when: choosing API paradigm for a new product or major version.</p>
+  <p>REST works well when your domain has clear, stable resources and consumers need predictable, cacheable responses. GraphQL works well when consumers need flexible queries across related data, when mobile bandwidth matters (no over-fetching), or when your frontend team and backend team want to decouple iteration speed. gRPC works well for internal service-to-service communication where performance matters more than developer ergonomics.</p>
+  <p>The decision isn't purely technical — it's a product decision. GraphQL shifts complexity to consumers (they write queries). REST shifts complexity to providers (they design endpoints for every use case). Choose based on who you trust more to handle complexity: your team or your developers.</p>
+</div>
+
+<div class="callout tip">
+  <p class="callout-title">Practical tip</p>
+  <p>Design your API for the 80% use case, not the power user edge case. If 80% of developers need the same three fields, make those the default response. Put the remaining 47 fields behind query parameters or expansion syntax. Simple defaults, powerful options.</p>
+</div>
+</section>
+
+<section id="developer-experience" data-section="practical">
+  <h2>Developer experience (DX)</h2>
+
+<div class="method-card">
+  <h4>Time-to-First-API-Call (TTFAC) Optimization <span class="method-tag">Core Method</span></h4>
+  <p class="method-when">Use when: evaluating or improving your onboarding funnel.</p>
+  <p>TTFAC is the single most important DX metric. It measures how long it takes a new developer to go from landing on your docs to successfully making their first API call. Best-in-class platforms achieve this in under 5 minutes. If yours takes 30 minutes or more, you're losing developers at every step.</p>
+  <p>Map the current TTFAC journey: (1) Find documentation → (2) Create account → (3) Get API key → (4) Install SDK → (5) Write first call → (6) Get successful response. Time each step. The biggest time sinks are usually account creation (too many fields), API key generation (buried in settings), and unclear quickstart guides (too much context, not enough copy-paste code).</p>
+  <p>Optimize ruthlessly: offer one-click sandbox keys, provide copy-pasteable curl commands on the landing page, auto-detect the developer's language and show the right SDK example, and make error messages actionable ("Invalid API key — generate one at dashboard.example.com/keys").</p>
+</div>
+
+<div class="method-card">
+  <h4>Documentation Audit <span class="method-tag">Technique</span></h4>
+  <p class="method-when">Use when: docs exist but developer satisfaction is low or support tickets are high.</p>
+  <p>Great API docs have four layers:</p>
+<ol>
+  <li><strong>Tutorials</strong> — guided walkthroughs for common tasks ("Send your first SMS"),.</li>
+  <li><strong>How-to guides</strong> — task-oriented recipes ("Handle webhook retries"),.</li>
+  <li><strong>Reference</strong> — complete endpoint documentation with every parameter,.</li>
+  <li><strong>Explanation</strong> — conceptual overviews of how the system works ("How our event system processes webhooks"). Most API docs only have layer 3 (reference). That's like having a dictionary but no grammar book — technically complete, practically useless for learning.</li>
+</ol>
+  <p>Audit by tagging every doc page as tutorial, how-to, reference, or explanation. If any layer has fewer than 20% of pages, that's your gap. Then interview 5 developers who recently integrated: what did they struggle with? The overlap between the structural gap and developer pain points is your documentation roadmap.</p>
+</div>
+
+<div class="method-card">
+  <h4>SDK Strategy Matrix <span class="method-tag">Framework</span></h4>
+  <p class="method-when">Use when: deciding which languages to support and how to maintain SDKs.</p>
+  <p>Start with your developer telemetry: which languages are developers using to call your API? Rank by volume. Then decide your SDK tier: <strong>Tier 1</strong> (official, maintained, feature-complete) for your top 2-3 languages, <strong>Tier 2</strong> (community-maintained with your review) for the next 3-4, <strong>Tier 3</strong> (community-only, listed but not endorsed) for the rest. Never promise official support for more languages than your team can realistically maintain — a broken SDK is worse than no SDK.</p>
+  <p>Consider auto-generation from your OpenAPI spec (tools like openapi-generator, Stainless, Fern) for Tier 1 SDKs. This ensures SDKs stay in sync with your API automatically. The PM decision is whether to invest in hand-crafted SDKs (better DX, higher maintenance cost) or auto-generated ones (lower maintenance, sometimes awkward ergonomics).</p>
+</div>
+</section>
+
+<section id="versioning" data-section="practical">
+  <h2>Versioning and backward compatibility</h2>
+
+<div class="method-card">
+  <h4>API Versioning Strategy <span class="method-tag">Core Method</span></h4>
+  <p class="method-when">Use when: planning your first major version bump or establishing versioning policy.</p>
+  <p>There are three common approaches: <strong>URL versioning</strong> (<code>/v1/users</code>, <code>/v2/users</code>) — simple, visible, but creates duplicate endpoints; <strong>header versioning</strong> (<code>API-Version: 2024-01-15</code>) — clean URLs but less discoverable; <strong>date-based versioning</strong> (Stripe's approach: <code>Stripe-Version: 2024-06-20</code>) — each API key pins to the version it was created on, and developers opt into upgrades explicitly.</p>
+  <p>The PM decision isn't which mechanism to use — it's what your compatibility promise is. How long will you support old versions? (Stripe: indefinitely. Most APIs: 12-24 months.) What constitutes a breaking change? (Removing a field: always breaking. Adding a field: usually not. Changing a field type: always breaking. Changing default behavior: breaking.) Document your compatibility policy publicly and hold yourself to it. Breaking changes without warning destroy developer trust faster than any bug.</p>
+</div>
+
+<div class="method-card">
+  <h4>Deprecation Playbook <span class="method-tag">Technique</span></h4>
+  <p class="method-when">Use when: you need to sunset an old API version or endpoint.</p>
+  <p>Follow this sequence: (1) Announce deprecation 6+ months before sunset, (2) Add deprecation headers to responses (<code>Deprecation: true</code>, <code>Sunset: 2025-06-01</code>), (3) Email all developers using the deprecated endpoint (use your API logs to identify them), (4) Provide a migration guide with before/after code examples, (5) Offer migration support (office hours, dedicated Slack channel), (6) Send final warning 30 days before sunset, (7) Return 410 Gone after sunset date with a link to the migration guide. Never silently break an endpoint. Even if only 12 developers still use it, those 12 developers built their business on your promise.</p>
+</div>
+
+<div class="callout warning">
+  <p class="callout-title">Common mistake</p>
+  <p>Shipping "non-breaking" changes that are actually breaking. Adding a required field to a request body is breaking. Changing the order of JSON keys can break brittle parsers. Changing enum values can break switch statements. If you're not sure whether a change is breaking, it is. Test against real integration code, not just your own test suite.</p>
+</div>
+</section>
+
+<section id="ecosystem-strategy" data-section="practical">
+  <h2>Ecosystem and partner strategy</h2>
+
+<div class="method-card">
+  <h4>Developer Funnel Analysis <span class="method-tag">Framework</span></h4>
+  <p class="method-when">Use when: measuring ecosystem health and identifying growth bottlenecks.</p>
+  <p>Map your developer funnel: Awareness (heard of your API) → Registration (created an account) → First call (made a successful API call) → Integration (shipped a production integration) → Expansion (using multiple endpoints or higher volume) → Advocacy (recommending your API to others). Track conversion rates between each stage. The biggest drop usually happens between Registration and First Call — that's your TTFAC problem. The second biggest is between First Call and Integration — that's a documentation or reliability problem.</p>
+</div>
+
+<div class="method-card">
+  <h4>Partner Tier Framework <span class="method-tag">Framework</span></h4>
+  <p class="method-when">Use when: structuring relationships with ecosystem partners.</p>
+  <p>Create tiers based on mutual value:</p>
+<ul>
+  <li><strong>Self-serve</strong> — anyone can integrate using public docs, no relationship needed.</li>
+  <li><strong>Technology partners</strong> — companies building maintained integrations, get early access to beta APIs and co-marketing.</li>
+  <li><strong>Strategic partners</strong> — deep integrations that drive significant mutual revenue, get dedicated engineering support and joint roadmap planning. Most ecosystems are 90% self-serve, 8% technology, 2% strategic. Don't over-invest in partner management for self-serve developers — invest in documentation and tooling instead.</li>
+</ul>
+</div>
+</section>
+
+<section id="metrics" data-section="practical">
+  <h2>Platform-specific metrics</h2>
+
+<div class="template-box">
+  <div class="template-header">
+    <span class="template-label">Template</span>
+    <span class="template-title">Platform Health Dashboard</span>
+  </div>
+  <div class="template-grid">
+    <div class="template-field">
+      <div class="template-field-label">Adoption metrics</div>
+      <p>Registered developers, Monthly active developers, TTFAC (median), API calls/month, New integrations/month</p>
+    </div>
+    <div class="template-field">
+      <div class="template-field-label">Quality metrics</div>
+      <p>API uptime (target: 99.95%+), P50/P95/P99 latency, Error rate by endpoint, SDK crash rate</p>
+    </div>
+    <div class="template-field">
+      <div class="template-field-label">Engagement metrics</div>
+      <p>Endpoints used per integration, API calls per developer (growth), Documentation page views, Support ticket volume (should decrease)</p>
+    </div>
+    <div class="template-field">
+      <div class="template-field-label">Ecosystem metrics</div>
+      <p>Partner integrations (active), Marketplace app installs, Developer NPS, Community contributions (PRs, forum answers)</p>
+    </div>
+  </div>
+</div>
+
+<div class="callout info">
+  <p class="callout-title">Key concept</p>
+  <p>The most dangerous platform metric is "API calls per month" in isolation. High call volume from one broken retry loop is not the same as high call volume from growing adoption. Always segment: calls from new integrations, calls from existing integrations, error-driven retries, and automated polling. Growth in the first two is healthy. Growth in the last two is a problem.</p>
+</div>
+</section>
+
+        <div class="section-marker" id="examples">
+          <span class="split-badge examples">Examples</span>
+          <span class="marker-line"></span>
+        </div>
+
+        <section data-section="examples">
+  <h2>Real-world examples</h2>
+
+<div class="case-study">
+  <p class="case-label">Case study</p>
+  <h4>Stripe: The gold standard of API DX</h4>
+  <p>Stripe's API is often cited as the benchmark for developer experience. Their quickstart gets developers to a successful payment in minutes. Their documentation includes runnable code examples in 7+ languages that update based on your API key. Their versioning system (date-based, pinned to API key) means breaking changes never surprise developers — you upgrade when you're ready. Their error messages include the exact field that failed, why it failed, and a link to the relevant doc page.</p>
+  <p><strong>Why it works:</strong> Stripe treats DX as a product, not a support function. They have dedicated DX engineers who test every API change from the developer's perspective before it ships. Their documentation team has the same authority as their product team — if the docs can't explain a feature clearly, the feature gets redesigned.</p>
+</div>
+
+<div class="case-study">
+  <p class="case-label">Case study</p>
+  <h4>Twilio: Building through developer community</h4>
+  <p>Twilio built its platform business through developer evangelism before "developer relations" was a common title. They invested in community building (meetups, hackathons, content), maintained language-specific SDKs with idiomatic patterns (not just auto-generated wrappers), and created a developer education program (TwilioQuest) that gamified learning their APIs. Their "Build" conference became a developer community event, not just a product launch.</p>
+  <p><strong>Why it works:</strong> Twilio recognized that platform adoption is a community problem, not just a documentation problem. Developers don't just need to know how to use an API — they need to see other developers using it successfully. Social proof drives platform adoption more than any marketing campaign.</p>
+</div>
+</section>
+
+<section id="pitfalls" data-section="practical">
+  <h2>Common pitfalls</h2>
+
+<div class="pitfall">
+  <div class="pitfall-icon">!</div>
+  <div>
+    <h4>Treating API versioning as an afterthought</h4>
+    <p>Starting without a versioning strategy and then trying to add one after developers have integrated. By that point, any change is a breaking change. Establish your versioning scheme before your first public release, even if v1 is the only version for years.</p>
+  </div>
+</div>
+
+<div class="pitfall">
+  <div class="pitfall-icon">!</div>
+  <div>
+    <h4>Building for your internal use case only</h4>
+    <p>Designing the API around your own frontend's needs rather than generalizing for external developers. Your frontend might only need three fields from the user endpoint, but external developers need different combinations. Design the public API for the broadest use case, not your narrowest one.</p>
+  </div>
+</div>
+
+<div class="pitfall">
+  <div class="pitfall-icon">!</div>
+  <div>
+    <h4>Over-promising SDK support</h4>
+    <p>Launching official SDKs in 8 languages when you can only maintain 3. Developers who adopt an unmaintained SDK and hit bugs will trust you less than if you'd never offered an SDK at all. It's better to have 3 excellent SDKs than 8 mediocre ones.</p>
+  </div>
+</div>
+</section>
+
+<section id="connections">
+  <h2>Connected topics in your library</h2>
+  <div class="cross-ref-grid">
+    <a href="requirements.html" class="cross-ref-card">
+      <span class="ref-number">PM Tier 1</span>
+      <div class="ref-title">User Stories &amp; Requirements</div>
+      <div class="ref-reason">API contracts are a form of requirements — they define what the system promises to deliver.</div>
+    </a>
+    <a href="product-metrics.html" class="cross-ref-card">
+      <span class="ref-number">PM Tier 1</span>
+      <div class="ref-title">Product Metrics &amp; KPIs</div>
+      <div class="ref-reason">Platform metrics (TTFAC, API calls, developer NPS) extend the standard metrics toolkit.</div>
+    </a>
+    <a href="b2b-pm.html" class="cross-ref-card">
+      <span class="ref-number">PM Tier 2</span>
+      <div class="ref-title">B2B Product Management</div>
+      <div class="ref-reason">Most platform products sell to businesses — B2B dynamics (procurement, multi-stakeholder) apply.</div>
+    </a>
+    <a href="stakeholder-management.html" class="cross-ref-card">
+      <span class="ref-number">PM Tier 1</span>
+      <div class="ref-title">Stakeholder Management</div>
+      <div class="ref-reason">Developer community management is stakeholder management at scale.</div>
+    </a>
+  </div>
+</section>
+
+<div class="deep-dive-section" id="deep-dive">
+          <div class="deep-dive-header">
+            <span class="deep-dive-badge">Deep Dive</span>
+            <h2 style="margin:0; border:none; padding:0;">Appendix</h2>
+          </div>
+  <details class="expandable">
+    <summary><span class="chevron"><svg viewBox="0 0 14 14"><polyline points="4,2 10,7 4,12"/></svg></span> Rate limiting and throttling strategies</summary>
+    <div class="expand-content topic-content">
+      <h4>Why rate limiting is a product decision</h4>
+      <p>Rate limits protect your infrastructure, but they also define your product's value tiers. A generous free tier with 1,000 calls/month lets developers build proof-of-concepts. A paid tier at 100,000 calls/month supports production apps. An enterprise tier with custom limits handles scale. Design rate limits as product packaging, not just infrastructure protection.</p>
+      <h4>Implementation patterns</h4>
+      <p>Token bucket (smooth, allows bursts), sliding window (predictable, no burst), and fixed window (simple, edge-case spikes at window boundaries). Always return rate limit headers: <code>X-RateLimit-Limit</code>, <code>X-RateLimit-Remaining</code>, <code>X-RateLimit-Reset</code>. Return 429 Too Many Requests with a Retry-After header. Never silently drop requests.</p>
+    </div>
+  </details>
+  <details class="expandable">
+    <summary><span class="chevron"><svg viewBox="0 0 14 14"><polyline points="4,2 10,7 4,12"/></svg></span> Webhook design and reliability</summary>
+    <div class="expand-content topic-content">
+      <h4>Webhook reliability patterns</h4>
+      <p>Webhooks are the push notification system of APIs — they let you notify developers when events happen instead of making them poll. Design webhooks with: (1) Signature verification (HMAC-SHA256) so developers can validate authenticity, (2) Retry logic with exponential backoff (attempt 1 immediately, then 5min, 30min, 2hr, 12hr), (3) Event logs developers can query to replay missed events, (4) Idempotency keys so developers can safely process retries without duplicating side effects.</p>
+      <h4>Common webhook mistakes</h4>
+      <p>Sending too many event types (let developers subscribe to specific events). Including sensitive data in the payload (send an event ID and let developers fetch details via API). Not providing a testing tool (let developers send test webhooks from your dashboard). Not documenting your retry policy (developers need to know how long you'll retry before giving up).</p>
+    </div>
+  </details>
+  <details class="expandable">
+    <summary><span class="chevron"><svg viewBox="0 0 14 14"><polyline points="4,2 10,7 4,12"/></svg></span> Further reading and resources</summary>
+    <div class="expand-content topic-content">
+      <h4>Essential reading</h4>
+      <p><strong>"API Design Patterns" by JJ Geewax</strong> — Comprehensive patterns for designing clean, consistent APIs.</p>
+      <p><strong>"The Design of Web APIs" by Arnaud Lauret</strong> — Practical API design from the consumer's perspective.</p>
+      <p><strong>"Platform Revolution" by Parker, Van Alstyne &amp; Choudary</strong> — Business strategy for platform businesses.</p>
+      <h4>References</h4>
+      <p><strong>Stripe's API design principles</strong> — Published internally and widely shared, the gold standard for API DX.</p>
+      <p><strong>Microsoft REST API Guidelines</strong> — Detailed enterprise API design standards.</p>
+    </div>
+  </details>
+</div>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer container">
+    <div class="footer-inner">
+      <p>Noir Book — Built for the work, not the shelf.</p>
+      <div class="footer-links">
+        <a href="../design-system.html">Design System</a>
+        <a href="../library-manifest.json">Manifest</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to Top -->
+  <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">&#8593;</button>
+
+  <!-- Floating Mobile TOC -->
+  <button class="mobile-toc-btn" id="mobileTocBtn" aria-label="Open table of contents">&#9776; Contents</button>
+  <div class="mobile-toc-overlay" id="mobileTocOverlay">
+    <div class="mobile-toc-panel">
+      <div class="mobile-toc-panel-header">
+        <h3>On this page</h3>
+        <button class="mobile-toc-close" id="mobileTocClose" aria-label="Close">&times;</button>
+      </div>
+      <ul class="mobile-toc-list">
+        <li><a href="#what-and-why" data-section="theory">What platform &amp; API product management is and why it matters</a></li>
+        <li><a href="#platform-types" data-section="theory">Platform types and ecosystem models</a></li>
+        <li><a href="#api-design" data-section="practical">API design principles</a></li>
+        <li><a href="#developer-experience" data-section="practical">Developer experience (DX)</a></li>
+        <li><a href="#versioning" data-section="practical">Versioning and backward compatibility</a></li>
+        <li><a href="#ecosystem-strategy" data-section="practical">Ecosystem and partner strategy</a></li>
+        <li><a href="#metrics" data-section="practical">Platform-specific metrics</a></li>
+        <li><a href="#examples" data-section="examples">Real-world examples</a></li>
+        <li><a href="#pitfalls" data-section="practical">Common pitfalls</a></li>
+        <li><a href="#connections">Connected topics in your library</a></li>
+        <li><a href="#deep-dive">Deep-dive appendix</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    // Scrollspy: highlight active TOC item
+    const tocLinks = document.querySelectorAll('.toc-list a');
+    const sections = [];
+    tocLinks.forEach(link => {
+      const href = link.getAttribute('href');
+      if (!href || !href.startsWith('#')) return;
+      const el = document.getElementById(href.slice(1));
+      if (el) sections.push({ el, link });
+    });
+
+    // Reading progress bar
+    const progressBar = document.getElementById('readingProgress');
+    const backToTop = document.getElementById('backToTop');
+
+    function onScroll() {
+      let current = sections[0];
+      for (const s of sections) {
+        if (s.el.getBoundingClientRect().top <= 120) current = s;
+      }
+      tocLinks.forEach(l => l.classList.remove('active'));
+      if (current) current.link.classList.add('active');
+
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrolled = window.scrollY;
+      const progress = docHeight > 0 ? (scrolled / docHeight) * 100 : 0;
+      if (progressBar) progressBar.style.width = progress + '%';
+      if (backToTop) backToTop.classList.toggle('visible', scrolled > 400);
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    // Split badges: click to scroll to section
+    document.querySelectorAll('.content-splits .split-badge').forEach(function(badge) {
+      badge.addEventListener('click', function() {
+        var type = badge.classList.contains('theory') ? 'theory' : badge.classList.contains('practical') ? 'practical' : 'examples';
+        var target = document.querySelector('section[data-section="' + type + '"]');
+        if (target) {
+          var marker = target.previousElementSibling;
+          (marker && marker.classList.contains('section-marker') ? marker : target).scrollIntoView({behavior:'smooth'});
+        }
+      });
+    });
+  </script>
+
+  <script src="../js/checklist.js"></script>
+  <script src="../js/mobile-toc.js"></script>
+  <script src="../js/search.js"></script>
+  <script>
+    function openBurger(){document.getElementById('burgerOverlay').classList.add('open');document.body.style.overflow='hidden'}
+    function closeBurger(e){if(e&&e.target&&e.target!==document.getElementById('burgerOverlay'))return;document.getElementById('burgerOverlay').classList.remove('open');document.body.style.overflow=''}
+    function burgerSearch(q){
+      var r=document.getElementById('burgerSearchResults');
+      if(!q||q.length<2){r.innerHTML='';return}
+      var ql=q.toLowerCase(),matches=[];
+      if(typeof SEARCH_INDEX!=='undefined'){
+        SEARCH_INDEX.forEach(function(t){
+          var hit=t.topic.toLowerCase().indexOf(ql)>-1;
+          if(!hit)t.sections.forEach(function(s){if((s.title+' '+s.keywords).toLowerCase().indexOf(ql)>-1)hit=true});
+          if(hit)matches.push(t);
+        });
+      }
+      if(!matches.length){r.innerHTML='<p style="padding:8px 0;font-size:13px;color:var(--ink-muted)">No results</p>';return}
+      r.innerHTML=matches.slice(0,8).map(function(m){return '<a href="../'+m.url+'">'+m.topic+'<span class="bsr-disc">'+m.discipline+'</span></a>'}).join('');
+    }
+    document.addEventListener('keydown',function(e){if(e.key==='Escape'){closeBurger();var dd=document.getElementById('searchDropdown');if(dd)dd.classList.remove('visible');}});
+    // Close burger when clicking a TOC link
+    document.querySelectorAll('.burger-toc-list a').forEach(function(a){a.addEventListener('click',function(){closeBurger()})});
+    // Search typeahead
+    function topicSearch(q){
+      var dd=document.getElementById('searchDropdown');
+      if(!q||q.length<2||typeof SEARCH_INDEX==='undefined'){if(dd)dd.classList.remove('visible');return}
+      var ql=q.toLowerCase(),grouped={};
+      SEARCH_INDEX.forEach(function(t){
+        var hit=t.topic.toLowerCase().indexOf(ql)>-1,sHits=[],mHits=[];
+        t.sections.forEach(function(s){if((s.title+' '+s.keywords).toLowerCase().indexOf(ql)>-1)sHits.push(s)});
+        (t.methods||[]).forEach(function(m){if((m.name+' '+(m.keywords||'')).toLowerCase().indexOf(ql)>-1)mHits.push(m)});
+        if(!hit&&!sHits.length&&!mHits.length&&ql.length>=3&&typeof levenshtein==='function'){
+          var words=t.topic.toLowerCase().split(/ +/);
+          for(var i=0;i<words.length;i++){if(levenshtein(ql,words[i].substring(0,ql.length+1))<=1){hit=true;break}}
+        }
+        if(hit||sHits.length||mHits.length)grouped[t.topic]={url:'../'+t.url,disc:t.discipline||'',sections:sHits,methods:mHits,topicHit:hit};
+      });
+      var keys=Object.keys(grouped);
+      if(!keys.length){dd.innerHTML='<div class="search-empty">No results</div>';dd.classList.add('visible');return}
+      var html='';
+      keys.slice(0,8).forEach(function(topic){
+        var g=grouped[topic];
+        html+='<div class="search-group"><div class="search-group-title">'+topic+'</div>';
+        if(g.topicHit)html+='<a class="search-result" href="'+g.url+'"><span class="search-result-title">'+topic+'</span><span class="search-result-type practical">'+g.disc+'</span></a>';
+        g.sections.forEach(function(s){html+='<a class="search-result" href="'+g.url+'#'+s.id+'"><span class="search-result-title">'+s.title+'</span><span class="search-result-type '+s.type+'">'+s.type+'</span></a>'});
+        g.methods.slice(0,3).forEach(function(m){html+='<a class="search-result" href="'+g.url+'#'+m.section+'"><span class="search-result-title">'+m.name+'</span><span class="search-result-type practical">method</span></a>'});
+        html+='</div>';
+      });
+      dd.innerHTML=html;dd.classList.add('visible');
+    }
+    document.addEventListener('click',function(e){if(!e.target.closest('.search-box')){var dd=document.getElementById('searchDropdown');if(dd)dd.classList.remove('visible')}});
+  </script>
+
+</body>
+</html>

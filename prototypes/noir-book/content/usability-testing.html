@@ -1,0 +1,348 @@
+<!--
+TOPIC_ID: UX.2.03
+TOPIC_NUMBER: UX.2.03
+TITLE: Conducting Usability Testing
+SUBTITLE: Plan, run, and analyze usability tests. Moderated, unmoderated, remote, in-person — with templates for every format.
+TIER: 2
+TIER_LABEL: Specialized
+THEORY: 20
+PRACTICAL: 55
+EXAMPLES: 25
+-->
+
+<section id="what-and-why" data-section="theory">
+  <h2>What usability testing is and when to test</h2>
+
+  <p>Usability testing means watching real people attempt real tasks with your product and observing where they succeed, struggle, or fail. It's the single most effective method for finding usability problems — more reliable than expert review, more specific than analytics, and more honest than asking people what they think.</p>
+
+  <p>The core insight from decades of usability research: you don't need many participants. Jakob Nielsen's research shows that 5 users find approximately 85% of usability problems. Testing with 5 users, fixing the problems, and testing again with 5 more users produces better results than testing with 50 users once. Small, frequent tests beat large, rare ones every time.</p>
+
+  <div class="callout info">
+    <p class="callout-title">When to test</p>
+    <p><strong>Before you design:</strong> Test competitor products to understand baseline expectations. <strong>During design:</strong> Test prototypes at every fidelity level — paper, wireframes, interactive. <strong>Before launch:</strong> Test the production-ready product with real content. <strong>After launch:</strong> Test with analytics-informed tasks (where do users actually struggle?). The best time to test is always "earlier than you think." The worst time is never.</p>
+  </div>
+</section>
+
+<section id="formats" data-section="theory">
+  <h2>Test formats: moderated, unmoderated, remote, in-person</h2>
+
+  <div class="method-card">
+    <h4>Format Comparison <span class="method-tag">Framework</span></h4>
+    <p class="method-when">Use this to choose the right format for your budget, timeline, and research question.</p>
+    <p><strong>Moderated in-person:</strong> Highest quality. You observe body language, ask follow-up questions, and catch nuances. Best for complex flows, early-stage prototypes, and sensitive topics. Cost: highest (facility, travel, time). <strong>Moderated remote:</strong> Nearly as good as in-person for screen-based products. Screen share + video call. Broader participant pool (geography doesn't matter). Best for most product usability testing. <strong>Unmoderated remote:</strong> Participants complete tasks on their own time using tools like UserTesting, Maze, or Lookback. Faster to collect data, larger sample sizes, but no follow-up questions. Best for validating specific flows, A/B comparisons, and quantitative benchmarking. <strong>Guerrilla testing:</strong> Grab 5 people at a coffee shop with a laptop. Fastest and cheapest. Best for quick gut-checks on early concepts. Not rigorous, but beats not testing at all.</p>
+  </div>
+</section>
+
+<section id="planning" data-section="practical">
+  <h2>Planning a usability test</h2>
+
+  <div class="method-card">
+    <h4>Test Plan Structure <span class="method-tag">Core Method</span></h4>
+    <p class="method-when">Use when: setting up any usability test.</p>
+    <p><strong>1. Research questions:</strong> What specifically do you want to learn? "Can users complete checkout?" is better than "Is the site usable?" Write 3-5 specific questions. <strong>2. Participant criteria:</strong> Who represents your actual users? Define 3-4 screener criteria (job role, product familiarity, demographic). <strong>3. Tasks:</strong> 4-6 realistic tasks, ordered from easy to hard. Each task should map to a research question. <strong>4. Metrics:</strong> What will you measure? Task success rate, time-on-task, error count, satisfaction rating. <strong>5. Logistics:</strong> Format, tools, schedule, recording consent, compensation ($50-150 for 60-minute sessions is standard).</p>
+  </div>
+</section>
+
+<section id="writing-tasks" data-section="practical">
+  <h2>Writing effective test tasks</h2>
+
+  <div class="method-card">
+    <h4>Task Writing <span class="method-tag">Technique</span></h4>
+    <p class="method-when">Use when: preparing tasks for any usability test.</p>
+    <p>Good tasks are scenarios, not instructions. Bad: "Click the Account button and change your password." Good: "You've heard about a security breach and want to update your password. How would you do that?" The scenario version doesn't reveal the answer (the user might not know to look in Account), uses realistic motivation, and sounds like something a real person would actually want to do.</p>
+    <p><strong>Rules:</strong> Don't use the same words that appear in the interface — if the button says "Account," don't use "Account" in the task. Don't reveal the path ("Go to Settings" is an instruction, not a task). Include context ("You just received an email saying..."). Start with an easier task to build confidence before harder ones.</p>
+  </div>
+
+  <div class="callout warning">
+    <p class="callout-title">Leading tasks invalidate results</p>
+    <p>"Use the filter panel on the left to narrow your search results" tells the user exactly where to look and what to do. You'll observe 100% success — and learn nothing. The task should describe the goal ("You want to find a hotel in Tokyo under $200/night for next weekend") and let the user figure out how to get there.</p>
+  </div>
+</section>
+
+<section id="moderating" data-section="practical">
+  <h2>Moderating techniques</h2>
+
+  <div class="method-card">
+    <h4>Think-Aloud Protocol <span class="method-tag">Core Method</span></h4>
+    <p class="method-when">Use when: conducting any moderated usability test.</p>
+    <p>Ask participants to verbalize their thoughts as they work: "Tell me what you're thinking as you go through this." This reveals their decision process, expectations, and confusion in real time. When they go silent (which means they're concentrating or confused), prompt gently: "What are you looking at?" or "What's going through your mind right now?" Never ask "Why did you click that?" — it sounds judgmental and makes people defensive. Instead: "What were you expecting to happen?"</p>
+  </div>
+
+  <div class="method-card">
+    <h4>Staying Neutral <span class="method-tag">Technique</span></h4>
+    <p class="method-when">Use when: a participant asks for help, gets frustrated, or gives opinions about the design.</p>
+    <p><strong>When they ask "Am I doing this right?":</strong> "There's no right or wrong — I'm interested in how you'd naturally approach this." <strong>When they're stuck:</strong> Wait at least 15-20 seconds before intervening. Often they'll find a way. If they're truly stuck, give a minimal hint: "Where might you look for that?" <strong>When they criticize the design:</strong> "That's really useful feedback" (don't defend or explain). <strong>When they praise the design:</strong> "Glad to hear that" (don't celebrate — you'll bias subsequent feedback). Your job is to observe, not to guide or react.</p>
+  </div>
+
+  <div class="callout tip">
+    <p class="callout-title">The echo technique</p>
+    <p>When a participant says something interesting ("I expected this to be in the sidebar"), repeat the last few words as a question: "In the sidebar?" This prompts them to elaborate without leading them. It's the single most useful moderating technique — it generates deeper insights without introducing bias.</p>
+  </div>
+</section>
+
+<section id="unmoderated" data-section="practical">
+  <h2>Unmoderated remote testing</h2>
+
+  <div class="method-card">
+    <h4>Unmoderated Test Setup <span class="method-tag">Core Method</span></h4>
+    <p class="method-when">Use when: you need results fast, want larger samples, or are testing straightforward task flows.</p>
+    <p>Participants receive tasks and complete them independently, with screen and audio recording. Tools like UserTesting, Maze, Hotjar, and Lookback handle the logistics. Key differences from moderated: you can't ask follow-up questions, so tasks must be completely self-explanatory. Include a post-task questionnaire (SUS, single-ease question) to capture subjective data. Review recordings for qualitative insights — don't rely solely on completion metrics.</p>
+    <p><strong>Best for:</strong> A/B comparison of two designs, benchmark testing (measuring improvement over time), first-click testing (where do users click first?), navigation testing (can users find specific content?). <strong>Not ideal for:</strong> Early-stage concepts, complex flows with many decision points, or research questions that require probing.</p>
+  </div>
+</section>
+
+<section id="analyzing" data-section="practical">
+  <h2>Analyzing results</h2>
+
+  <div class="method-card">
+    <h4>Rainbow Spreadsheet <span class="method-tag">Core Method</span></h4>
+    <p class="method-when">Use when: synthesizing observations from moderated usability tests.</p>
+    <p>Create a spreadsheet with participants as columns and observations as rows. Color-code each cell: green (success), yellow (difficulty), red (failure), white (not applicable). Patterns emerge visually — a row of red across multiple participants is a critical issue. A column of green means that participant had no trouble. The rainbow spreadsheet makes it easy to distinguish between individual quirks (one red cell) and systemic problems (a row of red cells).</p>
+  </div>
+
+  <div class="method-card">
+    <h4>Severity Rating <span class="method-tag">Core Method</span></h4>
+    <p class="method-when">Use when: prioritizing usability issues for the development team.</p>
+    <p>Rate each issue on a severity scale. Nielsen's scale: <strong>0</strong> — Not a usability problem. <strong>1</strong> — Cosmetic only, fix if time allows. <strong>2</strong> — Minor problem, low priority. <strong>3</strong> — Major problem, important to fix, high priority. <strong>4</strong> — Usability catastrophe, must fix before release. Severity combines frequency (how many users encountered it), impact (could they recover or were they blocked?), and persistence (one-time confusion vs. recurring struggle). A severity-3 issue affecting 4/5 users is more urgent than a severity-4 issue affecting 1/5 users.</p>
+  </div>
+
+  <div class="method-card">
+    <h4>Quantitative Metrics <span class="method-tag">Technique</span></h4>
+    <p class="method-when">Use when: benchmarking or comparing designs with data.</p>
+    <p><strong>Task success rate:</strong> Percentage of participants who completed the task. Below 78% is concerning (industry average). <strong>Time-on-task:</strong> How long the task took. Compare against expectations or previous versions. <strong>Error rate:</strong> Wrong clicks, wrong paths, backtracking. <strong>SUS (System Usability Scale):</strong> 10-question post-test survey, scored 0-100. Above 68 is above average; above 80 is good. <strong>Single Ease Question (SEQ):</strong> "How easy was this task?" on a 1-7 scale. Quick and reliable per-task metric.</p>
+  </div>
+</section>
+
+<section id="reporting" data-section="practical">
+  <h2>Reporting findings</h2>
+
+  <div class="method-card">
+    <h4>Usability Report <span class="method-tag">Core Method</span></h4>
+    <p class="method-when">Use when: communicating results to stakeholders or the development team.</p>
+    <p><strong>Structure:</strong> Executive summary (3-5 key findings, top-line metrics) → methodology (who, how many, what tasks) → findings by task (observations, severity, recommendations) → appendix (raw data, participant demographics, full task list). Lead with findings, not methodology — stakeholders care about what you learned, not how you set up the test. Include video clips of critical moments — 15-second clips of users struggling are more persuasive than any written description.</p>
+  </div>
+
+  <div class="callout tip">
+    <p class="callout-title">The highlight reel</p>
+    <p>A 5-minute video compilation of the most important moments from your test sessions is the most impactful deliverable you can produce. It brings stakeholders into the room with real users. Include moments of confusion, frustration, success, and surprise. One clip of a user saying "I have no idea what to do here" is worth twenty slides of analysis.</p>
+  </div>
+</section>
+
+<section id="templates" data-section="practical">
+  <h2>Templates and checklists</h2>
+
+  <div class="template-box">
+    <div class="template-header">
+      <span class="template-label">Template</span>
+      <span class="template-title">Usability Test Plan</span>
+    </div>
+    <div class="template-grid">
+      <div class="template-field">
+        <div class="template-field-label">Research questions (3-5)</div>
+        <p>[What specific questions will this test answer?]</p>
+      </div>
+      <div class="template-field">
+        <div class="template-field-label">Participants</div>
+        <p>[Number, screener criteria, recruitment source, compensation]</p>
+      </div>
+      <div class="template-field">
+        <div class="template-field-label">Tasks (4-6)</div>
+        <p>[Scenario-based tasks, ordered easy → hard, no leading language]</p>
+      </div>
+      <div class="template-field">
+        <div class="template-field-label">Metrics</div>
+        <p>[Task success rate, time-on-task, errors, SUS/SEQ, qualitative notes]</p>
+      </div>
+      <div class="template-field">
+        <div class="template-field-label">Format and tools</div>
+        <p>[Moderated/unmoderated, remote/in-person, recording tool, analysis method]</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="template-box">
+    <div class="template-header">
+      <span class="template-label">Checklist</span>
+      <span class="template-title">Test Session Readiness</span>
+    </div>
+    <ul class="checklist">
+      <li>Consent form and recording permission prepared</li>
+      <li>Prototype or product tested end-to-end by the moderator</li>
+      <li>Tasks written as scenarios (not instructions), tested for clarity</li>
+      <li>Recording tool tested and working (screen + audio + camera if applicable)</li>
+      <li>Note-taker assigned (moderator should not take notes during the session)</li>
+      <li>Backup plan for technical failures (spare device, alternative link)</li>
+      <li>Introduction script ready (purpose, think-aloud instruction, "no wrong answers")</li>
+      <li>Post-task and post-test questionnaires prepared</li>
+      <li>Compensation method confirmed with participants</li>
+    </ul>
+  </div>
+</section>
+
+<section id="real-world-examples" data-section="examples">
+  <h2>Real-world examples</h2>
+
+  <div class="case-study">
+    <p class="case-label">Case study</p>
+    <h4>Steve Krug's "Rocket Surgery Made Easy" approach</h4>
+    <p>Krug advocates for monthly usability testing as a team habit rather than a formal research project. One morning per month: recruit 3 participants, run 30-minute sessions, debrief over lunch, pick the top 3 issues to fix. No formal report. No extensive analysis. The team watches together and the findings are immediately actionable. This approach is effective because it builds usability testing into the team's rhythm rather than treating it as a special event that requires budget approval and a research plan.</p>
+    <p><strong>Why it works:</strong> Low overhead means it actually happens. Frequent small tests catch issues early. Team observation builds empathy directly.</p>
+  </div>
+
+  <div class="case-study">
+    <p class="case-label">Case study</p>
+    <h4>Government Digital Service (UK): testing with assisted digital users</h4>
+    <p>GDS tests every government service with users across the full digital ability spectrum — including people who have never used a computer. Their testing protocol includes participants using screen magnifiers, screen readers, and speech recognition. Testing with these users consistently reveals problems that affect everyone: confusing labels, inconsistent navigation, unclear error messages. The extreme users surface issues that moderate users work around without noticing.</p>
+    <p><strong>Why it works:</strong> Testing with the full ability spectrum produces more accessible AND more usable products for everyone.</p>
+  </div>
+
+  <div class="case-study">
+    <p class="case-label">Case study</p>
+    <h4>Maze: unmoderated testing at scale</h4>
+    <p>Product teams using Maze run unmoderated tests on Figma prototypes within hours of completing a design. The tool measures first-click accuracy, task completion paths (expected vs. actual), time-on-task, and drop-off points. A designer can test 20-50 participants overnight and have quantitative results by morning. This speed enables testing multiple design variations in the same sprint, turning usability testing from a milestone into a daily practice.</p>
+    <p><strong>Why it works:</strong> Speed removes the excuse for not testing. Quantitative data from unmoderated tests complements qualitative insights from moderated sessions.</p>
+  </div>
+</section>
+
+<section id="pitfalls" data-section="practical">
+  <h2>Common pitfalls</h2>
+
+  <div class="pitfall">
+    <div class="pitfall-icon">!</div>
+    <div>
+      <h4>Testing to validate, not to learn</h4>
+      <p>"We tested it and users liked it" is not a usability finding. If your test confirms every assumption and reveals no problems, either your design is perfect (unlikely) or your test was flawed — leading tasks, biased moderation, or participants who were too polite to criticize. Go in expecting to find problems. If you don't, adjust your method.</p>
+    </div>
+  </div>
+
+  <div class="pitfall">
+    <div class="pitfall-icon">!</div>
+    <div>
+      <h4>Asking users what they want instead of observing what they do</h4>
+      <p>"Would you use this feature?" always gets a yes. "What would you change?" generates design-by-committee suggestions. Usability testing is about observation, not opinion. Watch what users do, note where they struggle, and draw your own conclusions about why. User behavior is reliable data; user opinions are unreliable hypotheses.</p>
+    </div>
+  </div>
+
+  <div class="pitfall">
+    <div class="pitfall-icon">!</div>
+    <div>
+      <h4>Testing too late to act on findings</h4>
+      <p>Testing the finished product one week before launch produces a list of problems that can't be fixed. Test early with low-fidelity prototypes (when changes are cheap) and test often throughout development (when fixes can be prioritized alongside features). The value of testing is proportional to your ability to act on the results.</p>
+    </div>
+  </div>
+</section>
+
+<section id="connections">
+  <h2>Connected topics in your library</h2>
+  <div class="cross-ref-grid">
+    <a href="usability.html" class="cross-ref-card">
+      <span class="ref-number">Tier 1</span>
+      <div class="ref-title">Usability</div>
+      <div class="ref-reason">Usability principles define what to evaluate. This topic teaches how to evaluate it with real users.</div>
+    </a>
+    <a href="prototyping.html" class="cross-ref-card">
+      <span class="ref-number">Tier 1</span>
+      <div class="ref-title">Prototyping & Wireframing</div>
+      <div class="ref-reason">Prototypes are what you test. Fidelity choice affects what you can learn from testing.</div>
+    </a>
+    <a href="user-research.html" class="cross-ref-card">
+      <span class="ref-number">Tier 1</span>
+      <div class="ref-title">User Research</div>
+      <div class="ref-reason">Usability testing is one research method. User Research covers the full toolkit and when to use each method.</div>
+    </a>
+    <div class="cross-ref-card">
+      <span class="ref-number">Tier 2</span>
+      <div class="ref-title">Heuristic Evaluation</div>
+      <div class="ref-reason">Expert review without users. Use heuristic evaluation to find obvious issues before spending time on usability testing.</div>
+    </div>
+  </div>
+</section>
+
+<section id="deep-dive">
+  <h2>Deep-dive appendix</h2>
+
+  <details class="expandable">
+    <summary><span class="chevron"><svg viewBox="0 0 14 14"><polyline points="4,2 10,7 4,12"/></svg></span> The 5-user testing rationale</summary>
+    <div class="expand-content topic-content">
+      <h4>Nielsen's formula</h4>
+      <p>Nielsen's research shows that the number of usability problems found follows the formula N(1-(1-L)^n), where N is the total number of problems, L is the proportion found by a single user (~31%), and n is the number of users. With 5 users: 1-(1-0.31)^5 = 85% of problems found. With 10 users: 95%. With 15: 98%. The returns diminish rapidly after 5 — the 6th through 15th users mostly find problems the first 5 already found. The optimal strategy: test 5, fix, test 5 more. Two rounds of 5 finds more problems than one round of 10 because fixing problems between rounds exposes deeper issues that were hidden behind surface problems.</p>
+    </div>
+  </details>
+
+  <details class="expandable">
+    <summary><span class="chevron"><svg viewBox="0 0 14 14"><polyline points="4,2 10,7 4,12"/></svg></span> SUS scoring guide</summary>
+    <div class="expand-content topic-content">
+      <h4>System Usability Scale</h4>
+      <p>10 questions, each scored 1-5. Odd-numbered questions: subtract 1 from score. Even-numbered: subtract score from 5. Sum all adjusted scores, multiply by 2.5 for a 0-100 scale. Interpretation: below 50 = unacceptable. 50-68 = marginal. 68-80 = above average. Above 80 = good. Above 90 = exceptional. SUS measures perceived usability holistically — it's a reliable benchmark for comparing versions or competing products, but it doesn't diagnose specific problems.</p>
+    </div>
+  </details>
+
+  <details class="expandable">
+    <summary><span class="chevron"><svg viewBox="0 0 14 14"><polyline points="4,2 10,7 4,12"/></svg></span> Further reading and resources</summary>
+    <div class="expand-content topic-content">
+      <h4>Essential reading</h4>
+      <p><strong>"Rocket Surgery Made Easy" by Steve Krug</strong> — The most accessible guide to usability testing. Covers the entire process in under 200 pages with a focus on doing it regularly with minimal overhead.</p>
+      <p><strong>"Handbook of Usability Testing" by Jeffrey Rubin &amp; Dana Chisnell</strong> — The comprehensive reference. Covers advanced topics: international testing, testing with children, testing accessibility, statistical analysis.</p>
+      <p><strong>"Measuring the User Experience" by Tom Tullis &amp; Bill Albert</strong> — Focused on quantitative usability metrics. Essential if you need to benchmark or prove ROI with data.</p>
+
+      <h4>Tools</h4>
+      <p><strong>UserTesting:</strong> Full-service unmoderated testing platform with participant recruiting.</p>
+      <p><strong>Maze:</strong> Unmoderated testing on Figma prototypes with quantitative analytics.</p>
+      <p><strong>Lookback:</strong> Moderated and unmoderated remote testing with live observation.</p>
+      <p><strong>OBS Studio:</strong> Free screen recording for in-person sessions.</p>
+    </div>
+  </details>
+</section>
+
+<!-- SEARCH_INDEX
+{
+  topic: "Conducting Usability Testing",
+  url: "topics/usability-testing.html",
+  tier: "Tier 2",
+  sections: [
+    { title: "What & when", id: "what-and-why", type: "theory", keywords: "usability testing observation tasks users 5 users" },
+    { title: "Test formats", id: "formats", type: "theory", keywords: "moderated unmoderated remote in-person guerrilla format" },
+    { title: "Planning", id: "planning", type: "practical", keywords: "test plan research questions participants tasks metrics" },
+    { title: "Writing tasks", id: "writing-tasks", type: "practical", keywords: "task scenario leading words instructions" },
+    { title: "Moderating", id: "moderating", type: "practical", keywords: "think-aloud protocol neutral echo technique probing" },
+    { title: "Unmoderated testing", id: "unmoderated", type: "practical", keywords: "unmoderated remote UserTesting Maze first-click" },
+    { title: "Analyzing results", id: "analyzing", type: "practical", keywords: "rainbow spreadsheet severity rating SUS SEQ metrics" },
+    { title: "Reporting", id: "reporting", type: "practical", keywords: "report highlight reel video clips findings stakeholders" },
+    { title: "Templates & checklists", id: "templates", type: "practical", keywords: "test plan template session readiness checklist" },
+    { title: "Real-world examples", id: "real-world-examples", type: "examples", keywords: "Krug rocket surgery GDS Maze unmoderated" },
+    { title: "Common pitfalls", id: "pitfalls", type: "practical", keywords: "validate not learn opinion not behavior too late" },
+    { title: "Deep-dive appendix", id: "deep-dive", type: "deep-dive", keywords: "5-user formula Nielsen SUS scoring guide" }
+  ],
+  methods: [
+    { name: "Moderated Usability Test", section: "moderating", keywords: "think-aloud moderated observe tasks" },
+    { name: "Unmoderated Remote Test", section: "unmoderated", keywords: "UserTesting Maze remote self-service" },
+    { name: "Think-Aloud Protocol", section: "moderating", keywords: "verbalize thoughts observe real-time" },
+    { name: "Rainbow Spreadsheet Analysis", section: "analyzing", keywords: "rainbow spreadsheet color-code pattern" },
+    { name: "Severity Rating", section: "analyzing", keywords: "severity 0-4 frequency impact persistence" }
+  ]
+}
+SEARCH_INDEX -->
+
+<!-- MANIFEST
+{
+  "id": "UX.2.03",
+  "title": "Conducting Usability Testing",
+  "file": "topics/usability-testing.html",
+  "tier": 2,
+  "discipline": "UX",
+  "solves": [
+    "I need to test my design with real users before launching",
+    "I want to set up a usability testing practice for my team",
+    "I need to choose between moderated and unmoderated testing",
+    "I want to write effective test tasks that don't lead participants",
+    "I need to analyze and report usability findings to stakeholders",
+    "I want to measure usability quantitatively for benchmarking"
+  ],
+  "methods": ["Moderated Usability Test", "Unmoderated Remote Test", "Think-Aloud Protocol", "Rainbow Spreadsheet Analysis", "Severity Rating"],
+  "phase": "validation",
+  "prerequisites": ["UX.1.04"],
+  "pairs_with": ["UX.1.04", "UX.1.10", "UX.2.04"],
+  "depth": "methods",
+  "keywords": ["usability testing", "moderated", "unmoderated", "think-aloud", "task", "severity", "SUS", "rainbow spreadsheet", "5 users", "remote testing", "guerrilla", "highlight reel"]
+}
+MANIFEST -->

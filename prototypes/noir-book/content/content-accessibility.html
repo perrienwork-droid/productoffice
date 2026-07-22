@@ -1,0 +1,126 @@
+<!--
+TOPIC_ID: CS.2.03
+TOPIC_NUMBER: CS.2.03
+TITLE: Content Accessibility
+SUBTITLE: Make content usable by everyone. Plain language for cognitive accessibility, alt text strategy, accessible document design, caption and transcript workflows, and content for assistive technologies.
+TIER: 2
+TIER_LABEL: Specialized
+THEORY: 20
+PRACTICAL: 55
+EXAMPLES: 25
+-->
+<section id="what-and-why" data-section="theory">
+  <h2>What content accessibility is and why it matters</h2>
+  <p>Content accessibility ensures that all users — including those with visual, hearing, cognitive, and motor disabilities — can access and understand your content. This goes beyond interface accessibility (WCAG compliance for interactive elements) into the content itself: whether images have meaningful alt text, whether videos have captions, whether documents are structured for screen readers, and whether language is plain enough for users with cognitive disabilities or limited literacy.</p>
+</section>
+<section id="alt-text" data-section="practical">
+  <h2>Alt text and image accessibility</h2>
+  <div class="method-card">
+    <h4>Alt Text Decision Tree <span class="method-tag">Core Method</span></h4>
+    <p class="method-when">Use when: writing alt text for images at scale across your content library.</p>
+    <p>Not every image needs the same alt text treatment. <strong>Informative images:</strong> Describe what the image shows and why it matters — "Bar chart showing 40% increase in mobile traffic from 2024 to 2025." <strong>Decorative images:</strong> Use empty alt text (alt="") so screen readers skip them. Stock photos used for visual interest are typically decorative. <strong>Functional images:</strong> Describe the action — a search icon's alt text is "Search," not "magnifying glass." <strong>Complex images:</strong> Charts, diagrams, and infographics need both short alt text and a longer text description or data table alternative. <strong>At scale:</strong> Create alt text guidelines with examples for each image type your content uses. Train content creators. Audit existing content for missing or unhelpful alt text (including "image123.jpg" auto-generated alt text).</p>
+  </div>
+</section>
+<section id="captions" data-section="practical">
+  <h2>Captions, transcripts, and media accessibility</h2>
+  <div class="method-card">
+    <h4>Caption &amp; Transcript Workflow <span class="method-tag">Core Method</span></h4>
+    <p class="method-when">Use when: making audio and video content accessible to deaf and hard-of-hearing users.</p>
+    <p><strong>Captions:</strong> Synchronized text of spoken content displayed on video. Include speaker identification, relevant sound effects, and music descriptions. Auto-generated captions need human review — error rates of 10–30% are common and particularly problematic for technical terminology. <strong>Transcripts:</strong> Full text version of audio/video content. Useful for search indexing (making multimedia content searchable), for users who prefer reading, and for users in environments where audio isn't possible. <strong>Audio descriptions:</strong> Narration of visual information in videos for blind users. Required when visual content conveys information not available in the audio track. <strong>Workflow:</strong> Build captioning and transcription into your production pipeline, not as an afterthought. Budget for it. Auto-generate → human review → publish alongside the media.</p>
+  </div>
+</section>
+<section id="accessible-documents" data-section="practical">
+  <h2>Accessible document design</h2>
+  <div class="method-card">
+    <h4>Accessible Document Checklist <span class="method-tag">Technique</span></h4>
+    <p class="method-when">Use when: creating PDFs, slides, reports, or any downloadable document.</p>
+    <p>Documents are often inaccessible by default. <strong>PDF accessibility:</strong> Use tagged PDFs with heading structure, alt text for images, reading order defined, and form fields labeled. Scanned PDFs without OCR are completely inaccessible to screen readers. <strong>Slide accessibility:</strong> Use built-in layouts (not text boxes on blank slides), add alt text to images, ensure sufficient color contrast, and provide speaker notes as an alternative to visual content. <strong>Table accessibility:</strong> Designate header rows and columns, don't use tables for layout, and provide text summaries for complex data tables. <strong>Reading order:</strong> The order a screen reader encounters elements must make logical sense — which is often different from the visual layout order. Test with a screen reader.</p>
+  </div>
+</section>
+<section id="plain-language-accessibility" data-section="practical">
+  <h2>Plain language for accessibility</h2>
+  <div class="method-card">
+    <h4>Reading Level Guidelines by Audience <span class="method-tag">Technique</span></h4>
+    <p class="method-when">Use when: setting readability targets for content that must be accessible to users with varying cognitive abilities.</p>
+    <p>Plain language is a cognitive accessibility requirement, not just a style preference. <strong>General public content:</strong> Target 6th–8th grade reading level. This isn't about intelligence — it's about cognitive load and reading context. Stressed, distracted, or non-native readers benefit from simpler language. <strong>Patient health information:</strong> Target 5th–6th grade. Health literacy is lower than general literacy, and medical decisions have high stakes. <strong>Legal and financial disclosures:</strong> Target 8th grade maximum. Regulations increasingly require plain language for consumer-facing disclosures. <strong>Technical documentation:</strong> Audience-appropriate complexity is fine, but still use short sentences, active voice, and defined terminology. Complex concepts don't require complex sentences.</p>
+  </div>
+</section>
+<section id="real-world-examples" data-section="examples">
+  <h2>Real-world examples</h2>
+  <div class="case-study">
+    <p class="case-label">Case study</p>
+    <h4>BBC: accessible content at broadcast scale</h4>
+    <p>The BBC provides captions for 100% of broadcast content, audio descriptions for key programming, and follows strict plain language guidelines for news content. Their accessibility standards document is public and covers every content type — from web articles to interactive features to social media posts. The approach is operational, not aspirational: accessibility is built into production workflows with clear standards, training, and automated checks.</p>
+    <p><strong>Why it works:</strong> Accessibility as a production standard rather than an afterthought, with clear guidelines and automated enforcement.</p>
+  </div>
+</section>
+<section id="pitfalls" data-section="practical">
+  <h2>Common pitfalls</h2>
+  <div class="pitfall">
+    <div class="pitfall-icon">!</div>
+    <div>
+      <h4>Alt text as an afterthought</h4>
+      <p>Adding alt text after publication means it's often done hastily, generically, or not at all. Build alt text into the content creation process — require it in content briefs and CMS workflows before publication is possible.</p>
+    </div>
+  </div>
+</section>
+<section id="connections">
+  <h2>Connected topics in your library</h2>
+  <div class="cross-ref-grid">
+    <a href="accessibility.html" class="cross-ref-card">
+      <span class="ref-number">UX Tier 1</span>
+      <div class="ref-title">Accessibility in Practice</div>
+      <div class="ref-reason">UX.1.07 covers interface accessibility (WCAG, ARIA, keyboard). This covers content-specific accessibility — alt text, captions, plain language, documents.</div>
+    </a>
+    <a href="content-design-readability.html" class="cross-ref-card">
+      <span class="ref-number">CS Tier 1</span>
+      <div class="ref-title">Content Design &amp; Readability</div>
+      <div class="ref-reason">Plain language and content structure serve both readability and accessibility — the disciplines reinforce each other.</div>
+    </a>
+  </div>
+</section>
+<!-- SEARCH_INDEX
+{
+  topic: "Content Accessibility",
+  url: "topics/content-accessibility.html",
+  tier: "Tier 2",
+  sections: [
+    { title: "What & why", id: "what-and-why", type: "theory", keywords: "content accessibility inclusive alt text captions plain language" },
+    { title: "Alt text", id: "alt-text", type: "practical", keywords: "alt text images informative decorative functional complex" },
+    { title: "Captions and transcripts", id: "captions", type: "practical", keywords: "captions transcripts audio description media accessibility" },
+    { title: "Accessible documents", id: "accessible-documents", type: "practical", keywords: "PDF slides tables tagged reading order screen reader" },
+    { title: "Plain language accessibility", id: "plain-language-accessibility", type: "practical", keywords: "reading level plain language cognitive accessibility health literacy" },
+    { title: "Real-world examples", id: "real-world-examples", type: "examples", keywords: "BBC accessible broadcast scale" },
+    { title: "Common pitfalls", id: "pitfalls", type: "practical", keywords: "alt text afterthought" }
+  ],
+  methods: [
+    { name: "Alt Text Decision Tree", section: "alt-text", keywords: "alt text informative decorative functional complex" },
+    { name: "Caption & Transcript Workflow", section: "captions", keywords: "captions transcripts audio description workflow" },
+    { name: "Accessible Document Checklist", section: "accessible-documents", keywords: "PDF slides tables tagged reading order" },
+    { name: "Reading Level Guidelines by Audience", section: "plain-language-accessibility", keywords: "reading level plain language health legal general" }
+  ]
+}
+SEARCH_INDEX -->
+<!-- MANIFEST
+{
+  "id": "CS.2.03",
+  "title": "Content Accessibility",
+  "file": "topics/content-accessibility.html",
+  "tier": 2,
+  "discipline": "CS",
+  "solves": [
+    "I need an alt text strategy that scales across thousands of images",
+    "I want to write content that is cognitively accessible without being patronizing",
+    "I need accessible document templates for PDFs, slides, and reports",
+    "I want to build caption and transcript workflows for audio/video content",
+    "I need to audit existing content for accessibility compliance"
+  ],
+  "methods": ["Alt Text Decision Tree", "Caption & Transcript Workflow", "Accessible Document Checklist", "Reading Level Guidelines by Audience"],
+  "phase": "design",
+  "prerequisites": ["CS.1.04"],
+  "pairs_with": ["CS.1.04", "CS.2.07"],
+  "cross_discipline": ["UX.1.07"],
+  "depth": "methods",
+  "keywords": ["content accessibility", "alt text", "captions", "transcripts", "plain language", "cognitive accessibility", "accessible documents", "screen reader", "audio description"]
+}
+MANIFEST -->

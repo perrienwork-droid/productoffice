@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Design System</title>
+  <link rel="stylesheet" href="css/shared.css">
+  <script src="js/theme.js"></script>
+  <style>
+    .ds-page { max-width: var(--max-width); margin: 0 auto; padding: 0 40px 96px; }
+    .ds-hero { padding: 64px 0 48px; }
+    .ds-hero h1 { font-size: 48px; font-weight: var(--fw-thin); line-height: 1.05; letter-spacing: var(--ls-tight); margin-bottom: 16px; }
+    .ds-hero h1 strong { font-weight: var(--fw-bold); }
+    .ds-hero h1 em { font-style: normal; font-weight: var(--fw-bold); color: var(--ink); }
+    .ds-hero p { font-size: 17px; color: var(--ink-medium); line-height: 1.7; max-width: 620px; font-weight: var(--fw-regular); }
+
+    .ds-section { margin-top: 64px; }
+    .ds-section > h2 { font-size: 1.75rem; font-weight: 900; margin-bottom: 8px; padding-bottom: 12px; border-bottom: 1px solid var(--ink-faint); }
+    .ds-section > .ds-desc { font-size: 15px; color: var(--ink-soft); line-height: 1.7; max-width: 620px; margin-bottom: 32px; }
+
+    .ds-subsection { margin-top: 40px; }
+    .ds-subsection h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 16px; }
+
+    .ds-rule { font-size:15px; color: var(--ink-soft); line-height: 1.7; margin-bottom: 8px; padding: 12px 16px; border: 2px solid var(--ink-hairline); }
+    .ds-rule code { font-family: var(--font-mono); font-size:15px; background: var(--paper-warm); padding: 1px 6px; color: var(--ink); }
+
+    /* Swatch grids */
+    .swatch-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 12px; margin-bottom: 24px; }
+    .swatch { padding: 16px; border: 2px solid var(--ink-hairline); }
+    .swatch-color { height: 48px; margin: -16px -16px 12px; border-bottom: 1px solid var(--ink-hairline); }
+    .swatch-name { font-family: var(--font-mono); font-size:15px; font-weight: 500; color: var(--ink); margin-bottom: 2px; }
+    .swatch-hex { font-family: var(--font-mono); font-size:15px; color: var(--ink-muted); }
+    .swatch-use { font-size:15px; color: var(--ink-light); margin-top: 6px; line-height: 1.4; }
+
+    /* Font specimens */
+    .font-specimen { margin-bottom: 32px; padding: 28px; border: 2px solid var(--ink); }
+    .font-specimen-name { font-size:15px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-muted); margin-bottom: 16px; }
+    .specimen-display { font-family: var(--font-display); }
+    .specimen-body { font-family: var(--font-body); }
+    .specimen-mono { font-family: var(--font-mono); }
+    .specimen-large { font-size: 36px; font-weight: 900; line-height: 1.1; margin-bottom: 8px; }
+    .specimen-medium { font-size: 20px; font-weight: 700; line-height: 1.3; margin-bottom: 8px; }
+    .specimen-regular { font-size: 16px; line-height: 1.7; color: var(--ink-soft); margin-bottom: 8px; }
+    .specimen-weights { display: flex; gap: 24px; flex-wrap: wrap; margin-top: 12px; font-size:15px; }
+    .specimen-weights span { color: var(--ink-muted); }
+
+    /* Component showcase */
+    .ds-showcase { padding: 28px; background: var(--paper-warm); border: 1px solid var(--ink-hairline); margin-bottom: 16px; }
+    .ds-showcase-label { font-size:15px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-muted); margin-bottom: 16px; }
+    .ds-code { font-family: var(--font-mono); font-size:15px; background: var(--ink); color: var(--paper); padding: 16px 20px; margin-bottom: 24px; overflow-x: auto; line-height: 1.7; white-space: pre; }
+
+    /* Type scale table */
+    .type-scale { margin: 16px 0 24px; }
+    .type-row { display: flex; align-items: baseline; gap: 24px; padding: 12px 0; border-bottom: 1px solid var(--ink-hairline); }
+    .type-row:last-child { border-bottom: none; }
+    .type-sample { flex: 1; min-width: 0; }
+    .type-meta { flex-shrink: 0; width: 200px; font-family: var(--font-mono); font-size:15px; color: var(--ink-muted); text-align: right; }
+
+    /* Spacing & layout tokens */
+    .token-table { width: 100%; font-size:15px; border-collapse: collapse; margin: 16px 0 24px; }
+    .token-table th { text-align: left; font-size:15px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-muted); padding: 8px 0; border-bottom: 2px solid var(--ink); }
+    .token-table td { padding: 10px 0; border-bottom: 1px solid var(--ink-hairline); vertical-align: top; }
+    .token-table td:first-child { font-family: var(--font-mono); font-size:15px; color: var(--ink); font-weight: 500; }
+    .token-table td:nth-child(2) { font-family: var(--font-mono); font-size:15px; color: var(--ink-muted); }
+    .token-table td:last-child { color: var(--ink-soft); font-size:15px; }
+
+    /* Border examples */
+    .border-examples { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 16px 0 24px; }
+    .border-example { padding: 20px; text-align: center; font-size:15px; color: var(--ink-muted); }
+
+    /* Do / Don't */
+    .ds-do-dont { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 16px 0 24px; }
+    .ds-do, .ds-dont { padding: 20px; font-size:15px; color: var(--ink-soft); line-height: 1.6; }
+    .ds-do { background: var(--teal-bg); border: 2px solid var(--teal); }
+    .ds-dont { background: var(--rust-bg); border: 2px solid var(--rust); }
+    .ds-do strong, .ds-dont strong { display: block; margin-bottom: 8px; font-size:15px; text-transform: uppercase; letter-spacing: 0.08em; }
+    .ds-do strong { color: var(--teal); }
+    .ds-dont strong { color: var(--rust); }
+  </style>
+</head>
+<body>
+
+  <nav class="site-nav">
+    <div class="nav-inner">
+      <a href="index.html" class="site-logo">
+        <span class="logo-mark">UX</span>
+        Design Library
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">All Topics</a></li>
+        <li><a href="design-system.html" class="active">Design System</a></li>
+      </ul>
+      <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle theme">&#9790;</button>
+    </div>
+  </nav>
+
+  <div class="ds-page">
+
+    <header class="ds-hero">
+      <h1>Noir Book <em>Design System</em></h1>
+      <p>The complete visual language for the UX Design Library. Every token, component, and rule in one living reference. This page uses the same shared.css, what you see is what the site renders.</p>
+    </header>
+
+    <!-- ============================================================ -->
+    <!-- ACCESSIBILITY &amp; INTERACTION RULES                          -->
+    <!-- ============================================================ -->
+    <section class="ds-section">
+      <h2>Rules</h2>
+      <p class="ds-desc">Four rules are non-negotiable. They keep Noir Book legible, calm, and readable for people with eye trouble. Break any of them and the design-system guardrail or an accessibility review will catch it.</p>
+
+      <div class="ds-subsection">
+        <h3>1. 15px is the content floor, 13px the nav chrome floor</h3>
+        <p class="ds-rule">Content (anything someone reads, card descriptions, body paragraphs, captions, labels) never renders below 15px. Nav chrome (nav links, breadcrumbs, topic-number codes, tier-counts, filter buttons, view toggles) can drop to 13px via <code>--fs-nano</code>, paired with a semibold or bolder weight to keep small text firm. Nothing anywhere goes below 13px. The <code>--fs-*</code> token scale is the whole vocabulary, hardcoded sizes are banned and caught by review.</p>
+      </div>
+
+      <div class="ds-subsection">
+        <h3>2. High contrast by default, no light grey in text</h3>
+        <p class="ds-rule">Body copy runs at <code>--ink-soft</code> (#1F1C18, near-black on cream). Secondary copy and captions use <code>--ink-medium</code> (#3A362F), which is also the floor for any muted text. The legacy <code>--ink-muted</code> and <code>--ink-light</code> tokens are aliased to the same value so older CSS cannot re-introduce light grey by accident. <code>--ink-faint</code> is reserved for decorative non-text elements (icons, dashed borders). <code>--ink-hairline</code> is for dividers and card borders only, never for type. If you need a muted caption, use <code>--ink-medium</code>. Never lower the contrast; darken the background instead.</p>
+      </div>
+
+      <div class="ds-subsection">
+        <h3>3. Weight builds hierarchy, thin is reserved for display</h3>
+        <p class="ds-rule">Default body weight is <code>--fw-regular</code> (400). Secondary and UI chrome use <code>--fw-medium</code> (500) or <code>--fw-semibold</code> (600) for firmness at small sizes. <code>--fw-bold</code> (700) is for emphasis inside titles via <code>&lt;strong&gt;</code>. <code>--fw-thin</code> (200) is reserved for display h1 and h2 where it pairs with a bold <code>&lt;strong&gt;</code> to create the signature weight-contrast look. Do not use thin on body copy, captions, or small UI, it disappears at low weight.</p>
+      </div>
+
+      <div class="ds-subsection">
+        <h3>4. Animation signals interactivity</h3>
+        <p class="ds-rule">A hover lift, a drawn outline, or any transform belongs only on an element the user can actually click or select. On the homepage, topic cards lift and draw a full copper outline because they're links. Static display surfaces on topic pages, method cards, case studies, callouts, template boxes, at-a-glance blocks, pitfalls, are inert. They keep their copper corner strip at rest but do not animate on hover. If you add a hover effect to a new component, ask whether clicking it does something. If not, the hover comes off.</p>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- TYPOGRAPHY -->
+    <!-- ============================================================ -->
+    <section class="ds-section">
+      <h2>Typography</h2>
+      <p class="ds-desc">Two typefaces, one with attitude. Fira Sans carries both display and body roles, with weight contrast (thin 200 for editorial restraint, bold 700 for emphasis) doing the work a serif used to. JetBrains Mono handles code and the topic-number codes. Unifying on Fira means every page reads as one voice, with refinement coming from weight and spacing rather than typeface switching [commas, no em-dashes].</p>
+
+      <div class="font-specimen">
+        <div class="font-specimen-name">Display &amp; Body — Fira Sans</div>
+        <div class="specimen-display specimen-large" style="font-weight:200;letter-spacing:-0.03em">The quick brown fox jumps</div>
+        <div class="specimen-display specimen-medium" style="font-weight:200">Headings, hero, topic numbers, card titles, nav, body, UI labels</div>
+        <div class="specimen-display specimen-regular">Fira Sans is a humanist sans with a wide weight range. Use weight 200 (thin) for hero and section titles, weight 300 (light) for long-form body and subtitles, 500-600 for UI elements and small caps, and 700 (bold) for emphasis inside titles via &lt;strong&gt;. The weight gap is what carries the typographic identity.</div>
+        <div class="specimen-weights specimen-display">
+          <span style="font-weight:200">200 Thin</span>
+          <span style="font-weight:300">300 Light</span>
+          <span style="font-weight:400">400 Regular</span>
+          <span style="font-weight:500">500 Medium</span>
+          <span style="font-weight:600">600 Semi</span>
+          <span style="font-weight:700">700 Bold</span>
+        </div>
+      </div>
+
+      <div class="font-specimen">
+        <div class="font-specimen-name">Mono — JetBrains Mono</div>
+        <div class="specimen-mono specimen-medium">font-family: var(--font-mono);</div>
+        <div class="specimen-mono specimen-regular">Used for code snippets, technical references, topic numbering in cross-reference cards, and the design system's own token names. Tabular figures for aligned numbers.</div>
+      </div>
+
+      <div class="ds-subsection">
+        <h3>Type scale (<code>--fs-*</code> tokens)</h3>
+        <p class="ds-rule">The whole library renders through this scale. To shrink or grow everything, edit <code>--fs-*</code> values in <code>shared.css :root</code>, one line per role. Hardcoded sizes are banned and caught by review. 15px is the floor.</p>
+        <div class="type-scale">
+          <div class="type-row">
+            <div class="type-sample" style="font-family:var(--font-display);font-size:var(--fs-hero);font-weight:var(--fw-thin);line-height:1.05;letter-spacing:-0.03em">Every method</div>
+            <div class="type-meta">--fs-hero<br>clamp(36, 6vw, 56) / 200 thin<br>Homepage hero h1</div>
+          </div>
+          <div class="type-row">
+            <div class="type-sample" style="font-family:var(--font-display);font-size:var(--fs-h1);font-weight:var(--fw-thin);line-height:1.1;letter-spacing:-0.03em">Topic Title</div>
+            <div class="type-meta">--fs-h1<br>clamp(32, 5vw, 48) / 200<br>Topic page, request, ds-hero</div>
+          </div>
+          <div class="type-row">
+            <div class="type-sample" style="font-family:var(--font-display);font-size:var(--fs-h2);font-weight:var(--fw-thin);line-height:1.15;letter-spacing:-0.02em">Section Heading</div>
+            <div class="type-meta">--fs-h2<br>28px / 200<br>h2, tier headers</div>
+          </div>
+          <div class="type-row">
+            <div class="type-sample" style="font-family:var(--font-display);font-size:var(--fs-h3);font-weight:var(--fw-semibold);line-height:1.2">Subsection</div>
+            <div class="type-meta">--fs-h3<br>22px / 600<br>h3, section subtitles</div>
+          </div>
+          <div class="type-row">
+            <div class="type-sample" style="font-family:var(--font-body);font-size:var(--fs-h4);font-weight:var(--fw-semibold);line-height:1.3">Card &amp; Component Title</div>
+            <div class="type-meta">--fs-h4<br>18px / 600<br>h4, card titles</div>
+          </div>
+          <div class="type-row">
+            <div class="type-sample" style="font-family:var(--font-body);font-size:var(--fs-body-lg);color:var(--ink-medium);line-height:1.7;font-weight:var(--fw-regular)">Subtitles, hero subs, emphasis paragraphs at the body-large size.</div>
+            <div class="type-meta">--fs-body-lg<br>17px / 300<br>subtitles</div>
+          </div>
+          <div class="type-row">
+            <div class="type-sample" style="font-family:var(--font-body);font-size:var(--fs-body);color:var(--ink-soft);line-height:1.8;font-weight:var(--fw-regular)">Standard body copy for topic content and long-form reading. 16px with 1.8 line-height for comfort.</div>
+            <div class="type-meta">--fs-body<br>16px / 300<br>body copy, topic-content p</div>
+          </div>
+          <div class="type-row">
+            <div class="type-sample" style="font-family:var(--font-body);font-size:var(--fs-micro);color:var(--ink-medium);line-height:1.7;font-weight:var(--fw-regular)">The 15px floor. Topic descriptions, captions, labels, tier counts, meta, nav links. Nothing in the library renders smaller than this.</div>
+            <div class="type-meta">--fs-micro<br>15px / 300<br>labels, captions, UI (floor)</div>
+          </div>
+          <div class="type-row">
+            <div class="type-sample" style="font-family:var(--font-body);font-size:var(--fs-micro);font-weight:var(--fw-semibold);text-transform:uppercase;letter-spacing:0.06em;color:var(--ink)">SECTION LABEL &middot; BADGE TEXT &middot; NAV LINKS</div>
+            <div class="type-meta">--fs-micro<br>15px / 600 uppercase<br>section labels, badges</div>
+          </div>
+          <div class="type-row">
+            <div class="type-sample" style="font-family:var(--font-display);font-size:52px;font-weight:400;color:var(--ink-faint)">01</div>
+            <div class="type-meta">52px / 400 Playfair<br>Card numbers (decorative)</div>
+          </div>
+          <div class="type-row">
+            <div class="type-sample" style="font-family:var(--font-display);font-size:2.25rem;font-weight:700">28</div>
+            <div class="type-meta">36px / 700 Playfair<br>Stat figures</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ds-subsection">
+        <h3>Typography rules</h3>
+        <div class="ds-do-dont">
+          <div class="ds-do"><strong>Do</strong>Use Fira Sans everywhere. Carry hierarchy with weight (200 thin for hero / section titles, 300 light for body, 500-600 for UI, 700 for emphasis inside titles). JetBrains Mono only for the topic-number codes and the token names in this design system.</div>
+          <div class="ds-dont"><strong>Don't</strong>Reach for a second display face to add variety. The weight gap is the variety. Don't use 400 regular for hero [it reads flat], and don't use weight 700 for body copy [it loses the refinement].</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- COLOUR -->
+    <!-- ============================================================ -->
+    <section class="ds-section">
+      <h2>Colour</h2>
+      <p class="ds-desc">A warm, neutral palette inspired by ink on aged paper. Colours are defined as CSS custom properties and adapt automatically in dark mode. All text colours meet WCAG AA contrast requirements against their intended backgrounds.</p>
+
+      <div class="ds-subsection">
+        <h3>Paper tones (backgrounds)</h3>
+        <p class="ds-rule">Use <code>--paper</code> for the page. <code>--paper-warm</code> for cards, hover states, expandable headers. <code>--paper-deep</code> for deeper UI wells. <code>--paper-white</code> for inputs and template boxes.</p>
+        <div class="swatch-grid">
+          <div class="swatch"><div class="swatch-color" style="background:var(--paper)"></div><div class="swatch-name">--paper</div><div class="swatch-hex">Light #F5F0E8 / Dark #28231E</div><div class="swatch-use">Page background</div></div>
+          <div class="swatch"><div class="swatch-color" style="background:var(--paper-warm)"></div><div class="swatch-name">--paper-warm</div><div class="swatch-hex">Light #F2EDE5 / Dark #161A18</div><div class="swatch-use">Card surface, method card bg, tier groups, expandable headers</div></div>
+          <div class="swatch"><div class="swatch-color" style="background:var(--paper-deep)"></div><div class="swatch-name">--paper-deep</div><div class="swatch-hex">Light #E8DFD0 / Dark #1F2421</div><div class="swatch-use">Topic-card hover, expandable open state, deep UI wells</div></div>
+          <div class="swatch"><div class="swatch-color" style="background:var(--paper-white)"></div><div class="swatch-name">--paper-white</div><div class="swatch-hex">Light #FDFBF4 / Dark #161A18</div><div class="swatch-use">Search input, template box bg, expandable content, search dropdown</div></div>
+        </div>
+      </div>
+
+      <div class="ds-subsection">
+        <h3>Ink tones (text &amp; borders)</h3>
+        <p class="ds-rule">Text hierarchy flows from <code>--ink</code> (headings) through <code>--ink-soft</code> (body strong) and <code>--ink-medium</code> (body) to <code>--ink-muted</code> (captions). All text tokens pass WCAG AA on <code>--paper</code>. Unlike v49, <code>--ink</code> is never used as a surface, the nav flips with theme now, so the ink stack is purely for text and icons.</p>
+        <div class="swatch-grid">
+          <div class="swatch"><div class="swatch-color" style="background:var(--ink)"></div><div class="swatch-name">--ink</div><div class="swatch-hex">Light #1A1815 / Dark #EEF0EA</div><div class="swatch-use">Headings, strong text</div></div>
+          <div class="swatch"><div class="swatch-color" style="background:var(--ink-soft)"></div><div class="swatch-name">--ink-soft</div><div class="swatch-hex">Light #3D3A35 / Dark #D6DAD2</div><div class="swatch-use">Body copy strong, method-card descriptions</div></div>
+          <div class="swatch"><div class="swatch-color" style="background:var(--ink-medium)"></div><div class="swatch-name">--ink-medium</div><div class="swatch-hex">Light #5A564E / Dark #C8D0CC</div><div class="swatch-use">Standard body, subtitles, nav links, topic-card descriptions</div></div>
+          <div class="swatch"><div class="swatch-color" style="background:var(--ink-muted)"></div><div class="swatch-name">--ink-muted</div><div class="swatch-hex">Light #7A736A / Dark #A0ACA5</div><div class="swatch-use">Captions, footnotes, footer copy</div></div>
+          <div class="swatch"><div class="swatch-color" style="background:var(--ink-light)"></div><div class="swatch-name">--ink-light</div><div class="swatch-hex">Light #8A8074 / Dark #8E958E</div><div class="swatch-use">Placeholder text, TOC inactive items, breadcrumb separators</div></div>
+          <div class="swatch"><div class="swatch-color" style="background:var(--ink-faint)"></div><div class="swatch-name">--ink-faint</div><div class="swatch-hex">Light #A0958A / Dark #7A7F77</div><div class="swatch-use">Subtlest inactive state, dashed template field borders</div></div>
+          <div class="swatch"><div class="swatch-color" style="background:var(--ink-hairline)"></div><div class="swatch-name">--ink-hairline</div><div class="swatch-hex">Light #DDD6C8 / Dark #2A302D</div><div class="swatch-use">Hairline dividers, card borders, nav border, TOC rail</div></div>
+        </div>
+      </div>
+
+      <div class="ds-subsection">
+        <h3>Copper — the one accent</h3>
+        <p class="ds-rule">v50 drops every legacy accent (rust, teal, navy, plum, gold) in favor of a single copper family. Copper covers links, hero emphasis, CTAs, card left-strips, nav active state, reading progress, check marks, bookmarks, source labels. Three intensities cover the range: <code>--ink</code> for Tier 1 and warnings, <code>--ink</code> for most UI, <code>--ink</code> for solid CTAs and larger fills, <code>--ink</code> reserved for use on dark surfaces.</p>
+        <div class="swatch-grid">
+          <div class="swatch"><div class="swatch-color" style="background:var(--ink)"></div><div class="swatch-name">--ink</div><div class="swatch-hex">Light #6E3D20 / Dark #B87548</div><div class="swatch-use">Tier 1 badge, pitfall icon, warning callout strip, "essential" labels</div></div>
+          <div class="swatch"><div class="swatch-color" style="background:var(--ink)"></div><div class="swatch-name">--ink</div><div class="swatch-hex">Light #A06A42 / Dark #D4956A</div><div class="swatch-use">Links, hero em, card left-strip, filter-tab active (outline), labels, nav hover, checkmark, bookmark</div></div>
+          <div class="swatch"><div class="swatch-color" style="background:var(--ink)"></div><div class="swatch-name">--ink</div><div class="swatch-hex">Light #C0825A / Dark #D4956A</div><div class="swatch-use">Logo-mark bg, filter-tab active fill, submit button, process-step numbers, reading progress bar</div></div>
+          <div class="swatch"><div class="swatch-color" style="background:var(--ink)"></div><div class="swatch-name">--ink</div><div class="swatch-hex">Light #D4956A / Dark #E0A57A</div><div class="swatch-use">Reserved for use on dark surfaces; automatic fallback in dark-mode for --ink</div></div>
+        </div>
+      </div>
+
+      <div class="ds-subsection">
+        <h3>Discipline pigments</h3>
+        <p class="ds-rule">The library's four disciplines need distinct categorical signal, but not at the cost of the one-accent rule. So they're desaturated earth tones, each 40-60% saturation, all warm enough to live next to copper without fighting it. Each discipline has a matching <code>-bg</code> token at ~8% alpha for very faint card tints.</p>
+        <div class="swatch-grid">
+          <div class="swatch"><div class="swatch-color" style="background:var(--disc-ux)"></div><div class="swatch-name">--disc-ux</div><div class="swatch-hex">Light #4B7260 / Dark #6FA084</div><div class="swatch-use">UX Design pill, UX disc dot, UX topic-number prefix</div></div>
+          <div class="swatch"><div class="swatch-color" style="background:var(--disc-pm)"></div><div class="swatch-name">--disc-pm</div><div class="swatch-hex">Light #8F4A2A / Dark #C88158</div><div class="swatch-use">Product pill, PM disc dot, PM topic-number prefix, NN/g source marker</div></div>
+          <div class="swatch"><div class="swatch-color" style="background:var(--disc-mk)"></div><div class="swatch-name">--disc-mk</div><div class="swatch-hex">Light #4F5E72 / Dark #7B8AA4</div><div class="swatch-use">Marketing pill, MK disc dot, MK topic-number prefix</div></div>
+          <div class="swatch"><div class="swatch-color" style="background:var(--disc-cs)"></div><div class="swatch-name">--disc-cs</div><div class="swatch-hex">Light #7E4863 / Dark #B07490</div><div class="swatch-use">Content pill, CS disc dot, CS topic-number prefix</div></div>
+        </div>
+      </div>
+
+      <div class="ds-subsection">
+        <h3>Tier &amp; content-type bands</h3>
+        <p class="ds-rule">Tier and content-type (theory / practical / examples) are mapped to three intensities of copper, not to hue. Tier 1 reads darker (more essential), Tier 4 fades to a warm neutral. This collapses 4+3 categorical colors to a single tonal progression.</p>
+        <div class="swatch-grid">
+          <div class="swatch"><div class="swatch-color" style="background:var(--tier1-color)"></div><div class="swatch-name">--tier1-color</div><div class="swatch-hex">= --ink</div><div class="swatch-use">Tier 1 badge (most essential)</div></div>
+          <div class="swatch"><div class="swatch-color" style="background:var(--tier2-color)"></div><div class="swatch-name">--tier2-color</div><div class="swatch-hex">= --ink</div><div class="swatch-use">Tier 2 badge</div></div>
+          <div class="swatch"><div class="swatch-color" style="background:var(--tier3-color)"></div><div class="swatch-name">--tier3-color</div><div class="swatch-hex">= --ink</div><div class="swatch-use">Tier 3 badge</div></div>
+          <div class="swatch"><div class="swatch-color" style="background:var(--tier4-color)"></div><div class="swatch-name">--tier4-color</div><div class="swatch-hex">= --ink-medium</div><div class="swatch-use">Tier 4 badge (supplementary, neutral)</div></div>
+        </div>
+      </div>
+
+      <div class="ds-subsection">
+        <h3>Legacy aliases</h3>
+        <p class="ds-rule">Old library accent names survive as aliases so component CSS written against v49 still resolves. <code>--rust</code> = <code>--disc-pm</code> (burnt copper), <code>--teal</code> = <code>--disc-ux</code> (emerald), <code>--navy</code> = <code>--disc-mk</code> (slate), <code>--plum</code> = <code>--disc-cs</code> (mauve), <code>--gold</code> = <code>--ink</code>. No legacy accent introduces a new hue, they're all rewired onto the palette above.</p>
+      </div>
+
+      <div class="ds-subsection">
+        <h3>Dark mode philosophy</h3>
+        <p class="ds-rule">Dark mode is the career-site dark section, treated as the opposite of the cream section. Paper flips to <code>#0D1210</code> (near-black with green undertone), surface to <code>#161A18</code>, text to <code>#EEF0EA</code> and <code>#C8D0CC</code>, hairline to <code>#2A302D</code>. Copper shifts up to the bright variant. Discipline pigments shift up ~20% luminance to stay legible on deep dark. Shadows deepen to pure black with higher alpha.</p>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- BORDERS, RADIUS & SHADOW -->
+    <!-- ============================================================ -->
+    <section class="ds-section">
+      <h2>Borders, Radius &amp; Shadow</h2>
+      <p class="ds-desc">Editorial structure first, soft modern affordances second. Most editorial surfaces (cards, callouts, templates) keep sharp ink-on-paper edges. Interactive controls and overlays (search inputs, dropdowns, toasts, theme toggle, burger panel) use a small radius scale and a discreet shadow scale to read as tappable.</p>
+
+      <div class="ds-subsection">
+        <h3>Border weights</h3>
+        <table class="token-table">
+          <tr><th>Weight</th><th>Value</th><th>Use</th></tr>
+          <tr><td>Standard</td><td>1px solid --ink</td><td>Method cards, template boxes, expandables, case studies, topic header bottom, deep-dive separator</td></tr>
+          <tr><td>Accent</td><td>1px solid [color]</td><td>Tier badges, split badges, callouts, NN/g pill, case study borders</td></tr>
+          <tr><td>Faint</td><td>1px solid --ink-faint</td><td>h2 and h3 border-bottom, template header divider, inactive filter pills</td></tr>
+          <tr><td>Hairline</td><td>1px solid --ink-hairline</td><td>Checklist separators, pitfall dividers, search result dividers, scrolled nav border</td></tr>
+          <tr><td>Heavy left</td><td>3px solid --ink</td><td>Burger panel left edge</td></tr>
+          <tr><td>Dashed</td><td>2px dashed --ink-faint</td><td>Template fields (fill-in areas)</td></tr>
+        </table>
+      </div>
+
+      <div class="ds-subsection">
+        <h3>Radius scale</h3>
+        <p class="ds-rule">Editorial surfaces (cards, method blocks, callouts, badges) stay square. Radius is reserved for interactive controls, overlays, and pills. Use a token; don't invent intermediate values.</p>
+        <table class="token-table">
+          <tr><th>Token</th><th>Value</th><th>Use</th></tr>
+          <tr><td>--radius-xs</td><td>4px</td><td>Tier badges, logo mark, zero-suggest CTA</td></tr>
+          <tr><td>--radius-sm</td><td>6px</td><td>Section result rows, small chip surfaces</td></tr>
+          <tr><td>--radius-md</td><td>8px</td><td>Theme toggle, burger button, view toggles</td></tr>
+          <tr><td>--radius-lg</td><td>10px</td><td>Search inputs, search dropdown, nav-search wrap</td></tr>
+          <tr><td>--radius-xl</td><td>12px</td><td>Tier groups, search result blocks, collapsed tier headers</td></tr>
+          <tr><td>--radius-pill</td><td>999px</td><td>Discipline pills, filter pills, footer pills, search phrase pills, toast</td></tr>
+        </table>
+      </div>
+
+      <div class="ds-subsection">
+        <h3>Shadow scale</h3>
+        <p class="ds-rule">Shadows are warm and low-intensity in light mode (rgba of <code>--ink</code>) and pure black in dark mode for legibility. The <code>--shadow-*</code> tokens auto-flip across themes; consumers always reference the token, never a raw <code>rgba()</code>.</p>
+        <table class="token-table">
+          <tr><th>Token</th><th>Use</th></tr>
+          <tr><td>--shadow-sm</td><td>Subtle lift, reserved (available for new components)</td></tr>
+          <tr><td>--shadow-md</td><td>Scrolled home-nav drop shadow</td></tr>
+          <tr><td>--shadow-lg</td><td>Topic-card hover lift</td></tr>
+          <tr><td>--shadow-focus</td><td>Search input focus, burger search input focus</td></tr>
+          <tr><td>--shadow-popover</td><td>Search dropdown popover</td></tr>
+          <tr><td>--scrim</td><td>Burger overlay backdrop (rgba scrim, not box-shadow)</td></tr>
+        </table>
+      </div>
+
+      <div class="ds-subsection">
+        <h3>Z-index scale</h3>
+        <p class="ds-rule">All stacking contexts use the <code>--z-*</code> scale so layering decisions live in one place. New floating UI should reuse an existing token, not invent a number.</p>
+        <table class="token-table">
+          <tr><th>Token</th><th>Value</th><th>Use</th></tr>
+          <tr><td>--z-back-to-top</td><td>90</td><td>Back-to-top button on topic pages</td></tr>
+          <tr><td>--z-progress</td><td>99</td><td>Reading progress bar under nav</td></tr>
+          <tr><td>--z-nav</td><td>100</td><td>Sticky site-nav</td></tr>
+          <tr><td>--z-search</td><td>200</td><td>Search dropdown popover</td></tr>
+          <tr><td>--z-toast</td><td>300</td><td>Filter feedback toast</td></tr>
+          <tr><td>--z-burger-overlay</td><td>300</td><td>Burger menu scrim</td></tr>
+          <tr><td>--z-burger-panel</td><td>301</td><td>Burger menu panel (above its own scrim)</td></tr>
+        </table>
+      </div>
+
+      <div class="ds-subsection">
+        <h3>Key rules</h3>
+        <div class="ds-do-dont">
+          <div class="ds-do"><strong>Do</strong>Editorial cards (method, template, case study, expandable, callouts, tier groups) keep square corners. Use radius tokens only on inputs, controls, overlays, and pills. Use shadow tokens for elevation, never raw rgba.</div>
+          <div class="ds-dont"><strong>Don't</strong>Never invent a one-off radius or rgba shadow. If the new use case doesn't fit a token, propose a new token rather than hard-coding a value.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- SPACING & LAYOUT -->
+    <!-- ============================================================ -->
+    <section class="ds-section">
+      <h2>Spacing &amp; Layout</h2>
+      <p class="ds-desc">Spacing follows a 4px-based scale exposed as <code>--space-*</code> tokens. Layout constraints (page width, content measure, sidebar, nav height) are exposed as named layout tokens.</p>
+
+      <div class="ds-subsection">
+        <h3>Spacing scale</h3>
+        <p class="ds-rule">Use a token, not a magic number. The scale is denser at the small end (where eye-distance differences matter most) and sparser at the large end. <code>--space-7: 28px</code> exists because the editorial card padding has historically been 28px; otherwise prefer 24 or 32.</p>
+        <table class="token-table">
+          <tr><th>Token</th><th>Value</th><th>Typical use</th></tr>
+          <tr><td>--space-1</td><td>4px</td><td>Pill remove icon padding, search dropdown margin-top</td></tr>
+          <tr><td>--space-2</td><td>8px</td><td>TOC link padding, badge gap, pitfall icon gap</td></tr>
+          <tr><td>--space-3</td><td>12px</td><td>Cross-ref gap, tier group internal gaps</td></tr>
+          <tr><td>--space-4</td><td>16px</td><td>Container mobile padding, callout title bottom-margin, list padding</td></tr>
+          <tr><td>--space-5</td><td>20px</td><td>Tier group padding, search dropdown padding</td></tr>
+          <tr><td>--space-6</td><td>24px</td><td>Component vertical margin, callout block padding</td></tr>
+          <tr><td>--space-7</td><td>28px</td><td>Method card / template box internal padding (legacy editorial size)</td></tr>
+          <tr><td>--space-8</td><td>32px</td><td>v48 method card / case study padding (comfort pass)</td></tr>
+          <tr><td>--space-10</td><td>40px</td><td>Container desktop padding, nav-inner padding</td></tr>
+          <tr><td>--space-12</td><td>48px</td><td>Hero padding-bottom, footer padding</td></tr>
+          <tr><td>--space-14</td><td>56px</td><td>Topic-page section spacing (v48 comfort pass)</td></tr>
+          <tr><td>--space-16</td><td>64px</td><td>Topic layout sidebar gap, h2 top margin in topics, hero padding-top</td></tr>
+          <tr><td>--space-24</td><td>96px</td><td>Deep-dive section margin-top, site-footer margin-top</td></tr>
+        </table>
+      </div>
+
+      <div class="ds-subsection">
+        <h3>Layout widths</h3>
+        <table class="token-table">
+          <tr><th>Token</th><th>Value</th><th>Use</th></tr>
+          <tr><td>--max-width</td><td>1140px</td><td>Page container max-width (.container, .nav-inner)</td></tr>
+          <tr><td>--content-width</td><td>680px</td><td>Max-width on body paragraphs (prevents overly long measure)</td></tr>
+          <tr><td>--sidebar-width</td><td>200px</td><td>TOC sidebar on topic pages (desktop only)</td></tr>
+          <tr><td>--nav-height</td><td>72px</td><td>Sticky nav height; used for sticky TOC offset and reading-progress top</td></tr>
+        </table>
+      </div>
+
+      <div class="ds-subsection">
+        <h3>Grid system</h3>
+        <p class="ds-rule">Homepage tier groups use a 3-column topic grid (compact view) or 2-column (full view), wrapped in a rounded <code>.tier-group</code> container with <code>--paper-warm</code> background and <code>--radius-xl</code>. Topic cards inside a tier group are bordered with hairline dividers (1px <code>--ink-hairline</code>) on right and bottom edges.</p>
+        <p class="ds-rule">Topic pages use a 2-column grid: <code>var(--sidebar-width) 1fr</code> with <code>align-items: start</code>. The sidebar is <code>position: sticky</code> at <code>top: calc(var(--nav-height) + var(--space-8))</code>.</p>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- COMPONENTS -->
+    <!-- ============================================================ -->
+    <section class="ds-section">
+      <h2>Components</h2>
+      <p class="ds-desc">Every reusable element in the library. Components reference design tokens for all colour, shadow, radius, spacing, and z-index values. The build script verifies this on each build and warns on any raw colour literals introduced outside the <code>:root</code> token blocks.</p>
+
+      <div class="ds-subsection">
+        <h3>Callouts</h3>
+        <p class="ds-rule">Use <code>.callout.tip</code> for practical advice, <code>.callout.warning</code> for common mistakes, <code>.callout.info</code> for context or decision guidance. Always include a <code>.callout-title</code>. Callouts use a full 2px outline in the accent colour — never a single-side border.</p>
+        <div class="ds-showcase">
+          <div class="callout tip">
+            <div class="callout-title">Practical tip</div>
+            <p>This is a tip callout. Use it for actionable advice the reader can apply immediately.</p>
+          </div>
+          <div class="callout warning">
+            <div class="callout-title">Common mistake</div>
+            <p>This is a warning callout. Use it to flag pitfalls and errors to avoid.</p>
+          </div>
+          <div class="callout info">
+            <div class="callout-title">Context</div>
+            <p>This is an info callout. Use it for background context or decision guidance.</p>
+          </div>
+        </div>
+        <div class="ds-code">&lt;div class="callout tip"&gt;
+  &lt;div class="callout-title"&gt;Practical tip&lt;/div&gt;
+  &lt;p&gt;Your advice here.&lt;/p&gt;
+&lt;/div&gt;</div>
+      </div>
+
+      <div class="ds-subsection">
+        <h3>Badges</h3>
+        <p class="ds-rule">Tier badges identify priority level. Split badges show the theory/practical/examples content ratio. Both use <code>border: 2px solid</code> box style — never border-left.</p>
+        <div class="ds-showcase">
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px">
+            <span class="tier-badge tier1">Tier 1</span>
+            <span class="tier-badge tier2">Tier 2</span>
+            <span class="tier-badge tier3">Tier 3</span>
+            <span class="tier-badge tier4">Tier 4</span>
+          </div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <span class="split-badge theory">25% Theory</span>
+            <span class="split-badge practical">50% Practical</span>
+            <span class="split-badge examples">25% Examples</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="ds-subsection">
+        <h3>Method card</h3>
+        <p class="ds-rule">Used in topic pages to describe specific methods or techniques. Warm background, ink border, with an optional method tag (inverted ink label).</p>
+        <div class="ds-showcase">
+          <div class="method-card">
+            <h4>User Interviews <span class="method-tag">Core Method</span></h4>
+            <p class="method-when">Use when: Starting any project, validating assumptions, exploring a problem space.</p>
+            <p>One-on-one conversations with real or potential users to uncover what matters to people and why.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="ds-subsection">
+        <h3>Case study</h3>
+        <p class="ds-rule">Highlights real-world examples. Uses rust accent colour to distinguish from method cards.</p>
+        <div class="ds-showcase">
+          <div class="case-study">
+            <div class="case-label">Case Study</div>
+            <h4>Airbnb — Rebuilding trust through design</h4>
+            <p>How Airbnb used design thinking to transform their service after a period of declining bookings.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="ds-subsection">
+        <h3>Checklist (interactive)</h3>
+        <p class="ds-rule">Click items to toggle checked/unchecked state. Visual only — state does not persist across page loads. Designed for screenshot-based note-taking during project work.</p>
+        <div class="ds-showcase">
+          <ul class="checklist">
+            <li>Define the problem statement clearly</li>
+            <li>Identify key stakeholders to interview</li>
+            <li>Prepare interview guide with open questions</li>
+            <li>Schedule and conduct at least 5 interviews</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="ds-subsection">
+        <h3>Expandable section</h3>
+        <p class="ds-rule">Used for deep-dive appendix content and optional detail. Warm header, white content area, chevron indicator.</p>
+        <div class="ds-showcase">
+          <details class="expandable">
+            <summary><span class="chevron"><svg viewBox="0 0 14 14"><polyline points="4,2 10,7 4,12"/></svg></span> Advanced: Facilitation techniques for resistant stakeholders</summary>
+            <div class="expand-content">
+              <p style="font-size:15px;color:var(--ink-soft);line-height:1.7">Content appears here when expanded. Use for supplementary detail that would overwhelm the main reading flow.</p>
+            </div>
+          </details>
+        </div>
+        <div class="ds-do-dont-row" style="margin-top:12px">
+          <div class="ds-do"><strong>Do</strong>Chevrons are stroked SVG polylines with no fill — two lines meeting at a point. Consistent across homepage collapse chevrons and expandable section chevrons. Use <code>stroke-linecap: round</code> and <code>stroke-linejoin: round</code>.</div>
+          <div class="ds-dont"><strong>Don't</strong>Never use filled triangles (▶ &#9654;) or solid caret characters for chevrons. No filled shapes — chevrons are always open stroked lines.</div>
+        </div>
+        <div class="ds-do-dont-row" style="margin-top:8px">
+          <div class="ds-do"><strong>Do</strong>Checklist ticks use CSS-drawn straight lines (border-right + border-bottom, rotated) with <code>border-radius</code> for rounded ends. Tick sits visually centred-low within the checkbox.</div>
+          <div class="ds-dont"><strong>Don't</strong>Never use Unicode tick characters (✓ ✔) or font glyphs for checkmarks. They render inconsistently across platforms and can't be precisely positioned.</div>
+        </div>
+      </div>
+
+      <div class="ds-subsection">
+        <h3>Template box</h3>
+        <p class="ds-rule">Fillable templates with dashed-border fields. Uses <code>--paper-white</code> background to stand out from the page.</p>
+        <div class="ds-showcase">
+          <div class="template-box">
+            <div class="template-header">
+              <span class="template-label">Template</span>
+              <span class="template-title">Problem Statement</span>
+            </div>
+            <div class="template-grid">
+              <div class="template-field">
+                <div class="template-field-label">User</div>
+                <div class="template-field-hint">Who is experiencing this problem?</div>
+              </div>
+              <div class="template-field">
+                <div class="template-field-label">Need</div>
+                <div class="template-field-hint">What do they need to accomplish?</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ds-subsection">
+        <h3>Process steps</h3>
+        <p class="ds-rule">Numbered steps with 32px ink-black squares and 20px Playfair Display numbers inside, nudged up 3px for optical centering. Used for sequential processes.</p>
+        <div class="ds-showcase">
+          <div class="process-steps">
+            <div class="process-step">
+              <div class="process-step-content">
+                <h4>Empathize</h4>
+                <p>Understand the user's world through observation and interviews.</p>
+              </div>
+            </div>
+            <div class="process-step">
+              <div class="process-step-content">
+                <h4>Define</h4>
+                <p>Synthesize findings into a clear problem statement.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ds-subsection">
+        <h3>Cross-reference cards</h3>
+        <p class="ds-rule">Link to related topics at the bottom of each topic page. Hairline border, hover reveals ink border and warm background.</p>
+        <div class="ds-showcase">
+          <div class="cross-ref-grid">
+            <a class="cross-ref-card" href="#">
+              <div class="ref-number">Topic 02</div>
+              <div class="ref-title">User Research</div>
+              <div class="ref-reason">Research methods feed directly into empathy work</div>
+            </a>
+            <a class="cross-ref-card" href="#">
+              <div class="ref-number">Topic 03</div>
+              <div class="ref-title">Journey Mapping</div>
+              <div class="ref-reason">Map the experience you discovered</div>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="ds-subsection">
+        <h3>Pitfall</h3>
+        <p class="ds-rule">Used in "Common pitfalls" sections. Icon + text layout with <code>.pitfall</code> container, <code>.pitfall-icon</code> for the exclamation mark, and a nested div for the heading and description.</p>
+        <div class="ds-code">&lt;div class="pitfall"&gt;
+  &lt;div class="pitfall-icon"&gt;!&lt;/div&gt;
+  &lt;div&gt;
+    &lt;h4&gt;Pitfall title&lt;/h4&gt;
+    &lt;p&gt;Description of what goes wrong and how to avoid it.&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</div>
+      </div>
+
+      <div class="ds-subsection">
+        <h3>At a Glance</h3>
+        <p class="ds-rule">Overview block in the topic header, below content-splits. Gives readers a quick scan of what the topic covers before they commit to reading. Uses <code>.at-a-glance</code> with full 2px ink border. Items are color-coded by content type using <code>data-type</code> attributes (theory/practical/examples). Grid collapses from 2-col to 1-col at ≤960px.</p>
+        <div class="ds-showcase">
+          <div class="at-a-glance" style="max-width:600px">
+            <div class="at-a-glance-title">At a glance <span>Overview</span></div>
+            <ul>
+              <li data-type="theory">Core concepts and principles</li>
+              <li data-type="practical">Methods, tools, and templates</li>
+              <li data-type="practical">Step-by-step workflows</li>
+              <li data-type="examples">Real-world examples and case studies</li>
+            </ul>
+          </div>
+        </div>
+        <div class="ds-code">&lt;div class="at-a-glance"&gt;
+  &lt;div class="at-a-glance-title"&gt;At a glance &lt;span&gt;Overview&lt;/span&gt;&lt;/div&gt;
+  &lt;ul&gt;
+    &lt;li data-type="theory"&gt;...&lt;/li&gt;
+    &lt;li data-type="practical"&gt;...&lt;/li&gt;
+    &lt;li data-type="examples"&gt;...&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;</div>
+      </div>
+
+    </section>
+    <!-- ============================================================ -->
+    <section class="ds-section">
+      <h2>UX Patterns</h2>
+      <p class="ds-desc">Interactive behaviours and navigation patterns used across the site.</p>
+
+      <div class="ds-subsection">
+        <h3>Navigation</h3>
+        <p class="ds-rule">Sticky <code>.site-nav</code> at top, <code>--nav-height</code> (72px) tall, <code>--ink</code> background, no bottom border at rest. Logo uses Playfair Display 900 with a 40px <code>--paper</code> square mark (radius <code>--radius-xs</code>) and <code>margin-right: auto</code>. Nav links, discipline pills, search, theme toggle and burger button cluster on the right with <code>--space-6</code> gap. Nav links are 11px uppercase Outfit 600 in <code>--paper-deep</code>. Theme toggle and burger button are 40px squares with <code>--radius-md</code>.</p>
+        <p class="ds-rule"><strong>Subpage variant:</strong> the <code>.subpage-nav</code> modifier shows a smaller logo (32px mark), reveals the <code>.nav-back-link</code> and <code>.nav-title</code>, and reflows the right cluster (search, theme toggle, burger). On mobile, the search input expands when focused and the nav-title fades out to give it room (<code>.search-expanded</code> state).</p>
+      </div>
+
+      <div class="ds-subsection">
+        <h3>Reading progress</h3>
+        <p class="ds-rule">A 3px <code>--rust</code> line fixed directly under the nav bar. Width updates on scroll from 0% to 100%. Topic pages only.</p>
+      </div>
+
+      <div class="ds-subsection">
+        <h3>Sticky TOC sidebar</h3>
+        <p class="ds-rule">The <code>.topic-sidebar</code> element is <code>position: sticky</code> with <code>align-self: start</code>. Coloured dots (7px circles) indicate section type — gold for theory, teal for practical, plum for examples. Active item gets an ink-coloured left border and bold weight via scrollspy.</p>
+      </div>
+
+      <div class="ds-subsection">
+        <h3>Search</h3>
+        <p class="ds-rule">Available on all pages. Two placements: <strong>Homepage</strong> — full-width input in the filter bar, 2px ink border, 14px Outfit, placeholder "Search topics, methods, frameworks...". <strong>Topic pages</strong> — 220px input in the nav bar, same styling.</p>
+        <p class="ds-rule"><strong>Behaviour:</strong> Typing 2+ characters opens a dropdown grouped by topic. Each result row shows a title and a type badge (<code>theory</code> / <code>practical</code> / <code>examples</code> / <code>method</code>). Maximum 8 topic groups displayed. Fuzzy matching via Levenshtein distance (threshold ≤1) catches typos on queries of 3+ characters. Dropdown closes on click outside, Escape key, or result selection.</p>
+        <p class="ds-rule"><strong>Homepage dual sync:</strong> The filter bar search (<code>#searchInput</code>) and the scrolled nav search (<code>#navSearchInput</code>) stay synced — typing in either updates both. The filter bar input drives filtering; the nav input is a convenience duplicate visible after scrolling past 120px.</p>
+        <p class="ds-rule"><strong>Search index:</strong> Built by <code>build.js</code> from content file metadata. Lives in <code>js/search.js</code> as <code>SEARCH_INDEX</code> — an array of topic objects, each containing <code>topic</code> (title), <code>url</code>, <code>discipline</code>, <code>sections[]</code> (with id, title, type, keywords), and <code>methods[]</code> (with name, section, keywords). Search matches against topic titles, section titles + keywords, and method names + keywords.</p>
+        <p class="ds-rule"><strong>Clear button:</strong> An <code>&times;</code> button appears inside the search box (absolute positioned, right) when the input has a value. Class <code>.has-query</code> on the <code>.search-box</code> wrapper controls visibility.</p>
+        <p class="ds-rule"><strong>Safety:</strong> All user input rendered in dropdown "no results" messages is escaped via <code>escapeHtml()</code> to prevent HTML injection.</p>
+        <div class="ds-code">&lt;div class="search-box"&gt;
+  &lt;input type="text" id="searchInput"
+    placeholder="Search topics, methods, frameworks..."
+    autocomplete="off" oninput="syncSearch(this)"&gt;
+  &lt;button class="search-clear" onclick="clearSearch()"&gt;&amp;times;&lt;/button&gt;
+  &lt;div class="search-dropdown" id="searchDropdown"&gt;&lt;/div&gt;
+&lt;/div&gt;</div>
+      </div>
+
+      <div class="ds-subsection">
+        <h3>Homepage filtering</h3>
+        <p class="ds-rule"><strong>Discipline toggles</strong> — four buttons in a row (UX Design, Product Management, Marketing &amp; Growth, Content Strategy). Each has a coloured dot and a dynamically computed count. Active state uses the discipline colour for border and text; inactive state is 50% opacity with faint border. <strong>Single click</strong> toggles one discipline on/off. <strong>Double-click</strong> (within 400ms) isolates that discipline — or re-enables all if it was already isolated. First single click shows a hint toast.</p>
+        <p class="ds-rule"><strong>Tier filter</strong> — text-link buttons: All, Core toolkit (Tier 1), Specialized (Tier 2), Situational (Tier 3), Reference (Tier 4). Active state is bold with ink underline. Only one tier active at a time. "All" shows every tier.</p>
+        <p class="ds-rule"><strong>Sort</strong> — two text buttons (Discipline, Tier). Active sort is bold ink. A chevron SVG (▲ / ▼) indicates direction. Clicking the active sort reverses direction. When sorting by discipline, topic cards within each tier grid are reordered (UX → PM → MK → CS) and separator rows are inserted between disciplines. When sorting by tier, the tier <code>&lt;section&gt;</code> elements are reordered in the DOM.</p>
+      </div>
+
+      <div class="ds-subsection">
+        <h3>Show filters — Connected, NN/g, Bookmarked</h3>
+        <p class="ds-rule">Three toggle buttons in the controls row. Order: <strong>Connected</strong>, <strong>NN/g</strong>, <strong>Bookmarked</strong>. Each acts as an additive filter — when active, only matching cards are shown. Multiple filters can be active simultaneously (AND logic: a card must match all active filters). Default: all off (show everything).</p>
+        <p class="ds-rule"><strong>Connected</strong> — shows topics that span multiple disciplines. Styled with teal border and teal background tint when active. A card matches when it has a <code>data-cross</code> attribute (listing the other disciplines it connects to, e.g. <code>data-cross="pm mk"</code>). Connected topics also display small discipline badges (e.g. PM, MK) in the card's top-right corner. These are auto-generated from the <code>cross_discipline</code> field in the content file's MANIFEST block.</p>
+        <p class="ds-rule"><strong>NN/g</strong> — shows topics sourced from or enriched by Nielsen Norman Group material. Styled with orange border (<code>--nng</code>) and orange background tint when active. A card matches when it has <code>data-sources="nng"</code>. This attribute is built from the <code>sources</code> field in the MANIFEST block.</p>
+        <p class="ds-rule"><strong>Bookmarked</strong> — shows topics the user has bookmarked. Styled with gold border and gold background tint when active. Bookmarks are stored in <code>localStorage</code> under key <code>bb_bookmarks</code> as a JSON object keyed by topic number (e.g. <code>{"UX.1.01": true}</code>). A bookmark icon (SVG bookmark path, 16×20px) appears on each topic card — invisible at rest, visible on hover, always visible when bookmarked (gold fill).</p>
+        <div class="ds-code">&lt;!-- Filter button markup --&gt;
+&lt;button class="filter-btn" data-filter="connected"
+  onclick="toggleFilter('connected',this)"&gt;Connected&lt;/button&gt;
+&lt;button class="filter-btn" data-filter="nng"
+  onclick="toggleFilter('nng',this)"&gt;NN/g&lt;/button&gt;
+&lt;button class="filter-btn" data-filter="bookmarked"
+  onclick="toggleFilter('bookmarked',this)"&gt;Bookmarked&lt;/button&gt;
+
+&lt;!-- Topic card with cross-discipline + source data --&gt;
+&lt;a class="topic-card" data-discipline="ux"
+  data-cross="pm mk" data-sources="nng"&gt;...&lt;/a&gt;</div>
+        <div class="ds-do-dont-row" style="margin-top:12px">
+          <div class="ds-do"><strong>Do</strong>Show contextual zero-results messaging when filters yield nothing: "No bookmarked topics" with bookmark guidance, "No NN/g-sourced topics" explaining the source, "No cross-discipline topics found" suggesting broader filters.</div>
+          <div class="ds-dont"><strong>Don't</strong>Never combine filter state with search state ambiguously. The "Clear all filters" button resets disciplines, tier, search, and show-filters together — never partially.</div>
+        </div>
+      </div>
+
+      <div class="ds-subsection">
+        <h3>Filter persistence</h3>
+        <p class="ds-rule">Filter state (disciplines, tier, sort, sort direction, show-filters, search query, view mode) is saved to <code>sessionStorage</code> under key <code>bb_filters</code> on every change. Restored on page load so navigating to a topic and back preserves the user's filter context. Bookmarks use <code>localStorage</code> (persist across sessions). View mode (compact / full) is part of the session state.</p>
+      </div>
+
+      <div class="ds-subsection">
+        <h3>Dark mode</h3>
+        <p class="ds-rule">Three-way toggle: system default, manual dark, manual light. Preference saved to <code>localStorage</code>. All colours adapt via CSS custom properties — no separate stylesheets. Toggle button in nav shows moon/sun icon.</p>
+      </div>
+
+      <div class="ds-subsection">
+        <h3>Back to top</h3>
+        <p class="ds-rule">44px ink-black square, fixed bottom-right, appears after 400px scroll. Hover changes to <code>--rust</code>. Topic pages only.</p>
+      </div>
+
+      <div class="ds-subsection">
+        <h3>Collapsible sections</h3>
+        <p class="ds-rule">Homepage tier groups can be collapsed and expanded. Add <code>.collapsible-section</code> to the section, <code>.collapsible-header</code> with <code>onclick="toggleSection(this)"</code> to the header, an SVG chevron inside <code>.collapse-chevron</code>, and wrap the body content in <code>.collapsible-body</code>. The chevron is a stroked polyline (no fill) that rotates -90° when collapsed. Filter tab clicks auto-expand matching collapsed sections.</p>
+        <div class="ds-code">&lt;section class="tier-group collapsible-section"&gt;
+  &lt;div class="tier-header collapsible-header" onclick="toggleSection(this)"&gt;
+    &lt;h2&gt;Section Title&lt;/h2&gt;
+    &lt;span class="collapse-chevron"&gt;
+      &lt;svg viewBox="0 0 14 14"&gt;&lt;polyline points="3,5 7,9 11,5"/&gt;&lt;/svg&gt;
+    &lt;/span&gt;
+  &lt;/div&gt;
+  &lt;div class="collapsible-body"&gt;
+    &lt;!-- Section content --&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</div>
+      </div>
+
+      <div class="ds-subsection">
+        <h3>Burger menu (replaces Floating Mobile TOC)</h3>
+        <p class="ds-rule">At ≤960px the burger button (<code>.burger-btn</code>, 40px square, <code>--radius-md</code>) appears in the right of the nav. Clicking opens <code>.burger-overlay</code> (a <code>--scrim</code> backdrop at <code>--z-burger-overlay</code>) plus a slide-in <code>.burger-panel</code> from the right (max 320px wide / 85vw, <code>--paper</code> background, 3px ink left border, <code>--z-burger-panel</code>). The panel contains a header with close button, a search input (which uses <code>--shadow-focus</code> on focus), inline page links, and the current page's TOC if applicable. Closes on backdrop click, close button, Escape, or link click. The legacy <code>.mobile-toc-btn</code> is kept as <code>display:none</code> for back-compat.</p>
+      </div>
+
+      <div class="ds-subsection">
+        <h3>Discipline pills (in nav)</h3>
+        <p class="ds-rule">Four <code>.disc-toggle</code> pills inside <code>.nav-filters</code> (UX, PM, MK, CS). At rest: outlined with <code>--paper-deep</code>, 0.5 opacity. Hover lifts the border to <code>--paper</code>. Active state uses the <code>--disc-{ux|pm|mk|cs}</code> tokens for border + text and <code>--disc-{ux|pm|mk|cs}-bg</code> for the wash. Because the nav background is <code>--ink</code> (which flips), the discipline tokens flip the opposite way: bright pastels in light mode, deep saturated tones in dark mode. A small <code>.disc-dot</code> uses the same token for the leading bullet.</p>
+        <p class="ds-rule">Pills shape: <code>--radius-pill</code>, font 12px Outfit 600. Each pill includes a 2-letter <code>.disc-code</code> suffix (UX/PM/MK/CS) at 0.85 opacity so the pill maps to the topic-number prefix.</p>
+      </div>
+
+      <div class="ds-subsection">
+        <h3>Search phrase pills + clear</h3>
+        <p class="ds-rule">Both the homepage filter-bar search and the topic-page nav search support <strong>phrase pills</strong>: typing a comma or pressing Enter commits the typed text as a removable pill chip and clears the input. Pills accumulate as the user refines a multi-term search, so each commit is preserved as a discrete filter token rather than a single concatenated string.</p>
+        <p class="ds-rule">Pill markup is <code>.search-phrase-pill</code> (paper-warm background, ink-faint border, <code>--radius-pill</code>) with a small <code>.pill-remove</code> × button. A <code>.search-clear</code> button (×) appears on the right edge of the input when the box has any value (<code>.has-query</code> state on <code>.search-box</code>), clearing both the input and all committed pills.</p>
+        <p class="ds-rule">In the nav-search variant (<code>.nav-search-pills</code> inside <code>.nav-search-wrap</code>), pills sit inline with the input behind a translucent white wash (the one intentional theme-invariant rgba in shared.css, since the nav background is always dark) and scroll horizontally if they overflow.</p>
+      </div>
+
+      <div class="ds-subsection">
+        <h3>Source provenance markers</h3>
+        <p class="ds-rule">Any element with a <code>data-source</code> attribute renders a small uppercase label in the top-right corner via <code>::after</code>, coloured <code>--nng</code> for NN/g sources. Targets: <code>.method-card</code>, <code>.callout</code>, <code>.case-study</code>, <code>.template-box</code>, <code>.pitfall</code>, and <code>details.expandable</code>. Section-level provenance (an entire <code>&lt;section data-source="…"&gt;</code>) renders a visible inline <code>.source-label</code> next to the h2.</p>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- FILE STRUCTURE -->
+    <!-- ============================================================ -->
+    <section class="ds-section">
+      <h2>File Architecture</h2>
+      <p class="ds-desc">How the codebase is organised and where each concern lives.</p>
+
+      <div class="ds-code">library-v49/
+├── css/
+│   ├── shared.css            ← Design system: ALL tokens (colour, spacing, radius,
+│   │                           shadow, z-index, layout, typography), ALL components
+│   ├── home.css              ← Homepage layout (hero, tier groups, topic cards, filters)
+│   └── topic.css             ← Topic page layout (header, sidebar, progress bar, comfort pass)
+├── js/
+│   ├── theme.js              ← 3-way toggle (system / manual dark / manual light) + localStorage
+│   ├── search.js             ← Generated SEARCH_INDEX + fuzzy matching + dropdown
+│   ├── checklist.js          ← Click-to-toggle checklist items (in-page only)
+│   ├── mobile-toc.js         ← Legacy floating TOC (kept for back-compat, hidden in v48)
+│   └── topic-nav.js          ← v48: wires topic-page nav search + discipline pill behaviour
+├── content/                  ← Source fragments (what you edit)
+│   ├── _components.html      ← Component markup cheat-sheet
+│   ├── _recipe.html          ← Target line counts and section structure per tier
+│   └── *.html                ← topic content fragments
+├── topics/                   ← Built output (generated by build.js, do NOT hand-edit)
+│   └── *.html                ← complete topic pages
+├── index.html                ← Homepage (topic grid, 4 tiers, search, filters)
+├── design-system.html        ← This file
+├── request-topic.html        ← Suggest-a-topic form
+├── build.js                  ← content/ → topics/, regenerates SEARCH_INDEX + manifest + README
+├── library-manifest.json     ← AI-readable routing table (full topic metadata)
+├── README.md                 ← Agent instructions + human docs
+└── CHANGELOG.md              ← Per-version changes</div>
+
+      <div class="ds-subsection">
+        <h3>Separation of concerns</h3>
+        <p class="ds-rule"><code>shared.css</code> owns all visual tokens (colour, spacing, radius, shadow, z-index, layout, typography) and all component styles. Page CSS files (<code>home.css</code>, <code>topic.css</code>) own only layout-specific rules and the v48 comfort pass. Inline styles in <code>index.html</code> own homepage-only filter bar mechanics. To change the visual identity globally, edit only the <code>:root</code> token blocks in <code>shared.css</code>.</p>
+        <p class="ds-rule">The <code>SEARCH_INDEX</code> in <code>js/search.js</code> is regenerated by <code>build.js</code> from each content file's <code>SEARCH_INDEX</code> block, and the same is true for <code>library-manifest.json</code> entries. Hand-editing either file risks being overwritten on the next build.</p>
+        <p class="ds-rule">A token guardrail in <code>build.js</code> scans <code>css/</code> on every build and warns on raw hex / rgba colour literals declared outside the <code>:root</code> token blocks. The intent is that <code>shared.css</code>'s <code>:root</code> remains the single source of truth for colour and shadow values.</p>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- RESPONSIVE -->
+    <!-- ============================================================ -->
+    <section class="ds-section">
+      <h2>Responsive Design</h2>
+      <p class="ds-desc">Two breakpoints handle the transition from desktop to mobile. The site uses a mobile-first override approach — desktop styles are the default, with breakpoints scaling down.</p>
+
+      <div class="ds-subsection">
+        <h3>Breakpoints</h3>
+        <table class="token-table">
+          <tr><th>Breakpoint</th><th>Width</th><th>What changes</th></tr>
+          <tr><td>Tablet</td><td>max-width: 960px</td><td>Hero collapses to single column. Topic cards switch from 3-column to 2-column grid. Topic sidebar (TOC) is hidden — replaced by floating "Contents" button with slide-up TOC panel. At-a-glance grid collapses to 1-col. Nav link gap tightens.</td></tr>
+          <tr><td>Mobile</td><td>max-width: 768px</td><td>Nav links hidden, mobile back link appears. All grids collapse to single column. Type scale reduces. Container padding drops to 16px. Logo and theme toggle shrink.</td></tr>
+        </table>
+      </div>
+
+      <div class="ds-subsection">
+        <h3>Navigation on mobile</h3>
+        <p class="ds-rule">At ≤768px, <code>.nav-links</code> is hidden entirely. On topic pages, a <code>.nav-back</code> element (hidden on desktop) becomes visible to provide a way back to the homepage. This is a separate element from the nav-links back link — it lives outside the <code>ul</code> so it survives the <code>display: none</code>.</p>
+        <p class="ds-rule">The logo shrinks to 1.2rem with a 32px mark. The theme toggle shrinks to 32px. These elements plus the back link must fit comfortably on a 375px screen.</p>
+      </div>
+
+      <div class="ds-subsection">
+        <h3>Type scale changes</h3>
+        <table class="token-table">
+          <tr><th>Element</th><th>Desktop</th><th>Mobile (≤768px)</th></tr>
+          <tr><td>Homepage h1</td><td>62px</td><td>2rem (32px)</td></tr>
+          <tr><td>Homepage subtitle</td><td>17px</td><td>15px</td></tr>
+          <tr><td>Topic h1</td><td>3rem (48px)</td><td>2rem (32px)</td></tr>
+          <tr><td>Topic subtitle</td><td>1.125rem (18px)</td><td>1rem (16px)</td></tr>
+          <tr><td>Card numbers</td><td>52px</td><td>36px</td></tr>
+          <tr><td>Logo</td><td>1.5rem</td><td>1.2rem</td></tr>
+        </table>
+      </div>
+
+      <div class="ds-subsection">
+        <h3>Grid behaviour</h3>
+        <table class="token-table">
+          <tr><th>Grid</th><th>Desktop</th><th>Tablet (≤960px)</th><th>Mobile (≤768px)</th></tr>
+          <tr><td>Hero</td><td>1fr 1fr</td><td>1fr</td><td>1fr</td></tr>
+          <tr><td>Topic cards</td><td>3 columns</td><td>2 columns</td><td>1 column</td></tr>
+          <tr><td>Pathway cards</td><td>3 columns</td><td>2 columns</td><td>1 column</td></tr>
+          <tr><td>Topic layout</td><td>sidebar + content</td><td>content only</td><td>content only</td></tr>
+          <tr><td>Prev/next nav</td><td>1fr 1fr</td><td>1fr 1fr</td><td>1fr</td></tr>
+          <tr><td>Cross-ref cards</td><td>auto-fill 200px</td><td>auto-fill 200px</td><td>1fr</td></tr>
+        </table>
+      </div>
+
+      <div class="ds-subsection">
+        <h3>Rules for new topics</h3>
+        <div class="ds-do-dont">
+          <div class="ds-do"><strong>Do</strong>Every new topic page must include: the <code>.nav-back</code> element in the nav for mobile access, an <code>.at-a-glance</code> block in the header with 4–6 items covering what the topic contains, a <code>.mobile-toc-btn</code> and <code>.mobile-toc-overlay</code> panel mirroring the sidebar TOC, and a <code>&lt;script src="../js/mobile-toc.js"&gt;</code> include. Always test components at 375px width before shipping. Use relative units (rem, %) for anything that should scale — hardcoded px for things that shouldn't (borders, small icons).</div>
+          <div class="ds-dont"><strong>Don't</strong>Don't add new fixed-width grids without a mobile override. Don't use padding over 16px on containers at mobile width. Don't hide navigation elements without providing a mobile alternative.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- WCAG -->
+    <!-- ============================================================ -->
+    <section class="ds-section">
+      <h2>Accessibility</h2>
+      <p class="ds-desc">Contrast ratios and accessibility compliance for the Design System palette.</p>
+
+      <table class="token-table">
+        <tr><th>Token</th><th>Light ratio</th><th>WCAG level</th></tr>
+        <tr><td>--ink on --paper</td><td>15.7:1</td><td>AAA — headings, strong text</td></tr>
+        <tr><td>--ink-soft on --paper</td><td>10.2:1</td><td>AAA — body text</td></tr>
+        <tr><td>--ink-muted on --paper</td><td>4.7:1</td><td>AA — nav links, labels, descriptions</td></tr>
+        <tr><td>--ink-light on --paper</td><td>4.8:1</td><td>AA — breadcrumbs, TOC links, status text</td></tr>
+        <tr><td>--ink-faint on --paper</td><td>3.5:1</td><td>AA Large — card numbers (52px), borders</td></tr>
+      </table>
+      <p class="ds-rule">All text-bearing tokens pass WCAG AA (4.5:1) for normal text, except <code>--ink-faint</code> which is used only for large decorative text (52px card numbers) and passes AA Large (3:1). Dark mode equivalents are also verified.</p>
+    </section>
+
+    <footer class="site-footer">
+      Design System — UX Design Library
+    </footer>
+
+  </div>
+
+  <script src="js/checklist.js"></script>
+</body>
+</html>

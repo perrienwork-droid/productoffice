@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Information Visualization — Noir Book</title>
+  <link rel="stylesheet" href="../css/shared.css">
+  <link rel="stylesheet" href="../css/topic.css">
+  <script src="../js/theme.js"></script>
+  <script src="../js/topic-nav.js"></script>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="site-nav subpage-nav" data-discipline="ux">
+    <div class="nav-inner">
+      <a href="../index.html" class="site-logo">
+        <span class="logo-mark">UX</span>
+        <span class="nav-title">Noir Book</span>
+      </a>
+      <a href="../index.html" class="nav-back-link">&#8592; Library</a>
+      <div class="nav-filters">
+        <button class="disc-toggle ux-toggle active" data-disc="ux" onclick="toggleDisc('ux')" title="UX Design">
+          <span class="disc-dot disc-dot-ux"></span><span class="disc-label">UX Design</span><span class="disc-code">(UX)</span>
+        </button>
+        <button class="disc-toggle pm-toggle active" data-disc="pm" onclick="toggleDisc('pm')" title="Product Management">
+          <span class="disc-dot disc-dot-pm"></span><span class="disc-label">Product</span><span class="disc-code">(PM)</span>
+        </button>
+        <button class="disc-toggle mk-toggle active" data-disc="mk" onclick="toggleDisc('mk')" title="Marketing &amp; Growth">
+          <span class="disc-dot disc-dot-mk"></span><span class="disc-label">Marketing</span><span class="disc-code">(MK)</span>
+        </button>
+        <button class="disc-toggle cs-toggle active" data-disc="cs" onclick="toggleDisc('cs')" title="Content Strategy">
+          <span class="disc-dot disc-dot-cs"></span><span class="disc-label">Content</span><span class="disc-code">(CS)</span>
+        </button>
+        <div class="search-box nav-search-box">
+          <div class="nav-search-wrap">
+            <div class="nav-search-pills" id="navSearchPills"></div>
+            <input type="text" id="navSearchInput" placeholder="Search..." autocomplete="off"
+              oninput="topicNavSearch(this.value)"
+              onkeydown="handleNavSearchKey(event)"
+              onfocus="handleNavSearchFocus()"
+              onblur="handleNavSearchBlur()">
+            <button type="button" class="nav-search-clear" id="navSearchClear" onclick="clearNavSearch()" aria-label="Clear search">&times;</button>
+          </div>
+          <div class="search-dropdown" id="navSearchDropdown"></div>
+        </div>
+      </div>
+      <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle theme">&#9790;</button>
+      <button class="burger-btn" id="burgerBtn" onclick="openBurger()" aria-label="Menu">
+        <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="2" y1="4" x2="16" y2="4"/><line x1="2" y1="9" x2="16" y2="9"/><line x1="2" y1="14" x2="16" y2="14"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Burger Menu Overlay -->
+  <div class="burger-overlay" id="burgerOverlay" onclick="closeBurger(event)">
+    <div class="burger-panel" onclick="event.stopPropagation()">
+      <div class="burger-panel-header">
+        <h3>Menu</h3>
+        <button class="burger-close" onclick="closeBurger()" aria-label="Close">&times;</button>
+      </div>
+      <div class="burger-search">
+        <input type="text" id="burgerSearchInput" placeholder="Search topics, methods..." autocomplete="off" oninput="burgerSearch(this.value)">
+        <div class="burger-search-results" id="burgerSearchResults"></div>
+      </div>
+      <div class="burger-links">
+        <a href="../index.html">&#8592; Back to Library</a>
+        <a href="../design-system.html">Design System</a>
+        <a href="../request-topic.html">Suggest a topic or improvement</a>
+      </div>
+      <div class="burger-toc-section">
+        <p class="burger-toc-title">On this page</p>
+        <ul class="burger-toc-list">
+        <li><a href="#what-information-visualization-is-and-why-it-matters" data-section="theory">What information visualization is and why it matters</a></li>
+        <li><a href="#what-information-visualization-is-and-why-it-matters" data-section="theory">Graphical integrity</a></li>
+        <li><a href="#data-density-and-small-multiples" data-section="theory">Data density and small multiples</a></li>
+        <li><a href="#choosing-the-right-chart-type" data-section="theory">Choosing the right chart type</a></li>
+        <li><a href="#redesign-exercises-applying-the-erasing-principles" data-section="theory">Redesign exercises: applying the erasing principles</a></li>
+        <li><a href="#templates-and-checklists" data-section="practical">Templates and checklists</a></li>
+        <li><a href="#great-data-graphics-what-makes-them-work" data-section="examples">Great data graphics: what makes them work</a></li>
+        <li><a href="#great-data-graphics-what-makes-them-work" data-section="examples">Common failures and how to fix them</a></li>
+        <li><a href="#templates-and-checklists" data-section="practical">Common pitfalls</a></li>
+        <li><a href="#when-to-use" data-section="practical">When to use this</a></li>
+        <li><a href="#connections">Connected topics in your library</a></li>
+        <li><a href="#deep-dive">Deep-dive appendix</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Topic Header -->
+  <header class="topic-header container">
+    <div class="breadcrumb">
+      <a href="../index.html">Library</a>
+      <span class="sep">&#8250;</span>
+      <span class="breadcrumb-disc breadcrumb-ux">UX Design</span>
+      <span class="sep">&#8250;</span>
+      <span>Tier 3 — Situational</span>
+      <span class="sep">&#8250;</span>
+      <span>Information Visualization</span>
+    </div>
+    <div class="topic-meta">
+      <span class="tier-badge tier3">Tier 3</span>
+      <span style="font-size:14px;color:var(--ink-muted)">Topic UX.3.02</span>
+    </div>
+    <h1>Information Visualization</h1>
+    <p class="topic-subtitle">How to represent data visually so people can see patterns, make comparisons, and reach conclusions. Covers chart selection, visual encoding, graphical integrity, and the principles that separate excellent data graphics from misleading or wasteful ones.</p>
+    <div class="content-splits">
+      <span class="split-badge theory">35% Theory</span>
+      <span class="split-badge practical">40% Methods &amp; Templates</span>
+      <span class="split-badge examples">25% Examples</span>
+    </div>
+  </header>
+
+  <!-- Reading Progress Bar -->
+  <div class="reading-progress" id="readingProgress"></div>
+
+  <!-- Main Layout -->
+  <div class="container">
+    <div class="topic-layout">
+
+      <!-- Sidebar: Table of Contents -->
+      <aside class="topic-sidebar">
+        <nav class="toc">
+          <p class="sidebar-topic-title">Information Visualization</p>
+          <p class="toc-title">On this page</p>
+          <ul class="toc-list">
+            <li><a href="#what-information-visualization-is-and-why-it-matters" data-section="theory">What information visualization is and why it matters</a></li>
+            <li><a href="#what-information-visualization-is-and-why-it-matters" data-section="theory">Graphical integrity</a></li>
+            <li><a href="#data-density-and-small-multiples" data-section="theory">Data density and small multiples</a></li>
+            <li><a href="#choosing-the-right-chart-type" data-section="theory">Choosing the right chart type</a></li>
+            <li><a href="#redesign-exercises-applying-the-erasing-principles" data-section="theory">Redesign exercises: applying the erasing principles</a></li>
+            <li><a href="#templates-and-checklists" data-section="practical">Templates and checklists</a></li>
+            <li><a href="#great-data-graphics-what-makes-them-work" data-section="examples">Great data graphics: what makes them work</a></li>
+            <li><a href="#great-data-graphics-what-makes-them-work" data-section="examples">Common failures and how to fix them</a></li>
+            <li><a href="#templates-and-checklists" data-section="practical">Common pitfalls</a></li>
+            <li><a href="#when-to-use" data-section="practical">When to use this</a></li>
+            <li><a href="#connections">Connected topics in your library</a></li>
+            <li><a href="#deep-dive">Deep-dive appendix</a></li>
+          </ul>
+        </nav>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="topic-main topic-content">
+
+<!-- SECTION: What & Why (Theory)                 -->
+        <div class="section-marker" id="what-information-visualization-is-and-why-it-matters">
+          <span class="split-badge theory">Theory</span>
+          <span class="marker-line"></span>
+        </div>
+
+        <section data-section="theory">
+  <h2>What information visualization is and why it matters</h2>
+
+<p>Information visualization is the use of visual representations &#8212; charts, graphs, maps, diagrams &#8212; to help people understand data. The goal is not to make data pretty. The goal is to make data <strong>thinkable</strong>. A well-designed visualization reveals patterns that would remain invisible in a table of numbers, enables comparisons that would take hours to compute mentally, and communicates findings with a speed and clarity that words alone cannot match.</p>
+
+<p>Statistical graphics emerged surprisingly recently in human history. Despite millennia of mathematical sophistication, it wasn&#8217;t until the late 18th century that William Playfair invented the bar chart, line chart, and pie chart. The skills required &#8212; visual, empirical-statistical, and mathematical &#8212; rarely converge in one person or tradition. That convergence is still rare today, which is why so many data graphics are mediocre or misleading.</p>
+
+<p>The field&#8217;s theoretical foundation was established by Edward Tufte in <em>The Visual Display of Quantitative Information</em> (1983), which articulated principles for graphical excellence that remain the standard. This topic page uses Tufte&#8217;s framework as its theoretical backbone, supplemented by Cleveland and McGill&#8217;s perceptual research and modern practices for interactive, screen-based data graphics.</p>
+
+<div class="callout info">
+  <p class="callout-title">Why this matters for your projects</p>
+  <p>Every digital product eventually needs to show data &#8212; a dashboard, an analytics page, a report, a chart in a marketing site. The difference between a graphic that clarifies and one that confuses often comes down to a handful of principles that take minutes to learn but are violated constantly. Understanding these principles means your data graphics will be honest, efficient, and immediately comprehensible.</p>
+</div>
+
+<!-- SECTION: Graphical Excellence                -->
+<h3 id="graphical-excellence">Graphical excellence</h3>
+
+<p>Graphical excellence is the well-designed presentation of interesting data &#8212; a matter of substance, of statistics, and of design. It consists of complex ideas communicated with clarity, precision, and efficiency. It gives the viewer the greatest number of ideas in the shortest time with the least ink in the smallest space.</p>
+
+<p>Excellence in data graphics is not about aesthetics in the decorative sense. It is about enabling the viewer&#8217;s eye to make comparisons, see patterns, and detect causes. The best graphics are instruments for reasoning about quantitative information &#8212; and they are almost always the simplest.</p>
+
+<h4>Five qualities of excellent data graphics</h4>
+<p><strong>1. Show the data.</strong> This sounds obvious but is routinely violated. Many graphics bury the data under decoration, three-dimensional effects, or unnecessary visual complexity. The data should be the most prominent element.</p>
+<p><strong>2. Induce the viewer to think about substance.</strong> The viewer&#8217;s attention should be drawn to the data and what it means &#8212; not to the methodology, the design of the graphic, or the technology used to produce it.</p>
+<p><strong>3. Avoid distorting what the data have to say.</strong> The visual representation must be proportional to the numerical quantities. When it isn&#8217;t, you have a lie (see Graphical Integrity below).</p>
+<p><strong>4. Present many numbers in a small space.</strong> Great graphics are data-dense. They pack a lot of information into a compact area, allowing the eye to make comparisons rapidly.</p>
+<p><strong>5. Make large data sets coherent.</strong> The special power of graphics over tables is in handling large data sets. A table of 20 numbers is often clearer than a chart of 20 numbers. But a chart of 2,000 numbers can reveal structure that a table of 2,000 numbers never could.</p>
+
+<!-- SECTION: Graphical Integrity                 -->
+</section>
+
+<section id="what-information-visualization-is-and-why-it-matters" data-section="theory">
+  <h2>Graphical integrity</h2>
+
+<p>Graphics can lie. They lie when the visual representation of data is inconsistent with the numerical representation. Sometimes the lies are intentional (propaganda, marketing). More often, they result from ignorance of basic principles or from prioritizing visual impact over accuracy.</p>
+
+<div class="method-card">
+  <h4>The Lie Factor <span class="method-tag">Key Concept</span></h4>
+  <p class="method-when">Use when: Reviewing any data graphic for accuracy before publication.</p>
+  <p>The Lie Factor measures graphical integrity by comparing the visual effect to the numerical change:</p>
+  <p><strong>Lie Factor = (size of effect shown in graphic) ÷ (size of effect in data)</strong></p>
+  <p>A Lie Factor of 1.0 means the graphic is accurate. Above 1.05 or below 0.95, and the graphic is distorting the data. Many published graphics have Lie Factors of 2, 5, or even higher &#8212; meaning they visually exaggerate the change by 2x, 5x, or more.</p>
+  <p>Common causes of high Lie Factors: using areas or volumes to represent one-dimensional quantities (a circle twice the diameter represents 4x the area), truncating the y-axis to exaggerate small changes, and using three-dimensional perspective that distorts proportions.</p>
+</div>
+
+<h4>Six principles of graphical integrity</h4>
+<p><strong>1. Visual representations must be directly proportional to quantities.</strong> If sales doubled, the visual element representing sales should be exactly twice as large &#8212; not three times or four times, as happens with 3D bar charts and bubble charts that scale by area instead of length.</p>
+<p><strong>2. Use clear, detailed labeling.</strong> Labels should defeat graphical distortion and ambiguity. Write explanations of the data on the graphic itself. Label important events in the data.</p>
+<p><strong>3. Show data variation, not design variation.</strong> Changes in the graphic should reflect changes in the data, never changes in the graphic design. If a chart uses different visual styles for different bars, the viewer may read the style change as a data difference.</p>
+<p><strong>4. Standardize units.</strong> In time-series displays, use consistent time intervals. If mixing currencies, deflate for inflation. If showing rates, use the same denominator.</p>
+<p><strong>5. Don&#8217;t quote data out of context.</strong> A graphic showing one year of crime statistics rising can be alarming; the same data in a 20-year context may show a long decline with a small uptick. Context is essential to integrity.</p>
+<p><strong>6. The number of information-carrying dimensions should not exceed the number of dimensions in the data.</strong> One-dimensional data (a single variable over time) should be represented with a one-dimensional element (the position along a line), not a two- or three-dimensional object (areas, volumes) that introduces perceptual distortion.</p>
+
+<div class="callout warning">
+  <p class="callout-title">Watch for these common integrity violations</p>
+  <p><strong>Truncated y-axis:</strong> Starting the y-axis at a value other than zero makes small changes look dramatic. A 2% increase can look like a 50% increase. Sometimes truncation is legitimate (when showing small but meaningful variations in tightly controlled data), but it should always be clearly labeled.</p>
+  <p><strong>Dual y-axes:</strong> Two different scales on left and right axes let the designer imply correlation between unrelated data by adjusting scales to make lines cross. If you need two scales, use two separate charts.</p>
+  <p><strong>Area and volume distortion:</strong> When representing quantities with circles, the eye reads area, not radius. Doubling the radius quadruples the area. This is the single most common source of graphical distortion.</p>
+</div>
+
+<!-- SECTION: Data-Ink Ratio                     -->
+<h3 id="data-ink-ratio">The data-ink ratio</h3>
+
+<p>The data-ink ratio is perhaps the most practical principle in all of data visualization. It states that a large share of the ink (or pixels) on a graphic should present new information. Ink that does not tell the viewer something new can almost always be erased.</p>
+
+<p><strong>Data-ink ratio = (data-ink) ÷ (total ink used in the graphic)</strong></p>
+
+<p>Every bit of ink on a graphic requires a reason. That reason should nearly always be: this ink presents information that would be lost without it. The principle generates two erasing rules that apply to nearly every graphic:</p>
+
+<h4>Erasing principle 1: Erase non-data-ink, within reason</h4>
+<p>Grid lines, heavy tick marks, borders around the chart area, background fills, decorative boxes around legends &#8212; these are non-data-ink. In most cases, they can be reduced (make grid lines lighter, thinner, or fewer) or removed entirely. The data itself, if positioned clearly, can serve as its own grid.</p>
+
+<h4>Erasing principle 2: Erase redundant data-ink, within reason</h4>
+<p>If the same number is communicated by six visual elements &#8212; the height of a bar, the position of its top edge, a label above it, a grid line behind it, a tick mark on the axis, and shading within &#8212; then five of those six are redundant. Any five could be erased and the information would survive. In practice, keep the one or two that communicate most clearly and erase the rest.</p>
+
+<div class="callout tip">
+  <p class="callout-title">Applying data-ink in modern UI</p>
+  <p>Tufte wrote about ink on paper, but the principle translates directly to pixels on screen. Every visual element in your chart &#8212; background color, border, shadow, grid line, axis label &#8212; should earn its place by communicating data. When reviewing a visualization, ask of every element: &#8220;If I removed this, would the viewer lose information?&#8221; If the answer is no, remove it.</p>
+</div>
+
+<!-- SECTION: Chartjunk                           -->
+<h3 id="chartjunk">Chartjunk: what to erase</h3>
+
+<p>Chartjunk is the visual debris that clutters up a graphic without conveying information. It comes in three forms, each worth recognizing because each is still common in modern tools and templates.</p>
+
+<h4>1. Moir&#233; vibration</h4>
+<p>When closely spaced lines or patterns overlap, they create a shimmering, vibrating optical effect that is visually aggressive and communicates nothing. This happens with hatched fills in bar charts, tightly spaced grid lines, and patterned backgrounds. The solution is simple: use flat color fills or no fill at all, and reduce grid lines to the minimum needed for reference.</p>
+
+<h4>2. The grid</h4>
+<p>The grid should usually be muted or eliminated entirely. Heavy, dark grid lines compete with the data for the viewer&#8217;s attention. If the grid is necessary for precise readings, make it light gray and thin &#8212; present enough to reference but not enough to distract. Often the data can serve as its own grid: labeled data points or direct annotation make grid lines redundant.</p>
+
+<h4>3. The duck</h4>
+<p>Named after the Long Island building shaped like a duck, a &#8220;duck&#8221; in data graphics is a chart where the graphic design overwhelms the data. Infographics shaped like objects, charts inside illustrations, data labels integrated into artistic compositions &#8212; these prioritize visual novelty over data communication. The chart might be memorable, but the data is not.</p>
+
+<div class="callout info">
+  <p class="callout-title">Modern chartjunk</p>
+  <p>Tufte&#8217;s examples were from print. Modern chartjunk includes: 3D effects on bar charts, gradient fills, drop shadows on chart elements, decorative icons inside charts, animated transitions that slow down comprehension, and &#8220;skeuomorphic&#8221; chart styles that make flat data look like physical objects. Dashboard tools like Excel, Google Sheets, and even Figma chart plugins default to many of these. Your first step after generating a chart should be stripping away the defaults.</p>
+</div>
+
+<!-- SECTION: Data Density & Small Multiples      -->
+</section>
+
+<section id="data-density-and-small-multiples" data-section="theory">
+  <h2>Data density and small multiples</h2>
+
+<p>Data graphics should often be based on large data matrices and have high data density. The argument is counterintuitive: more information, not less, often makes a graphic clearer. When a graphic displays many data points, the eye can detect patterns, outliers, and relationships that a sparse chart would hide. The cost of adding data to a well-designed graphic is low; the cost of withholding it is high.</p>
+
+<p>Data density is defined as the number of data entries divided by the area of the graphic. Most published graphics have surprisingly low density &#8212; a handful of numbers spread across a large area. The best newspapers and academic journals publish data-dense graphics that pack significant information into compact displays. This density is not clutter; it is substance.</p>
+
+<h4>The principle of small multiples</h4>
+<p>Small multiples are the single most effective technique for displaying multivariate data. A small multiple is a series of graphics, all showing the same combination of variables, each showing a different slice of the data &#8212; by time period, by category, by geographic region. The design of each graphic is identical; only the data changes.</p>
+
+<p>Small multiples work because the human eye is extraordinarily good at scanning a series of similar images for differences. Once the viewer understands the format of one panel, they can read all the panels at a glance. Comparisons become immediate and visual rather than requiring memory or mental computation.</p>
+
+<div class="method-card">
+  <h4>Small Multiples <span class="method-tag">Core Technique</span></h4>
+  <p class="method-when">Use when: Comparing the same metric across categories, time periods, or conditions. Showing how a pattern varies across segments.</p>
+  <p>Design all panels identically: same axes, same scale, same visual encoding. Vary only the data. Use consistent color so the eye reads differences in shape and position, not in color. Arrange panels in a logical order (chronological, alphabetical, by magnitude). Label concisely &#8212; the panel title should be the only text that changes.</p>
+  <p><strong>Example:</strong> Instead of one cluttered line chart showing sales for 12 product categories, create a 4&#215;3 grid of small line charts, each showing one category. The viewer instantly sees which categories are growing, which are flat, and which are seasonal &#8212; comparisons that would be impossible in a single overlapping spaghetti chart.</p>
+</div>
+
+<div class="callout tip">
+  <p class="callout-title">When to maximize density vs. when to simplify</p>
+  <p>High density is appropriate when the audience is analytical &#8212; data analysts, researchers, financial professionals &#8212; and when the graphic will be studied, not glanced at. For presentations, marketing materials, or audiences unfamiliar with the data, a simpler graphic with fewer data points and more annotation is often more effective. Match density to context and audience.</p>
+</div>
+
+<!-- SECTION: Visual Encoding Principles          -->
+<h3 id="visual-encoding">Visual encoding principles</h3>
+
+<p>Visual encoding is how you map data values to visual properties. Choosing the right encoding channel is as important as choosing the right chart type &#8212; and the research on which channels humans read most accurately is well established.</p>
+
+<h4>The Cleveland-McGill hierarchy</h4>
+<p>In 1984, William Cleveland and Robert McGill published a landmark study ranking visual encoding channels by perceptual accuracy &#8212; how precisely humans can extract quantitative values from each channel. The ranking, from most accurate to least:</p>
+
+<p><strong>1. Position along a common scale</strong> (most accurate) &#8212; Dot plots, scatter plots, bar charts along a shared axis. This is why bar charts and line charts are so effective: the eye compares positions along a shared baseline with high precision.</p>
+<p><strong>2. Position along non-aligned scales</strong> &#8212; Small multiples where each panel has its own axis. Still accurate, but slightly harder because the eye must track across separate frames.</p>
+<p><strong>3. Length</strong> &#8212; Bar charts. Effective for comparison, but less precise than position because the eye must judge the extent of each bar, not just its endpoint.</p>
+<p><strong>4. Angle and slope</strong> &#8212; Pie charts (angle), line charts (slope). Angles are harder to compare than positions or lengths, which is why pie charts are generally inferior to bar charts for the same data.</p>
+<p><strong>5. Area</strong> &#8212; Bubble charts, treemaps. Humans are poor at comparing areas accurately. A circle with twice the area looks less than twice as big. Area should encode secondary information, never the primary comparison.</p>
+<p><strong>6. Volume and curvature</strong> &#8212; 3D charts. Almost never appropriate. The third dimension adds perceptual distortion without adding data dimensions.</p>
+<p><strong>7. Color saturation, color hue, density</strong> (least accurate) &#8212; Heat maps, choropleth maps. Color is effective for categories and for showing broad patterns, but poor for precise quantitative comparisons.</p>
+
+<div class="callout info">
+  <p class="callout-title">Pre-attentive processing</p>
+  <p>Some visual properties are processed before conscious attention &#8212; your eye detects them instantly without scanning. Color hue, orientation, size, and shape are all pre-attentive. This means a single red dot in a field of blue dots pops out immediately. Use pre-attentive properties to highlight outliers, anomalies, or the most important data points in a dense graphic. But use only one pre-attentive channel at a time: if everything is highlighted, nothing is.</p>
+</div>
+
+<!-- SECTION: Choosing Charts (Practical)         -->
+</section>
+
+<section id="choosing-the-right-chart-type" data-section="theory">
+  <h2>Choosing the right chart type</h2>
+
+<p>Chart selection is not a matter of taste. It follows from what relationship in the data you want the viewer to see. Different chart types encode different relationships &#8212; comparison, trend, proportion, distribution, correlation &#8212; and using the wrong type hides the pattern you&#8217;re trying to reveal.</p>
+
+<div class="method-card">
+  <h4>Chart Selection Framework <span class="method-tag">Decision Tool</span></h4>
+  <p class="method-when">Use when: Starting any data visualization. Ask &#8220;what relationship am I showing?&#8221; first, then select the chart.</p>
+  <div class="process-steps">
+    <div class="process-step">
+      <div class="process-step-content">
+        <h4>Comparison across categories &#8594; Bar chart</h4>
+        <p>Use horizontal bars when labels are long. Sort by value (not alphabetically) unless there&#8217;s a natural order. Never use 3D bars. For comparing two sets of categories, use grouped or side-by-side bars, not stacked.</p>
+      </div>
+    </div>
+    <div class="process-step">
+      <div class="process-step-content">
+        <h4>Trend over time &#8594; Line chart</h4>
+        <p>Time always goes on the x-axis, running left to right. Use a continuous line for continuous data (temperature, stock price) and points without connecting lines for discrete events. Multiple lines are fine up to about 5; beyond that, use small multiples.</p>
+      </div>
+    </div>
+    <div class="process-step">
+      <div class="process-step-content">
+        <h4>Part-to-whole proportion &#8594; Stacked bar or treemap</h4>
+        <p>Pie charts work for showing one dominant category vs. everything else (the &#8220;one big slice&#8221; story). For precise comparison of parts, use a stacked horizontal bar chart. For hierarchical part-to-whole with many categories, use a treemap. Never use a pie chart with more than 5 slices.</p>
+      </div>
+    </div>
+    <div class="process-step">
+      <div class="process-step-content">
+        <h4>Distribution &#8594; Histogram, box plot, or density plot</h4>
+        <p>Histograms show the shape of a distribution (normal, skewed, bimodal). Box plots compare distributions across categories. Density plots (smoothed histograms) work when comparing 2&#8211;3 overlapping distributions. Never use a bar chart for distribution data &#8212; it hides the shape.</p>
+      </div>
+    </div>
+    <div class="process-step">
+      <div class="process-step-content">
+        <h4>Relationship between variables &#8594; Scatter plot</h4>
+        <p>The only chart type designed to show correlation. Each point represents one observation plotted on two axes. Add a trend line if the relationship is meaningful. Use color or shape to encode a third variable (category). For very large data sets, use opacity or density plots to handle overplotting.</p>
+      </div>
+    </div>
+    <div class="process-step">
+      <div class="process-step-content">
+        <h4>Geographic data &#8594; Map</h4>
+        <p>Use choropleth maps (filled regions) for rates and ratios, not absolute counts. Use dot maps or proportional symbol maps for absolute counts. Never use a map when the geographic dimension doesn&#8217;t matter &#8212; a bar chart sorted by value is almost always clearer.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="callout warning">
+  <p class="callout-title">When a table is better than a chart</p>
+  <p>For small data sets (under 20 numbers), a well-formatted table often communicates more precisely than a chart. Tables allow exact values, easy row-by-row comparison, and clear labeling. Charts excel at revealing patterns across many data points. If someone would need to look up the exact number, use a table or annotate the chart with direct labels.</p>
+</div>
+
+<!-- SECTION: Color in Data Visualization         -->
+<h3 id="color-in-data">Color in data visualization</h3>
+
+<p>Color is the most misused encoding channel in data visualization. It is powerful for categorization and for showing broad patterns, but poor for precise quantitative comparison. The key is knowing when color carries data and when it&#8217;s decorative &#8212; and designing for both sighted and colorblind users.</p>
+
+<div class="method-card">
+  <h4>Palette Selection <span class="method-tag">Decision Tool</span></h4>
+  <p class="method-when">Use when: Choosing colors for any data visualization.</p>
+  <p><strong>Sequential palette</strong> (single hue, light to dark): Use for ordered data &#8212; low to high, less to more. Example: population density on a map. Use a single hue with variation in lightness, not multiple hues.</p>
+  <p><strong>Diverging palette</strong> (two hues meeting at a neutral center): Use when data has a meaningful midpoint &#8212; profit/loss, above/below average, positive/negative change. Both ends should be equally saturated.</p>
+  <p><strong>Categorical palette</strong> (distinct hues): Use for unordered categories &#8212; product lines, departments, countries. Maximum 7&#8211;8 distinct colors; beyond that, the eye can&#8217;t reliably distinguish them. Use a colorblind-safe palette.</p>
+</div>
+
+<h4>Designing for colorblindness</h4>
+<p>Roughly 8% of men and 0.5% of women have some form of color vision deficiency. The most common type confuses red and green, making the most popular color combination in data visualization &#8212; red for bad, green for good &#8212; unreadable for a significant portion of your audience.</p>
+<p><strong>Solutions:</strong> Never rely on color alone. Use redundant encoding: add shapes (circles vs. squares), patterns (solid vs. dashed lines), or direct labels alongside color. Use blue-orange as your primary pair instead of red-green. Test your graphics with a colorblind simulation tool (most design tools include one).</p>
+
+<!-- SECTION: Annotation & Labeling               -->
+<h3 id="annotation">Annotation and labeling</h3>
+
+<p>Annotation transforms a chart from a picture of data into a story about data. The best data graphics include words, numbers, and imagery &#8212; labels are not separate from the graphic, they are part of it. Tufte&#8217;s principle of multifunctioning graphical elements applies here: labels should serve as data references, not just identifiers.</p>
+
+<h4>Direct labeling vs. legends</h4>
+<p>Whenever possible, label data elements directly rather than using a legend. A legend forces the viewer to look away from the data, hold a color-label mapping in memory, and look back &#8212; a tax on working memory that direct labels eliminate entirely. Place labels next to or on the data they describe.</p>
+
+<h4>Contextual annotations</h4>
+<p>Annotate the <em>why</em>, not just the <em>what</em>. If revenue dropped in Q3, a label saying &#8220;$2.1M&#8221; tells the viewer the number. An annotation saying &#8220;Factory shutdown, Aug 12&#8211;Sep 3&#8221; tells them the story. The best data graphics from publications like the Financial Times and New York Times annotate key events, turning a passive chart into an active explanation.</p>
+
+<div class="callout tip">
+  <p class="callout-title">Multifunctioning elements</p>
+  <p>Look for opportunities where a single element can serve multiple purposes. A data label that&#8217;s positioned at the exact height of its value serves as both a label and a grid reference &#8212; eliminating the need for a grid line. A directly labeled bar makes the y-axis tick marks redundant. Each time one element absorbs the function of another, you can erase the other.</p>
+</div>
+
+<!-- SECTION: Responsive Data Graphics            -->
+<h3 id="responsive-data">Responsive data graphics</h3>
+
+<p>Data visualizations designed for a 1440px desktop monitor often fail on a 375px phone screen. The challenge isn&#8217;t just scaling &#8212; it&#8217;s that different screen sizes demand different levels of detail and sometimes different chart types entirely.</p>
+
+<h4>Progressive disclosure for data</h4>
+<p><strong>Desktop:</strong> Show the full visualization with all data points, detailed annotations, and interactive hover states. This is where data density can be maximized.</p>
+<p><strong>Tablet:</strong> Simplify annotations. Reduce the number of data labels. Ensure touch targets on interactive elements are at least 44px. Consider switching from hover interactions to tap.</p>
+<p><strong>Mobile:</strong> Show the headline number and trend. Consider replacing complex charts with simplified versions or sparklines. A 12-category bar chart might become a top-5 list with a &#8220;see all&#8221; link. Horizontal bar charts often work better on mobile than vertical ones because they don&#8217;t require scrolling.</p>
+
+<h4>When to change chart type at breakpoints</h4>
+<p>Some chart types simply don&#8217;t work on small screens. A scatter plot with 500 points is unreadable at 375px. Consider switching to a summary statistic (correlation coefficient) with a simplified view. A multi-line chart with 8 lines becomes spaghetti &#8212; switch to small multiples stacked vertically, or let the user select which lines to display.</p>
+
+<!-- SECTION: Redesign Exercises                  -->
+</section>
+
+<section id="redesign-exercises-applying-the-erasing-principles" data-section="theory">
+  <h2>Redesign exercises: applying the erasing principles</h2>
+
+<p>The most practical skill in information visualization is redesign &#8212; taking a mediocre graphic and systematically improving it by applying the data-ink ratio and erasing principles. Here are three exercises you can practice on any chart you encounter.</p>
+
+<div class="method-card">
+  <h4>The Erasure Test <span class="method-tag">Core Method</span></h4>
+  <p class="method-when">Use when: Reviewing any chart or visualization before publishing.</p>
+  <div class="process-steps">
+    <div class="process-step">
+      <div class="process-step-content">
+        <h4>Start with the default chart</h4>
+        <p>Generate the chart using your tool&#8217;s defaults (Excel, Google Sheets, Chart.js, whatever). Don&#8217;t customize anything yet. This is your &#8220;before&#8221; state.</p>
+      </div>
+    </div>
+    <div class="process-step">
+      <div class="process-step-content">
+        <h4>Remove the chart border and background</h4>
+        <p>Most tools add a box around the chart area and a slightly different background color. Remove both. The chart should sit on the page background, not inside a container.</p>
+      </div>
+    </div>
+    <div class="process-step">
+      <div class="process-step-content">
+        <h4>Lighten or remove grid lines</h4>
+        <p>Make grid lines light gray (#E0E0E0 or lighter) and thin (0.5px). If the chart has both horizontal and vertical grid lines, keep only the horizontal ones (or remove both and rely on direct labels).</p>
+      </div>
+    </div>
+    <div class="process-step">
+      <div class="process-step-content">
+        <h4>Remove redundant encoding</h4>
+        <p>If bars have value labels on top, you don&#8217;t need y-axis tick marks. If lines are directly labeled, you don&#8217;t need a legend. If data points are labeled, you may not need grid lines. Remove every element that duplicates information carried by another element.</p>
+      </div>
+    </div>
+    <div class="process-step">
+      <div class="process-step-content">
+        <h4>Add annotation where it helps</h4>
+        <p>Now add back &#8212; selectively. Annotate the most important data point. Add a contextual note explaining an outlier. Label the trend line. Every addition should answer a question the viewer would have.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="method-card">
+  <h4>The Bar Chart Minimization <span class="method-tag">Exercise</span></h4>
+  <p class="method-when">Practice exercise: Take any bar chart and reduce it to its minimum effective form.</p>
+  <p>Start with a standard bar chart with axis labels, tick marks, grid lines, a legend, colored fills, and a border. Progressively remove elements until one more removal would cause information loss. The result is the minimum effective graphic &#8212; every remaining pixel earns its place.</p>
+  <p>A common endpoint: horizontal bars sorted by value, directly labeled with values, no y-axis, no grid lines, a single muted color, and a title. This minimal form communicates more clearly than the cluttered original because the viewer&#8217;s attention goes entirely to the data.</p>
+</div>
+
+<!-- SECTION: Templates & Checklists              -->
+</section>
+
+        <div class="section-marker" id="templates-and-checklists">
+          <span class="split-badge practical">Practical</span>
+          <span class="marker-line"></span>
+        </div>
+
+        <section data-section="practical">
+  <h2>Templates and checklists</h2>
+
+<div class="template-box">
+  <div class="template-header">
+    <span class="template-label">Checklist</span>
+    <span class="template-title">Data Visualization Review</span>
+  </div>
+  <ul class="checklist">
+    <li>Chart type matches the data relationship (comparison, trend, proportion, distribution, correlation)</li>
+    <li>Visual representation is proportional to quantities (Lie Factor &#8776; 1.0)</li>
+    <li>Y-axis starts at zero (or truncation is clearly labeled and justified)</li>
+    <li>Non-data-ink has been minimized (grid lines, borders, backgrounds, decorative elements)</li>
+    <li>Redundant encoding has been removed (no value labels + tick marks + grid lines for the same data)</li>
+    <li>Color palette is colorblind-safe and uses redundant encoding (shape, pattern, or label)</li>
+    <li>Data is directly labeled where possible (no legend required)</li>
+    <li>Key data points are annotated with context (the &#8220;why,&#8221; not just the &#8220;what&#8221;)</li>
+    <li>Small data sets (under 20 values): consider whether a table would be clearer</li>
+    <li>Large data sets: data density is high and the graphic reveals structure a table could not</li>
+    <li>Text is legible at the display size (minimum 11px for labels, 14px for annotations)</li>
+    <li>Responsive behavior considered (how does this look on mobile?)</li>
+  </ul>
+</div>
+
+<div class="template-box">
+  <div class="template-header">
+    <span class="template-label">Template</span>
+    <span class="template-title">Chart Selection Decision Matrix</span>
+  </div>
+  <div class="template-grid">
+    <div class="template-field">
+      <div class="template-field-label">What question does this graphic answer?</div>
+      <div class="template-field-hint">Write it as a sentence: &#8220;Which region had the highest growth in Q3?&#8221; not &#8220;revenue data&#8221;</div>
+    </div>
+    <div class="template-field">
+      <div class="template-field-label">What relationship does the answer involve?</div>
+      <div class="template-field-hint">Comparison &#8594; bar | Trend &#8594; line | Proportion &#8594; stacked | Distribution &#8594; histogram | Correlation &#8594; scatter</div>
+    </div>
+    <div class="template-field">
+      <div class="template-field-label">How many data points?</div>
+      <div class="template-field-hint">Under 20 &#8594; consider a table. 20&#8211;200 &#8594; standard chart. 200+ &#8594; consider aggregation, density plots, or small multiples</div>
+    </div>
+    <div class="template-field">
+      <div class="template-field-label">Who is the audience?</div>
+      <div class="template-field-hint">Analysts &#8594; higher density, less annotation. Executives &#8594; headline number + trend + one annotated insight. Public &#8594; simple, fully labeled, single message</div>
+    </div>
+    <div class="template-field">
+      <div class="template-field-label">Where will it be displayed?</div>
+      <div class="template-field-hint">Report &#8594; detailed, static. Presentation &#8594; simplified, one message per slide. Dashboard &#8594; compact, interactive. Mobile &#8594; minimal, progressive</div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION: Great Data Graphics (Examples)      -->
+</section>
+
+        <div class="section-marker" id="great-data-graphics-what-makes-them-work">
+          <span class="split-badge examples">Examples</span>
+          <span class="marker-line"></span>
+        </div>
+
+        <section data-section="examples">
+  <h2>Great data graphics: what makes them work</h2>
+
+<div class="case-study">
+  <p class="case-label">Classic example</p>
+  <h4>Charles Joseph Minard&#8217;s map of Napoleon&#8217;s Russian campaign (1869)</h4>
+  <p>Often called the best statistical graphic ever drawn. This single image encodes six variables: the size of the army, its location on a two-dimensional surface, the direction of movement, the temperature on specific dates during the retreat, and time. The diminishing width of the line as the army shrinks from 422,000 to 10,000 soldiers is devastating in its clarity. It tells a story that pages of text could not: the army was destroyed not by battle but by cold, distance, and attrition.</p>
+  <p><strong>Why it works:</strong> Extreme data density. Every mark carries information. The visual encoding is intuitive (width = army size). The two-directional flow (advance and retreat) uses a single visual metaphor. And the temperature line along the bottom provides causal context for the shrinking army width above it.</p>
+</div>
+
+<div class="case-study">
+  <p class="case-label">Modern example</p>
+  <h4>Financial Times and New York Times COVID-19 trackers (2020&#8211;2022)</h4>
+  <p>The data journalism teams at FT and NYT produced some of the most effective information visualization of the decade. John Burn-Murdoch&#8217;s FT charts used small multiples (each country&#8217;s curve on its own panel), consistent scales, direct labeling, and progressive annotation as new data arrived. The NYT team used scrollytelling to build complexity gradually, layering data as the reader moved through the story.</p>
+  <p><strong>Why it worked:</strong> Direct labeling eliminated legends. Consistent scales across small multiples enabled instant country-to-country comparison. Annotation provided context (lockdown dates, policy changes). And the graphics were updated daily, demonstrating that data-dense visualization doesn&#8217;t require static print &#8212; it can be living, evolving documents.</p>
+</div>
+
+<div class="case-study">
+  <p class="case-label">Modern example</p>
+  <h4>The Pudding&#8217;s visual essays</h4>
+  <p>The Pudding (pudding.cool) publishes data-driven visual essays that demonstrate how modern web technology can create interactive data graphics that Tufte could only dream of on paper. Their pieces use scrollytelling, interactive exploration, and animated transitions &#8212; but always in service of the data, not as decoration. The data comes first; the interaction amplifies understanding.</p>
+  <p><strong>Why it works:</strong> The interaction is the data. You don&#8217;t just look at the data &#8212; you explore it, filter it, and discover your own patterns. This extends Tufte&#8217;s principles into a medium he didn&#8217;t anticipate: the graphic as instrument, not just as display.</p>
+</div>
+
+<!-- SECTION: Common Failures                     -->
+</section>
+
+<section id="great-data-graphics-what-makes-them-work" data-section="examples">
+  <h2>Common failures and how to fix them</h2>
+
+<div class="pitfall">
+  <div class="pitfall-icon">!</div>
+  <div>
+    <h4>Pie chart with 8+ slices</h4>
+    <p>Pie charts work for showing one dominant proportion (&#8220;mobile is 72% of traffic&#8221;). With many slices of similar size, the eye cannot compare angles accurately. Replace with a horizontal bar chart sorted by value.</p>
+  </div>
+</div>
+
+<div class="pitfall">
+  <div class="pitfall-icon">!</div>
+  <div>
+    <h4>3D bar chart</h4>
+    <p>The third dimension adds zero data dimensions and introduces perspective distortion that makes bars in the back look shorter than equivalent bars in front. Replace with a flat bar chart. Always.</p>
+  </div>
+</div>
+
+<div class="pitfall">
+  <div class="pitfall-icon">!</div>
+  <div>
+    <h4>Rainbow color palette on a sequential scale</h4>
+    <p>Rainbow palettes impose categorical perception on continuous data. The human eye sees yellow as &#8220;louder&#8221; than surrounding colors, creating false boundaries in the data. Replace with a single-hue sequential palette (light to dark).</p>
+  </div>
+</div>
+
+<div class="pitfall">
+  <div class="pitfall-icon">!</div>
+  <div>
+    <h4>Spaghetti chart (too many lines)</h4>
+    <p>More than 5 lines on a single chart becomes unreadable. The viewer can&#8217;t track any individual line through the tangle. Replace with small multiples (one line per panel) or an interactive chart where the user selects which lines to display.</p>
+  </div>
+</div>
+
+<div class="pitfall">
+  <div class="pitfall-icon">!</div>
+  <div>
+    <h4>Truncated y-axis presented without disclosure</h4>
+    <p>Starting the y-axis at 95 instead of 0 makes a 2% change look like a 40% change. If you truncate for legitimate reasons (showing small but meaningful variation in tightly controlled data), clearly label the axis and break the axis line visually.</p>
+  </div>
+</div>
+
+<!-- SECTION: Common Pitfalls                     -->
+</section>
+
+<section id="templates-and-checklists" data-section="practical">
+  <h2>Common pitfalls</h2>
+
+<div class="pitfall">
+  <div class="pitfall-icon">!</div>
+  <div>
+    <h4>Choosing charts by aesthetics rather than data relationship</h4>
+    <p>A donut chart is not &#8220;more modern&#8221; than a bar chart &#8212; it&#8217;s less accurate for the same data. Chart selection should be driven by the data relationship you need to communicate, not by visual preference or what the tool defaults to.</p>
+  </div>
+</div>
+
+<div class="pitfall">
+  <div class="pitfall-icon">!</div>
+  <div>
+    <h4>Decorating instead of informing</h4>
+    <p>Adding illustrations, icons, 3D effects, or elaborate backgrounds to data graphics reduces the data-ink ratio and shifts attention from the data to the decoration. When you catch yourself making a chart &#8220;look nicer,&#8221; ask: does this change help the viewer understand the data?</p>
+  </div>
+</div>
+
+<div class="pitfall">
+  <div class="pitfall-icon">!</div>
+  <div>
+    <h4>Using color without redundant encoding</h4>
+    <p>8% of men are colorblind. If your chart relies on red vs. green to distinguish &#8220;good&#8221; from &#8220;bad,&#8221; a significant portion of your audience can&#8217;t read it. Always add a second encoding channel: shape, pattern, icon, or label.</p>
+  </div>
+</div>
+
+<div class="pitfall">
+  <div class="pitfall-icon">!</div>
+  <div>
+    <h4>Showing data without context</h4>
+    <p>A single number is not information &#8212; it&#8217;s a fact. Information requires context: compared to what? Compared to when? The same revenue figure can be excellent or catastrophic depending on whether it&#8217;s compared to last year, to the forecast, or to the industry average. Always provide a comparison baseline.</p>
+  </div>
+</div>
+
+<!-- SECTION: When to Use This                    -->
+</section>
+
+<section id="when-to-use" data-section="practical">
+  <h2>When to use this</h2>
+
+<div class="callout info">
+  <p class="callout-title">Decision guidance</p>
+  <p><strong>Use this topic when:</strong> You&#8217;re designing any chart, graph, or data display &#8212; in a dashboard, a report, a presentation, a marketing page, or an article. Also when reviewing someone else&#8217;s data graphics for accuracy and clarity.</p>
+  <p><strong>Pair with Dashboard Design when:</strong> You&#8217;re composing multiple data graphics into a single screen. This topic teaches you how to design a great individual chart; Dashboard Design teaches you how to arrange many charts into a coherent decision-support interface.</p>
+  <p><strong>Pair with Data-Driven Design when:</strong> You&#8217;re deciding <em>what</em> to measure and display. Data-Driven Design helps you choose the right metrics; this topic helps you display those metrics effectively.</p>
+</div>
+
+<!-- SECTION: Connections                         -->
+</section>
+
+<section id="connections">
+  <h2>Connected topics in your library</h2>
+
+<div class="cross-ref-grid">
+  <a href="#" class="cross-ref-card">
+    <span class="ref-number">15</span>
+    <div class="ref-title">Dashboard &amp; Data-Dense Design</div>
+    <div class="ref-reason">Compose many charts into one screen</div>
+  </a>
+  <a href="#" class="cross-ref-card">
+    <span class="ref-number">11</span>
+    <div class="ref-title">Data-Driven Design</div>
+    <div class="ref-reason">Choose what to measure</div>
+  </a>
+  <a href="#" class="cross-ref-card">
+    <span class="ref-number">09</span>
+    <div class="ref-title">Visual Perception &amp; Psychology</div>
+    <div class="ref-reason">Why encoding channels work</div>
+  </a>
+  <a href="#" class="cross-ref-card">
+    <span class="ref-number">06</span>
+    <div class="ref-title">Visual Design</div>
+    <div class="ref-reason">Color theory and hierarchy</div>
+  </a>
+  <a href="#" class="cross-ref-card">
+    <span class="ref-number">07</span>
+    <div class="ref-title">Accessibility in Practice</div>
+    <div class="ref-reason">WCAG for data displays</div>
+  </a>
+  <a href="#" class="cross-ref-card">
+    <span class="ref-number">08</span>
+    <div class="ref-title">Cognitive &amp; Emotional Design</div>
+    <div class="ref-reason">How people process information</div>
+  </a>
+</div>
+
+<!-- SECTION: Deep Dive Appendix                  -->
+<div class="deep-dive-section" id="deep-dive">
+          <div class="deep-dive-header">
+            <span class="deep-dive-badge">Deep Dive</span>
+            <h2 style="margin:0; border:none; padding:0;">Appendix</h2>
+          </div>
+<p>Extended material for when you want to go deeper. Covers Tufte&#8217;s complete principles, the perceptual ranking research, and further reading.</p>
+
+  <details class="expandable">
+    <summary><span class="chevron"><svg viewBox="0 0 14 14"><polyline points="4,2 10,7 4,12"/></svg></span> Tufte&#8217;s principles: complete reference card</summary>
+    <div class="expand-content topic-content">
+      <h4>Graphical excellence</h4>
+      <p>Show the data. Induce the viewer to think about substance. Avoid distorting what the data say. Present many numbers in a small space. Make large data sets coherent. Encourage the eye to compare different pieces of data. Reveal the data at several levels of detail. Serve a reasonably clear purpose. Be closely integrated with the statistical and verbal descriptions of the data set.</p>
+
+      <h4>Graphical integrity</h4>
+      <p>Visual representation of data must be directly proportional to numerical quantities. Use clear, detailed, thorough labeling. Show data variation, not design variation. In time-series displays, standardize units. The number of information-carrying dimensions must not exceed the data dimensions. Graphics must not quote data out of context.</p>
+
+      <h4>Data-ink maximization</h4>
+      <p>Maximize the data-ink ratio within reason. Erase non-data-ink within reason. Erase redundant data-ink within reason. Revise and edit.</p>
+
+      <h4>Chartjunk avoidance</h4>
+      <p>Avoid moir&#233; vibration and other visual noise. Minimize grid lines or let the data serve as its own grid. Avoid &#8220;ducks&#8221; &#8212; graphics where the design overwhelms the data. Forgo decoration that does not inform.</p>
+
+      <h4>Data density and small multiples</h4>
+      <p>Maximize data density and the size of the data matrix, within reason. Graphics should tend toward the data-rich rather than the data-thin. Small multiples: same design, same structure, same scale &#8212; only the data changes. They are the most effective tool for multivariate data.</p>
+
+      <h4>Aesthetics</h4>
+      <p>Graphical elegance is found in simplicity of design and complexity of data. Use words, numbers, and images together. Balance, proportion, and relevant scale. An accessible complexity of detail. A narrative quality, a story told about the data.</p>
+    </div>
+  </details>
+
+  <details class="expandable">
+    <summary><span class="chevron"><svg viewBox="0 0 14 14"><polyline points="4,2 10,7 4,12"/></svg></span> Cleveland-McGill perceptual ranking</summary>
+    <div class="expand-content topic-content">
+      <h4>Elementary perceptual tasks, ranked by accuracy</h4>
+      <p>Cleveland and McGill (1984) established this hierarchy through controlled experiments measuring how accurately people extract quantitative information from different visual encodings:</p>
+      <p><strong>Most accurate:</strong> Position along a common scale &gt; Position on identical but non-aligned scales &gt; Length, direction, angle &gt; Area &gt; Volume, curvature &gt; Shading, color saturation <strong>:Least accurate</strong></p>
+      <p>The practical implication: use position-based encodings (bar charts, dot plots, line charts) as your default. Reserve area and color encodings for secondary dimensions. Avoid volume encodings (3D charts) entirely.</p>
+
+      <h4>Heer &amp; Bostock extension (2010)</h4>
+      <p>Jeffrey Heer and Michael Bostock replicated Cleveland-McGill&#8217;s studies using Amazon Mechanical Turk, confirming the original rankings for web-based visualizations. They found that crowdsourced results closely matched laboratory results, validating the hierarchy for digital contexts.</p>
+    </div>
+  </details>
+
+  <details class="expandable">
+    <summary><span class="chevron"><svg viewBox="0 0 14 14"><polyline points="4,2 10,7 4,12"/></svg></span> Tools and resources</summary>
+    <div class="expand-content topic-content">
+      <h4>When to use what</h4>
+      <p><strong>Quick exploration:</strong> Google Sheets, Excel &#8212; fast for generating initial views of data. Strip the defaults aggressively using the erasing principles.</p>
+      <p><strong>Publication-quality static charts:</strong> Observable Plot, ggplot2 (R), matplotlib/seaborn (Python) &#8212; full control over every visual element. Best for reports and articles.</p>
+      <p><strong>Interactive web charts:</strong> D3.js (maximum control, steep learning curve), Chart.js (simpler, good defaults), Recharts (React integration), Vega-Lite (declarative grammar).</p>
+      <p><strong>Dashboard tools:</strong> Metabase, Grafana, Looker, Tableau &#8212; for operational dashboards where the same charts are viewed repeatedly. Customize aggressively to reduce chartjunk.</p>
+      <p><strong>Design tools:</strong> Figma chart plugins (for mockups, not production), Flourish (for animated, embeddable charts in editorial contexts).</p>
+
+      <h4>Essential reading</h4>
+      <p><strong>&#8220;The Visual Display of Quantitative Information&#8221; by Edward Tufte</strong> &#8212; The foundational text. Covers all the principles in this topic page in depth, with extensive historical examples. Read this first.</p>
+      <p><strong>&#8220;Envisioning Information&#8221; by Edward Tufte</strong> &#8212; Tufte&#8217;s second book, focused on displaying complex multivariate data, small multiples, and layering information.</p>
+      <p><strong>&#8220;Show Me the Numbers&#8221; by Stephen Few</strong> &#8212; The practical complement to Tufte. Covers table design, dashboard design, and chart selection with a focus on business data.</p>
+      <p><strong>&#8220;Storytelling with Data&#8221; by Cole Nussbaumer Knaflic</strong> &#8212; Practical guide to applying data-ink principles in business presentations. Good for teams who need to present data to non-technical stakeholders.</p>
+      <p><strong>&#8220;The Functional Art&#8221; by Alberto Cairo</strong> &#8212; Bridges information visualization and infographic design. Good for editorial and journalistic contexts.</p>
+
+      <h4>Color palette resources</h4>
+      <p><strong>ColorBrewer</strong> (colorbrewer2.org) &#8212; Sequential, diverging, and qualitative palettes designed for cartography but applicable to any data visualization. All palettes are tested for colorblind safety and print-friendliness.</p>
+      <p><strong>Viz Palette</strong> (projects.susielu.com/viz-palette) &#8212; Test color palettes against colorblind simulations in the context of actual chart types.</p>
+    </div>
+  </details>
+</div>
+
+<!-- Topic Navigation -->
+<div class="topic-nav">
+  <div></div>
+  <a href="#" class="topic-nav-link next">
+    <div class="nav-direction">Next topic</div>
+    <div class="nav-title">Creativity Methods &#8250;</div>
+  </a>
+</div>
+</div>
+</div>
+</section>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer container">
+    <div class="footer-inner">
+      <p>Noir Book — Built for the work, not the shelf.</p>
+      <div class="footer-links">
+        <a href="../design-system.html">Design System</a>
+        <a href="../library-manifest.json">Manifest</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to Top -->
+  <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">&#8593;</button>
+
+  <!-- Floating Mobile TOC -->
+  <button class="mobile-toc-btn" id="mobileTocBtn" aria-label="Open table of contents">&#9776; Contents</button>
+  <div class="mobile-toc-overlay" id="mobileTocOverlay">
+    <div class="mobile-toc-panel">
+      <div class="mobile-toc-panel-header">
+        <h3>On this page</h3>
+        <button class="mobile-toc-close" id="mobileTocClose" aria-label="Close">&times;</button>
+      </div>
+      <ul class="mobile-toc-list">
+        <li><a href="#what-information-visualization-is-and-why-it-matters" data-section="theory">What information visualization is and why it matters</a></li>
+        <li><a href="#what-information-visualization-is-and-why-it-matters" data-section="theory">Graphical integrity</a></li>
+        <li><a href="#data-density-and-small-multiples" data-section="theory">Data density and small multiples</a></li>
+        <li><a href="#choosing-the-right-chart-type" data-section="theory">Choosing the right chart type</a></li>
+        <li><a href="#redesign-exercises-applying-the-erasing-principles" data-section="theory">Redesign exercises: applying the erasing principles</a></li>
+        <li><a href="#templates-and-checklists" data-section="practical">Templates and checklists</a></li>
+        <li><a href="#great-data-graphics-what-makes-them-work" data-section="examples">Great data graphics: what makes them work</a></li>
+        <li><a href="#great-data-graphics-what-makes-them-work" data-section="examples">Common failures and how to fix them</a></li>
+        <li><a href="#templates-and-checklists" data-section="practical">Common pitfalls</a></li>
+        <li><a href="#when-to-use" data-section="practical">When to use this</a></li>
+        <li><a href="#connections">Connected topics in your library</a></li>
+        <li><a href="#deep-dive">Deep-dive appendix</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    // Scrollspy: highlight active TOC item
+    const tocLinks = document.querySelectorAll('.toc-list a');
+    const sections = [];
+    tocLinks.forEach(link => {
+      const href = link.getAttribute('href');
+      if (!href || !href.startsWith('#')) return;
+      const el = document.getElementById(href.slice(1));
+      if (el) sections.push({ el, link });
+    });
+
+    // Reading progress bar
+    const progressBar = document.getElementById('readingProgress');
+    const backToTop = document.getElementById('backToTop');
+
+    function onScroll() {
+      let current = sections[0];
+      for (const s of sections) {
+        if (s.el.getBoundingClientRect().top <= 120) current = s;
+      }
+      tocLinks.forEach(l => l.classList.remove('active'));
+      if (current) current.link.classList.add('active');
+
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrolled = window.scrollY;
+      const progress = docHeight > 0 ? (scrolled / docHeight) * 100 : 0;
+      if (progressBar) progressBar.style.width = progress + '%';
+      if (backToTop) backToTop.classList.toggle('visible', scrolled > 400);
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    // Split badges: click to scroll to section
+    document.querySelectorAll('.content-splits .split-badge').forEach(function(badge) {
+      badge.addEventListener('click', function() {
+        var type = badge.classList.contains('theory') ? 'theory' : badge.classList.contains('practical') ? 'practical' : 'examples';
+        var target = document.querySelector('section[data-section="' + type + '"]');
+        if (target) {
+          var marker = target.previousElementSibling;
+          (marker && marker.classList.contains('section-marker') ? marker : target).scrollIntoView({behavior:'smooth'});
+        }
+      });
+    });
+  </script>
+
+  <script src="../js/checklist.js"></script>
+  <script src="../js/mobile-toc.js"></script>
+  <script src="../js/search.js"></script>
+  <script>
+    function openBurger(){document.getElementById('burgerOverlay').classList.add('open');document.body.style.overflow='hidden'}
+    function closeBurger(e){if(e&&e.target&&e.target!==document.getElementById('burgerOverlay'))return;document.getElementById('burgerOverlay').classList.remove('open');document.body.style.overflow=''}
+    function burgerSearch(q){
+      var r=document.getElementById('burgerSearchResults');
+      if(!q||q.length<2){r.innerHTML='';return}
+      var ql=q.toLowerCase(),matches=[];
+      if(typeof SEARCH_INDEX!=='undefined'){
+        SEARCH_INDEX.forEach(function(t){
+          var hit=t.topic.toLowerCase().indexOf(ql)>-1;
+          if(!hit)t.sections.forEach(function(s){if((s.title+' '+s.keywords).toLowerCase().indexOf(ql)>-1)hit=true});
+          if(hit)matches.push(t);
+        });
+      }
+      if(!matches.length){r.innerHTML='<p style="padding:8px 0;font-size:13px;color:var(--ink-muted)">No results</p>';return}
+      r.innerHTML=matches.slice(0,8).map(function(m){return '<a href="../'+m.url+'">'+m.topic+'<span class="bsr-disc">'+m.discipline+'</span></a>'}).join('');
+    }
+    document.addEventListener('keydown',function(e){if(e.key==='Escape'){closeBurger();var dd=document.getElementById('searchDropdown');if(dd)dd.classList.remove('visible');}});
+    // Close burger when clicking a TOC link
+    document.querySelectorAll('.burger-toc-list a').forEach(function(a){a.addEventListener('click',function(){closeBurger()})});
+    // Search typeahead
+    function topicSearch(q){
+      var dd=document.getElementById('searchDropdown');
+      if(!q||q.length<2||typeof SEARCH_INDEX==='undefined'){if(dd)dd.classList.remove('visible');return}
+      var ql=q.toLowerCase(),grouped={};
+      SEARCH_INDEX.forEach(function(t){
+        var hit=t.topic.toLowerCase().indexOf(ql)>-1,sHits=[],mHits=[];
+        t.sections.forEach(function(s){if((s.title+' '+s.keywords).toLowerCase().indexOf(ql)>-1)sHits.push(s)});
+        (t.methods||[]).forEach(function(m){if((m.name+' '+(m.keywords||'')).toLowerCase().indexOf(ql)>-1)mHits.push(m)});
+        if(!hit&&!sHits.length&&!mHits.length&&ql.length>=3&&typeof levenshtein==='function'){
+          var words=t.topic.toLowerCase().split(/ +/);
+          for(var i=0;i<words.length;i++){if(levenshtein(ql,words[i].substring(0,ql.length+1))<=1){hit=true;break}}
+        }
+        if(hit||sHits.length||mHits.length)grouped[t.topic]={url:'../'+t.url,disc:t.discipline||'',sections:sHits,methods:mHits,topicHit:hit};
+      });
+      var keys=Object.keys(grouped);
+      if(!keys.length){dd.innerHTML='<div class="search-empty">No results</div>';dd.classList.add('visible');return}
+      var html='';
+      keys.slice(0,8).forEach(function(topic){
+        var g=grouped[topic];
+        html+='<div class="search-group"><div class="search-group-title">'+topic+'</div>';
+        if(g.topicHit)html+='<a class="search-result" href="'+g.url+'"><span class="search-result-title">'+topic+'</span><span class="search-result-type practical">'+g.disc+'</span></a>';
+        g.sections.forEach(function(s){html+='<a class="search-result" href="'+g.url+'#'+s.id+'"><span class="search-result-title">'+s.title+'</span><span class="search-result-type '+s.type+'">'+s.type+'</span></a>'});
+        g.methods.slice(0,3).forEach(function(m){html+='<a class="search-result" href="'+g.url+'#'+m.section+'"><span class="search-result-title">'+m.name+'</span><span class="search-result-type practical">method</span></a>'});
+        html+='</div>';
+      });
+      dd.innerHTML=html;dd.classList.add('visible');
+    }
+    document.addEventListener('click',function(e){if(!e.target.closest('.search-box')){var dd=document.getElementById('searchDropdown');if(dd)dd.classList.remove('visible')}});
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,374 @@
+<!--
+TOPIC_ID: UX.1.10
+TOPIC_NUMBER: UX.1.10
+TITLE: Prototyping & Wireframing
+SUBTITLE: From paper sketches to interactive prototypes. Choosing the right fidelity, the right tool, and the right moment to test before you build.
+TIER: 1
+TIER_LABEL: Core Toolkit
+THEORY: 20
+PRACTICAL: 55
+EXAMPLES: 25
+-->
+
+<section id="what-and-why" data-section="theory">
+  <h2>What prototyping is and why fidelity matters</h2>
+
+  <p>A prototype is a representation of your product that you can test before building it. The purpose is always the same: answer a question with the least effort. "Will users understand this navigation?" "Does this checkout flow make sense?" "Is this layout better than that layout?" The form of the prototype should match the question you're asking — nothing more.</p>
+
+  <p>Fidelity describes how closely the prototype resembles the final product. Low fidelity (sketches, paper prototypes) is fast and cheap, ideal for exploring broad concepts and testing structure. High fidelity (interactive prototypes with real content) is slower and more expensive, ideal for testing specific interactions and visual design. The critical mistake teams make is using high fidelity too early — spending days on pixel-perfect mockups before validating the underlying concept.</p>
+
+  <div class="callout info">
+    <p class="callout-title">The fidelity trap</p>
+    <p>High-fidelity prototypes create a dangerous illusion of completion. Stakeholders see polished screens and assume the design is final. Users focus on visual details instead of structural issues. The team becomes emotionally attached to the execution. Use low fidelity when the question is "should we build this?" and high fidelity when the question is "how should we build this?"</p>
+  </div>
+</section>
+
+<section id="fidelity-spectrum" data-section="theory">
+  <h2>The fidelity spectrum</h2>
+
+  <div class="method-card">
+    <h4>Fidelity Levels <span class="method-tag">Framework</span></h4>
+    <p class="method-when">Use this to choose the right level of detail for your current question.</p>
+    <div class="process-steps">
+      <div class="process-step">
+        <div class="process-step-content">
+          <h4>Sketch (lowest fidelity)</h4>
+          <p>Pen and paper, whiteboard, sticky notes. Minutes to create. Tests: concept viability, information hierarchy, flow logic. Disposable by design — the goal is to generate and compare options, not to preserve them.</p>
+        </div>
+      </div>
+      <div class="process-step">
+        <div class="process-step-content">
+          <h4>Wireframe (low-mid fidelity)</h4>
+          <p>Gray boxes, placeholder text, basic layout. Hours to create. Tests: content structure, page layout, navigation flow, information density. No color, no images, no brand — forces focus on structure and hierarchy.</p>
+        </div>
+      </div>
+      <div class="process-step">
+        <div class="process-step-content">
+          <h4>Mockup (mid-high fidelity)</h4>
+          <p>Visual design applied. Real typography, color, imagery. Tests: visual hierarchy, brand expression, readability, aesthetic appeal. Static — no interactions. The gap between mockup and interactive prototype is where many teams stall.</p>
+        </div>
+      </div>
+      <div class="process-step">
+        <div class="process-step-content">
+          <h4>Interactive prototype (high fidelity)</h4>
+          <p>Clickable, sometimes animated. Simulates real interactions. Tests: task completion, navigation comprehension, interaction patterns, edge cases. Can range from "click-through hotspots" to near-functional code prototypes.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="paper-prototyping" data-section="practical">
+  <h2>Paper prototyping</h2>
+
+  <div class="method-card">
+    <h4>Paper Prototype Testing <span class="method-tag">Core Method</span></h4>
+    <p class="method-when">Use when: exploring early concepts, testing with stakeholders, or validating flow logic before any digital work.</p>
+    <p>Draw each screen on a separate piece of paper. One person plays the "computer" — when the user taps a button (points to it), the operator swaps in the next screen. This forces you to think through every path, every state, and every response. The low visual fidelity means users focus on structure and flow, not aesthetics. Paper prototypes are fastest for testing navigation structures, information architecture, and multi-step flows. They're also the best equalizer — everyone can draw boxes and arrows, regardless of tool proficiency.</p>
+  </div>
+
+  <div class="callout tip">
+    <p class="callout-title">The sticky note variant</p>
+    <p>For flows with many decision points, use sticky notes on a wall instead of paper sheets. Each sticky note is a screen or state. Arrows between them show the flow. This makes it easy to rearrange, add branches, and see the entire flow at once. It's particularly effective for team workshops where multiple people are contributing ideas simultaneously.</p>
+  </div>
+</section>
+
+<section id="wireframing" data-section="practical">
+  <h2>Low-fidelity wireframes</h2>
+
+  <div class="method-card">
+    <h4>Wireframing <span class="method-tag">Core Method</span></h4>
+    <p class="method-when">Use when: defining page structure, content hierarchy, and layout before visual design.</p>
+    <p>Wireframes are the blueprint. Gray boxes for images, lines for text, rectangles for buttons. No color, no typography decisions, no branding. The constraint is the point — it forces everyone to discuss what belongs on the page and where, without getting distracted by how it looks. Key wireframe decisions: what content appears above the fold, what the primary action is, how navigation works, where secondary information lives. Use real content lengths (not "lorem ipsum") to expose layout problems early — a headline that's 4 words behaves differently from one that's 12 words.</p>
+  </div>
+
+  <div class="callout warning">
+    <p class="callout-title">Lorem ipsum is dangerous</p>
+    <p>Placeholder text hides layout problems. Real content has variable lengths, different languages have different text expansion (German is ~30% longer than English), and actual data reveals edge cases that "User Name" and "Lorem ipsum dolor" never will. Use representative content as early as possible — even rough drafts are better than filler text.</p>
+  </div>
+</section>
+
+<section id="interactive-prototypes" data-section="practical">
+  <h2>Interactive prototypes</h2>
+
+  <div class="method-card">
+    <h4>Click-Through Prototypes <span class="method-tag">Core Method</span></h4>
+    <p class="method-when">Use when: testing navigation flows, task completion, and screen-to-screen transitions.</p>
+    <p>Link static screens with hotspot areas — click a button, transition to the next screen. Tools like Figma, InVision, and Marvel make this simple: upload your designs, draw hotspots, link to target screens. No animation, no dynamic content, no conditional logic. The strength is speed: you can have a testable flow in minutes after completing your designs. The limitation: users can only follow pre-defined paths, so unexpected behaviors and edge cases aren't testable.</p>
+  </div>
+
+  <div class="method-card">
+    <h4>High-Fidelity Interactive Prototypes <span class="method-tag">Core Method</span></h4>
+    <p class="method-when">Use when: testing specific interactions, animations, form behavior, or when you need stakeholder buy-in.</p>
+    <p>These simulate the actual experience: transitions, animations, conditional logic, input handling. Built in tools like Figma (Smart Animate + variables), ProtoPie, Framer, or code (HTML/CSS/JS). The trade-off: high-fidelity prototypes take significantly longer to build and are harder to change. Use them when the question is about interaction quality, not information architecture. The danger is building a prototype so complete that it becomes the product — if that's happening, you should be building the real thing instead.</p>
+  </div>
+</section>
+
+<section id="wizard-of-oz" data-section="practical">
+  <h2>Wizard of Oz and concierge prototypes</h2>
+
+  <div class="method-card">
+    <h4>Wizard of Oz Prototype <span class="method-tag">Core Method</span></h4>
+    <p class="method-when">Use when: testing a concept that requires backend functionality you haven't built (AI features, personalization, complex algorithms).</p>
+    <p>The user interacts with what appears to be a working product, but a human behind the scenes is manually producing the responses. Testing a chatbot? A team member types the responses in real time. Testing a recommendation engine? A person manually selects the recommendations based on the user's input. This lets you validate the concept and the user experience before investing in engineering. Named after the Wizard in Oz who operated a spectacular machine from behind a curtain.</p>
+  </div>
+
+  <div class="method-card">
+    <h4>Concierge Prototype <span class="method-tag">Core Method</span></h4>
+    <p class="method-when">Use when: validating a service concept before building any technology.</p>
+    <p>Deliver the entire service manually, person to person. No technology needed. If you're building a meal planning app, do the meal planning for 10 users manually via email. If you're building an appointment booking system, handle bookings via phone calls. This validates demand, reveals the actual user workflow, and surfaces requirements that would be invisible on a whiteboard. The concierge approach is slower per user but generates the richest learning about what the product actually needs to do.</p>
+  </div>
+</section>
+
+<section id="choosing-fidelity" data-section="practical">
+  <h2>Choosing fidelity for your situation</h2>
+
+  <div class="method-card">
+    <h4>Fidelity Decision Guide <span class="method-tag">Framework</span></h4>
+    <p class="method-when">Use this to decide how much fidelity your current situation needs.</p>
+    <p><strong>Use low fidelity (paper, wireframes) when:</strong> You're exploring multiple concepts. The question is about structure, not aesthetics. You need to iterate quickly. You're early in the design process. You want unbiased feedback focused on flow and content.</p>
+    <p><strong>Use high fidelity (interactive prototypes) when:</strong> The concept is validated and you're refining the experience. The question is about specific interactions or visual design. You need stakeholder or client approval. You're preparing for usability testing with task-completion metrics. You need to communicate motion or transition behavior.</p>
+    <p><strong>Use Wizard of Oz when:</strong> The core value depends on technology you haven't built. You need to validate AI, personalization, or algorithmic features. Building even a prototype is expensive relative to the learning.</p>
+  </div>
+</section>
+
+<section id="testing-with-prototypes" data-section="practical">
+  <h2>Testing with prototypes</h2>
+
+  <div class="method-card">
+    <h4>Prototype Usability Testing <span class="method-tag">Core Method</span></h4>
+    <p class="method-when">Use when: you have a prototype at any fidelity level and need to validate it with users.</p>
+    <p>The test setup depends on fidelity. Paper prototypes: facilitate in person with one person playing the computer. Wireframes: screen share or print, walk through the flow. Click-through prototypes: give the user the link and a task, observe where they get stuck. Interactive prototypes: run a standard usability test with think-aloud protocol. Regardless of fidelity, the core method is the same: give the user a realistic task ("You want to book a flight from London to New York for next Tuesday"), observe their behavior, and note where they hesitate, err, or succeed.</p>
+  </div>
+
+  <div class="callout tip">
+    <p class="callout-title">Set expectations about fidelity</p>
+    <p>Before testing, tell users what level of fidelity to expect. "This is a rough sketch — I'm interested in whether the flow makes sense, not how it looks." Without this framing, users of low-fidelity prototypes will comment on visual design, and users of high-fidelity prototypes will assume everything is final. Managing fidelity expectations is part of the test protocol.</p>
+  </div>
+</section>
+
+<section id="templates" data-section="practical">
+  <h2>Templates and checklists</h2>
+
+  <div class="template-box">
+    <div class="template-header">
+      <span class="template-label">Template</span>
+      <span class="template-title">Prototype Planning Brief</span>
+    </div>
+    <div class="template-grid">
+      <div class="template-field">
+        <div class="template-field-label">Question to answer</div>
+        <p>[What specific question will this prototype help us answer?]</p>
+      </div>
+      <div class="template-field">
+        <div class="template-field-label">Fidelity level</div>
+        <p>[Paper / Wireframe / Click-through / Interactive / Wizard of Oz]</p>
+      </div>
+      <div class="template-field">
+        <div class="template-field-label">Scope</div>
+        <p>[Which screens or flows are included? What's explicitly out of scope?]</p>
+      </div>
+      <div class="template-field">
+        <div class="template-field-label">Test plan</div>
+        <p>[Who will test? How many users? What tasks? What's the success criterion?]</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="template-box">
+    <div class="template-header">
+      <span class="template-label">Checklist</span>
+      <span class="template-title">Prototype Readiness</span>
+    </div>
+    <ul class="checklist">
+      <li>The question this prototype answers is written down and agreed on</li>
+      <li>Fidelity level matches the question (not higher than needed)</li>
+      <li>All screens in the core flow are built and linked</li>
+      <li>Happy path is complete and testable end to end</li>
+      <li>Key error states and edge cases are represented (if high fidelity)</li>
+      <li>Representative content is used instead of placeholder text</li>
+      <li>Test tasks are written from the user's perspective, not the product's</li>
+      <li>Stakeholders understand the fidelity level and won't treat it as final</li>
+      <li>A plan exists for what happens after testing (iteration, not just results)</li>
+    </ul>
+  </div>
+</section>
+
+<section id="real-world-examples" data-section="examples">
+  <h2>Real-world examples</h2>
+
+  <div class="case-study">
+    <p class="case-label">Case study</p>
+    <h4>PillPack: concierge-to-product pipeline</h4>
+    <p>PillPack (now Amazon Pharmacy) started as a concierge prototype. The founders manually sorted and packaged medications for a small group of users, delivering them by hand. This validated the core value proposition — people wanted pre-sorted medication packets — before any technology was built. The concierge phase also revealed critical operational requirements (pharmacy regulations, insurance integration, medication interaction checks) that would have been invisible in a traditional prototype. The manual service became the specification for the automated system.</p>
+    <p><strong>Why it works:</strong> The concierge approach validated demand, revealed hidden complexity, and generated the operational knowledge needed to build the real product — all before writing a line of code.</p>
+  </div>
+
+  <div class="case-study">
+    <p class="case-label">Case study</p>
+    <h4>Airbnb: paper prototyping their early growth</h4>
+    <p>Airbnb's early design process relied heavily on storyboarding and paper prototyping. When redesigning their booking flow, the team sketched dozens of variations on paper, testing the flow with users by physically swapping cards. The paper format forced focus on the fundamental question: "What information does a guest need, and in what order, to feel confident enough to book a stranger's home?" The answer — photos first, then reviews, then price, then booking — became the foundation of their listing page hierarchy.</p>
+    <p><strong>Why it works:</strong> Paper prototyping at the right moment (early, when the question was about information hierarchy) produced a structural insight that still shapes the product years later.</p>
+  </div>
+
+  <div class="case-study">
+    <p class="case-label">Case study</p>
+    <h4>Google's HEART framework: testing at every fidelity</h4>
+    <p>Google's design teams use different fidelity prototypes for different HEART metrics. Paper prototypes test Task Success (can users complete the flow?). Wireframes test Engagement (does the structure support exploration?). Interactive prototypes test Adoption (do users understand how to start?) and Retention (do users return?). The fidelity matches the metric: you don't need pixel-perfect screens to measure whether someone can find the search bar.</p>
+    <p><strong>Why it works:</strong> Matching prototype fidelity to the measurement goal prevents over-investment in polish before validating fundamentals.</p>
+  </div>
+</section>
+
+<section id="pitfalls" data-section="practical">
+  <h2>Common pitfalls</h2>
+
+  <div class="pitfall">
+    <div class="pitfall-icon">!</div>
+    <div>
+      <h4>Going high-fidelity too early</h4>
+      <p>Starting with interactive prototypes before validating the concept wastes time and creates emotional attachment to unvalidated ideas. A beautiful prototype of the wrong solution is still the wrong solution. Start rough, validate the structure, then increase fidelity incrementally.</p>
+    </div>
+  </div>
+
+  <div class="pitfall">
+    <div class="pitfall-icon">!</div>
+    <div>
+      <h4>Prototyping the entire product</h4>
+      <p>A prototype should test a specific question about a specific flow. Prototyping every screen, every state, and every edge case creates a second product that's almost as expensive to maintain as the real one. Scope ruthlessly: what's the one thing you need to learn? Prototype only that.</p>
+    </div>
+  </div>
+
+  <div class="pitfall">
+    <div class="pitfall-icon">!</div>
+    <div>
+      <h4>Never testing the prototype</h4>
+      <p>Some teams build prototypes that go straight into stakeholder presentations without ever being tested with users. A prototype that wasn't tested with users is a pitch deck with interactions — it demonstrates the vision but doesn't validate it. The purpose of a prototype is learning, not persuasion.</p>
+    </div>
+  </div>
+</section>
+
+<section id="connections">
+  <h2>Connected topics in your library</h2>
+  <div class="cross-ref-grid">
+    <a href="design-thinking.html" class="cross-ref-card">
+      <span class="ref-number">Tier 1</span>
+      <div class="ref-title">Design Thinking</div>
+      <div class="ref-reason">Prototyping is the fourth stage of Design Thinking. The mindset — build to learn, not to ship — comes directly from here.</div>
+    </a>
+    <a href="usability.html" class="cross-ref-card">
+      <span class="ref-number">Tier 1</span>
+      <div class="ref-title">Usability</div>
+      <div class="ref-reason">Prototypes exist to be tested. Usability principles determine what to evaluate and how to measure success.</div>
+    </a>
+    <a href="journey-mapping.html" class="cross-ref-card">
+      <span class="ref-number">Tier 1</span>
+      <div class="ref-title">Journey Mapping</div>
+      <div class="ref-reason">User flows from journey mapping define what screens and interactions to prototype.</div>
+    </a>
+    <div class="cross-ref-card">
+      <span class="ref-number">Tier 2</span>
+      <div class="ref-title">Conducting Usability Testing</div>
+      <div class="ref-reason">The detailed methods for testing prototypes with users — moderated, unmoderated, remote, in-person.</div>
+    </div>
+  </div>
+</section>
+
+<section id="deep-dive">
+  <h2>Deep-dive appendix</h2>
+
+  <details class="expandable">
+    <summary><span class="chevron"><svg viewBox="0 0 14 14"><polyline points="4,2 10,7 4,12"/></svg></span> Prototyping tool comparison</summary>
+    <div class="expand-content topic-content">
+      <h4>Figma</h4>
+      <p>Best for teams. Real-time collaboration, prototyping built into the design tool, Smart Animate for transitions, variables for conditional logic. The standard choice for most product teams. Limitation: complex interactions (drag-and-drop, physics-based animation) require workarounds or external tools.</p>
+
+      <h4>Framer</h4>
+      <p>Best for high-fidelity interactive prototypes. Code-based components (React), real data integration, production-quality animations. Bridges the gap between prototype and code. Limitation: steeper learning curve, less collaborative than Figma for team-based design.</p>
+
+      <h4>ProtoPie</h4>
+      <p>Best for complex interaction prototyping without code. Sensor inputs (gyroscope, camera), multi-device prototypes, conditional logic. Fills the gap between Figma's prototyping and actual code. Limitation: separate from your design tool, so you're maintaining two artifacts.</p>
+
+      <h4>Code prototypes (HTML/CSS/JS)</h4>
+      <p>Best for testing real interactions, performance, and accessibility. No fidelity ceiling — the prototype can become the product. Limitation: slower to create, requires development skills, harder to iterate on visual design. Best when the question is specifically about interaction behavior that can't be simulated.</p>
+    </div>
+  </details>
+
+  <details class="expandable">
+    <summary><span class="chevron"><svg viewBox="0 0 14 14"><polyline points="4,2 10,7 4,12"/></svg></span> The Design Sprint prototype</summary>
+    <div class="expand-content topic-content">
+      <h4>Thursday in a Design Sprint</h4>
+      <p>Google Ventures' Design Sprint allocates exactly one day (Thursday) for prototyping. The constraint is the point: you can only build what's testable in one day, which forces radical scoping. The sprint uses a "Goldilocks quality" principle — realistic enough to get genuine reactions, rough enough to build in 7 hours. Typically this means a click-through prototype in Figma or Keynote with real content, real copy, and enough screens to complete one core task. The sprint prototype is disposable by design — it exists only to enable Friday's user tests.</p>
+
+      <h4>The "façade" technique</h4>
+      <p>Sprint prototypes often use the façade technique: make the surface look real while everything behind it is fake. Real product name, real button labels, real content — but clicking a button just shows the next pre-built screen. Users don't notice the difference because they're focused on the task, not the technology. The façade works because usability testing measures comprehension and navigation, not functionality.</p>
+    </div>
+  </details>
+
+  <details class="expandable">
+    <summary><span class="chevron"><svg viewBox="0 0 14 14"><polyline points="4,2 10,7 4,12"/></svg></span> Further reading and resources</summary>
+    <div class="expand-content topic-content">
+      <h4>Essential reading</h4>
+      <p><strong>"Sprint" by Jake Knapp</strong> — The Google Ventures Design Sprint book. Chapter on prototyping ("Fake It") is the best practical guide to building realistic prototypes in one day.</p>
+      <p><strong>"Prototyping" by Todd Zaki Warfel</strong> — Comprehensive coverage of all prototype types, from paper to code, with guidance on choosing the right fidelity.</p>
+      <p><strong>"The Lean Startup" by Eric Ries</strong> — The MVP concept is prototyping applied to business models. Chapter on "Test" is directly relevant.</p>
+
+      <h4>Tools</h4>
+      <p><strong>Figma:</strong> Industry standard for design + prototyping. Free tier is generous enough for most projects.</p>
+      <p><strong>Miro / FigJam:</strong> Best for paper prototyping workshops gone digital. Sticky notes, drawing, real-time collaboration.</p>
+      <p><strong>Marvel:</strong> Simplest tool for turning static images into click-through prototypes. Upload screenshots, draw hotspots, test.</p>
+    </div>
+  </details>
+</section>
+
+<!-- SEARCH_INDEX
+{
+  topic: "Prototyping & Wireframing",
+  url: "topics/prototyping.html",
+  tier: "Tier 1",
+  sections: [
+    { title: "What & why", id: "what-and-why", type: "theory", keywords: "prototype wireframe fidelity question testing build learn" },
+    { title: "Fidelity spectrum", id: "fidelity-spectrum", type: "theory", keywords: "sketch wireframe mockup interactive fidelity low high spectrum" },
+    { title: "Paper prototyping", id: "paper-prototyping", type: "practical", keywords: "paper prototype sketch sticky note workshop low-fidelity" },
+    { title: "Wireframing", id: "wireframing", type: "practical", keywords: "wireframe gray boxes layout structure content hierarchy low-fidelity" },
+    { title: "Interactive prototypes", id: "interactive-prototypes", type: "practical", keywords: "click-through hotspot interactive high-fidelity Figma prototype" },
+    { title: "Wizard of Oz", id: "wizard-of-oz", type: "practical", keywords: "Wizard of Oz concierge prototype manual behind-the-scenes fake" },
+    { title: "Choosing fidelity", id: "choosing-fidelity", type: "practical", keywords: "fidelity decision guide low high when" },
+    { title: "Testing with prototypes", id: "testing-with-prototypes", type: "practical", keywords: "usability test prototype task think-aloud fidelity expectations" },
+    { title: "Templates & checklists", id: "templates", type: "practical", keywords: "prototype planning brief readiness checklist scope question" },
+    { title: "Real-world examples", id: "real-world-examples", type: "examples", keywords: "PillPack concierge Airbnb paper Google HEART" },
+    { title: "Common pitfalls", id: "pitfalls", type: "practical", keywords: "high fidelity too early scope creep never testing" },
+    { title: "Deep-dive appendix", id: "deep-dive", type: "deep-dive", keywords: "Figma Framer ProtoPie Design Sprint facade technique tool comparison" }
+  ],
+  methods: [
+    { name: "Paper Prototyping", section: "paper-prototyping", keywords: "paper sketch sticky note swap workshop" },
+    { name: "Wireframing", section: "wireframing", keywords: "wireframe layout structure gray boxes content" },
+    { name: "Interactive Prototyping", section: "interactive-prototypes", keywords: "click-through Figma hotspot interactive high-fidelity" },
+    { name: "Wizard of Oz", section: "wizard-of-oz", keywords: "wizard concierge manual behind-the-scenes fake backend" },
+    { name: "Prototype Usability Testing", section: "testing-with-prototypes", keywords: "test task think-aloud observe user" }
+  ]
+}
+SEARCH_INDEX -->
+
+<!-- MANIFEST
+{
+  "id": "UX.1.10",
+  "title": "Prototyping & Wireframing",
+  "file": "topics/prototyping.html",
+  "tier": 1,
+  "discipline": "UX",
+  "solves": [
+    "I need to test a design concept before investing in development",
+    "I want to choose the right prototype fidelity for my situation",
+    "I need to validate a flow or navigation structure quickly",
+    "I want to test a concept that depends on technology we haven't built",
+    "I need to communicate a design idea to stakeholders convincingly",
+    "I want to run usability testing but don't have a built product yet"
+  ],
+  "methods": ["Paper Prototyping", "Wireframing", "Interactive Prototyping", "Wizard of Oz", "Prototype Usability Testing"],
+  "phase": "design",
+  "prerequisites": ["UX.1.01"],
+  "pairs_with": ["UX.1.03", "UX.1.04", "UX.2.03"],
+  "depth": "methods",
+  "keywords": ["prototype", "wireframe", "fidelity", "mockup", "paper prototype", "interactive prototype", "Wizard of Oz", "concierge", "click-through", "Figma", "testing", "MVP", "design sprint"]
+}
+MANIFEST -->

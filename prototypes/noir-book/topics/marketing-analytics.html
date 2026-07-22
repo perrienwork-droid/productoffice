@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Marketing Analytics &amp; Attribution — Noir Book</title>
+  <link rel="stylesheet" href="../css/shared.css">
+  <link rel="stylesheet" href="../css/topic.css">
+  <script src="../js/theme.js"></script>
+  <script src="../js/topic-nav.js"></script>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="site-nav subpage-nav" data-discipline="mk">
+    <div class="nav-inner">
+      <a href="../index.html" class="site-logo">
+        <span class="logo-mark">MK</span>
+        <span class="nav-title">Noir Book</span>
+      </a>
+      <a href="../index.html" class="nav-back-link">&#8592; Library</a>
+      <div class="nav-filters">
+        <button class="disc-toggle ux-toggle active" data-disc="ux" onclick="toggleDisc('ux')" title="UX Design">
+          <span class="disc-dot disc-dot-ux"></span><span class="disc-label">UX Design</span><span class="disc-code">(UX)</span>
+        </button>
+        <button class="disc-toggle pm-toggle active" data-disc="pm" onclick="toggleDisc('pm')" title="Product Management">
+          <span class="disc-dot disc-dot-pm"></span><span class="disc-label">Product</span><span class="disc-code">(PM)</span>
+        </button>
+        <button class="disc-toggle mk-toggle active" data-disc="mk" onclick="toggleDisc('mk')" title="Marketing &amp; Growth">
+          <span class="disc-dot disc-dot-mk"></span><span class="disc-label">Marketing</span><span class="disc-code">(MK)</span>
+        </button>
+        <button class="disc-toggle cs-toggle active" data-disc="cs" onclick="toggleDisc('cs')" title="Content Strategy">
+          <span class="disc-dot disc-dot-cs"></span><span class="disc-label">Content</span><span class="disc-code">(CS)</span>
+        </button>
+        <div class="search-box nav-search-box">
+          <div class="nav-search-wrap">
+            <div class="nav-search-pills" id="navSearchPills"></div>
+            <input type="text" id="navSearchInput" placeholder="Search..." autocomplete="off"
+              oninput="topicNavSearch(this.value)"
+              onkeydown="handleNavSearchKey(event)"
+              onfocus="handleNavSearchFocus()"
+              onblur="handleNavSearchBlur()">
+            <button type="button" class="nav-search-clear" id="navSearchClear" onclick="clearNavSearch()" aria-label="Clear search">&times;</button>
+          </div>
+          <div class="search-dropdown" id="navSearchDropdown"></div>
+        </div>
+      </div>
+      <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle theme">&#9790;</button>
+      <button class="burger-btn" id="burgerBtn" onclick="openBurger()" aria-label="Menu">
+        <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="2" y1="4" x2="16" y2="4"/><line x1="2" y1="9" x2="16" y2="9"/><line x1="2" y1="14" x2="16" y2="14"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Burger Menu Overlay -->
+  <div class="burger-overlay" id="burgerOverlay" onclick="closeBurger(event)">
+    <div class="burger-panel" onclick="event.stopPropagation()">
+      <div class="burger-panel-header">
+        <h3>Menu</h3>
+        <button class="burger-close" onclick="closeBurger()" aria-label="Close">&times;</button>
+      </div>
+      <div class="burger-search">
+        <input type="text" id="burgerSearchInput" placeholder="Search topics, methods..." autocomplete="off" oninput="burgerSearch(this.value)">
+        <div class="burger-search-results" id="burgerSearchResults"></div>
+      </div>
+      <div class="burger-links">
+        <a href="../index.html">&#8592; Back to Library</a>
+        <a href="../design-system.html">Design System</a>
+        <a href="../request-topic.html">Suggest a topic or improvement</a>
+      </div>
+      <div class="burger-toc-section">
+        <p class="burger-toc-title">On this page</p>
+        <ul class="burger-toc-list">
+        <li><a href="#what-marketing-analytics-is" data-section="theory">What marketing analytics is and why it matters</a></li>
+        <li><a href="#core-methods" data-section="practical">Core analytics and attribution methods</a></li>
+        <li><a href="#templates-and-checklists" data-section="practical">Templates and checklists</a></li>
+        <li><a href="#real-world-examples" data-section="examples">Real-world examples</a></li>
+        <li><a href="#common-pitfalls" data-section="practical">Common analytics mistakes</a></li>
+        <li><a href="#connections">Connected topics in your library</a></li>
+        <li><a href="#deep-dive">Deep-dive appendix</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Topic Header -->
+  <header class="topic-header container">
+    <div class="breadcrumb">
+      <a href="../index.html">Library</a>
+      <span class="sep">&#8250;</span>
+      <span class="breadcrumb-disc breadcrumb-mk">Marketing &amp; Growth</span>
+      <span class="sep">&#8250;</span>
+      <span>Tier 1 — Core Toolkit</span>
+      <span class="sep">&#8250;</span>
+      <span>Marketing Analytics &amp; Attribution</span>
+    </div>
+    <div class="topic-meta">
+      <span class="tier-badge tier1">Tier 1</span>
+      <span style="font-size:14px;color:var(--ink-muted)">Topic MK.1.06</span>
+    </div>
+    <h1>Marketing Analytics &amp; Attribution</h1>
+    <p class="topic-subtitle">Know what's working. Attribution models, marketing dashboards, funnel metrics, and the honest practice of measuring marketing impact when perfect attribution is impossible.</p>
+    <div class="content-splits">
+      <span class="split-badge theory">25% Theory</span>
+      <span class="split-badge practical">50% Methods &amp; Templates</span>
+      <span class="split-badge examples">25% Examples</span>
+    </div>
+  </header>
+
+  <!-- Reading Progress Bar -->
+  <div class="reading-progress" id="readingProgress"></div>
+
+  <!-- Main Layout -->
+  <div class="container">
+    <div class="topic-layout">
+
+      <!-- Sidebar: Table of Contents -->
+      <aside class="topic-sidebar">
+        <nav class="toc">
+          <p class="sidebar-topic-title">Marketing Analytics &amp; Attribution</p>
+          <p class="toc-title">On this page</p>
+          <ul class="toc-list">
+            <li><a href="#what-marketing-analytics-is" data-section="theory">What marketing analytics is and why it matters</a></li>
+            <li><a href="#core-methods" data-section="practical">Core analytics and attribution methods</a></li>
+            <li><a href="#templates-and-checklists" data-section="practical">Templates and checklists</a></li>
+            <li><a href="#real-world-examples" data-section="examples">Real-world examples</a></li>
+            <li><a href="#common-pitfalls" data-section="practical">Common analytics mistakes</a></li>
+            <li><a href="#connections">Connected topics in your library</a></li>
+            <li><a href="#deep-dive">Deep-dive appendix</a></li>
+          </ul>
+        </nav>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="topic-main topic-content">
+
+<!-- SECTION: What & Why (Theory) -->
+        <div class="section-marker" id="what-marketing-analytics-is">
+          <span class="split-badge theory">Theory</span>
+          <span class="marker-line"></span>
+        </div>
+
+        <section data-section="theory">
+  <h2>What marketing analytics is and why it matters</h2>
+
+<p>Marketing analytics is the practice of measuring, managing, and analyzing marketing performance data to maximize effectiveness and optimize return on investment. It answers the fundamental marketing question: of everything we're doing, what's actually working, what's wasting money, and where should we invest next?</p>
+
+<p>The challenge is that marketing operates under fundamental measurement uncertainty. Unlike product analytics (where you can track exactly what a user does inside your product), marketing touches customers across channels, devices, and time periods in ways that are inherently difficult to attribute. A customer might see a LinkedIn ad on Monday, read a blog post on Wednesday, get a referral from a colleague on Friday, and sign up on Sunday. Which touchpoint "caused" the conversion? All of them, partially — but most measurement systems need to assign credit somewhere.</p>
+
+<p>This uncertainty doesn't mean measurement is futile — it means measurement must be honest about its limitations. The best marketing analytics practice combines multiple measurement approaches (attribution models, incrementality testing, marketing mix modeling) and makes decisions based on directional signals rather than false precision. A marketer who says "I'm 80% confident this channel is driving results" is more trustworthy than one who claims to know their exact CAC to the penny.</p>
+
+<div class="callout info">
+  <p class="callout-title">Why this matters for your projects</p>
+  <p>Marketing without analytics is guessing with money. But analytics without honest interpretation is worse — it creates false confidence. The goal of this topic is not just to teach you how to measure, but how to interpret measurements correctly, understand their limitations, and make decisions under uncertainty. The best marketing teams use data to inform judgment, not replace it.</p>
+</div>
+
+<h3 id="the-attribution-problem">The attribution problem</h3>
+
+<p>Attribution is the process of assigning credit for a conversion to the marketing touchpoints that influenced it. It sounds simple, but it's one of the hardest problems in marketing for three reasons.</p>
+
+<p>First, <strong>cross-device tracking is incomplete</strong>. A user who sees your ad on their phone but converts on their laptop appears as two unrelated events in most analytics tools. Privacy regulations and cookie deprecation are making this worse, not better.</p>
+
+<p>Second, <strong>influence doesn't equal last click</strong>. The touchpoint immediately before conversion gets disproportionate credit in most models, but the awareness-building touchpoints earlier in the journey (a podcast mention, a conference talk, a friend's recommendation) may have been more important in the decision.</p>
+
+<p>Third, <strong>offline touchpoints are invisible</strong>. Word-of-mouth, watercooler conversations, internal Slack recommendations — these are often the most influential touchpoints and the hardest to measure. Brand marketing creates conditions for these offline touchpoints but can't track them directly.</p>
+
+<p>Accepting these limitations is the first step toward useful measurement. Attribution models are useful approximations, not ground truth. Use them to make relative comparisons (channel A seems better than channel B) rather than absolute claims (this channel produced exactly $47,382 in revenue).</p>
+
+</section>
+
+<!-- SECTION: Core Methods (Practical) -->
+        <div class="section-marker" id="core-methods">
+          <span class="split-badge practical">Practical</span>
+          <span class="marker-line"></span>
+        </div>
+
+        <section data-section="practical">
+  <h2>Core analytics and attribution methods</h2>
+
+<div class="method-card">
+  <h4>Attribution Model Comparison <span class="method-tag">Core Method</span></h4>
+  <p class="method-when">Use when: You need to choose how to assign conversion credit across marketing touchpoints to guide budget allocation.</p>
+  <p>Every attribution model makes trade-offs. There is no "correct" model — only models that are more or less useful for your specific decisions.</p>
+  <div class="template-box">
+    <div class="template-header">
+      <span class="template-label">Reference</span>
+      <span class="template-title">Attribution Models</span>
+    </div>
+    <div class="template-grid">
+      <div class="template-field">
+        <div class="template-field-label">Last-touch attribution</div>
+        <div class="template-field-hint">All credit goes to the final touchpoint before conversion. Simple and widely used, but systematically overvalues bottom-of-funnel channels (branded search, retargeting) and undervalues awareness channels. Best for short sales cycles with few touchpoints.</div>
+      </div>
+      <div class="template-field">
+        <div class="template-field-label">First-touch attribution</div>
+        <div class="template-field-hint">All credit goes to the first touchpoint that introduced the customer. Overvalues top-of-funnel channels and ignores everything that happened afterward. Useful for understanding which channels generate initial awareness.</div>
+      </div>
+      <div class="template-field">
+        <div class="template-field-label">Linear attribution</div>
+        <div class="template-field-hint">Equal credit to every touchpoint in the journey. Simple and more balanced, but treats a casual blog visit the same as a high-intent demo request. Useful when you truly don't know which touchpoints matter more.</div>
+      </div>
+      <div class="template-field">
+        <div class="template-field-label">Time-decay attribution</div>
+        <div class="template-field-hint">More credit to touchpoints closer to conversion. Reasonable assumption for many businesses — recent interactions are usually more influential. Works well for moderate-length sales cycles (2–8 weeks).</div>
+      </div>
+      <div class="template-field">
+        <div class="template-field-label">Position-based (U-shaped)</div>
+        <div class="template-field-hint">40% to first touch, 40% to last touch, 20% distributed across middle. Acknowledges that introducing the customer and closing the deal are both important. A pragmatic default for most B2B companies.</div>
+      </div>
+      <div class="template-field">
+        <div class="template-field-label">Data-driven (algorithmic)</div>
+        <div class="template-field-hint">ML models analyze your actual conversion data to assign credit based on observed patterns. Most accurate in theory, but requires large datasets (1000+ conversions/month) and is a black box. Google Analytics offers this; custom models are expensive to build.</div>
+      </div>
+    </div>
+  </div>
+  <p>A practical approach: run two models simultaneously (e.g., last-touch and position-based) and compare the results. Channels that look good in both models are safe bets. Channels that look great in one model but terrible in another need closer investigation — the truth is somewhere in between.</p>
+</div>
+
+<div class="method-card">
+  <h4>Full-Funnel Metrics Framework <span class="method-tag">Core Method</span></h4>
+  <p class="method-when">Use when: You need a structured set of metrics that covers the entire marketing funnel from awareness to revenue.</p>
+  <p>Organize metrics into funnel stages. Each stage has primary metrics (what you optimize for) and diagnostic metrics (what you investigate when primary metrics decline).</p>
+  <div class="template-box">
+    <div class="template-header">
+      <span class="template-label">Template</span>
+      <span class="template-title">Full-Funnel Metrics</span>
+    </div>
+    <div class="template-grid">
+      <div class="template-field">
+        <div class="template-field-label">Awareness</div>
+        <div class="template-field-hint">Primary: impressions, reach, share of voice. Diagnostic: branded search volume, direct traffic, social mentions. These indicate whether people know you exist.</div>
+      </div>
+      <div class="template-field">
+        <div class="template-field-label">Engagement</div>
+        <div class="template-field-hint">Primary: click-through rate, content engagement, return visits. Diagnostic: time on site, pages per session, email open rates. These indicate whether your message resonates.</div>
+      </div>
+      <div class="template-field">
+        <div class="template-field-label">Conversion</div>
+        <div class="template-field-hint">Primary: signups, demo requests, MQLs, trial starts. Diagnostic: form completion rate, landing page conversion, lead-to-MQL rate. These indicate whether you're generating demand.</div>
+      </div>
+      <div class="template-field">
+        <div class="template-field-label">Revenue</div>
+        <div class="template-field-hint">Primary: pipeline generated, closed-won revenue, marketing-sourced revenue. Diagnostic: MQL-to-SQL rate, SQL-to-opportunity rate, win rate, average deal size. These indicate whether marketing drives business outcomes.</div>
+      </div>
+      <div class="template-field">
+        <div class="template-field-label">Efficiency</div>
+        <div class="template-field-hint">Primary: CAC, LTV:CAC ratio, payback period. Diagnostic: CAC by channel, cost per MQL, marketing spend as % of revenue. These indicate whether growth is sustainable.</div>
+      </div>
+    </div>
+  </div>
+  <p>Don't report on everything — pick 5–8 metrics that matter for your current stage and goals. Early-stage companies focus on awareness and conversion metrics. Growth-stage companies shift toward revenue and efficiency metrics. Reporting 30 metrics means nobody pays attention to any of them.</p>
+</div>
+
+<div class="method-card">
+  <h4>Marketing Dashboard Design <span class="method-tag">Communication Method</span></h4>
+  <p class="method-when">Use when: You need a dashboard that leadership trusts and that drives decisions rather than collecting dust.</p>
+  <p>A good marketing dashboard answers three questions at a glance: Are we on track against goals? What's working? What needs attention? Structure it in three tiers:</p>
+  <p><strong>Tier 1 — Executive summary (top of dashboard):</strong> 3–5 key metrics with trend arrows and goal status. Revenue generated, pipeline created, blended CAC, and one or two metrics tied to this quarter's specific goals. This is what the CEO reads.</p>
+  <p><strong>Tier 2 — Channel performance (middle):</strong> Per-channel spend, conversions, CAC, and trend. This is what the marketing leader uses to allocate budget. Highlight channels performing above or below expectations.</p>
+  <p><strong>Tier 3 — Diagnostic detail (bottom or drill-down):</strong> Conversion rates by funnel stage, content performance, campaign-level results. This is what marketing managers use to optimize. Keep it accessible but not cluttering the top-level view.</p>
+  <p>Update cadence matters: real-time dashboards are great for monitoring but terrible for decision-making (too noisy). Weekly snapshots for operational decisions, monthly for strategic decisions, quarterly for budget reallocation.</p>
+</div>
+
+<div class="method-card">
+  <h4>Incrementality Testing <span class="method-tag">Advanced Method</span></h4>
+  <p class="method-when">Use when: You need to prove that a channel or campaign is actually causing conversions, not just touching people who would have converted anyway.</p>
+  <p>Incrementality testing answers the question attribution can't: "Would these customers have converted without this marketing spend?" The basic approach is a holdout test — remove the marketing activity from a random subset of your audience and compare conversion rates.</p>
+  <p>For paid channels: run a geo-holdout (stop advertising in one region, compare to a similar region where ads continue). For email: hold out a random 10% from a campaign and compare conversion rates. For retargeting: this is where incrementality testing is most revealing — retargeting often shows high attribution credit but low incrementality because it targets people who were already close to converting.</p>
+  <p>Run incrementality tests on your largest budget channels annually. You may discover that a channel you thought was driving 500 conversions/month is only incrementally driving 200 — the other 300 would have happened anyway. This knowledge saves significant spend.</p>
+</div>
+
+<div class="method-card">
+  <h4>UTM Strategy &amp; Taxonomy <span class="method-tag">Infrastructure Method</span></h4>
+  <p class="method-when">Use when: Setting up or cleaning up campaign tracking to ensure consistent, accurate data across all channels.</p>
+  <p>UTM parameters (source, medium, campaign, content, term) are the foundation of digital attribution. Inconsistent UTMs — "facebook" vs "Facebook" vs "fb" vs "social-facebook" — corrupt your data and make channel comparison impossible.</p>
+  <p>Establish a naming convention and enforce it: use lowercase only, use hyphens instead of spaces, define allowed values for source and medium, and use a UTM builder tool that constrains inputs to your taxonomy. Document the convention, share it with everyone who creates campaign links, and audit monthly for violations. Bad UTM hygiene is one of the most common and most preventable analytics problems.</p>
+</div>
+
+</section>
+
+<section id="templates-and-checklists" data-section="practical">
+  <h2>Templates and checklists</h2>
+
+<div class="template-box">
+  <div class="template-header">
+    <span class="template-label">Checklist</span>
+    <span class="template-title">Marketing Analytics Foundation</span>
+  </div>
+  <ul class="checklist">
+    <li>Web analytics installed and configured (GA4 or equivalent) with goals/events defined</li>
+    <li>UTM naming convention documented and shared with the team</li>
+    <li>Attribution model selected and configured (start with position-based if unsure)</li>
+    <li>Marketing dashboard built with executive, channel, and diagnostic tiers</li>
+    <li>CRM connected to marketing tools for closed-loop reporting (marketing → pipeline → revenue)</li>
+    <li>Funnel stage definitions agreed with sales (what's an MQL? SQL? Opportunity?)</li>
+    <li>Monthly analytics review meeting scheduled with stakeholders</li>
+    <li>Data quality audit scheduled quarterly (UTM consistency, tracking accuracy, duplicate leads)</li>
+  </ul>
+</div>
+
+<div class="callout tip">
+  <p class="callout-title">Practical tip</p>
+  <p>The most important analytics investment isn't a tool — it's the connection between your marketing system and your CRM. Without closed-loop reporting (seeing which marketing-sourced leads actually became revenue), you're optimizing for leads, not revenue. A channel that generates 500 leads and $0 revenue is worse than a channel that generates 50 leads and $500K revenue. Closed-loop reporting reveals this; lead-only reporting hides it.</p>
+</div>
+
+</section>
+
+<!-- SECTION: Examples -->
+        <div class="section-marker" id="real-world-examples">
+          <span class="split-badge examples">Examples</span>
+          <span class="marker-line"></span>
+        </div>
+
+        <section data-section="examples">
+  <h2>Real-world examples</h2>
+
+<h3 id="example-attribution-comparison">Attribution model comparison in practice</h3>
+
+<p>A hypothetical B2B SaaS company called FlowOps ran their Q3 data through two attribution models and got strikingly different results:</p>
+
+<p><strong>Last-touch model:</strong> Google branded search = 42% of conversions. Retargeting = 28%. Direct = 18%. Everything else = 12%.</p>
+
+<p><strong>Position-based model:</strong> Content/SEO = 31% (first-touch credit). Google branded search = 24% (last-touch credit). LinkedIn ads = 19% (first-touch credit). Retargeting = 14%. Events = 12%.</p>
+
+<p>The last-touch model suggested doubling down on branded search and retargeting. The position-based model revealed that content and LinkedIn were creating the demand that branded search was capturing. Cutting content budget would have eventually reduced branded search volume — but the last-touch model would never show that relationship.</p>
+
+<p>The team adopted a dual-reporting approach: last-touch for short-term optimization, position-based for budget allocation decisions. Both were "right" — they just answered different questions.</p>
+
+<h3 id="example-dashboard">Marketing dashboard that drives action</h3>
+
+<p>A hypothetical e-commerce brand called ThreadCo built a dashboard that their CEO actually used. The key was ruthless simplicity at the top level:</p>
+
+<p><strong>Executive row:</strong> Four numbers — revenue this month vs. goal, new customers vs. goal, blended CAC vs. target, returning customer rate. Green/yellow/red status for each. The CEO could assess marketing health in 5 seconds.</p>
+
+<p><strong>Channel row:</strong> Six columns (paid search, paid social, email, organic, referral, direct) with spend, revenue attributed, and ROAS for each. The marketing VP used this weekly to shift budget toward high-ROAS channels.</p>
+
+<p><strong>Diagnostic section:</strong> Campaign-level performance, landing page conversion rates, email metrics. The marketing team used this daily for optimization but leadership never scrolled this far — which was the point.</p>
+
+</section>
+
+<!-- SECTION: Common Pitfalls -->
+<section id="common-pitfalls" data-section="practical">
+  <h2>Common analytics mistakes</h2>
+
+<p><strong>Vanity metrics masquerading as business metrics.</strong> Impressions, followers, page views, and email list size feel good but don't directly connect to revenue. Track them for context, but never optimize for them. The question is always: "And then what?" Impressions → clicks → conversions → revenue. If you can't trace the path, the metric is vanity.</p>
+
+<p><strong>Over-attributing to last touch.</strong> Branded search and retargeting look spectacular in last-touch models because they capture demand that other channels created. Cutting upper-funnel channels (content, events, brand advertising) often looks free in the short term but reduces the pipeline that bottom-funnel channels depend on. The effects are delayed, which makes them easy to miss.</p>
+
+<p><strong>False precision.</strong> Reporting CAC as "$127.43" implies a level of accuracy that attribution data simply cannot support. Round numbers and ranges ("CAC is approximately $125–$135") are more honest and equally useful for decision-making. Reserve precision for controlled experiments where you actually have clean data.</p>
+
+<p><strong>Measuring everything, understanding nothing.</strong> A dashboard with 50 metrics is a data dump, not an analytics practice. Decide what decisions you're trying to make, identify the 5–8 metrics that inform those decisions, and track only those. Add metrics when new questions arise, but always prune metrics that nobody acts on.</p>
+
+</section>
+
+<!-- SECTION: Connections -->
+<section id="connections">
+  <h2>Connected topics in your library</h2>
+
+<div class="cross-ref-grid">
+  <a href="#" class="cross-ref-card">
+    <span class="ref-number">MK.1.05</span>
+    <div class="ref-title">Growth Channels &amp; Acquisition</div>
+    <div class="ref-reason">Analytics measures channel performance — these topics work as a pair</div>
+  </a>
+  <a href="#" class="cross-ref-card">
+    <span class="ref-number">MK.1.07</span>
+    <div class="ref-title">Customer &amp; Market Segmentation</div>
+    <div class="ref-reason">Segment-level analytics reveals which customers convert best</div>
+  </a>
+  <a href="#" class="cross-ref-card">
+    <span class="ref-number">PM.1.05</span>
+    <div class="ref-title">Product Metrics &amp; Analytics <span class="ref-discipline">PM</span></div>
+    <div class="ref-reason">PM lens — product-level metrics (North Star, AARRR), not marketing attribution</div>
+  </a>
+  <a href="#" class="cross-ref-card">
+    <span class="ref-number">UX.2.05</span>
+    <div class="ref-title">Data-Driven Design <span class="ref-discipline">UX</span></div>
+    <div class="ref-reason">UX lens — analytics for design decisions and A/B testing UI</div>
+  </a>
+  <a href="#" class="cross-ref-card">
+    <span class="ref-number">MK.2.05</span>
+    <div class="ref-title">Landing Pages &amp; CRO</div>
+    <div class="ref-reason">Conversion optimization relies on analytics to measure improvement</div>
+  </a>
+</div>
+
+<div class="deep-dive-section" id="deep-dive">
+          <div class="deep-dive-header">
+            <span class="deep-dive-badge">Deep Dive</span>
+            <h2 style="margin:0; border:none; padding:0;">Appendix</h2>
+          </div>
+<p>Extended material on marketing measurement.</p>
+
+  <details class="expandable">
+    <summary><span class="chevron"><svg viewBox="0 0 14 14"><polyline points="4,2 10,7 4,12"/></svg></span> Privacy, cookies, and the future of attribution</summary>
+    <div class="expand-content topic-content">
+      <h4>The post-cookie landscape</h4>
+      <p>Third-party cookies are disappearing. Apple's ATT framework restricts tracking across apps. Privacy regulations (GDPR, CCPA) limit what data you can collect. This doesn't make attribution impossible — it makes it different. The industry is shifting from user-level tracking to aggregated measurement: conversion APIs (server-side tracking), privacy-safe aggregate reporting, marketing mix modeling (statistical analysis of spend vs. outcomes at the aggregate level), and first-party data strategies.</p>
+
+      <h4>First-party data as competitive advantage</h4>
+      <p>Companies that build strong first-party data (data customers voluntarily provide through direct interactions) will have a measurement advantage as third-party data degrades. Email signups, account creation, survey responses, and product usage data are all first-party. Invest in building direct customer relationships — the companies that own the customer relationship own the data that makes measurement possible.</p>
+
+      <h4>Marketing mix modeling (MMM)</h4>
+      <p>MMM uses statistical analysis to estimate the impact of marketing activities on business outcomes without tracking individual users. It correlates marketing spend by channel and time period with outcomes (revenue, conversions) while controlling for external factors (seasonality, economic conditions, competitive activity). MMM is privacy-safe by design because it works on aggregate data, not user-level tracking. It's becoming essential as granular attribution degrades.</p>
+    </div>
+  </details>
+
+  <details class="expandable">
+    <summary><span class="chevron"><svg viewBox="0 0 14 14"><polyline points="4,2 10,7 4,12"/></svg></span> Further reading and resources</summary>
+    <div class="expand-content topic-content">
+      <p><strong>"Lean Analytics" by Alistair Croll &amp; Benjamin Yoskovitz</strong> — Framework for choosing the right metrics at each company stage. Covers the "one metric that matters" concept and provides stage-specific guidance.</p>
+      <p><strong>"Marketing Analytics" by Mike Grigsby</strong> — Comprehensive textbook covering attribution, marketing mix modeling, customer lifetime value analysis, and predictive analytics. More technical than most marketing books.</p>
+      <p><strong>"How Brands Grow" by Byron Sharp</strong> — Challenges many marketing measurement assumptions with empirical evidence. Particularly valuable for understanding brand metrics and the limitations of targeting-focused measurement.</p>
+    </div>
+  </details>
+
+</div>
+</section>
+
+<!-- Topic Navigation -->
+<div class="topic-nav">
+  <a href="growth-channels.html" class="topic-nav-link prev">
+    <div class="nav-direction">Previous topic</div>
+    <div class="nav-title">&#8249; Growth Channels &amp; Acquisition</div>
+  </a>
+  <a href="customer-segmentation.html" class="topic-nav-link next">
+    <div class="nav-direction">Next topic</div>
+    <div class="nav-title">Customer &amp; Market Segmentation &#8250;</div>
+  </a>
+</div>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer container">
+    <div class="footer-inner">
+      <p>Noir Book — Built for the work, not the shelf.</p>
+      <div class="footer-links">
+        <a href="../design-system.html">Design System</a>
+        <a href="../library-manifest.json">Manifest</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to Top -->
+  <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">&#8593;</button>
+
+  <!-- Floating Mobile TOC -->
+  <button class="mobile-toc-btn" id="mobileTocBtn" aria-label="Open table of contents">&#9776; Contents</button>
+  <div class="mobile-toc-overlay" id="mobileTocOverlay">
+    <div class="mobile-toc-panel">
+      <div class="mobile-toc-panel-header">
+        <h3>On this page</h3>
+        <button class="mobile-toc-close" id="mobileTocClose" aria-label="Close">&times;</button>
+      </div>
+      <ul class="mobile-toc-list">
+        <li><a href="#what-marketing-analytics-is" data-section="theory">What marketing analytics is and why it matters</a></li>
+        <li><a href="#core-methods" data-section="practical">Core analytics and attribution methods</a></li>
+        <li><a href="#templates-and-checklists" data-section="practical">Templates and checklists</a></li>
+        <li><a href="#real-world-examples" data-section="examples">Real-world examples</a></li>
+        <li><a href="#common-pitfalls" data-section="practical">Common analytics mistakes</a></li>
+        <li><a href="#connections">Connected topics in your library</a></li>
+        <li><a href="#deep-dive">Deep-dive appendix</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    // Scrollspy: highlight active TOC item
+    const tocLinks = document.querySelectorAll('.toc-list a');
+    const sections = [];
+    tocLinks.forEach(link => {
+      const href = link.getAttribute('href');
+      if (!href || !href.startsWith('#')) return;
+      const el = document.getElementById(href.slice(1));
+      if (el) sections.push({ el, link });
+    });
+
+    // Reading progress bar
+    const progressBar = document.getElementById('readingProgress');
+    const backToTop = document.getElementById('backToTop');
+
+    function onScroll() {
+      let current = sections[0];
+      for (const s of sections) {
+        if (s.el.getBoundingClientRect().top <= 120) current = s;
+      }
+      tocLinks.forEach(l => l.classList.remove('active'));
+      if (current) current.link.classList.add('active');
+
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrolled = window.scrollY;
+      const progress = docHeight > 0 ? (scrolled / docHeight) * 100 : 0;
+      if (progressBar) progressBar.style.width = progress + '%';
+      if (backToTop) backToTop.classList.toggle('visible', scrolled > 400);
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    // Split badges: click to scroll to section
+    document.querySelectorAll('.content-splits .split-badge').forEach(function(badge) {
+      badge.addEventListener('click', function() {
+        var type = badge.classList.contains('theory') ? 'theory' : badge.classList.contains('practical') ? 'practical' : 'examples';
+        var target = document.querySelector('section[data-section="' + type + '"]');
+        if (target) {
+          var marker = target.previousElementSibling;
+          (marker && marker.classList.contains('section-marker') ? marker : target).scrollIntoView({behavior:'smooth'});
+        }
+      });
+    });
+  </script>
+
+  <script src="../js/checklist.js"></script>
+  <script src="../js/mobile-toc.js"></script>
+  <script src="../js/search.js"></script>
+  <script>
+    function openBurger(){document.getElementById('burgerOverlay').classList.add('open');document.body.style.overflow='hidden'}
+    function closeBurger(e){if(e&&e.target&&e.target!==document.getElementById('burgerOverlay'))return;document.getElementById('burgerOverlay').classList.remove('open');document.body.style.overflow=''}
+    function burgerSearch(q){
+      var r=document.getElementById('burgerSearchResults');
+      if(!q||q.length<2){r.innerHTML='';return}
+      var ql=q.toLowerCase(),matches=[];
+      if(typeof SEARCH_INDEX!=='undefined'){
+        SEARCH_INDEX.forEach(function(t){
+          var hit=t.topic.toLowerCase().indexOf(ql)>-1;
+          if(!hit)t.sections.forEach(function(s){if((s.title+' '+s.keywords).toLowerCase().indexOf(ql)>-1)hit=true});
+          if(hit)matches.push(t);
+        });
+      }
+      if(!matches.length){r.innerHTML='<p style="padding:8px 0;font-size:13px;color:var(--ink-muted)">No results</p>';return}
+      r.innerHTML=matches.slice(0,8).map(function(m){return '<a href="../'+m.url+'">'+m.topic+'<span class="bsr-disc">'+m.discipline+'</span></a>'}).join('');
+    }
+    document.addEventListener('keydown',function(e){if(e.key==='Escape'){closeBurger();var dd=document.getElementById('searchDropdown');if(dd)dd.classList.remove('visible');}});
+    // Close burger when clicking a TOC link
+    document.querySelectorAll('.burger-toc-list a').forEach(function(a){a.addEventListener('click',function(){closeBurger()})});
+    // Search typeahead
+    function topicSearch(q){
+      var dd=document.getElementById('searchDropdown');
+      if(!q||q.length<2||typeof SEARCH_INDEX==='undefined'){if(dd)dd.classList.remove('visible');return}
+      var ql=q.toLowerCase(),grouped={};
+      SEARCH_INDEX.forEach(function(t){
+        var hit=t.topic.toLowerCase().indexOf(ql)>-1,sHits=[],mHits=[];
+        t.sections.forEach(function(s){if((s.title+' '+s.keywords).toLowerCase().indexOf(ql)>-1)sHits.push(s)});
+        (t.methods||[]).forEach(function(m){if((m.name+' '+(m.keywords||'')).toLowerCase().indexOf(ql)>-1)mHits.push(m)});
+        if(!hit&&!sHits.length&&!mHits.length&&ql.length>=3&&typeof levenshtein==='function'){
+          var words=t.topic.toLowerCase().split(/ +/);
+          for(var i=0;i<words.length;i++){if(levenshtein(ql,words[i].substring(0,ql.length+1))<=1){hit=true;break}}
+        }
+        if(hit||sHits.length||mHits.length)grouped[t.topic]={url:'../'+t.url,disc:t.discipline||'',sections:sHits,methods:mHits,topicHit:hit};
+      });
+      var keys=Object.keys(grouped);
+      if(!keys.length){dd.innerHTML='<div class="search-empty">No results</div>';dd.classList.add('visible');return}
+      var html='';
+      keys.slice(0,8).forEach(function(topic){
+        var g=grouped[topic];
+        html+='<div class="search-group"><div class="search-group-title">'+topic+'</div>';
+        if(g.topicHit)html+='<a class="search-result" href="'+g.url+'"><span class="search-result-title">'+topic+'</span><span class="search-result-type practical">'+g.disc+'</span></a>';
+        g.sections.forEach(function(s){html+='<a class="search-result" href="'+g.url+'#'+s.id+'"><span class="search-result-title">'+s.title+'</span><span class="search-result-type '+s.type+'">'+s.type+'</span></a>'});
+        g.methods.slice(0,3).forEach(function(m){html+='<a class="search-result" href="'+g.url+'#'+m.section+'"><span class="search-result-title">'+m.name+'</span><span class="search-result-type practical">method</span></a>'});
+        html+='</div>';
+      });
+      dd.innerHTML=html;dd.classList.add('visible');
+    }
+    document.addEventListener('click',function(e){if(!e.target.closest('.search-box')){var dd=document.getElementById('searchDropdown');if(dd)dd.classList.remove('visible')}});
+  </script>
+
+</body>
+</html>

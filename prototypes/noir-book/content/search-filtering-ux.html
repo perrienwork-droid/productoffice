@@ -1,0 +1,217 @@
+<!--
+TOPIC_ID: UX.2.15
+TOPIC_NUMBER: UX.2.15
+TITLE: Search &amp; Filtering UX
+SUBTITLE: Design search experiences that help users find what they need. Search interface design, faceted navigation, autocomplete, zero-results states, filter patterns, and search analytics.
+TIER: 2
+TIER_LABEL: Specialized
+THEORY: 20
+PRACTICAL: 55
+EXAMPLES: 25
+-->
+
+<section id="what-and-why" data-section="theory">
+  <h2>What search UX is and why it matters</h2>
+
+  <p>Search is how users recover from information architecture failures — and even the best IA can't anticipate every user's mental model. When navigation doesn't work, search is the fallback. When content volume grows beyond what browsing can handle, search becomes the primary discovery mechanism. Yet most products treat search as a commodity feature — drop in a search box, wire it to a database query, done. This produces experiences where users can't find things that exist, get irrelevant results for reasonable queries, and have no path forward when results are empty.</p>
+
+  <p>Search UX is the design discipline of helping users express what they're looking for, presenting results they can evaluate quickly, and recovering gracefully when the system can't find a match. It intersects information architecture (what's searchable and how it's structured), interaction design (autocomplete, filters, result interactions), and content design (how results are presented and described).</p>
+</section>
+
+<section id="discovery-patterns" data-section="practical">
+  <h2>Search, browse, and filter</h2>
+
+  <div class="method-card">
+    <h4>Search/Browse/Filter Decision Framework <span class="method-tag">Framework</span></h4>
+    <p class="method-when">Use when: deciding whether your product needs search, browse navigation, filtering, or a combination.</p>
+    <p>Three discovery patterns serve different user needs: <strong>Search</strong> is best when users know what they want and can express it in words — looking for a specific product, finding a known document, seeking a particular person. Search-dominant experiences suit large catalogs and users with clear intent. <strong>Browse</strong> is best when users are exploring or don't know what's available — shopping for inspiration, discovering content, learning what a platform offers. Browse-dominant experiences suit curated collections and discovery-oriented use cases. <strong>Filter</strong> is best when users know their criteria but not the specific item — "shoes under $100 in size 10," "apartments with 2 bedrooms near downtown." Filter-dominant experiences suit structured catalogs with comparable attributes. Most products need all three, weighted by use case. An e-commerce site needs search (known-item), browse (category pages), and filter (faceted navigation) working together. A documentation site needs search (specific topic) and browse (table of contents). A social network needs search (find a person) and browse (discover content).</p>
+  </div>
+</section>
+
+<section id="search-interface" data-section="practical">
+  <h2>Search interface design</h2>
+
+  <div class="method-card">
+    <h4>Search UI Pattern Library <span class="method-tag">Core Method</span></h4>
+    <p class="method-when">Use when: designing the search input, results page, and search interactions.</p>
+    <p>Search interface components and their design considerations: <strong>Search box:</strong> Make it visible and prominent — a hidden search icon reduces search usage by 50%+. Show a text input with a placeholder indicating searchable scope ("Search products," "Search docs," "Search everything"). Size the input to suggest the expected query length. <strong>Search scope:</strong> When your product has distinct content types, let users scope their search — "All," "Products," "Help articles," "People." Tabs above results work better than a dropdown in the search box. Default to the most useful scope, not "All." <strong>Results layout:</strong> List view works best for text-heavy results (documents, articles). Grid/card view works best for visual results (products, images). Mixed layouts work when results span content types — show the most relevant type first, with links to type-specific result pages. <strong>Result anatomy:</strong> Each result needs a title (clickable, bolded query match), a snippet (context showing why this result matched), and metadata (type, date, category, rating — whatever helps users evaluate relevance without clicking).</p>
+  </div>
+</section>
+
+<section id="autocomplete" data-section="practical">
+  <h2>Autocomplete and suggestions</h2>
+
+  <div class="method-card">
+    <h4>Autocomplete Design Patterns <span class="method-tag">Core Method</span></h4>
+    <p class="method-when">Use when: designing type-ahead suggestions, query completions, or predictive search.</p>
+    <p>Autocomplete serves two functions: it saves typing for known queries, and it teaches users what's searchable. <strong>Query suggestions:</strong> Show popular or matching queries as the user types. Bold the typed portion, show the suggested completion in normal weight. Limit to 5–8 suggestions — more creates decision overload. <strong>Result previews:</strong> Show actual results (products, pages, people) alongside query suggestions. This lets users jump directly to a result without hitting the results page. <strong>Category suggestions:</strong> When a query matches a category ("shoes" → "Women's Shoes, Men's Shoes, Running Shoes"), surface category links that bypass the results page. <strong>Timing:</strong> Start showing suggestions after 2–3 characters. Debounce requests by 150–300ms to avoid firing on every keystroke. Show a subtle loading indicator if results take more than 200ms. <strong>Keyboard navigation:</strong> Users must be able to navigate suggestions with arrow keys, select with Enter, and dismiss with Escape. This is both a usability and accessibility requirement.</p>
+  </div>
+</section>
+
+<section id="faceted-navigation" data-section="practical">
+  <h2>Faceted navigation and filtering</h2>
+
+  <div class="method-card">
+    <h4>Faceted Navigation Design <span class="method-tag">Core Method</span></h4>
+    <p class="method-when">Use when: designing filter panels for catalogs, listings, or any structured content collection.</p>
+    <p>Faceted navigation lets users narrow results by attributes (price, color, size, category, rating). Design decisions: <strong>Filter types:</strong> Multi-select checkboxes for non-exclusive attributes (multiple colors, multiple brands). Single-select radio buttons or dropdowns for exclusive attributes (sort order, size). Range sliders for continuous values (price, distance). Toggles for binary attributes (in stock, free shipping). <strong>Filter placement:</strong> Left sidebar on desktop (the convention). Top horizontal bar for fewer than 5 filters. Bottom sheet or full-screen overlay on mobile — horizontal scrolling filter chips work for 3–5 simple filters. <strong>Result count feedback:</strong> Show how many results remain as filters are applied — "(47 results)" next to each filter option, or a live-updating result count. This prevents users from filtering into dead ends. <strong>Active filter visibility:</strong> Show all active filters as removable chips/tags above results. Include a "Clear all" option. Users need to see what's filtering their view and undo individual filters without navigating back to the filter panel. <strong>Performance:</strong> Filters should update results instantly or within 500ms. If database queries are slow, consider progressive loading or debounced filter application.</p>
+  </div>
+</section>
+
+<section id="zero-results" data-section="practical">
+  <h2>Zero-results recovery</h2>
+
+  <div class="method-card">
+    <h4>Zero-Results Recovery <span class="method-tag">Core Method</span></h4>
+    <p class="method-when">Use when: designing what happens when search returns no results — the most critical and most neglected search state.</p>
+    <p>A zero-results page is a dead end unless you design recovery paths. <strong>Acknowledge the failure clearly:</strong> "No results for 'blue widget'" — confirm what was searched so users can verify their query. <strong>Suggest corrections:</strong> Spelling suggestions ("Did you mean..."), alternative queries, or relaxed search (search with fewer terms). <strong>Show related content:</strong> Popular items in the same category, recently added content, or editorially curated alternatives. Don't show random content — it must feel relevant to the failed query. <strong>Offer filter adjustment:</strong> If active filters caused zero results, suggest which filter to remove — "No results for 'blue widget' in 'Under $10.' Try removing the price filter?" <strong>Provide a human path:</strong> Link to support, chat, or a contact form for users whose search failure means they need help that the system can't provide. <strong>Track zero-result queries:</strong> Zero-result queries are the most valuable search analytics signal — they tell you what users want that you don't have (or haven't made findable).</p>
+  </div>
+</section>
+
+<section id="search-analytics" data-section="practical">
+  <h2>Search analytics</h2>
+
+  <div class="method-card">
+    <h4>Search Analytics Setup <span class="method-tag">Technique</span></h4>
+    <p class="method-when">Use when: measuring search effectiveness and identifying opportunities to improve findability.</p>
+    <p>Search analytics reveal what users want and whether they're finding it. Key metrics: <strong>Top queries:</strong> What are users searching for most? This tells you what's important to users and whether your navigation surfaces it adequately. If your #1 search query is "pricing," your pricing page is too hard to find. <strong>Zero-result rate:</strong> What percentage of searches return no results? Rates above 10–15% indicate content gaps or vocabulary mismatches. <strong>Refinement rate:</strong> How often do users modify their query? High refinement rates suggest initial results aren't matching expectations. <strong>Click-through rate by position:</strong> Are users clicking the first result, or scrolling past it? Low CTR on position 1 means your relevance ranking needs work. <strong>Search exits:</strong> How often do users leave the site/product immediately after searching? This is the strongest signal that search is failing them. <strong>Query-to-conversion:</strong> Which search queries lead to desired outcomes (purchase, signup, task completion)? Prioritize search quality improvements for high-intent, high-volume queries.</p>
+  </div>
+</section>
+
+<section id="real-world-examples" data-section="examples">
+  <h2>Real-world examples</h2>
+
+  <div class="case-study">
+    <p class="case-label">Case study</p>
+    <h4>Algolia: search as a product feature</h4>
+    <p>Algolia's search-as-you-type experience demonstrates several patterns working together: instant results appear after the first keystroke, with faceted filtering alongside results, highlighting of matched terms in snippets, and category-scoped results. The search experience is fast enough (under 50ms) that users think in "search terms" rather than "navigation paths." The design lesson: when search is fast and relevant enough, it can replace navigation for a significant portion of user journeys.</p>
+    <p><strong>Why it works:</strong> Speed (sub-50ms) and relevance (typo-tolerant, synonym-aware) together make search feel like an extension of the user's thinking rather than a query-and-wait interaction.</p>
+  </div>
+
+  <div class="case-study">
+    <p class="case-label">Case study</p>
+    <h4>Airbnb: filter-first discovery</h4>
+    <p>Airbnb's search experience combines map-based browse with progressive filtering. Initial results show a broad set; users narrow with filters (price range, property type, amenities, dates). Filter application is instant with live result count updates. The map and list views are synchronized — filtering on the list updates the map, and panning the map updates the list. Mobile uses a bottom sheet for filters with a prominent "Show N results" button that communicates the impact of filters before applying them.</p>
+    <p><strong>Why it works:</strong> The "Show N results" button prevents filter dead ends by showing consequences before commitment. Synchronized map+list views let users switch between spatial and list-based mental models.</p>
+  </div>
+</section>
+
+<section id="pitfalls" data-section="practical">
+  <h2>Common pitfalls</h2>
+
+  <div class="pitfall">
+    <div class="pitfall-icon">!</div>
+    <div>
+      <h4>Treating search as a backend problem</h4>
+      <p>Relevance ranking, typo tolerance, synonym matching, and result presentation are all design decisions, not just engineering implementations. A technically functional search that returns results in the wrong order or with unhelpful snippets feels broken to users.</p>
+    </div>
+  </div>
+
+  <div class="pitfall">
+    <div class="pitfall-icon">!</div>
+    <div>
+      <h4>Too many filters</h4>
+      <p>Showing every possible filter overwhelms users. Prioritize filters by usage frequency and impact on result refinement. Hide rarely-used filters behind a "More filters" expansion. If a filter has only one option remaining in the current result set, hide it — it's not useful.</p>
+    </div>
+  </div>
+
+  <div class="pitfall">
+    <div class="pitfall-icon">!</div>
+    <div>
+      <h4>Ignoring mobile search</h4>
+      <p>Desktop search patterns (sidebar filters, wide result layouts) don't translate to mobile. Design mobile search as a separate experience: full-screen search overlay, vertically stacked filters, swipeable filter chips, and result cards optimized for thumb-scroll evaluation.</p>
+    </div>
+  </div>
+</section>
+
+<section id="connections">
+  <h2>Connected topics in your library</h2>
+  <div class="cross-ref-grid">
+    <a href="information-architecture.html" class="cross-ref-card">
+      <span class="ref-number">Tier 1</span>
+      <div class="ref-title">Information Architecture</div>
+      <div class="ref-reason">IA determines what's searchable and how it's categorized. Search UX compensates for IA limitations and extends IA's reach.</div>
+    </a>
+    <a href="ui-design-patterns.html" class="cross-ref-card">
+      <span class="ref-number">Tier 1</span>
+      <div class="ref-title">UI Design Patterns</div>
+      <div class="ref-reason">Search-as-you-type and faceted filtering are core UI patterns. This topic goes deeper on the search-specific design craft.</div>
+    </a>
+    <a href="data-driven-design.html" class="cross-ref-card">
+      <span class="ref-number">Tier 2</span>
+      <div class="ref-title">Data-Driven Design</div>
+      <div class="ref-reason">Search analytics is a rich data source for product improvement — zero-result queries reveal unmet needs.</div>
+    </a>
+  </div>
+
+  <div class="callout info">
+    <p class="callout-title">Cross-discipline connection</p>
+    <p><strong>CS.1.03 Structured Content &amp; Content Modeling</strong> covers the content-side architecture that makes search work — metadata schemas, taxonomy design, and content models that enable faceted search and filtering.</p>
+  </div>
+</section>
+
+<section id="deep-dive">
+  <h2>Deep-dive appendix</h2>
+
+  <details class="expandable">
+    <summary><span class="chevron"><svg viewBox="0 0 14 14"><polyline points="4,2 10,7 4,12"/></svg></span> Further reading</summary>
+    <div class="expand-content topic-content">
+      <h4>Essential reading</h4>
+      <p><strong>"Search Patterns" by Peter Morville &amp; Jeffery Callender</strong> — The foundational text on search interface design patterns.</p>
+      <p><strong>"Designing the Search Experience" by Tony Russell-Rose &amp; Tyler Tate</strong> — Framework for search UX from information retrieval and HCI perspectives.</p>
+      <p><strong>Baymard Institute search UX research</strong> — Extensive benchmark data on e-commerce search and filtering patterns.</p>
+    </div>
+  </details>
+</section>
+
+<!-- SEARCH_INDEX
+{
+  topic: "Search & Filtering UX",
+  url: "topics/search-filtering-ux.html",
+  tier: "Tier 2",
+  sections: [
+    { title: "What & why", id: "what-and-why", type: "theory", keywords: "search filtering discovery findability information retrieval" },
+    { title: "Search browse filter", id: "discovery-patterns", type: "practical", keywords: "search browse filter decision framework discovery patterns" },
+    { title: "Search interface", id: "search-interface", type: "practical", keywords: "search box scope results layout snippet metadata" },
+    { title: "Autocomplete", id: "autocomplete", type: "practical", keywords: "autocomplete suggestions type-ahead predictive query" },
+    { title: "Faceted navigation", id: "faceted-navigation", type: "practical", keywords: "faceted navigation filter checkbox range slider sidebar chips" },
+    { title: "Zero-results", id: "zero-results", type: "practical", keywords: "zero results empty no results recovery suggestions corrections" },
+    { title: "Search analytics", id: "search-analytics", type: "practical", keywords: "search analytics queries zero-result rate refinement click-through" },
+    { title: "Real-world examples", id: "real-world-examples", type: "examples", keywords: "Algolia Airbnb instant search faceted filter" },
+    { title: "Common pitfalls", id: "pitfalls", type: "practical", keywords: "backend problem too many filters mobile search" }
+  ],
+  methods: [
+    { name: "Search/Browse/Filter Decision Framework", section: "discovery-patterns", keywords: "search browse filter decision pattern" },
+    { name: "Search UI Pattern Library", section: "search-interface", keywords: "search box scope results layout snippet" },
+    { name: "Autocomplete Design Patterns", section: "autocomplete", keywords: "autocomplete suggestions type-ahead debounce keyboard" },
+    { name: "Faceted Navigation Design", section: "faceted-navigation", keywords: "faceted filter checkbox range slider count feedback" },
+    { name: "Zero-Results Recovery", section: "zero-results", keywords: "zero results corrections suggestions recovery" },
+    { name: "Search Analytics Setup", section: "search-analytics", keywords: "queries zero-result refinement click-through exits" }
+  ]
+}
+SEARCH_INDEX -->
+
+<!-- MANIFEST
+{
+  "id": "UX.2.15",
+  "title": "Search & Filtering UX",
+  "file": "topics/search-filtering-ux.html",
+  "tier": 2,
+  "discipline": "UX",
+  "solves": [
+    "I need to design a search experience for a content-heavy product",
+    "I want to implement faceted search and filtering that users actually use",
+    "I need to handle zero-results states gracefully",
+    "I want to design autocomplete suggestions that accelerate finding",
+    "I need to decide between search, browse, and filter as primary discovery patterns",
+    "I want to measure search effectiveness with search analytics"
+  ],
+  "methods": ["Search/Browse/Filter Decision Framework", "Search UI Pattern Library", "Autocomplete Design Patterns", "Faceted Navigation Design", "Zero-Results Recovery", "Search Analytics Setup"],
+  "phase": "design",
+  "prerequisites": ["UX.1.08"],
+  "pairs_with": ["UX.1.08", "UX.1.05", "UX.2.05"],
+  "cross_discipline": ["CS.1.03"],
+  "depth": "methods",
+  "keywords": ["search", "filtering", "faceted navigation", "autocomplete", "zero results", "search analytics", "findability", "discovery", "browse", "filter panel"]
+}
+MANIFEST -->

@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>For AI Agents — Noir Book</title>
+  <link rel="stylesheet" href="css/shared.css">
+  <style>
+    body{margin:0;min-height:100vh;display:flex;flex-direction:column}
+
+    .agents-page{max-width:720px;margin:0 auto;padding:80px 40px 80px}
+
+    .back-link{display:inline-flex;align-items:center;gap:6px;font-size:var(--fs-micro);font-weight:var(--fw-semibold);color:var(--ink-soft);text-decoration:none;margin-bottom:48px;letter-spacing:var(--ls-wide)}
+    .back-link:hover{color:var(--ink)}
+    .back-link svg{width:14px;height:14px}
+
+    /* Header */
+    .agents-header h1{font-family:var(--font-display);font-size:var(--fs-h1);font-weight:var(--fw-thin);letter-spacing:var(--ls-tight);line-height:var(--lh-tight);margin:0 0 16px}
+    .agents-header h1 em{font-style:normal;font-weight:var(--fw-bold);color:var(--ink)}
+    .agents-header p{font-size:var(--fs-body-lg);color:var(--ink-soft);line-height:var(--lh-body);margin:0}
+
+    /* Manifest path callout */
+    .manifest-path{display:inline-flex;align-items:center;gap:10px;margin-top:24px;padding:12px 18px;background:var(--paper-warm);border:1px solid var(--ink-hairline);border-radius:var(--radius-xs)}
+    .manifest-path code{font-family:var(--font-mono);font-size:var(--fs-micro);font-weight:var(--fw-semibold);color:var(--ink)}
+    .manifest-path span{font-size:var(--fs-nano);color:var(--ink-soft)}
+
+    /* Divider */
+    .agents-divider{border:none;border-top:1px solid var(--ink-hairline);margin:48px 0}
+
+    /* Section headings */
+    .agents-section h2{font-family:var(--font-display);font-size:var(--fs-h3);font-weight:var(--fw-semibold);letter-spacing:var(--ls-snug);color:var(--ink);margin:0 0 8px}
+    .agents-section .section-desc{font-size:var(--fs-body);color:var(--ink-soft);line-height:var(--lh-body);margin:0 0 28px}
+
+    /* Schema table */
+    .schema-table{width:100%;border-collapse:collapse}
+    .schema-table th{font-size:var(--fs-nano);font-weight:var(--fw-regular);text-transform:uppercase;letter-spacing:var(--ls-wider);color:var(--ink);text-align:left;padding:0 16px 10px 0;border-bottom:1px solid var(--ink-hairline)}
+    .schema-table td{font-size:var(--fs-micro);color:var(--ink-soft);line-height:var(--lh-body);padding:12px 16px 12px 0;border-bottom:1px solid var(--ink-hairline);vertical-align:top}
+    .schema-table td:first-child{font-family:var(--font-mono);font-weight:var(--fw-semibold);color:var(--ink);white-space:nowrap}
+    .schema-table td:nth-child(2){color:var(--ink-soft);font-size:var(--fs-nano)}
+    .field-ex{display:block;margin-top:4px;color:var(--ink-soft);font-family:var(--font-mono);font-size:var(--fs-nano);opacity:0.7}
+
+    /* Code blocks */
+    .code-snippet{margin-bottom:32px}
+    .code-label{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+    .code-label span{font-size:var(--fs-nano);font-weight:var(--fw-regular);text-transform:uppercase;letter-spacing:var(--ls-wider);color:var(--ink)}
+    .copy-btn{font-family:var(--font-body);font-size:var(--fs-nano);font-weight:var(--fw-semibold);color:var(--ink-soft);background:none;border:1px solid var(--ink-hairline);border-radius:var(--radius-xs);padding:4px 12px;cursor:pointer;letter-spacing:var(--ls-wide);transition:all var(--ease)}
+    .copy-btn:hover{color:var(--ink);border-color:var(--ink)}
+    .copy-btn.copied{color:var(--disc-ux);border-color:var(--disc-ux)}
+    .code-block{font-family:var(--font-mono);font-size:var(--fs-nano);line-height:1.75;background:var(--ink);color:var(--paper);padding:20px 24px;border-radius:var(--radius-xs);overflow-x:auto;white-space:pre;margin:0}
+
+    /* HN blurb */
+    .hn-blurb-wrap{background:var(--paper-warm);border:1px solid var(--ink-hairline);border-radius:var(--radius-xs);padding:28px 32px}
+    .hn-blurb-wrap .code-label{margin-bottom:16px}
+    .hn-blurb-text{font-size:var(--fs-body);color:var(--ink-soft);line-height:var(--lh-body);margin:0 0 20px;white-space:pre-wrap}
+    .hn-note{font-size:var(--fs-nano);color:var(--ink-soft);margin:16px 0 0}
+
+    @media(max-width:640px){
+      .agents-page{padding:48px 24px 64px}
+      .agents-header h1{font-size:var(--fs-h2)}
+      .schema-table td:nth-child(2){display:none}
+    }
+  </style>
+  <script src="js/theme.js"></script>
+</head>
+<body>
+
+  <div class="agents-page">
+
+    <a href="index.html" class="back-link">
+      <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="8,3 4,7 8,11"/></svg>
+      Back to library
+    </a>
+
+    <!-- Header -->
+    <div class="agents-header">
+      <h1>For <em>AI agents.</em></h1>
+      <p>Noir Book ships with a machine-readable manifest. Point your AI tool at it and it can find the right reference topic for any design, product, marketing, or content problem, without hallucinating frameworks or making up methods.</p>
+      <div class="manifest-path">
+        <code>library-manifest.json</code>
+        <span>— full topic metadata, ~22K tokens</span>
+      </div>
+    </div>
+
+    <hr class="agents-divider">
+
+    <!-- Schema -->
+    <div class="agents-section">
+      <h2>Manifest schema</h2>
+      <p class="section-desc">Each topic entry contains the following fields.</p>
+
+      <table class="schema-table">
+        <thead>
+          <tr>
+            <th>Field</th>
+            <th>Type</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>id<span class="field-ex">"UX.1.01"</span></td>
+            <td>string</td>
+            <td>Unique topic ID. Format: discipline code, tier (1–4), position within tier.</td>
+          </tr>
+          <tr>
+            <td>title<span class="field-ex">"Design Thinking"</span></td>
+            <td>string</td>
+            <td>Full topic title.</td>
+          </tr>
+          <tr>
+            <td>file<span class="field-ex">"topics/design-thinking.html"</span></td>
+            <td>string</td>
+            <td>Relative path to the full topic page. Open this for complete theory, methods, and examples.</td>
+          </tr>
+          <tr>
+            <td>tier<span class="field-ex">1</span></td>
+            <td>number</td>
+            <td>Depth level. 1 = foundation, 2 = practitioner, 3 = specialist, 4 = advanced.</td>
+          </tr>
+          <tr>
+            <td>discipline<span class="field-ex">"UX"</span></td>
+            <td>string</td>
+            <td>One of: UX (UX Design), PM (Product Management), MK (Marketing &amp; Growth), CS (Content Strategy).</td>
+          </tr>
+          <tr>
+            <td>solves<span class="field-ex">["I need a structured approach to...", ...]</span></td>
+            <td>string[]</td>
+            <td>Problems this topic addresses, written as first-person problem statements. Primary matching field for agent queries.</td>
+          </tr>
+          <tr>
+            <td>methods<span class="field-ex">["User Interviews", "Affinity Mapping", ...]</span></td>
+            <td>string[]</td>
+            <td>Techniques, frameworks, and tools covered in the topic.</td>
+          </tr>
+          <tr>
+            <td>phase<span class="field-ex">"discovery"</span></td>
+            <td>string</td>
+            <td>Project phase where this topic typically applies (e.g. discovery, delivery, strategy).</td>
+          </tr>
+          <tr>
+            <td>prerequisites<span class="field-ex">["UX.1.01"]</span></td>
+            <td>string[]</td>
+            <td>Topic IDs to read first. Empty array means no dependencies.</td>
+          </tr>
+          <tr>
+            <td>pairs_with<span class="field-ex">["UX.1.02", "UX.1.03"]</span></td>
+            <td>string[]</td>
+            <td>Related topic IDs that complement this one. Use for suggesting adjacent reading.</td>
+          </tr>
+          <tr>
+            <td>depth<span class="field-ex">"framework"</span></td>
+            <td>string</td>
+            <td>Content type: framework, methods, reference, or playbook.</td>
+          </tr>
+          <tr>
+            <td>keywords<span class="field-ex">["design thinking", "HMW", ...]</span></td>
+            <td>string[]</td>
+            <td>Search and matching terms. Secondary matching field after solves.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <hr class="agents-divider">
+
+    <!-- Code snippets -->
+    <div class="agents-section">
+      <h2>How to use it</h2>
+      <p class="section-desc">Paste the relevant snippet into your tool's context, system prompt, or config file. The manifest does the routing — your agent reads it once, then opens the matched topic file for full content.</p>
+
+      <!-- Claude / Claude Code -->
+      <div class="code-snippet">
+        <div class="code-label">
+          <span>Claude or Claude Code</span>
+          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        </div>
+        <pre class="code-block" data-copy>Read library-manifest.json. When the user asks a question about design,
+product management, marketing, or content strategy:
+
+1. Match the question against each topic's `solves` array (primary)
+   and `keywords` array (secondary).
+2. Return the top matching topics: id, title, file path, and the
+   matching solves entries so the user understands why each was picked.
+3. If the user wants full detail, read the matched topic's HTML file
+   directly — the path is in the `file` field.
+4. Use `pairs_with` to suggest related topics worth reading alongside.</pre>
+      </div>
+
+      <!-- Cursor -->
+      <div class="code-snippet">
+        <div class="code-label">
+          <span>Cursor (.cursorrules or Rules for AI)</span>
+          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        </div>
+        <pre class="code-block" data-copy># Noir Book reference library
+# When working on design, product, or marketing problems:
+# 1. Read library-manifest.json for topic discovery.
+# 2. Match the current problem against the `solves` fields — these are
+#    written as first-person problem statements, easy to match against.
+# 3. Open the matched topic file (path in the `file` field) for the
+#    full reference: theory, methods, templates, and examples.
+# 4. Prefer topics with lower tier numbers for foundational context,
+#    higher tier numbers for specialist or advanced situations.</pre>
+      </div>
+
+      <!-- ChatGPT custom GPT -->
+      <div class="code-snippet">
+        <div class="code-label">
+          <span>ChatGPT custom GPT (system prompt)</span>
+          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        </div>
+        <pre class="code-block" data-copy>You have access to a knowledge file called library-manifest.json from
+Noir Book, a cross-disciplinary reference library.
+
+When the user asks about design, product management, marketing, or
+content strategy:
+1. Search the manifest's `solves` array for entries that match the
+   user's problem (they are written as "I need to..." statements).
+2. Also check `keywords` for secondary matches.
+3. Return the matched topics with their IDs, titles, and the specific
+   solves entries that matched — this tells the user exactly why each
+   topic is relevant.
+4. Suggest related topics using the `pairs_with` field.</pre>
+      </div>
+
+      <!-- Plain fetch -->
+      <div class="code-snippet">
+        <div class="code-label">
+          <span>JavaScript (plain fetch)</span>
+          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        </div>
+        <pre class="code-block" data-copy>async function findTopics(problem) {
+  const res = await fetch('/library-manifest.json');
+  const manifest = await res.json();
+  const q = problem.toLowerCase();
+
+  return manifest.topics
+    .map(topic => {
+      const matchedSolves = topic.solves.filter(s =>
+        s.toLowerCase().split(' ').some(w => w.length > 4 && q.includes(w))
+      );
+      const keywordMatch = topic.keywords.some(k => q.includes(k.toLowerCase()));
+      const score = matchedSolves.length * 2 + (keywordMatch ? 1 : 0);
+      return { ...topic, matchedSolves, score };
+    })
+    .filter(t => t.score > 0)
+    .sort((a, b) => b.score - a.score)
+    .map(({ id, title, file, matchedSolves }) => ({ id, title, file, matchedSolves }));
+}
+
+// Example
+findTopics('how do I run user research').then(results => {
+  results.forEach(r => console.log(r.id, r.title));
+});</pre>
+      </div>
+    </div>
+
+    <hr class="agents-divider">
+
+    <!-- HN blurb -->
+    <div class="agents-section">
+      <h2>Hacker News launch copy</h2>
+      <p class="section-desc">Ready to paste. Edit the URL before posting.</p>
+
+      <div class="hn-blurb-wrap">
+        <div class="code-label">
+          <span>HN post</span>
+          <button class="copy-btn" onclick="copyBlurb(this)">Copy</button>
+        </div>
+        <p class="hn-blurb-text" id="hnBlurb">I built a personal reference library covering UX design, product management, marketing and growth, and content strategy. No Medium intros, no SEO padding, no courses that take three weeks before you get to anything useful. Just the frameworks, methods, and examples I keep going back to mid-project.
+
+The part that might be interesting here: the library ships with a machine-readable manifest (library-manifest.json). Every topic maps to the problems it solves — written as "I need to..." statements — plus methods covered, prerequisites, related topics, and keywords. You can point Claude, Cursor, or a custom GPT at it and ask "given this problem, which reference topics are relevant?" and get a direct answer with file paths to the full content.
+
+The /agents page has the schema and ready-to-paste snippets for Claude, Cursor, and ChatGPT custom GPTs.
+
+[YOUR URL HERE]</p>
+        <p class="hn-note">Replace [YOUR URL HERE] with the link to the library before posting.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    function copyCode(btn) {
+      var pre = btn.closest('.code-snippet').querySelector('pre');
+      navigator.clipboard.writeText(pre.textContent).then(function () {
+        btn.textContent = 'Copied';
+        btn.classList.add('copied');
+        setTimeout(function () {
+          btn.textContent = 'Copy';
+          btn.classList.remove('copied');
+        }, 2000);
+      });
+    }
+
+    function copyBlurb(btn) {
+      var text = document.getElementById('hnBlurb').textContent;
+      navigator.clipboard.writeText(text).then(function () {
+        btn.textContent = 'Copied';
+        btn.classList.add('copied');
+        setTimeout(function () {
+          btn.textContent = 'Copy';
+          btn.classList.remove('copied');
+        }, 2000);
+      });
+    }
+  </script>
+
+</body>
+</html>

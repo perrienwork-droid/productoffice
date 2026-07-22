@@ -1,0 +1,264 @@
+<!--
+TOPIC_ID: CS.3.01
+TOPIC_NUMBER: CS.3.01
+TITLE: Technical Writing &amp; Documentation
+SUBTITLE: Create documentation that users actually use. API docs, help centers, knowledge bases, developer documentation, and the information architecture of technical content.
+TIER: 3
+TIER_LABEL: Situational
+THEORY: 20
+PRACTICAL: 55
+EXAMPLES: 25
+-->
+
+<section id="what-and-why" data-section="theory">
+  <h2>What technical writing covers and why it matters</h2>
+
+  <p>Technical documentation is the content users consult when they need to accomplish something specific — install a product, use an API, troubleshoot a problem, understand a feature. Unlike marketing content (which attracts) or editorial content (which educates broadly), documentation exists to enable action. Its quality is measured not by readership but by task completion: did the user successfully do what they came to do?</p>
+
+  <p>Good documentation reduces support costs, accelerates adoption, and becomes a competitive advantage. Poor documentation creates friction at the exact moment users are trying to get value from your product — and unlike a bad onboarding flow, documentation failures compound over time as the product grows and content falls out of date. The discipline of technical writing is about building documentation systems that scale: structures that accommodate growth, processes that maintain accuracy, and information architectures that help users find answers without reading everything.</p>
+</section>
+
+<section id="doc-architecture" data-section="practical">
+  <h2>Documentation architecture</h2>
+
+  <div class="method-card">
+    <h4>Documentation Architecture <span class="method-tag">Core Method</span></h4>
+    <p class="method-when">Use when: planning the information architecture of a documentation site, help center, or knowledge base from scratch.</p>
+    <p>Documentation architecture defines how content is organized, categorized, and navigated. <strong>Content types:</strong> Define distinct documentation types, each serving a different user intent. Tutorials (learning-oriented, guided steps), how-to guides (task-oriented, problem-solving), reference (information-oriented, comprehensive), and explanation (understanding-oriented, conceptual background). These four types — from the Diátaxis framework — serve different needs and shouldn't be mixed within a single page. <strong>Information hierarchy:</strong> Organize by user mental model, not product architecture. Users think in tasks ("How do I export data?"), not in modules ("Data Module > Export Functionality"). <strong>Navigation:</strong> Provide multiple paths to the same content: hierarchical browsing (table of contents), search, and contextual cross-links. Users who know what they're looking for search; users who don't browse. Both must work. <strong>Versioning:</strong> If your product has multiple versions in use, documentation must support version switching without confusing users about which version they're reading.</p>
+  </div>
+
+  <div class="method-card">
+    <h4>Help Center IA Design <span class="method-tag">Technique</span></h4>
+    <p class="method-when">Use when: organizing a customer-facing help center or knowledge base.</p>
+    <p>Help center IA differs from developer docs because the audience is broader and the tasks are more varied. <strong>Category structure:</strong> Organize by user goal, not product feature. "Getting started," "Account & billing," "Using [feature]," "Troubleshooting." Limit top-level categories to 5–8 — more creates decision paralysis. <strong>Most popular first:</strong> Surface the most-accessed articles prominently. If 60% of help center traffic goes to 10 articles, make those 10 articles findable in one click. <strong>Search optimization:</strong> Help center search must handle natural language queries ("why can't I log in?"), not just keyword matching. Include common misspellings, synonyms, and colloquial descriptions in search metadata. <strong>Contextual help:</strong> Link to relevant help articles from within the product interface — at the point of confusion, not just in the help center homepage.</p>
+  </div>
+</section>
+
+<section id="api-docs" data-section="practical">
+  <h2>API and developer documentation</h2>
+
+  <div class="method-card">
+    <h4>API Documentation Template <span class="method-tag">Core Method</span></h4>
+    <p class="method-when">Use when: writing API documentation that developers can self-serve from without contacting support.</p>
+    <p>API docs are developer-facing product documentation. Developers evaluate your API by reading docs before writing code. <strong>Getting started guide:</strong> A complete, working example that takes a developer from zero to first successful API call in under 10 minutes. This is the single most important piece of API documentation. Include authentication setup, a simple request, and the expected response. <strong>Authentication:</strong> Dedicated section covering every auth method, with code samples for each. Authentication is the #1 friction point for new API users. <strong>Endpoint reference:</strong> For each endpoint: HTTP method and URL, required and optional parameters with types, request body schema with examples, response schema with examples (success and error), rate limits, and error codes with explanations. <strong>Code samples:</strong> Working code samples in the most popular languages for your API. Not pseudocode — copy-paste-run code. <strong>Changelog:</strong> What changed, when, and what developers need to do about it. Breaking changes need migration guides, not just announcements.</p>
+  </div>
+
+  <div class="method-card">
+    <h4>Code Sample Guidelines <span class="method-tag">Technique</span></h4>
+    <p class="method-when">Use when: ensuring code samples in documentation are accurate, runnable, and maintainable.</p>
+    <p>Code samples that don't work destroy documentation trust instantly. <strong>Runnable by default:</strong> Every code sample should work when copied and pasted. Include all imports, setup, and configuration. Never show a snippet that requires unstated context to run. <strong>Tested in CI:</strong> Code samples should be extracted from or validated against actual runnable tests. When the API changes, tests catch stale code samples before users do. <strong>Language coverage:</strong> Provide samples in the languages your users actually use, not the language your backend is written in. Check API key analytics to see which SDKs and languages users actually call from. <strong>Progressive complexity:</strong> Start with the simplest possible example, then show more complex usage. Don't lead with the most feature-complete example.</p>
+  </div>
+</section>
+
+<section id="doc-product-sync" data-section="practical">
+  <h2>Documentation-product sync</h2>
+
+  <div class="method-card">
+    <h4>Documentation-Product Sync Workflow <span class="method-tag">Core Method</span></h4>
+    <p class="method-when">Use when: ensuring documentation stays accurate as the product evolves.</p>
+    <p>Documentation that's out of sync with the product is worse than no documentation — it actively misleads users. <strong>Ship together:</strong> Documentation updates should be part of the feature release process, not a follow-up task. No feature ships without docs. Enforce this in your release checklist. <strong>Change detection:</strong> When UI changes, screenshots break. When APIs change, code samples break. Build automated checks that flag documentation pages affected by product changes. <strong>Ownership:</strong> Every documentation page should have an owner — either the feature team that owns the product area or a dedicated technical writer. Unowned docs decay fastest. <strong>Review triggers:</strong> Documentation should be re-reviewed when: the feature it covers changes, user feedback indicates confusion, support tickets reference it, or it hasn't been reviewed in its scheduled interval. <strong>Deprecation:</strong> When a feature is deprecated, documentation must be updated immediately — not archived, but updated with a clear notice of what replaces it and a migration path.</p>
+  </div>
+</section>
+
+<section id="troubleshooting" data-section="practical">
+  <h2>Troubleshooting content</h2>
+
+  <div class="method-card">
+    <h4>Troubleshooting Content Framework <span class="method-tag">Technique</span></h4>
+    <p class="method-when">Use when: writing documentation that helps users diagnose and fix problems.</p>
+    <p>Troubleshooting content serves users in a state of frustration — they expected something to work and it didn't. <strong>Symptom-first organization:</strong> Organize by what the user sees ("Error: connection refused"), not by what's wrong technically ("DNS resolution failure"). Users know their symptoms; they don't know the cause. <strong>Decision tree structure:</strong> Guide users through diagnostic steps. "Are you seeing error X or error Y?" → specific fix for each. Don't make users read 10 possible causes when a two-question decision tree narrows it to one. <strong>Most common first:</strong> Order solutions by likelihood, not by severity. If 80% of "can't log in" issues are forgotten passwords, put password reset first — not firewall configuration. <strong>Verification step:</strong> After each solution, tell users how to verify it worked. "Try logging in again. If you see the dashboard, the issue is resolved." <strong>Escalation path:</strong> When self-service fails, provide a clear path to human support. Include what information to provide (error messages, steps already tried) to avoid back-and-forth.</p>
+  </div>
+</section>
+
+<section id="doc-metrics" data-section="practical">
+  <h2>Documentation metrics</h2>
+
+  <div class="method-card">
+    <h4>Documentation Metrics <span class="method-tag">Technique</span></h4>
+    <p class="method-when">Use when: measuring documentation effectiveness beyond pageviews.</p>
+    <p><strong>Ticket deflection:</strong> The most important documentation metric. Track the ratio of help center visits to support tickets. If users read documentation and then file a ticket, the documentation failed. If they read documentation and don't file a ticket, it succeeded (assuming they found their answer, not that they gave up). <strong>Search success rate:</strong> What percentage of documentation searches result in a click? What percentage of users who search end up filing a support ticket? Low click-through after search means content doesn't exist or isn't findable. <strong>Task completion:</strong> For tutorial and how-to content, track completion rates. Where do users drop off? That's the quality bottleneck. <strong>Feedback signals:</strong> "Was this helpful?" ratings, comment feedback, and support ticket analysis (tickets that cite specific documentation as unhelpful). <strong>Time to answer:</strong> How quickly can users find answers? Measure time from first documentation search to page exit or successful task completion.</p>
+  </div>
+</section>
+
+<section id="templates" data-section="practical">
+  <h2>Templates and checklists</h2>
+
+  <div class="template-box">
+    <div class="template-header">
+      <span class="template-label">Template</span>
+      <span class="template-title">Getting Started Guide Structure</span>
+    </div>
+    <div class="template-grid">
+      <div class="template-field">
+        <div class="template-field-label">Prerequisites</div>
+        <p>[What the user needs before starting — accounts, tools, access]</p>
+      </div>
+      <div class="template-field">
+        <div class="template-field-label">Step 1: Setup</div>
+        <p>[Authentication, installation, or configuration — with copy-paste commands]</p>
+      </div>
+      <div class="template-field">
+        <div class="template-field-label">Step 2: First action</div>
+        <p>[The simplest meaningful task — "make your first API call" or "create your first project"]</p>
+      </div>
+      <div class="template-field">
+        <div class="template-field-label">Step 3: Verification</div>
+        <p>[How to confirm it worked — expected output, success message, or visual confirmation]</p>
+      </div>
+      <div class="template-field">
+        <div class="template-field-label">Next steps</div>
+        <p>[Links to tutorials, use cases, and reference docs for deeper usage]</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="real-world-examples" data-section="examples">
+  <h2>Real-world examples</h2>
+
+  <div class="case-study">
+    <p class="case-label">Case study</p>
+    <h4>Stripe: documentation as competitive moat</h4>
+    <p>Stripe's documentation is widely cited as the industry standard for API docs. Their approach: a getting-started guide that produces a working integration in under 10 minutes, code samples in every major language that are tested in CI (so they never break), and a reference section generated directly from their API schema (so it's always in sync). Critically, Stripe measures documentation by developer success metrics — time to first successful API call — not by pageviews. Their documentation team operates like a product team with its own roadmap and quality standards.</p>
+    <p><strong>Why it works:</strong> Documentation is treated as a product with success metrics, not a support function with output metrics.</p>
+  </div>
+
+  <div class="case-study">
+    <p class="case-label">Case study</p>
+    <h4>GitLab: docs-as-code at scale</h4>
+    <p>GitLab maintains thousands of documentation pages using a docs-as-code approach: documentation lives in the same repository as the product code, uses the same review process (merge requests), and ships in the same release cycle. Engineers are expected to update docs alongside code changes — the CI pipeline blocks merges that change functionality without corresponding documentation updates. A dedicated technical writing team reviews doc changes for quality and consistency, but the burden of creating first drafts sits with the engineers making the changes.</p>
+    <p><strong>Why it works:</strong> Documentation updates are a technical requirement, not an optional follow-up. The docs-as-code approach ensures documentation and product stay in sync by making them part of the same workflow.</p>
+  </div>
+</section>
+
+<section id="pitfalls" data-section="practical">
+  <h2>Common pitfalls</h2>
+
+  <div class="pitfall">
+    <div class="pitfall-icon">!</div>
+    <div>
+      <h4>Documenting features instead of tasks</h4>
+      <p>Documentation organized by product architecture ("the Settings panel contains...") fails users who think in tasks ("how do I change my notification preferences?"). Start with user intent, then map to features — not the other way around.</p>
+    </div>
+  </div>
+
+  <div class="pitfall">
+    <div class="pitfall-icon">!</div>
+    <div>
+      <h4>Assuming users read linearly</h4>
+      <p>Nobody reads documentation cover to cover. Users land on a specific page from search, scan for their answer, and leave. Every page must be self-contained enough to be useful in isolation while linking to context for users who need it.</p>
+    </div>
+  </div>
+
+  <div class="pitfall">
+    <div class="pitfall-icon">!</div>
+    <div>
+      <h4>Code samples that don't run</h4>
+      <p>A single broken code sample destroys trust in all your documentation. Test every code sample, ideally in CI. If you can't test it automatically, test it manually before every release that touches the relevant API or SDK.</p>
+    </div>
+  </div>
+</section>
+
+<section id="connections">
+  <h2>Connected topics in your library</h2>
+  <div class="cross-ref-grid">
+    <a href="structured-content.html" class="cross-ref-card">
+      <span class="ref-number">CS Tier 1</span>
+      <div class="ref-title">Structured Content &amp; Content Modeling</div>
+      <div class="ref-reason">Documentation benefits from structured content models — reusable content blocks, metadata-driven navigation, and multi-format publishing from a single source.</div>
+    </a>
+    <a href="content-auditing-governance.html" class="cross-ref-card">
+      <span class="ref-number">CS Tier 1</span>
+      <div class="ref-title">Content Auditing &amp; Governance</div>
+      <div class="ref-reason">Documentation governance (ownership, review cycles, deprecation) is a specialized application of content governance principles.</div>
+    </a>
+    <a href="information-architecture.html" class="cross-ref-card">
+      <span class="ref-number">UX Tier 1</span>
+      <div class="ref-title">Information Architecture</div>
+      <div class="ref-reason">Documentation IA applies the same principles of hierarchy, labeling, and navigation — specialized for task-oriented technical content.</div>
+    </a>
+  </div>
+
+  <div class="callout info">
+    <p class="callout-title">Cross-discipline connections</p>
+    <p><strong>PM.2.05 Platform &amp; API Product Management</strong> covers API product strategy and developer experience from a PM lens. This topic covers the content side — writing documentation that developers can self-serve from.</p>
+  </div>
+</section>
+
+<section id="deep-dive">
+  <h2>Deep-dive appendix</h2>
+
+  <details class="expandable">
+    <summary><span class="chevron"><svg viewBox="0 0 14 14"><polyline points="4,2 10,7 4,12"/></svg></span> The Diátaxis documentation framework</summary>
+    <div class="expand-content topic-content">
+      <h4>Four documentation types</h4>
+      <p><strong>Tutorials</strong> are learning-oriented. They take a beginner through a series of steps to complete a project. The goal is learning, not production use. Tutorials should work every time — if a step can fail, provide the recovery path.</p>
+      <p><strong>How-to guides</strong> are task-oriented. They show how to accomplish a specific goal. Unlike tutorials, they assume basic competence and focus on the task, not the learning. "How to export data as CSV" is a how-to guide.</p>
+      <p><strong>Reference</strong> is information-oriented. It describes the machinery: API endpoints, configuration options, CLI commands. Reference is comprehensive, consistent, and austere. It answers "what does this do?" not "how do I use this?"</p>
+      <p><strong>Explanation</strong> is understanding-oriented. It provides background, context, and rationale. "Why does the system work this way?" Explanation helps users build mental models that make the other three types more effective.</p>
+    </div>
+  </details>
+
+  <details class="expandable">
+    <summary><span class="chevron"><svg viewBox="0 0 14 14"><polyline points="4,2 10,7 4,12"/></svg></span> Further reading</summary>
+    <div class="expand-content topic-content">
+      <h4>Essential reading</h4>
+      <p><strong>Diátaxis framework (diataxis.fr)</strong> — The clearest framework for organizing documentation by user intent.</p>
+      <p><strong>"Docs for Developers" by Jared Bhatti et al.</strong> — Practical guide to developer documentation with real-world examples from Google and other tech companies.</p>
+      <p><strong>"Every Page is Page One" by Mark Baker</strong> — The case for topic-based, self-contained documentation pages rather than book-structured manuals.</p>
+    </div>
+  </details>
+</section>
+
+<!-- SEARCH_INDEX
+{
+  topic: "Technical Writing & Documentation",
+  url: "topics/technical-writing-documentation.html",
+  tier: "Tier 3",
+  sections: [
+    { title: "What & why", id: "what-and-why", type: "theory", keywords: "technical writing documentation help center knowledge base" },
+    { title: "Documentation architecture", id: "doc-architecture", type: "practical", keywords: "documentation architecture IA help center navigation Diataxis" },
+    { title: "API documentation", id: "api-docs", type: "practical", keywords: "API docs developer documentation code samples getting started" },
+    { title: "Documentation-product sync", id: "doc-product-sync", type: "practical", keywords: "sync workflow docs-as-code ownership deprecation" },
+    { title: "Troubleshooting content", id: "troubleshooting", type: "practical", keywords: "troubleshooting decision tree symptom-first escalation" },
+    { title: "Documentation metrics", id: "doc-metrics", type: "practical", keywords: "metrics deflection search success task completion feedback" },
+    { title: "Templates & checklists", id: "templates", type: "practical", keywords: "getting started guide template" },
+    { title: "Real-world examples", id: "real-world-examples", type: "examples", keywords: "Stripe GitLab docs-as-code API documentation" },
+    { title: "Common pitfalls", id: "pitfalls", type: "practical", keywords: "features vs tasks linear reading broken code samples" }
+  ],
+  methods: [
+    { name: "Documentation Architecture", section: "doc-architecture", keywords: "architecture content types hierarchy navigation versioning Diataxis" },
+    { name: "Help Center IA Design", section: "doc-architecture", keywords: "help center categories search contextual" },
+    { name: "API Documentation Template", section: "api-docs", keywords: "API getting started authentication endpoints code samples" },
+    { name: "Code Sample Guidelines", section: "api-docs", keywords: "code samples runnable tested CI progressive" },
+    { name: "Documentation-Product Sync Workflow", section: "doc-product-sync", keywords: "sync workflow ownership review deprecation" },
+    { name: "Troubleshooting Content Framework", section: "troubleshooting", keywords: "troubleshooting symptom decision tree verification escalation" },
+    { name: "Documentation Metrics", section: "doc-metrics", keywords: "deflection search success task completion feedback" }
+  ]
+}
+SEARCH_INDEX -->
+
+<!-- MANIFEST
+{
+  "id": "CS.3.01",
+  "title": "Technical Writing & Documentation",
+  "file": "topics/technical-writing-documentation.html",
+  "tier": 3,
+  "discipline": "CS",
+  "solves": [
+    "I need to build a help center or knowledge base from scratch",
+    "I want to write API documentation that developers can self-serve from",
+    "I need to organize technical documentation so users can find answers quickly",
+    "I want to measure documentation effectiveness and identify gaps",
+    "I need to maintain documentation accuracy as the product evolves"
+  ],
+  "methods": ["Documentation Architecture", "Help Center IA Design", "API Documentation Template", "Code Sample Guidelines", "Documentation-Product Sync Workflow", "Troubleshooting Content Framework", "Documentation Metrics"],
+  "phase": "design",
+  "prerequisites": ["CS.1.01", "CS.1.03"],
+  "pairs_with": ["CS.1.02", "CS.1.03", "CS.2.05"],
+  "cross_discipline": ["PM.2.05"],
+  "depth": "methods",
+  "keywords": ["technical writing", "documentation", "API docs", "help center", "knowledge base", "developer documentation", "troubleshooting", "Diataxis", "docs-as-code", "ticket deflection"],
+  "review_interval": 180
+}
+MANIFEST -->

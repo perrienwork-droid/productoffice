@@ -1,0 +1,151 @@
+<!--
+TOPIC_ID: CS.1.03
+TOPIC_NUMBER: CS.1.03
+TITLE: Structured Content &amp; Content Modeling
+SUBTITLE: Build content that works everywhere. Content models, structured authoring, metadata schemas, taxonomy design, and the architecture that makes content reusable, searchable, and AI-ready.
+TIER: 1
+TIER_LABEL: Core Toolkit
+THEORY: 25
+PRACTICAL: 50
+EXAMPLES: 25
+-->
+
+<section id="what-and-why" data-section="theory">
+  <h2>What structured content is and why it matters</h2>
+
+  <p>Unstructured content is a blob of text on a page. Structured content separates content from presentation — breaking it into typed, labeled components (title, summary, body, author, category, related items) that can be assembled, filtered, reused, and delivered across channels without manual reformatting. A product description that's structured content can appear on the website, in a mobile app, in an email, in search results, and in an AI assistant's response — each formatted appropriately for the channel, from a single source of truth.</p>
+
+  <p>In an AI-driven world, structured content is not optional. AI systems — search engines, assistants, agents — can only reliably extract and act on content that is explicitly labeled and semantically organized. Unstructured pages get summarized poorly; structured content gets parsed accurately.</p>
+</section>
+
+<section id="content-modeling" data-section="practical">
+  <h2>Content modeling</h2>
+
+  <div class="method-card">
+    <h4>Content Modeling Workshop <span class="method-tag">Core Method</span></h4>
+    <p class="method-when">Use when: designing a new CMS, migrating to structured content, or planning content for a new product surface.</p>
+    <p>A content model defines the types of content in your system and their relationships. <strong>Content type definition:</strong> Identify each distinct type of content (Article, Product, Help Article, Case Study, Person, Event). For each type, define its fields: which are required, what data type each accepts (text, rich text, image, reference to another type, date, enum), and field-level constraints (character limits, allowed values). <strong>Relationships:</strong> Define how content types relate: a Case Study references a Product and a Person (the customer). An Article belongs to a Category and has Tags. These relationships enable navigation, filtering, and cross-referencing. <strong>COPE principle:</strong> Create Once, Publish Everywhere. If the same content appears in multiple places (a product name on the website, in the app, in emails), it should be authored once and referenced, not duplicated. <strong>Workshop format:</strong> Bring content creators, designers, engineers, and product managers together. Map existing content to types, identify fields, and model relationships on a whiteboard before touching a CMS.</p>
+  </div>
+</section>
+
+<section id="metadata" data-section="practical">
+  <h2>Metadata and taxonomy</h2>
+
+  <div class="method-card">
+    <h4>Metadata Schema Design <span class="method-tag">Core Method</span></h4>
+    <p class="method-when">Use when: defining the labels, categories, and tags that make content findable, filterable, and machine-readable.</p>
+    <p>Metadata is data about content — the labels that make content discoverable. <strong>Descriptive metadata:</strong> Title, description, author, date, content type. Used for display and search. <strong>Administrative metadata:</strong> Owner, last reviewed date, review cycle, status (draft, published, archived). Used for governance. <strong>Structural metadata:</strong> Category, tags, related content, content model type. Used for navigation and filtering. Design principles: use controlled vocabularies (predefined lists, not free-text) for categories and tags to prevent inconsistency. Make metadata entry as automated as possible — derive dates, authors, and categories from the authoring context rather than requiring manual entry. Validate metadata completeness on publish — incomplete metadata means unfindable content.</p>
+  </div>
+
+  <div class="method-card">
+    <h4>Taxonomy Architecture <span class="method-tag">Core Method</span></h4>
+    <p class="method-when">Use when: organizing content into categories that support navigation, filtering, and discovery.</p>
+    <p>Taxonomies are the classification systems that organize content. Three types: <strong>Flat:</strong> A simple list of categories with no hierarchy (tags). Good for cross-cutting attributes (topic, audience, format). Easy to manage but doesn't express relationships. <strong>Hierarchical:</strong> Tree structure with parent-child relationships (Products > Software > Design Tools). Good for browse navigation but forces content into a single path. <strong>Faceted:</strong> Multiple independent classification dimensions applied simultaneously (topic + audience + format + difficulty). Most flexible — enables users to filter by any combination. More complex to design and maintain. Match taxonomy type to use case: hierarchical for primary navigation, faceted for search/filter interfaces, flat for supplementary tagging.</p>
+  </div>
+</section>
+
+<section id="ai-ready" data-section="practical">
+  <h2>AI-ready content architecture</h2>
+
+  <div class="method-card">
+    <h4>Content Architecture for AI Systems <span class="method-tag">Framework</span></h4>
+    <p class="method-when">Use when: ensuring your content can be accurately parsed, retrieved, and used by AI search engines, assistants, and agents.</p>
+    <p>AI systems consume content differently than humans. Optimize for both: <strong>Schema.org markup:</strong> Add structured data (JSON-LD) for products, articles, FAQs, events, people, and organizations. This tells AI systems exactly what your content represents. <strong>Clear heading hierarchy:</strong> AI systems use headings to understand content structure. H1 for the page topic, H2 for major sections, H3 for sub-sections — never skip levels. <strong>Self-contained sections:</strong> AI retrieval systems (RAG) often extract sections, not full pages. Each section should make sense independently, with its own heading and enough context to be understood without the surrounding content. <strong>Explicit facts over implications:</strong> AI systems parse explicit statements better than implied meanings. "Our product costs $49/month" is AI-readable; "affordable pricing" is not. <strong>Content API:</strong> For programmatic access, expose content through a well-documented API with consistent field names, filtering, and pagination. APIs serve both AI agents and partner integrations.</p>
+  </div>
+</section>
+
+<section id="real-world-examples" data-section="examples">
+  <h2>Real-world examples</h2>
+
+  <div class="case-study">
+    <p class="case-label">Case study</p>
+    <h4>NPR COPE: create once, publish everywhere</h4>
+    <p>NPR pioneered the COPE model — creating content in a structured CMS that separates content from presentation. A news story authored once is automatically formatted for the website, mobile app, smart speaker, and API consumers. Each output channel gets the fields it needs (the website gets the full story with images; the smart speaker gets a headline and audio summary). This approach lets NPR serve dozens of channels without multiplying content production effort.</p>
+    <p><strong>Why it works:</strong> Structured content types with clear field definitions make multi-channel publishing automatic rather than manual. The content model does the work.</p>
+  </div>
+</section>
+
+<section id="pitfalls" data-section="practical">
+  <h2>Common pitfalls</h2>
+
+  <div class="pitfall">
+    <div class="pitfall-icon">!</div>
+    <div>
+      <h4>Over-modeling</h4>
+      <p>Creating 50 content types with 30 fields each before publishing anything is paralysis. Start with the 3–5 most common content types, build them well, and add complexity as real needs emerge. A content model is never finished — it evolves with the content it supports.</p>
+    </div>
+  </div>
+</section>
+
+<section id="connections">
+  <h2>Connected topics in your library</h2>
+  <div class="cross-ref-grid">
+    <a href="information-architecture.html" class="cross-ref-card">
+      <span class="ref-number">UX Tier 1</span>
+      <div class="ref-title">Information Architecture</div>
+      <div class="ref-reason">IA covers navigation structure and page hierarchy. Content modeling covers how content is structured internally — complementary disciplines.</div>
+    </a>
+    <a href="search-filtering-ux.html" class="cross-ref-card">
+      <span class="ref-number">UX Tier 2</span>
+      <div class="ref-title">Search &amp; Filtering UX</div>
+      <div class="ref-reason">Structured content with good metadata enables the faceted search and filtering that search UX depends on.</div>
+    </a>
+  </div>
+</section>
+
+<section id="deep-dive">
+  <h2>Deep-dive appendix</h2>
+  <details class="expandable">
+    <summary><span class="chevron"><svg viewBox="0 0 14 14"><polyline points="4,2 10,7 4,12"/></svg></span> Further reading</summary>
+    <div class="expand-content topic-content">
+      <p><strong>"Content Modeling" by Carrie Hane &amp; Mike Atherton</strong> — Practical guide to designing content models for CMS implementations.</p>
+      <p><strong>Schema.org documentation</strong> — The standard vocabulary for structured data on the web.</p>
+    </div>
+  </details>
+</section>
+
+<!-- SEARCH_INDEX
+{
+  topic: "Structured Content & Content Modeling",
+  url: "topics/structured-content.html",
+  tier: "Tier 1",
+  sections: [
+    { title: "What & why", id: "what-and-why", type: "theory", keywords: "structured content content model reusable searchable AI-ready" },
+    { title: "Content modeling", id: "content-modeling", type: "practical", keywords: "content model types fields relationships COPE workshop" },
+    { title: "Metadata and taxonomy", id: "metadata", type: "practical", keywords: "metadata schema taxonomy flat hierarchical faceted tags categories" },
+    { title: "AI-ready architecture", id: "ai-ready", type: "practical", keywords: "AI schema.org JSON-LD headings self-contained API structured data" },
+    { title: "Real-world examples", id: "real-world-examples", type: "examples", keywords: "NPR COPE create once publish everywhere" },
+    { title: "Common pitfalls", id: "pitfalls", type: "practical", keywords: "over-modeling complexity paralysis" }
+  ],
+  methods: [
+    { name: "Content Modeling Workshop", section: "content-modeling", keywords: "content types fields relationships COPE" },
+    { name: "Metadata Schema Design", section: "metadata", keywords: "metadata descriptive administrative structural controlled vocabulary" },
+    { name: "Taxonomy Architecture", section: "metadata", keywords: "taxonomy flat hierarchical faceted classification" },
+    { name: "Content Architecture for AI Systems", section: "ai-ready", keywords: "AI schema.org JSON-LD heading hierarchy content API" }
+  ]
+}
+SEARCH_INDEX -->
+
+<!-- MANIFEST
+{
+  "id": "CS.1.03",
+  "title": "Structured Content & Content Modeling",
+  "file": "topics/structured-content.html",
+  "tier": 1,
+  "discipline": "CS",
+  "solves": [
+    "I need to design a content model for a new product or CMS",
+    "I want content that can be reused across channels without duplication",
+    "I need metadata schemas that make content findable and filterable",
+    "I want to structure content so AI systems can parse and use it effectively",
+    "I need to migrate from unstructured to structured content"
+  ],
+  "methods": ["Content Modeling Workshop", "Metadata Schema Design", "Taxonomy Architecture", "Content Architecture for AI Systems"],
+  "phase": "design",
+  "prerequisites": ["CS.1.01"],
+  "pairs_with": ["CS.1.01", "CS.1.02", "CS.2.01"],
+  "cross_discipline": ["UX.1.08", "UX.2.15"],
+  "depth": "methods",
+  "keywords": ["structured content", "content model", "metadata", "taxonomy", "schema.org", "COPE", "content types", "AI-ready", "content API", "faceted", "JSON-LD"]
+}
+MANIFEST -->

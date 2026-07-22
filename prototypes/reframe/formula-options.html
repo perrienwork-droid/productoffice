@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Formula section, design options</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..900,0..100;1,9..144,300..900,0..100&family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #FAF5EC;
+  --bg-card: #FFFFFF;
+  --bg-soft: #F4ECDC;
+  --ink: #2A1810;
+  --ink-soft: #6B5444;
+  --ink-mute: #9B8567;
+  --amber: #B8814A;
+  --amber-deep: #8B5A2B;
+  --tortoise: #6E4220;
+  --line: #E8DDC8;
+  --green: #5A7A4F;
+  --amber-soft: #F5E6D0;
+  --font-serif: 'Fraunces', serif;
+  --font-sans: 'DM Sans', sans-serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-sans);
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.6;
+  font-size: 17px;
+}
+.container { max-width: 1200px; margin: 0 auto; padding: 0 32px; }
+
+/* ============ NAVIGATOR ============ */
+.nav-top {
+  position: sticky; top: 0; z-index: 50;
+  background: rgba(250, 245, 236, 0.92);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--line);
+  padding: 14px 0;
+}
+.nav-top .container { display: flex; gap: 24px; flex-wrap: wrap; align-items: center; }
+.nav-title {
+  font-family: var(--font-serif); font-style: italic;
+  color: var(--amber-deep); font-size: 15px;
+}
+.nav-top a {
+  font-family: var(--font-serif);
+  font-size: 15px;
+  color: var(--ink-soft);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  padding-bottom: 2px;
+  transition: all 0.2s ease;
+}
+.nav-top a:hover { color: var(--tortoise); border-bottom-color: var(--amber); }
+
+/* ============ OPTION WRAPPER ============ */
+.option {
+  padding: 80px 0;
+  border-bottom: 1px solid var(--line);
+}
+.option-tag {
+  font-family: var(--font-serif); font-style: italic;
+  color: var(--amber-deep); letter-spacing: 0.1em;
+  font-size: 14px; text-transform: uppercase;
+  margin-bottom: 12px;
+  display: flex; align-items: center; gap: 12px;
+}
+.option-tag::before {
+  content: ''; width: 30px; height: 1px; background: var(--amber-deep);
+}
+.option-title {
+  font-family: var(--font-serif); font-weight: 300;
+  font-size: 38px; line-height: 1.05; letter-spacing: -0.015em;
+  color: var(--ink); margin-bottom: 12px;
+}
+.option-title em { font-style: italic; color: var(--tortoise); }
+.option-note {
+  font-family: var(--font-serif); font-style: italic;
+  color: var(--ink-soft); font-size: 17px;
+  max-width: 620px; margin-bottom: 48px;
+  line-height: 1.55;
+}
+
+/* ============ OPTION A, ANNOTATED DIAGRAM ============ */
+.diagram-wrap {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  padding: 64px 48px;
+  position: relative;
+}
+.diagram-svg-wrap {
+  display: flex; justify-content: center;
+  margin-bottom: 56px;
+}
+.diagram-svg-wrap svg { width: 100%; max-width: 640px; height: auto; }
+.diagram-callouts {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 32px;
+  border-top: 1px solid var(--line);
+  padding-top: 40px;
+}
+.callout { position: relative; }
+.callout-num {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: var(--tortoise);
+  color: var(--bg);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-serif); font-style: italic;
+  font-size: 14px;
+  margin-bottom: 16px;
+}
+.callout-label {
+  font-family: var(--font-serif);
+  font-weight: 400; font-size: 19px;
+  line-height: 1.2; color: var(--ink);
+  margin-bottom: 10px;
+}
+.callout-desc {
+  font-size: 14px; line-height: 1.55;
+  color: var(--ink-soft);
+}
+
+/* ============ OPTION B, VISUAL SWATCHES ============ */
+.swatch-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+}
+.swatch-cell {
+  background: var(--bg-card);
+  padding: 36px 24px 32px;
+  display: flex; flex-direction: column;
+  min-height: 320px;
+}
+.swatch-visual {
+  height: 96px;
+  margin-bottom: 24px;
+  display: flex; align-items: center;
+}
+.swatch-num {
+  font-family: var(--font-serif); font-style: italic;
+  font-size: 14px; color: var(--amber-deep);
+  margin-bottom: 12px;
+  letter-spacing: 0.05em;
+}
+.swatch-label {
+  font-family: var(--font-serif);
+  font-weight: 400; font-size: 22px;
+  line-height: 1.2; color: var(--ink);
+  margin-bottom: 10px;
+}
+.swatch-desc {
+  font-size: 14px; line-height: 1.55;
+  color: var(--ink-soft);
+}
+
+/* ============ OPTION C, DO/DONT ============ */
+.dodont-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 24px;
+}
+.dodont-cell {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  padding: 28px 22px 24px;
+  display: flex; flex-direction: column;
+}
+.dodont-num {
+  font-family: var(--font-serif); font-style: italic;
+  font-size: 14px; color: var(--amber-deep);
+  margin-bottom: 8px;
+}
+.dodont-label {
+  font-family: var(--font-serif);
+  font-weight: 400; font-size: 21px;
+  line-height: 1.2; color: var(--ink);
+  margin-bottom: 20px;
+}
+.dodont-row {
+  display: flex; align-items: center; gap: 12px;
+  padding: 12px 0;
+  border-top: 1px solid var(--line);
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--ink-soft);
+}
+.dodont-row.yes { color: var(--ink); }
+.dodont-mark {
+  flex-shrink: 0;
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-serif); font-style: italic;
+  font-size: 13px;
+}
+.yes .dodont-mark { background: var(--amber-soft); color: var(--tortoise); }
+.no .dodont-mark { background: var(--bg-soft); color: var(--ink-mute); }
+.no { opacity: 0.75; text-decoration: line-through; text-decoration-color: var(--ink-mute); text-decoration-thickness: 1px; }
+.no .dodont-mark { text-decoration: none; }
+
+/* ============ OPTION D, EDITORIAL SPREAD ============ */
+.editorial-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+}
+.ed-hero {
+  background: var(--bg-card);
+  padding: 56px 48px;
+  display: flex; flex-direction: column; justify-content: space-between;
+  position: relative;
+}
+.ed-hero-visual {
+  margin-bottom: 32px;
+  display: flex; align-items: center; justify-content: center;
+  min-height: 220px;
+}
+.ed-hero-visual svg { max-width: 360px; width: 100%; height: auto; }
+.ed-hero-num {
+  font-family: var(--font-serif); font-style: italic;
+  font-size: 14px; color: var(--amber-deep);
+  letter-spacing: 0.1em; text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.ed-hero-label {
+  font-family: var(--font-serif);
+  font-weight: 300; font-size: 42px; line-height: 1.05;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  margin-bottom: 14px;
+}
+.ed-hero-label em { font-style: italic; color: var(--tortoise); }
+.ed-hero-desc {
+  font-size: 16px; line-height: 1.55;
+  color: var(--ink-soft);
+  max-width: 460px;
+}
+.ed-side {
+  background: var(--bg-card);
+  display: grid;
+  grid-template-rows: repeat(4, 1fr);
+}
+.ed-side-cell {
+  padding: 28px 32px;
+  border-bottom: 1px solid var(--line);
+  display: flex; gap: 20px; align-items: flex-start;
+}
+.ed-side-cell:last-child { border-bottom: none; }
+.ed-side-visual {
+  flex-shrink: 0;
+  width: 56px; height: 56px;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--bg-soft);
+  border-radius: 50%;
+}
+.ed-side-text { flex: 1; }
+.ed-side-num {
+  font-family: var(--font-serif); font-style: italic;
+  font-size: 13px; color: var(--amber-deep);
+  margin-bottom: 4px;
+}
+.ed-side-label {
+  font-family: var(--font-serif);
+  font-weight: 400; font-size: 19px;
+  line-height: 1.2; color: var(--ink);
+  margin-bottom: 6px;
+}
+.ed-side-desc {
+  font-size: 13px; line-height: 1.5;
+  color: var(--ink-soft);
+}
+
+/* ============ INTRO/HERO ============ */
+.intro {
+  padding: 100px 0 60px;
+}
+.intro h1 {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(40px, 5vw, 60px);
+  line-height: 1.0; letter-spacing: -0.02em;
+  margin-bottom: 20px;
+}
+.intro h1 em { font-style: italic; color: var(--tortoise); }
+.intro p {
+  font-family: var(--font-serif); font-style: italic;
+  font-size: 19px; color: var(--ink-soft);
+  max-width: 620px; line-height: 1.55;
+}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 900px) {
+  .diagram-callouts, .swatch-grid, .dodont-grid { grid-template-columns: repeat(2, 1fr); }
+  .editorial-grid { grid-template-columns: 1fr; }
+  .ed-hero-label { font-size: 32px; }
+}
+@media (max-width: 560px) {
+  .diagram-callouts, .swatch-grid, .dodont-grid { grid-template-columns: 1fr; }
+  .diagram-wrap { padding: 40px 24px; }
+}
+</style>
+</head>
+<body>
+
+<nav class="nav-top">
+  <div class="container">
+    <span class="nav-title">Formula section, four directions</span>
+    <a href="#a">A. Annotated diagram</a>
+    <a href="#b">B. Visual swatches</a>
+    <a href="#c">C. Do, don't</a>
+    <a href="#d">D. Editorial spread</a>
+  </div>
+</nav>
+
+<section class="intro">
+  <div class="container">
+    <h1>Four ways to make <em>the formula</em> earn its placement.</h1>
+    <p>The current version is five identical text cards. Each option below replaces it with something that gives the eye something to do, while staying in the page's editorial register (Fraunces, warm palette, restrained).</p>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- OPTION A, ANNOTATED DIAGRAM                                 -->
+<!-- ============================================================ -->
+<section class="option" id="a">
+  <div class="container">
+    <div class="option-tag">Option A</div>
+    <h2 class="option-title">The <em>annotated</em> diagram.</h2>
+    <p class="option-note">A single illustrated pair of sunglasses, with the five criteria as numbered callouts. Most magazine-y, gives the section a "hero artefact", and the criteria become a glossary for the diagram. Strongest visual punch.</p>
+
+    <div class="diagram-wrap">
+      <div class="diagram-svg-wrap">
+        <svg viewBox="0 0 640 280" xmlns="http://www.w3.org/2000/svg">
+          <!-- callout lines -->
+          <g stroke="#B8814A" stroke-width="1" fill="none" opacity="0.55">
+            <line x1="80" y1="140" x2="160" y2="140"/>
+            <line x1="170" y1="100" x2="220" y2="125"/>
+            <line x1="320" y1="50" x2="320" y2="115"/>
+            <line x1="500" y1="160" x2="430" y2="160"/>
+            <line x1="560" y1="105" x2="490" y2="130"/>
+          </g>
+          <!-- callout dots (numbered) -->
+          <g font-family="Fraunces, serif" font-style="italic" font-size="13">
+            <circle cx="80" cy="140" r="13" fill="#6E4220"/>
+            <text x="80" y="145" text-anchor="middle" fill="#FAF5EC">i</text>
+            <circle cx="170" cy="100" r="13" fill="#6E4220"/>
+            <text x="170" y="105" text-anchor="middle" fill="#FAF5EC">ii</text>
+            <circle cx="320" cy="50" r="13" fill="#6E4220"/>
+            <text x="320" y="55" text-anchor="middle" fill="#FAF5EC">iii</text>
+            <circle cx="500" cy="160" r="13" fill="#6E4220"/>
+            <text x="500" y="165" text-anchor="middle" fill="#FAF5EC">iv</text>
+            <circle cx="560" cy="105" r="13" fill="#6E4220"/>
+            <text x="560" y="110" text-anchor="middle" fill="#FAF5EC">v</text>
+          </g>
+          <!-- left lens (soft cat-eye, tortoise frame) -->
+          <g>
+            <!-- lens fill, warm honey gradient -->
+            <defs>
+              <linearGradient id="lensTint" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#A86E3A" stop-opacity="0.85"/>
+                <stop offset="100%" stop-color="#6E4220" stop-opacity="0.95"/>
+              </linearGradient>
+              <pattern id="tortoise" patternUnits="userSpaceOnUse" width="16" height="16">
+                <rect width="16" height="16" fill="#6E4220"/>
+                <circle cx="4" cy="5" r="2.6" fill="#3A1E0A"/>
+                <circle cx="12" cy="11" r="2.2" fill="#3A1E0A"/>
+                <circle cx="2" cy="13" r="1.5" fill="#8B5A2B"/>
+                <circle cx="11" cy="3" r="1.8" fill="#8B5A2B"/>
+              </pattern>
+            </defs>
+
+            <!-- bridge -->
+            <path d="M 265 130 Q 320 118 375 130" stroke="url(#tortoise)" stroke-width="6" fill="none" stroke-linecap="round"/>
+
+            <!-- left lens (soft cat-eye shape) -->
+            <path d="M 160 135 Q 165 100 220 100 Q 275 100 270 130 Q 268 175 220 180 Q 165 180 160 135 Z" fill="url(#lensTint)" stroke="url(#tortoise)" stroke-width="7"/>
+
+            <!-- right lens -->
+            <path d="M 370 130 Q 365 100 420 100 Q 475 100 480 135 Q 478 180 425 180 Q 372 175 370 130 Z" fill="url(#lensTint)" stroke="url(#tortoise)" stroke-width="7"/>
+
+            <!-- temples -->
+            <path d="M 160 140 Q 130 145 95 155" stroke="url(#tortoise)" stroke-width="5" fill="none" stroke-linecap="round"/>
+            <path d="M 480 140 Q 510 145 545 155" stroke="url(#tortoise)" stroke-width="5" fill="none" stroke-linecap="round"/>
+
+            <!-- gold accent dots at hinges -->
+            <circle cx="162" cy="142" r="3.5" fill="#C9A063"/>
+            <circle cx="478" cy="142" r="3.5" fill="#C9A063"/>
+          </g>
+        </svg>
+      </div>
+
+      <div class="diagram-callouts">
+        <div class="callout">
+          <div class="callout-num">i</div>
+          <div class="callout-label">Warm frame</div>
+          <p class="callout-desc">Tortoise, champagne, milky pink, cream.</p>
+        </div>
+        <div class="callout">
+          <div class="callout-num">ii</div>
+          <div class="callout-label">Soft cat-eye</div>
+          <p class="callout-desc">Subtle upsweep, lifts the face.</p>
+        </div>
+        <div class="callout">
+          <div class="callout-num">iii</div>
+          <div class="callout-label">Medium-large</div>
+          <p class="callout-desc">Generous but not oversized.</p>
+        </div>
+        <div class="callout">
+          <div class="callout-num">iv</div>
+          <div class="callout-label">Warm lens tint</div>
+          <p class="callout-desc">Brown, amber, honey gradient.</p>
+        </div>
+        <div class="callout">
+          <div class="callout-num">v</div>
+          <div class="callout-label">Gold accents</div>
+          <p class="callout-desc">Matches jewellery and palette.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- OPTION B, VISUAL SWATCHES                                   -->
+<!-- ============================================================ -->
+<section class="option" id="b">
+  <div class="container">
+    <div class="option-tag">Option B</div>
+    <h2 class="option-title">Each criterion gets <em>a swatch</em>.</h2>
+    <p class="option-note">Keeps the five-column rhythm you already have, but each card opens with a concrete visual artefact (a colour chip, a shape, a scale, a gradient, a gold dot). Lowest-risk upgrade, slots in without changing the layout.</p>
+
+    <div class="swatch-grid">
+      <!-- Warm frame, tortoise palette chips -->
+      <div class="swatch-cell">
+        <div class="swatch-visual">
+          <svg viewBox="0 0 200 80" width="100%" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <pattern id="tort2" patternUnits="userSpaceOnUse" width="14" height="14">
+                <rect width="14" height="14" fill="#6E4220"/>
+                <circle cx="4" cy="4" r="2.4" fill="#3A1E0A"/>
+                <circle cx="10" cy="10" r="2" fill="#3A1E0A"/>
+                <circle cx="2" cy="11" r="1.2" fill="#8B5A2B"/>
+              </pattern>
+            </defs>
+            <rect x="0" y="14" width="40" height="52" rx="2" fill="url(#tort2)"/>
+            <rect x="44" y="14" width="40" height="52" rx="2" fill="#D8B788"/>
+            <rect x="88" y="14" width="40" height="52" rx="2" fill="#E8C8B8"/>
+            <rect x="132" y="14" width="40" height="52" rx="2" fill="#F0E4D0"/>
+          </svg>
+        </div>
+        <div class="swatch-num">i.</div>
+        <div class="swatch-label">Warm frame</div>
+        <p class="swatch-desc">Tortoise, champagne, milky pink, cream. Cool whites and greys clash with warm undertones.</p>
+      </div>
+
+      <!-- Soft cat-eye, silhouette -->
+      <div class="swatch-cell">
+        <div class="swatch-visual">
+          <svg viewBox="0 0 200 80" width="100%" xmlns="http://www.w3.org/2000/svg">
+            <path d="M 20 50 Q 22 22 70 22 Q 118 22 95 48 Q 92 62 56 62 Q 22 62 20 50 Z" fill="none" stroke="#6E4220" stroke-width="3"/>
+            <path d="M 110 50 Q 112 22 158 22 Q 200 22 180 48 Q 178 62 142 62 Q 112 62 110 50 Z" fill="none" stroke="#6E4220" stroke-width="3"/>
+            <path d="M 100 38 Q 105 33 110 38" fill="none" stroke="#6E4220" stroke-width="3"/>
+          </svg>
+        </div>
+        <div class="swatch-num">ii.</div>
+        <div class="swatch-label">Soft cat-eye</div>
+        <p class="swatch-desc">Or squared cat-eye with subtle upsweep. Lifts the face. Pure rounds and sharp angles underperform.</p>
+      </div>
+
+      <!-- Medium-large, size scale -->
+      <div class="swatch-cell">
+        <div class="swatch-visual">
+          <svg viewBox="0 0 200 80" width="100%" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="22" cy="44" r="14" fill="none" stroke="#9B8567" stroke-width="2" stroke-dasharray="3 3"/>
+            <circle cx="65" cy="44" r="20" fill="none" stroke="#9B8567" stroke-width="2" stroke-dasharray="3 3"/>
+            <circle cx="118" cy="44" r="26" fill="#F5E6D0" stroke="#6E4220" stroke-width="3"/>
+            <text x="118" y="48" text-anchor="middle" fill="#6E4220" font-family="Fraunces" font-style="italic" font-size="11">here</text>
+            <circle cx="172" cy="44" r="22" fill="none" stroke="#9B8567" stroke-width="2" stroke-dasharray="3 3"/>
+          </svg>
+        </div>
+        <div class="swatch-num">iii.</div>
+        <div class="swatch-label">Medium-large</div>
+        <p class="swatch-desc">Generous but not oversized. Small narrow frames ageing, oversized round overwhelming.</p>
+      </div>
+
+      <!-- Warm lens tint, gradient -->
+      <div class="swatch-cell">
+        <div class="swatch-visual">
+          <svg viewBox="0 0 200 80" width="100%" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="hg" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#C49566" stop-opacity="0.55"/>
+                <stop offset="100%" stop-color="#6E4220" stop-opacity="0.95"/>
+              </linearGradient>
+            </defs>
+            <circle cx="50" cy="40" r="28" fill="url(#hg)"/>
+            <circle cx="120" cy="40" r="28" fill="url(#hg)"/>
+            <path d="M 78 40 Q 85 35 92 40" fill="none" stroke="#6E4220" stroke-width="1.5" opacity="0.5"/>
+          </svg>
+        </div>
+        <div class="swatch-num">iv.</div>
+        <div class="swatch-label">Warm lens tint</div>
+        <p class="swatch-desc">Brown, amber, honey gradient make brown eyes glow. Cool blue/pink clashes.</p>
+      </div>
+
+      <!-- Gold accents, dot detail -->
+      <div class="swatch-cell">
+        <div class="swatch-visual">
+          <svg viewBox="0 0 200 80" width="100%" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <radialGradient id="gold" cx="35%" cy="35%">
+                <stop offset="0%" stop-color="#F0D9A8"/>
+                <stop offset="50%" stop-color="#C9A063"/>
+                <stop offset="100%" stop-color="#8B6F3E"/>
+              </radialGradient>
+            </defs>
+            <rect x="20" y="38" width="160" height="6" rx="3" fill="#6E4220" opacity="0.4"/>
+            <circle cx="50" cy="41" r="9" fill="url(#gold)"/>
+            <circle cx="100" cy="41" r="9" fill="url(#gold)"/>
+            <circle cx="150" cy="41" r="9" fill="url(#gold)"/>
+          </svg>
+        </div>
+        <div class="swatch-num">v.</div>
+        <div class="swatch-label">Gold accents</div>
+        <p class="swatch-desc">Matches existing jewellery and warm palette. Silver on warm frames reads mismatched.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- OPTION C, DO / DON'T                                        -->
+<!-- ============================================================ -->
+<section class="option" id="c">
+  <div class="container">
+    <div class="option-tag">Option C</div>
+    <h2 class="option-title">Five criteria, ten <em>rules</em>.</h2>
+    <p class="option-note">Each card lifts the implicit "don't" out of the prose and surfaces it as a strike-through. Reads as a checklist, gives the page editorial opinion, useful if the goal is to make the formula feel earned, not arbitrary.</p>
+
+    <div class="dodont-grid">
+      <div class="dodont-cell">
+        <div class="dodont-num">i.</div>
+        <div class="dodont-label">Warm frame</div>
+        <div class="dodont-row yes"><span class="dodont-mark">✓</span>Tortoise, champagne, milky pink, cream</div>
+        <div class="dodont-row no"><span class="dodont-mark">×</span>Cool whites, blacks, greys</div>
+      </div>
+      <div class="dodont-cell">
+        <div class="dodont-num">ii.</div>
+        <div class="dodont-label">Soft cat-eye</div>
+        <div class="dodont-row yes"><span class="dodont-mark">✓</span>Subtle upsweep, squared cat-eye</div>
+        <div class="dodont-row no"><span class="dodont-mark">×</span>Pure rounds, sharp angles</div>
+      </div>
+      <div class="dodont-cell">
+        <div class="dodont-num">iii.</div>
+        <div class="dodont-label">Medium-large</div>
+        <div class="dodont-row yes"><span class="dodont-mark">✓</span>Generous lens, restrained frame</div>
+        <div class="dodont-row no"><span class="dodont-mark">×</span>Tiny narrow, oversized round</div>
+      </div>
+      <div class="dodont-cell">
+        <div class="dodont-num">iv.</div>
+        <div class="dodont-label">Warm lens tint</div>
+        <div class="dodont-row yes"><span class="dodont-mark">✓</span>Brown, amber, honey gradient</div>
+        <div class="dodont-row no"><span class="dodont-mark">×</span>Cool blue, grey, pink tint</div>
+      </div>
+      <div class="dodont-cell">
+        <div class="dodont-num">v.</div>
+        <div class="dodont-label">Gold accents</div>
+        <div class="dodont-row yes"><span class="dodont-mark">✓</span>Gold hinges, gold logo, gold rivets</div>
+        <div class="dodont-row no"><span class="dodont-mark">×</span>Silver hardware on warm frames</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- OPTION D, EDITORIAL SPREAD                                  -->
+<!-- ============================================================ -->
+<section class="option" id="d">
+  <div class="container">
+    <div class="option-tag">Option D</div>
+    <h2 class="option-title">A <em>hero</em> criterion, four supporting.</h2>
+    <p class="option-note">Magazine spread layout. One criterion gets blown up as the visual anchor (here, "Soft cat-eye", the shape that does the most work), the rest stay tight in a right column. Slightly more opinionated, very editorial.</p>
+
+    <div class="editorial-grid">
+      <!-- Hero criterion -->
+      <div class="ed-hero">
+        <div class="ed-hero-visual">
+          <svg viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="lensTintD" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#A86E3A" stop-opacity="0.7"/>
+                <stop offset="100%" stop-color="#6E4220" stop-opacity="0.95"/>
+              </linearGradient>
+              <pattern id="tortD" patternUnits="userSpaceOnUse" width="14" height="14">
+                <rect width="14" height="14" fill="#6E4220"/>
+                <circle cx="4" cy="4" r="2.4" fill="#3A1E0A"/>
+                <circle cx="10" cy="10" r="2" fill="#3A1E0A"/>
+                <circle cx="2" cy="11" r="1.2" fill="#8B5A2B"/>
+              </pattern>
+            </defs>
+            <path d="M 40 120 Q 45 65 130 65 Q 215 65 195 110 Q 190 150 130 154 Q 50 154 40 120 Z" fill="url(#lensTintD)" stroke="url(#tortD)" stroke-width="7"/>
+            <path d="M 195 110 Q 220 100 245 105" stroke="url(#tortD)" stroke-width="5" fill="none" stroke-linecap="round"/>
+            <path d="M 245 110 Q 250 65 320 65 Q 360 65 345 105 Q 340 145 290 147 Q 250 147 245 115 Z" fill="url(#lensTintD)" stroke="url(#tortD)" stroke-width="7"/>
+            <circle cx="42" cy="122" r="3.5" fill="#C9A063"/>
+            <circle cx="343" cy="108" r="3.5" fill="#C9A063"/>
+          </svg>
+        </div>
+        <div>
+          <div class="ed-hero-num">ii. The shape</div>
+          <h3 class="ed-hero-label"><em>Soft</em> cat-eye.</h3>
+          <p class="ed-hero-desc">A subtle upsweep at the temple, just enough to lift the face. Squared cat-eye works too. Pure rounds flatten, sharp angles harden, this is the in-between.</p>
+        </div>
+      </div>
+
+      <!-- Side criteria -->
+      <div class="ed-side">
+        <div class="ed-side-cell">
+          <div class="ed-side-visual">
+            <svg viewBox="0 0 40 40" width="40" height="40" xmlns="http://www.w3.org/2000/svg">
+              <pattern id="tortSm" patternUnits="userSpaceOnUse" width="10" height="10">
+                <rect width="10" height="10" fill="#6E4220"/>
+                <circle cx="3" cy="3" r="1.8" fill="#3A1E0A"/>
+                <circle cx="7" cy="7" r="1.5" fill="#3A1E0A"/>
+              </pattern>
+              <circle cx="20" cy="20" r="16" fill="url(#tortSm)"/>
+            </svg>
+          </div>
+          <div class="ed-side-text">
+            <div class="ed-side-num">i.</div>
+            <div class="ed-side-label">Warm frame</div>
+            <p class="ed-side-desc">Tortoise, champagne, milky pink, cream. Never cool whites or greys.</p>
+          </div>
+        </div>
+
+        <div class="ed-side-cell">
+          <div class="ed-side-visual">
+            <svg viewBox="0 0 40 40" width="40" height="40" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="20" cy="20" r="8" fill="#9B8567" opacity="0.4"/>
+              <circle cx="20" cy="20" r="14" fill="none" stroke="#6E4220" stroke-width="2.5"/>
+            </svg>
+          </div>
+          <div class="ed-side-text">
+            <div class="ed-side-num">iii.</div>
+            <div class="ed-side-label">Medium-large</div>
+            <p class="ed-side-desc">Generous lens, restrained outline. Not tiny, not oversized.</p>
+          </div>
+        </div>
+
+        <div class="ed-side-cell">
+          <div class="ed-side-visual">
+            <svg viewBox="0 0 40 40" width="40" height="40" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="hgSm" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stop-color="#C49566" stop-opacity="0.55"/>
+                  <stop offset="100%" stop-color="#6E4220" stop-opacity="0.95"/>
+                </linearGradient>
+              </defs>
+              <circle cx="20" cy="20" r="14" fill="url(#hgSm)"/>
+            </svg>
+          </div>
+          <div class="ed-side-text">
+            <div class="ed-side-num">iv.</div>
+            <div class="ed-side-label">Warm lens tint</div>
+            <p class="ed-side-desc">Brown, amber, honey gradient. Makes brown eyes glow.</p>
+          </div>
+        </div>
+
+        <div class="ed-side-cell">
+          <div class="ed-side-visual">
+            <svg viewBox="0 0 40 40" width="40" height="40" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <radialGradient id="goldSm" cx="35%" cy="35%">
+                  <stop offset="0%" stop-color="#F0D9A8"/>
+                  <stop offset="50%" stop-color="#C9A063"/>
+                  <stop offset="100%" stop-color="#8B6F3E"/>
+                </radialGradient>
+              </defs>
+              <circle cx="20" cy="20" r="9" fill="url(#goldSm)"/>
+            </svg>
+          </div>
+          <div class="ed-side-text">
+            <div class="ed-side-num">v.</div>
+            <div class="ed-side-label">Gold accents</div>
+            <p class="ed-side-desc">Gold hardware matches the palette. Silver clashes.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="option" style="border-bottom: none;">
+  <div class="container">
+    <div class="option-tag">Next</div>
+    <h2 class="option-title">Pick one, I'll drop it into <em>index.html</em>.</h2>
+    <p class="option-note">All four are designed against the same palette and typography you already use, so the swap is purely the formula block. If a hybrid feels closer (say, A's diagram up top + C's do/don't rows below), say so and I'll build it.</p>
+  </div>
+</section>
+
+</body>
+</html>

@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interaction Design: Micro-interactions &amp; Motion — Noir Book</title>
+  <link rel="stylesheet" href="../css/shared.css">
+  <link rel="stylesheet" href="../css/topic.css">
+  <script src="../js/theme.js"></script>
+  <script src="../js/topic-nav.js"></script>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="site-nav subpage-nav" data-discipline="ux">
+    <div class="nav-inner">
+      <a href="../index.html" class="site-logo">
+        <span class="logo-mark">UX</span>
+        <span class="nav-title">Noir Book</span>
+      </a>
+      <a href="../index.html" class="nav-back-link">&#8592; Library</a>
+      <div class="nav-filters">
+        <button class="disc-toggle ux-toggle active" data-disc="ux" onclick="toggleDisc('ux')" title="UX Design">
+          <span class="disc-dot disc-dot-ux"></span><span class="disc-label">UX Design</span><span class="disc-code">(UX)</span>
+        </button>
+        <button class="disc-toggle pm-toggle active" data-disc="pm" onclick="toggleDisc('pm')" title="Product Management">
+          <span class="disc-dot disc-dot-pm"></span><span class="disc-label">Product</span><span class="disc-code">(PM)</span>
+        </button>
+        <button class="disc-toggle mk-toggle active" data-disc="mk" onclick="toggleDisc('mk')" title="Marketing &amp; Growth">
+          <span class="disc-dot disc-dot-mk"></span><span class="disc-label">Marketing</span><span class="disc-code">(MK)</span>
+        </button>
+        <button class="disc-toggle cs-toggle active" data-disc="cs" onclick="toggleDisc('cs')" title="Content Strategy">
+          <span class="disc-dot disc-dot-cs"></span><span class="disc-label">Content</span><span class="disc-code">(CS)</span>
+        </button>
+        <div class="search-box nav-search-box">
+          <div class="nav-search-wrap">
+            <div class="nav-search-pills" id="navSearchPills"></div>
+            <input type="text" id="navSearchInput" placeholder="Search..." autocomplete="off"
+              oninput="topicNavSearch(this.value)"
+              onkeydown="handleNavSearchKey(event)"
+              onfocus="handleNavSearchFocus()"
+              onblur="handleNavSearchBlur()">
+            <button type="button" class="nav-search-clear" id="navSearchClear" onclick="clearNavSearch()" aria-label="Clear search">&times;</button>
+          </div>
+          <div class="search-dropdown" id="navSearchDropdown"></div>
+        </div>
+      </div>
+      <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle theme">&#9790;</button>
+      <button class="burger-btn" id="burgerBtn" onclick="openBurger()" aria-label="Menu">
+        <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="2" y1="4" x2="16" y2="4"/><line x1="2" y1="9" x2="16" y2="9"/><line x1="2" y1="14" x2="16" y2="14"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Burger Menu Overlay -->
+  <div class="burger-overlay" id="burgerOverlay" onclick="closeBurger(event)">
+    <div class="burger-panel" onclick="event.stopPropagation()">
+      <div class="burger-panel-header">
+        <h3>Menu</h3>
+        <button class="burger-close" onclick="closeBurger()" aria-label="Close">&times;</button>
+      </div>
+      <div class="burger-search">
+        <input type="text" id="burgerSearchInput" placeholder="Search topics, methods..." autocomplete="off" oninput="burgerSearch(this.value)">
+        <div class="burger-search-results" id="burgerSearchResults"></div>
+      </div>
+      <div class="burger-links">
+        <a href="../index.html">&#8592; Back to Library</a>
+        <a href="../design-system.html">Design System</a>
+        <a href="../request-topic.html">Suggest a topic or improvement</a>
+      </div>
+      <div class="burger-toc-section">
+        <p class="burger-toc-title">On this page</p>
+        <ul class="burger-toc-list">
+        <li><a href="#what-and-why" data-section="theory">What interaction design is and why motion matters</a></li>
+        <li><a href="#motion-principles" data-section="theory">Principles of motion design</a></li>
+        <li><a href="#micro-interactions" data-section="practical">Micro-interactions</a></li>
+        <li><a href="#state-transitions" data-section="practical">State transitions</a></li>
+        <li><a href="#feedback-patterns" data-section="practical">Feedback patterns</a></li>
+        <li><a href="#animation-purpose" data-section="practical">Functional vs decorative animation</a></li>
+        <li><a href="#reduced-motion" data-section="practical">Reduced motion and accessibility</a></li>
+        <li><a href="#notification-design" data-section="practical">Notification and attention design</a></li>
+        <li><a href="#templates" data-section="practical">Templates and checklists</a></li>
+        <li><a href="#real-world-examples" data-section="examples">Real-world examples</a></li>
+        <li><a href="#pitfalls" data-section="practical">Common pitfalls</a></li>
+        <li><a href="#connections">Connected topics in your library</a></li>
+        <li><a href="#deep-dive">Deep-dive appendix</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Topic Header -->
+  <header class="topic-header container">
+    <div class="breadcrumb">
+      <a href="../index.html">Library</a>
+      <span class="sep">&#8250;</span>
+      <span class="breadcrumb-disc breadcrumb-ux">UX Design</span>
+      <span class="sep">&#8250;</span>
+      <span>Tier 1 — Core Toolkit</span>
+      <span class="sep">&#8250;</span>
+      <span>Interaction Design</span>
+    </div>
+    <div class="topic-meta">
+      <span class="tier-badge tier1">Tier 1</span>
+      <span style="font-size:14px;color:var(--ink-muted)">Topic UX.1.09</span>
+    </div>
+    <h1>Interaction Design: Micro-interactions &amp; Motion</h1>
+    <p class="topic-subtitle">How interfaces respond, move, and communicate through animation, transitions, state changes, and feedback timing. The layer that makes UI feel alive.</p>
+    <div class="content-splits">
+      <span class="split-badge theory">25% Theory</span>
+      <span class="split-badge practical">50% Methods &amp; Templates</span>
+      <span class="split-badge examples">25% Examples</span>
+    </div>
+  </header>
+
+  <!-- Reading Progress Bar -->
+  <div class="reading-progress" id="readingProgress"></div>
+
+  <!-- Main Layout -->
+  <div class="container">
+    <div class="topic-layout">
+
+      <!-- Sidebar: Table of Contents -->
+      <aside class="topic-sidebar">
+        <nav class="toc">
+          <p class="sidebar-topic-title">Interaction Design: Micro-interactions &amp; Motion</p>
+          <p class="toc-title">On this page</p>
+          <ul class="toc-list">
+            <li><a href="#what-and-why" data-section="theory">What interaction design is and why motion matters</a></li>
+            <li><a href="#motion-principles" data-section="theory">Principles of motion design</a></li>
+            <li><a href="#micro-interactions" data-section="practical">Micro-interactions</a></li>
+            <li><a href="#state-transitions" data-section="practical">State transitions</a></li>
+            <li><a href="#feedback-patterns" data-section="practical">Feedback patterns</a></li>
+            <li><a href="#animation-purpose" data-section="practical">Functional vs decorative animation</a></li>
+            <li><a href="#reduced-motion" data-section="practical">Reduced motion and accessibility</a></li>
+            <li><a href="#notification-design" data-section="practical">Notification and attention design</a></li>
+            <li><a href="#templates" data-section="practical">Templates and checklists</a></li>
+            <li><a href="#real-world-examples" data-section="examples">Real-world examples</a></li>
+            <li><a href="#pitfalls" data-section="practical">Common pitfalls</a></li>
+            <li><a href="#connections">Connected topics in your library</a></li>
+            <li><a href="#deep-dive">Deep-dive appendix</a></li>
+          </ul>
+        </nav>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="topic-main topic-content">
+
+        <div class="section-marker" id="what-and-why">
+          <span class="split-badge theory">Theory</span>
+          <span class="marker-line"></span>
+        </div>
+
+        <section data-section="theory">
+  <h2>What interaction design is and why motion matters</h2>
+
+  <p>Interaction design is the practice of shaping how users and products communicate through behavior. While visual design determines how an interface looks, interaction design determines how it feels — how it responds to input, how elements move and change, how the system communicates its state.</p>
+
+  <p>Motion in interfaces serves a functional purpose. It shows cause and effect (I tapped this, and that happened). It maintains spatial orientation (this panel slid in from the right, so I know it's "beside" the previous view). It communicates status (the spinner tells me something is loading). It directs attention (the notification badge pulsed, so I noticed it). Without motion, interfaces feel mechanical and disconnected — users lose context during transitions and miss state changes.</p>
+
+  <p>The key principle: motion should be invisible. Users shouldn't notice your animations — they should simply feel that the interface is responsive, clear, and natural. When someone notices the animation itself, it's usually too slow, too flashy, or too decorative.</p>
+</section>
+
+<section id="motion-principles" data-section="theory">
+  <h2>Principles of motion design</h2>
+
+  <div class="method-card">
+    <h4>The Twelve Principles (adapted from Disney) <span class="method-tag">Framework</span></h4>
+    <p class="method-when">Use this to evaluate whether an animation feels right.</p>
+    <p>Disney's animation principles translate surprisingly well to UI. The most relevant for interfaces: <strong>Easing</strong> (objects accelerate and decelerate naturally — never move at constant speed). <strong>Anticipation</strong> (a brief wind-up before the main action — a button scales down slightly before the press response). <strong>Follow-through</strong> (elements settle after arriving — a slight overshoot and bounce-back). <strong>Staging</strong> (direct the user's attention to the most important change). <strong>Secondary action</strong> (supporting animations that reinforce the primary action without competing for attention).</p>
+  </div>
+
+  <div class="callout info">
+    <p class="callout-title">Duration guidelines</p>
+    <p><strong>Micro-interactions:</strong> 100–300ms. Button press feedback, toggle switches, tooltips. Fast enough to feel instant, slow enough to be perceived. <strong>Transitions:</strong> 200–500ms. Page transitions, modal open/close, panel slide. Long enough to maintain spatial context. <strong>Complex choreography:</strong> 300–700ms. Staggered list animations, multi-element transitions. Each element gets 50–100ms, staggered by 30–50ms. <strong>Never exceed 1 second</strong> for any UI animation — after that, users feel like they're waiting for the interface rather than using it.</p>
+  </div>
+
+  <div class="callout tip">
+    <p class="callout-title">The easing rule</p>
+    <p>Never use linear easing for UI motion. Objects in the real world don't move at constant speed — they accelerate and decelerate. Use <code>ease-out</code> for elements entering the screen (fast start, gentle landing). Use <code>ease-in</code> for elements leaving (slow start, fast exit). Use <code>ease-in-out</code> for elements moving within the screen. The difference between linear and eased motion is the difference between robotic and natural.</p>
+  </div>
+</section>
+
+        <div class="section-marker" id="micro-interactions">
+          <span class="split-badge practical">Practical</span>
+          <span class="marker-line"></span>
+        </div>
+
+        <section data-section="practical">
+  <h2>Micro-interactions</h2>
+
+  <p>Micro-interactions are contained moments of interaction — a single use case with a clear trigger, rules, feedback, and loop. Dan Saffer's framework breaks every micro-interaction into four parts:</p>
+
+  <div class="method-card">
+    <h4>Micro-interaction Anatomy <span class="method-tag">Framework</span></h4>
+    <p class="method-when">Use this to design any small, contained interaction.</p>
+    <div class="process-steps">
+      <div class="process-step">
+        <div class="process-step-content">
+          <h4>Trigger</h4>
+          <p>What initiates the interaction. User-initiated triggers: clicking a button, swiping, typing. System-initiated triggers: receiving a notification, reaching a threshold, a timer expiring. Every micro-interaction starts with one of these.</p>
+        </div>
+      </div>
+      <div class="process-step">
+        <div class="process-step-content">
+          <h4>Rules</h4>
+          <p>What happens when the trigger fires. The rules define the behavior: what changes, what's affected, what the constraints are. "When the user toggles the switch, change the setting and sync to the server." Rules are invisible to users but define the entire logic.</p>
+        </div>
+      </div>
+      <div class="process-step">
+        <div class="process-step-content">
+          <h4>Feedback</h4>
+          <p>How the system communicates what happened. Visual feedback (color change, animation), auditory feedback (click sound, notification chime), haptic feedback (vibration). Feedback must be immediate, proportional to the action, and clearly connected to the trigger.</p>
+        </div>
+      </div>
+      <div class="process-step">
+        <div class="process-step-content">
+          <h4>Loops and modes</h4>
+          <p>What happens over time. Does the interaction repeat? Does it change with repeated use? Does it expire? A "like" animation plays once per tap. A loading spinner loops until the data arrives. A notification badge persists until acknowledged. Modes are alternate states: a toggle that changes behavior between two modes.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="method-card">
+    <h4>Common Micro-interactions <span class="method-tag">Core Method</span></h4>
+    <p class="method-when">Use when: designing any interactive element.</p>
+    <p><strong>Button press:</strong> Visual depression on press (scale to 0.97), color shift, then release. 100–150ms. <strong>Toggle switch:</strong> Thumb slides with easing, track color transitions, optional haptic on mobile. 200ms. <strong>Pull-to-refresh:</strong> Elastic resistance while pulling, spinner appears at threshold, content reloads, spinner fades. <strong>Swipe to delete:</strong> Item slides to reveal action, color change indicates danger zone, release triggers action or snaps back. <strong>Form validation:</strong> Inline feedback as user types (checkmark, error icon), not just on submit.</p>
+  </div>
+</section>
+
+<section id="state-transitions" data-section="practical">
+  <h2>State transitions</h2>
+
+  <div class="method-card">
+    <h4>The Five UI States <span class="method-tag">Framework</span></h4>
+    <p class="method-when">Use when: designing any component that loads or displays data.</p>
+    <p>Every data-dependent component exists in five states. Designing for only the "ideal" populated state leaves users confused when anything else happens.</p>
+    <p><strong>Empty state:</strong> No data yet. Don't show a blank screen — explain what will appear here and how to get started. The best empty states are onboarding moments. <strong>Loading state:</strong> Data is being fetched. Use skeleton screens (content-shaped placeholders) over spinners when possible — they give a sense of what's coming. <strong>Partial state:</strong> Some data, not all. Handle gracefully — show what you have, indicate what's missing. <strong>Error state:</strong> Something went wrong. Say what happened and what the user can do about it. Offer retry. <strong>Ideal state:</strong> Everything works. This is what most teams design first (and sometimes only).</p>
+  </div>
+
+  <div class="callout tip">
+    <p class="callout-title">Skeleton screens vs spinners</p>
+    <p>Skeleton screens (gray shapes mimicking the content layout) make perceived load time feel shorter than spinners. The user's brain starts processing the layout before data arrives, so the transition from skeleton to content feels like a reveal rather than a wait. Use skeletons when you know the content structure. Use spinners when the content structure is unpredictable or when a discrete action is processing (submitting a form, saving a file).</p>
+  </div>
+</section>
+
+<section id="feedback-patterns" data-section="practical">
+  <h2>Feedback patterns</h2>
+
+  <div class="method-card">
+    <h4>Hover and Focus States <span class="method-tag">Core Pattern</span></h4>
+    <p class="method-when">Use when: designing any interactive element.</p>
+    <p>Hover states communicate "this is interactive" before the user clicks. A subtle background shift, underline appearance, or shadow elevation. Don't make hover states too dramatic — they fire constantly as the cursor moves. Focus states (for keyboard navigation) must be visible and distinct from hover — typically an outline or ring. Never share the same visual treatment between hover and focus; keyboard users need to know which element is focused even without a cursor present.</p>
+  </div>
+
+  <div class="method-card">
+    <h4>Progress and Loading Feedback <span class="method-tag">Core Pattern</span></h4>
+    <p class="method-when">Use when: any operation takes longer than 1 second.</p>
+    <p>Under 1 second: no feedback needed — the result should just appear. 1–3 seconds: show a spinner or skeleton screen. 3–10 seconds: show a progress bar with indication of progress (determinate if possible, indeterminate if not). Over 10 seconds: show progress with estimated time remaining and allow the user to do other things. Over 1 minute: send a notification when done, let the user navigate away.</p>
+  </div>
+
+  <div class="method-card">
+    <h4>Success and Confirmation <span class="method-tag">Core Pattern</span></h4>
+    <p class="method-when">Use when: a user action completes successfully.</p>
+    <p>Success feedback should be proportional to the action's importance. Saving a document: a brief checkmark or "Saved" label that fades after 2 seconds. Completing a purchase: a dedicated success screen with order details. Sending a message: the message appears in the conversation with a "sent" indicator. The common mistake is over-celebrating trivial actions (full-screen confetti for toggling a setting) or under-acknowledging important ones (no confirmation after deleting a file).</p>
+  </div>
+</section>
+
+<section id="animation-purpose" data-section="practical">
+  <h2>Functional vs decorative animation</h2>
+
+  <div class="callout info">
+    <p class="callout-title">The purpose test</p>
+    <p>Before adding any animation, ask: "If I remove this animation, does the user lose information or context?" If yes, it's functional — keep it. If no, it's decorative — justify it carefully. Functional animation clarifies relationships, provides feedback, or maintains spatial context. Decorative animation adds personality but costs performance and can distract. Most products need more functional animation and less decorative animation.</p>
+  </div>
+
+  <p><strong>Functional examples:</strong> A sidebar sliding in from the left (spatial context). A checkmark appearing after form validation (feedback). Items reordering smoothly after a sort (continuity). A modal dimming the background (focus direction). <strong>Decorative examples:</strong> A logo animation on page load. Parallax scrolling effects. Particle effects on button hover. Bouncing notification badges. Decorative animation isn't wrong, but it should be used sparingly and always with a <code>prefers-reduced-motion</code> fallback.</p>
+</section>
+
+<section id="reduced-motion" data-section="practical">
+  <h2>Reduced motion and accessibility</h2>
+
+  <div class="method-card">
+    <h4>prefers-reduced-motion <span class="method-tag">Core Pattern</span></h4>
+    <p class="method-when">Use when: implementing any animation in CSS or JavaScript.</p>
+    <p>Some users experience motion sickness, seizures, or distraction from animation. The <code>prefers-reduced-motion</code> media query lets you respect their system preference. At minimum: disable parallax, auto-playing video, and complex transitions. Replace animated transitions with instant state changes (opacity crossfade is usually acceptable). Never remove functional feedback — just make it non-animated. In CSS: <code>@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; } }</code></p>
+  </div>
+
+  <div class="callout warning">
+    <p class="callout-title">Vestibular disorders affect more people than you think</p>
+    <p>An estimated 35% of adults over 40 have experienced vestibular dysfunction. Large-scale motion (full-screen transitions, parallax), zoom effects, and animations that move in multiple directions simultaneously are the most problematic. Supporting reduced motion isn't an edge case — it's a significant portion of your user base.</p>
+  </div>
+</section>
+
+<section id="notification-design" data-section="practical">
+  <h2>Notification and attention design</h2>
+
+  <div class="method-card">
+    <h4>Notification Design Framework <span class="method-tag">Core Method</span></h4>
+    <p class="method-when">Use when: designing how your product communicates with users across different urgency levels, or when users complain about notification fatigue.</p>
+    <p>Notifications are an interaction design problem, not just a feature. Every notification is an interruption — and interruptions have cognitive costs. The framework: <strong>Alert hierarchy</strong> defines urgency levels and the interaction pattern each deserves. Critical alerts (security breach, payment failure) warrant modal interruption. Important updates (new message, task assigned) warrant persistent but non-blocking indicators (badges, banners). Informational updates (weekly digest, feature announcement) warrant passive indicators (inbox items, feed entries). The hierarchy must be strict: promoting low-urgency notifications to high-urgency channels trains users to ignore everything. <strong>Interruption management</strong> gives users control over when and how they're interrupted: do-not-disturb modes, notification schedules, per-channel granularity, and smart batching that groups low-urgency notifications into periodic digests. <strong>Smart notification patterns</strong> use context to suppress or modify: don't send a push notification if the user is actively in the app, combine multiple notifications from the same source, and decay notification urgency over time. <strong>AI-generated notification governance</strong> is the emerging challenge: as AI systems generate more proactive recommendations, alerts, and suggestions, designers need policies for how many AI-initiated notifications are acceptable, quality thresholds before surfacing an AI suggestion, and clear visual differentiation between human-triggered and AI-triggered notifications.</p>
+  </div>
+</section>
+
+<section id="templates" data-section="practical">
+  <h2>Templates and checklists</h2>
+
+  <div class="template-box">
+    <div class="template-header">
+      <span class="template-label">Checklist</span>
+      <span class="template-title">Motion Design Review</span>
+    </div>
+    <ul class="checklist">
+      <li>Every animation has a functional purpose (feedback, context, direction)</li>
+      <li>Durations are appropriate (100–300ms for micro-interactions, 200–500ms for transitions)</li>
+      <li>Easing is non-linear (ease-out for enter, ease-in for exit)</li>
+      <li>No animation exceeds 1 second</li>
+      <li>prefers-reduced-motion is respected for all decorative animation</li>
+      <li>Functional feedback is preserved in reduced-motion mode (instant state changes)</li>
+      <li>All five UI states are designed (empty, loading, partial, error, ideal)</li>
+      <li>Loading feedback matches operation duration (spinner for 1–3s, progress bar for 3–10s)</li>
+      <li>Hover and focus states are visually distinct from each other</li>
+      <li>Success feedback is proportional to action importance</li>
+      <li>No auto-playing animation without user control</li>
+    </ul>
+  </div>
+</section>
+
+        <div class="section-marker" id="real-world-examples">
+          <span class="split-badge examples">Examples</span>
+          <span class="marker-line"></span>
+        </div>
+
+        <section data-section="examples">
+  <h2>Real-world examples</h2>
+
+  <div class="case-study">
+    <p class="case-label">Case study</p>
+    <h4>Stripe: micro-interactions that build trust</h4>
+    <p>Stripe's payment forms use micro-interactions to reduce anxiety during the most critical moment — entering payment details. The credit card number field formats as you type (adding spaces every 4 digits), the card brand icon appears when the number is recognized (Visa, Mastercard), and inline validation confirms each field before you move to the next. The entire form provides continuous, reassuring feedback that says "everything is working correctly" without interrupting the flow.</p>
+    <p><strong>Why it works:</strong> Each micro-interaction reduces cognitive load and builds confidence. The user never wonders "did that work?" — the interface tells them in real time.</p>
+  </div>
+
+  <div class="case-study">
+    <p class="case-label">Case study</p>
+    <h4>iOS: spatial model and physics-based motion</h4>
+    <p>Apple's iOS uses a consistent spatial model: apps live on the home screen, and launching an app zooms into it. Closing zooms back out. Notifications slide down from the top (where they "live"). Control Center slides up from the bottom. This spatial consistency means users always know where things are, even in a 2D interface. The physics-based motion (momentum scrolling, rubber-banding at scroll limits, spring animations) makes the interface feel like it has physical properties — you can almost feel the weight of the elements.</p>
+    <p><strong>Why it works:</strong> Spatial consistency reduces disorientation. Physics-based motion makes abstract digital objects feel tangible and predictable.</p>
+  </div>
+
+  <div class="case-study">
+    <p class="case-label">Case study</p>
+    <h4>Slack: loading states and status communication</h4>
+    <p>Slack uses skeleton screens for channel loading, typing indicators for real-time presence awareness, and message delivery indicators (sent → delivered → read). When a message fails to send, the interface doesn't silently fail — it shows a red error indicator with a retry button. The loading experience is particularly notable: skeleton screens match the exact layout of messages, so the transition from loading to loaded feels like content "filling in" rather than replacing a spinner.</p>
+    <p><strong>Why it works:</strong> Every state transition communicates clearly. Users always know what's happening, what worked, and what didn't.</p>
+  </div>
+</section>
+
+<section id="pitfalls" data-section="practical">
+  <h2>Common pitfalls</h2>
+
+  <div class="pitfall">
+    <div class="pitfall-icon">!</div>
+    <div>
+      <h4>Animation for animation's sake</h4>
+      <p>Adding motion to make the interface "feel premium" without functional purpose. Every animation should pass the removal test: if you take it away and nothing is lost (no context, no feedback, no direction), it shouldn't exist. Decorative animation has a high cost in performance, accessibility, and user patience.</p>
+    </div>
+  </div>
+
+  <div class="pitfall">
+    <div class="pitfall-icon">!</div>
+    <div>
+      <h4>Animations that are too slow</h4>
+      <p>A 500ms button press animation feels sluggish. A 1-second page transition makes the app feel heavy. Users of modern interfaces expect near-instant feedback. When in doubt, make it faster. The most common timing mistake is applying the same duration to everything — a tooltip should appear in 100ms, not the same 300ms as a modal transition.</p>
+    </div>
+  </div>
+
+  <div class="pitfall">
+    <div class="pitfall-icon">!</div>
+    <div>
+      <h4>Ignoring reduced motion preferences</h4>
+      <p>Approximately 35% of adults over 40 have vestibular issues. Parallax, zoom effects, and complex transitions cause real discomfort for these users. <code>prefers-reduced-motion</code> is easy to implement and has been supported by all major browsers since 2019. There's no excuse for ignoring it.</p>
+    </div>
+  </div>
+</section>
+
+<section id="connections">
+  <h2>Connected topics in your library</h2>
+  <div class="cross-ref-grid">
+    <a href="ui-design-patterns.html" class="cross-ref-card">
+      <span class="ref-number">Tier 1</span>
+      <div class="ref-title">UI Design Patterns</div>
+      <div class="ref-reason">Interaction design brings UI patterns to life — how modals open, how navigation responds, how forms validate.</div>
+    </a>
+    <a href="usability.html" class="cross-ref-card">
+      <span class="ref-number">Tier 1</span>
+      <div class="ref-title">Usability</div>
+      <div class="ref-reason">Feedback and state communication are core usability heuristics. Motion is the vehicle.</div>
+    </a>
+    <a href="accessibility.html" class="cross-ref-card">
+      <span class="ref-number">Tier 1</span>
+      <div class="ref-title">Accessibility</div>
+      <div class="ref-reason">Reduced motion, focus management, and screen reader announcements are where interaction design meets accessibility.</div>
+    </a>
+    <a href="visual-design.html" class="cross-ref-card">
+      <span class="ref-number">Tier 1</span>
+      <div class="ref-title">Visual Design</div>
+      <div class="ref-reason">Visual hierarchy and motion hierarchy work together — both direct attention and communicate importance.</div>
+    </a>
+  </div>
+</section>
+
+<div class="deep-dive-section" id="deep-dive">
+          <div class="deep-dive-header">
+            <span class="deep-dive-badge">Deep Dive</span>
+            <h2 style="margin:0; border:none; padding:0;">Appendix</h2>
+          </div>
+
+  <details class="expandable">
+    <summary><span class="chevron"><svg viewBox="0 0 14 14"><polyline points="4,2 10,7 4,12"/></svg></span> Dan Saffer's micro-interaction model in depth</summary>
+    <div class="expand-content topic-content">
+      <h4>Signature moments</h4>
+      <p>Saffer argues that the best products are defined by their micro-interactions — the "signature moments" that users remember and associate with the product. Twitter's pull-to-refresh (which they popularized), Facebook's like animation, Tinder's swipe-to-match. These aren't features — they're micro-interactions that became synonymous with the product. The opportunity: identify 2-3 interactions in your product that could become signature moments and invest in making them exceptional.</p>
+
+      <h4>Loops that evolve</h4>
+      <p>Advanced micro-interactions change over time. A notification sound could become quieter if the user dismisses it repeatedly (the system learns it's low priority). A streak counter could add visual flourish as the streak gets longer (progressive reward). A dark mode toggle could remember per-device preferences. These "long loops" create the feeling that the product knows the user — a powerful retention driver.</p>
+    </div>
+  </details>
+
+  <details class="expandable">
+    <summary><span class="chevron"><svg viewBox="0 0 14 14"><polyline points="4,2 10,7 4,12"/></svg></span> CSS and JS animation reference</summary>
+    <div class="expand-content topic-content">
+      <h4>CSS transitions vs animations</h4>
+      <p><strong>Transitions:</strong> Use for simple state changes (hover, focus, active). Define the property, duration, and easing. Triggered by state change only. <strong>Animations:</strong> Use for multi-step sequences, looping, or keyframe-based motion. More flexible but heavier. <strong>Web Animations API:</strong> JavaScript-based, best for complex choreography, interruptible animations, and dynamic values. Prefer CSS for simple cases (it's GPU-accelerated by default for transform and opacity).</p>
+
+      <h4>Performance rules</h4>
+      <p>Only animate <code>transform</code> and <code>opacity</code> — these are GPU-composited and won't trigger layout recalculation. Animating <code>width</code>, <code>height</code>, <code>top</code>, <code>left</code>, <code>margin</code>, or <code>padding</code> triggers layout reflow on every frame and will jank on mobile. Use <code>transform: translateX()</code> instead of <code>left</code>. Use <code>transform: scale()</code> instead of <code>width/height</code>. Use <code>will-change</code> sparingly to hint the browser about upcoming animations.</p>
+    </div>
+  </details>
+
+  <details class="expandable">
+    <summary><span class="chevron"><svg viewBox="0 0 14 14"><polyline points="4,2 10,7 4,12"/></svg></span> Further reading and resources</summary>
+    <div class="expand-content topic-content">
+      <h4>Essential reading</h4>
+      <p><strong>"Microinteractions" by Dan Saffer</strong> — The definitive guide. Covers the trigger→rules→feedback→loops framework with dozens of examples.</p>
+      <p><strong>"Animation at Work" by Rachel Nabors</strong> — Practical guide to implementing motion in web interfaces. Bridges design theory and development.</p>
+      <p><strong>"Designing Interface Animation" by Val Head</strong> — Comprehensive coverage of motion design principles for UI, with attention to performance and accessibility.</p>
+
+      <h4>Tools</h4>
+      <p><strong>Figma Smart Animate:</strong> Prototype transitions between frames with automatic tweening.</p>
+      <p><strong>Principle / ProtoPie:</strong> Purpose-built for interaction prototyping with complex animations.</p>
+      <p><strong>Lottie:</strong> Export After Effects animations as lightweight JSON for web and mobile.</p>
+      <p><strong>Framer Motion:</strong> React animation library with spring physics and gesture support.</p>
+    </div>
+  </details>
+</div>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer container">
+    <div class="footer-inner">
+      <p>Noir Book — Built for the work, not the shelf.</p>
+      <div class="footer-links">
+        <a href="../design-system.html">Design System</a>
+        <a href="../library-manifest.json">Manifest</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to Top -->
+  <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">&#8593;</button>
+
+  <!-- Floating Mobile TOC -->
+  <button class="mobile-toc-btn" id="mobileTocBtn" aria-label="Open table of contents">&#9776; Contents</button>
+  <div class="mobile-toc-overlay" id="mobileTocOverlay">
+    <div class="mobile-toc-panel">
+      <div class="mobile-toc-panel-header">
+        <h3>On this page</h3>
+        <button class="mobile-toc-close" id="mobileTocClose" aria-label="Close">&times;</button>
+      </div>
+      <ul class="mobile-toc-list">
+        <li><a href="#what-and-why" data-section="theory">What interaction design is and why motion matters</a></li>
+        <li><a href="#motion-principles" data-section="theory">Principles of motion design</a></li>
+        <li><a href="#micro-interactions" data-section="practical">Micro-interactions</a></li>
+        <li><a href="#state-transitions" data-section="practical">State transitions</a></li>
+        <li><a href="#feedback-patterns" data-section="practical">Feedback patterns</a></li>
+        <li><a href="#animation-purpose" data-section="practical">Functional vs decorative animation</a></li>
+        <li><a href="#reduced-motion" data-section="practical">Reduced motion and accessibility</a></li>
+        <li><a href="#notification-design" data-section="practical">Notification and attention design</a></li>
+        <li><a href="#templates" data-section="practical">Templates and checklists</a></li>
+        <li><a href="#real-world-examples" data-section="examples">Real-world examples</a></li>
+        <li><a href="#pitfalls" data-section="practical">Common pitfalls</a></li>
+        <li><a href="#connections">Connected topics in your library</a></li>
+        <li><a href="#deep-dive">Deep-dive appendix</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    // Scrollspy: highlight active TOC item
+    const tocLinks = document.querySelectorAll('.toc-list a');
+    const sections = [];
+    tocLinks.forEach(link => {
+      const href = link.getAttribute('href');
+      if (!href || !href.startsWith('#')) return;
+      const el = document.getElementById(href.slice(1));
+      if (el) sections.push({ el, link });
+    });
+
+    // Reading progress bar
+    const progressBar = document.getElementById('readingProgress');
+    const backToTop = document.getElementById('backToTop');
+
+    function onScroll() {
+      let current = sections[0];
+      for (const s of sections) {
+        if (s.el.getBoundingClientRect().top <= 120) current = s;
+      }
+      tocLinks.forEach(l => l.classList.remove('active'));
+      if (current) current.link.classList.add('active');
+
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrolled = window.scrollY;
+      const progress = docHeight > 0 ? (scrolled / docHeight) * 100 : 0;
+      if (progressBar) progressBar.style.width = progress + '%';
+      if (backToTop) backToTop.classList.toggle('visible', scrolled > 400);
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    // Split badges: click to scroll to section
+    document.querySelectorAll('.content-splits .split-badge').forEach(function(badge) {
+      badge.addEventListener('click', function() {
+        var type = badge.classList.contains('theory') ? 'theory' : badge.classList.contains('practical') ? 'practical' : 'examples';
+        var target = document.querySelector('section[data-section="' + type + '"]');
+        if (target) {
+          var marker = target.previousElementSibling;
+          (marker && marker.classList.contains('section-marker') ? marker : target).scrollIntoView({behavior:'smooth'});
+        }
+      });
+    });
+  </script>
+
+  <script src="../js/checklist.js"></script>
+  <script src="../js/mobile-toc.js"></script>
+  <script src="../js/search.js"></script>
+  <script>
+    function openBurger(){document.getElementById('burgerOverlay').classList.add('open');document.body.style.overflow='hidden'}
+    function closeBurger(e){if(e&&e.target&&e.target!==document.getElementById('burgerOverlay'))return;document.getElementById('burgerOverlay').classList.remove('open');document.body.style.overflow=''}
+    function burgerSearch(q){
+      var r=document.getElementById('burgerSearchResults');
+      if(!q||q.length<2){r.innerHTML='';return}
+      var ql=q.toLowerCase(),matches=[];
+      if(typeof SEARCH_INDEX!=='undefined'){
+        SEARCH_INDEX.forEach(function(t){
+          var hit=t.topic.toLowerCase().indexOf(ql)>-1;
+          if(!hit)t.sections.forEach(function(s){if((s.title+' '+s.keywords).toLowerCase().indexOf(ql)>-1)hit=true});
+          if(hit)matches.push(t);
+        });
+      }
+      if(!matches.length){r.innerHTML='<p style="padding:8px 0;font-size:13px;color:var(--ink-muted)">No results</p>';return}
+      r.innerHTML=matches.slice(0,8).map(function(m){return '<a href="../'+m.url+'">'+m.topic+'<span class="bsr-disc">'+m.discipline+'</span></a>'}).join('');
+    }
+    document.addEventListener('keydown',function(e){if(e.key==='Escape'){closeBurger();var dd=document.getElementById('searchDropdown');if(dd)dd.classList.remove('visible');}});
+    // Close burger when clicking a TOC link
+    document.querySelectorAll('.burger-toc-list a').forEach(function(a){a.addEventListener('click',function(){closeBurger()})});
+    // Search typeahead
+    function topicSearch(q){
+      var dd=document.getElementById('searchDropdown');
+      if(!q||q.length<2||typeof SEARCH_INDEX==='undefined'){if(dd)dd.classList.remove('visible');return}
+      var ql=q.toLowerCase(),grouped={};
+      SEARCH_INDEX.forEach(function(t){
+        var hit=t.topic.toLowerCase().indexOf(ql)>-1,sHits=[],mHits=[];
+        t.sections.forEach(function(s){if((s.title+' '+s.keywords).toLowerCase().indexOf(ql)>-1)sHits.push(s)});
+        (t.methods||[]).forEach(function(m){if((m.name+' '+(m.keywords||'')).toLowerCase().indexOf(ql)>-1)mHits.push(m)});
+        if(!hit&&!sHits.length&&!mHits.length&&ql.length>=3&&typeof levenshtein==='function'){
+          var words=t.topic.toLowerCase().split(/ +/);
+          for(var i=0;i<words.length;i++){if(levenshtein(ql,words[i].substring(0,ql.length+1))<=1){hit=true;break}}
+        }
+        if(hit||sHits.length||mHits.length)grouped[t.topic]={url:'../'+t.url,disc:t.discipline||'',sections:sHits,methods:mHits,topicHit:hit};
+      });
+      var keys=Object.keys(grouped);
+      if(!keys.length){dd.innerHTML='<div class="search-empty">No results</div>';dd.classList.add('visible');return}
+      var html='';
+      keys.slice(0,8).forEach(function(topic){
+        var g=grouped[topic];
+        html+='<div class="search-group"><div class="search-group-title">'+topic+'</div>';
+        if(g.topicHit)html+='<a class="search-result" href="'+g.url+'"><span class="search-result-title">'+topic+'</span><span class="search-result-type practical">'+g.disc+'</span></a>';
+        g.sections.forEach(function(s){html+='<a class="search-result" href="'+g.url+'#'+s.id+'"><span class="search-result-title">'+s.title+'</span><span class="search-result-type '+s.type+'">'+s.type+'</span></a>'});
+        g.methods.slice(0,3).forEach(function(m){html+='<a class="search-result" href="'+g.url+'#'+m.section+'"><span class="search-result-title">'+m.name+'</span><span class="search-result-type practical">method</span></a>'});
+        html+='</div>';
+      });
+      dd.innerHTML=html;dd.classList.add('visible');
+    }
+    document.addEventListener('click',function(e){if(!e.target.closest('.search-box')){var dd=document.getElementById('searchDropdown');if(dd)dd.classList.remove('visible')}});
+  </script>
+
+</body>
+</html>

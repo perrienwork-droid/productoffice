@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Accessibility in Practice — Noir Book</title>
+  <link rel="stylesheet" href="../css/shared.css">
+  <link rel="stylesheet" href="../css/topic.css">
+  <script src="../js/theme.js"></script>
+  <script src="../js/topic-nav.js"></script>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="site-nav subpage-nav" data-discipline="ux">
+    <div class="nav-inner">
+      <a href="../index.html" class="site-logo">
+        <span class="logo-mark">UX</span>
+        <span class="nav-title">Noir Book</span>
+      </a>
+      <a href="../index.html" class="nav-back-link">&#8592; Library</a>
+      <div class="nav-filters">
+        <button class="disc-toggle ux-toggle active" data-disc="ux" onclick="toggleDisc('ux')" title="UX Design">
+          <span class="disc-dot disc-dot-ux"></span><span class="disc-label">UX Design</span><span class="disc-code">(UX)</span>
+        </button>
+        <button class="disc-toggle pm-toggle active" data-disc="pm" onclick="toggleDisc('pm')" title="Product Management">
+          <span class="disc-dot disc-dot-pm"></span><span class="disc-label">Product</span><span class="disc-code">(PM)</span>
+        </button>
+        <button class="disc-toggle mk-toggle active" data-disc="mk" onclick="toggleDisc('mk')" title="Marketing &amp; Growth">
+          <span class="disc-dot disc-dot-mk"></span><span class="disc-label">Marketing</span><span class="disc-code">(MK)</span>
+        </button>
+        <button class="disc-toggle cs-toggle active" data-disc="cs" onclick="toggleDisc('cs')" title="Content Strategy">
+          <span class="disc-dot disc-dot-cs"></span><span class="disc-label">Content</span><span class="disc-code">(CS)</span>
+        </button>
+        <div class="search-box nav-search-box">
+          <div class="nav-search-wrap">
+            <div class="nav-search-pills" id="navSearchPills"></div>
+            <input type="text" id="navSearchInput" placeholder="Search..." autocomplete="off"
+              oninput="topicNavSearch(this.value)"
+              onkeydown="handleNavSearchKey(event)"
+              onfocus="handleNavSearchFocus()"
+              onblur="handleNavSearchBlur()">
+            <button type="button" class="nav-search-clear" id="navSearchClear" onclick="clearNavSearch()" aria-label="Clear search">&times;</button>
+          </div>
+          <div class="search-dropdown" id="navSearchDropdown"></div>
+        </div>
+      </div>
+      <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle theme">&#9790;</button>
+      <button class="burger-btn" id="burgerBtn" onclick="openBurger()" aria-label="Menu">
+        <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="2" y1="4" x2="16" y2="4"/><line x1="2" y1="9" x2="16" y2="9"/><line x1="2" y1="14" x2="16" y2="14"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Burger Menu Overlay -->
+  <div class="burger-overlay" id="burgerOverlay" onclick="closeBurger(event)">
+    <div class="burger-panel" onclick="event.stopPropagation()">
+      <div class="burger-panel-header">
+        <h3>Menu</h3>
+        <button class="burger-close" onclick="closeBurger()" aria-label="Close">&times;</button>
+      </div>
+      <div class="burger-search">
+        <input type="text" id="burgerSearchInput" placeholder="Search topics, methods..." autocomplete="off" oninput="burgerSearch(this.value)">
+        <div class="burger-search-results" id="burgerSearchResults"></div>
+      </div>
+      <div class="burger-links">
+        <a href="../index.html">&#8592; Back to Library</a>
+        <a href="../design-system.html">Design System</a>
+        <a href="../request-topic.html">Suggest a topic or improvement</a>
+      </div>
+      <div class="burger-toc-section">
+        <p class="burger-toc-title">On this page</p>
+        <ul class="burger-toc-list">
+        <li><a href="#what-and-why" data-section="theory">What accessibility is and why it's non-negotiable</a></li>
+        <li><a href="#pour-principles" data-section="theory">The four WCAG principles: POUR</a></li>
+        <li><a href="#perceivable" data-section="practical">Perceivable: making content available to all senses</a></li>
+        <li><a href="#operable" data-section="practical">Operable: keyboard, touch, and input methods</a></li>
+        <li><a href="#understandable" data-section="practical">Understandable: clear labels, errors, and predictability</a></li>
+        <li><a href="#robust" data-section="practical">Robust: semantic HTML and ARIA</a></li>
+        <li><a href="#testing" data-section="practical">Testing with assistive technology</a></li>
+        <li><a href="#engineering-handoff" data-section="practical">Accessibility engineering communication</a></li>
+        <li><a href="#cognitive-accessibility" data-section="practical">Cognitive accessibility across age groups</a></li>
+        <li><a href="#templates" data-section="practical">Templates and checklists</a></li>
+        <li><a href="#real-world-examples" data-section="examples">Real-world examples</a></li>
+        <li><a href="#pitfalls" data-section="practical">Common pitfalls</a></li>
+        <li><a href="#connections">Connected topics in your library</a></li>
+        <li><a href="#deep-dive">Deep-dive appendix</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Topic Header -->
+  <header class="topic-header container">
+    <div class="breadcrumb">
+      <a href="../index.html">Library</a>
+      <span class="sep">&#8250;</span>
+      <span class="breadcrumb-disc breadcrumb-ux">UX Design</span>
+      <span class="sep">&#8250;</span>
+      <span>Tier 1 — Core Toolkit</span>
+      <span class="sep">&#8250;</span>
+      <span>Accessibility in Practice</span>
+    </div>
+    <div class="topic-meta">
+      <span class="tier-badge tier1">Tier 1</span>
+      <span style="font-size:14px;color:var(--ink-muted)">Topic UX.1.07</span>
+    </div>
+    <h1>Accessibility in Practice</h1>
+    <p class="topic-subtitle">WCAG guidelines, assistive technologies, and inclusive design patterns. Non-negotiable for any product — and a better experience for everyone.</p>
+    <div class="content-splits">
+      <span class="split-badge theory">20% Theory</span>
+      <span class="split-badge practical">55% Methods &amp; Templates</span>
+      <span class="split-badge examples">25% Examples</span>
+    </div>
+  </header>
+
+  <!-- Reading Progress Bar -->
+  <div class="reading-progress" id="readingProgress"></div>
+
+  <!-- Main Layout -->
+  <div class="container">
+    <div class="topic-layout">
+
+      <!-- Sidebar: Table of Contents -->
+      <aside class="topic-sidebar">
+        <nav class="toc">
+          <p class="sidebar-topic-title">Accessibility in Practice</p>
+          <p class="toc-title">On this page</p>
+          <ul class="toc-list">
+            <li><a href="#what-and-why" data-section="theory">What accessibility is and why it's non-negotiable</a></li>
+            <li><a href="#pour-principles" data-section="theory">The four WCAG principles: POUR</a></li>
+            <li><a href="#perceivable" data-section="practical">Perceivable: making content available to all senses</a></li>
+            <li><a href="#operable" data-section="practical">Operable: keyboard, touch, and input methods</a></li>
+            <li><a href="#understandable" data-section="practical">Understandable: clear labels, errors, and predictability</a></li>
+            <li><a href="#robust" data-section="practical">Robust: semantic HTML and ARIA</a></li>
+            <li><a href="#testing" data-section="practical">Testing with assistive technology</a></li>
+            <li><a href="#engineering-handoff" data-section="practical">Accessibility engineering communication</a></li>
+            <li><a href="#cognitive-accessibility" data-section="practical">Cognitive accessibility across age groups</a></li>
+            <li><a href="#templates" data-section="practical">Templates and checklists</a></li>
+            <li><a href="#real-world-examples" data-section="examples">Real-world examples</a></li>
+            <li><a href="#pitfalls" data-section="practical">Common pitfalls</a></li>
+            <li><a href="#connections">Connected topics in your library</a></li>
+            <li><a href="#deep-dive">Deep-dive appendix</a></li>
+          </ul>
+        </nav>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="topic-main topic-content">
+
+        <div class="section-marker" id="what-and-why">
+          <span class="split-badge theory">Theory</span>
+          <span class="marker-line"></span>
+        </div>
+
+        <section data-section="theory">
+  <h2>What accessibility is and why it's non-negotiable</h2>
+
+  <p>Accessibility means designing products that people with disabilities can perceive, understand, navigate, and interact with. This includes people who are blind, deaf, have motor impairments, cognitive disabilities, or temporary situational limitations like a broken arm or bright sunlight on a screen.</p>
+
+  <p>The case for accessibility is three-layered. First, it's an ethical obligation — excluding people from using your product is excluding them from participation. Second, it's often a legal requirement — the ADA, Section 508, the European Accessibility Act, and similar laws in dozens of countries mandate accessible digital products. Third, it makes your product better for everyone. Curb cuts were designed for wheelchairs but help parents with strollers, travelers with luggage, and delivery workers with carts. The same principle applies to digital design: captions help people in noisy environments, keyboard navigation helps power users, clear error messages help everyone.</p>
+
+  <div class="callout info">
+    <p class="callout-title">The numbers</p>
+    <p>Approximately 16% of the global population lives with some form of disability. In many markets, that's a larger segment than any demographic you're deliberately designing for. And disability is not binary — it's a spectrum that includes permanent conditions (blindness), temporary conditions (broken wrist), and situational limitations (holding a baby). Design for the extremes and the middle benefits.</p>
+  </div>
+</section>
+
+<section id="pour-principles" data-section="theory">
+  <h2>The four WCAG principles: POUR</h2>
+
+  <p>The Web Content Accessibility Guidelines (WCAG) organize all requirements under four principles. Every accessibility decision maps to one of these.</p>
+
+  <div class="method-card">
+    <h4>POUR Framework <span class="method-tag">Framework</span></h4>
+    <p class="method-when">Use this to structure any accessibility review or design decision.</p>
+    <div class="process-steps">
+      <div class="process-step">
+        <div class="process-step-content">
+          <h4>Perceivable</h4>
+          <p>Users must be able to perceive the information. If content is only visual, blind users can't access it. If it's only audio, deaf users can't access it. Provide alternatives: alt text for images, captions for video, text alternatives for icons.</p>
+        </div>
+      </div>
+      <div class="process-step">
+        <div class="process-step-content">
+          <h4>Operable</h4>
+          <p>Users must be able to operate the interface. If it requires a mouse, keyboard-only users are locked out. If it requires precise clicking, people with motor impairments struggle. Support keyboard navigation, provide adequate touch targets, don't rely on hover alone.</p>
+        </div>
+      </div>
+      <div class="process-step">
+        <div class="process-step-content">
+          <h4>Understandable</h4>
+          <p>Users must be able to understand the content and how the interface works. Use clear labels, predictable navigation, helpful error messages. Don't assume familiarity with jargon or conventions. Make the interface forgiving of mistakes.</p>
+        </div>
+      </div>
+      <div class="process-step">
+        <div class="process-step-content">
+          <h4>Robust</h4>
+          <p>Content must work across technologies — browsers, screen readers, magnifiers, voice control. Use semantic HTML, valid markup, and standard ARIA patterns. Don't build custom widgets that only work in one browser.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+        <div class="section-marker" id="perceivable">
+          <span class="split-badge practical">Practical</span>
+          <span class="marker-line"></span>
+        </div>
+
+        <section data-section="practical">
+  <h2>Perceivable: making content available to all senses</h2>
+
+  <div class="method-card">
+    <h4>Alt Text <span class="method-tag">Core Pattern</span></h4>
+    <p class="method-when">Use when: any image appears in your interface.</p>
+    <p>Every meaningful image needs alt text that conveys its purpose, not its appearance. A photo of a chart should describe what the chart shows, not "a bar chart." A decorative image gets an empty alt attribute (<code>alt=""</code>) so screen readers skip it. Icons that function as buttons need alt text describing the action ("Close," "Search"), not the icon shape ("magnifying glass").</p>
+  </div>
+
+  <div class="method-card">
+    <h4>Color Contrast <span class="method-tag">Core Pattern</span></h4>
+    <p class="method-when">Use when: choosing any text color, button color, or UI element color.</p>
+    <p>WCAG AA requires a minimum contrast ratio of 4.5:1 for normal text and 3:1 for large text (18px+ or 14px+ bold). For UI components and graphical objects, 3:1 against adjacent colors. Never use color alone to convey meaning — a red error state also needs an icon or text label. Tools: WebAIM Contrast Checker, browser DevTools accessibility panel, Figma plugins like Stark.</p>
+  </div>
+
+  <div class="method-card">
+    <h4>Captions and Transcripts <span class="method-tag">Core Pattern</span></h4>
+    <p class="method-when">Use when: any audio or video content appears in your product.</p>
+    <p>Pre-recorded video needs synchronized captions. Live video needs real-time captions (auto-generated is acceptable as a starting point but should be reviewed). Audio-only content needs a text transcript. Captions should include speaker identification and relevant sound effects, not just dialogue.</p>
+  </div>
+
+  <div class="method-card">
+    <h4>Text Resize and Reflow <span class="method-tag">Core Pattern</span></h4>
+    <p class="method-when">Use when: building any responsive layout.</p>
+    <p>Users must be able to resize text up to 200% without loss of content or functionality. Use relative units (rem, em) not fixed pixels for font sizes. At 320px viewport width (or 400% zoom), content should reflow into a single column with no horizontal scrolling. Test by zooming your browser to 200% and checking that nothing breaks.</p>
+  </div>
+</section>
+
+<section id="operable" data-section="practical">
+  <h2>Operable: keyboard, touch, and input methods</h2>
+
+  <div class="method-card">
+    <h4>Keyboard Navigation <span class="method-tag">Core Pattern</span></h4>
+    <p class="method-when">Use when: building any interactive element.</p>
+    <p>Every interactive element must be reachable and operable with keyboard alone. Tab moves forward, Shift+Tab moves backward, Enter/Space activates, Escape closes. The focus order must follow a logical reading sequence. Never remove the focus outline (<code>outline: none</code>) without providing a visible alternative. Custom components need explicit <code>tabindex</code> and keyboard event handlers.</p>
+  </div>
+
+  <div class="method-card">
+    <h4>Focus Management <span class="method-tag">Core Pattern</span></h4>
+    <p class="method-when">Use when: modals, drawers, or dynamic content changes occur.</p>
+    <p>When a modal opens, focus must move into it. When it closes, focus returns to the trigger element. Tab must be trapped inside the modal — users shouldn't be able to tab to elements behind it. When new content loads dynamically (infinite scroll, AJAX updates), announce it to screen readers with ARIA live regions. Skip links at the top of the page let keyboard users jump past the navigation to the main content.</p>
+  </div>
+
+  <div class="method-card">
+    <h4>Touch Targets <span class="method-tag">Core Pattern</span></h4>
+    <p class="method-when">Use when: designing for mobile or touch interfaces.</p>
+    <p>Minimum touch target size: 44×44px (WCAG) or 48×48dp (Material Design). Spacing between targets matters as much as size — adjacent targets that are too close cause mis-taps. Text links in paragraphs should have enough padding to be tappable. If a target must be smaller than 44px visually, extend the tappable area with invisible padding.</p>
+  </div>
+
+  <div class="callout tip">
+    <p class="callout-title">The keyboard test</p>
+    <p>Unplug your mouse and try to use your product with keyboard alone for 10 minutes. Can you reach every interactive element? Can you see where focus is? Can you operate menus, modals, and forms? Can you escape from everything? This single test catches more accessibility issues than any automated tool.</p>
+  </div>
+</section>
+
+<section id="understandable" data-section="practical">
+  <h2>Understandable: clear labels, errors, and predictability</h2>
+
+  <div class="method-card">
+    <h4>Form Labels and Instructions <span class="method-tag">Core Pattern</span></h4>
+    <p class="method-when">Use when: building any form.</p>
+    <p>Every form input needs a visible label (not just placeholder text — placeholders disappear on focus). Labels must be programmatically associated with inputs using <code>for</code>/<code>id</code> or by wrapping the input in the label element. Required fields must be indicated before the user submits. Input format expectations (e.g., "MM/DD/YYYY") should be visible, not hidden in tooltips.</p>
+  </div>
+
+  <div class="method-card">
+    <h4>Error Messages <span class="method-tag">Core Pattern</span></h4>
+    <p class="method-when">Use when: validating any user input.</p>
+    <p>Errors must identify what went wrong and how to fix it. "Invalid input" is useless. "Email address must include an @ symbol" is helpful. Errors must be visually connected to the field they relate to, announced to screen readers (use <code>aria-describedby</code> or <code>aria-live</code>), and not rely solely on color (add an icon or text prefix). Provide error summaries at the top of long forms.</p>
+  </div>
+
+  <div class="method-card">
+    <h4>Predictable Behavior <span class="method-tag">Core Pattern</span></h4>
+    <p class="method-when">Use when: designing navigation, forms, or any repeated interaction.</p>
+    <p>Navigation should appear in the same location on every page. Similar components should behave consistently throughout the product. Changing a select dropdown should not automatically submit the form or navigate away — unexpected actions disorient users. If an action has significant consequences (deleting data, submitting a form), provide confirmation or undo.</p>
+  </div>
+</section>
+
+<section id="robust" data-section="practical">
+  <h2>Robust: semantic HTML and ARIA</h2>
+
+  <div class="method-card">
+    <h4>Semantic HTML <span class="method-tag">Core Pattern</span></h4>
+    <p class="method-when">Use when: writing any HTML.</p>
+    <p>Use native HTML elements for their intended purpose: <code>&lt;button&gt;</code> for actions, <code>&lt;a&gt;</code> for navigation, <code>&lt;nav&gt;</code> for navigation regions, <code>&lt;main&gt;</code> for primary content, <code>&lt;h1&gt;</code>–<code>&lt;h6&gt;</code> for heading hierarchy. Native elements come with built-in keyboard behavior, screen reader announcements, and platform integration. A <code>&lt;div onclick&gt;</code> is not a button — it lacks keyboard support, role announcement, and disabled state handling.</p>
+  </div>
+
+  <div class="method-card">
+    <h4>ARIA (Accessible Rich Internet Applications) <span class="method-tag">Core Pattern</span></h4>
+    <p class="method-when">Use when: native HTML elements aren't sufficient for your component.</p>
+    <p>ARIA adds accessibility information to custom components. The five rules: (1) Use native HTML first — ARIA is a last resort. (2) Don't change native semantics unless you must (<code>&lt;h2 role="tab"&gt;</code> is usually wrong). (3) All interactive ARIA controls must be keyboard operable. (4) Don't use <code>role="presentation"</code> or <code>aria-hidden="true"</code> on focusable elements. (5) All interactive elements must have an accessible name. Common ARIA patterns: tabs (<code>role="tablist"</code>), accordions (<code>aria-expanded</code>), alerts (<code>role="alert"</code>), dialogs (<code>role="dialog"</code>).</p>
+  </div>
+
+  <div class="callout warning">
+    <p class="callout-title">The first rule of ARIA</p>
+    <p>Don't use ARIA if you can use native HTML. A <code>&lt;button&gt;</code> is always better than <code>&lt;div role="button" tabindex="0"&gt;</code>. ARIA doesn't add behavior — it only adds metadata. You still need to implement keyboard handlers, focus management, and state changes yourself. Bad ARIA is worse than no ARIA because it creates false expectations for assistive technology users.</p>
+  </div>
+</section>
+
+<section id="testing" data-section="practical">
+  <h2>Testing with assistive technology</h2>
+
+  <div class="method-card">
+    <h4>Screen Reader Testing <span class="method-tag">Technique</span></h4>
+    <p class="method-when">Use when: validating that your product works for blind and low-vision users.</p>
+    <p>Test with at least one screen reader: VoiceOver on Mac/iOS (built-in, activate with Cmd+F5), NVDA on Windows (free download), or TalkBack on Android (built-in). Navigate your product using only screen reader commands. Check: Are images announced with meaningful alt text? Do form labels read correctly? Do headings create a navigable structure? Are dynamic updates (notifications, loading states) announced? Can you complete core tasks without seeing the screen?</p>
+  </div>
+
+  <div class="method-card">
+    <h4>Automated Testing Tools <span class="method-tag">Tool</span></h4>
+    <p class="method-when">Use when: building an accessibility testing workflow.</p>
+    <p>Automated tools catch about 30-40% of accessibility issues — primarily technical ones like missing alt text, insufficient contrast, and invalid ARIA. Use axe DevTools (browser extension), Lighthouse (built into Chrome DevTools), or WAVE (web-based). Run these on every page and component. But remember: automated tools cannot test whether alt text is meaningful, whether focus order is logical, or whether the experience actually makes sense to an assistive technology user. Manual testing is essential.</p>
+  </div>
+
+  <div class="method-card">
+    <h4>Keyboard-Only Testing <span class="method-tag">Technique</span></h4>
+    <p class="method-when">Use when: doing any accessibility review.</p>
+    <p>Disconnect your mouse. Navigate your entire product with Tab, Shift+Tab, Enter, Space, Escape, and arrow keys. Verify: Can you reach every interactive element? Is focus always visible? Does the focus order make sense? Can you open and close modals, menus, and dropdowns? Can you complete every user flow? This is the single highest-value accessibility test you can run.</p>
+  </div>
+</section>
+
+<section id="engineering-handoff" data-section="practical">
+  <h2>Accessibility engineering communication</h2>
+
+  <div class="method-card">
+    <h4>Accessibility Requirements Handoff <span class="method-tag">Framework</span></h4>
+    <p class="method-when">Use when: handing off designs to engineers and need to specify accessibility behavior that isn't visible in mockups.</p>
+    <p>Most accessibility problems come from the gap between what designers envision and what engineers implement — because accessibility behavior is invisible in static mockups. Bridge this gap with explicit specs. <strong>ARIA patterns brief:</strong> For every custom component (dropdown, modal, accordion, tab panel), document which ARIA role, states, and properties to use. Don't make engineers guess — specify "this dropdown uses role='listbox' with aria-activedescendant for focus management" rather than "make this accessible." <strong>Keyboard navigation specs:</strong> For each interactive component, document the expected keyboard behavior: which keys do what, tab order, focus trapping for modals, arrow key navigation within composite widgets. Include a keyboard behavior table in your design specs. <strong>Accessible name specifications:</strong> For every interactive element, define the accessible name — the text that screen readers announce. This includes icon-only buttons (what does the screen reader say?), images (alt text or decorative?), and form fields (visible label or aria-label?). Include these annotations directly on your design files.</p>
+  </div>
+</section>
+
+<section id="cognitive-accessibility" data-section="practical">
+  <h2>Cognitive accessibility across age groups</h2>
+
+  <div class="method-card">
+    <h4>Cognitive Accessibility Framework <span class="method-tag">Framework</span></h4>
+    <p class="method-when">Use when: designing for audiences with varying cognitive abilities — young users, older adults, users with cognitive disabilities, or varying literacy levels.</p>
+    <p>Cognitive accessibility extends beyond screen readers and keyboard navigation into how well an interface supports thinking, remembering, and deciding. <strong>For young users:</strong> Minimize reliance on reading — use visual cues, icons, and spatial memory. Simplify decision trees. Provide clear undo paths because young users explore unpredictably. Avoid time pressure. <strong>For older adults:</strong> Increase touch target sizes beyond WCAG minimums (target 48px minimum, ideally 56px). Use higher contrast ratios. Reduce reliance on short-term memory — keep related information visible rather than requiring users to remember across screens. Allow more time for task completion. Avoid hover-dependent interactions. <strong>For varying literacy levels:</strong> Use plain language (aim for a 6th–8th grade reading level for general audiences). Break complex processes into simple, clearly labeled steps. Use concrete language over abstractions. Provide examples alongside instructions. <strong>For users with cognitive disabilities:</strong> Minimize distractions (reduce animation, avoid autoplay, provide focus modes). Support consistent navigation patterns. Use familiar interface conventions rather than novel interactions. Provide clear error recovery without requiring users to remember what went wrong.</p>
+  </div>
+</section>
+
+<section id="templates" data-section="practical">
+  <h2>Templates and checklists</h2>
+
+  <div class="template-box">
+    <div class="template-header">
+      <span class="template-label">Template</span>
+      <span class="template-title">Accessibility Review Worksheet</span>
+    </div>
+    <div class="template-grid">
+      <div class="template-field">
+        <div class="template-field-label">Page / Component</div>
+        <p>[Name of the page or component being reviewed]</p>
+      </div>
+      <div class="template-field">
+        <div class="template-field-label">Perceivable</div>
+        <p>[Alt text present? Contrast ratios passing? Color not sole indicator? Text resizable?]</p>
+      </div>
+      <div class="template-field">
+        <div class="template-field-label">Operable</div>
+        <p>[Keyboard navigable? Focus visible? Touch targets ≥44px? No keyboard traps?]</p>
+      </div>
+      <div class="template-field">
+        <div class="template-field-label">Understandable</div>
+        <p>[Labels on all inputs? Error messages helpful? Behavior predictable?]</p>
+      </div>
+      <div class="template-field">
+        <div class="template-field-label">Robust</div>
+        <p>[Semantic HTML? Valid ARIA? Screen reader tested?]</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="template-box">
+    <div class="template-header">
+      <span class="template-label">Checklist</span>
+      <span class="template-title">Accessibility Audit Checklist</span>
+    </div>
+    <ul class="checklist">
+      <li>All images have meaningful alt text (or empty alt for decorative images)</li>
+      <li>Color contrast ratios meet WCAG AA (4.5:1 text, 3:1 large text and UI)</li>
+      <li>Information is not conveyed by color alone</li>
+      <li>All interactive elements are keyboard accessible</li>
+      <li>Focus indicator is visible on every focusable element</li>
+      <li>Focus order follows a logical reading sequence</li>
+      <li>Touch targets are at least 44×44px</li>
+      <li>All form inputs have visible, associated labels</li>
+      <li>Error messages identify the problem and suggest a fix</li>
+      <li>Heading hierarchy is logical (no skipped levels)</li>
+      <li>Page has a single h1 and uses landmarks (main, nav, footer)</li>
+      <li>Skip link present to bypass navigation</li>
+      <li>Modals trap focus and return focus on close</li>
+      <li>Dynamic content changes announced via ARIA live regions</li>
+      <li>Text resizes to 200% without loss of content</li>
+      <li>Tested with at least one screen reader</li>
+    </ul>
+  </div>
+</section>
+
+        <div class="section-marker" id="real-world-examples">
+          <span class="split-badge examples">Examples</span>
+          <span class="marker-line"></span>
+        </div>
+
+        <section data-section="examples">
+  <h2>Real-world examples</h2>
+
+  <div class="case-study">
+    <p class="case-label">Case study</p>
+    <h4>GOV.UK: accessibility as a design principle</h4>
+    <p>The UK Government Digital Service built accessibility into every layer of their design system. Every component in the GOV.UK Design System is tested with screen readers, keyboard navigation, and high magnification before release. Their approach: start with semantic HTML, layer on progressive enhancement, and test with real assistive technology users. The result is one of the most accessible government services in the world — and also one of the simplest and most usable for everyone.</p>
+    <p><strong>Why it works:</strong> Accessibility isn't a separate workstream — it's embedded in every component, every review, and every release criterion. The design system enforces it by default.</p>
+  </div>
+
+  <div class="case-study">
+    <p class="case-label">Case study</p>
+    <h4>Microsoft Inclusive Design: the persona spectrum</h4>
+    <p>Microsoft's Inclusive Design methodology reframes disability as a spectrum: permanent (one arm), temporary (arm in a cast), and situational (holding a baby). This insight shifted their design approach from "accommodate a small group" to "design for the extremes and everyone benefits." Their Xbox Adaptive Controller emerged from this thinking — a game controller designed for players with limited mobility that became a platform for customization that benefits all users.</p>
+    <p><strong>Why it works:</strong> By broadening the definition of who benefits from accessible design, the team built organizational buy-in beyond compliance.</p>
+  </div>
+
+  <div class="case-study">
+    <p class="case-label">Case study</p>
+    <h4>Target.com lawsuit: the cost of ignoring accessibility</h4>
+    <p>In 2006, the National Federation of the Blind sued Target because their website was unusable with screen readers — images lacked alt text, forms lacked labels, and the checkout flow required a mouse. Target settled for $6 million and agreed to make their website fully accessible. The case established that the ADA applies to commercial websites and triggered an industry-wide shift toward digital accessibility compliance.</p>
+    <p><strong>Why it works as a cautionary tale:</strong> The cost of retrofitting accessibility is always higher than building it in from the start. Legal risk is real, but the deeper lesson is that Target's checkout flow was bad for everyone — the inaccessible patterns also created friction for users without disabilities.</p>
+  </div>
+</section>
+
+<section id="pitfalls" data-section="practical">
+  <h2>Common pitfalls</h2>
+
+  <div class="pitfall">
+    <div class="pitfall-icon">!</div>
+    <div>
+      <h4>Treating accessibility as a checklist to pass, not a practice to maintain</h4>
+      <p>Teams often audit once, fix the flagged issues, and move on. But accessibility breaks with every new feature, design change, and content update. It needs to be part of the continuous development process — in component libraries, code reviews, and QA workflows — not a one-time project.</p>
+    </div>
+  </div>
+
+  <div class="pitfall">
+    <div class="pitfall-icon">!</div>
+    <div>
+      <h4>Relying only on automated testing</h4>
+      <p>Tools like axe and Lighthouse catch roughly 30-40% of WCAG issues. They can verify contrast ratios and missing alt text, but they can't assess whether alt text is meaningful, whether focus order is logical, or whether a screen reader user can actually complete a task. Automated tools are the starting point, not the finish line.</p>
+    </div>
+  </div>
+
+  <div class="pitfall">
+    <div class="pitfall-icon">!</div>
+    <div>
+      <h4>Hiding accessible alternatives instead of fixing the main experience</h4>
+      <p>Building a separate "accessible version" of your site creates a second-class experience that's harder to maintain and inevitably falls out of sync. The main product should be accessible. If a component can't be made accessible, that's a signal to redesign the component, not to build a parallel version.</p>
+    </div>
+  </div>
+
+  <div class="pitfall">
+    <div class="pitfall-icon">!</div>
+    <div>
+      <h4>Removing focus outlines for aesthetics</h4>
+      <p><code>outline: none</code> on focusable elements makes your product unusable for keyboard users. If the default browser outline doesn't match your design, replace it with a custom focus style — never remove it. A common pattern: <code>:focus-visible</code> shows the outline only for keyboard navigation, not mouse clicks.</p>
+    </div>
+  </div>
+</section>
+
+<section id="connections">
+  <h2>Connected topics in your library</h2>
+  <div class="cross-ref-grid">
+    <a href="usability.html" class="cross-ref-card">
+      <span class="ref-number">Tier 1</span>
+      <div class="ref-title">Usability</div>
+      <div class="ref-reason">Accessibility is a dimension of usability. Many usability heuristics (error prevention, consistency) directly support accessible design.</div>
+    </a>
+    <a href="ui-design-patterns.html" class="cross-ref-card">
+      <span class="ref-number">Tier 1</span>
+      <div class="ref-title">UI Design Patterns</div>
+      <div class="ref-reason">Every UI pattern (forms, modals, navigation) has accessibility requirements built in.</div>
+    </a>
+    <a href="visual-design.html" class="cross-ref-card">
+      <span class="ref-number">Tier 1</span>
+      <div class="ref-title">Visual Design</div>
+      <div class="ref-reason">Color contrast, typography, and visual hierarchy directly affect perceivability.</div>
+    </a>
+    <div class="cross-ref-card">
+      <span class="ref-number">Tier 2</span>
+      <div class="ref-title">Conducting Usability Testing</div>
+      <div class="ref-reason">Include participants with disabilities in your usability tests for the most complete picture.</div>
+    </div>
+  </div>
+</section>
+
+<div class="deep-dive-section" id="deep-dive">
+          <div class="deep-dive-header">
+            <span class="deep-dive-badge">Deep Dive</span>
+            <h2 style="margin:0; border:none; padding:0;">Appendix</h2>
+          </div>
+
+  <details class="expandable">
+    <summary><span class="chevron"><svg viewBox="0 0 14 14"><polyline points="4,2 10,7 4,12"/></svg></span> WCAG conformance levels: A, AA, and AAA</summary>
+    <div class="expand-content topic-content">
+      <h4>Level A (minimum)</h4>
+      <p>Basic accessibility requirements. Without these, some users cannot access content at all. Examples: alt text for images, keyboard accessibility, no seizure-inducing content. Meeting Level A alone is not sufficient for most legal requirements.</p>
+
+      <h4>Level AA (standard target)</h4>
+      <p>The accepted standard for most organizations and legal requirements. Adds contrast ratios, text resize, consistent navigation, and input assistance. WCAG 2.1 AA is the target for most web accessibility laws worldwide. This is what "WCAG compliant" typically means.</p>
+
+      <h4>Level AAA (enhanced)</h4>
+      <p>The highest standard. Adds enhanced contrast (7:1), sign language for video, simpler reading levels, and pronunciation assistance. Not required by law and not achievable for all content types — but individual AAA criteria can be selectively adopted when they benefit your users.</p>
+    </div>
+  </details>
+
+  <details class="expandable">
+    <summary><span class="chevron"><svg viewBox="0 0 14 14"><polyline points="4,2 10,7 4,12"/></svg></span> Common ARIA patterns reference</summary>
+    <div class="expand-content topic-content">
+      <h4>Tabs</h4>
+      <p><code>role="tablist"</code> on the container, <code>role="tab"</code> on each tab, <code>role="tabpanel"</code> on each panel. Use <code>aria-selected="true"</code> on the active tab. Arrow keys move between tabs; Tab moves into the panel content.</p>
+
+      <h4>Accordion</h4>
+      <p>Use <code>&lt;button&gt;</code> for headers with <code>aria-expanded="true/false"</code> and <code>aria-controls="panel-id"</code>. The panel uses <code>role="region"</code> with <code>aria-labelledby="header-id"</code>.</p>
+
+      <h4>Modal dialog</h4>
+      <p><code>role="dialog"</code> with <code>aria-modal="true"</code> and <code>aria-labelledby</code> pointing to the dialog title. Trap focus inside. Return focus to the trigger on close. Escape key closes.</p>
+
+      <h4>Live regions</h4>
+      <p><code>aria-live="polite"</code> for non-urgent updates (search results count). <code>aria-live="assertive"</code> for urgent updates (error messages). <code>role="alert"</code> is equivalent to <code>aria-live="assertive"</code>. <code>role="status"</code> is equivalent to <code>aria-live="polite"</code>.</p>
+    </div>
+  </details>
+
+  <details class="expandable">
+    <summary><span class="chevron"><svg viewBox="0 0 14 14"><polyline points="4,2 10,7 4,12"/></svg></span> Further reading and resources</summary>
+    <div class="expand-content topic-content">
+      <h4>Essential reading</h4>
+      <p><strong>"A Web for Everyone" by Sarah Horton &amp; Whitney Quesenbery</strong> — Practical guide to designing accessible web experiences, organized around personas with different abilities.</p>
+      <p><strong>"Inclusive Design Patterns" by Heydon Pickering</strong> — Component-by-component guide to building accessible interfaces. Covers forms, menus, tabs, dialogs, and more.</p>
+      <p><strong>"Mismatch" by Kat Holmes</strong> — The philosophy behind inclusive design and how exclusion happens. Less technical, more strategic.</p>
+
+      <h4>Tools</h4>
+      <p><strong>axe DevTools:</strong> Browser extension for automated accessibility testing. Best-in-class rule engine, low false positives.</p>
+      <p><strong>WAVE:</strong> Web-based accessibility evaluator with visual overlay showing issues in context.</p>
+      <p><strong>Stark:</strong> Figma/Sketch plugin for contrast checking and vision simulation during design.</p>
+      <p><strong>pa11y:</strong> Command-line tool for CI/CD pipeline integration. Run accessibility tests on every deploy.</p>
+    </div>
+  </details>
+</div>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer container">
+    <div class="footer-inner">
+      <p>Noir Book — Built for the work, not the shelf.</p>
+      <div class="footer-links">
+        <a href="../design-system.html">Design System</a>
+        <a href="../library-manifest.json">Manifest</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to Top -->
+  <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">&#8593;</button>
+
+  <!-- Floating Mobile TOC -->
+  <button class="mobile-toc-btn" id="mobileTocBtn" aria-label="Open table of contents">&#9776; Contents</button>
+  <div class="mobile-toc-overlay" id="mobileTocOverlay">
+    <div class="mobile-toc-panel">
+      <div class="mobile-toc-panel-header">
+        <h3>On this page</h3>
+        <button class="mobile-toc-close" id="mobileTocClose" aria-label="Close">&times;</button>
+      </div>
+      <ul class="mobile-toc-list">
+        <li><a href="#what-and-why" data-section="theory">What accessibility is and why it's non-negotiable</a></li>
+        <li><a href="#pour-principles" data-section="theory">The four WCAG principles: POUR</a></li>
+        <li><a href="#perceivable" data-section="practical">Perceivable: making content available to all senses</a></li>
+        <li><a href="#operable" data-section="practical">Operable: keyboard, touch, and input methods</a></li>
+        <li><a href="#understandable" data-section="practical">Understandable: clear labels, errors, and predictability</a></li>
+        <li><a href="#robust" data-section="practical">Robust: semantic HTML and ARIA</a></li>
+        <li><a href="#testing" data-section="practical">Testing with assistive technology</a></li>
+        <li><a href="#engineering-handoff" data-section="practical">Accessibility engineering communication</a></li>
+        <li><a href="#cognitive-accessibility" data-section="practical">Cognitive accessibility across age groups</a></li>
+        <li><a href="#templates" data-section="practical">Templates and checklists</a></li>
+        <li><a href="#real-world-examples" data-section="examples">Real-world examples</a></li>
+        <li><a href="#pitfalls" data-section="practical">Common pitfalls</a></li>
+        <li><a href="#connections">Connected topics in your library</a></li>
+        <li><a href="#deep-dive">Deep-dive appendix</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    // Scrollspy: highlight active TOC item
+    const tocLinks = document.querySelectorAll('.toc-list a');
+    const sections = [];
+    tocLinks.forEach(link => {
+      const href = link.getAttribute('href');
+      if (!href || !href.startsWith('#')) return;
+      const el = document.getElementById(href.slice(1));
+      if (el) sections.push({ el, link });
+    });
+
+    // Reading progress bar
+    const progressBar = document.getElementById('readingProgress');
+    const backToTop = document.getElementById('backToTop');
+
+    function onScroll() {
+      let current = sections[0];
+      for (const s of sections) {
+        if (s.el.getBoundingClientRect().top <= 120) current = s;
+      }
+      tocLinks.forEach(l => l.classList.remove('active'));
+      if (current) current.link.classList.add('active');
+
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrolled = window.scrollY;
+      const progress = docHeight > 0 ? (scrolled / docHeight) * 100 : 0;
+      if (progressBar) progressBar.style.width = progress + '%';
+      if (backToTop) backToTop.classList.toggle('visible', scrolled > 400);
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    // Split badges: click to scroll to section
+    document.querySelectorAll('.content-splits .split-badge').forEach(function(badge) {
+      badge.addEventListener('click', function() {
+        var type = badge.classList.contains('theory') ? 'theory' : badge.classList.contains('practical') ? 'practical' : 'examples';
+        var target = document.querySelector('section[data-section="' + type + '"]');
+        if (target) {
+          var marker = target.previousElementSibling;
+          (marker && marker.classList.contains('section-marker') ? marker : target).scrollIntoView({behavior:'smooth'});
+        }
+      });
+    });
+  </script>
+
+  <script src="../js/checklist.js"></script>
+  <script src="../js/mobile-toc.js"></script>
+  <script src="../js/search.js"></script>
+  <script>
+    function openBurger(){document.getElementById('burgerOverlay').classList.add('open');document.body.style.overflow='hidden'}
+    function closeBurger(e){if(e&&e.target&&e.target!==document.getElementById('burgerOverlay'))return;document.getElementById('burgerOverlay').classList.remove('open');document.body.style.overflow=''}
+    function burgerSearch(q){
+      var r=document.getElementById('burgerSearchResults');
+      if(!q||q.length<2){r.innerHTML='';return}
+      var ql=q.toLowerCase(),matches=[];
+      if(typeof SEARCH_INDEX!=='undefined'){
+        SEARCH_INDEX.forEach(function(t){
+          var hit=t.topic.toLowerCase().indexOf(ql)>-1;
+          if(!hit)t.sections.forEach(function(s){if((s.title+' '+s.keywords).toLowerCase().indexOf(ql)>-1)hit=true});
+          if(hit)matches.push(t);
+        });
+      }
+      if(!matches.length){r.innerHTML='<p style="padding:8px 0;font-size:13px;color:var(--ink-muted)">No results</p>';return}
+      r.innerHTML=matches.slice(0,8).map(function(m){return '<a href="../'+m.url+'">'+m.topic+'<span class="bsr-disc">'+m.discipline+'</span></a>'}).join('');
+    }
+    document.addEventListener('keydown',function(e){if(e.key==='Escape'){closeBurger();var dd=document.getElementById('searchDropdown');if(dd)dd.classList.remove('visible');}});
+    // Close burger when clicking a TOC link
+    document.querySelectorAll('.burger-toc-list a').forEach(function(a){a.addEventListener('click',function(){closeBurger()})});
+    // Search typeahead
+    function topicSearch(q){
+      var dd=document.getElementById('searchDropdown');
+      if(!q||q.length<2||typeof SEARCH_INDEX==='undefined'){if(dd)dd.classList.remove('visible');return}
+      var ql=q.toLowerCase(),grouped={};
+      SEARCH_INDEX.forEach(function(t){
+        var hit=t.topic.toLowerCase().indexOf(ql)>-1,sHits=[],mHits=[];
+        t.sections.forEach(function(s){if((s.title+' '+s.keywords).toLowerCase().indexOf(ql)>-1)sHits.push(s)});
+        (t.methods||[]).forEach(function(m){if((m.name+' '+(m.keywords||'')).toLowerCase().indexOf(ql)>-1)mHits.push(m)});
+        if(!hit&&!sHits.length&&!mHits.length&&ql.length>=3&&typeof levenshtein==='function'){
+          var words=t.topic.toLowerCase().split(/ +/);
+          for(var i=0;i<words.length;i++){if(levenshtein(ql,words[i].substring(0,ql.length+1))<=1){hit=true;break}}
+        }
+        if(hit||sHits.length||mHits.length)grouped[t.topic]={url:'../'+t.url,disc:t.discipline||'',sections:sHits,methods:mHits,topicHit:hit};
+      });
+      var keys=Object.keys(grouped);
+      if(!keys.length){dd.innerHTML='<div class="search-empty">No results</div>';dd.classList.add('visible');return}
+      var html='';
+      keys.slice(0,8).forEach(function(topic){
+        var g=grouped[topic];
+        html+='<div class="search-group"><div class="search-group-title">'+topic+'</div>';
+        if(g.topicHit)html+='<a class="search-result" href="'+g.url+'"><span class="search-result-title">'+topic+'</span><span class="search-result-type practical">'+g.disc+'</span></a>';
+        g.sections.forEach(function(s){html+='<a class="search-result" href="'+g.url+'#'+s.id+'"><span class="search-result-title">'+s.title+'</span><span class="search-result-type '+s.type+'">'+s.type+'</span></a>'});
+        g.methods.slice(0,3).forEach(function(m){html+='<a class="search-result" href="'+g.url+'#'+m.section+'"><span class="search-result-title">'+m.name+'</span><span class="search-result-type practical">method</span></a>'});
+        html+='</div>';
+      });
+      dd.innerHTML=html;dd.classList.add('visible');
+    }
+    document.addEventListener('click',function(e){if(!e.target.closest('.search-box')){var dd=document.getElementById('searchDropdown');if(dd)dd.classList.remove('visible')}});
+  </script>
+
+</body>
+</html>

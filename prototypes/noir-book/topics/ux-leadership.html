@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UX Leadership &amp; Influence — Noir Book</title>
+  <link rel="stylesheet" href="../css/shared.css">
+  <link rel="stylesheet" href="../css/topic.css">
+  <script src="../js/theme.js"></script>
+  <script src="../js/topic-nav.js"></script>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="site-nav subpage-nav" data-discipline="ux">
+    <div class="nav-inner">
+      <a href="../index.html" class="site-logo">
+        <span class="logo-mark">UX</span>
+        <span class="nav-title">Noir Book</span>
+      </a>
+      <a href="../index.html" class="nav-back-link">&#8592; Library</a>
+      <div class="nav-filters">
+        <button class="disc-toggle ux-toggle active" data-disc="ux" onclick="toggleDisc('ux')" title="UX Design">
+          <span class="disc-dot disc-dot-ux"></span><span class="disc-label">UX Design</span><span class="disc-code">(UX)</span>
+        </button>
+        <button class="disc-toggle pm-toggle active" data-disc="pm" onclick="toggleDisc('pm')" title="Product Management">
+          <span class="disc-dot disc-dot-pm"></span><span class="disc-label">Product</span><span class="disc-code">(PM)</span>
+        </button>
+        <button class="disc-toggle mk-toggle active" data-disc="mk" onclick="toggleDisc('mk')" title="Marketing &amp; Growth">
+          <span class="disc-dot disc-dot-mk"></span><span class="disc-label">Marketing</span><span class="disc-code">(MK)</span>
+        </button>
+        <button class="disc-toggle cs-toggle active" data-disc="cs" onclick="toggleDisc('cs')" title="Content Strategy">
+          <span class="disc-dot disc-dot-cs"></span><span class="disc-label">Content</span><span class="disc-code">(CS)</span>
+        </button>
+        <div class="search-box nav-search-box">
+          <div class="nav-search-wrap">
+            <div class="nav-search-pills" id="navSearchPills"></div>
+            <input type="text" id="navSearchInput" placeholder="Search..." autocomplete="off"
+              oninput="topicNavSearch(this.value)"
+              onkeydown="handleNavSearchKey(event)"
+              onfocus="handleNavSearchFocus()"
+              onblur="handleNavSearchBlur()">
+            <button type="button" class="nav-search-clear" id="navSearchClear" onclick="clearNavSearch()" aria-label="Clear search">&times;</button>
+          </div>
+          <div class="search-dropdown" id="navSearchDropdown"></div>
+        </div>
+      </div>
+      <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle theme">&#9790;</button>
+      <button class="burger-btn" id="burgerBtn" onclick="openBurger()" aria-label="Menu">
+        <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="2" y1="4" x2="16" y2="4"/><line x1="2" y1="9" x2="16" y2="9"/><line x1="2" y1="14" x2="16" y2="14"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Burger Menu Overlay -->
+  <div class="burger-overlay" id="burgerOverlay" onclick="closeBurger(event)">
+    <div class="burger-panel" onclick="event.stopPropagation()">
+      <div class="burger-panel-header">
+        <h3>Menu</h3>
+        <button class="burger-close" onclick="closeBurger()" aria-label="Close">&times;</button>
+      </div>
+      <div class="burger-search">
+        <input type="text" id="burgerSearchInput" placeholder="Search topics, methods..." autocomplete="off" oninput="burgerSearch(this.value)">
+        <div class="burger-search-results" id="burgerSearchResults"></div>
+      </div>
+      <div class="burger-links">
+        <a href="../index.html">&#8592; Back to Library</a>
+        <a href="../design-system.html">Design System</a>
+        <a href="../request-topic.html">Suggest a topic or improvement</a>
+      </div>
+      <div class="burger-toc-section">
+        <p class="burger-toc-title">On this page</p>
+        <ul class="burger-toc-list">
+        <li><a href="#what-and-why" data-section="theory">What UX leadership is and why every practitioner needs it NN/g</a></li>
+        <li><a href="#leadership-strengths" data-section="theory">Five UX leadership strengths NN/g</a></li>
+        <li><a href="#vision" data-section="practical">Driving vision NN/g</a></li>
+        <li><a href="#evangelizing" data-section="practical">Evangelizing UX NN/g</a></li>
+        <li><a href="#self-evaluation" data-section="practical">Evaluating yourself NN/g</a></li>
+        <li><a href="#charisma" data-section="practical">Developing UX charisma NN/g</a></li>
+        <li><a href="#real-world-examples" data-section="examples">Real-world examples NN/g</a></li>
+        <li><a href="#pitfalls" data-section="practical">Common pitfalls NN/g</a></li>
+        <li><a href="#connections">Connected topics in your library</a></li>
+        <li><a href="#deep-dive">Deep-dive appendix</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Topic Header -->
+  <header class="topic-header container">
+    <div class="breadcrumb">
+      <a href="../index.html">Library</a>
+      <span class="sep">&#8250;</span>
+      <span class="breadcrumb-disc breadcrumb-ux">UX Design</span>
+      <span class="sep">&#8250;</span>
+      <span>Tier 4 — Reference</span>
+      <span class="sep">&#8250;</span>
+      <span>UX Leadership &amp; Influence</span>
+    </div>
+    <div class="topic-meta">
+      <span class="tier-badge tier4">Tier 4</span>
+      <span style="font-size:14px;color:var(--ink-muted)">Topic UX.4.07</span>
+    </div>
+    <h1>UX Leadership &amp; Influence</h1>
+    <p class="topic-subtitle">Lead without the title. UX leadership strengths, driving vision, evangelizing UX, building organizational culture, and growing your influence as a practitioner.</p>
+    <div class="content-splits">
+      <span class="split-badge theory">30% Theory</span>
+      <span class="split-badge practical">50% Methods &amp; Templates</span>
+      <span class="split-badge examples">20% Examples</span>
+    </div>
+  </header>
+
+  <!-- Reading Progress Bar -->
+  <div class="reading-progress" id="readingProgress"></div>
+
+  <!-- Main Layout -->
+  <div class="container">
+    <div class="topic-layout">
+
+      <!-- Sidebar: Table of Contents -->
+      <aside class="topic-sidebar">
+        <nav class="toc">
+          <p class="sidebar-topic-title">UX Leadership &amp; Influence</p>
+          <p class="toc-title">On this page</p>
+          <ul class="toc-list">
+            <li><a href="#what-and-why" data-section="theory">What UX leadership is and why every practitioner needs it NN/g</a></li>
+            <li><a href="#leadership-strengths" data-section="theory">Five UX leadership strengths NN/g</a></li>
+            <li><a href="#vision" data-section="practical">Driving vision NN/g</a></li>
+            <li><a href="#evangelizing" data-section="practical">Evangelizing UX NN/g</a></li>
+            <li><a href="#self-evaluation" data-section="practical">Evaluating yourself NN/g</a></li>
+            <li><a href="#charisma" data-section="practical">Developing UX charisma NN/g</a></li>
+            <li><a href="#real-world-examples" data-section="examples">Real-world examples NN/g</a></li>
+            <li><a href="#pitfalls" data-section="practical">Common pitfalls NN/g</a></li>
+            <li><a href="#connections">Connected topics in your library</a></li>
+            <li><a href="#deep-dive">Deep-dive appendix</a></li>
+          </ul>
+        </nav>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="topic-main topic-content">
+
+        <div class="section-marker" id="what-and-why">
+          <span class="split-badge theory">Theory</span>
+          <span class="marker-line"></span>
+        </div>
+
+        <section data-section="theory" data-source="NN/g">
+  <h2>What UX leadership is and why every practitioner needs it <span class="source-label">NN/g</span></h2>
+
+  <p>UX leadership is the ability to be effective — to create impact and affect change — regardless of your title. It's not reserved for managers, directors, or VPs. A junior designer who convinces a skeptical stakeholder to invest in usability testing is demonstrating UX leadership. A researcher who translates findings into a business case that shifts a roadmap is demonstrating UX leadership. Leadership in UX is about influence, not authority.</p>
+
+  <p>The distinction between management and leadership matters here. Managers have people who work for them, processes to maintain, and tasks to assign. Leaders have people who follow them, a vision to fulfill, and a purpose to define. Management is not leadership, knowledge is not leadership, innovation is not leadership, and position is not leadership. You can be the most knowledgeable designer in the room and still fail to lead if you can't move others toward a shared vision or get your ideas implemented.</p>
+
+  <div class="callout info" data-source="NN/g">
+    <p class="callout-title">Why this matters even if you're not a manager</p>
+    <p>Great UX depends on six organizational pillars: a capable UX team, adequate UX resources (roughly 1 UX professional for every 10 developers), executive support, a UX-focused cross-functional team, a development process that includes UX (not only coding and QA), and a project schedule that supports iterative design and research. In most organizations, several of these pillars are weak or missing. UX leadership — from any practitioner at any level — is what fills those gaps. You don't need a leadership title to advocate for research time in the sprint, to educate a product manager on what usability testing reveals, or to build a relationship with an executive who can fund your team's growth.</p>
+  </div>
+</section>
+
+<section id="leadership-strengths" data-section="theory" data-source="NN/g">
+  <h2>Five UX leadership strengths <span class="source-label">NN/g</span></h2>
+
+  <div class="method-card" data-source="NN/g">
+    <h4>UX Leadership Strengths Model <span class="method-tag">Self-Assessment</span></h4>
+    <p class="method-when">Use when: understanding your natural leadership style and identifying where to invest in growth.</p>
+    <p>UX practitioners tend to lead through one of five strengths. Understanding yours helps you play to it while deliberately developing the others:</p>
+    <p><strong>The Architect (34.7% of practitioners).</strong> Excels at setting and inspiring others with overall design vision and direction. Helps others envision the future state, creates blueprints and frameworks that build shared understanding, and creates inclusiveness to get people on the same page. The architect's superpower is making the invisible visible — turning abstract strategy into concrete direction that a team can rally around.</p>
+    <p><strong>The Foreperson (30.6%).</strong> Excels at maintaining momentum on a project. Incorporates input and makes others feel listened to, navigates critique and feedback without losing progress, and communicates adjustments while setting expectations. The foreperson's superpower is keeping things moving — absorbing organizational friction without letting it slow the team down.</p>
+    <p><strong>The Orator (25.6%).</strong> Excels at communicating ideas and insights effectively and persuasively. Breaks down big ideas into their core parts to ease comprehension, captures and shares the thought process that led to an idea, and leads others toward conclusions. The orator's superpower is clarity — making complex things simple without losing their meaning.</p>
+    <p><strong>The Interpreter (9.1%).</strong> Excels at understanding what stakeholders care about and communicating how UX can achieve business goals. Demonstrates the value of UX to others and builds the business case for investment. The interpreter's superpower is translation — converting UX value into the language of revenue, efficiency, and competitive advantage. This is the rarest strength among UX practitioners, which is why organizations often struggle to fund UX work.</p>
+    <p><strong>The Evangelist.</strong> Excels at cultivating trust, building relationships, creating a following, and sharing a message. The evangelist's superpower is belief — their conviction gains strength when others adopt it, and they build the organizational momentum that turns UX from a department into a culture.</p>
+    <p>Distribution data from ongoing NN/g conference surveys shows Architect and Foreperson as the most common strengths, with Interpreter significantly underrepresented. This matters: the rarest strength — translating UX to business value — is often the one organizations need most. If the Interpreter isn't your natural strength, it's the one most worth developing.</p>
+  </div>
+</section>
+
+        <div class="section-marker" id="vision">
+          <span class="split-badge practical">Practical</span>
+          <span class="marker-line"></span>
+        </div>
+
+        <section data-section="practical" data-source="NN/g">
+  <h2>Driving vision <span class="source-label">NN/g</span></h2>
+
+  <div class="method-card" data-source="NN/g">
+    <h4>Vision Definition <span class="method-tag">Foundation</span></h4>
+    <p class="method-when">Use when: you need to articulate where you're going before you can get others to follow.</p>
+    <p>A vision is an impactful, future-state view of the experience users will have with a product or organization. Good visions are: <strong>attainable</strong> (aspirational yet in reach), <strong>experience-focused</strong> (connected to users, not technology), <strong>specific</strong> (tailored to the product and users, not generic), <strong>research-based</strong> (grounded in what you've learned from users), <strong>practical</strong> (pragmatic yet impactful), and <strong>shared</strong> (communicated across the entire team or company). A good vision statement addresses three elements: the target customer (the who), the benefit or need addressed (the why), and what makes it unique (how it's different).</p>
+    <p>Visions fail when: there's no buy-in or stakeholder alignment, the vision is too generic (could apply to any product), there's no champion keeping it alive, or there's no plan to deliver it. Without a plan, a vision is just words.</p>
+  </div>
+
+  <div class="method-card" data-source="NN/g">
+    <h4>UX Team Vision <span class="method-tag">Core Method</span></h4>
+    <p class="method-when">Use when: you don't have a say in the company vision but want to define your team's purpose and direction.</p>
+    <p>A company vision answers: "What impact do I want my brand to have on my community/industry/world? How will my brand ultimately interact with customers?" A UX team vision answers a different question: "What impact do I want my team to have on my company/product/users? How will my team ultimately interact with other teams and stakeholders?" You can create a UX team vision even when the broader organization hasn't articulated one.</p>
+    <p>Example: "We own and continually improve the design system, enabling product teams to innovate, learn, and deliver with optimal speed and quality." This identifies the who (product teams), the why (to make them more effective), and the how it's different (a living design system, not rigid page-based templates).</p>
+  </div>
+
+  <div class="method-card" data-source="NN/g">
+    <h4>Shared Vision Process (Three-Step) <span class="method-tag">Core Method</span></h4>
+    <p class="method-when">Use when: creating a vision collaboratively rather than dictating one from the top. Especially valuable for cross-functional teams.</p>
+    <p>Three steps, each with a distinct goal and output:</p>
+    <p><strong>Step 1 — Planning.</strong> Goal: understand the current state by bringing stakeholders together. Activities: cross-functional and stakeholder interviews, exploratory user research (interviews, diary studies, field studies). Output: an experience brief that captures current challenges, objectives, and existing research insights. The experience brief is the foundation — it ensures the vision is grounded in reality, not aspirations.</p>
+    <p><strong>Step 2 — Visioning.</strong> Goal: create a research-backed vision the team can rally around. Activities: a visioning workshop where the team reviews the experience brief, answers a focus question ("Why do we exist?" / "What's our ideal state?" / "Where do we want to be?"), clusters responses into themes, crafts vision options from themes, and dot-votes on a winner. Output: a vision statement.</p>
+    <p><strong>Step 3 — Prioritization.</strong> Goal: make a plan for how to achieve the vision over time. Activities: a prioritization workshop where the team recaps the vision, sketches ideas for achieving it, assigns priority (must-have / should-have / could-have), and fills out a skeleton roadmap. Output: incremental steps mapped and ranked by importance, connected to objectives and key results.</p>
+  </div>
+
+  <div class="method-card" data-source="NN/g">
+    <h4>Vision Board <span class="method-tag">Technique</span></h4>
+    <p class="method-when">Use when: you need a shareable artifact that keeps the vision visible and actionable.</p>
+    <p>A vision board is a one-page artifact that captures: the vision statement, the target group, the needs being addressed, the product direction, and the business goals. It serves as a reference point for daily decisions — when evaluating any feature, initiative, or design direction, ask: "Is this moving us closer or farther away from the vision?" Post it where the team can see it. A vision that lives in a slide deck nobody opens is not a shared vision.</p>
+  </div>
+</section>
+
+<section id="evangelizing" data-section="practical" data-source="NN/g">
+  <h2>Evangelizing UX <span class="source-label">NN/g</span></h2>
+
+  <div class="method-card" data-source="NN/g">
+    <h4>Make Your Work Visible <span class="method-tag">Practice</span></h4>
+    <p class="method-when">Use when: the organization doesn't understand what UX does or why it matters.</p>
+    <p>Visibility creates understanding, and understanding creates support. Three tactics: <strong>Bring people into your research.</strong> Invite PMs, engineers, and executives to observe usability tests. Nothing evangelizes UX faster than watching a real user struggle with something the team assumed was intuitive. <strong>Hold company-wide meetings to share insights.</strong> Not formal presentations — informal show-and-tell sessions where you share what you learned, what surprised you, and what it means for the product. <strong>Set aside recurring time for video clips.</strong> A weekly or bi-weekly "highlight reel" slot where the team watches 5 minutes of real user sessions. Over time, this builds an organizational habit of caring about user experience.</p>
+  </div>
+
+  <div class="method-card" data-source="NN/g">
+    <h4>Share the Ownership of UX <span class="method-tag">Practice</span></h4>
+    <p class="method-when">Use when: UX is treated as one team's responsibility rather than a shared organizational value.</p>
+    <p>Don't limit UX participation to the C-suite. Involve people across the organization in design work: design studios and workshops, critiques and artifact discussions, usability testing observation, and ethnographic research. When a product manager helps analyze usability test results, they become an advocate for the next round of testing. When an engineer observes a user struggling with a feature they built, they care more about the fix. Shared ownership means shared advocacy.</p>
+  </div>
+
+  <div class="method-card" data-source="NN/g">
+    <h4>UX Community of Practice <span class="method-tag">Core Method</span></h4>
+    <p class="method-when">Use when: you want to create ongoing organizational momentum for UX beyond individual projects.</p>
+    <p>A UX community of practice is a regular, informal gathering where UX practitioners and interested colleagues share projects, discuss issues, and ask questions. It serves multiple purposes: skill-sharing across projects, pattern recognition across the product portfolio, consistent advocacy for UX standards, and a support network for practitioners who may be the only UX person on their team. Meet regularly — biweekly or monthly — in an informal setting. The community of practice is the engine of UX culture; it sustains momentum between the big wins.</p>
+  </div>
+
+  <div class="method-card" data-source="NN/g">
+    <h4>Transactional vs. Transformational UX Leadership <span class="method-tag">Framework</span></h4>
+    <p class="method-when">Use when: evaluating your leadership approach and deciding how to grow your impact.</p>
+    <p><strong>Transactional UX leadership</strong> focuses on managing and supervising: monitoring individual work against expected standards, promoting success through rewards and punishments contingent on performance, and working within existing structures to shape work according to the current culture. This keeps the lights on but doesn't change anything.</p>
+    <p><strong>Transformational UX leadership</strong> focuses on growth and change: paying individualized attention to meeting the needs of the team, stimulating ideas and creativity through a safe environment where people can challenge the status quo, providing a vision that inspires and motivates others to achieve important goals, and role-modeling behaviors that help others identify with a shared vision. Transformational leaders create UX culture; transactional leaders maintain it. Both are necessary — but if your organization's UX maturity is low, transformational leadership is what moves the needle.</p>
+  </div>
+</section>
+
+<section id="self-evaluation" data-section="practical" data-source="NN/g">
+  <h2>Evaluating yourself <span class="source-label">NN/g</span></h2>
+
+  <div class="method-card" data-source="NN/g">
+    <h4>UX Leader Self-Evaluation <span class="method-tag">Self-Assessment</span></h4>
+    <p class="method-when">Use when: you want to identify habits that are holding you back from being an effective UX leader.</p>
+    <p>Bad habits that undermine UX leadership: <strong>Being out of touch</strong> with your work, projects, achievements, and failures.</p>
+<ul>
+  <li><strong>Managing up over managing across</strong> — gravitating toward high-visibility projects and executive attention rather than investing in your team's success. <strong>Dismissing people</strong> or always having to offer your answer, assuming it's the right one.</li>
+  <li><strong>Believing you have to do it yourself</strong> — not trusting your team to get the job done.</li>
+  <li><strong>Requiring excessive reporting</strong> — your team produces artifacts primarily to quench your thirst for details, not to advance the work.</li>
+  <li><strong>Shifting priorities constantly</strong> — regularly redirecting people's work day-to-day without stable direction.</li>
+</ul>
+    <p>The antidote: become a thought partner, not a gatekeeper. Nurture and share new ideas. Let peers tell you how you're doing. Make sure everyone has the same information you have. Actively remove obstacles instead of creating them.</p>
+  </div>
+
+  <div class="method-card" data-source="NN/g">
+    <h4>Personal Action Plan <span class="method-tag">Technique</span></h4>
+    <p class="method-when">Use when: translating self-awareness into deliberate growth as a UX leader.</p>
+    <p>Ask yourself eight questions: What kind of work do I want to be doing? What kind of team do I want to work with? What kinds of products or experiences do I want to create? What do I want my success stories to be? Who do I want my allies and friends to be? What kind of education do I want to have? How do I want to work? What kind of culture do I want to be part of? Then assess your organization against the six pillars of great UX. Color in each pillar based on your honest assessment. Where the gaps are is where UX leadership — your leadership — can make the biggest difference. Make a plan for this week, this month, and this year.</p>
+  </div>
+
+  <div class="callout info" data-source="NN/g">
+    <p class="callout-title">On imposter syndrome</p>
+    <p>Imposter syndrome — the persistent inability to believe that one's success is deserved or legitimately achieved — is remarkably common among UX practitioners, especially those stepping into leadership roles. The antidote isn't to wait until you feel ready. Don't be afraid to ask for help. Get comfortable saying "I don't know." Put yourself in new situations and scenarios. You were hired for a reason. Lean into the discomfort rather than fighting it — it's a signal that you're growing, not a signal that you don't belong.</p>
+  </div>
+</section>
+
+<section id="charisma" data-section="practical" data-source="NN/g">
+  <h2>Developing UX charisma <span class="source-label">NN/g</span></h2>
+
+  <div class="method-card" data-source="NN/g">
+    <h4>UX Charisma Practices <span class="method-tag">Practice</span></h4>
+    <p class="method-when">Use when: you want to become someone people naturally follow and trust.</p>
+    <p>Charisma in a UX context isn't about personality — it's about behavior. Six practices: <strong>Listen more than you talk.</strong> Charismatic people listen closely to everyone and make others feel like they have something in common with them. <strong>Don't practice selective hearing.</strong> Maintain eye contact, respond non-verbally (smile, frown, nod), and show you're engaged even when you disagree. <strong>Choose your attitude and your words.</strong> The words you use affect others' attitudes — speak with intention. <strong>Don't discuss the failings of others, but admit your own.</strong> If you criticize others, people wonder if you also criticize them behind their back. Admitting your own mistakes builds trust. <strong>Ask questions.</strong> Questions are a key driver of effective leadership — they create clarity, promote honesty, construct better relationships, attract evidence, and allow for uncertainty before discovery. <strong>Cultivate curiosity.</strong> Innovation is the result of thoughtfulness, not inspiration. Practice asking the right questions upfront. There's power in asking "What if?"</p>
+  </div>
+</section>
+
+        <div class="section-marker" id="real-world-examples">
+          <span class="split-badge examples">Examples</span>
+          <span class="marker-line"></span>
+        </div>
+
+        <section data-section="examples" data-source="NN/g">
+  <h2>Real-world examples <span class="source-label">NN/g</span></h2>
+
+  <div class="case-study" data-source="NN/g">
+    <p class="case-label">Case study</p>
+    <h4>Apple's Knowledge Navigator (1987): vision as artifact</h4>
+    <p>In 1987, Apple created a concept video called "Knowledge Navigator" showing a professor using a tablet-like device with an intelligent assistant — decades before the iPad or Siri existed. The video wasn't a product spec; it was a vision artifact. It rallied the organization around a future state, made the invisible visible, and gave everyone from engineers to marketers a shared picture of where they were heading. The lesson: a vision shared through a compelling artifact is more powerful than a vision buried in a strategy document. Create something people can watch, touch, or experience — not just read.</p>
+  </div>
+
+  <div class="case-study" data-source="NN/g">
+    <p class="case-label">Case study</p>
+    <h4>Lemonade: vision that differentiates</h4>
+    <p>Lemonade, a non-traditional insurance company, has a vision that demonstrates all three elements of a good vision statement. Mission: "Bring out the best in people, while giving society a push for the better." Vision: "Transform insurance from a necessary evil into a social good." The who: their customers (people). The why: helping people show their best qualities. The how it's different: considering individuals and social good collectively over company profit. This vision creates a decision filter — every product feature, every policy, every interaction can be evaluated against "does this transform insurance into a social good?" Visions that work are specific enough to guide daily decisions, not just annual strategy reviews.</p>
+  </div>
+
+  <div class="case-study" data-source="NN/g">
+    <p class="case-label">Case study</p>
+    <h4>University online experience: shared vision to roadmap</h4>
+    <p>A university struggling with market saturation and high support call volume used the three-step shared vision process. Step 1 (Planning): cross-functional interviews and student research revealed poor online access, low flexibility, and the insight that one personal connection dramatically reduced dropout rates. Step 2 (Visioning): the team crafted and voted on a vision: "Deliver the entire university experience to students and faculty, successfully over the web." Step 3 (Prioritization): they mapped incremental steps into now/next/future buckets — support resources and administrative functionality now, chat-for-support and online learning spaces next, private networks of learners, faculty, and alumni in the future. Each step was connected to specific OKRs (20% increase in undergrad admissions, cost per support call of $0.50, 85% positive feedback). The vision went from workshop artifact to funded roadmap in three weeks.</p>
+  </div>
+</section>
+
+<section id="pitfalls" data-section="practical" data-source="NN/g">
+  <h2>Common pitfalls <span class="source-label">NN/g</span></h2>
+
+  <div class="pitfall" data-source="NN/g">
+    <div class="pitfall-icon">!</div>
+    <div>
+      <h4>Confusing position with leadership</h4>
+      <p>Having a title doesn't make you a leader. Having influence does. The most common trap: waiting for a leadership title before acting like a leader. You don't need to be a VP to advocate for research, champion a vision, or build cross-functional relationships. If you're waiting for permission to lead, you're not leading.</p>
+    </div>
+  </div>
+
+  <div class="pitfall" data-source="NN/g">
+    <div class="pitfall-icon">!</div>
+    <div>
+      <h4>Vision without a plan</h4>
+      <p>A vision statement that isn't connected to prioritized steps, assigned ownership, and measurable outcomes is just aspirational writing. The visioning workshop is the beginning, not the end. If you skip Step 3 (prioritization) of the shared vision process, you'll have a beautiful vision statement and no way to get there.</p>
+    </div>
+  </div>
+
+  <div class="pitfall" data-source="NN/g">
+    <div class="pitfall-icon">!</div>
+    <div>
+      <h4>Evangelizing without listening</h4>
+      <p>UX evangelism that talks without listening alienates the people you're trying to convert. Stakeholders who feel lectured at about "the importance of UX" become resistant, not supportive. Evangelism works when you connect UX value to the things stakeholders already care about — their metrics, their frustrations, their goals. Listen first, then translate.</p>
+    </div>
+  </div>
+
+  <div class="pitfall" data-source="NN/g">
+    <div class="pitfall-icon">!</div>
+    <div>
+      <h4>Neglecting the Interpreter strength</h4>
+      <p>Only 9.1% of UX practitioners naturally lead through business-value translation — yet this is the skill organizations need most from their UX teams. If you can't articulate why a design improvement matters in revenue, efficiency, or competitive terms, you'll always be fighting for budget and headcount. Invest deliberately in building your Interpreter muscles, especially if your natural strength lies elsewhere.</p>
+    </div>
+  </div>
+</section>
+
+<section id="connections">
+  <h2>Connected topics in your library</h2>
+  <div class="cross-ref-grid">
+    <a href="presentation-communication.html" class="cross-ref-card">
+      <span class="ref-number">Tier 4</span>
+      <div class="ref-title">Presentation &amp; Communication</div>
+      <div class="ref-reason">The tactical toolkit for communication — evidence frameworks, feedback management, business cases. This topic provides the strategy; that topic provides the methods.</div>
+    </a>
+    <a href="ux-management.html" class="cross-ref-card">
+      <span class="ref-number">Tier 4</span>
+      <div class="ref-title">UX Management</div>
+      <div class="ref-reason">UX Management covers running a design team. This topic covers leading without authority — the influence dimension rather than the operational one.</div>
+    </a>
+    <a href="stakeholder-management.html" class="cross-ref-card">
+      <span class="ref-number">PM Tier 1</span>
+      <div class="ref-title">Stakeholder Management &amp; Influence</div>
+      <div class="ref-reason">Stakeholder mapping, alignment narratives, and ally-finding — the organizational skills that make UX leadership effective.</div>
+    </a>
+    <a href="ux-roadmapping.html" class="cross-ref-card">
+      <span class="ref-number">Tier 2</span>
+      <div class="ref-title">UX Roadmapping</div>
+      <div class="ref-reason">The roadmap is where vision becomes actionable. Shared vision workshops feed directly into UX roadmap creation.</div>
+    </a>
+    <a href="workshop-facilitation.html" class="cross-ref-card">
+      <span class="ref-number">Tier 2</span>
+      <div class="ref-title">Workshop Facilitation &amp; Design</div>
+      <div class="ref-reason">Visioning workshops and prioritization workshops are specific applications of facilitation skills.</div>
+    </a>
+    <a href="product-thinking.html" class="cross-ref-card">
+      <span class="ref-number">PM Tier 4</span>
+      <div class="ref-title">Product Thinking: Mental Models &amp; Decision-Making</div>
+      <div class="ref-reason">Decision frameworks and UX-to-business cost translation connect directly to the Interpreter strength.</div>
+    </a>
+  </div>
+</section>
+
+<div class="deep-dive-section" id="deep-dive">
+          <div class="deep-dive-header">
+            <span class="deep-dive-badge">Deep Dive</span>
+            <h2 style="margin:0; border:none; padding:0;">Appendix</h2>
+          </div>
+
+  <details class="expandable">
+    <summary><span class="chevron"><svg viewBox="0 0 14 14"><polyline points="4,2 10,7 4,12"/></svg></span> Further reading and resources</summary>
+    <div class="expand-content topic-content">
+      <h4>Essential reading</h4>
+      <p><strong>"The User Experience Team of One" by Leah Buley</strong> — The definitive guide for UX practitioners operating with limited organizational support. Source of the personal action plan framework and practical strategies for building UX culture from the ground up.</p>
+      <p><strong>"Articulating Design Decisions" by Tom Greever</strong> — Essential for the Orator and Foreperson strengths. How to present work, handle feedback, and defend decisions without getting defensive.</p>
+      <p><strong>"The 21 Irrefutable Laws of Leadership" by John C. Maxwell</strong> — Source of the "leadership is influence" definition. Non-UX-specific but directly applicable to understanding leadership as a practice, not a title.</p>
+      <p><strong>"Product Roadmaps Relaunched" by C. Todd Lombardo et al.</strong> — Connects vision to execution through experience briefs, visioning workshops, and roadmap frameworks. Source of the shared vision process.</p>
+      <p><strong>"Radical Candor" by Kim Scott</strong> — Framework for honest, caring communication — the balance between challenging directly and caring personally that effective UX leaders must strike.</p>
+    </div>
+  </details>
+</div>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer container">
+    <div class="footer-inner">
+      <p>Noir Book — Built for the work, not the shelf.</p>
+      <div class="footer-links">
+        <a href="../design-system.html">Design System</a>
+        <a href="../library-manifest.json">Manifest</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to Top -->
+  <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">&#8593;</button>
+
+  <!-- Floating Mobile TOC -->
+  <button class="mobile-toc-btn" id="mobileTocBtn" aria-label="Open table of contents">&#9776; Contents</button>
+  <div class="mobile-toc-overlay" id="mobileTocOverlay">
+    <div class="mobile-toc-panel">
+      <div class="mobile-toc-panel-header">
+        <h3>On this page</h3>
+        <button class="mobile-toc-close" id="mobileTocClose" aria-label="Close">&times;</button>
+      </div>
+      <ul class="mobile-toc-list">
+        <li><a href="#what-and-why" data-section="theory">What UX leadership is and why every practitioner needs it NN/g</a></li>
+        <li><a href="#leadership-strengths" data-section="theory">Five UX leadership strengths NN/g</a></li>
+        <li><a href="#vision" data-section="practical">Driving vision NN/g</a></li>
+        <li><a href="#evangelizing" data-section="practical">Evangelizing UX NN/g</a></li>
+        <li><a href="#self-evaluation" data-section="practical">Evaluating yourself NN/g</a></li>
+        <li><a href="#charisma" data-section="practical">Developing UX charisma NN/g</a></li>
+        <li><a href="#real-world-examples" data-section="examples">Real-world examples NN/g</a></li>
+        <li><a href="#pitfalls" data-section="practical">Common pitfalls NN/g</a></li>
+        <li><a href="#connections">Connected topics in your library</a></li>
+        <li><a href="#deep-dive">Deep-dive appendix</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    // Scrollspy: highlight active TOC item
+    const tocLinks = document.querySelectorAll('.toc-list a');
+    const sections = [];
+    tocLinks.forEach(link => {
+      const href = link.getAttribute('href');
+      if (!href || !href.startsWith('#')) return;
+      const el = document.getElementById(href.slice(1));
+      if (el) sections.push({ el, link });
+    });
+
+    // Reading progress bar
+    const progressBar = document.getElementById('readingProgress');
+    const backToTop = document.getElementById('backToTop');
+
+    function onScroll() {
+      let current = sections[0];
+      for (const s of sections) {
+        if (s.el.getBoundingClientRect().top <= 120) current = s;
+      }
+      tocLinks.forEach(l => l.classList.remove('active'));
+      if (current) current.link.classList.add('active');
+
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrolled = window.scrollY;
+      const progress = docHeight > 0 ? (scrolled / docHeight) * 100 : 0;
+      if (progressBar) progressBar.style.width = progress + '%';
+      if (backToTop) backToTop.classList.toggle('visible', scrolled > 400);
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    // Split badges: click to scroll to section
+    document.querySelectorAll('.content-splits .split-badge').forEach(function(badge) {
+      badge.addEventListener('click', function() {
+        var type = badge.classList.contains('theory') ? 'theory' : badge.classList.contains('practical') ? 'practical' : 'examples';
+        var target = document.querySelector('section[data-section="' + type + '"]');
+        if (target) {
+          var marker = target.previousElementSibling;
+          (marker && marker.classList.contains('section-marker') ? marker : target).scrollIntoView({behavior:'smooth'});
+        }
+      });
+    });
+  </script>
+
+  <script src="../js/checklist.js"></script>
+  <script src="../js/mobile-toc.js"></script>
+  <script src="../js/search.js"></script>
+  <script>
+    function openBurger(){document.getElementById('burgerOverlay').classList.add('open');document.body.style.overflow='hidden'}
+    function closeBurger(e){if(e&&e.target&&e.target!==document.getElementById('burgerOverlay'))return;document.getElementById('burgerOverlay').classList.remove('open');document.body.style.overflow=''}
+    function burgerSearch(q){
+      var r=document.getElementById('burgerSearchResults');
+      if(!q||q.length<2){r.innerHTML='';return}
+      var ql=q.toLowerCase(),matches=[];
+      if(typeof SEARCH_INDEX!=='undefined'){
+        SEARCH_INDEX.forEach(function(t){
+          var hit=t.topic.toLowerCase().indexOf(ql)>-1;
+          if(!hit)t.sections.forEach(function(s){if((s.title+' '+s.keywords).toLowerCase().indexOf(ql)>-1)hit=true});
+          if(hit)matches.push(t);
+        });
+      }
+      if(!matches.length){r.innerHTML='<p style="padding:8px 0;font-size:13px;color:var(--ink-muted)">No results</p>';return}
+      r.innerHTML=matches.slice(0,8).map(function(m){return '<a href="../'+m.url+'">'+m.topic+'<span class="bsr-disc">'+m.discipline+'</span></a>'}).join('');
+    }
+    document.addEventListener('keydown',function(e){if(e.key==='Escape'){closeBurger();var dd=document.getElementById('searchDropdown');if(dd)dd.classList.remove('visible');}});
+    // Close burger when clicking a TOC link
+    document.querySelectorAll('.burger-toc-list a').forEach(function(a){a.addEventListener('click',function(){closeBurger()})});
+    // Search typeahead
+    function topicSearch(q){
+      var dd=document.getElementById('searchDropdown');
+      if(!q||q.length<2||typeof SEARCH_INDEX==='undefined'){if(dd)dd.classList.remove('visible');return}
+      var ql=q.toLowerCase(),grouped={};
+      SEARCH_INDEX.forEach(function(t){
+        var hit=t.topic.toLowerCase().indexOf(ql)>-1,sHits=[],mHits=[];
+        t.sections.forEach(function(s){if((s.title+' '+s.keywords).toLowerCase().indexOf(ql)>-1)sHits.push(s)});
+        (t.methods||[]).forEach(function(m){if((m.name+' '+(m.keywords||'')).toLowerCase().indexOf(ql)>-1)mHits.push(m)});
+        if(!hit&&!sHits.length&&!mHits.length&&ql.length>=3&&typeof levenshtein==='function'){
+          var words=t.topic.toLowerCase().split(/ +/);
+          for(var i=0;i<words.length;i++){if(levenshtein(ql,words[i].substring(0,ql.length+1))<=1){hit=true;break}}
+        }
+        if(hit||sHits.length||mHits.length)grouped[t.topic]={url:'../'+t.url,disc:t.discipline||'',sections:sHits,methods:mHits,topicHit:hit};
+      });
+      var keys=Object.keys(grouped);
+      if(!keys.length){dd.innerHTML='<div class="search-empty">No results</div>';dd.classList.add('visible');return}
+      var html='';
+      keys.slice(0,8).forEach(function(topic){
+        var g=grouped[topic];
+        html+='<div class="search-group"><div class="search-group-title">'+topic+'</div>';
+        if(g.topicHit)html+='<a class="search-result" href="'+g.url+'"><span class="search-result-title">'+topic+'</span><span class="search-result-type practical">'+g.disc+'</span></a>';
+        g.sections.forEach(function(s){html+='<a class="search-result" href="'+g.url+'#'+s.id+'"><span class="search-result-title">'+s.title+'</span><span class="search-result-type '+s.type+'">'+s.type+'</span></a>'});
+        g.methods.slice(0,3).forEach(function(m){html+='<a class="search-result" href="'+g.url+'#'+m.section+'"><span class="search-result-title">'+m.name+'</span><span class="search-result-type practical">method</span></a>'});
+        html+='</div>';
+      });
+      dd.innerHTML=html;dd.classList.add('visible');
+    }
+    document.addEventListener('click',function(e){if(!e.target.closest('.search-box')){var dd=document.getElementById('searchDropdown');if(dd)dd.classList.remove('visible')}});
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,154 @@
+<!--
+TOPIC_ID: CS.1.02
+TOPIC_NUMBER: CS.1.02
+TITLE: Content Auditing &amp; Governance
+SUBTITLE: Know what you have and keep it healthy. Content inventories, audits, governance models, ownership structures, and the systems that prevent content from decaying.
+TIER: 1
+TIER_LABEL: Core Toolkit
+THEORY: 20
+PRACTICAL: 55
+EXAMPLES: 25
+-->
+
+<section id="what-and-why" data-section="theory">
+  <h2>What content governance is and why it matters</h2>
+
+  <p>Every organization has a content problem they don't know about: outdated articles, duplicate pages, broken links, contradictory information, and content nobody owns. Without governance, content accumulates like sediment — each piece made sense when published, but the aggregate is a mess. Users encounter outdated instructions, conflicting information across pages, and content that references features that no longer exist. Content governance is the system that prevents this decay: who owns content, how it's reviewed, when it's updated, and when it's retired.</p>
+</section>
+
+<section id="content-audit" data-section="practical">
+  <h2>Content auditing</h2>
+
+  <div class="method-card">
+    <h4>Content Inventory &amp; Audit Methodology <span class="method-tag">Core Method</span></h4>
+    <p class="method-when">Use when: you need to understand what content exists, assess its quality, and identify gaps, redundancy, and decay.</p>
+    <p>The audit has two phases. <strong>Quantitative inventory:</strong> Crawl or manually catalog every piece of content: URL, title, content type, word count, last updated date, author, traffic, and metadata completeness. This produces a spreadsheet that answers "what do we have?" <strong>Qualitative audit:</strong> Evaluate a sample (or all content, if manageable) against quality criteria: accuracy (is it still correct?), relevance (does anyone need this?), completeness (does it cover the topic adequately?), findability (can users discover it?), and voice consistency (does it match current brand guidelines?). Score each piece and categorize: keep as-is, update, consolidate with another piece, or retire. The ROT analysis (Redundant, Outdated, Trivial) is a quick triage: redundant content should be consolidated, outdated content should be updated or removed, trivial content should be archived.</p>
+  </div>
+
+  <div class="method-card">
+    <h4>Content Health Score <span class="method-tag">Technique</span></h4>
+    <p class="method-when">Use when: tracking content quality over time without running a full audit.</p>
+    <p>A content health score monitors ongoing quality through automated and semi-automated signals. <strong>Freshness:</strong> Percentage of content updated within its review cycle (e.g., within the last 6 months for product docs). <strong>Accuracy:</strong> Number of reported errors or corrections per month. <strong>Completeness:</strong> Percentage of content with all required metadata, images, and cross-links. <strong>Performance:</strong> Traffic trends, bounce rate, and user satisfaction signals (feedback widgets, support escalation from content pages). <strong>Ownership:</strong> Percentage of content with an assigned owner. Track monthly, alert when scores drop below thresholds, and use trends to justify content investment.</p>
+  </div>
+</section>
+
+<section id="governance-models" data-section="practical">
+  <h2>Governance models</h2>
+
+  <div class="method-card">
+    <h4>Governance Model Selection <span class="method-tag">Core Method</span></h4>
+    <p class="method-when">Use when: establishing or restructuring how content decisions are made, who has authority, and how quality is maintained.</p>
+    <p>Three models, each with trade-offs: <strong>Centralized:</strong> A dedicated content team creates and maintains all content. Produces high consistency and quality but creates bottlenecks — product teams wait for content resources. Works best for small-to-medium content operations with a dedicated team. <strong>Decentralized:</strong> Subject matter experts across the organization create their own content. Produces volume and domain expertise but inconsistent quality, voice, and format. Works best for large organizations with diverse content needs. <strong>Hybrid (federated):</strong> A central content team sets standards, templates, and guidelines; distributed teams create content within those guardrails. The central team reviews, edits, and maintains quality. This is the most common model for scaling organizations — it balances quality with throughput.</p>
+  </div>
+
+  <div class="method-card">
+    <h4>Content Ownership Matrix <span class="method-tag">Technique</span></h4>
+    <p class="method-when">Use when: assigning accountability for content creation, review, and maintenance.</p>
+    <p>Every piece of content needs an owner. The ownership matrix defines: <strong>Creator:</strong> Who writes the initial draft? <strong>Reviewer:</strong> Who checks accuracy and quality before publication? <strong>Approver:</strong> Who gives final sign-off (for regulated or brand-sensitive content)? <strong>Maintainer:</strong> Who is responsible for keeping the content current after publication? This is the most commonly missing role — content is created and then orphaned. <strong>Retire decision:</strong> Who decides when content should be archived or removed? Assign by content type and area: product docs are owned by PM teams, help articles by support, marketing content by marketing, API docs by engineering. The content strategist ensures all areas are covered.</p>
+  </div>
+
+  <div class="method-card">
+    <h4>Content Lifecycle Framework <span class="method-tag">Framework</span></h4>
+    <p class="method-when">Use when: defining the stages content passes through from creation to retirement.</p>
+    <p>Content has a lifecycle: <strong>Create:</strong> Drafted against a brief, following style guidelines and templates. <strong>Review:</strong> Checked for accuracy, quality, and compliance. <strong>Publish:</strong> Released to its audience with appropriate metadata and distribution. <strong>Maintain:</strong> Reviewed on a schedule (quarterly for fast-changing content, annually for stable content), updated when products change, and corrected when errors are reported. <strong>Archive/Retire:</strong> When content is no longer relevant, it's either archived (still accessible but not promoted) or retired (removed with redirects). Most governance failures happen in the Maintain and Retire stages — building these into the workflow from day one prevents content decay.</p>
+  </div>
+</section>
+
+<section id="real-world-examples" data-section="examples">
+  <h2>Real-world examples</h2>
+
+  <div class="case-study">
+    <p class="case-label">Case study</p>
+    <h4>GOV.UK: governance at national scale</h4>
+    <p>The UK Government Digital Service manages content for hundreds of government departments through a federated governance model. Departments create content, but GDS sets strict content standards: plain language requirements, mandatory content types, and a content design methodology that prioritizes user needs over organizational structure. A central content team reviews and publishes, and regular audits retire content that isn't meeting performance standards. The result: GOV.UK consistently scores as one of the most usable government websites globally, despite the enormous scale and organizational complexity.</p>
+    <p><strong>Why it works:</strong> Strict standards with federated creation, central review authority, and the willingness to retire underperforming content.</p>
+  </div>
+</section>
+
+<section id="pitfalls" data-section="practical">
+  <h2>Common pitfalls</h2>
+
+  <div class="pitfall">
+    <div class="pitfall-icon">!</div>
+    <div>
+      <h4>Governance without maintenance</h4>
+      <p>Many organizations build governance for content creation (style guides, approval workflows, templates) but nothing for maintenance. Content published today starts decaying immediately — product features change, links break, information becomes outdated. A governance model that doesn't include scheduled reviews and clear ownership for updates will produce an ever-growing library of increasingly unreliable content.</p>
+    </div>
+  </div>
+</section>
+
+<section id="connections">
+  <h2>Connected topics in your library</h2>
+  <div class="cross-ref-grid">
+    <a href="content-strategy-foundations.html" class="cross-ref-card">
+      <span class="ref-number">CS Tier 1</span>
+      <div class="ref-title">Content Strategy Foundations</div>
+      <div class="ref-reason">Governance implements the strategy — audits measure whether content meets strategic goals.</div>
+    </a>
+    <a href="content-analytics-performance.html" class="cross-ref-card">
+      <span class="ref-number">CS Tier 2</span>
+      <div class="ref-title">Content Analytics &amp; Performance</div>
+      <div class="ref-reason">Analytics data feeds audit decisions — which content to keep, update, consolidate, or retire.</div>
+    </a>
+  </div>
+  <div class="callout info">
+    <p class="callout-title">Cross-discipline connections</p>
+    <p><strong>PM.2.07 Product Operations</strong> covers product-level operations and rituals. Content governance is the content parallel — same operational discipline, different domain.</p>
+  </div>
+</section>
+
+<section id="deep-dive">
+  <h2>Deep-dive appendix</h2>
+  <details class="expandable">
+    <summary><span class="chevron"><svg viewBox="0 0 14 14"><polyline points="4,2 10,7 4,12"/></svg></span> Further reading</summary>
+    <div class="expand-content topic-content">
+      <p><strong>"The Content Strategy Toolkit" by Meghan Casey</strong> — Practical tools for content auditing and governance at scale.</p>
+    </div>
+  </details>
+</section>
+
+<!-- SEARCH_INDEX
+{
+  topic: "Content Auditing & Governance",
+  url: "topics/content-auditing-governance.html",
+  tier: "Tier 1",
+  sections: [
+    { title: "What & why", id: "what-and-why", type: "theory", keywords: "content governance audit decay ownership maintenance" },
+    { title: "Content auditing", id: "content-audit", type: "practical", keywords: "inventory audit ROT redundant outdated trivial health score" },
+    { title: "Governance models", id: "governance-models", type: "practical", keywords: "centralized decentralized federated hybrid ownership lifecycle" },
+    { title: "Real-world examples", id: "real-world-examples", type: "examples", keywords: "GOV.UK government content standards federated" },
+    { title: "Common pitfalls", id: "pitfalls", type: "practical", keywords: "governance without maintenance orphaned content" }
+  ],
+  methods: [
+    { name: "Content Inventory & Audit Methodology", section: "content-audit", keywords: "inventory audit quantitative qualitative ROT" },
+    { name: "Content Health Score", section: "content-audit", keywords: "health score freshness accuracy completeness tracking" },
+    { name: "Governance Model Selection", section: "governance-models", keywords: "centralized decentralized federated hybrid" },
+    { name: "Content Ownership Matrix", section: "governance-models", keywords: "owner creator reviewer maintainer retire" },
+    { name: "Content Lifecycle Framework", section: "governance-models", keywords: "lifecycle create review publish maintain archive retire" }
+  ]
+}
+SEARCH_INDEX -->
+
+<!-- MANIFEST
+{
+  "id": "CS.1.02",
+  "title": "Content Auditing & Governance",
+  "file": "topics/content-auditing-governance.html",
+  "tier": 1,
+  "discipline": "CS",
+  "solves": [
+    "I need to audit our existing content to find gaps, redundancy, and decay",
+    "I want a governance model that keeps content accurate and current",
+    "I need to assign content ownership without creating bottlenecks",
+    "I want to decide between centralized, decentralized, or hybrid content operations",
+    "I need to measure content health over time"
+  ],
+  "methods": ["Content Inventory & Audit Methodology", "Content Health Score", "Governance Model Selection", "Content Ownership Matrix", "Content Lifecycle Framework"],
+  "phase": "discovery",
+  "prerequisites": ["CS.1.01"],
+  "pairs_with": ["CS.1.01", "CS.2.05"],
+  "cross_discipline": ["PM.2.07"],
+  "depth": "methods",
+  "keywords": ["content audit", "content governance", "content inventory", "ROT analysis", "content ownership", "content lifecycle", "content health", "content decay", "federated governance"]
+}
+MANIFEST -->

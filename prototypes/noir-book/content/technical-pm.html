@@ -1,0 +1,294 @@
+<!--
+TOPIC_ID: PM.2.08
+TOPIC_NUMBER: PM.2.08
+TITLE: Technical Product Management
+SUBTITLE: Bridge product and engineering. Build vs. buy decisions, tech debt quantification, architecture trade-offs, and speaking engineering's language.
+TIER: 2
+TIER_LABEL: Specialized
+THEORY: 25
+PRACTICAL: 50
+EXAMPLES: 25
+-->
+
+<section id="what-and-why" data-section="theory">
+  <h2>What technical product management is and how it differs</h2>
+
+<p>Technical product management is the practice of managing products where deep technical understanding is essential to making good product decisions. All PMs need some technical literacy, but a Technical PM needs to understand system architecture well enough to evaluate trade-offs, estimate feasibility, and spot when an engineering proposal solves the wrong problem. TPMs typically own platform products, infrastructure, APIs, developer tools, or internal systems — products where the end user is often another engineer or where the product's value is deeply intertwined with its technical implementation.</p>
+
+<p>The distinguishing skill isn't writing code — it's translating between business value and technical complexity. When a stakeholder says "we need real-time sync," a TPM knows to ask: "Do you mean sub-second latency or just faster than the current 5-minute batch job? Because the former requires WebSockets and event-driven architecture, and the latter just requires running the batch job every 30 seconds." That translation prevents the team from over-engineering a solution to a problem that doesn't require it.</p>
+
+<p>TPMs earn trust differently from business-side PMs. Engineering teams respect a PM who can read a pull request, understand a system design document, and ask informed questions about database schema choices. You don't need to be the best engineer — you need to be fluent enough that engineers don't have to simplify every explanation to the point where nuance is lost.</p>
+</section>
+
+<section id="build-buy" data-section="practical">
+  <h2>Build vs. buy decisions</h2>
+
+<div class="method-card">
+  <h4>Build vs. Buy Framework <span class="method-tag">Core Method</span></h4>
+  <p class="method-when">Use when: the team is debating whether to build custom infrastructure or adopt an existing solution.</p>
+  <p>Evaluate along five dimensions:</p>
+<ul>
+  <li><strong>Differentiation</strong> — does building this create competitive advantage? If authentication isn't your product's differentiator, don't build an auth system.</li>
+  <li><strong>Total cost</strong> — compare the full cost of building (engineering time × loaded cost × opportunity cost) against buying (license fees + integration time + vendor management + migration risk).</li>
+  <li><strong>Control</strong> — does building give you control over something critical?</li>
+  <li><strong>Time</strong> — how fast do you need a solution? Building takes months; buying takes weeks.</li>
+  <li><strong>Maintenance</strong> — building means you own maintenance forever; buying means vendor dependency.</li>
+</ul>
+  <p>The default should be "buy" unless building creates meaningful differentiation. Most teams over-build because engineers enjoy building and under-weight the ongoing maintenance burden.</p>
+</div>
+
+<div class="method-card">
+  <h4>Build vs. Buy Scoring Matrix <span class="method-tag">Tool</span></h4>
+  <p class="method-when">Use when: you need to present the decision to stakeholders in a structured way.</p>
+  <p>Score each option on a 1-5 scale across: differentiation potential, time to value, total 3-year cost, integration complexity, team capability match, and vendor risk. Weight criteria based on context (startup weights time-to-value; enterprise weights vendor risk). Present the weighted score alongside a qualitative narrative — the matrix structures the conversation, but the narrative captures nuance the numbers miss.</p>
+</div>
+
+<div class="callout warning">
+  <p class="callout-title">Common mistake</p>
+  <p>Comparing the cost of buying (vendor quotes a price) against building (engineers estimate 3 months). Engineering estimates are consistently 2-3x optimistic. If the build estimate is "3 months," plan for 6-9 months including edge cases, testing, documentation, and maintenance. Then re-run the math.</p>
+</div>
+</section>
+
+<section id="tech-debt" data-section="practical">
+  <h2>Tech debt quantification and management</h2>
+
+<div class="method-card">
+  <h4>Tech Debt Quantification <span class="method-tag">Core Method</span></h4>
+  <p class="method-when">Use when: engineering says "we need to pay down tech debt" but can't quantify the business impact.</p>
+  <p>Categorize debt by its effect:</p>
+<ul>
+  <li><strong>Velocity debt</strong> — slows feature development ("adding a new payment method takes 3 weeks instead of 3 days").</li>
+  <li><strong>Reliability debt</strong> — causes outages ("2 incidents per month from the legacy auth system").</li>
+  <li><strong>Scalability debt</strong> — limits growth ("we handle 10K concurrent users but break at 50K").</li>
+  <li><strong>Security debt</strong> — creates vulnerabilities ("deprecated encryption library").</li>
+</ul>
+  <p>For each category, quantify: velocity debt = extra days per feature × features per quarter × engineering cost per day. Reliability debt = incidents per month × average cost per incident. This transforms "we need to refactor" from an engineering wish into a business case with dollar amounts.</p>
+</div>
+
+<div class="method-card">
+  <h4>20% Time Allocation <span class="method-tag">Framework</span></h4>
+  <p class="method-when">Use when: tech debt keeps growing because it loses every prioritization battle against features.</p>
+  <p>Reserve 15-20% of engineering capacity for tech debt and infrastructure. This capacity is non-negotiable — it doesn't compete with features. Engineering leads decide how to spend it, with TPM input on business impact. The benefit: debt gets addressed continuously instead of accumulating until it forces an emergency. Track what the 20% produces: reduced incident rate, faster feature delivery time, improved test coverage. If you can't show impact, the allocation will get questioned.</p>
+</div>
+</section>
+
+<section id="architecture" data-section="practical">
+  <h2>Architecture decision-making</h2>
+
+<div class="method-card">
+  <h4>Architecture Decision Record (ADR) <span class="method-tag">Core Method</span></h4>
+  <p class="method-when">Use when: the team makes a significant technical decision that future team members need to understand.</p>
+  <p>An ADR documents: the decision context (what problem we're solving), the decision itself (what we chose), alternatives considered (what we rejected and why), consequences (what trade-offs we accepted), and status (proposed, accepted, deprecated, superseded). The PM's role isn't writing ADRs — it's ensuring they get written, reviewed, and stored where people can find them. ADRs are the technical equivalent of product decision logs: without them, new team members re-litigate settled decisions.</p>
+  <p>Keep ADRs short (1-2 pages). Store them in the codebase alongside the code they describe, not in a wiki nobody checks. Number them sequentially. Never delete an ADR — mark deprecated ones as such with a pointer to the superseding ADR.</p>
+</div>
+
+<div class="method-card">
+  <h4>Dependency Risk Matrix <span class="method-tag">Technique</span></h4>
+  <p class="method-when">Use when: evaluating the risk profile of your technical dependencies.</p>
+  <p>List every critical external dependency (databases, third-party APIs, libraries, cloud services). For each, assess: <strong>Substitutability</strong> (how hard is it to switch?), <strong>Vendor health</strong> (is the company/project stable?), <strong>Usage depth</strong> (surface-level or deeply embedded?), and <strong>Failure impact</strong> (what happens if it goes down?). Dependencies that score high on all four dimensions are existential risks that need mitigation plans: abstraction layers, fallback strategies, or contractual SLAs.</p>
+</div>
+</section>
+
+<section id="migration" data-section="practical">
+  <h2>Migration and platform rewrite planning</h2>
+
+<div class="method-card">
+  <h4>Migration Planning Template <span class="method-tag">Core Method</span></h4>
+  <p class="method-when">Use when: moving from one system to another (database migration, platform rewrite, vendor switch).</p>
+  <p>Every migration plan needs:</p>
+<ul>
+  <li><strong>Scope</strong> — what's migrating and what stays.</li>
+  <li><strong>Dual-write period</strong> — how long both systems run in parallel.</li>
+  <li><strong>Rollback plan</strong> — how you revert if migration fails.</li>
+  <li><strong>Data validation</strong> — how you prove the new system produces identical results.</li>
+  <li><strong>Customer communication</strong> — what users need to know and when.</li>
+  <li><strong>Success criteria</strong> — how you know the migration is complete.</li>
+</ul>
+  <p>The biggest migration risk is the "big bang" approach: flip a switch and hope everything works. Instead, migrate incrementally: start with read traffic (shadow the new system against the old), then migrate write traffic for low-risk operations, then high-risk operations, then cut over remaining traffic. Each phase has its own rollback plan.</p>
+</div>
+
+<div class="callout tip">
+  <p class="callout-title">Practical tip</p>
+  <p>The Strangler Fig pattern: instead of rewriting a system from scratch, gradually route traffic from the old system to the new one, endpoint by endpoint. The old system shrinks as the new one grows, like a strangler fig growing around a host tree. This eliminates the "big bang" risk and lets you ship value incrementally.</p>
+</div>
+</section>
+
+<section id="engineering-partnership" data-section="practical">
+  <h2>Engineering partnership model</h2>
+
+<div class="method-card">
+  <h4>Engineering Partnership Model <span class="method-tag">Framework</span></h4>
+  <p class="method-when">Use when: you want to build trust and effective working relationships with engineering leads.</p>
+  <p>The TPM-engineering relationship has three modes:</p>
+<ul>
+  <li><strong>Collaborate</strong> — decisions where PM and engineering have equal input (what to build, how to sequence work).</li>
+  <li><strong>Advise</strong> — engineering decisions where PM provides business context but engineering decides (architecture choices, technology selection, code quality standards).</li>
+  <li><strong>Inform</strong> — PM decisions where engineering needs to know the outcome but doesn't need to weigh in (pricing strategy, market positioning). Explicitly agree on which mode applies to which decisions. Most PM-engineering conflict comes from mode mismatch: PM trying to collaborate on architecture, or engineering trying to collaborate on product strategy.</li>
+</ul>
+</div>
+
+<div class="template-box">
+  <div class="template-header">
+    <span class="template-label">Checklist</span>
+    <span class="template-title">Technical PM Fluency Checklist</span>
+  </div>
+  <ul class="checklist">
+    <li>Can read and understand a system architecture diagram</li>
+    <li>Can follow a pull request discussion and ask relevant questions</li>
+    <li>Understands the difference between synchronous and asynchronous processing</li>
+    <li>Can explain the product's database schema at a high level</li>
+    <li>Knows the team's deployment process and release cadence</li>
+    <li>Can estimate whether a feature is "days" or "months" of engineering work</li>
+    <li>Understands API design basics (REST, versioning, rate limiting)</li>
+    <li>Can read and interpret monitoring dashboards and error logs</li>
+    <li>Knows the major technical risks and dependencies in the product</li>
+    <li>Can participate in incident post-mortems productively</li>
+  </ul>
+</div>
+</section>
+
+<section id="examples" data-section="examples">
+  <h2>Real-world examples</h2>
+
+<div class="case-study">
+  <p class="case-label">Case study</p>
+  <h4>Slack: Managing the database migration at scale</h4>
+  <p>Slack's migration from a single MySQL database to a sharded architecture was one of the most complex technical PM challenges in recent SaaS history. The TPMs involved had to coordinate a multi-year migration that couldn't cause downtime for millions of users. They used the Strangler Fig pattern, migrating one data type at a time, running shadow reads against the new system for months before switching writes. The rollback plan for each phase was tested in production before the actual migration.</p>
+  <p><strong>Why it works:</strong> The TPMs treated the migration as a product launch, not just an engineering project. They defined success criteria (zero customer-visible impact), managed stakeholder expectations (this will take years, not months), and made scope trade-offs (some legacy features were deprecated rather than migrated).</p>
+</div>
+
+<div class="case-study">
+  <p class="case-label">Case study</p>
+  <h4>Figma: Build vs. buy for the multiplayer engine</h4>
+  <p>Figma's real-time multiplayer editing engine is custom-built using CRDTs (Conflict-free Replicated Data Types). This was a deliberate build-over-buy decision: real-time collaboration on a design canvas is Figma's core differentiator. No off-the-shelf solution could handle the specific requirements of vector graphics conflict resolution at the latency they needed. The TPM decision was clear: this is the one thing worth building from scratch because it's the product's competitive moat.</p>
+  <p><strong>Why it works:</strong> They applied the build-vs-buy framework rigorously. Authentication? Buy (Auth0). Payments? Buy (Stripe). Real-time canvas collaboration? Build, because no one else has solved this specific problem, and solving it is why customers choose Figma.</p>
+</div>
+</section>
+
+<section id="pitfalls" data-section="practical">
+  <h2>Common pitfalls</h2>
+
+<div class="pitfall">
+  <div class="pitfall-icon">!</div>
+  <div>
+    <h4>Overstepping into engineering decisions</h4>
+    <p>A TPM who dictates technology choices or architecture decisions erodes engineering trust quickly. Your role is to ensure business context informs technical decisions, not to make the technical decisions yourself. Say "this feature needs sub-200ms response time because users abandon after 200ms" — not "use Redis for caching."</p>
+  </div>
+</div>
+
+<div class="pitfall">
+  <div class="pitfall-icon">!</div>
+  <div>
+    <h4>Treating tech debt as a favor to engineering</h4>
+    <p>Tech debt work isn't a concession to engineers — it's infrastructure investment that enables future product velocity. If you frame it as "I'm giving you time to refactor" instead of "we're investing in faster delivery," you create the wrong dynamic. Tech debt allocation should have business metrics attached, just like feature work.</p>
+  </div>
+</div>
+
+<div class="pitfall">
+  <div class="pitfall-icon">!</div>
+  <div>
+    <h4>Ignoring the "second system effect"</h4>
+    <p>When teams rewrite a system, they tend to over-engineer the replacement ("we'll do it right this time"). The second system accumulates every wish-list feature from the past three years. Scope the rewrite to match current needs plus 12 months of anticipated growth, not the dream architecture. You can always iterate.</p>
+  </div>
+</div>
+</section>
+
+<section id="connections">
+  <h2>Connected topics in your library</h2>
+  <div class="cross-ref-grid">
+    <a href="platform-api-pm.html" class="cross-ref-card">
+      <span class="ref-number">PM Tier 2</span>
+      <div class="ref-title">Platform &amp; API PM</div>
+      <div class="ref-reason">Platform products are the most common home for technical PMs.</div>
+    </a>
+    <a href="agile-pm.html" class="cross-ref-card">
+      <span class="ref-number">PM Tier 1</span>
+      <div class="ref-title">Agile Product Management</div>
+      <div class="ref-reason">Technical PMs need fluency in sprint mechanics to partner with engineering.</div>
+    </a>
+    <a href="requirements.html" class="cross-ref-card">
+      <span class="ref-number">PM Tier 1</span>
+      <div class="ref-title">Requirements: Stories, PRDs &amp; Specs</div>
+      <div class="ref-reason">Technical specs and ADRs extend the requirements toolkit for infrastructure work.</div>
+    </a>
+    <a href="product-metrics.html" class="cross-ref-card">
+      <span class="ref-number">PM Tier 1</span>
+      <div class="ref-title">Product Metrics &amp; Analytics</div>
+      <div class="ref-reason">Quantifying tech debt impact requires the same metrics discipline as product metrics.</div>
+    </a>
+  </div>
+</section>
+
+<section id="deep-dive">
+  <h2>Deep-dive appendix</h2>
+  <details class="expandable">
+    <summary><span class="chevron"><svg viewBox="0 0 14 14"><polyline points="4,2 10,7 4,12"/></svg></span> How to read a system design document</summary>
+    <div class="expand-content topic-content">
+      <h4>What to look for as a PM</h4>
+      <p>System design docs typically cover: problem statement, proposed architecture, data model, API contracts, scalability considerations, and trade-offs. As a TPM, focus on: (1) Does the problem statement match your understanding of the product need? (2) What trade-offs are being made and do you agree with the priorities? (3) What are the failure modes and how are they handled? (4) Does the timeline estimate include testing, documentation, and rollout? (5) What dependencies does this create on other teams or systems?</p>
+      <h4>Questions that earn engineering respect</h4>
+      <p>"What happens when [service X] is down — does the user see an error or do we degrade gracefully?" "How does this scale if we 10x our user base?" "What's the rollback plan if this doesn't work?" "Does this decision lock us in or can we change course later?" These show you understand the system well enough to spot risks without pretending to be an engineer.</p>
+    </div>
+  </details>
+  <details class="expandable">
+    <summary><span class="chevron"><svg viewBox="0 0 14 14"><polyline points="4,2 10,7 4,12"/></svg></span> Further reading and resources</summary>
+    <div class="expand-content topic-content">
+      <h4>Essential reading</h4>
+      <p><strong>"An Elegant Puzzle" by Will Larson</strong> — Engineering management perspective that helps TPMs understand how engineering orgs think.</p>
+      <p><strong>"Designing Data-Intensive Applications" by Martin Kleppmann</strong> — Deep technical reference that gives TPMs enough architecture fluency to participate in system design conversations.</p>
+      <p><strong>"The Manager's Path" by Camille Fournier</strong> — Particularly the chapters on tech lead and architect roles, which clarify where PM ends and engineering begins.</p>
+    </div>
+  </details>
+</section>
+
+<!-- SEARCH_INDEX
+{
+  topic: "Technical Product Management",
+  url: "topics/technical-pm.html",
+  tier: "Tier 2",
+  discipline: "PM",
+  sections: [
+    { title: "What technical PM is", id: "what-and-why", type: "theory", keywords: "technical PM TPM engineering bridge" },
+    { title: "Build vs. buy decisions", id: "build-buy", type: "practical", keywords: "build buy vendor make decision" },
+    { title: "Tech debt quantification", id: "tech-debt", type: "practical", keywords: "tech debt quantify velocity reliability security" },
+    { title: "Architecture decision-making", id: "architecture", type: "practical", keywords: "architecture ADR decision record dependency" },
+    { title: "Migration planning", id: "migration", type: "practical", keywords: "migration rewrite strangler fig rollback" },
+    { title: "Engineering partnership", id: "engineering-partnership", type: "practical", keywords: "engineering trust partnership collaborate advise" },
+    { title: "Real-world examples", id: "examples", type: "examples", keywords: "Slack Figma migration build buy" },
+    { title: "Common pitfalls", id: "pitfalls", type: "practical", keywords: "overstep second system effect" }
+  ],
+  methods: [
+    { name: "Build vs. Buy Framework", section: "build-buy", keywords: "build buy differentiation cost control" },
+    { name: "Build vs. Buy Scoring Matrix", section: "build-buy", keywords: "scoring matrix vendor comparison" },
+    { name: "Tech Debt Quantification", section: "tech-debt", keywords: "tech debt velocity reliability scalability" },
+    { name: "20% Time Allocation", section: "tech-debt", keywords: "allocation capacity infrastructure debt" },
+    { name: "Architecture Decision Record", section: "architecture", keywords: "ADR architecture decision document" },
+    { name: "Dependency Risk Matrix", section: "architecture", keywords: "dependency risk vendor substitutability" },
+    { name: "Migration Planning Template", section: "migration", keywords: "migration rollback dual-write validation" },
+    { name: "Engineering Partnership Model", section: "engineering-partnership", keywords: "collaborate advise inform engineering trust" }
+  ]
+}
+SEARCH_INDEX -->
+
+<!-- MANIFEST
+{
+  "id": "PM.2.08",
+  "title": "Technical Product Management",
+  "file": "topics/technical-pm.html",
+  "tier": 2,
+  "discipline": "PM",
+  "solves": [
+    "I need to participate in architecture decisions without overstepping",
+    "I want to evaluate build vs. buy trade-offs",
+    "I need to quantify and prioritize tech debt",
+    "I want to understand enough about our tech stack to make informed trade-offs",
+    "I need to manage a migration or platform rewrite"
+  ],
+  "methods": ["Build vs. Buy Framework", "Build vs. Buy Scoring Matrix", "Tech Debt Quantification", "20% Time Allocation", "Architecture Decision Record", "Dependency Risk Matrix", "Migration Planning Template", "Engineering Partnership Model"],
+  "phase": "delivery",
+  "prerequisites": ["PM.1.04"],
+  "pairs_with": ["PM.2.05", "PM.1.10", "PM.2.10"],
+  "depth": "methods",
+  "keywords": ["technical PM", "build vs buy", "tech debt", "architecture", "ADR", "migration", "engineering partnership", "dependency", "rewrite"]
+}
+MANIFEST -->

@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Product Management — Noir Book</title>
+  <link rel="stylesheet" href="../css/shared.css">
+  <link rel="stylesheet" href="../css/topic.css">
+  <script src="../js/theme.js"></script>
+  <script src="../js/topic-nav.js"></script>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="site-nav subpage-nav" data-discipline="pm">
+    <div class="nav-inner">
+      <a href="../index.html" class="site-logo">
+        <span class="logo-mark">PM</span>
+        <span class="nav-title">Noir Book</span>
+      </a>
+      <a href="../index.html" class="nav-back-link">&#8592; Library</a>
+      <div class="nav-filters">
+        <button class="disc-toggle ux-toggle active" data-disc="ux" onclick="toggleDisc('ux')" title="UX Design">
+          <span class="disc-dot disc-dot-ux"></span><span class="disc-label">UX Design</span><span class="disc-code">(UX)</span>
+        </button>
+        <button class="disc-toggle pm-toggle active" data-disc="pm" onclick="toggleDisc('pm')" title="Product Management">
+          <span class="disc-dot disc-dot-pm"></span><span class="disc-label">Product</span><span class="disc-code">(PM)</span>
+        </button>
+        <button class="disc-toggle mk-toggle active" data-disc="mk" onclick="toggleDisc('mk')" title="Marketing &amp; Growth">
+          <span class="disc-dot disc-dot-mk"></span><span class="disc-label">Marketing</span><span class="disc-code">(MK)</span>
+        </button>
+        <button class="disc-toggle cs-toggle active" data-disc="cs" onclick="toggleDisc('cs')" title="Content Strategy">
+          <span class="disc-dot disc-dot-cs"></span><span class="disc-label">Content</span><span class="disc-code">(CS)</span>
+        </button>
+        <div class="search-box nav-search-box">
+          <div class="nav-search-wrap">
+            <div class="nav-search-pills" id="navSearchPills"></div>
+            <input type="text" id="navSearchInput" placeholder="Search..." autocomplete="off"
+              oninput="topicNavSearch(this.value)"
+              onkeydown="handleNavSearchKey(event)"
+              onfocus="handleNavSearchFocus()"
+              onblur="handleNavSearchBlur()">
+            <button type="button" class="nav-search-clear" id="navSearchClear" onclick="clearNavSearch()" aria-label="Clear search">&times;</button>
+          </div>
+          <div class="search-dropdown" id="navSearchDropdown"></div>
+        </div>
+      </div>
+      <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle theme">&#9790;</button>
+      <button class="burger-btn" id="burgerBtn" onclick="openBurger()" aria-label="Menu">
+        <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="2" y1="4" x2="16" y2="4"/><line x1="2" y1="9" x2="16" y2="9"/><line x1="2" y1="14" x2="16" y2="14"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Burger Menu Overlay -->
+  <div class="burger-overlay" id="burgerOverlay" onclick="closeBurger(event)">
+    <div class="burger-panel" onclick="event.stopPropagation()">
+      <div class="burger-panel-header">
+        <h3>Menu</h3>
+        <button class="burger-close" onclick="closeBurger()" aria-label="Close">&times;</button>
+      </div>
+      <div class="burger-search">
+        <input type="text" id="burgerSearchInput" placeholder="Search topics, methods..." autocomplete="off" oninput="burgerSearch(this.value)">
+        <div class="burger-search-results" id="burgerSearchResults"></div>
+      </div>
+      <div class="burger-links">
+        <a href="../index.html">&#8592; Back to Library</a>
+        <a href="../design-system.html">Design System</a>
+        <a href="../request-topic.html">Suggest a topic or improvement</a>
+      </div>
+      <div class="burger-toc-section">
+        <p class="burger-toc-title">On this page</p>
+        <ul class="burger-toc-list">
+        <li><a href="#what-and-why" data-section="theory">What AI product management is and why it's different</a></li>
+        <li><a href="#suitability" data-section="practical">AI suitability assessment</a></li>
+        <li><a href="#evaluation" data-section="practical">Evaluation and quality frameworks</a></li>
+        <li><a href="#hitl" data-section="practical">Human-in-the-loop design</a></li>
+        <li><a href="#monitoring" data-section="practical">Model performance monitoring</a></li>
+        <li><a href="#examples" data-section="examples">Real-world examples</a></li>
+        <li><a href="#ai-trust-agents" data-section="practical">Trust and AI agent considerations</a></li>
+        <li><a href="#pitfalls" data-section="practical">Common pitfalls</a></li>
+        <li><a href="#connections">Connected topics in your library</a></li>
+        <li><a href="#deep-dive">Deep-dive appendix</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Topic Header -->
+  <header class="topic-header container">
+    <div class="breadcrumb">
+      <a href="../index.html">Library</a>
+      <span class="sep">&#8250;</span>
+      <span class="breadcrumb-disc breadcrumb-pm">Product Management</span>
+      <span class="sep">&#8250;</span>
+      <span>Tier 3 — Situational</span>
+      <span class="sep">&#8250;</span>
+      <span>AI Product Management</span>
+    </div>
+    <div class="topic-meta">
+      <span class="tier-badge tier3">Tier 3</span>
+      <span style="font-size:14px;color:var(--ink-muted)">Topic PM.3.01</span>
+    </div>
+    <h1>AI Product Management</h1>
+    <p class="topic-subtitle">Products powered by ML and LLMs. AI suitability assessment, evaluation frameworks, prompt engineering as product work, human-in-the-loop design, and managing AI capability uncertainty.</p>
+    <div class="content-splits">
+      <span class="split-badge theory">30% Theory</span>
+      <span class="split-badge practical">45% Methods &amp; Templates</span>
+      <span class="split-badge examples">25% Examples</span>
+    </div>
+  </header>
+
+  <!-- Reading Progress Bar -->
+  <div class="reading-progress" id="readingProgress"></div>
+
+  <!-- Main Layout -->
+  <div class="container">
+    <div class="topic-layout">
+
+      <!-- Sidebar: Table of Contents -->
+      <aside class="topic-sidebar">
+        <nav class="toc">
+          <p class="sidebar-topic-title">AI Product Management</p>
+          <p class="toc-title">On this page</p>
+          <ul class="toc-list">
+            <li><a href="#what-and-why" data-section="theory">What AI product management is and why it's different</a></li>
+            <li><a href="#suitability" data-section="practical">AI suitability assessment</a></li>
+            <li><a href="#evaluation" data-section="practical">Evaluation and quality frameworks</a></li>
+            <li><a href="#hitl" data-section="practical">Human-in-the-loop design</a></li>
+            <li><a href="#monitoring" data-section="practical">Model performance monitoring</a></li>
+            <li><a href="#examples" data-section="examples">Real-world examples</a></li>
+            <li><a href="#ai-trust-agents" data-section="practical">Trust and AI agent considerations</a></li>
+            <li><a href="#pitfalls" data-section="practical">Common pitfalls</a></li>
+            <li><a href="#connections">Connected topics in your library</a></li>
+            <li><a href="#deep-dive">Deep-dive appendix</a></li>
+          </ul>
+        </nav>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="topic-main topic-content">
+
+        <div class="section-marker" id="what-and-why">
+          <span class="split-badge theory">Theory</span>
+          <span class="marker-line"></span>
+        </div>
+
+        <section data-section="theory">
+  <h2>What AI product management is and why it's different</h2>
+
+<p>AI product management is the discipline of building products where machine learning or large language models are core to the value delivered. Unlike traditional software — where you specify exact behavior and the system executes deterministically — AI products produce probabilistic outputs. The search results might be slightly different each time. The recommendation might be wrong. The generated text might hallucinate. This fundamental uncertainty changes how you spec, test, launch, and iterate on features.</p>
+
+<p>The PM's role in AI products isn't understanding the math behind transformer architectures — it's making three judgment calls that engineers and data scientists can't make alone: (1) <strong>Should this be AI?</strong> Not every problem needs ML. Sometimes a rules-based system, a lookup table, or a well-designed form is better. (2) <strong>What quality bar is acceptable?</strong> A medical diagnosis tool needs 99%+ accuracy. A playlist recommendation can be wrong 40% of the time and still delight users. The PM defines the threshold. (3) <strong>What happens when AI fails?</strong> Every AI feature fails some percentage of the time. The PM designs the failure experience: fallbacks, confidence indicators, human escalation paths.</p>
+
+<p>The biggest mindset shift: in traditional PM, you ship a feature and it either works or it doesn't. In AI PM, you ship a feature that works <em>most of the time</em>, and your job is defining what "most" means, measuring whether you're hitting it, and deciding what to do about the gap.</p>
+</section>
+
+        <div class="section-marker" id="suitability">
+          <span class="split-badge practical">Practical</span>
+          <span class="marker-line"></span>
+        </div>
+
+        <section data-section="practical">
+  <h2>AI suitability assessment</h2>
+
+<div class="method-card">
+  <h4>AI Suitability Assessment <span class="method-tag">Core Method</span></h4>
+  <p class="method-when">Use when: evaluating whether AI is the right approach for a product problem.</p>
+  <p>Before committing to an AI solution, score the problem on five dimensions:</p>
+<ul>
+  <li><strong>Pattern complexity</strong> — is the pattern too complex for rules but learnable from data? Simple if/then logic doesn't need AI.</li>
+  <li><strong>Data availability</strong> — do you have enough labeled data to train or fine-tune a model? (For LLM features, do you have enough examples to write effective prompts?).</li>
+  <li><strong>Error tolerance</strong> — can the user recover from wrong outputs? Autocomplete suggestions: high tolerance. Financial calculations: zero tolerance.</li>
+  <li><strong>Explanation need</strong> — do users need to understand <em>why</em> the AI made a decision? Regulated industries often require explainability that black-box models can't provide.</li>
+  <li><strong>Maintenance capacity</strong> — can your team monitor model performance, retrain when accuracy drifts, and handle edge cases over time?</li>
+</ul>
+  <p>If a problem scores low on data availability and error tolerance but high on explanation need, AI is probably the wrong approach. Use a rules engine or decision tree instead.</p>
+</div>
+
+<div class="callout warning">
+  <p class="callout-title">Common mistake</p>
+  <p>"We should add AI to this" is not a product strategy. AI is a capability, not a feature. Start with the user problem, then evaluate whether AI is the best solution. The question is never "where can we use AI?" — it's "what's the best way to solve this problem, and is AI part of that answer?"</p>
+</div>
+</section>
+
+<section id="evaluation" data-section="practical">
+  <h2>Evaluation and quality frameworks</h2>
+
+<div class="method-card">
+  <h4>Evaluation Framework Design <span class="method-tag">Core Method</span></h4>
+  <p class="method-when">Use when: defining what "good enough" means for an AI-powered feature.</p>
+  <p>Build an evaluation framework with three layers:</p>
+<ul>
+  <li><strong>Automated metrics</strong> — quantitative measures you can compute at scale (accuracy, precision, recall, F1 for classification; BLEU, ROUGE for generation; latency, cost per inference).</li>
+  <li><strong>Human evaluation</strong> — qualitative assessment by human raters on dimensions like relevance, helpfulness, safety, and tone. Design a rating rubric (1-5 scale with clear anchor descriptions) and evaluate a sample of 100-200 outputs regularly.</li>
+  <li><strong>User-facing metrics</strong> — how AI quality translates to product outcomes (click-through rate on recommendations, task completion rate with AI assistance, user satisfaction scores).</li>
+</ul>
+  <p>Set minimum quality thresholds for launch: "We launch when automated metrics exceed X AND human evaluation scores average Y AND user-facing metrics show no degradation from the non-AI baseline." Review these thresholds quarterly as user expectations and competitive benchmarks evolve.</p>
+</div>
+
+<div class="method-card">
+  <h4>Prompt Engineering as Product Spec <span class="method-tag">Technique</span></h4>
+  <p class="method-when">Use when: building features powered by LLMs where the prompt IS the product logic.</p>
+  <p>For LLM-powered features, the prompt is the spec. It defines the system's behavior, constraints, tone, and output format. Treat prompts with the same rigor as traditional specs: version them, review them, test them against edge cases, and track their performance over time. Build a prompt evaluation suite: a set of 50-100 test inputs with expected outputs. Run every prompt change through the suite before deploying. Track prompt performance metrics: output quality score, latency, token cost, and failure rate (outputs that violate constraints or produce nonsensical results).</p>
+</div>
+
+<div class="method-card">
+  <h4>AI Failure Mode Analysis <span class="method-tag">Core Method</span></h4>
+  <p class="method-when">Use when: designing the user experience around AI uncertainty.</p>
+  <p>Map every way the AI can fail:</p>
+<ul>
+  <li><strong>Wrong output</strong> — the AI gives an incorrect answer with high confidence.</li>
+  <li><strong>Hallucination</strong> — the AI generates plausible-sounding information that doesn't exist.</li>
+  <li><strong>Bias</strong> — the AI produces systematically unfair or skewed outputs for certain groups.</li>
+  <li><strong>Refusal</strong> — the AI declines to answer when it should engage.</li>
+  <li><strong>Latency</strong> — the AI takes too long, degrading the user experience.</li>
+  <li><strong>Cost spike</strong> — unexpected usage patterns cause inference costs to explode.</li>
+</ul>
+  <p>For each failure mode, design a mitigation: confidence scores displayed to users, citation requirements, bias testing in the evaluation suite, fallback to non-AI paths, streaming for latency, and cost guardrails (rate limits, cheaper model fallbacks).</p>
+</div>
+</section>
+
+<section id="hitl" data-section="practical">
+  <h2>Human-in-the-loop design</h2>
+
+<div class="method-card">
+  <h4>Human-in-the-Loop Workflow <span class="method-tag">Core Method</span></h4>
+  <p class="method-when">Use when: AI accuracy isn't high enough for fully autonomous operation.</p>
+  <p>HITL puts a human reviewer in the AI pipeline for cases where the model isn't confident or the stakes are high. Design the workflow:</p>
+<ul>
+  <li><strong>Confidence threshold</strong> — below what confidence score does the output get routed to a human?</li>
+  <li><strong>Review interface</strong> — what does the reviewer see? (AI output, confidence score, relevant context, approve/edit/reject actions.).</li>
+  <li><strong>Feedback loop</strong> — how do human corrections improve the model over time? (Corrections become training data for the next model version.).</li>
+  <li><strong>Escalation path</strong> — what happens when the human reviewer is also uncertain?</li>
+</ul>
+  <p>The PM decision is where to set the confidence threshold. Too low (route everything to humans) and you've built an expensive human workflow with AI decoration. Too high (route nothing to humans) and errors reach users unchecked. Start conservative (low threshold, more human review), measure error rates, and raise the threshold as model performance improves.</p>
+</div>
+
+<div class="callout tip">
+  <p class="callout-title">Practical tip</p>
+  <p>Show users AI confidence visually. A search result with "95% confident" feels different from one with "62% confident." Confidence indicators help users calibrate their trust: they'll verify low-confidence outputs themselves and trust high-confidence ones. This is far better than either hiding confidence (users over-trust everything) or showing disclaimers on every output (users learn to ignore them).</p>
+</div>
+</section>
+
+<section id="monitoring" data-section="practical">
+  <h2>Model performance monitoring</h2>
+
+<div class="method-card">
+  <h4>Model Performance Monitoring <span class="method-tag">Technique</span></h4>
+  <p class="method-when">Use when: an AI feature is in production and you need to detect quality degradation.</p>
+  <p>AI models degrade over time as the real world drifts from training data. Monitor:</p>
+<ul>
+  <li><strong>Input drift</strong> — are users sending inputs the model wasn't trained on?</li>
+  <li><strong>Output quality</strong> — sample and human-evaluate a percentage of outputs weekly.</li>
+  <li><strong>User feedback signals</strong> — thumbs up/down, "regenerate" clicks, manual overrides of AI suggestions.</li>
+  <li><strong>Business metrics</strong> — are conversion rates, engagement, or satisfaction changing? Set alerts for statistically significant drops in any monitored metric. When alerts fire, investigate: is it a model issue, a data issue, or a user behavior change?</li>
+</ul>
+</div>
+
+<div class="method-card">
+  <h4>Responsible AI Checklist <span class="method-tag">Tool</span></h4>
+  <p class="method-when">Use when: launching any AI-powered feature.</p>
+  <p>Before launching, verify:</p>
+<ul>
+  <li><strong>Bias testing</strong> — have you tested outputs across demographic groups for systematic unfairness?</li>
+  <li><strong>Privacy</strong> — does the model process or store PII? Is user data used for training? Have users consented?</li>
+  <li><strong>Transparency</strong> — do users know they're interacting with AI? Can they opt out?</li>
+  <li><strong>Safety</strong> — can the model produce harmful, illegal, or dangerous outputs? What guardrails prevent this?</li>
+  <li><strong>Accountability</strong> — who is responsible when the AI makes a consequential error? Is there a human appeal path?</li>
+</ul>
+</div>
+</section>
+
+        <div class="section-marker" id="examples">
+          <span class="split-badge examples">Examples</span>
+          <span class="marker-line"></span>
+        </div>
+
+        <section data-section="examples">
+  <h2>Real-world examples</h2>
+
+<div class="case-study">
+  <p class="case-label">Case study</p>
+  <h4>Notion AI: Augmentation over automation</h4>
+  <p>Notion's AI features (summarize, translate, brainstorm, edit) position AI as an augmentation tool, not an automation tool. The AI drafts; the human edits. This HITL-by-default approach means Notion doesn't need 99% accuracy — they need the AI output to be a useful starting point that saves the user time even after editing. Their quality bar: "Is the AI output faster to edit than writing from scratch?" If yes, the feature succeeds even when the output is imperfect.</p>
+  <p><strong>Why it works:</strong> By framing AI as "draft, not final," Notion set user expectations correctly. Users don't rage when the AI summary misses a point — they edit it. This tolerance for imperfection let Notion ship faster and iterate based on usage patterns rather than waiting for perfect accuracy.</p>
+</div>
+
+<div class="case-study">
+  <p class="case-label">Case study</p>
+  <h4>GitHub Copilot: Acceptance rate as the North Star</h4>
+  <p>GitHub Copilot measures success by "acceptance rate" — the percentage of AI suggestions that developers accept (tab to complete) without modification. This metric elegantly captures quality: if developers accept 30% of suggestions, the AI is useful. If acceptance drops to 10%, something is wrong. They track acceptance rate by language, file type, and suggestion length, which helps the ML team prioritize improvements. They also track "time saved" — estimated keystrokes saved per accepted suggestion — to quantify business value.</p>
+  <p><strong>Why it works:</strong> Acceptance rate is a product metric, not an ML metric. It measures user value directly. A model that generates beautiful code that developers always modify scores lower than a model that generates acceptable code that developers accept as-is. This aligns ML optimization with product success.</p>
+</div>
+</section>
+
+<section id="ai-trust-agents" data-section="practical">
+  <h2>Trust and AI agent considerations</h2>
+
+  <div class="method-card">
+    <h4>Trust as Product Quality <span class="method-tag">Framework</span></h4>
+    <p class="method-when">Use when: defining quality standards for AI-powered features — beyond accuracy to the full trust experience.</p>
+    <p>For AI products, trust is not a feeling — it's a measurable product quality built through four design properties. <strong>Transparency:</strong> Can users see what the AI is doing, what data it uses, and when it's uncertain? Transparency requirements scale with stakes — a music suggestion needs a one-line reason, a medical recommendation needs detailed justification. <strong>Control:</strong> Can users steer, correct, undo, or override AI behavior? Define control granularity per feature — some AI actions need a simple accept/reject, others need parameter adjustment. <strong>Consistency:</strong> Does the AI behave predictably in similar situations? Inconsistency erodes trust faster than occasional errors because users can't form a reliable mental model. <strong>Failure recovery:</strong> When the AI is wrong, how quickly can users recover? Design for clear error identification, easy correction paths, and visible system improvement. Set product requirements against all four qualities, not just accuracy.</p>
+  </div>
+
+  <div class="method-card">
+    <h4>AI Agent Product Considerations <span class="method-tag">Technique</span></h4>
+    <p class="method-when">Use when: deciding whether to build for AI agent interaction, or when agents are becoming a significant interaction channel for your product.</p>
+    <p>AI agents increasingly act on behalf of users — booking travel, comparing products, completing workflows. PMs must decide when to optimize for agent interaction. <strong>When to build for agents:</strong> When your product has structured, repeatable tasks (booking, purchasing, data retrieval) that agents can complete reliably. When a significant portion of your users already delegate tasks to assistants. When your product's API or structured data could serve agent consumption. <strong>Agent task completion metrics:</strong> Measure what percentage of common tasks an agent can complete without human intervention, where handoffs fail, and how agent-driven usage compares to direct usage in conversion and satisfaction. <strong>Product implications:</strong> Agent-friendly products need clean APIs, structured data, predictable state transitions, and clear error responses. This often aligns with accessibility improvements — well-structured products serve both agents and assistive technologies better.</p>
+  </div>
+</section>
+
+<section id="pitfalls" data-section="practical">
+  <h2>Common pitfalls</h2>
+
+<div class="pitfall">
+  <div class="pitfall-icon">!</div>
+  <div>
+    <h4>Demo-driven development</h4>
+    <p>The AI demo looks amazing — it generates perfect outputs for carefully chosen examples. Then you ship it and real users send inputs the demo never covered. Always test with adversarial, edge-case, and boring inputs, not just the "golden path" demo scenarios. If the demo uses 5 examples, test with 500.</p>
+  </div>
+</div>
+
+<div class="pitfall">
+  <div class="pitfall-icon">!</div>
+  <div>
+    <h4>Ignoring inference costs in product decisions</h4>
+    <p>An LLM feature that costs $0.05 per API call seems cheap until you have 1M daily users making 10 requests each. That's $500K/month in inference costs alone. Model cost is a product constraint, just like latency and accuracy. Factor it into the quality-cost-latency triangle when choosing model sizes and architectures.</p>
+  </div>
+</div>
+
+<div class="pitfall">
+  <div class="pitfall-icon">!</div>
+  <div>
+    <h4>Shipping AI without a non-AI fallback</h4>
+    <p>When the model goes down (and it will), users need a path to complete their task. Search should fall back to keyword matching. Recommendations should fall back to popularity-based lists. Generative features should show a clear "unavailable" state with manual alternatives. Never make AI the only path to core functionality.</p>
+  </div>
+</div>
+</section>
+
+<section id="connections">
+  <h2>Connected topics in your library</h2>
+  <div class="cross-ref-grid">
+    <a href="experimentation.html" class="cross-ref-card">
+      <span class="ref-number">PM Tier 2</span>
+      <div class="ref-title">Experimentation &amp; A/B Testing</div>
+      <div class="ref-reason">AI features need rigorous A/B testing — but with different statistical considerations (variance in AI outputs).</div>
+    </a>
+    <a href="ai-for-designers.html" class="cross-ref-card">
+      <span class="ref-number">UX Tier 3</span>
+      <div class="ref-title">AI for Designers (UX)</div>
+      <div class="ref-reason">UX lens on AI — designing trust patterns, explaining AI decisions, and handling uncertainty in interfaces.</div>
+    </a>
+    <a href="technical-pm.html" class="cross-ref-card">
+      <span class="ref-number">PM Tier 2</span>
+      <div class="ref-title">Technical PM</div>
+      <div class="ref-reason">AI PM is a specialization of technical PM — deeper technical fluency required.</div>
+    </a>
+    <a href="product-metrics.html" class="cross-ref-card">
+      <span class="ref-number">PM Tier 1</span>
+      <div class="ref-title">Product Metrics &amp; Analytics</div>
+      <div class="ref-reason">AI evaluation frameworks extend the metrics toolkit with model-specific measurements.</div>
+    </a>
+  </div>
+</section>
+
+<div class="deep-dive-section" id="deep-dive">
+          <div class="deep-dive-header">
+            <span class="deep-dive-badge">Deep Dive</span>
+            <h2 style="margin:0; border:none; padding:0;">Appendix</h2>
+          </div>
+  <details class="expandable">
+    <summary><span class="chevron"><svg viewBox="0 0 14 14"><polyline points="4,2 10,7 4,12"/></svg></span> LLM-specific PM considerations</summary>
+    <div class="expand-content topic-content">
+      <h4>Build vs. buy for LLM features</h4>
+      <p>The LLM landscape offers three approaches: <strong>API-based</strong> (OpenAI, Anthropic, Google) — fastest to ship, per-token cost, dependent on vendor. <strong>Open-source hosted</strong> (Llama, Mistral on your infra) — more control, higher upfront cost, need ML ops expertise. <strong>Fine-tuned</strong> — either API or self-hosted, trained on your domain data for better quality on specific tasks. The PM decision: API for speed and experimentation, open-source for cost control at scale, fine-tuned for quality on domain-specific tasks.</p>
+      <h4>Prompt management at scale</h4>
+      <p>As you accumulate LLM-powered features, you need prompt management infrastructure: version control for prompts, A/B testing of prompt variants, cost tracking per prompt, and automated regression testing. Tools like Langfuse, Braintrust, and Humanloop provide this. Without it, prompt changes are ungoverned — someone edits a prompt in production and breaks a feature nobody monitors.</p>
+    </div>
+  </details>
+  <details class="expandable">
+    <summary><span class="chevron"><svg viewBox="0 0 14 14"><polyline points="4,2 10,7 4,12"/></svg></span> Further reading and resources</summary>
+    <div class="expand-content topic-content">
+      <h4>Essential reading</h4>
+      <p><strong>"AI Product Management" by Marily Nika</strong> — Practical guide to PM for AI-powered products.</p>
+      <p><strong>"Designing Machine Learning Systems" by Chip Huyen</strong> — Technical depth on ML systems that gives PMs fluency in the engineering conversations.</p>
+      <p><strong>Anthropic's research on AI safety and evaluation</strong> — Practical frameworks for responsible AI deployment.</p>
+    </div>
+  </details>
+</div>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer container">
+    <div class="footer-inner">
+      <p>Noir Book — Built for the work, not the shelf.</p>
+      <div class="footer-links">
+        <a href="../design-system.html">Design System</a>
+        <a href="../library-manifest.json">Manifest</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to Top -->
+  <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">&#8593;</button>
+
+  <!-- Floating Mobile TOC -->
+  <button class="mobile-toc-btn" id="mobileTocBtn" aria-label="Open table of contents">&#9776; Contents</button>
+  <div class="mobile-toc-overlay" id="mobileTocOverlay">
+    <div class="mobile-toc-panel">
+      <div class="mobile-toc-panel-header">
+        <h3>On this page</h3>
+        <button class="mobile-toc-close" id="mobileTocClose" aria-label="Close">&times;</button>
+      </div>
+      <ul class="mobile-toc-list">
+        <li><a href="#what-and-why" data-section="theory">What AI product management is and why it's different</a></li>
+        <li><a href="#suitability" data-section="practical">AI suitability assessment</a></li>
+        <li><a href="#evaluation" data-section="practical">Evaluation and quality frameworks</a></li>
+        <li><a href="#hitl" data-section="practical">Human-in-the-loop design</a></li>
+        <li><a href="#monitoring" data-section="practical">Model performance monitoring</a></li>
+        <li><a href="#examples" data-section="examples">Real-world examples</a></li>
+        <li><a href="#ai-trust-agents" data-section="practical">Trust and AI agent considerations</a></li>
+        <li><a href="#pitfalls" data-section="practical">Common pitfalls</a></li>
+        <li><a href="#connections">Connected topics in your library</a></li>
+        <li><a href="#deep-dive">Deep-dive appendix</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    // Scrollspy: highlight active TOC item
+    const tocLinks = document.querySelectorAll('.toc-list a');
+    const sections = [];
+    tocLinks.forEach(link => {
+      const href = link.getAttribute('href');
+      if (!href || !href.startsWith('#')) return;
+      const el = document.getElementById(href.slice(1));
+      if (el) sections.push({ el, link });
+    });
+
+    // Reading progress bar
+    const progressBar = document.getElementById('readingProgress');
+    const backToTop = document.getElementById('backToTop');
+
+    function onScroll() {
+      let current = sections[0];
+      for (const s of sections) {
+        if (s.el.getBoundingClientRect().top <= 120) current = s;
+      }
+      tocLinks.forEach(l => l.classList.remove('active'));
+      if (current) current.link.classList.add('active');
+
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrolled = window.scrollY;
+      const progress = docHeight > 0 ? (scrolled / docHeight) * 100 : 0;
+      if (progressBar) progressBar.style.width = progress + '%';
+      if (backToTop) backToTop.classList.toggle('visible', scrolled > 400);
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    // Split badges: click to scroll to section
+    document.querySelectorAll('.content-splits .split-badge').forEach(function(badge) {
+      badge.addEventListener('click', function() {
+        var type = badge.classList.contains('theory') ? 'theory' : badge.classList.contains('practical') ? 'practical' : 'examples';
+        var target = document.querySelector('section[data-section="' + type + '"]');
+        if (target) {
+          var marker = target.previousElementSibling;
+          (marker && marker.classList.contains('section-marker') ? marker : target).scrollIntoView({behavior:'smooth'});
+        }
+      });
+    });
+  </script>
+
+  <script src="../js/checklist.js"></script>
+  <script src="../js/mobile-toc.js"></script>
+  <script src="../js/search.js"></script>
+  <script>
+    function openBurger(){document.getElementById('burgerOverlay').classList.add('open');document.body.style.overflow='hidden'}
+    function closeBurger(e){if(e&&e.target&&e.target!==document.getElementById('burgerOverlay'))return;document.getElementById('burgerOverlay').classList.remove('open');document.body.style.overflow=''}
+    function burgerSearch(q){
+      var r=document.getElementById('burgerSearchResults');
+      if(!q||q.length<2){r.innerHTML='';return}
+      var ql=q.toLowerCase(),matches=[];
+      if(typeof SEARCH_INDEX!=='undefined'){
+        SEARCH_INDEX.forEach(function(t){
+          var hit=t.topic.toLowerCase().indexOf(ql)>-1;
+          if(!hit)t.sections.forEach(function(s){if((s.title+' '+s.keywords).toLowerCase().indexOf(ql)>-1)hit=true});
+          if(hit)matches.push(t);
+        });
+      }
+      if(!matches.length){r.innerHTML='<p style="padding:8px 0;font-size:13px;color:var(--ink-muted)">No results</p>';return}
+      r.innerHTML=matches.slice(0,8).map(function(m){return '<a href="../'+m.url+'">'+m.topic+'<span class="bsr-disc">'+m.discipline+'</span></a>'}).join('');
+    }
+    document.addEventListener('keydown',function(e){if(e.key==='Escape'){closeBurger();var dd=document.getElementById('searchDropdown');if(dd)dd.classList.remove('visible');}});
+    // Close burger when clicking a TOC link
+    document.querySelectorAll('.burger-toc-list a').forEach(function(a){a.addEventListener('click',function(){closeBurger()})});
+    // Search typeahead
+    function topicSearch(q){
+      var dd=document.getElementById('searchDropdown');
+      if(!q||q.length<2||typeof SEARCH_INDEX==='undefined'){if(dd)dd.classList.remove('visible');return}
+      var ql=q.toLowerCase(),grouped={};
+      SEARCH_INDEX.forEach(function(t){
+        var hit=t.topic.toLowerCase().indexOf(ql)>-1,sHits=[],mHits=[];
+        t.sections.forEach(function(s){if((s.title+' '+s.keywords).toLowerCase().indexOf(ql)>-1)sHits.push(s)});
+        (t.methods||[]).forEach(function(m){if((m.name+' '+(m.keywords||'')).toLowerCase().indexOf(ql)>-1)mHits.push(m)});
+        if(!hit&&!sHits.length&&!mHits.length&&ql.length>=3&&typeof levenshtein==='function'){
+          var words=t.topic.toLowerCase().split(/ +/);
+          for(var i=0;i<words.length;i++){if(levenshtein(ql,words[i].substring(0,ql.length+1))<=1){hit=true;break}}
+        }
+        if(hit||sHits.length||mHits.length)grouped[t.topic]={url:'../'+t.url,disc:t.discipline||'',sections:sHits,methods:mHits,topicHit:hit};
+      });
+      var keys=Object.keys(grouped);
+      if(!keys.length){dd.innerHTML='<div class="search-empty">No results</div>';dd.classList.add('visible');return}
+      var html='';
+      keys.slice(0,8).forEach(function(topic){
+        var g=grouped[topic];
+        html+='<div class="search-group"><div class="search-group-title">'+topic+'</div>';
+        if(g.topicHit)html+='<a class="search-result" href="'+g.url+'"><span class="search-result-title">'+topic+'</span><span class="search-result-type practical">'+g.disc+'</span></a>';
+        g.sections.forEach(function(s){html+='<a class="search-result" href="'+g.url+'#'+s.id+'"><span class="search-result-title">'+s.title+'</span><span class="search-result-type '+s.type+'">'+s.type+'</span></a>'});
+        g.methods.slice(0,3).forEach(function(m){html+='<a class="search-result" href="'+g.url+'#'+m.section+'"><span class="search-result-title">'+m.name+'</span><span class="search-result-type practical">method</span></a>'});
+        html+='</div>';
+      });
+      dd.innerHTML=html;dd.classList.add('visible');
+    }
+    document.addEventListener('click',function(e){if(!e.target.closest('.search-box')){var dd=document.getElementById('searchDropdown');if(dd)dd.classList.remove('visible')}});
+  </script>
+
+</body>
+</html>

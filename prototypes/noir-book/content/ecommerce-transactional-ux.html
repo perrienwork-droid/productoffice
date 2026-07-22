@@ -1,0 +1,203 @@
+<!--
+TOPIC_ID: UX.3.08
+TOPIC_NUMBER: UX.3.08
+TITLE: Ecommerce &amp; Transactional UX
+SUBTITLE: Design buying experiences that convert. Cart design, checkout flows, product page anatomy, trust signals, pricing display, payment patterns, and the friction-reduction techniques specific to transactional interfaces.
+TIER: 3
+TIER_LABEL: Situational
+THEORY: 20
+PRACTICAL: 55
+EXAMPLES: 25
+-->
+
+<section id="what-and-why" data-section="theory">
+  <h2>What transactional UX is and why it matters</h2>
+
+  <p>Transactional interfaces are where users commit resources — money, time, personal information, contractual obligations. Every interaction either builds toward a conversion or introduces friction that causes abandonment. The stakes are measurable: a 1% improvement in checkout conversion can represent millions in revenue. But transactional UX is not just about squeezing more conversions from aggressive funnels — it's about designing buying experiences that respect user autonomy, build genuine trust, and make the right decision easy.</p>
+
+  <p>The craft is specific: product pages need different patterns than content pages, cart experiences need different patterns than browsing experiences, and checkout needs different patterns than anything else in your product. Generic UI patterns often fail in transactional contexts because the psychological dynamics of spending money, committing to a subscription, or providing payment information create unique design challenges.</p>
+</section>
+
+<section id="product-pages" data-section="practical">
+  <h2>Product page design</h2>
+
+  <div class="method-card">
+    <h4>Product Page Anatomy Framework <span class="method-tag">Core Method</span></h4>
+    <p class="method-when">Use when: designing or optimizing product pages, plan comparison pages, or any page where users evaluate before purchasing.</p>
+    <p>A product page has distinct zones serving different evaluation needs: <strong>Hero zone (above the fold):</strong> Product image/visual, title, price, primary CTA, and the single most important differentiator. Users decide within seconds whether to engage further — the hero zone must answer "what is this and should I care?" <strong>Evidence zone:</strong> Reviews, ratings, social proof, trust badges, and credibility signals. Users who pass the hero zone are interested but not convinced — evidence reduces perceived risk. <strong>Detail zone:</strong> Specifications, features, comparison, sizing guides, FAQs — the information that informed buyers need to make confident decisions. <strong>Action zone:</strong> Add-to-cart, quantity selection, variant selection (size, color), availability status, and shipping information. Keep the primary action visible or easily reachable as the user scrolls. <strong>Cross-sell zone:</strong> Related products, "frequently bought together," complementary items. Place after the primary action to avoid distracting from the main purchase decision.</p>
+  </div>
+</section>
+
+<section id="cart" data-section="practical">
+  <h2>Cart and wishlist patterns</h2>
+
+  <div class="method-card">
+    <h4>Cart UX Patterns <span class="method-tag">Core Method</span></h4>
+    <p class="method-when">Use when: designing shopping cart, basket, or order summary experiences.</p>
+    <p>The cart is a decision-support tool, not just a holding area. <strong>Cart visibility:</strong> Mini-cart (slide-out panel or dropdown) for quick additions without page navigation. Full cart page for review and editing. Persistent cart icon with item count so users always know their cart status. <strong>Editing in cart:</strong> Allow quantity changes, variant changes (size/color), and item removal directly in the cart — don't force users back to the product page. <strong>Save for later:</strong> Let users move items from cart to a wishlist/save-for-later list without losing them. This reduces cart abandonment from users who aren't ready to buy yet. <strong>Price transparency:</strong> Show item prices, subtotal, estimated tax, and shipping cost in the cart — not just at checkout. Price surprises at checkout are the #1 cause of cart abandonment. <strong>Empty cart:</strong> When the cart is empty, show recently viewed items, saved items, or popular products — not just "Your cart is empty."</p>
+  </div>
+</section>
+
+<section id="checkout" data-section="practical">
+  <h2>Checkout flow design</h2>
+
+  <div class="method-card">
+    <h4>Checkout Flow Design <span class="method-tag">Core Method</span></h4>
+    <p class="method-when">Use when: designing or optimizing the checkout process from cart to order confirmation.</p>
+    <p>Checkout is the highest-friction moment in the buying journey. Design principles: <strong>Guest vs. account:</strong> Always offer guest checkout. Requiring account creation before purchase causes 24% of cart abandonments. Offer account creation after purchase ("Save your details for faster checkout next time?"). <strong>Single-page vs. multi-step:</strong> Single-page checkout shows all fields at once — good for simple orders with few fields. Multi-step checkout breaks the process into stages (shipping → payment → review) — better for complex orders or when the process feels overwhelming. Test both with your audience. <strong>Progress visibility:</strong> In multi-step checkout, show clear progress indicators with labeled steps. Let users go back without losing data. <strong>Order summary persistence:</strong> Keep the order summary visible throughout checkout — ideally in a sidebar (desktop) or collapsible section (mobile). Users want to verify what they're buying at every step. <strong>Trust at the point of payment:</strong> Show security badges, encryption indicators, and accepted payment methods near the payment form. Trust signals matter most at the moment of maximum commitment.</p>
+  </div>
+
+  <div class="method-card">
+    <h4>Guest vs. Account Checkout Decision <span class="method-tag">Technique</span></h4>
+    <p class="method-when">Use when: deciding how to handle authentication during checkout.</p>
+    <p>The decision matrix: <strong>Always offer guest checkout</strong> when first-time purchase rate is high, when average order value is low (friction cost exceeds account value), or when the product is a commodity (customers buy once and may not return). <strong>Encourage but don't require accounts</strong> by offering post-purchase account creation with pre-filled details. Incentivize with order tracking, faster future checkout, or loyalty benefits. <strong>Require accounts only</strong> for subscription products, digital goods requiring access management, or when regulatory requirements demand user identification. Even then, support social login and passwordless authentication to minimize friction.</p>
+  </div>
+</section>
+
+<section id="trust-signals" data-section="practical">
+  <h2>Trust signals and pricing display</h2>
+
+  <div class="method-card">
+    <h4>Trust Signal Placement <span class="method-tag">Technique</span></h4>
+    <p class="method-when">Use when: users need reassurance to complete a purchase — which is always.</p>
+    <p>Trust signals reduce perceived risk at the moment of commitment. <strong>Review display:</strong> Star ratings plus review count near the product title. Verified purchase badges. Photo reviews. Negative review visibility (hiding negative reviews destroys trust faster than showing them). <strong>Guarantee placement:</strong> Money-back guarantees, free return policies, and warranty information near the purchase button — not in the footer. <strong>Security indicators:</strong> Lock icons, SSL badges, and "secure checkout" messaging near payment forms. <strong>Social proof:</strong> Purchase frequency ("47 bought this week"), real-time activity ("3 people viewing"), stock levels ("Only 2 left"). Use honestly — fabricated urgency is a dark pattern. <strong>Pricing transparency:</strong> Show total cost as early as possible. Break down pricing (base price + options + tax + shipping). No hidden fees. When price comparison is important, show the per-unit or per-month price prominently.</p>
+  </div>
+
+  <div class="method-card">
+    <h4>Price Presentation Guidelines <span class="method-tag">Technique</span></h4>
+    <p class="method-when">Use when: displaying prices for products, subscriptions, or tiered plans.</p>
+    <p>How you present price affects perceived value. <strong>Anchor pricing:</strong> Show the original price crossed out next to the sale price. The discount feels larger with the anchor visible. <strong>Per-unit normalization:</strong> When comparing options of different sizes, show per-unit price (price/oz, price/seat, price/month) to enable fair comparison. <strong>Subscription pricing:</strong> Show monthly cost prominently, annual cost with monthly equivalent, and savings for longer commitments. <strong>Plan comparison tables:</strong> Limit to 3–4 plans. Highlight the recommended plan. Show what each plan includes, not just what it lacks. Use checkmarks for included features and clear "not included" indicators (not just empty cells). <strong>Tier naming:</strong> Plan names should suggest the target user (Starter, Professional, Enterprise), not arbitrary labels (Bronze, Silver, Gold).</p>
+  </div>
+</section>
+
+<section id="post-purchase" data-section="practical">
+  <h2>Post-purchase experience</h2>
+
+  <div class="method-card">
+    <h4>Post-Purchase Experience Design <span class="method-tag">Technique</span></h4>
+    <p class="method-when">Use when: designing what happens after the user clicks "Place Order."</p>
+    <p>The post-purchase experience shapes whether customers return. <strong>Confirmation page:</strong> Show order number, summary, expected delivery, and next steps. Offer account creation (for guest users), email signup, and social sharing. <strong>Confirmation email:</strong> Immediate, comprehensive, and action-oriented — order details, tracking information, return policy, and support contact. <strong>Order tracking:</strong> Real-time status updates with visual progress (ordered → processing → shipped → delivered). Proactive notifications for status changes. <strong>Post-delivery follow-up:</strong> Request reviews at the right moment (after enough time to evaluate the product). Make review submission easy (star rating + optional text). <strong>Return/exchange flow:</strong> Self-serve returns reduce support costs and increase repurchase rates. Clear return policy visibility pre-purchase builds confidence to buy.</p>
+  </div>
+</section>
+
+<section id="real-world-examples" data-section="examples">
+  <h2>Real-world examples</h2>
+
+  <div class="case-study">
+    <p class="case-label">Case study</p>
+    <h4>Amazon: one-click trust at scale</h4>
+    <p>Amazon's transactional UX is built on reducing friction to near-zero for repeat customers. Saved payment methods, one-click ordering, and address books eliminate data entry. The "Buy Now" button bypasses the cart entirely for impulse purchases. Product pages front-load reviews, ratings, and "Amazon's Choice" badges as trust signals. Prime members see delivery dates as a primary product attribute — not price, not features, but "arrives tomorrow." The entire experience is designed around the assumption that the customer has already decided to buy from Amazon; the only question is which item.</p>
+    <p><strong>Why it works:</strong> Accumulated trust (years of reliable delivery) plus minimal friction (saved credentials, one-click) means the buying decision is about the product, not about whether to trust the platform.</p>
+  </div>
+</section>
+
+<section id="pitfalls" data-section="practical">
+  <h2>Common pitfalls</h2>
+
+  <div class="pitfall">
+    <div class="pitfall-icon">!</div>
+    <div>
+      <h4>Surprise costs at checkout</h4>
+      <p>Shipping costs, taxes, and fees that appear only at the final checkout step cause 48% of cart abandonments. Show estimated total cost as early as possible — ideally on the product page or in the cart. If costs can't be calculated until checkout, set expectations ("Shipping calculated at checkout — typically $5–$10").</p>
+    </div>
+  </div>
+
+  <div class="pitfall">
+    <div class="pitfall-icon">!</div>
+    <div>
+      <h4>Dark patterns that erode trust</h4>
+      <p>Pre-checked add-ons, hidden subscriptions, misleading urgency ("Only 1 left!" when you have 500), and confusing cancellation flows produce short-term conversion gains and long-term brand damage. Regulators are increasingly targeting these patterns. Design for informed consent, not for tricking users into purchases they'll regret.</p>
+    </div>
+  </div>
+</section>
+
+<section id="connections">
+  <h2>Connected topics in your library</h2>
+  <div class="cross-ref-grid">
+    <a href="forms-data-entry.html" class="cross-ref-card">
+      <span class="ref-number">Tier 2</span>
+      <div class="ref-title">Forms &amp; Data Entry</div>
+      <div class="ref-reason">Checkout forms are the most high-stakes form design challenge. Inline validation, error recovery, and address autocomplete are critical.</div>
+    </a>
+    <a href="behavioral-design.html" class="cross-ref-card">
+      <span class="ref-number">Tier 2</span>
+      <div class="ref-title">Behavioral Design</div>
+      <div class="ref-reason">Trust signals, social proof, anchoring, and urgency are behavioral design principles applied to transactional contexts — with ethical implications.</div>
+    </a>
+    <a href="usability.html" class="cross-ref-card">
+      <span class="ref-number">Tier 1</span>
+      <div class="ref-title">Usability</div>
+      <div class="ref-reason">Checkout usability — error prevention, clear feedback, consistent patterns — directly impacts conversion rates.</div>
+    </a>
+  </div>
+
+  <div class="callout info">
+    <p class="callout-title">Cross-discipline connections</p>
+    <p><strong>MK.2.05 Landing Pages &amp; CRO</strong> covers conversion optimization from a marketing lens. <strong>MK.2.06 Pricing Communication</strong> covers pricing presentation and value messaging. This topic covers the UX design craft of transactional interfaces.</p>
+  </div>
+</section>
+
+<section id="deep-dive">
+  <h2>Deep-dive appendix</h2>
+
+  <details class="expandable">
+    <summary><span class="chevron"><svg viewBox="0 0 14 14"><polyline points="4,2 10,7 4,12"/></svg></span> Further reading</summary>
+    <div class="expand-content topic-content">
+      <h4>Essential reading</h4>
+      <p><strong>Baymard Institute</strong> — The largest collection of e-commerce UX research: checkout, product pages, cart, search, mobile, and accessibility. Over 130,000 hours of research.</p>
+      <p><strong>"Don't Make Me Think, Revisited" by Steve Krug</strong> — Usability principles that apply directly to reducing transactional friction.</p>
+    </div>
+  </details>
+</section>
+
+<!-- SEARCH_INDEX
+{
+  topic: "Ecommerce & Transactional UX",
+  url: "topics/ecommerce-transactional-ux.html",
+  tier: "Tier 3",
+  sections: [
+    { title: "What & why", id: "what-and-why", type: "theory", keywords: "ecommerce transactional buying conversion checkout" },
+    { title: "Product pages", id: "product-pages", type: "practical", keywords: "product page hero evidence detail action cross-sell" },
+    { title: "Cart and wishlist", id: "cart", type: "practical", keywords: "cart mini-cart save for later price transparency empty cart" },
+    { title: "Checkout flow", id: "checkout", type: "practical", keywords: "checkout guest account single-page multi-step trust payment" },
+    { title: "Trust and pricing", id: "trust-signals", type: "practical", keywords: "trust signals reviews guarantees security pricing anchor comparison" },
+    { title: "Post-purchase", id: "post-purchase", type: "practical", keywords: "confirmation tracking follow-up returns review" },
+    { title: "Real-world examples", id: "real-world-examples", type: "examples", keywords: "Amazon one-click trust friction" },
+    { title: "Common pitfalls", id: "pitfalls", type: "practical", keywords: "surprise costs dark patterns urgency hidden fees" }
+  ],
+  methods: [
+    { name: "Product Page Anatomy Framework", section: "product-pages", keywords: "hero evidence detail action cross-sell zones" },
+    { name: "Cart UX Patterns", section: "cart", keywords: "mini-cart save for later editing transparency" },
+    { name: "Checkout Flow Design", section: "checkout", keywords: "guest account single-page multi-step progress" },
+    { name: "Guest vs Account Checkout", section: "checkout", keywords: "guest account social login post-purchase creation" },
+    { name: "Trust Signal Placement", section: "trust-signals", keywords: "reviews guarantees security social proof" },
+    { name: "Price Presentation Guidelines", section: "trust-signals", keywords: "anchor per-unit subscription plan comparison" },
+    { name: "Post-Purchase Experience Design", section: "post-purchase", keywords: "confirmation tracking returns review follow-up" }
+  ]
+}
+SEARCH_INDEX -->
+
+<!-- MANIFEST
+{
+  "id": "UX.3.08",
+  "title": "Ecommerce & Transactional UX",
+  "file": "topics/ecommerce-transactional-ux.html",
+  "tier": 3,
+  "discipline": "UX",
+  "solves": [
+    "I need to design a checkout flow that minimizes abandonment",
+    "I want to optimize product pages for conversion without dark patterns",
+    "I need to design cart and wishlist experiences that support decision-making",
+    "I want to implement trust signals effectively",
+    "I need to handle complex pricing display",
+    "I want to design for guest checkout vs. account creation trade-offs"
+  ],
+  "methods": ["Product Page Anatomy Framework", "Cart UX Patterns", "Checkout Flow Design", "Guest vs Account Checkout", "Trust Signal Placement", "Price Presentation Guidelines", "Post-Purchase Experience Design"],
+  "phase": "design",
+  "prerequisites": ["UX.1.04", "UX.1.05"],
+  "pairs_with": ["UX.2.14", "UX.2.12", "UX.1.04"],
+  "cross_discipline": ["MK.2.05", "MK.2.06"],
+  "depth": "methods",
+  "keywords": ["ecommerce", "checkout", "cart", "product page", "conversion", "trust signals", "pricing", "payment", "guest checkout", "abandonment", "transactional"]
+}
+MANIFEST -->

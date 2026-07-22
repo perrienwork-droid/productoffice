@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Usability: Principles, Patterns, and Practice — Noir Book</title>
+  <link rel="stylesheet" href="../css/shared.css">
+  <link rel="stylesheet" href="../css/topic.css">
+  <script src="../js/theme.js"></script>
+  <script src="../js/topic-nav.js"></script>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="site-nav subpage-nav" data-discipline="ux">
+    <div class="nav-inner">
+      <a href="../index.html" class="site-logo">
+        <span class="logo-mark">UX</span>
+        <span class="nav-title">Noir Book</span>
+      </a>
+      <a href="../index.html" class="nav-back-link">&#8592; Library</a>
+      <div class="nav-filters">
+        <button class="disc-toggle ux-toggle active" data-disc="ux" onclick="toggleDisc('ux')" title="UX Design">
+          <span class="disc-dot disc-dot-ux"></span><span class="disc-label">UX Design</span><span class="disc-code">(UX)</span>
+        </button>
+        <button class="disc-toggle pm-toggle active" data-disc="pm" onclick="toggleDisc('pm')" title="Product Management">
+          <span class="disc-dot disc-dot-pm"></span><span class="disc-label">Product</span><span class="disc-code">(PM)</span>
+        </button>
+        <button class="disc-toggle mk-toggle active" data-disc="mk" onclick="toggleDisc('mk')" title="Marketing &amp; Growth">
+          <span class="disc-dot disc-dot-mk"></span><span class="disc-label">Marketing</span><span class="disc-code">(MK)</span>
+        </button>
+        <button class="disc-toggle cs-toggle active" data-disc="cs" onclick="toggleDisc('cs')" title="Content Strategy">
+          <span class="disc-dot disc-dot-cs"></span><span class="disc-label">Content</span><span class="disc-code">(CS)</span>
+        </button>
+        <div class="search-box nav-search-box">
+          <div class="nav-search-wrap">
+            <div class="nav-search-pills" id="navSearchPills"></div>
+            <input type="text" id="navSearchInput" placeholder="Search..." autocomplete="off"
+              oninput="topicNavSearch(this.value)"
+              onkeydown="handleNavSearchKey(event)"
+              onfocus="handleNavSearchFocus()"
+              onblur="handleNavSearchBlur()">
+            <button type="button" class="nav-search-clear" id="navSearchClear" onclick="clearNavSearch()" aria-label="Clear search">&times;</button>
+          </div>
+          <div class="search-dropdown" id="navSearchDropdown"></div>
+        </div>
+      </div>
+      <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle theme">&#9790;</button>
+      <button class="burger-btn" id="burgerBtn" onclick="openBurger()" aria-label="Menu">
+        <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="2" y1="4" x2="16" y2="4"/><line x1="2" y1="9" x2="16" y2="9"/><line x1="2" y1="14" x2="16" y2="14"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Burger Menu Overlay -->
+  <div class="burger-overlay" id="burgerOverlay" onclick="closeBurger(event)">
+    <div class="burger-panel" onclick="event.stopPropagation()">
+      <div class="burger-panel-header">
+        <h3>Menu</h3>
+        <button class="burger-close" onclick="closeBurger()" aria-label="Close">&times;</button>
+      </div>
+      <div class="burger-search">
+        <input type="text" id="burgerSearchInput" placeholder="Search topics, methods..." autocomplete="off" oninput="burgerSearch(this.value)">
+        <div class="burger-search-results" id="burgerSearchResults"></div>
+      </div>
+      <div class="burger-links">
+        <a href="../index.html">&#8592; Back to Library</a>
+        <a href="../design-system.html">Design System</a>
+        <a href="../request-topic.html">Suggest a topic or improvement</a>
+      </div>
+      <div class="burger-toc-section">
+        <p class="burger-toc-title">On this page</p>
+        <ul class="burger-toc-list">
+        <li><a href="#what-and-why" data-section="theory">What usability is and why it matters</a></li>
+        <li><a href="#core-principles" data-section="theory">Core principles</a></li>
+        <li><a href="#shneiderman" data-section="theory">Shneiderman's 8 Golden Rules</a></li>
+        <li><a href="#patterns" data-section="practical">Usability patterns for common problems</a></li>
+        <li><a href="#navigation" data-section="practical">Navigation usability</a></li>
+        <li><a href="#forms" data-section="practical">Form usability</a></li>
+        <li><a href="#feedback" data-section="practical">Feedback and system status</a></li>
+        <li><a href="#performance-usability" data-section="practical">Performance as usability</a></li>
+        <li><a href="#templates" data-section="practical">Templates and checklists</a></li>
+        <li><a href="#real-world-examples" data-section="examples">Real-world examples</a></li>
+        <li><a href="#pitfalls" data-section="practical">Common pitfalls</a></li>
+        <li><a href="#when-to-use" data-section="practical">When to apply usability thinking</a></li>
+        <li><a href="#connections">Connected topics</a></li>
+        <li><a href="#deep-dive">Deep-dive appendix</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Topic Header -->
+  <header class="topic-header container">
+    <div class="breadcrumb">
+      <a href="../index.html">Library</a>
+      <span class="sep">&#8250;</span>
+      <span class="breadcrumb-disc breadcrumb-ux">UX Design</span>
+      <span class="sep">&#8250;</span>
+      <span>Tier 1 — Core Toolkit</span>
+      <span class="sep">&#8250;</span>
+      <span>Usability</span>
+    </div>
+    <div class="topic-meta">
+      <span class="tier-badge tier1">Tier 1</span>
+      <span style="font-size:14px;color:var(--ink-muted)">Topic UX.1.04</span>
+    </div>
+    <h1>Usability: Principles, Patterns, and Practice</h1>
+    <p class="topic-subtitle">Daily reference material for making products easy, efficient, and satisfying to use. Principles that explain why things work, patterns that solve common problems, and practical evaluation methods you can apply immediately.</p>
+    <div class="content-splits">
+      <span class="split-badge theory">25% Theory</span>
+      <span class="split-badge practical">55% Methods &amp; Templates</span>
+      <span class="split-badge examples">20% Examples</span>
+    </div>
+  </header>
+
+  <!-- Reading Progress Bar -->
+  <div class="reading-progress" id="readingProgress"></div>
+
+  <!-- Main Layout -->
+  <div class="container">
+    <div class="topic-layout">
+
+      <!-- Sidebar: Table of Contents -->
+      <aside class="topic-sidebar">
+        <nav class="toc">
+          <p class="sidebar-topic-title">Usability: Principles, Patterns, and Practice</p>
+          <p class="toc-title">On this page</p>
+          <ul class="toc-list">
+            <li><a href="#what-and-why" data-section="theory">What usability is and why it matters</a></li>
+            <li><a href="#core-principles" data-section="theory">Core principles</a></li>
+            <li><a href="#shneiderman" data-section="theory">Shneiderman's 8 Golden Rules</a></li>
+            <li><a href="#patterns" data-section="practical">Usability patterns for common problems</a></li>
+            <li><a href="#navigation" data-section="practical">Navigation usability</a></li>
+            <li><a href="#forms" data-section="practical">Form usability</a></li>
+            <li><a href="#feedback" data-section="practical">Feedback and system status</a></li>
+            <li><a href="#performance-usability" data-section="practical">Performance as usability</a></li>
+            <li><a href="#templates" data-section="practical">Templates and checklists</a></li>
+            <li><a href="#real-world-examples" data-section="examples">Real-world examples</a></li>
+            <li><a href="#pitfalls" data-section="practical">Common pitfalls</a></li>
+            <li><a href="#when-to-use" data-section="practical">When to apply usability thinking</a></li>
+            <li><a href="#connections">Connected topics</a></li>
+            <li><a href="#deep-dive">Deep-dive appendix</a></li>
+          </ul>
+        </nav>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="topic-main topic-content">
+
+<!-- ============================================ -->
+
+<!-- ============================================ -->
+
+        <div class="section-marker" id="what-and-why">
+          <span class="split-badge theory">Theory</span>
+          <span class="marker-line"></span>
+        </div>
+
+        <section data-section="theory">
+  <h2>What usability is and why it matters</h2>
+
+  <p>Usability is the extent to which a product can be used by specific users to achieve specific goals with effectiveness, efficiency, and satisfaction. That's the ISO 9241 definition, and every word matters: effectiveness (can they complete the task?), efficiency (how much effort does it take?), and satisfaction (how did it feel?).</p>
+
+  <p>A product with poor usability isn't just annoying — it's expensive. Users abandon tasks, call support, choose competitors, or create workarounds that introduce errors. A product with good usability disappears — users don't think about the interface; they think about their goal. That disappearance is the highest compliment a design can receive.</p>
+
+  <p>Usability is not the same as user experience, though they overlap. User experience encompasses the entire relationship with a product — brand perception, emotional response, the onboarding journey, long-term satisfaction. Usability is narrower: can the person use this thing to do what they need to do? A product can be usable but have a poor user experience (a government tax form that works but feels oppressive), or have a great emotional experience but poor usability (a beautiful app where no one can find the settings).</p>
+
+  <div class="callout info">
+    <p class="callout-title">Why this is Tier 1</p>
+    <p>You will reference usability principles on every project, in every design review, in every conversation with stakeholders who say "but it looks nice." Usability is the foundation that everything else builds on — without it, visual polish and emotional design are cosmetic fixes on a broken product.</p>
+  </div>
+</section>
+
+<section id="core-principles" data-section="theory">
+  <h2>Core principles</h2>
+
+  <h3>Nielsen's 10 Usability Heuristics</h3>
+
+  <p>Jakob Nielsen's heuristics are the most widely used usability principles in the industry. Published in 1994, they remain remarkably relevant because they describe human cognitive needs, not technology-specific patterns. Use these as a checklist during design reviews and as a vocabulary for discussing usability problems.</p>
+
+  <h4>1. Visibility of system status</h4>
+  <p>The system should always keep users informed about what's going on, through appropriate feedback within reasonable time. When a user clicks "Save," they need to know it worked. When a file is uploading, they need to see progress. When the system is processing, they need to know it hasn't frozen. Silence creates anxiety.</p>
+
+  <h4>2. Match between system and the real world</h4>
+  <p>The system should speak the users' language, with words, phrases, and concepts familiar to the user rather than system-oriented terms. Follow real-world conventions, making information appear in a natural and logical order. "Your session token has expired" means nothing to most users. "You've been logged out. Sign in again to continue" does.</p>
+
+  <h4>3. User control and freedom</h4>
+  <p>Users often choose system functions by mistake and need a clearly marked "emergency exit" to leave the unwanted state without going through an extended process. Support undo and redo. Never trap users in a flow they can't escape from. Gmail's "Undo Send" is a masterful example — it acknowledges that mistakes happen and provides a graceful recovery.</p>
+
+  <h4>4. Consistency and standards</h4>
+  <p>Users should not have to wonder whether different words, situations, or actions mean the same thing. Follow platform conventions. If every other app uses a gear icon for settings, don't use a wrench. If your product calls it "Projects" on one page and "Workspaces" on another, users lose confidence in their understanding of the system.</p>
+
+  <h4>5. Error prevention</h4>
+  <p>Even better than good error messages is a careful design that prevents problems from occurring in the first place. Eliminate error-prone conditions or check for them and present users with a confirmation option before they commit to the action. Disabling a "Delete" button until a confirmation checkbox is ticked prevents more disasters than the best error recovery flow.</p>
+
+  <h4>6. Recognition rather than recall</h4>
+  <p>Minimize the user's memory load by making objects, actions, and options visible. The user should not have to remember information from one part of the dialogue to another. Dropdown menus are better than text inputs for known values. "Recently viewed" sections are better than forcing users to remember what they were looking at yesterday.</p>
+
+  <h4>7. Flexibility and efficiency of use</h4>
+  <p>Accelerators — unseen by the novice user — may often speed up the interaction for the expert user such that the system can cater to both inexperienced and experienced users. Allow users to tailor frequent actions. Keyboard shortcuts, saved searches, templates, and "do this again" patterns serve power users without complicating the interface for beginners.</p>
+
+  <h4>8. Aesthetic and minimalist design</h4>
+  <p>Dialogues should not contain information that is irrelevant or rarely needed. Every extra unit of information in a dialogue competes with the relevant units of information and diminishes their relative visibility. This is not "make it pretty" — it's "remove everything that doesn't help the user complete their task."</p>
+
+  <h4>9. Help users recognize, diagnose, and recover from errors</h4>
+  <p>Error messages should be expressed in plain language (no codes), precisely indicate the problem, and constructively suggest a solution. "Error 0x80004005" helps no one. "We couldn't save your file because the disk is full. Free up 2 GB of space and try again" helps everyone.</p>
+
+  <h4>10. Help and documentation</h4>
+  <p>Even though it is better if the system can be used without documentation, it may be necessary to provide help and documentation. Any such information should be easy to search, focused on the user's task, list concrete steps to be carried out, and not be too large. The best help is contextual — a tooltip that appears when you hover over a confusing label, not a 200-page manual.</p>
+
+  <div class="callout tip">
+    <p class="callout-title">How to use the heuristics</p>
+    <p>Don't memorize these as a list — internalize them as a way of seeing. When you look at any interface, you should instinctively notice: "There's no feedback after this action" (#1), "This label doesn't match what users call it" (#2), "There's no way to undo this" (#3). The heuristics become most powerful when they're reflexive, not referenced.</p>
+  </div>
+</section>
+
+<section id="shneiderman" data-section="theory">
+  <h2>Shneiderman's 8 Golden Rules</h2>
+
+  <p>Ben Shneiderman's golden rules complement Nielsen's heuristics with a focus on interaction design. Where they overlap, the principle is reinforced. Where they differ, each adds nuance.</p>
+
+  <h4>1. Strive for consistency</h4>
+  <p>Consistent sequences of actions should be required in similar situations; identical terminology should be used in prompts, menus, and help screens; consistent color, layout, and font conventions should be observed throughout.</p>
+
+  <h4>2. Seek universal usability</h4>
+  <p>Recognize the needs of diverse users. Novices need guidance; experts need shortcuts. Age differences, disabilities, international users, and technological diversity all affect how people interact with your system.</p>
+
+  <h4>3. Offer informative feedback</h4>
+  <p>For every user action, there should be system feedback. For frequent and minor actions, the response can be modest. For infrequent and major actions, the response should be more substantial.</p>
+
+  <h4>4. Design dialogues to yield closure</h4>
+  <p>Sequences of actions should be organized into groups with a beginning, middle, and end. The informative feedback at the completion of a group gives the user satisfaction, a sense of relief, and a signal to prepare for the next group of actions.</p>
+
+  <h4>5. Prevent errors</h4>
+  <p>Design the system so users cannot make serious errors. If they do, the system should detect the error and offer clear, constructive instructions for recovery. Grayed-out menu items, input validation, and type-ahead suggestions all prevent errors before they happen.</p>
+
+  <h4>6. Permit easy reversal of actions</h4>
+  <p>As much as possible, actions should be reversible. This relieves anxiety because the user knows that errors can be undone, encouraging exploration of unfamiliar options.</p>
+
+  <h4>7. Keep users in control</h4>
+  <p>Experienced users want the sense that they are in charge of the interface and that the interface responds to their actions. Surprising interface actions, tedious data entry sequences, inability to find or change information, and difficulty in obtaining needed information all erode confidence.</p>
+
+  <h4>8. Reduce short-term memory load</h4>
+  <p>Humans can hold roughly 4±1 chunks of information in short-term memory. Interfaces should not require users to remember information from one screen to use on another. Keep options visible. Provide contextual cues. Let the system remember what the user shouldn't have to.</p>
+</section>
+
+<!-- ============================================ -->
+
+<!-- ============================================ -->
+
+        <div class="section-marker" id="patterns">
+          <span class="split-badge practical">Practical</span>
+          <span class="marker-line"></span>
+        </div>
+
+        <section data-section="practical">
+  <h2>Usability patterns for common problems</h2>
+
+  <p>Principles tell you why something works. Patterns tell you what to build. The following patterns solve problems that recur across almost every product.</p>
+
+  <div class="method-card">
+    <h4>Progressive Disclosure <span class="method-tag">Core Pattern</span></h4>
+    <p class="method-when">Use when: An interface has many options but most users only need a few. When complexity overwhelms new users but power users need access to everything.</p>
+    <p>Show only the most important options first. Reveal additional options on demand — through "Advanced settings," expandable sections, or contextual menus. The user interface should match the frequency of use: the most common actions are always visible; the rare ones are one click away. Gmail's compose window is a textbook example — the basic fields (To, Subject, Body) are always visible; CC, BCC, and formatting options appear on demand.</p>
+  </div>
+
+  <div class="method-card">
+    <h4>Sensible Defaults <span class="method-tag">Core Pattern</span></h4>
+    <p class="method-when">Use when: Users must configure settings, fill forms, or make choices where one option is most common.</p>
+    <p>Pre-fill fields with the most likely value. Pre-select the most common option. Use smart defaults based on context — if the user's location is known, default the country field. If 90% of users choose "Weekly" for a notification frequency, start there. Defaults reduce cognitive load, speed up task completion, and reduce errors. But make them easy to override — a default should be a suggestion, not a constraint.</p>
+  </div>
+
+  <div class="method-card">
+    <h4>Forgiving Input <span class="method-tag">Core Pattern</span></h4>
+    <p class="method-when">Use when: Users enter data in varied formats — phone numbers, dates, postal codes, names.</p>
+    <p>Accept multiple input formats and normalize them behind the scenes. If a phone field accepts (555) 123-4567, 5551234567, and 555.123.4567 and stores them identically, users never see an error for something the system can easily handle. Same for date formats: "March 5" and "3/5" and "5 Mar" should all work. The principle: be liberal in what you accept and strict in what you produce.</p>
+  </div>
+
+  <div class="method-card">
+    <h4>Inline Validation <span class="method-tag">Core Pattern</span></h4>
+    <p class="method-when">Use when: Forms with multiple fields where errors are common and correcting them is disruptive.</p>
+    <p>Validate each field as the user completes it, not after they submit the entire form. Show success states (green checkmarks) as well as errors — positive feedback reduces anxiety. Display error messages directly next to the field, not in a banner at the top of the page. The moment a user tabs away from an email field, they should know whether it's valid. Waiting until they hit "Submit" to reveal five errors at once is hostile.</p>
+    <div class="callout warning">
+      <p class="callout-title">Don't validate too eagerly</p>
+      <p>Showing an error while the user is still typing is annoying. Wait until they leave the field (onBlur) or pause for 1–2 seconds. For password strength indicators, real-time feedback works because it's constructive, not corrective.</p>
+    </div>
+  </div>
+
+  <div class="method-card">
+    <h4>Confirmation for Destructive Actions <span class="method-tag">Core Pattern</span></h4>
+    <p class="method-when">Use when: An action can't be undone — deleting data, canceling a subscription, sending a message to a large audience.</p>
+    <p>Ask the user to confirm destructive actions, but make the confirmation meaningful. "Are you sure?" is useless — people click through it reflexively. "This will permanently delete 47 files and free up 2.3 GB of space. This cannot be undone." is useful — it confirms what will happen, shows the consequences, and states reversibility. For the most destructive actions (deleting an account, terminating a service), require typing a confirmation word.</p>
+  </div>
+
+  <div class="method-card">
+    <h4>Empty States That Educate <span class="method-tag">Core Pattern</span></h4>
+    <p class="method-when">Use when: A feature or section has no content yet — new accounts, empty dashboards, search results with no matches.</p>
+    <p>An empty state is a teaching moment, not a dead end. Instead of "No items found," show: what this area is for, how to add the first item, and what it will look like when populated. Slack's empty channels, Trello's empty boards, and Notion's empty pages all do this well — they turn a potentially confusing moment into an onboarding step.</p>
+  </div>
+</section>
+
+<section id="navigation" data-section="practical">
+  <h2>Navigation usability</h2>
+
+  <p>Navigation is the most frequently used and most frequently broken part of any product. Good navigation is invisible — users find what they need without thinking about how they got there. Bad navigation makes every task harder than it should be.</p>
+
+  <div class="method-card">
+    <h4>The Three-Click Rule (and why it's wrong) <span class="method-tag">Myth + Reality</span></h4>
+    <p class="method-when">Know this to counter a persistent misconception in stakeholder conversations.</p>
+    <p>The "three-click rule" (users will give up if they can't find something in three clicks) has been thoroughly debunked by research. What actually matters is not click count but confidence: does the user feel they're making progress toward their goal? Each click should bring them closer and make the path clearer. Ten confident clicks are better than three confused ones. The real rule: at every point in the navigation, the user should know where they are, where they can go, and how to get back.</p>
+  </div>
+
+  <div class="method-card">
+    <h4>Navigation Patterns <span class="method-tag">Reference</span></h4>
+    <p class="method-when">Use when: Designing or evaluating the primary navigation structure of a product.</p>
+    <p><strong>Global navigation (persistent):</strong> The main nav that appears on every page. Should contain 5–9 top-level items. More than 9 means your information architecture needs work, not a bigger menu.</p>
+    <p><strong>Local navigation (contextual):</strong> Sub-navigation within a section. Shows where you are within a category. Breadcrumbs, sidebar menus, and tab bars serve this purpose.</p>
+    <p><strong>Utility navigation:</strong> Account settings, help, notifications, language selection. Things every user needs occasionally but that aren't part of the core content structure.</p>
+    <p><strong>Search as navigation:</strong> For products with large content sets, search is often the primary navigation method. If users search more than they browse, invest in search quality over menu structure.</p>
+  </div>
+</section>
+
+<section id="forms" data-section="practical">
+  <h2>Form usability</h2>
+
+  <p>Forms are where usability most directly impacts business metrics. Every unnecessary field, confusing label, or broken validation message costs conversions. The principles here apply to any form — registration, checkout, onboarding, settings, surveys.</p>
+
+  <div class="method-card">
+    <h4>Form Design Checklist <span class="method-tag">Core Method</span></h4>
+    <p class="method-when">Use when: Designing or auditing any form.</p>
+    <div class="process-steps">
+      <div class="process-step">
+        <div class="process-step-content">
+          <h4>1. Question every field</h4>
+          <p>For each field, ask: "What will we do with this data? What happens if we don't collect it?" If you can't answer both, remove the field. Every field you remove increases completion rates. Mark truly optional fields as "Optional" — don't mark required fields with asterisks and assume users know what * means.</p>
+        </div>
+      </div>
+      <div class="process-step">
+        <div class="process-step-content">
+          <h4>2. Use single-column layout</h4>
+          <p>Multi-column forms create visual confusion about reading order. Research consistently shows single-column layouts have higher completion rates. The only exception: short related fields (City + State + Zip) that logically form one unit.</p>
+        </div>
+      </div>
+      <div class="process-step">
+        <div class="process-step-content">
+          <h4>3. Label placement matters</h4>
+          <p>Labels above fields have the fastest completion times (users' eyes move in one direction). Labels to the left work but slow completion by 50%. Placeholder text as labels is the worst option — it disappears when the user starts typing, removing the context they need most.</p>
+        </div>
+      </div>
+      <div class="process-step">
+        <div class="process-step-content">
+          <h4>4. Group related fields</h4>
+          <p>Use visual grouping (whitespace, headers, or subtle borders) to cluster related fields. "Personal Information," "Shipping Address," "Payment" — each group is a mini-task with its own sense of completion.</p>
+        </div>
+      </div>
+      <div class="process-step">
+        <div class="process-step-content">
+          <h4>5. One primary action per form</h4>
+          <p>The submit button should be clearly the most prominent action. If you also have "Cancel" or "Save as Draft," make those secondary (text links or ghost buttons). Two equally-weighted buttons create decision paralysis.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="feedback" data-section="practical">
+  <h2>Feedback and system status</h2>
+
+  <div class="method-card">
+    <h4>Feedback Timing Framework <span class="method-tag">Core Pattern</span></h4>
+    <p class="method-when">Use when: Designing any interaction that has a response delay or state change.</p>
+    <div class="process-steps">
+      <div class="process-step">
+        <div class="process-step-content">
+          <h4>0–100ms: Instant</h4>
+          <p>Feels instantaneous. Button state changes, hover effects, input responses should happen here. No loading indicator needed.</p>
+        </div>
+      </div>
+      <div class="process-step">
+        <div class="process-step-content">
+          <h4>100ms–1s: Perceptible delay</h4>
+          <p>User notices a wait but flow isn't broken. Show a subtle indicator — a spinner on the button, a brief skeleton screen. Don't show a full-page loader for a 500ms operation.</p>
+        </div>
+      </div>
+      <div class="process-step">
+        <div class="process-step-content">
+          <h4>1–10s: Noticeable wait</h4>
+          <p>User's attention starts to wander. Show a progress indicator if possible (determinate progress bar > indeterminate spinner). Show what's happening: "Uploading 3 of 7 photos..." Keep the user informed and in control (allow cancellation).</p>
+        </div>
+      </div>
+      <div class="process-step">
+        <div class="process-step-content">
+          <h4>10s+: Long operation</h4>
+          <p>Users will leave if not managed. Allow background processing with notifications on completion. Show estimated time remaining. Provide something useful to do while waiting. Never block the entire interface for a long operation.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="performance-usability" data-section="practical">
+  <h2>Performance as usability</h2>
+
+  <div class="method-card">
+    <h4>Performance-Usability Connection <span class="method-tag">Framework</span></h4>
+    <p class="method-when">Use when: evaluating how page speed, loading behavior, and responsiveness affect perceived product quality.</p>
+    <p>Performance is not an engineering concern that designers can ignore — it is a usability quality. Users perceive slow interfaces as broken, untrustworthy, or low-quality, even when the content is excellent. Research consistently shows that delays beyond 100ms break the feeling of direct manipulation, delays beyond 1 second interrupt task flow, and delays beyond 10 seconds cause abandonment. Designers influence performance through their choices: image-heavy layouts, complex animations, large bundle sizes, and synchronous data loading all degrade perceived usability. <strong>Loading state design</strong> is where performance and UX intersect most directly. <strong>Skeleton screens</strong> show the structural outline of content before data arrives — they reduce perceived wait time by 30–40% compared to spinners because users feel the page is already loading meaningfully. <strong>Progressive loading</strong> renders above-the-fold content first, letting users begin reading or scanning while the rest loads. <strong>Optimistic UI</strong> shows the result of an action immediately (e.g., a "liked" heart) before server confirmation, making the interface feel instant. The principle: design the waiting experience, not just the loaded experience. Every screen has at least three states — loading, loaded, and error — and the loading state deserves as much design attention as the other two.</p>
+  </div>
+</section>
+
+<section id="templates" data-section="practical">
+  <h2>Templates and checklists</h2>
+
+  <div class="template-box">
+    <div class="template-header">
+      <span class="template-label">Checklist</span>
+      <span class="template-title">Usability review checklist (use during any design review)</span>
+    </div>
+    <ul class="checklist">
+      <li>System status: Does the user always know what's happening? (#1)</li>
+      <li>Language: Are labels and messages in the user's language, not system jargon? (#2)</li>
+      <li>Escape routes: Can the user undo, go back, or cancel at every step? (#3)</li>
+      <li>Consistency: Do similar things look and behave the same way? (#4)</li>
+      <li>Error prevention: Are the most common mistakes designed out? (#5)</li>
+      <li>Recognition over recall: Are options visible rather than requiring memory? (#6)</li>
+      <li>Efficiency: Are there shortcuts for experienced users? (#7)</li>
+      <li>Minimalism: Does every element on screen serve the user's current task? (#8)</li>
+      <li>Error recovery: Are error messages helpful, specific, and actionable? (#9)</li>
+      <li>Help: Is contextual help available where confusion is likely? (#10)</li>
+    </ul>
+  </div>
+
+  <div class="template-box">
+    <div class="template-header">
+      <span class="template-label">Template</span>
+      <span class="template-title">Usability Problem Report</span>
+    </div>
+    <div class="template-grid">
+      <div class="template-field">
+        <div class="template-field-label">Problem</div>
+        <p>[What happened? What did the user try to do and what went wrong?]</p>
+      </div>
+      <div class="template-field">
+        <div class="template-field-label">Heuristic violated</div>
+        <p>[Which principle does this break? (Nielsen #1–10 or Shneiderman #1–8)]</p>
+      </div>
+      <div class="template-field">
+        <div class="template-field-label">Severity</div>
+        <p>[0=Not a problem, 1=Cosmetic, 2=Minor, 3=Major, 4=Catastrophic]</p>
+      </div>
+      <div class="template-field">
+        <div class="template-field-label">Recommendation</div>
+        <p>[Specific, actionable suggestion for fixing this]</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+
+<!-- ============================================ -->
+
+        <div class="section-marker" id="real-world-examples">
+          <span class="split-badge examples">Examples</span>
+          <span class="marker-line"></span>
+        </div>
+
+        <section data-section="examples">
+  <h2>Real-world examples</h2>
+
+  
+  <div class="case-study">
+    <p class="case-label">Case study</p>
+    <h4>Google Search: usability as competitive advantage</h4>
+    <p>When Google launched in 1998, competing search engines (AltaVista, Yahoo, Excite) had cluttered homepages with news, ads, categories, and dozens of links. Google had one input field, two buttons, and nothing else. This wasn't minimalism for aesthetics — it was usability. The single most common action (entering a search query) was the only thing on the page. No cognitive load, no decision-making, no distraction. The simplicity wasn't a design choice — it was a usability insight: people come to a search engine to search. Everything else is friction.</p>
+  </div>
+
+
+  
+  <div class="case-study">
+    <p class="case-label">Case study</p>
+    <h4>Amazon's 1-Click: reducing friction to zero</h4>
+    <p>Amazon's 1-Click patent (now expired) was essentially a usability innovation. The standard e-commerce checkout flow — add to cart, view cart, enter shipping, enter payment, review, confirm — has multiple abandonment points. 1-Click eliminated all of them for repeat customers. The usability insight: the checkout process isn't something users want to experience; it's an obstacle between them and their purchase. Remove the obstacle.</p>
+  </div>
+
+
+  
+  <div class="case-study">
+    <p class="case-label">Case study</p>
+    <h4>ATM interfaces: universal usability under pressure</h4>
+    <p>ATM design is a masterclass in usability under constraints. Users are standing in public (often in bad weather), may be rushed, may have limited vision or motor control, and make transactions involving real money. The design response: large buttons with clear labels, minimal options per screen (usually 4–6), consistent layout across all machines, immediate feedback for every action, and clear confirmation before money moves. The "Insert card → Enter PIN → Select action → Confirm → Take card" flow hasn't fundamentally changed in 40 years because it works.</p>
+  </div>
+
+</section>
+
+<section id="pitfalls" data-section="practical">
+  <h2>Common pitfalls</h2>
+
+  <div class="pitfall">
+    <div class="pitfall-icon">!</div>
+    <div>
+      <h4>Confusing usability with aesthetics</h4>
+      <p>"It looks good" is not the same as "it works well." Beautiful interfaces with poor usability are common — they win design awards and lose users. Always test with real users doing real tasks. Visual polish matters, but it comes after the interaction works.</p>
+    </div>
+  </div>
+
+  <div class="pitfall">
+    <div class="pitfall-icon">!</div>
+    <div>
+      <h4>Designing for yourself</h4>
+      <p>You are not your user. You know where everything is because you built it. You don't make errors because you know the system. You don't get confused because you understand the mental model. Test with people who don't share your knowledge, context, or assumptions.</p>
+    </div>
+  </div>
+
+  <div class="pitfall">
+    <div class="pitfall-icon">!</div>
+    <div>
+      <h4>Adding features instead of fixing usability</h4>
+      <p>When users struggle, the temptation is to add a tooltip, a tutorial, or a help page. The better response is usually to fix the underlying design. If users can't find the export button, moving it or making it more prominent is better than adding a tooltip that says "Click here to export."</p>
+    </div>
+  </div>
+</section>
+
+<section id="when-to-use" data-section="practical">
+  <h2>When to apply usability thinking</h2>
+
+  <p><strong>Always.</strong> Usability isn't a phase — it's a lens. Apply these principles during initial design (will this be easy to use?), design reviews (does this violate any heuristics?), development (is the implementation matching the design intent?), and post-launch (what are users struggling with?).</p>
+
+  <p><strong>Usability review vs. usability testing:</strong> A usability review (this topic) is expert evaluation — you examine the interface against established principles. Usability testing (a separate topic) involves watching real users. Both are valuable. Reviews are faster and cheaper; testing reveals problems you'd never anticipate. Use reviews during design; use testing before and after launch.</p>
+</section>
+
+<section id="connections">
+  <h2>Connected topics</h2>
+
+  <div class="cross-ref-grid">
+    <a href="design-thinking.html" class="cross-ref-card">
+      <span class="ref-number">Tier 1</span>
+      <span class="ref-title">Design Thinking</span>
+      <span class="ref-reason">Usability principles inform every stage of Design Thinking — especially prototyping and testing.</span>
+    </a>
+    <a href="information-architecture.html" class="cross-ref-card">
+      <span class="ref-number">Tier 1</span>
+      <span class="ref-title">Information Architecture</span>
+      <span class="ref-reason">Navigation usability depends on solid IA — the right structure makes navigation intuitive.</span>
+    </a>
+    <div class="cross-ref-card">
+      <span class="ref-number">Tier 2</span>
+      <span class="ref-title">Conducting Usability Testing</span>
+      <span class="ref-reason">This topic teaches the principles; Usability Testing teaches how to validate with real users.</span>
+    </div>
+    <div class="cross-ref-card">
+      <span class="ref-number">Tier 2</span>
+      <span class="ref-title">Heuristic Evaluation</span>
+      <span class="ref-reason">A structured method for applying these principles as an expert review. Uses Nielsen's heuristics as its framework.</span>
+    </div>
+  </div>
+</section>
+
+<div class="deep-dive-section" id="deep-dive">
+          <div class="deep-dive-header">
+            <span class="deep-dive-badge">Deep Dive</span>
+            <h2 style="margin:0; border:none; padding:0;">Appendix</h2>
+          </div>
+
+  <details class="expandable">
+    <summary><span class="chevron"><svg viewBox="0 0 14 14"><polyline points="4,2 10,7 4,12"/></svg></span> ISO 9241: The formal usability standard</summary>
+    <div class="expand-content topic-content">
+      <h4>ISO 9241-11: Usability framework</h4>
+      <p>The international standard defines usability as "the extent to which a system, product or service can be used by specified users to achieve specified goals with effectiveness, efficiency and satisfaction in a specified context of use." Key elements: specified users (not everyone), specified goals (not all goals), specified context (not all contexts). This means usability is always relative — a product can be highly usable for one user group and unusable for another.</p>
+
+      <h4>ISO 9241-110: Interaction principles</h4>
+      <p>Seven interaction principles that complement Nielsen and Shneiderman: suitability for the task, self-descriptiveness, conformity with user expectations, learnability, controllability, error tolerance, and suitability for individualization. These are more abstract but useful for articulating usability requirements in formal specifications and contracts.</p>
+    </div>
+  </details>
+
+  <details class="expandable">
+    <summary><span class="chevron"><svg viewBox="0 0 14 14"><polyline points="4,2 10,7 4,12"/></svg></span> Cognitive psychology foundations</summary>
+    <div class="expand-content topic-content">
+      <h4>Miller's Law: 7±2 (actually 4±1)</h4>
+      <p>George Miller's 1956 paper established that short-term memory can hold approximately 7±2 chunks of information. More recent research by Nelson Cowan suggests the true number is closer to 4±1. This explains why navigation with more than ~7 top-level items feels overwhelming, why phone numbers are chunked into groups, and why forms should group related fields. Design implication: never ask users to hold more than 4 things in mind simultaneously.</p>
+
+      <h4>Hick's Law: More choices = slower decisions</h4>
+      <p>Decision time increases logarithmically with the number of options. 2 options: fast. 8 options: slower. 32 options: much slower. This doesn't mean fewer options are always better — it means unstructured options are expensive. Categorization, progressive disclosure, and sensible defaults all reduce effective choice count without removing capability.</p>
+
+      <h4>Fitts's Law: Size and distance matter</h4>
+      <p>The time to acquire a target (click a button, tap a link) is a function of the distance to the target and the size of the target. Bigger targets closer to the cursor are faster to click. Design implications: make primary actions large, place them near where the user's attention already is, and give destructive actions smaller targets further from the primary flow.</p>
+    </div>
+  </details>
+
+  <details class="expandable">
+    <summary><span class="chevron"><svg viewBox="0 0 14 14"><polyline points="4,2 10,7 4,12"/></svg></span> Further reading and resources</summary>
+    <div class="expand-content topic-content">
+      <h4>Essential reading</h4>
+      <p><strong>"Don't Make Me Think" by Steve Krug</strong> — The most accessible introduction to web usability ever written. Short, funny, practical. If you read one book on usability, make it this one.</p>
+      <p><strong>"The Design of Everyday Things" by Don Norman</strong> — The foundational text on how humans interact with designed objects. Covers affordances, signifiers, mapping, and feedback. Everything in this topic traces back to Norman's principles.</p>
+      <p><strong>"About Face" by Alan Cooper</strong> — Comprehensive guide to interaction design. Covers goal-directed design, personas, and detailed interaction patterns. Denser than Krug but more complete.</p>
+      <p><strong>"Designing Web Usability" by Jakob Nielsen</strong> — Nielsen's own book expanding on his heuristics. Dated in examples (written in 2000) but timeless in principles.</p>
+    </div>
+  </details>
+</div>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer container">
+    <div class="footer-inner">
+      <p>Noir Book — Built for the work, not the shelf.</p>
+      <div class="footer-links">
+        <a href="../design-system.html">Design System</a>
+        <a href="../library-manifest.json">Manifest</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to Top -->
+  <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">&#8593;</button>
+
+  <!-- Floating Mobile TOC -->
+  <button class="mobile-toc-btn" id="mobileTocBtn" aria-label="Open table of contents">&#9776; Contents</button>
+  <div class="mobile-toc-overlay" id="mobileTocOverlay">
+    <div class="mobile-toc-panel">
+      <div class="mobile-toc-panel-header">
+        <h3>On this page</h3>
+        <button class="mobile-toc-close" id="mobileTocClose" aria-label="Close">&times;</button>
+      </div>
+      <ul class="mobile-toc-list">
+        <li><a href="#what-and-why" data-section="theory">What usability is and why it matters</a></li>
+        <li><a href="#core-principles" data-section="theory">Core principles</a></li>
+        <li><a href="#shneiderman" data-section="theory">Shneiderman's 8 Golden Rules</a></li>
+        <li><a href="#patterns" data-section="practical">Usability patterns for common problems</a></li>
+        <li><a href="#navigation" data-section="practical">Navigation usability</a></li>
+        <li><a href="#forms" data-section="practical">Form usability</a></li>
+        <li><a href="#feedback" data-section="practical">Feedback and system status</a></li>
+        <li><a href="#performance-usability" data-section="practical">Performance as usability</a></li>
+        <li><a href="#templates" data-section="practical">Templates and checklists</a></li>
+        <li><a href="#real-world-examples" data-section="examples">Real-world examples</a></li>
+        <li><a href="#pitfalls" data-section="practical">Common pitfalls</a></li>
+        <li><a href="#when-to-use" data-section="practical">When to apply usability thinking</a></li>
+        <li><a href="#connections">Connected topics</a></li>
+        <li><a href="#deep-dive">Deep-dive appendix</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    // Scrollspy: highlight active TOC item
+    const tocLinks = document.querySelectorAll('.toc-list a');
+    const sections = [];
+    tocLinks.forEach(link => {
+      const href = link.getAttribute('href');
+      if (!href || !href.startsWith('#')) return;
+      const el = document.getElementById(href.slice(1));
+      if (el) sections.push({ el, link });
+    });
+
+    // Reading progress bar
+    const progressBar = document.getElementById('readingProgress');
+    const backToTop = document.getElementById('backToTop');
+
+    function onScroll() {
+      let current = sections[0];
+      for (const s of sections) {
+        if (s.el.getBoundingClientRect().top <= 120) current = s;
+      }
+      tocLinks.forEach(l => l.classList.remove('active'));
+      if (current) current.link.classList.add('active');
+
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrolled = window.scrollY;
+      const progress = docHeight > 0 ? (scrolled / docHeight) * 100 : 0;
+      if (progressBar) progressBar.style.width = progress + '%';
+      if (backToTop) backToTop.classList.toggle('visible', scrolled > 400);
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    // Split badges: click to scroll to section
+    document.querySelectorAll('.content-splits .split-badge').forEach(function(badge) {
+      badge.addEventListener('click', function() {
+        var type = badge.classList.contains('theory') ? 'theory' : badge.classList.contains('practical') ? 'practical' : 'examples';
+        var target = document.querySelector('section[data-section="' + type + '"]');
+        if (target) {
+          var marker = target.previousElementSibling;
+          (marker && marker.classList.contains('section-marker') ? marker : target).scrollIntoView({behavior:'smooth'});
+        }
+      });
+    });
+  </script>
+
+  <script src="../js/checklist.js"></script>
+  <script src="../js/mobile-toc.js"></script>
+  <script src="../js/search.js"></script>
+  <script>
+    function openBurger(){document.getElementById('burgerOverlay').classList.add('open');document.body.style.overflow='hidden'}
+    function closeBurger(e){if(e&&e.target&&e.target!==document.getElementById('burgerOverlay'))return;document.getElementById('burgerOverlay').classList.remove('open');document.body.style.overflow=''}
+    function burgerSearch(q){
+      var r=document.getElementById('burgerSearchResults');
+      if(!q||q.length<2){r.innerHTML='';return}
+      var ql=q.toLowerCase(),matches=[];
+      if(typeof SEARCH_INDEX!=='undefined'){
+        SEARCH_INDEX.forEach(function(t){
+          var hit=t.topic.toLowerCase().indexOf(ql)>-1;
+          if(!hit)t.sections.forEach(function(s){if((s.title+' '+s.keywords).toLowerCase().indexOf(ql)>-1)hit=true});
+          if(hit)matches.push(t);
+        });
+      }
+      if(!matches.length){r.innerHTML='<p style="padding:8px 0;font-size:13px;color:var(--ink-muted)">No results</p>';return}
+      r.innerHTML=matches.slice(0,8).map(function(m){return '<a href="../'+m.url+'">'+m.topic+'<span class="bsr-disc">'+m.discipline+'</span></a>'}).join('');
+    }
+    document.addEventListener('keydown',function(e){if(e.key==='Escape'){closeBurger();var dd=document.getElementById('searchDropdown');if(dd)dd.classList.remove('visible');}});
+    // Close burger when clicking a TOC link
+    document.querySelectorAll('.burger-toc-list a').forEach(function(a){a.addEventListener('click',function(){closeBurger()})});
+    // Search typeahead
+    function topicSearch(q){
+      var dd=document.getElementById('searchDropdown');
+      if(!q||q.length<2||typeof SEARCH_INDEX==='undefined'){if(dd)dd.classList.remove('visible');return}
+      var ql=q.toLowerCase(),grouped={};
+      SEARCH_INDEX.forEach(function(t){
+        var hit=t.topic.toLowerCase().indexOf(ql)>-1,sHits=[],mHits=[];
+        t.sections.forEach(function(s){if((s.title+' '+s.keywords).toLowerCase().indexOf(ql)>-1)sHits.push(s)});
+        (t.methods||[]).forEach(function(m){if((m.name+' '+(m.keywords||'')).toLowerCase().indexOf(ql)>-1)mHits.push(m)});
+        if(!hit&&!sHits.length&&!mHits.length&&ql.length>=3&&typeof levenshtein==='function'){
+          var words=t.topic.toLowerCase().split(/ +/);
+          for(var i=0;i<words.length;i++){if(levenshtein(ql,words[i].substring(0,ql.length+1))<=1){hit=true;break}}
+        }
+        if(hit||sHits.length||mHits.length)grouped[t.topic]={url:'../'+t.url,disc:t.discipline||'',sections:sHits,methods:mHits,topicHit:hit};
+      });
+      var keys=Object.keys(grouped);
+      if(!keys.length){dd.innerHTML='<div class="search-empty">No results</div>';dd.classList.add('visible');return}
+      var html='';
+      keys.slice(0,8).forEach(function(topic){
+        var g=grouped[topic];
+        html+='<div class="search-group"><div class="search-group-title">'+topic+'</div>';
+        if(g.topicHit)html+='<a class="search-result" href="'+g.url+'"><span class="search-result-title">'+topic+'</span><span class="search-result-type practical">'+g.disc+'</span></a>';
+        g.sections.forEach(function(s){html+='<a class="search-result" href="'+g.url+'#'+s.id+'"><span class="search-result-title">'+s.title+'</span><span class="search-result-type '+s.type+'">'+s.type+'</span></a>'});
+        g.methods.slice(0,3).forEach(function(m){html+='<a class="search-result" href="'+g.url+'#'+m.section+'"><span class="search-result-title">'+m.name+'</span><span class="search-result-type practical">method</span></a>'});
+        html+='</div>';
+      });
+      dd.innerHTML=html;dd.classList.add('visible');
+    }
+    document.addEventListener('click',function(e){if(!e.target.closest('.search-box')){var dd=document.getElementById('searchDropdown');if(dd)dd.classList.remove('visible')}});
+  </script>
+
+</body>
+</html>

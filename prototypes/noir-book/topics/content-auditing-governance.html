@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Content Auditing &amp; Governance — Noir Book</title>
+  <link rel="stylesheet" href="../css/shared.css">
+  <link rel="stylesheet" href="../css/topic.css">
+  <script src="../js/theme.js"></script>
+  <script src="../js/topic-nav.js"></script>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="site-nav subpage-nav" data-discipline="cs">
+    <div class="nav-inner">
+      <a href="../index.html" class="site-logo">
+        <span class="logo-mark">CS</span>
+        <span class="nav-title">Noir Book</span>
+      </a>
+      <a href="../index.html" class="nav-back-link">&#8592; Library</a>
+      <div class="nav-filters">
+        <button class="disc-toggle ux-toggle active" data-disc="ux" onclick="toggleDisc('ux')" title="UX Design">
+          <span class="disc-dot disc-dot-ux"></span><span class="disc-label">UX Design</span><span class="disc-code">(UX)</span>
+        </button>
+        <button class="disc-toggle pm-toggle active" data-disc="pm" onclick="toggleDisc('pm')" title="Product Management">
+          <span class="disc-dot disc-dot-pm"></span><span class="disc-label">Product</span><span class="disc-code">(PM)</span>
+        </button>
+        <button class="disc-toggle mk-toggle active" data-disc="mk" onclick="toggleDisc('mk')" title="Marketing &amp; Growth">
+          <span class="disc-dot disc-dot-mk"></span><span class="disc-label">Marketing</span><span class="disc-code">(MK)</span>
+        </button>
+        <button class="disc-toggle cs-toggle active" data-disc="cs" onclick="toggleDisc('cs')" title="Content Strategy">
+          <span class="disc-dot disc-dot-cs"></span><span class="disc-label">Content</span><span class="disc-code">(CS)</span>
+        </button>
+        <div class="search-box nav-search-box">
+          <div class="nav-search-wrap">
+            <div class="nav-search-pills" id="navSearchPills"></div>
+            <input type="text" id="navSearchInput" placeholder="Search..." autocomplete="off"
+              oninput="topicNavSearch(this.value)"
+              onkeydown="handleNavSearchKey(event)"
+              onfocus="handleNavSearchFocus()"
+              onblur="handleNavSearchBlur()">
+            <button type="button" class="nav-search-clear" id="navSearchClear" onclick="clearNavSearch()" aria-label="Clear search">&times;</button>
+          </div>
+          <div class="search-dropdown" id="navSearchDropdown"></div>
+        </div>
+      </div>
+      <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle theme">&#9790;</button>
+      <button class="burger-btn" id="burgerBtn" onclick="openBurger()" aria-label="Menu">
+        <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="2" y1="4" x2="16" y2="4"/><line x1="2" y1="9" x2="16" y2="9"/><line x1="2" y1="14" x2="16" y2="14"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Burger Menu Overlay -->
+  <div class="burger-overlay" id="burgerOverlay" onclick="closeBurger(event)">
+    <div class="burger-panel" onclick="event.stopPropagation()">
+      <div class="burger-panel-header">
+        <h3>Menu</h3>
+        <button class="burger-close" onclick="closeBurger()" aria-label="Close">&times;</button>
+      </div>
+      <div class="burger-search">
+        <input type="text" id="burgerSearchInput" placeholder="Search topics, methods..." autocomplete="off" oninput="burgerSearch(this.value)">
+        <div class="burger-search-results" id="burgerSearchResults"></div>
+      </div>
+      <div class="burger-links">
+        <a href="../index.html">&#8592; Back to Library</a>
+        <a href="../design-system.html">Design System</a>
+        <a href="../request-topic.html">Suggest a topic or improvement</a>
+      </div>
+      <div class="burger-toc-section">
+        <p class="burger-toc-title">On this page</p>
+        <ul class="burger-toc-list">
+        <li><a href="#what-and-why" data-section="theory">What content governance is and why it matters</a></li>
+        <li><a href="#content-audit" data-section="practical">Content auditing</a></li>
+        <li><a href="#governance-models" data-section="practical">Governance models</a></li>
+        <li><a href="#real-world-examples" data-section="examples">Real-world examples</a></li>
+        <li><a href="#pitfalls" data-section="practical">Common pitfalls</a></li>
+        <li><a href="#connections">Connected topics in your library</a></li>
+        <li><a href="#deep-dive">Deep-dive appendix</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Topic Header -->
+  <header class="topic-header container">
+    <div class="breadcrumb">
+      <a href="../index.html">Library</a>
+      <span class="sep">&#8250;</span>
+      <span class="breadcrumb-disc breadcrumb-cs">Content Strategy</span>
+      <span class="sep">&#8250;</span>
+      <span>Tier 1 — Core Toolkit</span>
+      <span class="sep">&#8250;</span>
+      <span>Content Auditing &amp; Governance</span>
+    </div>
+    <div class="topic-meta">
+      <span class="tier-badge tier1">Tier 1</span>
+      <span style="font-size:14px;color:var(--ink-muted)">Topic CS.1.02</span>
+    </div>
+    <h1>Content Auditing &amp; Governance</h1>
+    <p class="topic-subtitle">Know what you have and keep it healthy. Content inventories, audits, governance models, ownership structures, and the systems that prevent content from decaying.</p>
+    <div class="content-splits">
+      <span class="split-badge theory">20% Theory</span>
+      <span class="split-badge practical">55% Methods &amp; Templates</span>
+      <span class="split-badge examples">25% Examples</span>
+    </div>
+  </header>
+
+  <!-- Reading Progress Bar -->
+  <div class="reading-progress" id="readingProgress"></div>
+
+  <!-- Main Layout -->
+  <div class="container">
+    <div class="topic-layout">
+
+      <!-- Sidebar: Table of Contents -->
+      <aside class="topic-sidebar">
+        <nav class="toc">
+          <p class="sidebar-topic-title">Content Auditing &amp; Governance</p>
+          <p class="toc-title">On this page</p>
+          <ul class="toc-list">
+            <li><a href="#what-and-why" data-section="theory">What content governance is and why it matters</a></li>
+            <li><a href="#content-audit" data-section="practical">Content auditing</a></li>
+            <li><a href="#governance-models" data-section="practical">Governance models</a></li>
+            <li><a href="#real-world-examples" data-section="examples">Real-world examples</a></li>
+            <li><a href="#pitfalls" data-section="practical">Common pitfalls</a></li>
+            <li><a href="#connections">Connected topics in your library</a></li>
+            <li><a href="#deep-dive">Deep-dive appendix</a></li>
+          </ul>
+        </nav>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="topic-main topic-content">
+
+        <div class="section-marker" id="what-and-why">
+          <span class="split-badge theory">Theory</span>
+          <span class="marker-line"></span>
+        </div>
+
+        <section data-section="theory">
+  <h2>What content governance is and why it matters</h2>
+
+  <p>Every organization has a content problem they don't know about: outdated articles, duplicate pages, broken links, contradictory information, and content nobody owns. Without governance, content accumulates like sediment — each piece made sense when published, but the aggregate is a mess. Users encounter outdated instructions, conflicting information across pages, and content that references features that no longer exist. Content governance is the system that prevents this decay: who owns content, how it's reviewed, when it's updated, and when it's retired.</p>
+</section>
+
+        <div class="section-marker" id="content-audit">
+          <span class="split-badge practical">Practical</span>
+          <span class="marker-line"></span>
+        </div>
+
+        <section data-section="practical">
+  <h2>Content auditing</h2>
+
+  <div class="method-card">
+    <h4>Content Inventory &amp; Audit Methodology <span class="method-tag">Core Method</span></h4>
+    <p class="method-when">Use when: you need to understand what content exists, assess its quality, and identify gaps, redundancy, and decay.</p>
+    <p>The audit has two phases. <strong>Quantitative inventory:</strong> Crawl or manually catalog every piece of content: URL, title, content type, word count, last updated date, author, traffic, and metadata completeness. This produces a spreadsheet that answers "what do we have?" <strong>Qualitative audit:</strong> Evaluate a sample (or all content, if manageable) against quality criteria: accuracy (is it still correct?), relevance (does anyone need this?), completeness (does it cover the topic adequately?), findability (can users discover it?), and voice consistency (does it match current brand guidelines?). Score each piece and categorize: keep as-is, update, consolidate with another piece, or retire. The ROT analysis (Redundant, Outdated, Trivial) is a quick triage: redundant content should be consolidated, outdated content should be updated or removed, trivial content should be archived.</p>
+  </div>
+
+  <div class="method-card">
+    <h4>Content Health Score <span class="method-tag">Technique</span></h4>
+    <p class="method-when">Use when: tracking content quality over time without running a full audit.</p>
+    <p>A content health score monitors ongoing quality through automated and semi-automated signals. <strong>Freshness:</strong> Percentage of content updated within its review cycle (e.g., within the last 6 months for product docs). <strong>Accuracy:</strong> Number of reported errors or corrections per month. <strong>Completeness:</strong> Percentage of content with all required metadata, images, and cross-links. <strong>Performance:</strong> Traffic trends, bounce rate, and user satisfaction signals (feedback widgets, support escalation from content pages). <strong>Ownership:</strong> Percentage of content with an assigned owner. Track monthly, alert when scores drop below thresholds, and use trends to justify content investment.</p>
+  </div>
+</section>
+
+<section id="governance-models" data-section="practical">
+  <h2>Governance models</h2>
+
+  <div class="method-card">
+    <h4>Governance Model Selection <span class="method-tag">Core Method</span></h4>
+    <p class="method-when">Use when: establishing or restructuring how content decisions are made, who has authority, and how quality is maintained.</p>
+    <p>Three models, each with trade-offs: <strong>Centralized:</strong> A dedicated content team creates and maintains all content. Produces high consistency and quality but creates bottlenecks — product teams wait for content resources. Works best for small-to-medium content operations with a dedicated team. <strong>Decentralized:</strong> Subject matter experts across the organization create their own content. Produces volume and domain expertise but inconsistent quality, voice, and format. Works best for large organizations with diverse content needs. <strong>Hybrid (federated):</strong> A central content team sets standards, templates, and guidelines; distributed teams create content within those guardrails. The central team reviews, edits, and maintains quality. This is the most common model for scaling organizations — it balances quality with throughput.</p>
+  </div>
+
+  <div class="method-card">
+    <h4>Content Ownership Matrix <span class="method-tag">Technique</span></h4>
+    <p class="method-when">Use when: assigning accountability for content creation, review, and maintenance.</p>
+    <p>Every piece of content needs an owner. The ownership matrix defines: <strong>Creator:</strong> Who writes the initial draft? <strong>Reviewer:</strong> Who checks accuracy and quality before publication? <strong>Approver:</strong> Who gives final sign-off (for regulated or brand-sensitive content)? <strong>Maintainer:</strong> Who is responsible for keeping the content current after publication? This is the most commonly missing role — content is created and then orphaned. <strong>Retire decision:</strong> Who decides when content should be archived or removed? Assign by content type and area: product docs are owned by PM teams, help articles by support, marketing content by marketing, API docs by engineering. The content strategist ensures all areas are covered.</p>
+  </div>
+
+  <div class="method-card">
+    <h4>Content Lifecycle Framework <span class="method-tag">Framework</span></h4>
+    <p class="method-when">Use when: defining the stages content passes through from creation to retirement.</p>
+    <p>Content has a lifecycle: <strong>Create:</strong> Drafted against a brief, following style guidelines and templates. <strong>Review:</strong> Checked for accuracy, quality, and compliance. <strong>Publish:</strong> Released to its audience with appropriate metadata and distribution. <strong>Maintain:</strong> Reviewed on a schedule (quarterly for fast-changing content, annually for stable content), updated when products change, and corrected when errors are reported. <strong>Archive/Retire:</strong> When content is no longer relevant, it's either archived (still accessible but not promoted) or retired (removed with redirects). Most governance failures happen in the Maintain and Retire stages — building these into the workflow from day one prevents content decay.</p>
+  </div>
+</section>
+
+        <div class="section-marker" id="real-world-examples">
+          <span class="split-badge examples">Examples</span>
+          <span class="marker-line"></span>
+        </div>
+
+        <section data-section="examples">
+  <h2>Real-world examples</h2>
+
+  <div class="case-study">
+    <p class="case-label">Case study</p>
+    <h4>GOV.UK: governance at national scale</h4>
+    <p>The UK Government Digital Service manages content for hundreds of government departments through a federated governance model. Departments create content, but GDS sets strict content standards: plain language requirements, mandatory content types, and a content design methodology that prioritizes user needs over organizational structure. A central content team reviews and publishes, and regular audits retire content that isn't meeting performance standards. The result: GOV.UK consistently scores as one of the most usable government websites globally, despite the enormous scale and organizational complexity.</p>
+    <p><strong>Why it works:</strong> Strict standards with federated creation, central review authority, and the willingness to retire underperforming content.</p>
+  </div>
+</section>
+
+<section id="pitfalls" data-section="practical">
+  <h2>Common pitfalls</h2>
+
+  <div class="pitfall">
+    <div class="pitfall-icon">!</div>
+    <div>
+      <h4>Governance without maintenance</h4>
+      <p>Many organizations build governance for content creation (style guides, approval workflows, templates) but nothing for maintenance. Content published today starts decaying immediately — product features change, links break, information becomes outdated. A governance model that doesn't include scheduled reviews and clear ownership for updates will produce an ever-growing library of increasingly unreliable content.</p>
+    </div>
+  </div>
+</section>
+
+<section id="connections">
+  <h2>Connected topics in your library</h2>
+  <div class="cross-ref-grid">
+    <a href="content-strategy-foundations.html" class="cross-ref-card">
+      <span class="ref-number">CS Tier 1</span>
+      <div class="ref-title">Content Strategy Foundations</div>
+      <div class="ref-reason">Governance implements the strategy — audits measure whether content meets strategic goals.</div>
+    </a>
+    <a href="content-analytics-performance.html" class="cross-ref-card">
+      <span class="ref-number">CS Tier 2</span>
+      <div class="ref-title">Content Analytics &amp; Performance</div>
+      <div class="ref-reason">Analytics data feeds audit decisions — which content to keep, update, consolidate, or retire.</div>
+    </a>
+  </div>
+  <div class="callout info">
+    <p class="callout-title">Cross-discipline connections</p>
+    <p><strong>PM.2.07 Product Operations</strong> covers product-level operations and rituals. Content governance is the content parallel — same operational discipline, different domain.</p>
+  </div>
+</section>
+
+<div class="deep-dive-section" id="deep-dive">
+          <div class="deep-dive-header">
+            <span class="deep-dive-badge">Deep Dive</span>
+            <h2 style="margin:0; border:none; padding:0;">Appendix</h2>
+          </div>
+  <details class="expandable">
+    <summary><span class="chevron"><svg viewBox="0 0 14 14"><polyline points="4,2 10,7 4,12"/></svg></span> Further reading</summary>
+    <div class="expand-content topic-content">
+      <p><strong>"The Content Strategy Toolkit" by Meghan Casey</strong> — Practical tools for content auditing and governance at scale.</p>
+    </div>
+  </details>
+</div>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer container">
+    <div class="footer-inner">
+      <p>Noir Book — Built for the work, not the shelf.</p>
+      <div class="footer-links">
+        <a href="../design-system.html">Design System</a>
+        <a href="../library-manifest.json">Manifest</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to Top -->
+  <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">&#8593;</button>
+
+  <!-- Floating Mobile TOC -->
+  <button class="mobile-toc-btn" id="mobileTocBtn" aria-label="Open table of contents">&#9776; Contents</button>
+  <div class="mobile-toc-overlay" id="mobileTocOverlay">
+    <div class="mobile-toc-panel">
+      <div class="mobile-toc-panel-header">
+        <h3>On this page</h3>
+        <button class="mobile-toc-close" id="mobileTocClose" aria-label="Close">&times;</button>
+      </div>
+      <ul class="mobile-toc-list">
+        <li><a href="#what-and-why" data-section="theory">What content governance is and why it matters</a></li>
+        <li><a href="#content-audit" data-section="practical">Content auditing</a></li>
+        <li><a href="#governance-models" data-section="practical">Governance models</a></li>
+        <li><a href="#real-world-examples" data-section="examples">Real-world examples</a></li>
+        <li><a href="#pitfalls" data-section="practical">Common pitfalls</a></li>
+        <li><a href="#connections">Connected topics in your library</a></li>
+        <li><a href="#deep-dive">Deep-dive appendix</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    // Scrollspy: highlight active TOC item
+    const tocLinks = document.querySelectorAll('.toc-list a');
+    const sections = [];
+    tocLinks.forEach(link => {
+      const href = link.getAttribute('href');
+      if (!href || !href.startsWith('#')) return;
+      const el = document.getElementById(href.slice(1));
+      if (el) sections.push({ el, link });
+    });
+
+    // Reading progress bar
+    const progressBar = document.getElementById('readingProgress');
+    const backToTop = document.getElementById('backToTop');
+
+    function onScroll() {
+      let current = sections[0];
+      for (const s of sections) {
+        if (s.el.getBoundingClientRect().top <= 120) current = s;
+      }
+      tocLinks.forEach(l => l.classList.remove('active'));
+      if (current) current.link.classList.add('active');
+
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrolled = window.scrollY;
+      const progress = docHeight > 0 ? (scrolled / docHeight) * 100 : 0;
+      if (progressBar) progressBar.style.width = progress + '%';
+      if (backToTop) backToTop.classList.toggle('visible', scrolled > 400);
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    // Split badges: click to scroll to section
+    document.querySelectorAll('.content-splits .split-badge').forEach(function(badge) {
+      badge.addEventListener('click', function() {
+        var type = badge.classList.contains('theory') ? 'theory' : badge.classList.contains('practical') ? 'practical' : 'examples';
+        var target = document.querySelector('section[data-section="' + type + '"]');
+        if (target) {
+          var marker = target.previousElementSibling;
+          (marker && marker.classList.contains('section-marker') ? marker : target).scrollIntoView({behavior:'smooth'});
+        }
+      });
+    });
+  </script>
+
+  <script src="../js/checklist.js"></script>
+  <script src="../js/mobile-toc.js"></script>
+  <script src="../js/search.js"></script>
+  <script>
+    function openBurger(){document.getElementById('burgerOverlay').classList.add('open');document.body.style.overflow='hidden'}
+    function closeBurger(e){if(e&&e.target&&e.target!==document.getElementById('burgerOverlay'))return;document.getElementById('burgerOverlay').classList.remove('open');document.body.style.overflow=''}
+    function burgerSearch(q){
+      var r=document.getElementById('burgerSearchResults');
+      if(!q||q.length<2){r.innerHTML='';return}
+      var ql=q.toLowerCase(),matches=[];
+      if(typeof SEARCH_INDEX!=='undefined'){
+        SEARCH_INDEX.forEach(function(t){
+          var hit=t.topic.toLowerCase().indexOf(ql)>-1;
+          if(!hit)t.sections.forEach(function(s){if((s.title+' '+s.keywords).toLowerCase().indexOf(ql)>-1)hit=true});
+          if(hit)matches.push(t);
+        });
+      }
+      if(!matches.length){r.innerHTML='<p style="padding:8px 0;font-size:13px;color:var(--ink-muted)">No results</p>';return}
+      r.innerHTML=matches.slice(0,8).map(function(m){return '<a href="../'+m.url+'">'+m.topic+'<span class="bsr-disc">'+m.discipline+'</span></a>'}).join('');
+    }
+    document.addEventListener('keydown',function(e){if(e.key==='Escape'){closeBurger();var dd=document.getElementById('searchDropdown');if(dd)dd.classList.remove('visible');}});
+    // Close burger when clicking a TOC link
+    document.querySelectorAll('.burger-toc-list a').forEach(function(a){a.addEventListener('click',function(){closeBurger()})});
+    // Search typeahead
+    function topicSearch(q){
+      var dd=document.getElementById('searchDropdown');
+      if(!q||q.length<2||typeof SEARCH_INDEX==='undefined'){if(dd)dd.classList.remove('visible');return}
+      var ql=q.toLowerCase(),grouped={};
+      SEARCH_INDEX.forEach(function(t){
+        var hit=t.topic.toLowerCase().indexOf(ql)>-1,sHits=[],mHits=[];
+        t.sections.forEach(function(s){if((s.title+' '+s.keywords).toLowerCase().indexOf(ql)>-1)sHits.push(s)});
+        (t.methods||[]).forEach(function(m){if((m.name+' '+(m.keywords||'')).toLowerCase().indexOf(ql)>-1)mHits.push(m)});
+        if(!hit&&!sHits.length&&!mHits.length&&ql.length>=3&&typeof levenshtein==='function'){
+          var words=t.topic.toLowerCase().split(/ +/);
+          for(var i=0;i<words.length;i++){if(levenshtein(ql,words[i].substring(0,ql.length+1))<=1){hit=true;break}}
+        }
+        if(hit||sHits.length||mHits.length)grouped[t.topic]={url:'../'+t.url,disc:t.discipline||'',sections:sHits,methods:mHits,topicHit:hit};
+      });
+      var keys=Object.keys(grouped);
+      if(!keys.length){dd.innerHTML='<div class="search-empty">No results</div>';dd.classList.add('visible');return}
+      var html='';
+      keys.slice(0,8).forEach(function(topic){
+        var g=grouped[topic];
+        html+='<div class="search-group"><div class="search-group-title">'+topic+'</div>';
+        if(g.topicHit)html+='<a class="search-result" href="'+g.url+'"><span class="search-result-title">'+topic+'</span><span class="search-result-type practical">'+g.disc+'</span></a>';
+        g.sections.forEach(function(s){html+='<a class="search-result" href="'+g.url+'#'+s.id+'"><span class="search-result-title">'+s.title+'</span><span class="search-result-type '+s.type+'">'+s.type+'</span></a>'});
+        g.methods.slice(0,3).forEach(function(m){html+='<a class="search-result" href="'+g.url+'#'+m.section+'"><span class="search-result-title">'+m.name+'</span><span class="search-result-type practical">method</span></a>'});
+        html+='</div>';
+      });
+      dd.innerHTML=html;dd.classList.add('visible');
+    }
+    document.addEventListener('click',function(e){if(!e.target.closest('.search-box')){var dd=document.getElementById('searchDropdown');if(dd)dd.classList.remove('visible')}});
+  </script>
+
+</body>
+</html>

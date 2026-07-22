@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Technical Writing &amp; Documentation — Noir Book</title>
+  <link rel="stylesheet" href="../css/shared.css">
+  <link rel="stylesheet" href="../css/topic.css">
+  <script src="../js/theme.js"></script>
+  <script src="../js/topic-nav.js"></script>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="site-nav subpage-nav" data-discipline="cs">
+    <div class="nav-inner">
+      <a href="../index.html" class="site-logo">
+        <span class="logo-mark">CS</span>
+        <span class="nav-title">Noir Book</span>
+      </a>
+      <a href="../index.html" class="nav-back-link">&#8592; Library</a>
+      <div class="nav-filters">
+        <button class="disc-toggle ux-toggle active" data-disc="ux" onclick="toggleDisc('ux')" title="UX Design">
+          <span class="disc-dot disc-dot-ux"></span><span class="disc-label">UX Design</span><span class="disc-code">(UX)</span>
+        </button>
+        <button class="disc-toggle pm-toggle active" data-disc="pm" onclick="toggleDisc('pm')" title="Product Management">
+          <span class="disc-dot disc-dot-pm"></span><span class="disc-label">Product</span><span class="disc-code">(PM)</span>
+        </button>
+        <button class="disc-toggle mk-toggle active" data-disc="mk" onclick="toggleDisc('mk')" title="Marketing &amp; Growth">
+          <span class="disc-dot disc-dot-mk"></span><span class="disc-label">Marketing</span><span class="disc-code">(MK)</span>
+        </button>
+        <button class="disc-toggle cs-toggle active" data-disc="cs" onclick="toggleDisc('cs')" title="Content Strategy">
+          <span class="disc-dot disc-dot-cs"></span><span class="disc-label">Content</span><span class="disc-code">(CS)</span>
+        </button>
+        <div class="search-box nav-search-box">
+          <div class="nav-search-wrap">
+            <div class="nav-search-pills" id="navSearchPills"></div>
+            <input type="text" id="navSearchInput" placeholder="Search..." autocomplete="off"
+              oninput="topicNavSearch(this.value)"
+              onkeydown="handleNavSearchKey(event)"
+              onfocus="handleNavSearchFocus()"
+              onblur="handleNavSearchBlur()">
+            <button type="button" class="nav-search-clear" id="navSearchClear" onclick="clearNavSearch()" aria-label="Clear search">&times;</button>
+          </div>
+          <div class="search-dropdown" id="navSearchDropdown"></div>
+        </div>
+      </div>
+      <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle theme">&#9790;</button>
+      <button class="burger-btn" id="burgerBtn" onclick="openBurger()" aria-label="Menu">
+        <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="2" y1="4" x2="16" y2="4"/><line x1="2" y1="9" x2="16" y2="9"/><line x1="2" y1="14" x2="16" y2="14"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Burger Menu Overlay -->
+  <div class="burger-overlay" id="burgerOverlay" onclick="closeBurger(event)">
+    <div class="burger-panel" onclick="event.stopPropagation()">
+      <div class="burger-panel-header">
+        <h3>Menu</h3>
+        <button class="burger-close" onclick="closeBurger()" aria-label="Close">&times;</button>
+      </div>
+      <div class="burger-search">
+        <input type="text" id="burgerSearchInput" placeholder="Search topics, methods..." autocomplete="off" oninput="burgerSearch(this.value)">
+        <div class="burger-search-results" id="burgerSearchResults"></div>
+      </div>
+      <div class="burger-links">
+        <a href="../index.html">&#8592; Back to Library</a>
+        <a href="../design-system.html">Design System</a>
+        <a href="../request-topic.html">Suggest a topic or improvement</a>
+      </div>
+      <div class="burger-toc-section">
+        <p class="burger-toc-title">On this page</p>
+        <ul class="burger-toc-list">
+        <li><a href="#what-and-why" data-section="theory">What technical writing covers and why it matters</a></li>
+        <li><a href="#doc-architecture" data-section="practical">Documentation architecture</a></li>
+        <li><a href="#api-docs" data-section="practical">API and developer documentation</a></li>
+        <li><a href="#doc-product-sync" data-section="practical">Documentation-product sync</a></li>
+        <li><a href="#troubleshooting" data-section="practical">Troubleshooting content</a></li>
+        <li><a href="#doc-metrics" data-section="practical">Documentation metrics</a></li>
+        <li><a href="#templates" data-section="practical">Templates and checklists</a></li>
+        <li><a href="#real-world-examples" data-section="examples">Real-world examples</a></li>
+        <li><a href="#pitfalls" data-section="practical">Common pitfalls</a></li>
+        <li><a href="#connections">Connected topics in your library</a></li>
+        <li><a href="#deep-dive">Deep-dive appendix</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Topic Header -->
+  <header class="topic-header container">
+    <div class="breadcrumb">
+      <a href="../index.html">Library</a>
+      <span class="sep">&#8250;</span>
+      <span class="breadcrumb-disc breadcrumb-cs">Content Strategy</span>
+      <span class="sep">&#8250;</span>
+      <span>Tier 3 — Situational</span>
+      <span class="sep">&#8250;</span>
+      <span>Technical Writing &amp; Documentation</span>
+    </div>
+    <div class="topic-meta">
+      <span class="tier-badge tier3">Tier 3</span>
+      <span style="font-size:14px;color:var(--ink-muted)">Topic CS.3.01</span>
+    </div>
+    <h1>Technical Writing &amp; Documentation</h1>
+    <p class="topic-subtitle">Create documentation that users actually use. API docs, help centers, knowledge bases, developer documentation, and the information architecture of technical content.</p>
+    <div class="content-splits">
+      <span class="split-badge theory">20% Theory</span>
+      <span class="split-badge practical">55% Methods &amp; Templates</span>
+      <span class="split-badge examples">25% Examples</span>
+    </div>
+  </header>
+
+  <!-- Reading Progress Bar -->
+  <div class="reading-progress" id="readingProgress"></div>
+
+  <!-- Main Layout -->
+  <div class="container">
+    <div class="topic-layout">
+
+      <!-- Sidebar: Table of Contents -->
+      <aside class="topic-sidebar">
+        <nav class="toc">
+          <p class="sidebar-topic-title">Technical Writing &amp; Documentation</p>
+          <p class="toc-title">On this page</p>
+          <ul class="toc-list">
+            <li><a href="#what-and-why" data-section="theory">What technical writing covers and why it matters</a></li>
+            <li><a href="#doc-architecture" data-section="practical">Documentation architecture</a></li>
+            <li><a href="#api-docs" data-section="practical">API and developer documentation</a></li>
+            <li><a href="#doc-product-sync" data-section="practical">Documentation-product sync</a></li>
+            <li><a href="#troubleshooting" data-section="practical">Troubleshooting content</a></li>
+            <li><a href="#doc-metrics" data-section="practical">Documentation metrics</a></li>
+            <li><a href="#templates" data-section="practical">Templates and checklists</a></li>
+            <li><a href="#real-world-examples" data-section="examples">Real-world examples</a></li>
+            <li><a href="#pitfalls" data-section="practical">Common pitfalls</a></li>
+            <li><a href="#connections">Connected topics in your library</a></li>
+            <li><a href="#deep-dive">Deep-dive appendix</a></li>
+          </ul>
+        </nav>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="topic-main topic-content">
+
+        <div class="section-marker" id="what-and-why">
+          <span class="split-badge theory">Theory</span>
+          <span class="marker-line"></span>
+        </div>
+
+        <section data-section="theory">
+  <h2>What technical writing covers and why it matters</h2>
+
+  <p>Technical documentation is the content users consult when they need to accomplish something specific — install a product, use an API, troubleshoot a problem, understand a feature. Unlike marketing content (which attracts) or editorial content (which educates broadly), documentation exists to enable action. Its quality is measured not by readership but by task completion: did the user successfully do what they came to do?</p>
+
+  <p>Good documentation reduces support costs, accelerates adoption, and becomes a competitive advantage. Poor documentation creates friction at the exact moment users are trying to get value from your product — and unlike a bad onboarding flow, documentation failures compound over time as the product grows and content falls out of date. The discipline of technical writing is about building documentation systems that scale: structures that accommodate growth, processes that maintain accuracy, and information architectures that help users find answers without reading everything.</p>
+</section>
+
+        <div class="section-marker" id="doc-architecture">
+          <span class="split-badge practical">Practical</span>
+          <span class="marker-line"></span>
+        </div>
+
+        <section data-section="practical">
+  <h2>Documentation architecture</h2>
+
+  <div class="method-card">
+    <h4>Documentation Architecture <span class="method-tag">Core Method</span></h4>
+    <p class="method-when">Use when: planning the information architecture of a documentation site, help center, or knowledge base from scratch.</p>
+    <p>Documentation architecture defines how content is organized, categorized, and navigated. <strong>Content types:</strong> Define distinct documentation types, each serving a different user intent. Tutorials (learning-oriented, guided steps), how-to guides (task-oriented, problem-solving), reference (information-oriented, comprehensive), and explanation (understanding-oriented, conceptual background). These four types — from the Diátaxis framework — serve different needs and shouldn't be mixed within a single page. <strong>Information hierarchy:</strong> Organize by user mental model, not product architecture. Users think in tasks ("How do I export data?"), not in modules ("Data Module > Export Functionality"). <strong>Navigation:</strong> Provide multiple paths to the same content: hierarchical browsing (table of contents), search, and contextual cross-links. Users who know what they're looking for search; users who don't browse. Both must work. <strong>Versioning:</strong> If your product has multiple versions in use, documentation must support version switching without confusing users about which version they're reading.</p>
+  </div>
+
+  <div class="method-card">
+    <h4>Help Center IA Design <span class="method-tag">Technique</span></h4>
+    <p class="method-when">Use when: organizing a customer-facing help center or knowledge base.</p>
+    <p>Help center IA differs from developer docs because the audience is broader and the tasks are more varied. <strong>Category structure:</strong> Organize by user goal, not product feature. "Getting started," "Account & billing," "Using [feature]," "Troubleshooting." Limit top-level categories to 5–8 — more creates decision paralysis. <strong>Most popular first:</strong> Surface the most-accessed articles prominently. If 60% of help center traffic goes to 10 articles, make those 10 articles findable in one click. <strong>Search optimization:</strong> Help center search must handle natural language queries ("why can't I log in?"), not just keyword matching. Include common misspellings, synonyms, and colloquial descriptions in search metadata. <strong>Contextual help:</strong> Link to relevant help articles from within the product interface — at the point of confusion, not just in the help center homepage.</p>
+  </div>
+</section>
+
+<section id="api-docs" data-section="practical">
+  <h2>API and developer documentation</h2>
+
+  <div class="method-card">
+    <h4>API Documentation Template <span class="method-tag">Core Method</span></h4>
+    <p class="method-when">Use when: writing API documentation that developers can self-serve from without contacting support.</p>
+    <p>API docs are developer-facing product documentation. Developers evaluate your API by reading docs before writing code. <strong>Getting started guide:</strong> A complete, working example that takes a developer from zero to first successful API call in under 10 minutes. This is the single most important piece of API documentation. Include authentication setup, a simple request, and the expected response. <strong>Authentication:</strong> Dedicated section covering every auth method, with code samples for each. Authentication is the #1 friction point for new API users. <strong>Endpoint reference:</strong> For each endpoint: HTTP method and URL, required and optional parameters with types, request body schema with examples, response schema with examples (success and error), rate limits, and error codes with explanations. <strong>Code samples:</strong> Working code samples in the most popular languages for your API. Not pseudocode — copy-paste-run code. <strong>Changelog:</strong> What changed, when, and what developers need to do about it. Breaking changes need migration guides, not just announcements.</p>
+  </div>
+
+  <div class="method-card">
+    <h4>Code Sample Guidelines <span class="method-tag">Technique</span></h4>
+    <p class="method-when">Use when: ensuring code samples in documentation are accurate, runnable, and maintainable.</p>
+    <p>Code samples that don't work destroy documentation trust instantly. <strong>Runnable by default:</strong> Every code sample should work when copied and pasted. Include all imports, setup, and configuration. Never show a snippet that requires unstated context to run. <strong>Tested in CI:</strong> Code samples should be extracted from or validated against actual runnable tests. When the API changes, tests catch stale code samples before users do. <strong>Language coverage:</strong> Provide samples in the languages your users actually use, not the language your backend is written in. Check API key analytics to see which SDKs and languages users actually call from. <strong>Progressive complexity:</strong> Start with the simplest possible example, then show more complex usage. Don't lead with the most feature-complete example.</p>
+  </div>
+</section>
+
+<section id="doc-product-sync" data-section="practical">
+  <h2>Documentation-product sync</h2>
+
+  <div class="method-card">
+    <h4>Documentation-Product Sync Workflow <span class="method-tag">Core Method</span></h4>
+    <p class="method-when">Use when: ensuring documentation stays accurate as the product evolves.</p>
+    <p>Documentation that's out of sync with the product is worse than no documentation — it actively misleads users. <strong>Ship together:</strong> Documentation updates should be part of the feature release process, not a follow-up task. No feature ships without docs. Enforce this in your release checklist. <strong>Change detection:</strong> When UI changes, screenshots break. When APIs change, code samples break. Build automated checks that flag documentation pages affected by product changes. <strong>Ownership:</strong> Every documentation page should have an owner — either the feature team that owns the product area or a dedicated technical writer. Unowned docs decay fastest. <strong>Review triggers:</strong> Documentation should be re-reviewed when: the feature it covers changes, user feedback indicates confusion, support tickets reference it, or it hasn't been reviewed in its scheduled interval. <strong>Deprecation:</strong> When a feature is deprecated, documentation must be updated immediately — not archived, but updated with a clear notice of what replaces it and a migration path.</p>
+  </div>
+</section>
+
+<section id="troubleshooting" data-section="practical">
+  <h2>Troubleshooting content</h2>
+
+  <div class="method-card">
+    <h4>Troubleshooting Content Framework <span class="method-tag">Technique</span></h4>
+    <p class="method-when">Use when: writing documentation that helps users diagnose and fix problems.</p>
+    <p>Troubleshooting content serves users in a state of frustration — they expected something to work and it didn't. <strong>Symptom-first organization:</strong> Organize by what the user sees ("Error: connection refused"), not by what's wrong technically ("DNS resolution failure"). Users know their symptoms; they don't know the cause. <strong>Decision tree structure:</strong> Guide users through diagnostic steps. "Are you seeing error X or error Y?" → specific fix for each. Don't make users read 10 possible causes when a two-question decision tree narrows it to one. <strong>Most common first:</strong> Order solutions by likelihood, not by severity. If 80% of "can't log in" issues are forgotten passwords, put password reset first — not firewall configuration. <strong>Verification step:</strong> After each solution, tell users how to verify it worked. "Try logging in again. If you see the dashboard, the issue is resolved." <strong>Escalation path:</strong> When self-service fails, provide a clear path to human support. Include what information to provide (error messages, steps already tried) to avoid back-and-forth.</p>
+  </div>
+</section>
+
+<section id="doc-metrics" data-section="practical">
+  <h2>Documentation metrics</h2>
+
+  <div class="method-card">
+    <h4>Documentation Metrics <span class="method-tag">Technique</span></h4>
+    <p class="method-when">Use when: measuring documentation effectiveness beyond pageviews.</p>
+    <p><strong>Ticket deflection:</strong> The most important documentation metric. Track the ratio of help center visits to support tickets. If users read documentation and then file a ticket, the documentation failed. If they read documentation and don't file a ticket, it succeeded (assuming they found their answer, not that they gave up). <strong>Search success rate:</strong> What percentage of documentation searches result in a click? What percentage of users who search end up filing a support ticket? Low click-through after search means content doesn't exist or isn't findable. <strong>Task completion:</strong> For tutorial and how-to content, track completion rates. Where do users drop off? That's the quality bottleneck. <strong>Feedback signals:</strong> "Was this helpful?" ratings, comment feedback, and support ticket analysis (tickets that cite specific documentation as unhelpful). <strong>Time to answer:</strong> How quickly can users find answers? Measure time from first documentation search to page exit or successful task completion.</p>
+  </div>
+</section>
+
+<section id="templates" data-section="practical">
+  <h2>Templates and checklists</h2>
+
+  <div class="template-box">
+    <div class="template-header">
+      <span class="template-label">Template</span>
+      <span class="template-title">Getting Started Guide Structure</span>
+    </div>
+    <div class="template-grid">
+      <div class="template-field">
+        <div class="template-field-label">Prerequisites</div>
+        <p>[What the user needs before starting — accounts, tools, access]</p>
+      </div>
+      <div class="template-field">
+        <div class="template-field-label">Step 1: Setup</div>
+        <p>[Authentication, installation, or configuration — with copy-paste commands]</p>
+      </div>
+      <div class="template-field">
+        <div class="template-field-label">Step 2: First action</div>
+        <p>[The simplest meaningful task — "make your first API call" or "create your first project"]</p>
+      </div>
+      <div class="template-field">
+        <div class="template-field-label">Step 3: Verification</div>
+        <p>[How to confirm it worked — expected output, success message, or visual confirmation]</p>
+      </div>
+      <div class="template-field">
+        <div class="template-field-label">Next steps</div>
+        <p>[Links to tutorials, use cases, and reference docs for deeper usage]</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+        <div class="section-marker" id="real-world-examples">
+          <span class="split-badge examples">Examples</span>
+          <span class="marker-line"></span>
+        </div>
+
+        <section data-section="examples">
+  <h2>Real-world examples</h2>
+
+  <div class="case-study">
+    <p class="case-label">Case study</p>
+    <h4>Stripe: documentation as competitive moat</h4>
+    <p>Stripe's documentation is widely cited as the industry standard for API docs. Their approach: a getting-started guide that produces a working integration in under 10 minutes, code samples in every major language that are tested in CI (so they never break), and a reference section generated directly from their API schema (so it's always in sync). Critically, Stripe measures documentation by developer success metrics — time to first successful API call — not by pageviews. Their documentation team operates like a product team with its own roadmap and quality standards.</p>
+    <p><strong>Why it works:</strong> Documentation is treated as a product with success metrics, not a support function with output metrics.</p>
+  </div>
+
+  <div class="case-study">
+    <p class="case-label">Case study</p>
+    <h4>GitLab: docs-as-code at scale</h4>
+    <p>GitLab maintains thousands of documentation pages using a docs-as-code approach: documentation lives in the same repository as the product code, uses the same review process (merge requests), and ships in the same release cycle. Engineers are expected to update docs alongside code changes — the CI pipeline blocks merges that change functionality without corresponding documentation updates. A dedicated technical writing team reviews doc changes for quality and consistency, but the burden of creating first drafts sits with the engineers making the changes.</p>
+    <p><strong>Why it works:</strong> Documentation updates are a technical requirement, not an optional follow-up. The docs-as-code approach ensures documentation and product stay in sync by making them part of the same workflow.</p>
+  </div>
+</section>
+
+<section id="pitfalls" data-section="practical">
+  <h2>Common pitfalls</h2>
+
+  <div class="pitfall">
+    <div class="pitfall-icon">!</div>
+    <div>
+      <h4>Documenting features instead of tasks</h4>
+      <p>Documentation organized by product architecture ("the Settings panel contains...") fails users who think in tasks ("how do I change my notification preferences?"). Start with user intent, then map to features — not the other way around.</p>
+    </div>
+  </div>
+
+  <div class="pitfall">
+    <div class="pitfall-icon">!</div>
+    <div>
+      <h4>Assuming users read linearly</h4>
+      <p>Nobody reads documentation cover to cover. Users land on a specific page from search, scan for their answer, and leave. Every page must be self-contained enough to be useful in isolation while linking to context for users who need it.</p>
+    </div>
+  </div>
+
+  <div class="pitfall">
+    <div class="pitfall-icon">!</div>
+    <div>
+      <h4>Code samples that don't run</h4>
+      <p>A single broken code sample destroys trust in all your documentation. Test every code sample, ideally in CI. If you can't test it automatically, test it manually before every release that touches the relevant API or SDK.</p>
+    </div>
+  </div>
+</section>
+
+<section id="connections">
+  <h2>Connected topics in your library</h2>
+  <div class="cross-ref-grid">
+    <a href="structured-content.html" class="cross-ref-card">
+      <span class="ref-number">CS Tier 1</span>
+      <div class="ref-title">Structured Content &amp; Content Modeling</div>
+      <div class="ref-reason">Documentation benefits from structured content models — reusable content blocks, metadata-driven navigation, and multi-format publishing from a single source.</div>
+    </a>
+    <a href="content-auditing-governance.html" class="cross-ref-card">
+      <span class="ref-number">CS Tier 1</span>
+      <div class="ref-title">Content Auditing &amp; Governance</div>
+      <div class="ref-reason">Documentation governance (ownership, review cycles, deprecation) is a specialized application of content governance principles.</div>
+    </a>
+    <a href="information-architecture.html" class="cross-ref-card">
+      <span class="ref-number">UX Tier 1</span>
+      <div class="ref-title">Information Architecture</div>
+      <div class="ref-reason">Documentation IA applies the same principles of hierarchy, labeling, and navigation — specialized for task-oriented technical content.</div>
+    </a>
+  </div>
+
+  <div class="callout info">
+    <p class="callout-title">Cross-discipline connections</p>
+    <p><strong>PM.2.05 Platform &amp; API Product Management</strong> covers API product strategy and developer experience from a PM lens. This topic covers the content side — writing documentation that developers can self-serve from.</p>
+  </div>
+</section>
+
+<div class="deep-dive-section" id="deep-dive">
+          <div class="deep-dive-header">
+            <span class="deep-dive-badge">Deep Dive</span>
+            <h2 style="margin:0; border:none; padding:0;">Appendix</h2>
+          </div>
+
+  <details class="expandable">
+    <summary><span class="chevron"><svg viewBox="0 0 14 14"><polyline points="4,2 10,7 4,12"/></svg></span> The Diátaxis documentation framework</summary>
+    <div class="expand-content topic-content">
+      <h4>Four documentation types</h4>
+      <p><strong>Tutorials</strong> are learning-oriented. They take a beginner through a series of steps to complete a project. The goal is learning, not production use. Tutorials should work every time — if a step can fail, provide the recovery path.</p>
+      <p><strong>How-to guides</strong> are task-oriented. They show how to accomplish a specific goal. Unlike tutorials, they assume basic competence and focus on the task, not the learning. "How to export data as CSV" is a how-to guide.</p>
+      <p><strong>Reference</strong> is information-oriented. It describes the machinery: API endpoints, configuration options, CLI commands. Reference is comprehensive, consistent, and austere. It answers "what does this do?" not "how do I use this?"</p>
+      <p><strong>Explanation</strong> is understanding-oriented. It provides background, context, and rationale. "Why does the system work this way?" Explanation helps users build mental models that make the other three types more effective.</p>
+    </div>
+  </details>
+
+  <details class="expandable">
+    <summary><span class="chevron"><svg viewBox="0 0 14 14"><polyline points="4,2 10,7 4,12"/></svg></span> Further reading</summary>
+    <div class="expand-content topic-content">
+      <h4>Essential reading</h4>
+      <p><strong>Diátaxis framework (diataxis.fr)</strong> — The clearest framework for organizing documentation by user intent.</p>
+      <p><strong>"Docs for Developers" by Jared Bhatti et al.</strong> — Practical guide to developer documentation with real-world examples from Google and other tech companies.</p>
+      <p><strong>"Every Page is Page One" by Mark Baker</strong> — The case for topic-based, self-contained documentation pages rather than book-structured manuals.</p>
+    </div>
+  </details>
+</div>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer container">
+    <div class="footer-inner">
+      <p>Noir Book — Built for the work, not the shelf.</p>
+      <div class="footer-links">
+        <a href="../design-system.html">Design System</a>
+        <a href="../library-manifest.json">Manifest</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to Top -->
+  <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">&#8593;</button>
+
+  <!-- Floating Mobile TOC -->
+  <button class="mobile-toc-btn" id="mobileTocBtn" aria-label="Open table of contents">&#9776; Contents</button>
+  <div class="mobile-toc-overlay" id="mobileTocOverlay">
+    <div class="mobile-toc-panel">
+      <div class="mobile-toc-panel-header">
+        <h3>On this page</h3>
+        <button class="mobile-toc-close" id="mobileTocClose" aria-label="Close">&times;</button>
+      </div>
+      <ul class="mobile-toc-list">
+        <li><a href="#what-and-why" data-section="theory">What technical writing covers and why it matters</a></li>
+        <li><a href="#doc-architecture" data-section="practical">Documentation architecture</a></li>
+        <li><a href="#api-docs" data-section="practical">API and developer documentation</a></li>
+        <li><a href="#doc-product-sync" data-section="practical">Documentation-product sync</a></li>
+        <li><a href="#troubleshooting" data-section="practical">Troubleshooting content</a></li>
+        <li><a href="#doc-metrics" data-section="practical">Documentation metrics</a></li>
+        <li><a href="#templates" data-section="practical">Templates and checklists</a></li>
+        <li><a href="#real-world-examples" data-section="examples">Real-world examples</a></li>
+        <li><a href="#pitfalls" data-section="practical">Common pitfalls</a></li>
+        <li><a href="#connections">Connected topics in your library</a></li>
+        <li><a href="#deep-dive">Deep-dive appendix</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    // Scrollspy: highlight active TOC item
+    const tocLinks = document.querySelectorAll('.toc-list a');
+    const sections = [];
+    tocLinks.forEach(link => {
+      const href = link.getAttribute('href');
+      if (!href || !href.startsWith('#')) return;
+      const el = document.getElementById(href.slice(1));
+      if (el) sections.push({ el, link });
+    });
+
+    // Reading progress bar
+    const progressBar = document.getElementById('readingProgress');
+    const backToTop = document.getElementById('backToTop');
+
+    function onScroll() {
+      let current = sections[0];
+      for (const s of sections) {
+        if (s.el.getBoundingClientRect().top <= 120) current = s;
+      }
+      tocLinks.forEach(l => l.classList.remove('active'));
+      if (current) current.link.classList.add('active');
+
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrolled = window.scrollY;
+      const progress = docHeight > 0 ? (scrolled / docHeight) * 100 : 0;
+      if (progressBar) progressBar.style.width = progress + '%';
+      if (backToTop) backToTop.classList.toggle('visible', scrolled > 400);
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    // Split badges: click to scroll to section
+    document.querySelectorAll('.content-splits .split-badge').forEach(function(badge) {
+      badge.addEventListener('click', function() {
+        var type = badge.classList.contains('theory') ? 'theory' : badge.classList.contains('practical') ? 'practical' : 'examples';
+        var target = document.querySelector('section[data-section="' + type + '"]');
+        if (target) {
+          var marker = target.previousElementSibling;
+          (marker && marker.classList.contains('section-marker') ? marker : target).scrollIntoView({behavior:'smooth'});
+        }
+      });
+    });
+  </script>
+
+  <script src="../js/checklist.js"></script>
+  <script src="../js/mobile-toc.js"></script>
+  <script src="../js/search.js"></script>
+  <script>
+    function openBurger(){document.getElementById('burgerOverlay').classList.add('open');document.body.style.overflow='hidden'}
+    function closeBurger(e){if(e&&e.target&&e.target!==document.getElementById('burgerOverlay'))return;document.getElementById('burgerOverlay').classList.remove('open');document.body.style.overflow=''}
+    function burgerSearch(q){
+      var r=document.getElementById('burgerSearchResults');
+      if(!q||q.length<2){r.innerHTML='';return}
+      var ql=q.toLowerCase(),matches=[];
+      if(typeof SEARCH_INDEX!=='undefined'){
+        SEARCH_INDEX.forEach(function(t){
+          var hit=t.topic.toLowerCase().indexOf(ql)>-1;
+          if(!hit)t.sections.forEach(function(s){if((s.title+' '+s.keywords).toLowerCase().indexOf(ql)>-1)hit=true});
+          if(hit)matches.push(t);
+        });
+      }
+      if(!matches.length){r.innerHTML='<p style="padding:8px 0;font-size:13px;color:var(--ink-muted)">No results</p>';return}
+      r.innerHTML=matches.slice(0,8).map(function(m){return '<a href="../'+m.url+'">'+m.topic+'<span class="bsr-disc">'+m.discipline+'</span></a>'}).join('');
+    }
+    document.addEventListener('keydown',function(e){if(e.key==='Escape'){closeBurger();var dd=document.getElementById('searchDropdown');if(dd)dd.classList.remove('visible');}});
+    // Close burger when clicking a TOC link
+    document.querySelectorAll('.burger-toc-list a').forEach(function(a){a.addEventListener('click',function(){closeBurger()})});
+    // Search typeahead
+    function topicSearch(q){
+      var dd=document.getElementById('searchDropdown');
+      if(!q||q.length<2||typeof SEARCH_INDEX==='undefined'){if(dd)dd.classList.remove('visible');return}
+      var ql=q.toLowerCase(),grouped={};
+      SEARCH_INDEX.forEach(function(t){
+        var hit=t.topic.toLowerCase().indexOf(ql)>-1,sHits=[],mHits=[];
+        t.sections.forEach(function(s){if((s.title+' '+s.keywords).toLowerCase().indexOf(ql)>-1)sHits.push(s)});
+        (t.methods||[]).forEach(function(m){if((m.name+' '+(m.keywords||'')).toLowerCase().indexOf(ql)>-1)mHits.push(m)});
+        if(!hit&&!sHits.length&&!mHits.length&&ql.length>=3&&typeof levenshtein==='function'){
+          var words=t.topic.toLowerCase().split(/ +/);
+          for(var i=0;i<words.length;i++){if(levenshtein(ql,words[i].substring(0,ql.length+1))<=1){hit=true;break}}
+        }
+        if(hit||sHits.length||mHits.length)grouped[t.topic]={url:'../'+t.url,disc:t.discipline||'',sections:sHits,methods:mHits,topicHit:hit};
+      });
+      var keys=Object.keys(grouped);
+      if(!keys.length){dd.innerHTML='<div class="search-empty">No results</div>';dd.classList.add('visible');return}
+      var html='';
+      keys.slice(0,8).forEach(function(topic){
+        var g=grouped[topic];
+        html+='<div class="search-group"><div class="search-group-title">'+topic+'</div>';
+        if(g.topicHit)html+='<a class="search-result" href="'+g.url+'"><span class="search-result-title">'+topic+'</span><span class="search-result-type practical">'+g.disc+'</span></a>';
+        g.sections.forEach(function(s){html+='<a class="search-result" href="'+g.url+'#'+s.id+'"><span class="search-result-title">'+s.title+'</span><span class="search-result-type '+s.type+'">'+s.type+'</span></a>'});
+        g.methods.slice(0,3).forEach(function(m){html+='<a class="search-result" href="'+g.url+'#'+m.section+'"><span class="search-result-title">'+m.name+'</span><span class="search-result-type practical">method</span></a>'});
+        html+='</div>';
+      });
+      dd.innerHTML=html;dd.classList.add('visible');
+    }
+    document.addEventListener('click',function(e){if(!e.target.closest('.search-box')){var dd=document.getElementById('searchDropdown');if(dd)dd.classList.remove('visible')}});
+  </script>
+
+</body>
+</html>

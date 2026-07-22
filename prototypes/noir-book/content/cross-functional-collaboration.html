@@ -1,0 +1,271 @@
+<!--
+TOPIC_ID: PM.2.11
+TOPIC_NUMBER: PM.2.11
+TITLE: Cross-Functional Collaboration
+SUBTITLE: Work with design, engineering, data, and beyond. Communication rituals, shared artifacts, healthy conflict, and building trust that makes product trios work.
+TIER: 2
+TIER_LABEL: Specialized
+THEORY: 25
+PRACTICAL: 50
+EXAMPLES: 25
+-->
+
+<section id="what-and-why" data-section="theory">
+  <h2>What cross-functional collaboration means for PMs</h2>
+
+<p>Cross-functional collaboration is the practice of making decisions and delivering products with people from different disciplines — design, engineering, data science, marketing, sales, support. The PM sits at the intersection of all these functions, not above them. You don't manage these people. You can't tell them what to do. Your effectiveness depends entirely on your ability to align, persuade, and create shared context across groups with different priorities, different vocabularies, and different definitions of "done."</p>
+
+<p>The most impactful model for cross-functional work is the <strong>product trio</strong>: PM, designer, and tech lead working as a tight unit through discovery and delivery. The trio makes decisions together, shares context continuously, and presents a unified perspective to the rest of the organization. When the trio is strong, work flows. When it's broken, you get the classic dysfunctions: PM writes specs and throws them over the wall to engineering, design creates mockups nobody implements faithfully, and engineering builds things nobody asked for.</p>
+
+<p>Cross-functional collaboration isn't "being nice" or "having lots of meetings." It's a structural discipline: the right people, with the right context, making decisions at the right time, with clear accountability for outcomes. Getting this wrong is the #1 source of PM frustration — not market strategy, not metrics, not roadmapping.</p>
+</section>
+
+<section id="product-trio" data-section="practical">
+  <h2>The product trio operating model</h2>
+
+<div class="method-card">
+  <h4>Product Trio Operating Model <span class="method-tag">Core Method</span></h4>
+  <p class="method-when">Use when: setting up a new team or fixing a dysfunctional PM-design-engineering relationship.</p>
+  <p>The product trio (PM + designer + tech lead) functions as a mini-team within the team. They operate in three modes:</p>
+<ul>
+  <li><strong>Discovery</strong> — trio reviews customer insights together, generates opportunity hypotheses, and decides what to explore. The PM doesn't do discovery alone and hand results to the team.</li>
+  <li><strong>Framing</strong> — trio shapes the problem together. The PM provides business context and constraints, the designer provides user context, the tech lead provides feasibility context. All three contribute to the solution direction.</li>
+  <li><strong>Delivery</strong> — trio stays connected during build. Weekly sync on progress, scope trade-offs made together (not by PM alone), and shared review of the shipped result.</li>
+</ul>
+  <p>Establish the trio's working rhythm: (1) Weekly trio sync (30 min, no laptops, just talking through what's happening). (2) Shared backlog review (trio grooms the backlog together, not PM alone). (3) Joint customer exposure (all three attend user interviews, at least monthly). (4) Shared decision log (trio decisions are documented, so the team knows the "why" behind scope choices).</p>
+</div>
+
+<div class="method-card">
+  <h4>Shared Decision Framework <span class="method-tag">Framework</span></h4>
+  <p class="method-when">Use when: decisions get stuck because nobody knows who has the final call.</p>
+  <p>For every recurring decision type, define: who's <strong>responsible</strong> (does the work), who's <strong>accountable</strong> (has the final call), who's <strong>consulted</strong> (gives input before the decision), and who's <strong>informed</strong> (told after the decision). This is RACI, but applied specifically to product decisions: <em>What features to build</em> — PM accountable, trio consulted. <em>How to design the solution</em> — designer accountable, trio consulted. <em>Architecture and implementation</em> — tech lead accountable, PM consulted on business constraints. <em>Sprint scope trade-offs</em> — trio decides together. <em>Go/no-go for launch</em> — PM accountable, trio consulted.</p>
+  <p>The most important thing isn't the specific RACI assignments — it's that they're explicit and agreed upon. Most cross-functional conflict comes from ambiguity, not disagreement.</p>
+</div>
+</section>
+
+<section id="handoffs" data-section="practical">
+  <h2>Design-engineering handoffs</h2>
+
+<div class="method-card">
+  <h4>Design-Engineering Handoff Checklist <span class="method-tag">Core Method</span></h4>
+  <p class="method-when">Use when: design-to-engineering handoffs produce results that don't match the design.</p>
+  <p>A clean handoff includes:</p>
+<ul>
+  <li><strong>Design specs</strong> — Figma file with all states (empty, loading, error, success, edge cases), responsive breakpoints, and interaction annotations.</li>
+  <li><strong>Content</strong> — final copy for all strings, error messages, empty states, and tooltips.</li>
+  <li><strong>Acceptance criteria</strong> — what "done" looks like, written in testable statements.</li>
+  <li><strong>Edge cases</strong> — documented list of what happens with long text, missing data, slow connections, and permission boundaries.</li>
+  <li><strong>Asset export</strong> — icons, images, and illustrations exported in required formats.</li>
+</ul>
+  <p>The PM's role in handoffs: ensure the handoff meeting happens (don't let designers throw a Figma link over Slack), facilitate scope negotiations when engineering flags complexity, and verify the acceptance criteria match the user need, not just the design spec.</p>
+</div>
+
+<div class="callout tip">
+  <p class="callout-title">Practical tip</p>
+  <p>The best handoff is no handoff. If your designer and tech lead are in the trio, they've been collaborating since discovery. The "handoff" becomes a formality — the engineer already knows the design intent because they helped shape it. Invest in trio collaboration to reduce handoff friction, not in better handoff documents.</p>
+</div>
+</section>
+
+<section id="conflict" data-section="practical">
+  <h2>Healthy conflict norms</h2>
+
+<div class="method-card">
+  <h4>Healthy Conflict Norms <span class="method-tag">Framework</span></h4>
+  <p class="method-when">Use when: team disagreements either escalate into personal conflict or get suppressed into passive agreement.</p>
+  <p>Healthy teams disagree often and resolve quickly. Dysfunctional teams either avoid conflict (and make mediocre decisions) or fight constantly (and make no decisions). Establish explicit norms:</p>
+<ul>
+  <li><strong>Disagree with evidence</strong> — "I disagree because our data shows X" is productive. "I disagree because I think so" is not.</li>
+  <li><strong>Separate ideas from people</strong> — critique the proposal, not the person. "This approach has a flaw" not "You didn't think about.".</li>
+  <li><strong>Time-box debates</strong> — if the trio can't resolve a disagreement in 15 minutes, escalate or commit to a time-limited experiment.</li>
+  <li><strong>Disagree and commit</strong> — once the accountable person decides, everyone commits fully. Passive resistance (agreeing in the meeting, undermining afterward) is the most corrosive team behavior.</li>
+</ul>
+</div>
+
+<div class="method-card">
+  <h4>Cross-Functional Ritual Design <span class="method-tag">Technique</span></h4>
+  <p class="method-when">Use when: cross-functional communication is ad hoc and important information falls through the cracks.</p>
+  <p>Design rituals for three purposes:</p>
+<ul>
+  <li><strong>Alignment</strong> — ensure everyone is working toward the same goal (weekly trio sync, bi-weekly team standup).</li>
+  <li><strong>Review</strong> — inspect what was built and learn from it (design review, sprint demo, launch retro).</li>
+  <li><strong>Planning</strong> — decide what to do next (sprint planning, quarterly roadmap review). Each ritual has: a clear owner, a defined agenda, required attendees only (everyone else gets notes), a time-box, and a decision or artifact as output. If a ritual doesn't produce a decision or artifact, it's a status meeting — and you should question whether it needs to exist.</li>
+</ul>
+</div>
+</section>
+
+<section id="beyond-trio" data-section="practical">
+  <h2>Working with data, sales, and support</h2>
+
+<div class="method-card">
+  <h4>Data Science Partnership Model <span class="method-tag">Technique</span></h4>
+  <p class="method-when">Use when: you have a data team but aren't getting value from the partnership.</p>
+  <p>Most PM-data science friction comes from misaligned expectations. The PM throws a vague question ("why is retention dropping?") and expects an answer in a day. The data scientist spends a week on analysis and delivers a 20-slide deck the PM doesn't act on. Fix this by: (1) Brief the data scientist on the decision context: "I need to decide between investing in onboarding or re-engagement. What data would help me choose?" (2) Agree on the deliverable format: dashboard, one-pager, Slack summary, or presentation. (3) Set a time-box: "I need enough data to decide by Thursday, not a perfect analysis by next month." (4) Close the loop: tell the data scientist what decision you made and why. This feedback makes future analyses more targeted.</p>
+</div>
+
+<div class="method-card">
+  <h4>Sales-Product Feedback Loop <span class="method-tag">Technique</span></h4>
+  <p class="method-when">Use when: sales brings feature requests that feel disconnected from product strategy.</p>
+  <p>Build a structured feedback loop: (1) Sales submits feature requests through a standard form (customer name, problem, revenue impact, urgency). (2) PM triages requests monthly, grouping by theme and quantifying aggregate demand. (3) PM shares "what we're building and why" updates quarterly, connecting shipped features to sales requests where applicable. (4) PM conducts win/loss review calls with sales — not to validate specific feature requests, but to understand patterns in why deals close or die. The goal: sales feels heard, PM gets signal, and neither side feels like the other is ignoring them.</p>
+</div>
+</section>
+
+<section id="examples" data-section="examples">
+  <h2>Real-world examples</h2>
+
+<div class="case-study">
+  <p class="case-label">Case study</p>
+  <h4>Spotify: The squad model's evolution</h4>
+  <p>Spotify's squad model (small, autonomous cross-functional teams) became industry-famous but also evolved significantly from its initial form. The original model gave squads almost complete autonomy, which led to duplication and misalignment across squads. They iterated toward "aligned autonomy" — squads have tactical freedom but operate within strategic constraints set by leadership. The PM's role evolved from "backlog owner" to "strategy translator" — ensuring the squad's autonomous decisions advance company-level goals.</p>
+  <p><strong>Why it works (after iteration):</strong> The key insight was that autonomy without alignment produces chaos, and alignment without autonomy produces a factory. The PM balances both: providing strategic context that shapes squad decisions without micromanaging tactical execution.</p>
+</div>
+
+<div class="case-study">
+  <p class="case-label">Case study</p>
+  <h4>Linear: Opinionated tooling as collaboration framework</h4>
+  <p>Linear (the project management tool) embeds cross-functional collaboration assumptions into the tool itself: issues have both product and engineering owners, cycles create shared deadlines across functions, and the triage workflow forces decision-making on every incoming item. By making the tool opinionated about collaboration patterns, they reduced the need for meta-conversations about "how we work together" — the tool enforces the norms.</p>
+  <p><strong>Why it works:</strong> Teams spend less time debating process and more time doing the work. The collaboration norms are embedded in the daily workflow tool, not in a process document nobody reads.</p>
+</div>
+</section>
+
+<section id="trio-facilitation" data-section="practical">
+  <h2>Product trio partnership</h2>
+
+  <div class="method-card">
+    <h4>Product Trio Operating Model <span class="method-tag">Core Method</span></h4>
+    <p class="method-when">Use when: establishing or improving the PM-design-engineering working relationship with shared ownership.</p>
+    <p>The product trio (PM, designer, tech lead) works best with explicit agreements on shared decision-making. <strong>Shared decision frameworks:</strong> Define which decisions are made jointly (problem selection, success metrics, major UX direction) versus individually (visual details belong to design, technical architecture to engineering, business trade-offs to PM). Document these boundaries so they don't get relitigated every sprint. <strong>PM-design ownership boundaries:</strong> The most common conflict: PM defines the "what" and designer defines the "how," but the line between them is blurry. Clarify with examples specific to your team — for instance, PM owns the feature scope and success metrics, designer owns the interaction model and visual execution, and both own the user flow. <strong>When to defer:</strong> Good trio partners know when to defer to each other's expertise. PMs should defer on interaction quality, designers on technical feasibility, and engineers on user insight. The strongest trios argue constructively in discovery and commit fully in delivery.</p>
+  </div>
+
+  <div class="method-card">
+    <h4>Cross-Functional Facilitation Techniques <span class="method-tag">Technique</span></h4>
+    <p class="method-when">Use when: running workshops, alignment sessions, or design sprints with mixed-discipline teams.</p>
+    <p>Facilitation across disciplines requires managing different communication styles and professional biases. <strong>Silent ideation first:</strong> Start every group exercise with individual silent writing before discussion — this prevents the loudest voice (often the PM) from anchoring the group. <strong>Role rotation:</strong> Have engineers critique designs, designers question technical trade-offs, and PMs test prototypes. Cross-pollination builds empathy. <strong>Decision documentation:</strong> End every cross-functional session with a written decision summary: what was decided, who's responsible, and what's still open. Verbal agreements between disciplines are forgotten or remembered differently. <strong>Conflict protocols:</strong> Establish norms for productive disagreement before conflict arises — "disagree and commit" timelines, escalation paths, and the expectation that all perspectives get heard before a decision is made.</p>
+  </div>
+</section>
+
+<section id="pitfalls" data-section="practical">
+  <h2>Common pitfalls</h2>
+
+<div class="pitfall">
+  <div class="pitfall-icon">!</div>
+  <div>
+    <h4>Mistaking alignment for consensus</h4>
+    <p>Alignment means everyone understands the direction and commits to it. Consensus means everyone agrees. You need the former, not the latter. Waiting for consensus produces watered-down decisions. A PM who says "I hear your concerns, here's why we're going this direction, and I need your commitment" is doing their job. A PM who says "let's find something everyone agrees on" is abdicating it.</p>
+  </div>
+</div>
+
+<div class="pitfall">
+  <div class="pitfall-icon">!</div>
+  <div>
+    <h4>Over-communicating through documents, under-communicating through conversation</h4>
+    <p>Writing a 10-page PRD and emailing it to the team is not communication — it's documentation. Communication happens when you walk through the reasoning in person, answer questions, and negotiate concerns face-to-face. Documents record decisions. Conversations make decisions.</p>
+  </div>
+</div>
+
+<div class="pitfall">
+  <div class="pitfall-icon">!</div>
+  <div>
+    <h4>Treating cross-functional work as coordination instead of collaboration</h4>
+    <p>Coordination is "PM decides, then tells design and engineering what to build." Collaboration is "PM, design, and engineering explore the problem together and converge on a solution." The former is faster in the short term and worse in every other dimension: design quality, engineering buy-in, team morale, and decision quality.</p>
+  </div>
+</div>
+</section>
+
+<section id="connections">
+  <h2>Connected topics in your library</h2>
+  <div class="cross-ref-grid">
+    <a href="stakeholder-management.html" class="cross-ref-card">
+      <span class="ref-number">PM Tier 1</span>
+      <div class="ref-title">Stakeholder Management</div>
+      <div class="ref-reason">Cross-functional collaboration is stakeholder management applied to your immediate team.</div>
+    </a>
+    <a href="agile-pm.html" class="cross-ref-card">
+      <span class="ref-number">PM Tier 1</span>
+      <div class="ref-title">Agile Product Management</div>
+      <div class="ref-reason">Agile ceremonies are the primary rituals where cross-functional collaboration happens.</div>
+    </a>
+    <a href="product-operations.html" class="cross-ref-card">
+      <span class="ref-number">PM Tier 2</span>
+      <div class="ref-title">Product Operations</div>
+      <div class="ref-reason">Product Ops designs and maintains the infrastructure that enables cross-functional work.</div>
+    </a>
+    <a href="requirements.html" class="cross-ref-card">
+      <span class="ref-number">PM Tier 1</span>
+      <div class="ref-title">Requirements: Stories, PRDs &amp; Specs</div>
+      <div class="ref-reason">Shared artifacts (PRDs, stories) are the connective tissue of cross-functional collaboration.</div>
+    </a>
+  </div>
+</section>
+
+<section id="deep-dive">
+  <h2>Deep-dive appendix</h2>
+  <details class="expandable">
+    <summary><span class="chevron"><svg viewBox="0 0 14 14"><polyline points="4,2 10,7 4,12"/></svg></span> Remote and hybrid collaboration</summary>
+    <div class="expand-content topic-content">
+      <h4>Adapting the trio for distributed teams</h4>
+      <p>Remote trios need more structure than co-located ones. What happens naturally in an office (overhearing a design discussion, tapping an engineer for a quick feasibility check) must be intentionally designed in remote settings. Practices that work: asynchronous design reviews in Figma with threaded comments (don't wait for a meeting), daily 10-minute trio standup via video (not Slack — face time builds trust), shared Miro or FigJam boards for real-time collaboration during discovery, and a "trio channel" in Slack where all three members surface relevant information without filtering.</p>
+      <h4>The hybrid trap</h4>
+      <p>The hardest mode is hybrid: some trio members in office, others remote. The in-office members have side conversations the remote member misses. Fix this by: treating every trio interaction as remote (even if two people are in the same room, use the video link), documenting every decision in the shared log (not just verbal agreements over coffee), and over-communicating context changes ("FYI, stakeholder X just told me the timeline moved up").</p>
+    </div>
+  </details>
+  <details class="expandable">
+    <summary><span class="chevron"><svg viewBox="0 0 14 14"><polyline points="4,2 10,7 4,12"/></svg></span> Further reading and resources</summary>
+    <div class="expand-content topic-content">
+      <h4>Essential reading</h4>
+      <p><strong>"Empowered" by Marty Cagan</strong> — The definitive argument for product trios and empowered teams over feature factories.</p>
+      <p><strong>"Team Topologies" by Skelton &amp; Pais</strong> — How to structure teams for fast flow, including team interaction modes.</p>
+      <p><strong>"Continuous Discovery Habits" by Teresa Torres</strong> — Practical framework for trio-based product discovery.</p>
+    </div>
+  </details>
+</section>
+
+<!-- SEARCH_INDEX
+{
+  topic: "Cross-Functional Collaboration",
+  url: "topics/cross-functional-collaboration.html",
+  tier: "Tier 2",
+  discipline: "PM",
+  sections: [
+    { title: "What cross-functional collaboration means", id: "what-and-why", type: "theory", keywords: "cross-functional collaboration trio design engineering" },
+    { title: "Product trio operating model", id: "product-trio", type: "practical", keywords: "trio PM designer tech lead discovery framing" },
+    { title: "Design-engineering handoffs", id: "handoffs", type: "practical", keywords: "handoff design engineering Figma spec" },
+    { title: "Healthy conflict norms", id: "conflict", type: "practical", keywords: "conflict disagree commit norm evidence" },
+    { title: "Working with data sales support", id: "beyond-trio", type: "practical", keywords: "data science sales support feedback loop" },
+    { title: "Real-world examples", id: "examples", type: "examples", keywords: "Spotify Linear squad trio" },
+    { title: "Common pitfalls", id: "pitfalls", type: "practical", keywords: "consensus coordination document communication" },
+    { title: "Product trio partnership", id: "trio-facilitation", type: "practical", keywords: "trio ownership boundaries defer facilitation silent ideation conflict protocols" }
+  ],
+  methods: [
+    { name: "Product Trio Operating Model", section: "product-trio", keywords: "trio discovery framing delivery sync" },
+    { name: "Shared Decision Framework", section: "product-trio", keywords: "RACI decision accountable responsible" },
+    { name: "Design-Engineering Handoff Checklist", section: "handoffs", keywords: "handoff spec acceptance criteria edge case" },
+    { name: "Healthy Conflict Norms", section: "conflict", keywords: "disagree commit evidence debate resolve" },
+    { name: "Cross-Functional Ritual Design", section: "conflict", keywords: "ritual cadence alignment review planning" },
+    { name: "Product Trio Partnership Methods", section: "trio-facilitation", keywords: "ownership boundaries defer shared decisions PM-design" },
+    { name: "Cross-Functional Facilitation Techniques", section: "trio-facilitation", keywords: "facilitation silent ideation role rotation decision documentation conflict protocols" }
+  ]
+}
+SEARCH_INDEX -->
+
+<!-- MANIFEST
+{
+  "id": "PM.2.11",
+  "title": "Cross-Functional Collaboration",
+  "file": "topics/cross-functional-collaboration.html",
+  "tier": 2,
+  "discipline": "PM",
+  "solves": [
+    "I need to improve the PM-design-engineering working relationship",
+    "I want to set up a product trio with shared ownership",
+    "I need to resolve a design-engineering disagreement on approach",
+    "I want to include data science as a true partner",
+    "I need efficient cross-functional meetings"
+  ],
+  "methods": ["Product Trio Operating Model", "Shared Decision Framework", "Design-Engineering Handoff Checklist", "Healthy Conflict Norms", "Cross-Functional Ritual Design", "Product Trio Partnership Methods", "Cross-Functional Facilitation Techniques"],
+  "phase": "delivery",
+  "prerequisites": ["PM.1.06"],
+  "pairs_with": ["PM.1.10", "PM.2.07", "PM.1.04"],
+  "depth": "methods",
+  "keywords": ["cross-functional", "collaboration", "product trio", "design engineering", "handoff", "conflict", "RACI", "ritual", "alignment"]
+}
+MANIFEST -->

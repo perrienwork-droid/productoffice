@@ -1,0 +1,290 @@
+<!--
+TOPIC_ID: PM.2.07
+TOPIC_NUMBER: PM.2.07
+TITLE: Product Operations
+SUBTITLE: Scale the PM function. Templates, rituals, tooling, and the operating system that keeps product teams aligned without adding meetings.
+TIER: 2
+TIER_LABEL: Specialized
+THEORY: 25
+PRACTICAL: 50
+EXAMPLES: 25
+-->
+
+<section id="what-and-why" data-section="theory">
+  <h2>What product operations is and why it matters</h2>
+
+<p>Product operations (Product Ops) is the discipline of building systems, processes, and infrastructure that help product teams work more effectively. If product management is deciding <em>what</em> to build and <em>why</em>, product operations is ensuring the <em>how</em> of product work scales as the team grows. It's the difference between a 5-person product team where everyone knows what's happening because they sit together, and a 50-person product team that needs structured communication, standardized tooling, and repeatable processes to stay aligned.</p>
+
+<p>Product Ops typically owns three domains:</p>
+<ul>
+  <li><strong>Tools &amp; data</strong> — selecting, configuring, and maintaining the product team's tooling stack (Jira, Productboard, analytics tools, feature flag systems).</li>
+  <li><strong>Processes &amp; rituals</strong> — designing and facilitating cadences like sprint planning, quarterly planning, launch reviews, and cross-functional syncs.</li>
+  <li><strong>Communication &amp; insights</strong> — synthesizing customer feedback, market data, and internal learnings into formats product managers can act on without doing the research themselves.</li>
+</ul>
+
+<p>Product Ops matters because PM time is finite and expensive. Every hour a PM spends configuring Jira, manually compiling a status update, or hunting for customer feedback in Intercom is an hour not spent on strategy, discovery, or stakeholder alignment. Product Ops creates leverage: one Ops person building a template that saves 10 PMs 2 hours each per week creates 20 hours of PM capacity from one role.</p>
+</section>
+
+<section id="operating-model" data-section="theory">
+  <h2>The product operating model</h2>
+
+<p>A product operating model is the documented system of how your product team works. It answers: How do we decide what to build? How do we communicate progress? How do we handle incoming requests? How do we learn from shipped work? Most product teams have implicit answers to these questions — the PM who's been there longest just "knows" how things work. Product Ops makes these implicit systems explicit, documented, and improvable.</p>
+
+<p>The operating model typically covers five areas: <strong>Planning</strong> (annual, quarterly, sprint-level cadences and artifacts), <strong>Discovery</strong> (how insights flow from customers to PMs), <strong>Execution</strong> (how work moves from idea to shipped), <strong>Communication</strong> (status updates, stakeholder reporting, launch announcements), and <strong>Learning</strong> (post-launch reviews, metric check-ins, retrospectives). Document each area with: who's responsible, what artifacts are produced, what tools are used, and what cadence it follows.</p>
+</section>
+
+<section id="tooling" data-section="practical">
+  <h2>Tooling strategy and stack management</h2>
+
+<div class="method-card">
+  <h4>Tool Stack Audit <span class="method-tag">Core Method</span></h4>
+  <p class="method-when">Use when: joining a new team, sensing tool sprawl, or preparing for a new fiscal year.</p>
+  <p>List every tool the product team uses. For each tool, document: what it's used for, who uses it, how much it costs, what data it contains, and what it integrates with. Then map overlaps — are you using both Jira and Linear? Both Productboard and Aha? Both Notion and Confluence? Tool sprawl happens when individual PMs adopt tools without coordination. The audit reveals redundancy, identifies the "source of truth" for each data type (roadmap lives in X, customer feedback lives in Y, sprint work lives in Z), and creates the basis for consolidation decisions.</p>
+</div>
+
+<div class="method-card">
+  <h4>Feature Request Pipeline <span class="method-tag">Core Method</span></h4>
+  <p class="method-when">Use when: feature requests come from everywhere (sales, support, executives) and nothing gets triaged consistently.</p>
+  <p>Build a single intake channel for all feature requests. This can be a form (Typeform, Google Form), a dedicated Slack channel with a bot that creates tickets, or a Productboard portal. Every request gets the same fields: who's asking, what problem they're solving, how urgent they think it is, and how many customers are affected. Product Ops triages incoming requests weekly: duplicates get merged, requests get tagged by theme and product area, and high-signal requests get routed to the relevant PM. PMs review their queue, not a firehose of raw requests.</p>
+  <p>The key discipline is closing the loop: every requester should know what happened to their request, even if the answer is "not now." A quarterly "what we built and why" update to internal stakeholders dramatically reduces "why didn't you build my thing?" complaints.</p>
+</div>
+
+<div class="method-card">
+  <h4>Analytics Tool Configuration <span class="method-tag">Technique</span></h4>
+  <p class="method-when">Use when: PMs need self-serve access to data but can't write SQL.</p>
+  <p>Product Ops configures analytics tools (Amplitude, Mixpanel, Looker) so PMs can answer common questions without requesting analyst time. This means building pre-configured dashboards for each product area (activation funnel, retention curves, feature adoption), creating saved segments (new users, power users, churned users), and documenting how to create custom reports. The goal is 80% of PM data questions answered in under 5 minutes without an analyst.</p>
+</div>
+
+<div class="callout tip">
+  <p class="callout-title">Practical tip</p>
+  <p>Don't buy a tool to fix a process problem. If your sprint planning is chaotic, switching from Jira to Linear won't help — you'll have chaotic sprint planning in a prettier interface. Fix the process first (who attends, what's the agenda, what artifact is produced), then choose the tool that best supports the fixed process.</p>
+</div>
+</section>
+
+<section id="rituals" data-section="practical">
+  <h2>Rituals and cadences</h2>
+
+<div class="method-card">
+  <h4>Cadence Design <span class="method-tag">Framework</span></h4>
+  <p class="method-when">Use when: setting up or redesigning the product team's meeting rhythm.</p>
+  <p>Effective product cadences operate at three horizons:</p>
+<ul>
+  <li><strong>Weekly</strong> — sprint-level execution (standup, sprint planning, backlog grooming).</li>
+  <li><strong>Monthly</strong> — tactical review (metric check-ins, feature launch reviews, customer insight synthesis).</li>
+  <li><strong>Quarterly</strong> — strategic alignment (OKR setting, roadmap planning, portfolio review). Design each cadence with: clear purpose (why does this meeting exist?), defined inputs (what do attendees prepare?), defined outputs (what artifact is produced?), and a time-box (60 minutes max for weekly, 2 hours max for quarterly).</li>
+</ul>
+  <p>The anti-pattern is meetings that exist because they've always existed. Every cadence should pass the "what would break if we stopped doing this?" test. If nothing would break, kill the meeting.</p>
+</div>
+
+<div class="method-card">
+  <h4>Launch Readiness Checklist <span class="method-tag">Core Method</span></h4>
+  <p class="method-when">Use when: features ship without coordination, causing support gaps or missed announcements.</p>
+  <p>Create a standardized launch checklist that every feature goes through before release. Sections include: <strong>Product</strong> (feature complete, QA passed, analytics instrumented, feature flag configured), <strong>Marketing</strong> (blog post drafted, changelog updated, in-app announcement configured), <strong>Support</strong> (help docs updated, support team briefed, known issues documented), <strong>Sales</strong> (pitch deck updated, demo environment ready, FAQ prepared), and <strong>Legal</strong> (privacy review complete, terms updated if needed). Assign owners per section. The checklist doesn't slow launches — it prevents the fire drills that come from launching without coordination.</p>
+</div>
+
+<div class="method-card">
+  <h4>Customer Insight Synthesis <span class="method-tag">Technique</span></h4>
+  <p class="method-when">Use when: customer feedback exists in 6 different tools and no PM reads all of it.</p>
+  <p>Product Ops aggregates feedback from all channels (support tickets, NPS surveys, sales call notes, user interviews, app reviews, social media) into a monthly insight report. The report isn't a dump of raw feedback — it's synthesized themes: "14 enterprise customers mentioned SSO as a blocker this month (up from 3 last month)" or "Users in the onboarding funnel mention 'confusing pricing page' in 22% of churn surveys." PMs get actionable signals, not noise.</p>
+</div>
+</section>
+
+<section id="postmortem-content" data-section="practical">
+  <h2>Postmortems and content collaboration</h2>
+
+  <div class="method-card">
+    <h4>UX Postmortem Methodology <span class="method-tag">Technique</span></h4>
+    <p class="method-when">Use when: a feature has shipped and you want to capture design and product learnings before the team moves on.</p>
+    <p>Run UX postmortems 2–4 weeks after launch, once usage data has accumulated. <strong>Timing matters:</strong> Too early and you only have opinions; too late and the team has forgotten the context. <strong>Structure:</strong> Review original goals and success metrics, present actual outcomes (usage data, support tickets, user feedback), walk through each major product and design decision asking "what was the rationale and what was the outcome?" <strong>Deliverable format:</strong> A brief document with 3–5 key learnings, each paired with a specific recommendation. <strong>System-level changes:</strong> The most valuable output isn't fixing what shipped — it's changing the process. If testing was skipped due to timeline, the fix is building testing into the timeline template, not saying "test next time."</p>
+  </div>
+
+  <div class="callout info">
+    <p class="callout-title">Cross-discipline collaboration with content teams</p>
+    <p>As content strategy matures as a discipline, Product Ops should build integration points: include content strategists in product rituals, add content review steps to spec templates, and track content-related feedback alongside product feedback. See <strong>CS.1.05 Editorial Operations &amp; Workflow</strong> for the content operations perspective.</p>
+  </div>
+</section>
+
+<section id="templates" data-section="practical">
+  <h2>Templates and standards</h2>
+
+<div class="template-box">
+  <div class="template-header">
+    <span class="template-label">Template</span>
+    <span class="template-title">Product Ops Charter</span>
+  </div>
+  <div class="template-grid">
+    <div class="template-field">
+      <div class="template-field-label">Mission</div>
+      <p>[One sentence: what Product Ops exists to do for the product team]</p>
+    </div>
+    <div class="template-field">
+      <div class="template-field-label">Scope: Tools &amp; data</div>
+      <p>[Which tools we own, what data infrastructure we maintain, what self-serve analytics we provide]</p>
+    </div>
+    <div class="template-field">
+      <div class="template-field-label">Scope: Processes</div>
+      <p>[Which cadences we design and facilitate, which templates we maintain, which workflows we automate]</p>
+    </div>
+    <div class="template-field">
+      <div class="template-field-label">Scope: Insights</div>
+      <p>[What customer feedback channels we aggregate, what reports we produce, what analysis we own]</p>
+    </div>
+    <div class="template-field">
+      <div class="template-field-label">Not in scope</div>
+      <p>[What we explicitly don't do — e.g., we don't make product decisions, we don't manage engineers]</p>
+    </div>
+    <div class="template-field">
+      <div class="template-field-label">Success metrics</div>
+      <p>[PM satisfaction score, time saved per PM per week, request-to-triage time, data question resolution time]</p>
+    </div>
+  </div>
+</div>
+
+<div class="callout info">
+  <p class="callout-title">Key concept</p>
+  <p>The best Product Ops work is invisible. PMs don't notice the dashboard that auto-updates, the template that's always current, or the process that quietly routes requests to the right person. They notice when these things break. Measure Product Ops success by what PMs <em>don't</em> have to think about, not by the volume of Ops output.</p>
+</div>
+</section>
+
+<section id="examples" data-section="examples">
+  <h2>Real-world examples</h2>
+
+<div class="case-study">
+  <p class="case-label">Case study</p>
+  <h4>Pendo: Building Product Ops as the product grew</h4>
+  <p>Pendo, the product analytics company, invested in Product Ops as they scaled from 5 PMs to 25. Their Ops team standardized planning templates so every PM used the same PRD format, built automated dashboards that pulled from Pendo's own product (eating their own dog food), and created a quarterly insight report that synthesized feedback from support, sales, and user research into a single document. The result: PMs spent 30% less time on administrative tasks and the time from customer feedback to PM awareness dropped from weeks to days.</p>
+  <p><strong>Why it works:</strong> They started with the highest-pain administrative tasks (status updates and feedback routing), proved value there, then expanded scope. They didn't try to boil the ocean on day one.</p>
+</div>
+
+<div class="case-study">
+  <p class="case-label">Case study</p>
+  <h4>Airbnb: Centralized experimentation infrastructure</h4>
+  <p>Airbnb built an internal experimentation platform (ERF — Experiment Reporting Framework) managed by a central team that functions as Product Ops for experiments. Any PM can launch an A/B test through a self-serve interface, with built-in guardrail metrics, statistical rigor checks, and automated reports. The Ops team maintains the platform, trains new PMs on experimentation methodology, and ensures consistent quality standards across hundreds of simultaneous experiments.</p>
+  <p><strong>Why it works:</strong> By centralizing experimentation infrastructure, Airbnb ensured every experiment met the same quality bar without requiring every PM to be a statistician. The Ops investment unlocked experimentation at scale.</p>
+</div>
+</section>
+
+<section id="pitfalls" data-section="practical">
+  <h2>Common pitfalls</h2>
+
+<div class="pitfall">
+  <div class="pitfall-icon">!</div>
+  <div>
+    <h4>Becoming the process police</h4>
+    <p>Product Ops that enforces compliance rather than enabling effectiveness quickly becomes resented. If PMs experience Ops as "more bureaucracy," you've failed. Every process should demonstrably save PMs time or improve their decision quality. If it doesn't, kill it.</p>
+  </div>
+</div>
+
+<div class="pitfall">
+  <div class="pitfall-icon">!</div>
+  <div>
+    <h4>Building for the ideal team, not the real one</h4>
+    <p>Designing a 12-step quarterly planning process for a team that's never done quarterly planning at all. Start with the minimal version that's better than what exists today. A simple Google Doc template beats a beautiful Notion database that nobody fills in.</p>
+  </div>
+</div>
+
+<div class="pitfall">
+  <div class="pitfall-icon">!</div>
+  <div>
+    <h4>No feedback loop on Ops effectiveness</h4>
+    <p>Product Ops should practice what product teams preach: measure, learn, iterate. Run a quarterly PM satisfaction survey. Track how much time PMs spend on administrative tasks. Measure request-to-triage time. If these metrics aren't improving, your Ops work isn't landing.</p>
+  </div>
+</div>
+</section>
+
+<section id="connections">
+  <h2>Connected topics in your library</h2>
+  <div class="cross-ref-grid">
+    <a href="agile-pm.html" class="cross-ref-card">
+      <span class="ref-number">PM Tier 1</span>
+      <div class="ref-title">Agile Product Management</div>
+      <div class="ref-reason">Product Ops designs and maintains the agile rituals PMs participate in.</div>
+    </a>
+    <a href="stakeholder-management.html" class="cross-ref-card">
+      <span class="ref-number">PM Tier 1</span>
+      <div class="ref-title">Stakeholder Management</div>
+      <div class="ref-reason">Ops builds the communication infrastructure that stakeholder management depends on.</div>
+    </a>
+    <a href="product-analytics-infrastructure.html" class="cross-ref-card">
+      <span class="ref-number">PM Tier 2</span>
+      <div class="ref-title">Product Analytics Infrastructure</div>
+      <div class="ref-reason">Analytics tooling configuration and self-serve dashboards are core Ops responsibilities.</div>
+    </a>
+    <a href="experimentation.html" class="cross-ref-card">
+      <span class="ref-number">PM Tier 2</span>
+      <div class="ref-title">Experimentation &amp; A/B Testing</div>
+      <div class="ref-reason">Experimentation platforms are often owned and maintained by Product Ops.</div>
+    </a>
+  </div>
+</section>
+
+<section id="deep-dive">
+  <h2>Deep-dive appendix</h2>
+  <details class="expandable">
+    <summary><span class="chevron"><svg viewBox="0 0 14 14"><polyline points="4,2 10,7 4,12"/></svg></span> When to hire your first Product Ops person</summary>
+    <div class="expand-content topic-content">
+      <h4>Signals that it's time</h4>
+      <p>Consider hiring dedicated Product Ops when: (1) You have 5+ PMs and they're each spending 20%+ of their time on administrative tasks. (2) Cross-team coordination is breaking — features ship without support knowing, or stakeholders complain about lack of visibility. (3) Your PM team uses 5+ tools with no consistent configuration or process. (4) Quarterly planning takes weeks of PM time instead of days. At fewer than 5 PMs, the PM lead or a senior PM can handle Ops responsibilities part-time. Beyond 15 PMs, you likely need a dedicated Ops team, not just one person.</p>
+    </div>
+  </details>
+  <details class="expandable">
+    <summary><span class="chevron"><svg viewBox="0 0 14 14"><polyline points="4,2 10,7 4,12"/></svg></span> Further reading and resources</summary>
+    <div class="expand-content topic-content">
+      <h4>Essential reading</h4>
+      <p><strong>"Product Operations" by Melissa Perri &amp; Denise Tilles</strong> — The definitive book on building a Product Ops function.</p>
+      <p><strong>"Team Topologies" by Skelton &amp; Pais</strong> — How to structure teams for fast flow, relevant to Ops organizational design.</p>
+      <h4>References</h4>
+      <p><strong>Product Ops community (Pendo, Productboard)</strong> — Vendor-sponsored but useful communities of practice for Product Ops professionals.</p>
+    </div>
+  </details>
+</section>
+
+<!-- SEARCH_INDEX
+{
+  topic: "Product Operations",
+  url: "topics/product-operations.html",
+  tier: "Tier 2",
+  discipline: "PM",
+  sections: [
+    { title: "What product operations is", id: "what-and-why", type: "theory", keywords: "product ops operations scale process" },
+    { title: "The product operating model", id: "operating-model", type: "theory", keywords: "operating model planning discovery execution communication" },
+    { title: "Tooling strategy", id: "tooling", type: "practical", keywords: "tool stack audit Jira Linear Productboard" },
+    { title: "Rituals and cadences", id: "rituals", type: "practical", keywords: "cadence ritual sprint quarterly planning" },
+    { title: "Templates and standards", id: "templates", type: "practical", keywords: "template charter standard process" },
+    { title: "Real-world examples", id: "examples", type: "examples", keywords: "Pendo Airbnb product ops case study" },
+    { title: "Common pitfalls", id: "pitfalls", type: "practical", keywords: "process police bureaucracy feedback" },
+    { title: "Postmortems and content collaboration", id: "postmortem-content", type: "practical", keywords: "UX postmortem retrospective learnings content teams cross-discipline" }
+  ],
+  methods: [
+    { name: "Tool Stack Audit", section: "tooling", keywords: "tool audit consolidation sprawl" },
+    { name: "Feature Request Pipeline", section: "tooling", keywords: "feature request intake triage routing" },
+    { name: "Analytics Tool Configuration", section: "tooling", keywords: "analytics self-serve dashboard configuration" },
+    { name: "Cadence Design", section: "rituals", keywords: "cadence meeting rhythm weekly quarterly" },
+    { name: "Launch Readiness Checklist", section: "rituals", keywords: "launch checklist readiness coordination" },
+    { name: "Customer Insight Synthesis", section: "rituals", keywords: "customer feedback synthesis insight report" },
+    { name: "UX Postmortem Methodology", section: "postmortem-content", keywords: "postmortem retrospective shipped design learnings system-level" }
+  ]
+}
+SEARCH_INDEX -->
+
+<!-- MANIFEST
+{
+  "id": "PM.2.07",
+  "title": "Product Operations",
+  "file": "topics/product-operations.html",
+  "tier": 2,
+  "discipline": "PM",
+  "solves": [
+    "My PMs spend too much time on admin and not enough on strategy",
+    "Feature requests come from everywhere and nothing gets triaged",
+    "Our product team's processes don't scale beyond 5 PMs",
+    "We need standardized templates and cadences across the product org"
+  ],
+  "methods": ["Tool Stack Audit", "Feature Request Pipeline", "Analytics Tool Configuration", "Cadence Design", "Launch Readiness Checklist", "Customer Insight Synthesis", "UX Postmortem Methodology"],
+  "phase": "delivery",
+  "prerequisites": ["PM.1.08"],
+  "pairs_with": ["PM.1.05", "PM.2.06", "PM.2.12"],
+  "depth": "methods",
+  "keywords": ["product ops", "operations", "process", "tooling", "ritual", "cadence", "template", "launch checklist", "feature request", "insight synthesis"]
+}
+MANIFEST -->

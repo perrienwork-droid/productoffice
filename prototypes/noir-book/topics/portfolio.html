@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Build a Standout Portfolio — Noir Book</title>
+  <link rel="stylesheet" href="../css/shared.css">
+  <link rel="stylesheet" href="../css/topic.css">
+  <script src="../js/theme.js"></script>
+  <script src="../js/topic-nav.js"></script>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="site-nav subpage-nav" data-discipline="ux">
+    <div class="nav-inner">
+      <a href="../index.html" class="site-logo">
+        <span class="logo-mark">UX</span>
+        <span class="nav-title">Noir Book</span>
+      </a>
+      <a href="../index.html" class="nav-back-link">&#8592; Library</a>
+      <div class="nav-filters">
+        <button class="disc-toggle ux-toggle active" data-disc="ux" onclick="toggleDisc('ux')" title="UX Design">
+          <span class="disc-dot disc-dot-ux"></span><span class="disc-label">UX Design</span><span class="disc-code">(UX)</span>
+        </button>
+        <button class="disc-toggle pm-toggle active" data-disc="pm" onclick="toggleDisc('pm')" title="Product Management">
+          <span class="disc-dot disc-dot-pm"></span><span class="disc-label">Product</span><span class="disc-code">(PM)</span>
+        </button>
+        <button class="disc-toggle mk-toggle active" data-disc="mk" onclick="toggleDisc('mk')" title="Marketing &amp; Growth">
+          <span class="disc-dot disc-dot-mk"></span><span class="disc-label">Marketing</span><span class="disc-code">(MK)</span>
+        </button>
+        <button class="disc-toggle cs-toggle active" data-disc="cs" onclick="toggleDisc('cs')" title="Content Strategy">
+          <span class="disc-dot disc-dot-cs"></span><span class="disc-label">Content</span><span class="disc-code">(CS)</span>
+        </button>
+        <div class="search-box nav-search-box">
+          <div class="nav-search-wrap">
+            <div class="nav-search-pills" id="navSearchPills"></div>
+            <input type="text" id="navSearchInput" placeholder="Search..." autocomplete="off"
+              oninput="topicNavSearch(this.value)"
+              onkeydown="handleNavSearchKey(event)"
+              onfocus="handleNavSearchFocus()"
+              onblur="handleNavSearchBlur()">
+            <button type="button" class="nav-search-clear" id="navSearchClear" onclick="clearNavSearch()" aria-label="Clear search">&times;</button>
+          </div>
+          <div class="search-dropdown" id="navSearchDropdown"></div>
+        </div>
+      </div>
+      <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle theme">&#9790;</button>
+      <button class="burger-btn" id="burgerBtn" onclick="openBurger()" aria-label="Menu">
+        <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="2" y1="4" x2="16" y2="4"/><line x1="2" y1="9" x2="16" y2="9"/><line x1="2" y1="14" x2="16" y2="14"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Burger Menu Overlay -->
+  <div class="burger-overlay" id="burgerOverlay" onclick="closeBurger(event)">
+    <div class="burger-panel" onclick="event.stopPropagation()">
+      <div class="burger-panel-header">
+        <h3>Menu</h3>
+        <button class="burger-close" onclick="closeBurger()" aria-label="Close">&times;</button>
+      </div>
+      <div class="burger-search">
+        <input type="text" id="burgerSearchInput" placeholder="Search topics, methods..." autocomplete="off" oninput="burgerSearch(this.value)">
+        <div class="burger-search-results" id="burgerSearchResults"></div>
+      </div>
+      <div class="burger-links">
+        <a href="../index.html">&#8592; Back to Library</a>
+        <a href="../design-system.html">Design System</a>
+        <a href="../request-topic.html">Suggest a topic or improvement</a>
+      </div>
+      <div class="burger-toc-section">
+        <p class="burger-toc-title">On this page</p>
+        <ul class="burger-toc-list">
+        <li><a href="#what-and-why" data-section="theory">What hiring managers look for</a></li>
+        <li><a href="#structure" data-section="practical">Portfolio structure</a></li>
+        <li><a href="#case-study" data-section="practical">Writing a case study</a></li>
+        <li><a href="#process" data-section="practical">Showing process, not just outcomes</a></li>
+        <li><a href="#different-roles" data-section="practical">Portfolios for different roles</a></li>
+        <li><a href="#nda" data-section="practical">Presenting NDA-restricted work</a></li>
+        <li><a href="#templates" data-section="practical">Templates and checklists</a></li>
+        <li><a href="#real-world-examples" data-section="examples">Real-world examples</a></li>
+        <li><a href="#pitfalls" data-section="practical">Common pitfalls</a></li>
+        <li><a href="#connections">Connected topics in your library</a></li>
+        <li><a href="#deep-dive">Deep-dive appendix</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Topic Header -->
+  <header class="topic-header container">
+    <div class="breadcrumb">
+      <a href="../index.html">Library</a>
+      <span class="sep">&#8250;</span>
+      <span class="breadcrumb-disc breadcrumb-ux">UX Design</span>
+      <span class="sep">&#8250;</span>
+      <span>Tier 4 — Reference</span>
+      <span class="sep">&#8250;</span>
+      <span>Build a Standout Portfolio</span>
+    </div>
+    <div class="topic-meta">
+      <span class="tier-badge tier4">Tier 4</span>
+      <span style="font-size:14px;color:var(--ink-muted)">Topic UX.4.05</span>
+    </div>
+    <h1>Build a Standout Portfolio</h1>
+    <p class="topic-subtitle">Crafting case studies, structuring your portfolio, and presenting your design process to land the job you want.</p>
+    <div class="content-splits">
+      <span class="split-badge theory">15% Theory</span>
+      <span class="split-badge practical">60% Methods &amp; Templates</span>
+      <span class="split-badge examples">25% Examples</span>
+    </div>
+  </header>
+
+  <!-- Reading Progress Bar -->
+  <div class="reading-progress" id="readingProgress"></div>
+
+  <!-- Main Layout -->
+  <div class="container">
+    <div class="topic-layout">
+
+      <!-- Sidebar: Table of Contents -->
+      <aside class="topic-sidebar">
+        <nav class="toc">
+          <p class="sidebar-topic-title">Build a Standout Portfolio</p>
+          <p class="toc-title">On this page</p>
+          <ul class="toc-list">
+            <li><a href="#what-and-why" data-section="theory">What hiring managers look for</a></li>
+            <li><a href="#structure" data-section="practical">Portfolio structure</a></li>
+            <li><a href="#case-study" data-section="practical">Writing a case study</a></li>
+            <li><a href="#process" data-section="practical">Showing process, not just outcomes</a></li>
+            <li><a href="#different-roles" data-section="practical">Portfolios for different roles</a></li>
+            <li><a href="#nda" data-section="practical">Presenting NDA-restricted work</a></li>
+            <li><a href="#templates" data-section="practical">Templates and checklists</a></li>
+            <li><a href="#real-world-examples" data-section="examples">Real-world examples</a></li>
+            <li><a href="#pitfalls" data-section="practical">Common pitfalls</a></li>
+            <li><a href="#connections">Connected topics in your library</a></li>
+            <li><a href="#deep-dive">Deep-dive appendix</a></li>
+          </ul>
+        </nav>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="topic-main topic-content">
+
+        <div class="section-marker" id="what-and-why">
+          <span class="split-badge theory">Theory</span>
+          <span class="marker-line"></span>
+        </div>
+
+        <section data-section="theory">
+  <h2>What hiring managers look for</h2>
+
+  <p>A UX portfolio is not a gallery of pretty screens. Hiring managers evaluate: <strong>Problem framing:</strong> Can you articulate the problem clearly before jumping to solutions? <strong>Process:</strong> Did you follow a systematic approach, or did you skip straight to mockups? <strong>Decision-making:</strong> Can you explain why you chose one direction over others? <strong>Impact:</strong> Did your design actually improve something measurable? <strong>Collaboration:</strong> How did you work with engineers, PMs, researchers, and stakeholders? <strong>Communication:</strong> Can you tell a clear, engaging story about your work? A portfolio with four well-told case studies beats one with twelve screenshot galleries.</p>
+
+  <p>The portfolio is also a design artifact — it demonstrates your skills by being well-designed itself. If your portfolio has poor information architecture, inconsistent typography, broken responsive behavior, or confusing navigation, you're demonstrating exactly the kind of work the hiring manager should expect from you. The portfolio is simultaneously the content and the proof.</p>
+</section>
+
+        <div class="section-marker" id="structure">
+          <span class="split-badge practical">Practical</span>
+          <span class="marker-line"></span>
+        </div>
+
+        <section data-section="practical">
+  <h2>Portfolio structure</h2>
+
+  <div class="method-card">
+    <h4>Portfolio Architecture <span class="method-tag">Core Method</span></h4>
+    <p class="method-when">Use when: structuring your portfolio site or document.</p>
+    <p>A portfolio needs three elements: <strong>Landing page:</strong> Your name, title ("Product Designer" or "UX Designer" — be specific), a one-line positioning statement ("I design enterprise B2B tools" or "I make complex financial products simple"), and 3–5 case study previews with thumbnails. The landing page should communicate who you are and what kind of work you do within 5 seconds. <strong>Case studies:</strong> The core of your portfolio. 3–5 detailed case studies that show range (different project types, different stages of the design process, different outcomes). <strong>About page:</strong> Brief bio, your design philosophy (2 sentences), skills/tools, and contact information. Don't over-design this page — it's reference material, not the main event.</p>
+  </div>
+</section>
+
+<section id="case-study" data-section="practical">
+  <h2>Writing a case study</h2>
+
+  <div class="method-card">
+    <h4>Case Study Framework (STAR) <span class="method-tag">Core Method</span></h4>
+    <p class="method-when">Use when: writing any portfolio case study.</p>
+    <p>Follow the STAR structure: <strong>Situation:</strong> What was the context? The company, the product, the team, the timeline, your role. Set the stage so the reader understands the constraints. <strong>Task:</strong> What was the specific design challenge? What were the goals? What metrics needed to move? Make the problem feel real and urgent. <strong>Action:</strong> What did you do? Walk through your process — research, ideation, design decisions, testing, iteration. This is the bulk of the case study. Show your thinking, not just your output. <strong>Result:</strong> What happened? Quantitative results (conversion increased 23%), qualitative results (users rated the new flow 4.5/5), and organizational impact (the project was expanded to three more product lines). If you can't share specific numbers, describe the direction and magnitude.</p>
+  </div>
+
+  <div class="method-card">
+    <h4>Impact Statement Writing <span class="method-tag">Technique</span></h4>
+    <p class="method-when">Use when: summarizing the result of a design project.</p>
+    <p>Impact statements should be specific and attributable: <strong>Weak:</strong> "The redesign improved the user experience." <strong>Better:</strong> "The redesigned checkout flow reduced cart abandonment by 18%." <strong>Best:</strong> "The redesigned checkout flow reduced cart abandonment by 18%, contributing to an estimated $1.2M additional annual revenue." If exact numbers are NDA-protected, use ranges or relative improvements: "Task completion time improved by more than 40%." If the project was never launched, frame the impact as validated potential: "Usability testing showed 90% task success rate, up from 55% with the existing design."</p>
+  </div>
+
+  <div class="callout tip">
+    <p class="callout-title">Show the messy middle</p>
+    <p>The most compelling case studies show the process — including the parts that didn't work. Sketches that were rejected, usability test findings that forced a pivot, stakeholder feedback that changed the direction. This demonstrates something more valuable than perfect outcomes: the ability to iterate, handle ambiguity, and improve through feedback. A case study where everything went perfectly is either dishonest or boring.</p>
+  </div>
+</section>
+
+<section id="process" data-section="practical">
+  <h2>Showing process, not just outcomes</h2>
+
+  <div class="method-card">
+    <h4>Process Documentation <span class="method-tag">Technique</span></h4>
+    <p class="method-when">Use when: deciding what process artifacts to include in case studies.</p>
+    <p>Include artifacts that demonstrate thinking: <strong>Research artifacts:</strong> Interview quotes, affinity diagrams, persona snapshots, journey maps. Show that your designs are grounded in real user needs. <strong>Ideation artifacts:</strong> Sketches, whiteboard photos, Crazy Eights output, design studio results. Show that you explored alternatives. <strong>Decision artifacts:</strong> Comparison matrices, trade-off analyses, stakeholder feedback notes. Show that you made informed choices. <strong>Testing artifacts:</strong> Usability test highlights, before/after comparisons, iteration history. Show that you validated and improved. Don't include every artifact from every project — curate. Show the 3–4 artifacts that most clearly demonstrate your thinking process.</p>
+  </div>
+</section>
+
+<section id="different-roles" data-section="practical">
+  <h2>Portfolios for different roles</h2>
+
+  <div class="method-card">
+    <h4>Role-Specific Portfolio Focus <span class="method-tag">Framework</span></h4>
+    <p class="method-when">Use when: tailoring your portfolio to a specific role type.</p>
+    <p><strong>Product designer:</strong> End-to-end case studies showing research → design → validation. Emphasize strategic thinking, cross-functional collaboration, and measurable outcomes. <strong>UX designer:</strong> Focus on interaction design, information architecture, and user flows. Show detailed wireframes, flow diagrams, and usability testing iterations. <strong>Visual/UI designer:</strong> Show craft. Design systems, typography decisions, color theory application, micro-interactions, responsive implementations. High-fidelity work should be stunning. <strong>UX researcher:</strong> Focus on methodology, analysis, and impact. Show research plans, synthesis frameworks, and how findings changed product direction. Less visual design, more analytical rigor. <strong>Generalist (startups):</strong> Show range. Include projects where you did research, design, prototyping, and testing yourself — demonstrating you can handle the full spectrum.</p>
+  </div>
+</section>
+
+<section id="nda" data-section="practical">
+  <h2>Presenting NDA-restricted work</h2>
+
+  <div class="method-card">
+    <h4>NDA Work Presentation <span class="method-tag">Technique</span></h4>
+    <p class="method-when">Use when: your best work is under NDA or confidential.</p>
+    <p>Strategies for showing restricted work: <strong>Abstract the visuals:</strong> Replace real UI with wireframes, change colors and branding, use placeholder content. The process and thinking remain; the specifics are obscured. <strong>Focus on process:</strong> Describe the approach, methods, and thinking without showing the final product. Journey maps, personas, and process photos often aren't NDA-restricted. <strong>Ask for permission:</strong> Many companies allow portfolio use if you ask — especially for work that has shipped publicly. Get written approval. <strong>Create a password-protected section:</strong> Some case studies are available only to interviewers who request access. <strong>Use personal or side projects:</strong> Supplement NDA-restricted work with personal projects, design challenges, or redesign concepts that demonstrate your skills without confidentiality issues.</p>
+  </div>
+</section>
+
+<section id="templates" data-section="practical">
+  <h2>Templates and checklists</h2>
+
+  <div class="template-box">
+    <div class="template-header">
+      <span class="template-label">Checklist</span>
+      <span class="template-title">Portfolio Audit</span>
+    </div>
+    <ul class="checklist">
+      <li>The landing page communicates who you are and what you do in 5 seconds</li>
+      <li>You have 3–5 case studies that show range (different types of projects)</li>
+      <li>Each case study follows a clear narrative structure (problem → process → outcome)</li>
+      <li>Quantitative or qualitative impact is stated for each project</li>
+      <li>Process artifacts are included (not just final screens)</li>
+      <li>Your role is clearly stated in each project</li>
+      <li>The portfolio itself demonstrates good design (IA, typography, responsiveness)</li>
+      <li>It loads quickly and works on mobile</li>
+      <li>Contact information is easy to find</li>
+      <li>No case study is longer than 5 minutes to read</li>
+    </ul>
+  </div>
+</section>
+
+        <div class="section-marker" id="real-world-examples">
+          <span class="split-badge examples">Examples</span>
+          <span class="marker-line"></span>
+        </div>
+
+        <section data-section="examples">
+  <h2>Real-world examples</h2>
+
+  <div class="case-study">
+    <p class="case-label">Case study</p>
+    <h4>The before/after case study structure</h4>
+    <p>One of the most effective case study patterns: show the existing experience (with its problems clearly annotated), walk through the design process that identified and prioritized solutions, then show the redesigned experience side-by-side with the original. The visual contrast makes the improvement tangible and the impact self-evident. This structure works especially well for redesign projects where the improvement is visible: cleaner information hierarchy, simplified workflows, reduced steps in a flow.</p>
+    <p><strong>Why it works:</strong> Before/after creates an immediate visual argument that's more persuasive than written descriptions of improvement. The hiring manager can see the quality delta with their own eyes.</p>
+  </div>
+
+  <div class="case-study">
+    <p class="case-label">Case study</p>
+    <h4>The unsolicited redesign: risks and rewards</h4>
+    <p>Redesigning an existing product (without being hired to) is common in junior portfolios. Done well, it demonstrates initiative and analytical thinking: identify real problems through heuristic evaluation, propose solutions grounded in principles, and acknowledge constraints you might not know about. Done poorly, it looks naive: "I redesigned Spotify's navigation" without understanding why it's designed the way it is. The key: show that you understand the current design's rationale before proposing changes. "Here's what the current design does well, here's where user data suggests friction, and here's my proposal" is respectful. "I fixed Spotify" is arrogant.</p>
+    <p><strong>The rule:</strong> Unsolicited redesigns are best when they identify real problems, acknowledge constraints, and propose thoughtful alternatives — not when they just reskin an existing product.</p>
+  </div>
+</section>
+
+<section id="pitfalls" data-section="practical">
+  <h2>Common pitfalls</h2>
+
+  <div class="pitfall">
+    <div class="pitfall-icon">!</div>
+    <div>
+      <h4>Screenshot galleries without narrative</h4>
+      <p>A page of 20 beautiful screens tells a hiring manager nothing about your thinking process, decision-making, or collaboration skills. They can see you can push pixels — but can you solve problems? Wrap every visual in the story of why it exists and what it achieved.</p>
+    </div>
+  </div>
+
+  <div class="pitfall">
+    <div class="pitfall-icon">!</div>
+    <div>
+      <h4>Too many projects, too little depth</h4>
+      <p>Eight shallow case studies are worse than three deep ones. Depth demonstrates the kind of thinking hiring managers want to see. If you have many projects, feature 3–4 as full case studies and list the rest as a brief project gallery with one-line descriptions.</p>
+    </div>
+  </div>
+</section>
+
+<section id="connections">
+  <h2>Connected topics in your library</h2>
+  <div class="cross-ref-grid">
+    <a href="presentation-communication.html" class="cross-ref-card">
+      <span class="ref-number">Tier 4</span>
+      <div class="ref-title">Presentation &amp; Communication</div>
+      <div class="ref-reason">A portfolio is a presentation. The same storytelling, audience mapping, and narrative structure principles apply to case studies and portfolio walkthroughs.</div>
+    </a>
+    <a href="visual-design.html" class="cross-ref-card">
+      <span class="ref-number">Tier 1</span>
+      <div class="ref-title">Visual Design</div>
+      <div class="ref-reason">Your portfolio's visual design demonstrates your craft. Typography, layout, spacing, and visual hierarchy in the portfolio itself are part of the evaluation.</div>
+    </a>
+    <a href="user-research.html" class="cross-ref-card">
+      <span class="ref-number">Tier 1</span>
+      <div class="ref-title">User Research</div>
+      <div class="ref-reason">Case studies that show research-informed design decisions are stronger than those that don't. Research artifacts are some of the most compelling process documentation.</div>
+    </a>
+    <a href="design-thinking.html" class="cross-ref-card">
+      <span class="ref-number">Tier 1</span>
+      <div class="ref-title">Design Thinking</div>
+      <div class="ref-reason">The design thinking process (empathize → define → ideate → prototype → test) provides the narrative structure for most case studies.</div>
+    </a>
+  </div>
+</section>
+
+<div class="deep-dive-section" id="deep-dive">
+          <div class="deep-dive-header">
+            <span class="deep-dive-badge">Deep Dive</span>
+            <h2 style="margin:0; border:none; padding:0;">Appendix</h2>
+          </div>
+
+  <details class="expandable">
+    <summary><span class="chevron"><svg viewBox="0 0 14 14"><polyline points="4,2 10,7 4,12"/></svg></span> Further reading and resources</summary>
+    <div class="expand-content topic-content">
+      <h4>Essential reading</h4>
+      <p><strong>"Refactoring UI" by Adam Wathan and Steve Schoger</strong> — Practical visual design techniques that make portfolio projects look professional. Focused on the craft of making things look good.</p>
+      <p><strong>Bestfolios and Cofolios</strong> — Curated galleries of design portfolios for inspiration. Study what works and what doesn't across dozens of real portfolios.</p>
+      <p><strong>"Don't Make Me Think" by Steve Krug</strong> — If your portfolio violates the usability principles in this book, you're undermining your own case. Apply it to your portfolio's IA and navigation.</p>
+    </div>
+  </details>
+</div>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer container">
+    <div class="footer-inner">
+      <p>Noir Book — Built for the work, not the shelf.</p>
+      <div class="footer-links">
+        <a href="../design-system.html">Design System</a>
+        <a href="../library-manifest.json">Manifest</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to Top -->
+  <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">&#8593;</button>
+
+  <!-- Floating Mobile TOC -->
+  <button class="mobile-toc-btn" id="mobileTocBtn" aria-label="Open table of contents">&#9776; Contents</button>
+  <div class="mobile-toc-overlay" id="mobileTocOverlay">
+    <div class="mobile-toc-panel">
+      <div class="mobile-toc-panel-header">
+        <h3>On this page</h3>
+        <button class="mobile-toc-close" id="mobileTocClose" aria-label="Close">&times;</button>
+      </div>
+      <ul class="mobile-toc-list">
+        <li><a href="#what-and-why" data-section="theory">What hiring managers look for</a></li>
+        <li><a href="#structure" data-section="practical">Portfolio structure</a></li>
+        <li><a href="#case-study" data-section="practical">Writing a case study</a></li>
+        <li><a href="#process" data-section="practical">Showing process, not just outcomes</a></li>
+        <li><a href="#different-roles" data-section="practical">Portfolios for different roles</a></li>
+        <li><a href="#nda" data-section="practical">Presenting NDA-restricted work</a></li>
+        <li><a href="#templates" data-section="practical">Templates and checklists</a></li>
+        <li><a href="#real-world-examples" data-section="examples">Real-world examples</a></li>
+        <li><a href="#pitfalls" data-section="practical">Common pitfalls</a></li>
+        <li><a href="#connections">Connected topics in your library</a></li>
+        <li><a href="#deep-dive">Deep-dive appendix</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    // Scrollspy: highlight active TOC item
+    const tocLinks = document.querySelectorAll('.toc-list a');
+    const sections = [];
+    tocLinks.forEach(link => {
+      const href = link.getAttribute('href');
+      if (!href || !href.startsWith('#')) return;
+      const el = document.getElementById(href.slice(1));
+      if (el) sections.push({ el, link });
+    });
+
+    // Reading progress bar
+    const progressBar = document.getElementById('readingProgress');
+    const backToTop = document.getElementById('backToTop');
+
+    function onScroll() {
+      let current = sections[0];
+      for (const s of sections) {
+        if (s.el.getBoundingClientRect().top <= 120) current = s;
+      }
+      tocLinks.forEach(l => l.classList.remove('active'));
+      if (current) current.link.classList.add('active');
+
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrolled = window.scrollY;
+      const progress = docHeight > 0 ? (scrolled / docHeight) * 100 : 0;
+      if (progressBar) progressBar.style.width = progress + '%';
+      if (backToTop) backToTop.classList.toggle('visible', scrolled > 400);
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    // Split badges: click to scroll to section
+    document.querySelectorAll('.content-splits .split-badge').forEach(function(badge) {
+      badge.addEventListener('click', function() {
+        var type = badge.classList.contains('theory') ? 'theory' : badge.classList.contains('practical') ? 'practical' : 'examples';
+        var target = document.querySelector('section[data-section="' + type + '"]');
+        if (target) {
+          var marker = target.previousElementSibling;
+          (marker && marker.classList.contains('section-marker') ? marker : target).scrollIntoView({behavior:'smooth'});
+        }
+      });
+    });
+  </script>
+
+  <script src="../js/checklist.js"></script>
+  <script src="../js/mobile-toc.js"></script>
+  <script src="../js/search.js"></script>
+  <script>
+    function openBurger(){document.getElementById('burgerOverlay').classList.add('open');document.body.style.overflow='hidden'}
+    function closeBurger(e){if(e&&e.target&&e.target!==document.getElementById('burgerOverlay'))return;document.getElementById('burgerOverlay').classList.remove('open');document.body.style.overflow=''}
+    function burgerSearch(q){
+      var r=document.getElementById('burgerSearchResults');
+      if(!q||q.length<2){r.innerHTML='';return}
+      var ql=q.toLowerCase(),matches=[];
+      if(typeof SEARCH_INDEX!=='undefined'){
+        SEARCH_INDEX.forEach(function(t){
+          var hit=t.topic.toLowerCase().indexOf(ql)>-1;
+          if(!hit)t.sections.forEach(function(s){if((s.title+' '+s.keywords).toLowerCase().indexOf(ql)>-1)hit=true});
+          if(hit)matches.push(t);
+        });
+      }
+      if(!matches.length){r.innerHTML='<p style="padding:8px 0;font-size:13px;color:var(--ink-muted)">No results</p>';return}
+      r.innerHTML=matches.slice(0,8).map(function(m){return '<a href="../'+m.url+'">'+m.topic+'<span class="bsr-disc">'+m.discipline+'</span></a>'}).join('');
+    }
+    document.addEventListener('keydown',function(e){if(e.key==='Escape'){closeBurger();var dd=document.getElementById('searchDropdown');if(dd)dd.classList.remove('visible');}});
+    // Close burger when clicking a TOC link
+    document.querySelectorAll('.burger-toc-list a').forEach(function(a){a.addEventListener('click',function(){closeBurger()})});
+    // Search typeahead
+    function topicSearch(q){
+      var dd=document.getElementById('searchDropdown');
+      if(!q||q.length<2||typeof SEARCH_INDEX==='undefined'){if(dd)dd.classList.remove('visible');return}
+      var ql=q.toLowerCase(),grouped={};
+      SEARCH_INDEX.forEach(function(t){
+        var hit=t.topic.toLowerCase().indexOf(ql)>-1,sHits=[],mHits=[];
+        t.sections.forEach(function(s){if((s.title+' '+s.keywords).toLowerCase().indexOf(ql)>-1)sHits.push(s)});
+        (t.methods||[]).forEach(function(m){if((m.name+' '+(m.keywords||'')).toLowerCase().indexOf(ql)>-1)mHits.push(m)});
+        if(!hit&&!sHits.length&&!mHits.length&&ql.length>=3&&typeof levenshtein==='function'){
+          var words=t.topic.toLowerCase().split(/ +/);
+          for(var i=0;i<words.length;i++){if(levenshtein(ql,words[i].substring(0,ql.length+1))<=1){hit=true;break}}
+        }
+        if(hit||sHits.length||mHits.length)grouped[t.topic]={url:'../'+t.url,disc:t.discipline||'',sections:sHits,methods:mHits,topicHit:hit};
+      });
+      var keys=Object.keys(grouped);
+      if(!keys.length){dd.innerHTML='<div class="search-empty">No results</div>';dd.classList.add('visible');return}
+      var html='';
+      keys.slice(0,8).forEach(function(topic){
+        var g=grouped[topic];
+        html+='<div class="search-group"><div class="search-group-title">'+topic+'</div>';
+        if(g.topicHit)html+='<a class="search-result" href="'+g.url+'"><span class="search-result-title">'+topic+'</span><span class="search-result-type practical">'+g.disc+'</span></a>';
+        g.sections.forEach(function(s){html+='<a class="search-result" href="'+g.url+'#'+s.id+'"><span class="search-result-title">'+s.title+'</span><span class="search-result-type '+s.type+'">'+s.type+'</span></a>'});
+        g.methods.slice(0,3).forEach(function(m){html+='<a class="search-result" href="'+g.url+'#'+m.section+'"><span class="search-result-title">'+m.name+'</span><span class="search-result-type practical">method</span></a>'});
+        html+='</div>';
+      });
+      dd.innerHTML=html;dd.classList.add('visible');
+    }
+    document.addEventListener('click',function(e){if(!e.target.closest('.search-box')){var dd=document.getElementById('searchDropdown');if(dd)dd.classList.remove('visible')}});
+  </script>
+
+</body>
+</html>

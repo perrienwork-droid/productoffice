@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Design Philosophy: Don Norman's Vision — Noir Book</title>
+  <link rel="stylesheet" href="../css/shared.css">
+  <link rel="stylesheet" href="../css/topic.css">
+  <script src="../js/theme.js"></script>
+  <script src="../js/topic-nav.js"></script>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="site-nav subpage-nav" data-discipline="ux">
+    <div class="nav-inner">
+      <a href="../index.html" class="site-logo">
+        <span class="logo-mark">UX</span>
+        <span class="nav-title">Noir Book</span>
+      </a>
+      <a href="../index.html" class="nav-back-link">&#8592; Library</a>
+      <div class="nav-filters">
+        <button class="disc-toggle ux-toggle active" data-disc="ux" onclick="toggleDisc('ux')" title="UX Design">
+          <span class="disc-dot disc-dot-ux"></span><span class="disc-label">UX Design</span><span class="disc-code">(UX)</span>
+        </button>
+        <button class="disc-toggle pm-toggle active" data-disc="pm" onclick="toggleDisc('pm')" title="Product Management">
+          <span class="disc-dot disc-dot-pm"></span><span class="disc-label">Product</span><span class="disc-code">(PM)</span>
+        </button>
+        <button class="disc-toggle mk-toggle active" data-disc="mk" onclick="toggleDisc('mk')" title="Marketing &amp; Growth">
+          <span class="disc-dot disc-dot-mk"></span><span class="disc-label">Marketing</span><span class="disc-code">(MK)</span>
+        </button>
+        <button class="disc-toggle cs-toggle active" data-disc="cs" onclick="toggleDisc('cs')" title="Content Strategy">
+          <span class="disc-dot disc-dot-cs"></span><span class="disc-label">Content</span><span class="disc-code">(CS)</span>
+        </button>
+        <div class="search-box nav-search-box">
+          <div class="nav-search-wrap">
+            <div class="nav-search-pills" id="navSearchPills"></div>
+            <input type="text" id="navSearchInput" placeholder="Search..." autocomplete="off"
+              oninput="topicNavSearch(this.value)"
+              onkeydown="handleNavSearchKey(event)"
+              onfocus="handleNavSearchFocus()"
+              onblur="handleNavSearchBlur()">
+            <button type="button" class="nav-search-clear" id="navSearchClear" onclick="clearNavSearch()" aria-label="Clear search">&times;</button>
+          </div>
+          <div class="search-dropdown" id="navSearchDropdown"></div>
+        </div>
+      </div>
+      <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle theme">&#9790;</button>
+      <button class="burger-btn" id="burgerBtn" onclick="openBurger()" aria-label="Menu">
+        <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="2" y1="4" x2="16" y2="4"/><line x1="2" y1="9" x2="16" y2="9"/><line x1="2" y1="14" x2="16" y2="14"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Burger Menu Overlay -->
+  <div class="burger-overlay" id="burgerOverlay" onclick="closeBurger(event)">
+    <div class="burger-panel" onclick="event.stopPropagation()">
+      <div class="burger-panel-header">
+        <h3>Menu</h3>
+        <button class="burger-close" onclick="closeBurger()" aria-label="Close">&times;</button>
+      </div>
+      <div class="burger-search">
+        <input type="text" id="burgerSearchInput" placeholder="Search topics, methods..." autocomplete="off" oninput="burgerSearch(this.value)">
+        <div class="burger-search-results" id="burgerSearchResults"></div>
+      </div>
+      <div class="burger-links">
+        <a href="../index.html">&#8592; Back to Library</a>
+        <a href="../design-system.html">Design System</a>
+        <a href="../request-topic.html">Suggest a topic or improvement</a>
+      </div>
+      <div class="burger-toc-section">
+        <p class="burger-toc-title">On this page</p>
+        <ul class="burger-toc-list">
+        <li><a href="#what-and-why" data-section="theory">Who Don Norman is and why his thinking matters</a></li>
+        <li><a href="#everyday-things" data-section="theory">The Design of Everyday Things: core concepts</a></li>
+        <li><a href="#human-error" data-section="theory">Human error and design responsibility</a></li>
+        <li><a href="#emotional-design" data-section="theory">Emotional Design: visceral, behavioral, reflective</a></li>
+        <li><a href="#systems-design" data-section="practical">Designing for the real world: complexity and systems</a></li>
+        <li><a href="#applying-norman" data-section="practical">Applying Norman's principles today</a></li>
+        <li><a href="#real-world-examples" data-section="examples">Real-world examples</a></li>
+        <li><a href="#connections">Connected topics in your library</a></li>
+        <li><a href="#deep-dive">Deep-dive appendix</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Topic Header -->
+  <header class="topic-header container">
+    <div class="breadcrumb">
+      <a href="../index.html">Library</a>
+      <span class="sep">&#8250;</span>
+      <span class="breadcrumb-disc breadcrumb-ux">UX Design</span>
+      <span class="sep">&#8250;</span>
+      <span>Tier 4 — Reference</span>
+      <span class="sep">&#8250;</span>
+      <span>Design Philosophy</span>
+    </div>
+    <div class="topic-meta">
+      <span class="tier-badge tier4">Tier 4</span>
+      <span style="font-size:14px;color:var(--ink-muted)">Topic UX.4.01</span>
+    </div>
+    <h1>Design Philosophy: Don Norman's Vision</h1>
+    <p class="topic-subtitle">Inspiration and ethics. Norman's thinking on human-centered design, sustainable design, and designing for the complexities of the real world.</p>
+    <div class="content-splits">
+      <span class="split-badge theory">50% Theory</span>
+      <span class="split-badge practical">30% Methods &amp; Templates</span>
+      <span class="split-badge examples">20% Examples</span>
+    </div>
+  </header>
+
+  <!-- Reading Progress Bar -->
+  <div class="reading-progress" id="readingProgress"></div>
+
+  <!-- Main Layout -->
+  <div class="container">
+    <div class="topic-layout">
+
+      <!-- Sidebar: Table of Contents -->
+      <aside class="topic-sidebar">
+        <nav class="toc">
+          <p class="sidebar-topic-title">Design Philosophy: Don Norman's Vision</p>
+          <p class="toc-title">On this page</p>
+          <ul class="toc-list">
+            <li><a href="#what-and-why" data-section="theory">Who Don Norman is and why his thinking matters</a></li>
+            <li><a href="#everyday-things" data-section="theory">The Design of Everyday Things: core concepts</a></li>
+            <li><a href="#human-error" data-section="theory">Human error and design responsibility</a></li>
+            <li><a href="#emotional-design" data-section="theory">Emotional Design: visceral, behavioral, reflective</a></li>
+            <li><a href="#systems-design" data-section="practical">Designing for the real world: complexity and systems</a></li>
+            <li><a href="#applying-norman" data-section="practical">Applying Norman's principles today</a></li>
+            <li><a href="#real-world-examples" data-section="examples">Real-world examples</a></li>
+            <li><a href="#connections">Connected topics in your library</a></li>
+            <li><a href="#deep-dive">Deep-dive appendix</a></li>
+          </ul>
+        </nav>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="topic-main topic-content">
+
+        <div class="section-marker" id="what-and-why">
+          <span class="split-badge theory">Theory</span>
+          <span class="marker-line"></span>
+        </div>
+
+        <section data-section="theory">
+  <h2>Who Don Norman is and why his thinking matters</h2>
+
+  <p>Don Norman is the person who coined the term "User Experience" while at Apple in the 1990s, but his influence on design thinking stretches far beyond that label. As a cognitive scientist turned design advocate, Norman brought rigorous psychological research into the world of product design — arguing that when people struggle with everyday objects, the fault lies with the design, not the user. His books, particularly "The Design of Everyday Things" (1988, revised 2013), established the intellectual framework that UX design is built on.</p>
+
+  <p>What makes Norman's thinking distinctive is its evolution. Early Norman focused on usability and cognitive psychology — making things easy to use. Later Norman expanded to emotional design — making things pleasurable and meaningful. Current Norman thinks about systems — designing for sustainability, equity, and the complex interconnections of the real world. Tracking this evolution reveals how the discipline itself has matured, from "does the door handle work?" to "does this system serve humanity?"</p>
+
+  <div class="callout info">
+    <p class="callout-title">Why a philosophy topic?</p>
+    <p>Most topics in this library teach methods you apply directly to projects. This topic is different — it's about the intellectual foundation beneath those methods. Understanding Norman's thinking doesn't make you faster at wireframing, but it makes you better at asking "should we build this?" and "who does this serve?" — questions that determine whether your technical skill creates value or harm.</p>
+  </div>
+</section>
+
+<section id="everyday-things" data-section="theory">
+  <h2>The Design of Everyday Things: core concepts</h2>
+
+  <div class="method-card">
+    <h4>Norman's Core Design Principles <span class="method-tag">Framework</span></h4>
+    <p class="method-when">Use when: evaluating any design for fundamental usability and intuitiveness.</p>
+    <p>Norman identified six fundamental principles that determine whether a design is intuitive: <strong>Affordances:</strong> The properties of an object that suggest how it can be used — a flat plate on a door affords pushing, a handle affords pulling. <strong>Signifiers:</strong> The perceivable indicators that communicate where the action should take place — the "Push" label on a door, the underline on a link. <strong>Constraints:</strong> Limitations that guide behavior — a USB plug that only fits one way, a form field that only accepts numbers. <strong>Mappings:</strong> The relationship between controls and their effects — a stove with burner knobs arranged to mirror the burner layout. <strong>Feedback:</strong> Information about what has happened — the click of a light switch, the progress bar of a download. <strong>Conceptual models:</strong> The user's understanding of how the system works — which may or may not match how it actually works.</p>
+  </div>
+
+  <div class="callout tip">
+    <p class="callout-title">Affordances vs. signifiers: the distinction that matters</p>
+    <p>Norman's most important conceptual correction (in the 2013 revision) was clarifying the difference between affordances and signifiers. An affordance is a relationship between an object and an agent — a chair affords sitting regardless of whether anyone sits in it. A signifier is a perceivable signal — the shape of the chair's seat tells you it's for sitting. In digital design, we almost always mean signifiers: a button's visual treatment (signifier) communicates that it's clickable (affordance). Getting this distinction right sharpens how you think about discoverability.</p>
+  </div>
+</section>
+
+<section id="human-error" data-section="theory">
+  <h2>Human error and design responsibility</h2>
+
+  <p>One of Norman's most influential arguments: there is no such thing as "human error" — only bad design. When a nurse administers the wrong medication because two bottles look identical, the design of the bottles failed, not the nurse. When a pilot crashes because two identical switches control different systems, the cockpit design failed. Norman distinguishes between <strong>slips</strong> (the user intends the right action but executes it wrong — clicking the wrong button because it's too close to the right one) and <strong>mistakes</strong> (the user forms the wrong intention — choosing the wrong menu because the labels are ambiguous).</p>
+
+  <p>The design implications are profound: instead of training users not to make errors (which never works reliably), design the system to prevent errors (constraints), make errors visible (feedback), and make errors reversible (undo). This principle — that the system should accommodate human limitations rather than demanding human perfection — is the ethical core of human-centered design.</p>
+</section>
+
+<section id="emotional-design" data-section="theory">
+  <h2>Emotional Design: visceral, behavioral, reflective</h2>
+
+  <div class="method-card">
+    <h4>Three Levels of Emotional Design <span class="method-tag">Framework</span></h4>
+    <p class="method-when">Use when: designing for emotional impact beyond pure usability.</p>
+    <p>Norman's "Emotional Design" (2004) proposed that we process design at three levels: <strong>Visceral:</strong> The immediate, pre-conscious reaction to appearance — is it beautiful, ugly, frightening, inviting? This is the "first impression" that happens in milliseconds. Driven by color, shape, texture, sound. <strong>Behavioral:</strong> The experience of use — is it effective, efficient, satisfying? This is traditional usability. Driven by function, performance, feel. <strong>Reflective:</strong> The conscious interpretation after use — what does using this product say about me? Does it align with my values and identity? This is brand, status, meaning. Driven by story, cultural context, self-image. A product can succeed at one level and fail at another — a beautiful app (visceral success) that's hard to use (behavioral failure) that nobody wants to be seen using (reflective failure).</p>
+  </div>
+</section>
+
+        <div class="section-marker" id="systems-design">
+          <span class="split-badge practical">Practical</span>
+          <span class="marker-line"></span>
+        </div>
+
+        <section data-section="practical">
+  <h2>Designing for the real world: complexity and systems</h2>
+
+  <div class="method-card">
+    <h4>Systems Thinking for Designers <span class="method-tag">Framework</span></h4>
+    <p class="method-when">Use when: considering the broader impact of design decisions beyond the immediate interface.</p>
+    <p>Later Norman argued that the design profession focuses too narrowly on individual products and interfaces, ignoring the systems they operate within. A ride-sharing app is a well-designed product that contributes to traffic congestion, driver exploitation, and urban planning challenges. A social media feed is a usability triumph that enables misinformation and mental health harm. Systems thinking asks designers to consider: Who is affected beyond the immediate user? What second-order effects does this design create? What happens at scale? What happens over time? This doesn't mean refusing to design — it means designing with awareness of consequences beyond the screen.</p>
+  </div>
+
+  <div class="method-card">
+    <h4>Sustainability and Humane Design <span class="method-tag">Framework</span></h4>
+    <p class="method-when">Use when: evaluating the long-term and societal impact of design choices.</p>
+    <p>Norman's recent work emphasizes designing for sustainability — both environmental (reducing waste, energy consumption, planned obsolescence) and human (respecting attention, supporting wellbeing, avoiding addictive patterns). Key principles: <strong>Design for repair:</strong> Products should be fixable, not disposable. <strong>Design for longevity:</strong> Resist artificial obsolescence and planned degradation. <strong>Design for autonomy:</strong> Give users control over their attention and data. <strong>Design for equity:</strong> Consider who benefits and who is harmed. These aren't just ethical abstractions — they're design constraints that lead to better, more durable products.</p>
+  </div>
+</section>
+
+<section id="applying-norman" data-section="practical">
+  <h2>Applying Norman's principles today</h2>
+
+  <div class="method-card">
+    <h4>Norman's Design Principles Checklist <span class="method-tag">Core Method</span></h4>
+    <p class="method-when">Use when: reviewing any interface design for fundamental quality.</p>
+    <p>Walk through each principle: <strong>Discoverability:</strong> Can the user figure out what actions are possible? Are controls visible and labeled? <strong>Feedback:</strong> Does every action produce a perceivable result? Is the feedback immediate and informative? <strong>Conceptual model:</strong> Does the user's mental model match how the system actually works? Are metaphors consistent? <strong>Affordances/signifiers:</strong> Do interactive elements look interactive? Do non-interactive elements look static? <strong>Mapping:</strong> Do controls correspond logically to their effects? Is the layout relationship between controls and outcomes clear? <strong>Constraints:</strong> Does the system prevent errors through structure rather than warnings? Are impossible states impossible to reach?</p>
+  </div>
+
+  <div class="template-box">
+    <div class="template-header">
+      <span class="template-label">Checklist</span>
+      <span class="template-title">Norman's Principles Review</span>
+    </div>
+    <ul class="checklist">
+      <li>All interactive elements have clear signifiers (look clickable, tappable, draggable)</li>
+      <li>Every user action receives immediate, appropriate feedback</li>
+      <li>The conceptual model is consistent throughout the product</li>
+      <li>Controls are mapped logically to their effects</li>
+      <li>Constraints prevent errors before they happen</li>
+      <li>The system is forgiving — errors are reversible (undo, back, cancel)</li>
+      <li>The design works at all three emotional levels (visceral, behavioral, reflective)</li>
+      <li>When things go wrong, the system blames itself, not the user</li>
+    </ul>
+  </div>
+</section>
+
+        <div class="section-marker" id="real-world-examples">
+          <span class="split-badge examples">Examples</span>
+          <span class="marker-line"></span>
+        </div>
+
+        <section data-section="examples">
+  <h2>Real-world examples</h2>
+
+  <div class="case-study">
+    <p class="case-label">Case study</p>
+    <h4>The Norman Door: design failure made famous</h4>
+    <p>The "Norman Door" — a door whose design doesn't indicate whether to push or pull — has become the universal symbol of design failure. It demonstrates every principle at once: poor affordances (flat plate on both sides), missing signifiers (no "push" or "pull" label), bad mapping (handle placement doesn't match the required action), and inadequate feedback (you only learn you were wrong after pulling a push door). Norman Doors persist in buildings worldwide, which proves Norman's deeper point: poor design is normalized so thoroughly that people blame themselves ("I always get confused by doors") rather than the designer.</p>
+    <p><strong>Why it matters:</strong> If a door — one of humanity's oldest designed objects — can be routinely designed wrong, imagine the complexity of getting a software interface right. The lesson isn't humility; it's vigilance.</p>
+  </div>
+
+  <div class="case-study">
+    <p class="case-label">Case study</p>
+    <h4>Gmail's Undo Send: error recovery as design philosophy</h4>
+    <p>Gmail's "Undo Send" feature is a direct application of Norman's error recovery principle. Instead of a confirmation dialog before sending ("Are you sure?" — which users dismiss automatically), Gmail sends the email immediately but provides a brief window to undo. This respects the natural workflow (send, then realize the mistake) instead of interrupting it (stop, confirm, then send). The design acknowledges that errors are inevitable and focuses on making them recoverable rather than preventable through friction.</p>
+    <p><strong>Why it works:</strong> The undo pattern is less disruptive than confirmation dialogs, more aligned with actual user behavior, and more likely to catch real errors — exactly what Norman's error framework predicts.</p>
+  </div>
+</section>
+
+<section id="connections">
+  <h2>Connected topics in your library</h2>
+  <div class="cross-ref-grid">
+    <a href="usability.html" class="cross-ref-card">
+      <span class="ref-number">Tier 1</span>
+      <div class="ref-title">Usability</div>
+      <div class="ref-reason">Norman's principles are the theoretical foundation that usability heuristics operationalize. Nielsen's heuristics map directly to Norman's concepts.</div>
+    </a>
+    <a href="cognitive-emotional-design.html" class="cross-ref-card">
+      <span class="ref-number">Tier 2</span>
+      <div class="ref-title">Cognitive &amp; Emotional Design</div>
+      <div class="ref-reason">Norman's three levels of emotional design (visceral, behavioral, reflective) are the framework that Cognitive & Emotional Design expands on.</div>
+    </a>
+    <a href="affordances.html" class="cross-ref-card">
+      <span class="ref-number">Tier 4</span>
+      <div class="ref-title">Affordances &amp; Physical Intuition</div>
+      <div class="ref-reason">The deep theory behind affordances, signifiers, and physical intuition — extending Norman's concepts into Gibson's original ecological psychology.</div>
+    </a>
+    <a href="service-design.html" class="cross-ref-card">
+      <span class="ref-number">Tier 2</span>
+      <div class="ref-title">Service Design</div>
+      <div class="ref-reason">Norman's systems thinking maps to service design's holistic view — designing beyond individual touchpoints to consider the full ecosystem.</div>
+    </a>
+  </div>
+</section>
+
+<div class="deep-dive-section" id="deep-dive">
+          <div class="deep-dive-header">
+            <span class="deep-dive-badge">Deep Dive</span>
+            <h2 style="margin:0; border:none; padding:0;">Appendix</h2>
+          </div>
+
+  <details class="expandable">
+    <summary><span class="chevron"><svg viewBox="0 0 14 14"><polyline points="4,2 10,7 4,12"/></svg></span> Norman's evolution of thinking</summary>
+    <div class="expand-content topic-content">
+      <h4>From usability to systems</h4>
+      <p>Norman's intellectual journey mirrors the discipline's maturation. <strong>1980s–1990s:</strong> Cognitive science applied to design. Focus on usability, affordances, mapping, feedback. Products should be easy to use. <strong>2000s:</strong> Emotional design. Usability isn't enough — products should also be beautiful and meaningful. The three levels (visceral, behavioral, reflective) expanded the designer's responsibility beyond function. <strong>2010s–present:</strong> Systems and humanity. Individual product design isn't enough — designers must consider societal impact, sustainability, equity, and the systems their products exist within. Each phase didn't replace the previous one; it expanded it. A designer today needs all three perspectives.</p>
+    </div>
+  </details>
+
+  <details class="expandable">
+    <summary><span class="chevron"><svg viewBox="0 0 14 14"><polyline points="4,2 10,7 4,12"/></svg></span> Recommended reading path</summary>
+    <div class="expand-content topic-content">
+      <h4>Norman's essential works in order</h4>
+      <p><strong>"The Design of Everyday Things" (revised 2013)</strong> — Start here. The foundation. Read the revised edition, not the 1988 original — Norman updated his thinking significantly, especially on affordances vs. signifiers.</p>
+      <p><strong>"Emotional Design" (2004)</strong> — The expansion from usability to emotion. Introduces the three-level model. Lighter and more enjoyable to read than DOET.</p>
+      <p><strong>"Living with Complexity" (2010)</strong> — Norman argues against oversimplification. Complex systems need complex interfaces — the goal is managing complexity, not eliminating it.</p>
+      <p><strong>"Design for a Better World" (2023)</strong> — Norman's most recent and most ambitious work. Argues that design must address humanity's major challenges: sustainability, equity, and the human condition.</p>
+    </div>
+  </details>
+</div>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer container">
+    <div class="footer-inner">
+      <p>Noir Book — Built for the work, not the shelf.</p>
+      <div class="footer-links">
+        <a href="../design-system.html">Design System</a>
+        <a href="../library-manifest.json">Manifest</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to Top -->
+  <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">&#8593;</button>
+
+  <!-- Floating Mobile TOC -->
+  <button class="mobile-toc-btn" id="mobileTocBtn" aria-label="Open table of contents">&#9776; Contents</button>
+  <div class="mobile-toc-overlay" id="mobileTocOverlay">
+    <div class="mobile-toc-panel">
+      <div class="mobile-toc-panel-header">
+        <h3>On this page</h3>
+        <button class="mobile-toc-close" id="mobileTocClose" aria-label="Close">&times;</button>
+      </div>
+      <ul class="mobile-toc-list">
+        <li><a href="#what-and-why" data-section="theory">Who Don Norman is and why his thinking matters</a></li>
+        <li><a href="#everyday-things" data-section="theory">The Design of Everyday Things: core concepts</a></li>
+        <li><a href="#human-error" data-section="theory">Human error and design responsibility</a></li>
+        <li><a href="#emotional-design" data-section="theory">Emotional Design: visceral, behavioral, reflective</a></li>
+        <li><a href="#systems-design" data-section="practical">Designing for the real world: complexity and systems</a></li>
+        <li><a href="#applying-norman" data-section="practical">Applying Norman's principles today</a></li>
+        <li><a href="#real-world-examples" data-section="examples">Real-world examples</a></li>
+        <li><a href="#connections">Connected topics in your library</a></li>
+        <li><a href="#deep-dive">Deep-dive appendix</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    // Scrollspy: highlight active TOC item
+    const tocLinks = document.querySelectorAll('.toc-list a');
+    const sections = [];
+    tocLinks.forEach(link => {
+      const href = link.getAttribute('href');
+      if (!href || !href.startsWith('#')) return;
+      const el = document.getElementById(href.slice(1));
+      if (el) sections.push({ el, link });
+    });
+
+    // Reading progress bar
+    const progressBar = document.getElementById('readingProgress');
+    const backToTop = document.getElementById('backToTop');
+
+    function onScroll() {
+      let current = sections[0];
+      for (const s of sections) {
+        if (s.el.getBoundingClientRect().top <= 120) current = s;
+      }
+      tocLinks.forEach(l => l.classList.remove('active'));
+      if (current) current.link.classList.add('active');
+
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrolled = window.scrollY;
+      const progress = docHeight > 0 ? (scrolled / docHeight) * 100 : 0;
+      if (progressBar) progressBar.style.width = progress + '%';
+      if (backToTop) backToTop.classList.toggle('visible', scrolled > 400);
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    // Split badges: click to scroll to section
+    document.querySelectorAll('.content-splits .split-badge').forEach(function(badge) {
+      badge.addEventListener('click', function() {
+        var type = badge.classList.contains('theory') ? 'theory' : badge.classList.contains('practical') ? 'practical' : 'examples';
+        var target = document.querySelector('section[data-section="' + type + '"]');
+        if (target) {
+          var marker = target.previousElementSibling;
+          (marker && marker.classList.contains('section-marker') ? marker : target).scrollIntoView({behavior:'smooth'});
+        }
+      });
+    });
+  </script>
+
+  <script src="../js/checklist.js"></script>
+  <script src="../js/mobile-toc.js"></script>
+  <script src="../js/search.js"></script>
+  <script>
+    function openBurger(){document.getElementById('burgerOverlay').classList.add('open');document.body.style.overflow='hidden'}
+    function closeBurger(e){if(e&&e.target&&e.target!==document.getElementById('burgerOverlay'))return;document.getElementById('burgerOverlay').classList.remove('open');document.body.style.overflow=''}
+    function burgerSearch(q){
+      var r=document.getElementById('burgerSearchResults');
+      if(!q||q.length<2){r.innerHTML='';return}
+      var ql=q.toLowerCase(),matches=[];
+      if(typeof SEARCH_INDEX!=='undefined'){
+        SEARCH_INDEX.forEach(function(t){
+          var hit=t.topic.toLowerCase().indexOf(ql)>-1;
+          if(!hit)t.sections.forEach(function(s){if((s.title+' '+s.keywords).toLowerCase().indexOf(ql)>-1)hit=true});
+          if(hit)matches.push(t);
+        });
+      }
+      if(!matches.length){r.innerHTML='<p style="padding:8px 0;font-size:13px;color:var(--ink-muted)">No results</p>';return}
+      r.innerHTML=matches.slice(0,8).map(function(m){return '<a href="../'+m.url+'">'+m.topic+'<span class="bsr-disc">'+m.discipline+'</span></a>'}).join('');
+    }
+    document.addEventListener('keydown',function(e){if(e.key==='Escape'){closeBurger();var dd=document.getElementById('searchDropdown');if(dd)dd.classList.remove('visible');}});
+    // Close burger when clicking a TOC link
+    document.querySelectorAll('.burger-toc-list a').forEach(function(a){a.addEventListener('click',function(){closeBurger()})});
+    // Search typeahead
+    function topicSearch(q){
+      var dd=document.getElementById('searchDropdown');
+      if(!q||q.length<2||typeof SEARCH_INDEX==='undefined'){if(dd)dd.classList.remove('visible');return}
+      var ql=q.toLowerCase(),grouped={};
+      SEARCH_INDEX.forEach(function(t){
+        var hit=t.topic.toLowerCase().indexOf(ql)>-1,sHits=[],mHits=[];
+        t.sections.forEach(function(s){if((s.title+' '+s.keywords).toLowerCase().indexOf(ql)>-1)sHits.push(s)});
+        (t.methods||[]).forEach(function(m){if((m.name+' '+(m.keywords||'')).toLowerCase().indexOf(ql)>-1)mHits.push(m)});
+        if(!hit&&!sHits.length&&!mHits.length&&ql.length>=3&&typeof levenshtein==='function'){
+          var words=t.topic.toLowerCase().split(/ +/);
+          for(var i=0;i<words.length;i++){if(levenshtein(ql,words[i].substring(0,ql.length+1))<=1){hit=true;break}}
+        }
+        if(hit||sHits.length||mHits.length)grouped[t.topic]={url:'../'+t.url,disc:t.discipline||'',sections:sHits,methods:mHits,topicHit:hit};
+      });
+      var keys=Object.keys(grouped);
+      if(!keys.length){dd.innerHTML='<div class="search-empty">No results</div>';dd.classList.add('visible');return}
+      var html='';
+      keys.slice(0,8).forEach(function(topic){
+        var g=grouped[topic];
+        html+='<div class="search-group"><div class="search-group-title">'+topic+'</div>';
+        if(g.topicHit)html+='<a class="search-result" href="'+g.url+'"><span class="search-result-title">'+topic+'</span><span class="search-result-type practical">'+g.disc+'</span></a>';
+        g.sections.forEach(function(s){html+='<a class="search-result" href="'+g.url+'#'+s.id+'"><span class="search-result-title">'+s.title+'</span><span class="search-result-type '+s.type+'">'+s.type+'</span></a>'});
+        g.methods.slice(0,3).forEach(function(m){html+='<a class="search-result" href="'+g.url+'#'+m.section+'"><span class="search-result-title">'+m.name+'</span><span class="search-result-type practical">method</span></a>'});
+        html+='</div>';
+      });
+      dd.innerHTML=html;dd.classList.add('visible');
+    }
+    document.addEventListener('click',function(e){if(!e.target.closest('.search-box')){var dd=document.getElementById('searchDropdown');if(dd)dd.classList.remove('visible')}});
+  </script>
+
+</body>
+</html>

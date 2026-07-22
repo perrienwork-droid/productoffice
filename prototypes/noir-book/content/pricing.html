@@ -1,0 +1,313 @@
+<!--
+TOPIC_ID: PM.2.02
+TOPIC_NUMBER: PM.2.02
+TITLE: Pricing &amp; Monetization Strategy
+SUBTITLE: Capture value. Pricing models, packaging, willingness-to-pay research, and aligning price with perceived value.
+TIER: 2
+TIER_LABEL: Specialized
+THEORY: 25
+PRACTICAL: 50
+EXAMPLES: 25
+-->
+
+<section id="what-and-why" data-section="theory">
+  <h2>What pricing strategy is and why it matters</h2>
+
+<p>Pricing is the most underleveraged growth tool in product management. A 1% improvement in price realization typically has 3–4× the revenue impact of a 1% improvement in customer acquisition. Yet most PMs spend 100× more time on features than on pricing. The result: products with excellent functionality and terrible monetization — leaving money on the table or, worse, losing customers to pricing friction that could be redesigned.</p>
+
+<p>Pricing strategy answers three questions: <strong>How much?</strong> (the number), <strong>How?</strong> (the model — subscription, usage-based, freemium, one-time), and <strong>For whom?</strong> (the packaging — which features go in which tier). All three must align. A great product at the wrong price fails. A fair price in the wrong model frustrates users. Good packaging with bad pricing leaks revenue.</p>
+
+<p>The PM's role in pricing is setting the strategy — not the exact number. Finance, sales, and marketing all have input. But the PM owns the decision of what value metric to charge on, how to structure tiers, and how pricing connects to the product experience. Pricing is a product decision because it shapes how users perceive and interact with the product.</p>
+
+<div class="callout info">
+  <p class="callout-title">Why this matters for your projects</p>
+  <p>Price communicates value. A product priced at $5/month signals "not very important." The same product at $50/month signals "this is a serious tool." Price also shapes user behavior: per-seat pricing discourages seat sharing but limits viral adoption. Usage-based pricing aligns cost with value but creates billing anxiety. Every pricing decision is a product decision in disguise.</p>
+</div>
+
+<h3 id="value-metric">Choosing the right value metric</h3>
+
+<p>The value metric is what you charge for — the unit of pricing. Seats (Slack), API calls (Twilio), emails sent (Mailchimp), storage (Dropbox), or revenue processed (Stripe). The best value metric has three properties: it scales with the customer's success (as they get more value, they pay more), it's easy to understand (no complex formulas), and it's predictable (customers can estimate their bill before they commit).</p>
+
+<p>Bad value metrics create friction. Charging per page view penalizes success — the more popular your content, the more you pay. Charging per seat penalizes collaboration — adding a team member costs money, which discourages adoption. The ideal value metric makes customers happy to pay more because it means they're getting more value.</p>
+
+</section>
+
+<section id="pricing-methods" data-section="practical">
+  <h2>Pricing methods</h2>
+
+<div class="method-card">
+  <h4>Van Westendorp Price Sensitivity Meter <span class="method-tag">Research Method</span></h4>
+  <p class="method-when">Use when: Setting or validating price for a new product or major pricing change. Requires 200+ survey responses for reliable results.</p>
+  <p>Ask four questions: At what price would this product be so cheap you'd question its quality? (Too cheap.) At what price is this a bargain — a great buy for the money? (Cheap.) At what price is this getting expensive but you'd still consider it? (Expensive.) At what price is this too expensive to consider? (Too expensive.)</p>
+  <p>Plot the cumulative distributions of each answer. The intersections reveal your pricing range: the point of marginal cheapness (floor), the optimal price point, and the point of marginal expensiveness (ceiling). This gives you a data-backed range rather than a guess.</p>
+  <div class="callout tip">
+    <p class="callout-title">Practical tip</p>
+    <p>Never ask "What would you pay?" directly. People understate willingness-to-pay by 20–40% when asked directly. Van Westendorp works because the four-question structure triangulates from different angles. But remember: survey responses about future spending are always less reliable than revealed behavior (what people actually pay).</p>
+  </div>
+</div>
+
+<div class="method-card">
+  <h4>Pricing Tier Architecture <span class="method-tag">Core Framework</span></h4>
+  <p class="method-when">Use when: Structuring a multi-tier pricing model (free, pro, enterprise). Applies to any SaaS or subscription product.</p>
+  <p>Each tier should serve a different buyer persona with a different willingness-to-pay and feature need. The architecture follows a principle: the free tier demonstrates value, the mid tier captures most users, and the top tier captures maximum revenue from power users.</p>
+  <div class="process-steps">
+    <div class="process-step">
+      <div class="process-step-content">
+        <h4>Free / Starter tier</h4>
+        <p>Enough to demonstrate value and create habit. Not enough for professional use. The free tier is a marketing channel, not a product. Its job is activation and conversion, not retention. Common limits: usage caps, seat limits, no team features, limited integrations.</p>
+      </div>
+    </div>
+    <div class="process-step">
+      <div class="process-step-content">
+        <h4>Pro / Growth tier</h4>
+        <p>The main product. Designed for the ICP. Priced to capture 60–70% of paying customers. This tier should feel like great value — generous enough that most users don't hit limits, but with clear upgrade triggers for power users.</p>
+      </div>
+    </div>
+    <div class="process-step">
+      <div class="process-step-content">
+        <h4>Enterprise / Scale tier</h4>
+        <p>Custom pricing, advanced features (SSO, audit logs, SLA, dedicated support), and volume discounts. Often "Contact us" pricing because enterprise deals are negotiated individually. The enterprise tier anchors the pricing page — it makes the Pro tier look affordable by comparison.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="method-card">
+  <h4>Freemium Conversion Modeling <span class="method-tag">Growth Tool</span></h4>
+  <p class="method-when">Use when: Deciding whether to offer a free tier, and if so, how generous to make it.</p>
+  <p>The freemium equation: free users × conversion rate × ARPU = revenue. If your conversion rate is 2–5% (typical for B2B SaaS), you need a large free base to generate meaningful revenue. If conversion is below 1%, your free tier is too generous — users don't need to upgrade. If conversion is above 10%, your free tier might be too restrictive — potential users bounce before experiencing value.</p>
+  <p>The strategic question isn't "should we have a free tier?" but "what's the job of the free tier?" If it's lead generation, measure leads generated. If it's product-led growth, measure activation and conversion. If it's market share, measure active users. Different jobs produce different tier designs.</p>
+</div>
+
+<div class="method-card">
+  <h4>Usage-Based Pricing Framework <span class="method-tag">Model Decision</span></h4>
+  <p class="method-when">Use when: Evaluating whether to charge based on usage (API calls, transactions, data volume) instead of flat subscription fees.</p>
+  <p>Usage-based pricing aligns cost with value: customers pay more as they get more value. It eliminates the "shelfware" problem (paying for a subscription you barely use) and makes the product accessible to small customers who grow into large ones. But it creates billing uncertainty — customers don't know their bill until the month ends.</p>
+  <p><strong>Best for:</strong> Infrastructure products (AWS, Twilio, Stripe), products where value scales linearly with usage, and markets where customer usage varies dramatically (10× difference between small and large customers).</p>
+  <p><strong>Worst for:</strong> Products where users need budget predictability (corporate software), products where heavy usage means the customer is struggling (support tools), and products where value doesn't scale linearly with usage.</p>
+  <p>Hybrid models (base subscription + usage overage) are increasingly common. They provide predictability with a base fee and value alignment with usage pricing above the threshold.</p>
+</div>
+
+<div class="method-card">
+  <h4>Price Sensitivity Testing <span class="method-tag">Validation</span></h4>
+  <p class="method-when">Use when: You have an existing price and want to know if you can raise it, or want to test different price points before committing.</p>
+  <p>Three approaches, from least to most reliable: <strong>Survey-based</strong> (Van Westendorp, conjoint analysis — fast but stated preference is unreliable). <strong>Fake door tests</strong> (show different prices on the pricing page and measure click-through to signup — measures interest but not actual purchase behavior). <strong>Live pricing experiments</strong> (A/B test actual prices with real customers — the gold standard, but ethically complex and operationally challenging).</p>
+  <div class="callout warning">
+    <p class="callout-title">Common mistake</p>
+    <p>A/B testing prices means some customers pay more for the same product than others at the same time. This can damage trust if customers discover the discrepancy. Mitigate by testing with new customers only (existing customers keep their price), by testing price presentation (monthly vs. annual framing) rather than actual price, or by offering different feature bundles at different prices (different products, not different prices for the same product).</p>
+  </div>
+</div>
+
+</section>
+
+<section id="b2b-pricing" data-section="practical">
+  <h2>B2B pricing mechanics</h2>
+
+  <div class="method-card">
+    <h4>B2B Pricing Mechanics <span class="method-tag">Technique</span></h4>
+    <p class="method-when">Use when: pricing products sold to businesses, where pricing is negotiated, volume-dependent, or contract-based.</p>
+    <p>B2B pricing adds layers that consumer pricing doesn't have. <strong>Custom pricing:</strong> Enterprise deals often require bespoke pricing based on usage projections, seat counts, or integration scope. Build a pricing calculator that sales can use to generate quotes within guardrails — floor prices, discount authority levels, and required approval thresholds. <strong>Volume discounts:</strong> Structure tiered volume discounts that incentivize expansion without giving away margin. Common patterns: committed-use discounts (lower rate for annual commitment), volume tiers (price decreases at usage thresholds), and bundle discounts (savings for buying multiple products). <strong>Contract structure:</strong> Multi-year contracts need price escalation clauses, renewal terms, and expansion pricing. Define whether expansions are priced at contract rate or list rate. <strong>Pricing negotiation frameworks:</strong> Give sales structured negotiation playbooks: what to concede (payment terms, implementation support), what to hold (per-unit pricing, core features), and when to walk away. The PM's role is defining the pricing architecture; sales executes within it.</p>
+  </div>
+</section>
+
+<section id="templates-and-checklists" data-section="practical">
+  <h2>Templates and checklists</h2>
+
+<div class="template-box">
+  <div class="template-header">
+    <span class="template-label">Checklist</span>
+    <span class="template-title">Pricing Strategy Readiness</span>
+  </div>
+  <ul class="checklist">
+    <li>Value metric identified — scales with customer success, easy to understand</li>
+    <li>Tier structure designed — each tier serves a different persona with different needs</li>
+    <li>Willingness-to-pay researched — Van Westendorp or competitive benchmarking done</li>
+    <li>Free tier job defined — lead gen, PLG, or market share (and metrics match the job)</li>
+    <li>Upgrade triggers identified — what events or limits drive conversion from free to paid</li>
+    <li>Competitive pricing mapped — not to copy, but to understand the market frame</li>
+    <li>Price communication plan ready — pricing page, sales deck, FAQ for objections</li>
+    <li>Existing customer impact assessed — grandfathering policy for price increases</li>
+    <li>Counter-metrics defined — conversion rate won't be optimized at the expense of churn</li>
+  </ul>
+</div>
+
+</section>
+
+<section id="real-world-examples" data-section="examples">
+  <h2>Real-world examples</h2>
+
+<div class="case-study">
+  <p class="case-label">Case study</p>
+  <h4>Slack: The fair billing policy that built trust</h4>
+  <p>Slack charges per active user, not per seat. If someone on your team hasn't used Slack in 14 days, you stop paying for them — automatically, with a prorated credit. This "fair billing" policy became a competitive advantage: customers felt safe adding their whole team without worrying about ghost accounts inflating the bill.</p>
+  <p>The pricing lesson: a pricing model that reduces customer anxiety can be more valuable than a lower price. Slack's willingness to give money back actually increased revenue — because it removed the fear that prevented teams from adding seats in the first place.</p>
+</div>
+
+<div class="case-study">
+  <p class="case-label">Case study</p>
+  <h4>Notion: Free for individuals, paid for teams</h4>
+  <p>Notion's free tier is remarkably generous for individual users — unlimited pages, unlimited blocks. But it limits team features: sharing, permissions, admin tools. This draws a natural line between personal use (free forever) and professional use (paid). The individual user becomes an advocate who brings Notion to their team — where the real revenue lives.</p>
+  <p>The pricing lesson: the free tier's job is growth, not revenue. Notion's free plan costs money to serve, but each free user is a potential entry point into a team account worth $8–15/seat/month. The math works because the conversion path from individual to team is built into the product experience.</p>
+</div>
+
+<div class="case-study">
+  <p class="case-label">Case study</p>
+  <h4>Twilio: Usage-based pricing that scales with success</h4>
+  <p>Twilio charges per API call — you pay for what you use. A startup sending 100 SMS messages pays cents. A company sending 10 million messages pays tens of thousands. The pricing scales linearly with the customer's success: the more messages they send, the more value they're getting, and the more they pay.</p>
+  <p>This model eliminated the traditional enterprise sales barrier: startups could start with Twilio for free (trial credits) and grow into six-figure accounts without ever talking to a salesperson. The self-serve pricing model was the product strategy — not just the business model.</p>
+</div>
+
+</section>
+
+<section id="common-pitfalls" data-section="practical">
+  <h2>Common pitfalls</h2>
+
+<div class="pitfall">
+  <div class="pitfall-icon">!</div>
+  <div>
+    <h4>Pricing based on cost, not value</h4>
+    <p>"It costs us $5 per user to run, so we should charge $10" is cost-plus pricing — the least effective model. Your customers don't care what it costs you. They care what it's worth to them. A product that saves a company 10 hours per week per employee is worth hundreds of dollars per seat, regardless of your infrastructure costs. Price based on the value delivered, not the cost incurred.</p>
+  </div>
+</div>
+
+<div class="pitfall">
+  <div class="pitfall-icon">!</div>
+  <div>
+    <h4>Fear of raising prices</h4>
+    <p>Most products are underpriced, especially early. PMs fear that raising prices will cause mass churn. In reality, well-communicated price increases typically cause 1–5% churn — and the remaining 95% pay more. A 10% price increase with 3% churn is a 6.7% net revenue increase. You almost certainly should raise your prices if you haven't in the last 18 months.</p>
+  </div>
+</div>
+
+<div class="pitfall">
+  <div class="pitfall-icon">!</div>
+  <div>
+    <h4>Too many tiers</h4>
+    <p>More than 3–4 tiers creates decision paralysis. Users spend energy comparing plans instead of signing up. If people can't immediately identify which tier is for them, you have too many or the differentiation is too subtle. The pricing page should take 10 seconds to understand, not 10 minutes.</p>
+  </div>
+</div>
+
+</section>
+
+<section id="when-to-use" data-section="practical">
+  <h2>When to revisit pricing</h2>
+
+<div class="callout info">
+  <p class="callout-title">Decision guidance</p>
+  <p><strong>Revisit pricing when:</strong> You haven't changed prices in 18+ months. Conversion from free to paid is below 2% or above 10%. Win/loss analysis shows pricing as a top-3 loss reason. You're launching a major new capability. A competitor has significantly changed their pricing.</p>
+  <p><strong>Don't change pricing when:</strong> You're reacting to a single customer complaint. You haven't validated with research (gut-feel pricing changes are risky). The product is pre-PMF — focus on value first, then capture.</p>
+</div>
+
+</section>
+
+<section id="connections">
+  <h2>Connected topics in your library</h2>
+
+<div class="cross-ref-grid">
+  <a href="#" class="cross-ref-card">
+    <span class="ref-number">PM.1.01</span>
+    <div class="ref-title">Product Strategy &amp; Vision</div>
+    <div class="ref-reason">Pricing is a strategic choice, not just a business decision</div>
+  </a>
+  <a href="#" class="cross-ref-card">
+    <span class="ref-number">PM.2.03</span>
+    <div class="ref-title">Growth &amp; PLG</div>
+    <div class="ref-reason">Free-to-paid conversion and self-serve monetization</div>
+  </a>
+  <a href="#" class="cross-ref-card">
+    <span class="ref-number">PM.1.08</span>
+    <div class="ref-title">Competitive Analysis</div>
+    <div class="ref-reason">Competitive pricing context for positioning</div>
+  </a>
+  <a href="#" class="cross-ref-card cross-discipline">
+    <span class="ref-number">MK.2.06</span>
+    <div class="ref-title">Pricing Communication (MK)</div>
+    <div class="ref-reason">MK lens: pricing page design, anchoring, value messaging</div>
+  </a>
+</div>
+
+<section id="deep-dive">
+<h2>Deep-dive appendix</h2>
+
+  <details class="expandable">
+    <summary><span class="chevron"><svg viewBox="0 0 14 14"><polyline points="4,2 10,7 4,12"/></svg></span> Further reading</summary>
+    <div class="expand-content topic-content">
+      <p><strong>"Monetizing Innovation" by Madhavan Ramanujam &amp; Georg Tacke</strong> — The Simon-Kucher approach to pricing. Argues that pricing should be designed before the product, not after. The most practical pricing book for PMs.</p>
+      <p><strong>"The Strategy and Tactics of Pricing" by Nagle &amp; Holden</strong> — The academic standard. Dense but comprehensive. Good reference for specific pricing situations.</p>
+      <p><strong>"Obviously Awesome" by April Dunford</strong> — Positioning directly shapes pricing. If users don't understand your value proposition, no price feels right.</p>
+    </div>
+  </details>
+
+</section>
+</section>
+
+<div class="topic-nav">
+  <a href="experimentation.html" class="topic-nav-link prev">
+    <div class="nav-direction">Previous topic</div>
+    <div class="nav-title">&#8249; Experimentation &amp; A/B Testing</div>
+  </a>
+  <a href="growth-plg.html" class="topic-nav-link next">
+    <div class="nav-direction">Next topic</div>
+    <div class="nav-title">Growth &amp; Product-Led Growth &#8250;</div>
+  </a>
+</div>
+
+<!-- SEARCH_INDEX
+{
+    topic: "Pricing & Monetization Strategy",
+    url: "topics/pricing.html",
+    tier: "Tier 2",
+    sections: [
+      { title: "What it is & why it matters", id: "what-and-why", type: "theory", keywords: "pricing monetization value metric model subscription usage-based freemium" },
+      { title: "Pricing methods", id: "pricing-methods", type: "practical", keywords: "Van Westendorp tier architecture freemium conversion usage-based price sensitivity" },
+      { title: "Templates and checklists", id: "templates-and-checklists", type: "practical", keywords: "pricing readiness checklist" },
+      { title: "Real-world examples", id: "real-world-examples", type: "examples", keywords: "Slack fair billing Notion free Twilio usage-based" },
+      { title: "Common pitfalls", id: "common-pitfalls", type: "practical", keywords: "cost-plus fear raising too many tiers" },
+      { title: "When to revisit", id: "when-to-use", type: "practical", keywords: "18 months conversion win loss competitor" },
+      { title: "B2B pricing mechanics", id: "b2b-pricing", type: "practical", keywords: "B2B custom pricing volume discounts contract negotiation enterprise" }
+    ],
+    methods: [
+      { name: "Van Westendorp Price Sensitivity", section: "pricing-methods", keywords: "Van Westendorp survey too cheap bargain expensive four questions" },
+      { name: "Pricing Tier Architecture", section: "pricing-methods", keywords: "tier free pro enterprise packaging structure persona" },
+      { name: "Freemium Conversion Modeling", section: "pricing-methods", keywords: "freemium conversion rate free tier job lead gen PLG" },
+      { name: "Usage-Based Pricing", section: "pricing-methods", keywords: "usage-based API calls transactions hybrid base overage" },
+      { name: "Price Sensitivity Testing", section: "pricing-methods", keywords: "price test survey fake door A/B live validation" },
+      { name: "B2B Pricing Mechanics", section: "b2b-pricing", keywords: "B2B custom volume discounts contract negotiation enterprise pricing calculator" }
+    ]
+  }
+SEARCH_INDEX -->
+
+<!-- MANIFEST
+{
+  "id": "PM.2.02",
+  "title": "Pricing & Monetization Strategy",
+  "file": "topics/pricing.html",
+  "tier": 2,
+  "discipline": "PM",
+  "solves": [
+    "I need to set pricing for a new product or feature",
+    "I want to restructure our pricing tiers",
+    "I need willingness-to-pay research",
+    "I want to evaluate subscription vs. usage-based pricing",
+    "I need to price an add-on or premium feature",
+    "I want to structure B2B pricing with volume discounts and contract terms"
+  ],
+  "methods": [
+    "Van Westendorp Price Sensitivity Meter",
+    "Pricing Tier Architecture",
+    "Freemium Conversion Modeling",
+    "Usage-Based Pricing Framework",
+    "Price Sensitivity Testing",
+    "B2B Pricing Mechanics"
+  ],
+  "phase": "definition",
+  "prerequisites": ["PM.1.01"],
+  "pairs_with": ["PM.2.03", "PM.1.08"],
+  "cross_discipline": ["MK.2.06"],
+  "depth": "methods",
+  "keywords": [
+    "pricing", "monetization", "freemium", "usage-based", "subscription",
+    "Van Westendorp", "tier", "packaging", "value metric", "willingness-to-pay",
+    "conversion", "ARPU", "fair billing"
+  ]
+}
+MANIFEST -->

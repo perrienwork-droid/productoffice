@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Marketplaces &amp; Multi-Sided Platforms — Noir Book</title>
+  <link rel="stylesheet" href="../css/shared.css">
+  <link rel="stylesheet" href="../css/topic.css">
+  <script src="../js/theme.js"></script>
+  <script src="../js/topic-nav.js"></script>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="site-nav subpage-nav" data-discipline="pm">
+    <div class="nav-inner">
+      <a href="../index.html" class="site-logo">
+        <span class="logo-mark">PM</span>
+        <span class="nav-title">Noir Book</span>
+      </a>
+      <a href="../index.html" class="nav-back-link">&#8592; Library</a>
+      <div class="nav-filters">
+        <button class="disc-toggle ux-toggle active" data-disc="ux" onclick="toggleDisc('ux')" title="UX Design">
+          <span class="disc-dot disc-dot-ux"></span><span class="disc-label">UX Design</span><span class="disc-code">(UX)</span>
+        </button>
+        <button class="disc-toggle pm-toggle active" data-disc="pm" onclick="toggleDisc('pm')" title="Product Management">
+          <span class="disc-dot disc-dot-pm"></span><span class="disc-label">Product</span><span class="disc-code">(PM)</span>
+        </button>
+        <button class="disc-toggle mk-toggle active" data-disc="mk" onclick="toggleDisc('mk')" title="Marketing &amp; Growth">
+          <span class="disc-dot disc-dot-mk"></span><span class="disc-label">Marketing</span><span class="disc-code">(MK)</span>
+        </button>
+        <button class="disc-toggle cs-toggle active" data-disc="cs" onclick="toggleDisc('cs')" title="Content Strategy">
+          <span class="disc-dot disc-dot-cs"></span><span class="disc-label">Content</span><span class="disc-code">(CS)</span>
+        </button>
+        <div class="search-box nav-search-box">
+          <div class="nav-search-wrap">
+            <div class="nav-search-pills" id="navSearchPills"></div>
+            <input type="text" id="navSearchInput" placeholder="Search..." autocomplete="off"
+              oninput="topicNavSearch(this.value)"
+              onkeydown="handleNavSearchKey(event)"
+              onfocus="handleNavSearchFocus()"
+              onblur="handleNavSearchBlur()">
+            <button type="button" class="nav-search-clear" id="navSearchClear" onclick="clearNavSearch()" aria-label="Clear search">&times;</button>
+          </div>
+          <div class="search-dropdown" id="navSearchDropdown"></div>
+        </div>
+      </div>
+      <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle theme">&#9790;</button>
+      <button class="burger-btn" id="burgerBtn" onclick="openBurger()" aria-label="Menu">
+        <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="2" y1="4" x2="16" y2="4"/><line x1="2" y1="9" x2="16" y2="9"/><line x1="2" y1="14" x2="16" y2="14"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Burger Menu Overlay -->
+  <div class="burger-overlay" id="burgerOverlay" onclick="closeBurger(event)">
+    <div class="burger-panel" onclick="event.stopPropagation()">
+      <div class="burger-panel-header">
+        <h3>Menu</h3>
+        <button class="burger-close" onclick="closeBurger()" aria-label="Close">&times;</button>
+      </div>
+      <div class="burger-search">
+        <input type="text" id="burgerSearchInput" placeholder="Search topics, methods..." autocomplete="off" oninput="burgerSearch(this.value)">
+        <div class="burger-search-results" id="burgerSearchResults"></div>
+      </div>
+      <div class="burger-links">
+        <a href="../index.html">&#8592; Back to Library</a>
+        <a href="../design-system.html">Design System</a>
+        <a href="../request-topic.html">Suggest a topic or improvement</a>
+      </div>
+      <div class="burger-toc-section">
+        <p class="burger-toc-title">On this page</p>
+        <ul class="burger-toc-list">
+        <li><a href="#what-and-why" data-section="theory">What marketplace product management is and why it's different</a></li>
+        <li><a href="#cold-start" data-section="practical">Solving the cold-start problem</a></li>
+        <li><a href="#supply-demand" data-section="practical">Supply and demand balancing</a></li>
+        <li><a href="#quality-trust" data-section="practical">Quality and trust systems</a></li>
+        <li><a href="#examples" data-section="examples">Real-world examples</a></li>
+        <li><a href="#pitfalls" data-section="practical">Common pitfalls</a></li>
+        <li><a href="#connections">Connected topics in your library</a></li>
+        <li><a href="#deep-dive">Deep-dive appendix</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Topic Header -->
+  <header class="topic-header container">
+    <div class="breadcrumb">
+      <a href="../index.html">Library</a>
+      <span class="sep">&#8250;</span>
+      <span class="breadcrumb-disc breadcrumb-pm">Product Management</span>
+      <span class="sep">&#8250;</span>
+      <span>Tier 3 — Situational</span>
+      <span class="sep">&#8250;</span>
+      <span>Marketplaces &amp; Multi-Sided Platforms</span>
+    </div>
+    <div class="topic-meta">
+      <span class="tier-badge tier3">Tier 3</span>
+      <span style="font-size:14px;color:var(--ink-muted)">Topic PM.3.02</span>
+    </div>
+    <h1>Marketplaces &amp; Multi-Sided Platforms</h1>
+    <p class="topic-subtitle">Chicken-and-egg problems. Supply/demand dynamics, liquidity metrics, cold-start strategies, take-rate modeling, and managing the complex incentives of multi-sided platforms.</p>
+    <div class="content-splits">
+      <span class="split-badge theory">30% Theory</span>
+      <span class="split-badge practical">45% Methods &amp; Templates</span>
+      <span class="split-badge examples">25% Examples</span>
+    </div>
+  </header>
+
+  <!-- Reading Progress Bar -->
+  <div class="reading-progress" id="readingProgress"></div>
+
+  <!-- Main Layout -->
+  <div class="container">
+    <div class="topic-layout">
+
+      <!-- Sidebar: Table of Contents -->
+      <aside class="topic-sidebar">
+        <nav class="toc">
+          <p class="sidebar-topic-title">Marketplaces &amp; Multi-Sided Platforms</p>
+          <p class="toc-title">On this page</p>
+          <ul class="toc-list">
+            <li><a href="#what-and-why" data-section="theory">What marketplace product management is and why it's different</a></li>
+            <li><a href="#cold-start" data-section="practical">Solving the cold-start problem</a></li>
+            <li><a href="#supply-demand" data-section="practical">Supply and demand balancing</a></li>
+            <li><a href="#quality-trust" data-section="practical">Quality and trust systems</a></li>
+            <li><a href="#examples" data-section="examples">Real-world examples</a></li>
+            <li><a href="#pitfalls" data-section="practical">Common pitfalls</a></li>
+            <li><a href="#connections">Connected topics in your library</a></li>
+            <li><a href="#deep-dive">Deep-dive appendix</a></li>
+          </ul>
+        </nav>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="topic-main topic-content">
+
+        <div class="section-marker" id="what-and-why">
+          <span class="split-badge theory">Theory</span>
+          <span class="marker-line"></span>
+        </div>
+
+        <section data-section="theory">
+  <h2>What marketplace product management is and why it's different</h2>
+
+<p>A marketplace is a platform that connects two or more sides — typically buyers and sellers, or supply and demand. Airbnb connects hosts and guests. Uber connects drivers and riders. Upwork connects freelancers and clients. Unlike single-sided products where you serve one user type, marketplaces must serve multiple user types with conflicting needs simultaneously. Sellers want maximum visibility and high prices. Buyers want the best selection and low prices. Your job is designing incentives, rules, and experiences that make both sides better off.</p>
+
+<p>Marketplace PM is fundamentally different from single-sided PM because of <strong>network effects</strong>. The product gets more valuable as more participants join — but only if both sides grow in balance. A marketplace with 10,000 sellers and 5 buyers is worthless. One with 100 sellers and 10,000 buyers is also broken (sellers are overwhelmed, quality drops). The PM's job is managing this balance while growing both sides, which creates the signature marketplace challenge: the chicken-and-egg problem.</p>
+
+<p>The economics are also different. Marketplaces typically earn by taking a percentage of each transaction (the "take rate"). This means your revenue is directly tied to transaction volume and average transaction value — not to user count or subscription fees. A marketplace with 1M registered users but low transaction volume is failing. One with 50K active users transacting frequently is thriving.</p>
+</section>
+
+        <div class="section-marker" id="cold-start">
+          <span class="split-badge practical">Practical</span>
+          <span class="marker-line"></span>
+        </div>
+
+        <section data-section="practical">
+  <h2>Solving the cold-start problem</h2>
+
+<div class="method-card">
+  <h4>Cold-Start Strategy Matrix <span class="method-tag">Core Method</span></h4>
+  <p class="method-when">Use when: launching a new marketplace and facing the chicken-and-egg problem.</p>
+  <p>Choose from proven cold-start strategies:</p>
+<ul>
+  <li><strong>Single-player mode</strong> — provide value to one side before the other exists. Yelp gave restaurants a free listing page (useful even without reviews). OpenTable gave restaurants reservation management software (useful even without diners).</li>
+  <li><strong>Seed the supply</strong> — manually recruit or create initial supply. Uber recruited its first drivers through personal outreach. Reddit's founders seeded content with fake accounts.</li>
+  <li><strong>Constrain geography</strong> — launch in one city or neighborhood. Achieve density in a small market before expanding. Uber launched in San Francisco only.</li>
+  <li><strong>Subsidize one side</strong> — pay early supply or give early demand free access. DoorDash subsidized early delivery fees.</li>
+  <li><strong>Come for the tool, stay for the network</strong> — build a useful tool that attracts one side, then add marketplace dynamics. Shopify started as an e-commerce tool, then added a marketplace layer.</li>
+</ul>
+</div>
+
+<div class="method-card">
+  <h4>Liquidity Metrics Framework <span class="method-tag">Core Method</span></h4>
+  <p class="method-when">Use when: measuring whether your marketplace is healthy and transactions are flowing.</p>
+  <p>Liquidity is the probability that a participant can complete a transaction successfully. Measure it with:</p>
+<ul>
+  <li><strong>Search-to-fill rate</strong> — what percentage of searches result in a completed transaction? (Airbnb: percentage of searches that result in a booking.).</li>
+  <li><strong>Time-to-match</strong> — how long does it take to connect supply and demand? (Uber: time from ride request to driver match.).</li>
+  <li><strong>Utilization rate</strong> — what percentage of supply is active and transacting? (Airbnb: percentage of listed nights that are booked.).</li>
+  <li><strong>Repeat rate</strong> — what percentage of participants transact more than once? A marketplace with high search-to-fill, low time-to-match, high utilization, and high repeat rate is liquid.</li>
+</ul>
+</div>
+</section>
+
+<section id="supply-demand" data-section="practical">
+  <h2>Supply and demand balancing</h2>
+
+<div class="method-card">
+  <h4>Supply/Demand Balancing <span class="method-tag">Framework</span></h4>
+  <p class="method-when">Use when: one side of the marketplace is growing faster than the other.</p>
+  <p>Diagnose the imbalance: <strong>Supply-constrained</strong> (more buyers than sellers) — demand is strong but supply can't keep up. Symptoms: long wait times, high prices, low search-to-fill. Fix: recruit more supply, reduce supply-side friction, incentivize high-quality supply. <strong>Demand-constrained</strong> (more sellers than buyers) — supply is plentiful but buyers aren't coming. Symptoms: low utilization, supply churn, price competition. Fix: marketing to demand side, improve discovery and matching, reduce buyer-side friction.</p>
+  <p>The ideal state is slight supply surplus — enough selection that buyers always find what they want, with enough competition that supply quality stays high. Significant oversupply kills supply-side economics (sellers can't earn enough and leave). Significant undersupply kills buyer experience (buyers can't find what they want and leave).</p>
+</div>
+
+<div class="method-card">
+  <h4>Take-Rate Modeling <span class="method-tag">Technique</span></h4>
+  <p class="method-when">Use when: setting or adjusting your marketplace commission structure.</p>
+  <p>The take rate (percentage of each transaction the marketplace keeps) must balance three forces:</p>
+<ul>
+  <li><strong>Revenue</strong> — higher take rate means more revenue per transaction.</li>
+  <li><strong>Supply retention</strong> — too high and sellers leave for competitors or direct channels.</li>
+  <li><strong>Demand price sensitivity</strong> — if the take rate inflates prices, buyers may leave. Benchmark against category norms: ride-sharing takes 20-30%, accommodation takes 12-15%, freelance marketplaces take 10-20%, e-commerce marketplaces take 8-15%. Your take rate should reflect the value you add: better matching, trust/safety, payment processing, and demand generation.</li>
+</ul>
+</div>
+
+<div class="callout warning">
+  <p class="callout-title">Common mistake</p>
+  <p>Setting a high take rate too early. When your marketplace is small, supply has alternatives. A 25% take rate on a marketplace with low demand drives supply to competitors with lower fees. Start with a low or zero take rate to build liquidity, then gradually increase as the marketplace becomes the dominant venue for transactions in your category.</p>
+</div>
+</section>
+
+<section id="quality-trust" data-section="practical">
+  <h2>Quality and trust systems</h2>
+
+<div class="method-card">
+  <h4>Marketplace Flywheel Design <span class="method-tag">Framework</span></h4>
+  <p class="method-when">Use when: designing the self-reinforcing growth loop for your marketplace.</p>
+  <p>The marketplace flywheel: more supply → better selection → more demand → more transactions → more revenue for supply → more supply. Each element strengthens the next. The PM's job is identifying where the flywheel is weakest and investing there. If selection is great but demand is low, invest in marketing. If demand is strong but supply quality is poor, invest in quality controls. If transactions are happening but supply isn't earning enough, adjust take rates or add value-added services.</p>
+</div>
+
+<div class="method-card">
+  <h4>Trust &amp; Safety Framework <span class="method-tag">Technique</span></h4>
+  <p class="method-when">Use when: building the review, verification, and dispute resolution systems your marketplace needs.</p>
+  <p>Trust systems for marketplaces include:</p>
+<ul>
+  <li><strong>Identity verification</strong> — how do you verify participants are who they claim to be?</li>
+  <li><strong>Reviews and ratings</strong> — bilateral reviews (both sides rate each other) create accountability.</li>
+  <li><strong>Quality standards</strong> — minimum requirements for supply (response time, cancellation rate, quality scores).</li>
+  <li><strong>Dispute resolution</strong> — what happens when a transaction goes wrong? Who pays? How fast is resolution?</li>
+  <li><strong>Fraud detection</strong> — fake listings, fake reviews, payment fraud. Each system needs investment proportional to the risk in your category.</li>
+</ul>
+</div>
+</section>
+
+        <div class="section-marker" id="examples">
+          <span class="split-badge examples">Examples</span>
+          <span class="marker-line"></span>
+        </div>
+
+        <section data-section="examples">
+  <h2>Real-world examples</h2>
+
+<div class="case-study">
+  <p class="case-label">Case study</p>
+  <h4>Airbnb: Geographic density as the cold-start strategy</h4>
+  <p>Airbnb's early growth was hyper-local. Rather than launching globally, they focused on getting density in individual cities — enough listings that a traveler searching for accommodation in San Francisco would find multiple quality options. They seeded supply by personally visiting hosts, taking professional photos of listings, and coaching hosts on pricing. The professional photography alone increased bookings 2-3x for participating listings, creating a value exchange that brought more hosts onto the platform.</p>
+  <p><strong>Why it works:</strong> Density creates liquidity. A traveler who searches and finds 3 options might not book. One who finds 30 options almost certainly will. By achieving density city-by-city rather than spreading thin globally, Airbnb created great buyer experiences in each market they entered.</p>
+</div>
+
+<div class="case-study">
+  <p class="case-label">Case study</p>
+  <h4>Uber: Subsidizing both sides to achieve critical mass</h4>
+  <p>Uber subsidized both sides simultaneously in new markets: driver bonuses ensured supply availability, and rider promotions ensured demand volume. This was expensive — Uber lost money in every new city — but it achieved the liquidity threshold (enough drivers that wait times stayed below 5 minutes) that made the service compelling. Once liquidity was established, subsidies were gradually reduced as network effects took over.</p>
+  <p><strong>Why it works:</strong> Uber recognized that marketplace economics don't apply until you cross the liquidity threshold. Below that threshold, the experience is too poor to retain either side. Subsidies were an investment in reaching the threshold, not a permanent pricing strategy.</p>
+</div>
+</section>
+
+<section id="pitfalls" data-section="practical">
+  <h2>Common pitfalls</h2>
+
+<div class="pitfall">
+  <div class="pitfall-icon">!</div>
+  <div>
+    <h4>Disintermediation: users cut you out</h4>
+    <p>Once buyers and sellers connect through your marketplace, they may take future transactions off-platform to avoid your fees. Prevent this by providing ongoing value that makes on-platform transactions superior: payment protection, dispute resolution, reviews that build reputation, and tools that simplify the transaction process. If the only value you add is the initial match, disintermediation is inevitable.</p>
+  </div>
+</div>
+
+<div class="pitfall">
+  <div class="pitfall-icon">!</div>
+  <div>
+    <h4>Optimizing for GMV instead of liquidity</h4>
+    <p>Gross Merchandise Volume (total transaction value) looks impressive in board decks but can be misleading. A marketplace with $10M GMV from 100 power sellers and 50 repeat buyers is fragile. One with $5M GMV from 2,000 sellers and 10,000 buyers is healthier. Optimize for liquidity and participant diversity, not headline GMV.</p>
+  </div>
+</div>
+</section>
+
+<section id="connections">
+  <h2>Connected topics in your library</h2>
+  <div class="cross-ref-grid">
+    <a href="platform-api-pm.html" class="cross-ref-card">
+      <span class="ref-number">PM Tier 2</span>
+      <div class="ref-title">Platform &amp; API PM</div>
+      <div class="ref-reason">Marketplaces are a type of platform — ecosystem and partner management skills apply.</div>
+    </a>
+    <a href="growth-plg.html" class="cross-ref-card">
+      <span class="ref-number">PM Tier 2</span>
+      <div class="ref-title">Growth &amp; PLG</div>
+      <div class="ref-reason">Marketplace growth has unique dynamics (network effects, flywheels) beyond standard PLG.</div>
+    </a>
+    <a href="pricing.html" class="cross-ref-card">
+      <span class="ref-number">PM Tier 2</span>
+      <div class="ref-title">Pricing &amp; Monetization</div>
+      <div class="ref-reason">Take-rate design is a specialized pricing problem with multi-sided constraints.</div>
+    </a>
+    <a href="product-metrics.html" class="cross-ref-card">
+      <span class="ref-number">PM Tier 1</span>
+      <div class="ref-title">Product Metrics &amp; Analytics</div>
+      <div class="ref-reason">Marketplace metrics (liquidity, utilization, GMV) extend the standard metrics toolkit.</div>
+    </a>
+  </div>
+</section>
+
+<div class="deep-dive-section" id="deep-dive">
+          <div class="deep-dive-header">
+            <span class="deep-dive-badge">Deep Dive</span>
+            <h2 style="margin:0; border:none; padding:0;">Appendix</h2>
+          </div>
+  <details class="expandable">
+    <summary><span class="chevron"><svg viewBox="0 0 14 14"><polyline points="4,2 10,7 4,12"/></svg></span> Multi-sided platform variants</summary>
+    <div class="expand-content topic-content">
+      <h4>Beyond two-sided</h4>
+      <p>Some platforms have three or more sides: <strong>Advertisers + users + content creators</strong> (YouTube). <strong>Riders + drivers + restaurants</strong> (Uber Eats). <strong>Shoppers + sellers + advertisers</strong> (Amazon). Each additional side multiplies complexity: more balancing, more conflicting incentives, more potential failure modes. The PM must decide which sides to prioritize at each growth stage — you can't optimize for all sides simultaneously.</p>
+    </div>
+  </details>
+  <details class="expandable">
+    <summary><span class="chevron"><svg viewBox="0 0 14 14"><polyline points="4,2 10,7 4,12"/></svg></span> Further reading and resources</summary>
+    <div class="expand-content topic-content">
+      <h4>Essential reading</h4>
+      <p><strong>"The Cold Start Problem" by Andrew Chen</strong> — Definitive book on network effects and marketplace launch strategies.</p>
+      <p><strong>"Platform Revolution" by Parker, Van Alstyne &amp; Choudary</strong> — Strategic framework for platform businesses.</p>
+      <p><strong>"Matchmakers" by Evans &amp; Schmalensee</strong> — Economic theory behind multi-sided platforms, accessible for PMs.</p>
+    </div>
+  </details>
+</div>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer container">
+    <div class="footer-inner">
+      <p>Noir Book — Built for the work, not the shelf.</p>
+      <div class="footer-links">
+        <a href="../design-system.html">Design System</a>
+        <a href="../library-manifest.json">Manifest</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to Top -->
+  <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">&#8593;</button>
+
+  <!-- Floating Mobile TOC -->
+  <button class="mobile-toc-btn" id="mobileTocBtn" aria-label="Open table of contents">&#9776; Contents</button>
+  <div class="mobile-toc-overlay" id="mobileTocOverlay">
+    <div class="mobile-toc-panel">
+      <div class="mobile-toc-panel-header">
+        <h3>On this page</h3>
+        <button class="mobile-toc-close" id="mobileTocClose" aria-label="Close">&times;</button>
+      </div>
+      <ul class="mobile-toc-list">
+        <li><a href="#what-and-why" data-section="theory">What marketplace product management is and why it's different</a></li>
+        <li><a href="#cold-start" data-section="practical">Solving the cold-start problem</a></li>
+        <li><a href="#supply-demand" data-section="practical">Supply and demand balancing</a></li>
+        <li><a href="#quality-trust" data-section="practical">Quality and trust systems</a></li>
+        <li><a href="#examples" data-section="examples">Real-world examples</a></li>
+        <li><a href="#pitfalls" data-section="practical">Common pitfalls</a></li>
+        <li><a href="#connections">Connected topics in your library</a></li>
+        <li><a href="#deep-dive">Deep-dive appendix</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    // Scrollspy: highlight active TOC item
+    const tocLinks = document.querySelectorAll('.toc-list a');
+    const sections = [];
+    tocLinks.forEach(link => {
+      const href = link.getAttribute('href');
+      if (!href || !href.startsWith('#')) return;
+      const el = document.getElementById(href.slice(1));
+      if (el) sections.push({ el, link });
+    });
+
+    // Reading progress bar
+    const progressBar = document.getElementById('readingProgress');
+    const backToTop = document.getElementById('backToTop');
+
+    function onScroll() {
+      let current = sections[0];
+      for (const s of sections) {
+        if (s.el.getBoundingClientRect().top <= 120) current = s;
+      }
+      tocLinks.forEach(l => l.classList.remove('active'));
+      if (current) current.link.classList.add('active');
+
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrolled = window.scrollY;
+      const progress = docHeight > 0 ? (scrolled / docHeight) * 100 : 0;
+      if (progressBar) progressBar.style.width = progress + '%';
+      if (backToTop) backToTop.classList.toggle('visible', scrolled > 400);
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    // Split badges: click to scroll to section
+    document.querySelectorAll('.content-splits .split-badge').forEach(function(badge) {
+      badge.addEventListener('click', function() {
+        var type = badge.classList.contains('theory') ? 'theory' : badge.classList.contains('practical') ? 'practical' : 'examples';
+        var target = document.querySelector('section[data-section="' + type + '"]');
+        if (target) {
+          var marker = target.previousElementSibling;
+          (marker && marker.classList.contains('section-marker') ? marker : target).scrollIntoView({behavior:'smooth'});
+        }
+      });
+    });
+  </script>
+
+  <script src="../js/checklist.js"></script>
+  <script src="../js/mobile-toc.js"></script>
+  <script src="../js/search.js"></script>
+  <script>
+    function openBurger(){document.getElementById('burgerOverlay').classList.add('open');document.body.style.overflow='hidden'}
+    function closeBurger(e){if(e&&e.target&&e.target!==document.getElementById('burgerOverlay'))return;document.getElementById('burgerOverlay').classList.remove('open');document.body.style.overflow=''}
+    function burgerSearch(q){
+      var r=document.getElementById('burgerSearchResults');
+      if(!q||q.length<2){r.innerHTML='';return}
+      var ql=q.toLowerCase(),matches=[];
+      if(typeof SEARCH_INDEX!=='undefined'){
+        SEARCH_INDEX.forEach(function(t){
+          var hit=t.topic.toLowerCase().indexOf(ql)>-1;
+          if(!hit)t.sections.forEach(function(s){if((s.title+' '+s.keywords).toLowerCase().indexOf(ql)>-1)hit=true});
+          if(hit)matches.push(t);
+        });
+      }
+      if(!matches.length){r.innerHTML='<p style="padding:8px 0;font-size:13px;color:var(--ink-muted)">No results</p>';return}
+      r.innerHTML=matches.slice(0,8).map(function(m){return '<a href="../'+m.url+'">'+m.topic+'<span class="bsr-disc">'+m.discipline+'</span></a>'}).join('');
+    }
+    document.addEventListener('keydown',function(e){if(e.key==='Escape'){closeBurger();var dd=document.getElementById('searchDropdown');if(dd)dd.classList.remove('visible');}});
+    // Close burger when clicking a TOC link
+    document.querySelectorAll('.burger-toc-list a').forEach(function(a){a.addEventListener('click',function(){closeBurger()})});
+    // Search typeahead
+    function topicSearch(q){
+      var dd=document.getElementById('searchDropdown');
+      if(!q||q.length<2||typeof SEARCH_INDEX==='undefined'){if(dd)dd.classList.remove('visible');return}
+      var ql=q.toLowerCase(),grouped={};
+      SEARCH_INDEX.forEach(function(t){
+        var hit=t.topic.toLowerCase().indexOf(ql)>-1,sHits=[],mHits=[];
+        t.sections.forEach(function(s){if((s.title+' '+s.keywords).toLowerCase().indexOf(ql)>-1)sHits.push(s)});
+        (t.methods||[]).forEach(function(m){if((m.name+' '+(m.keywords||'')).toLowerCase().indexOf(ql)>-1)mHits.push(m)});
+        if(!hit&&!sHits.length&&!mHits.length&&ql.length>=3&&typeof levenshtein==='function'){
+          var words=t.topic.toLowerCase().split(/ +/);
+          for(var i=0;i<words.length;i++){if(levenshtein(ql,words[i].substring(0,ql.length+1))<=1){hit=true;break}}
+        }
+        if(hit||sHits.length||mHits.length)grouped[t.topic]={url:'../'+t.url,disc:t.discipline||'',sections:sHits,methods:mHits,topicHit:hit};
+      });
+      var keys=Object.keys(grouped);
+      if(!keys.length){dd.innerHTML='<div class="search-empty">No results</div>';dd.classList.add('visible');return}
+      var html='';
+      keys.slice(0,8).forEach(function(topic){
+        var g=grouped[topic];
+        html+='<div class="search-group"><div class="search-group-title">'+topic+'</div>';
+        if(g.topicHit)html+='<a class="search-result" href="'+g.url+'"><span class="search-result-title">'+topic+'</span><span class="search-result-type practical">'+g.disc+'</span></a>';
+        g.sections.forEach(function(s){html+='<a class="search-result" href="'+g.url+'#'+s.id+'"><span class="search-result-title">'+s.title+'</span><span class="search-result-type '+s.type+'">'+s.type+'</span></a>'});
+        g.methods.slice(0,3).forEach(function(m){html+='<a class="search-result" href="'+g.url+'#'+m.section+'"><span class="search-result-title">'+m.name+'</span><span class="search-result-type practical">method</span></a>'});
+        html+='</div>';
+      });
+      dd.innerHTML=html;dd.classList.add('visible');
+    }
+    document.addEventListener('click',function(e){if(!e.target.closest('.search-box')){var dd=document.getElementById('searchDropdown');if(dd)dd.classList.remove('visible')}});
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,403 @@
+<!--
+TOPIC_ID: PM.1.04
+TOPIC_NUMBER: PM.1.04
+TITLE: Requirements: User Stories, PRDs &amp; Specs
+SUBTITLE: Translate strategy into buildable plans. User stories, acceptance criteria, PRDs, one-pagers, and the spectrum from lightweight to heavyweight specification.
+TIER: 1
+TIER_LABEL: Core Toolkit
+THEORY: 25
+PRACTICAL: 50
+EXAMPLES: 25
+-->
+
+<section id="what-and-why" data-section="theory">
+  <h2>What requirements are and why they matter</h2>
+
+<p>Requirements are the translation layer between "what we want to achieve" and "what we need to build." They bridge the gap between product strategy (why and what) and engineering execution (how). Done well, requirements give engineers enough context to make good decisions without prescribing every implementation detail. Done badly, they create either confusion (too vague) or resentment (too prescriptive).</p>
+
+<p>The format matters less than the content. Whether you write user stories, PRDs, one-pagers, or RFCs, the essential information is the same: who is this for, what problem does it solve, what does success look like, and what are the constraints? The right format depends on your team's culture, the initiative's complexity, and how much shared context already exists.</p>
+
+<p>The biggest requirement mistake isn't choosing the wrong format — it's writing requirements too late. Requirements written after design is complete are documentation, not specification. They should be written early enough to shape design and engineering decisions, not just record them.</p>
+
+<div class="callout info">
+  <p class="callout-title">Why this matters for your projects</p>
+  <p>The cost of ambiguity in requirements compounds through the entire build process. An unclear requirement leads to a design assumption, which leads to an engineering interpretation, which leads to a QA question, which leads to a rework cycle. One clear sentence in the spec can prevent a week of back-and-forth during implementation. Requirements aren't bureaucracy — they're the cheapest form of quality assurance.</p>
+</div>
+
+<h3 id="spec-spectrum">The specification spectrum</h3>
+
+<p>Requirements exist on a spectrum from lightweight to heavyweight. The right position depends on three factors: team maturity (experienced teams need less specification), initiative risk (high-stakes work needs more), and shared context (teams that recently did discovery together need less written down).</p>
+
+<p><strong>Lightweight</strong> (1-pager, bullet points): For small features, experienced teams, or when discovery just happened and context is fresh. Takes 30 minutes to write.</p>
+
+<p><strong>Medium</strong> (user stories + acceptance criteria): For standard features with clear scope. Takes 1–2 hours. The default for most work.</p>
+
+<p><strong>Heavyweight</strong> (full PRD): For major features, cross-team initiatives, or when the team lacks shared context. Takes 4–8 hours. Use sparingly — heavyweight specs often go unread.</p>
+
+</section>
+
+<section id="requirements-methods" data-section="practical">
+  <h2>Requirements formats</h2>
+
+<div class="method-card">
+  <h4>User Stories (INVEST) <span class="method-tag">Core Method</span></h4>
+  <p class="method-when">Use when: Breaking down a feature into implementable units for sprint planning. The default format for most agile teams.</p>
+  <p>A user story follows the format: <strong>As a [user type], I want to [action], so that [outcome].</strong> The "so that" clause is the most important part — it provides the context engineers need to make implementation decisions. Without it, the story is just a feature request.</p>
+  <p>Good stories follow the INVEST criteria: <strong>I</strong>ndependent (can be built without other stories), <strong>N</strong>egotiable (details are open to discussion), <strong>V</strong>aluable (delivers user value, not just technical value), <strong>E</strong>stimable (team can roughly size it), <strong>S</strong>mall (fits in one sprint), <strong>T</strong>estable (you can verify it works).</p>
+  <div class="callout tip">
+    <p class="callout-title">Practical tip</p>
+    <p>The story format isn't sacred — the context is. "As a marketing manager, I want to schedule reports, so that I don't have to manually run them every Monday morning" gives an engineer everything they need: the user (marketing manager, not admin), the action (schedule, not just generate), and the reason (avoiding manual work on Monday, which suggests weekly scheduling is the MVP, not arbitrary scheduling).</p>
+  </div>
+</div>
+
+<div class="method-card">
+  <h4>Acceptance Criteria (Given/When/Then) <span class="method-tag">Core Method</span></h4>
+  <p class="method-when">Use when: You need to define what "done" looks like for a user story. Every story should have acceptance criteria — they're the contract between PM and engineering.</p>
+  <p>Acceptance criteria use the Given/When/Then format borrowed from Behavior-Driven Development:</p>
+  <p><strong>Given</strong> [precondition — the starting state]<br>
+  <strong>When</strong> [action — what the user does]<br>
+  <strong>Then</strong> [outcome — what should happen]</p>
+  <p><strong>Example:</strong> Given a marketing manager is on the Reports page, When they click "Schedule" and select "Weekly on Monday at 9am," Then the report runs automatically every Monday at 9am and is emailed to them.</p>
+  <p>Write 3–7 acceptance criteria per story. Include the happy path, at least one error case, and any edge cases that could cause confusion during implementation.</p>
+  <div class="callout warning">
+    <p class="callout-title">Common mistake</p>
+    <p>Writing acceptance criteria that describe the UI rather than the behavior. "Then a green success toast appears" is an implementation detail. "Then the user sees confirmation that the schedule was saved" describes the behavior and lets the designer and engineer decide how to show it.</p>
+  </div>
+</div>
+
+<div class="method-card">
+  <h4>PRD (Product Requirements Document) <span class="method-tag">Heavyweight</span></h4>
+  <p class="method-when">Use when: A major initiative needs cross-team alignment, the problem is complex, or the team lacks shared context from recent discovery.</p>
+  <p>A PRD is a comprehensive document that captures the full context: problem, users, goals, solution, scope, metrics, and dependencies. It's not a spec for engineers — it's a shared understanding document for everyone involved.</p>
+  <div class="template-box">
+    <div class="template-header">
+      <span class="template-label">Template</span>
+      <span class="template-title">PRD Structure</span>
+    </div>
+    <div class="template-grid">
+      <div class="template-field">
+        <div class="template-field-label">Problem statement</div>
+        <div class="template-field-hint">What problem are we solving? For whom? Evidence that it matters. Link to discovery research.</div>
+      </div>
+      <div class="template-field">
+        <div class="template-field-label">Goals and success metrics</div>
+        <div class="template-field-hint">What does success look like? Specific metrics with targets. Counter-metrics.</div>
+      </div>
+      <div class="template-field">
+        <div class="template-field-label">User stories / requirements</div>
+        <div class="template-field-hint">What the product needs to do, organized by user flow or capability area.</div>
+      </div>
+      <div class="template-field">
+        <div class="template-field-label">Scope: in and out</div>
+        <div class="template-field-hint">Explicit list of what's included and what's deliberately excluded.</div>
+      </div>
+      <div class="template-field">
+        <div class="template-field-label">Design and UX considerations</div>
+        <div class="template-field-hint">Link to designs. Key UX decisions and their rationale. Accessibility requirements.</div>
+      </div>
+      <div class="template-field">
+        <div class="template-field-label">Edge cases and error states</div>
+        <div class="template-field-hint">What happens when things go wrong? Empty states, error handling, permission boundaries.</div>
+      </div>
+      <div class="template-field">
+        <div class="template-field-label">Dependencies and risks</div>
+        <div class="template-field-hint">What could block this? API dependencies, team availability, third-party services.</div>
+      </div>
+      <div class="template-field">
+        <div class="template-field-label">Launch plan</div>
+        <div class="template-field-hint">Rollout strategy (beta, phased, full), feature flags, migration needs, documentation.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="method-card">
+  <h4>One-Pager <span class="method-tag">Lightweight</span></h4>
+  <p class="method-when">Use when: A small-to-medium initiative needs enough context to get started but doesn't warrant a full PRD. The 80/20 version of a PRD.</p>
+  <div class="template-box">
+    <div class="template-header">
+      <span class="template-label">Template</span>
+      <span class="template-title">Initiative One-Pager</span>
+    </div>
+    <div class="template-grid">
+      <div class="template-field">
+        <div class="template-field-label">Problem (2–3 sentences)</div>
+        <div class="template-field-hint">What's broken, for whom, and why it matters now.</div>
+      </div>
+      <div class="template-field">
+        <div class="template-field-label">Proposed solution (2–3 sentences)</div>
+        <div class="template-field-hint">What we'll build. High-level, not detailed spec.</div>
+      </div>
+      <div class="template-field">
+        <div class="template-field-label">Success metric</div>
+        <div class="template-field-hint">One metric with a target. How we'll know this worked.</div>
+      </div>
+      <div class="template-field">
+        <div class="template-field-label">Scope boundaries</div>
+        <div class="template-field-hint">What's in v1. What's explicitly out.</div>
+      </div>
+      <div class="template-field">
+        <div class="template-field-label">Open questions</div>
+        <div class="template-field-hint">What we still need to figure out. Flag unknowns honestly.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="method-card">
+  <h4>Edge Case Matrix <span class="method-tag">Completeness Tool</span></h4>
+  <p class="method-when">Use when: A feature has complex state interactions, permission boundaries, or error conditions. The matrix prevents the "but what happens when..." conversations during code review.</p>
+  <p>List every relevant condition on one axis and every possible state on the other. Fill in what should happen at each intersection. Common dimensions: user role (admin, member, viewer), plan type (free, pro, enterprise), data state (empty, populated, error), connectivity (online, offline, slow), and platform (web, iOS, Android).</p>
+  <p>You don't need to fill in every cell — many combinations are irrelevant. But identifying which cells matter and explicitly documenting the expected behavior prevents ambiguity and reduces QA cycles.</p>
+</div>
+
+<div class="method-card">
+  <h4>Job Story Format <span class="method-tag">Alternative</span></h4>
+  <p class="method-when">Use when: User stories feel too role-focused and you want to emphasize the situation and motivation instead.</p>
+  <p><strong>When [situation], I want to [motivation], so I can [expected outcome].</strong></p>
+  <p>"When I'm reviewing last week's metrics before the Monday standup, I want to see the key numbers at a glance without opening multiple reports, so I can identify issues in 2 minutes instead of 15." The situation provides context that "As a PM" doesn't — it tells the engineer when this feature matters and what constraints exist (Monday morning, time pressure, multiple reports).</p>
+</div>
+
+</section>
+
+<section id="templates-and-checklists" data-section="practical">
+  <h2>Templates and checklists</h2>
+
+<div class="template-box">
+  <div class="template-header">
+    <span class="template-label">Checklist</span>
+    <span class="template-title">Spec Review Readiness</span>
+  </div>
+  <ul class="checklist">
+    <li>Problem statement links to discovery evidence (not just PM opinion)</li>
+    <li>Success metrics defined with specific targets and counter-metrics</li>
+    <li>User stories include "so that" context for every story</li>
+    <li>Acceptance criteria cover happy path, error cases, and key edge cases</li>
+    <li>Scope explicitly lists what's in AND what's out</li>
+    <li>Empty states, loading states, and error states are specified</li>
+    <li>Permission and role boundaries are documented</li>
+    <li>Dependencies identified and owners confirmed</li>
+    <li>Design links included (or design brief provided for the designer)</li>
+    <li>Open questions are flagged honestly — don't pretend to have answers you don't</li>
+    <li>The spec has been reviewed by at least one engineer before sprint planning</li>
+  </ul>
+</div>
+
+<div class="template-box">
+  <div class="template-header">
+    <span class="template-label">Checklist</span>
+    <span class="template-title">Definition of Done</span>
+  </div>
+  <ul class="checklist">
+    <li>All acceptance criteria pass</li>
+    <li>Edge cases from the edge case matrix are handled</li>
+    <li>Error states display appropriate messaging</li>
+    <li>Empty states are designed and implemented</li>
+    <li>Accessibility requirements met (keyboard nav, screen reader, contrast)</li>
+    <li>Analytics events are instrumented per the tracking plan</li>
+    <li>Feature is behind a feature flag (if applicable)</li>
+    <li>Documentation updated (help center, API docs, changelog)</li>
+    <li>Stakeholders notified per the communication plan</li>
+    <li>Success metric is being tracked and baselined</li>
+  </ul>
+</div>
+
+</section>
+
+<section id="real-world-examples" data-section="examples">
+  <h2>Real-world examples</h2>
+
+<div class="case-study">
+  <p class="case-label">Case study</p>
+  <h4>Amazon: The working-backwards press release</h4>
+  <p>Amazon's product development process starts with a press release written before any code is written. The press release describes the product as if it's already launched: what it does, who it's for, why it matters, and a customer quote explaining the benefit. If the press release doesn't sound compelling, the product isn't worth building.</p>
+  <p>This format works because it forces PM clarity at the specification stage. You can't write a compelling press release for a vague initiative. "We're building a dashboard" produces a weak press release. "We're launching a tool that lets marketing teams see their campaign ROI in real time, eliminating the 3-day lag that currently delays budget decisions" produces a clear one — and the spec practically writes itself from there.</p>
+</div>
+
+<div class="case-study">
+  <p class="case-label">Case study</p>
+  <h4>Basecamp: The "Shape Up" pitch</h4>
+  <p>Basecamp's Shape Up methodology replaces PRDs with "pitches" — short documents that define the problem, the appetite (how much time the team should spend — 2 weeks or 6 weeks), the solution sketch (rough enough to leave room for implementation creativity), and the "rabbit holes" (potential complications that have been pre-addressed). Notably, pitches include "no-gos" — things the solution deliberately doesn't handle.</p>
+  <p>The pitch format trusts the implementation team to fill in details. It provides boundaries (appetite, scope, no-gos) without specifying every screen and interaction. This requires a mature team but produces faster, more creative implementation.</p>
+</div>
+
+<div class="case-study">
+  <p class="case-label">Case study</p>
+  <h4>Stripe: RFC-driven development</h4>
+  <p>Stripe uses RFCs (Request for Comments) for major technical and product decisions. An RFC proposes a specific approach, explains the alternatives considered, and invites feedback from anyone in the company. RFCs are living documents — they evolve through comments and revisions before a decision is finalized.</p>
+  <p>The RFC model works well for complex, cross-cutting initiatives where multiple teams need to align on approach. It's more heavyweight than a PRD but produces deeper alignment because the review process surfaces concerns that would otherwise emerge during implementation.</p>
+</div>
+
+</section>
+
+<section id="common-pitfalls" data-section="practical">
+  <h2>Common pitfalls</h2>
+
+<div class="pitfall">
+  <div class="pitfall-icon">!</div>
+  <div>
+    <h4>Spec as UI prescription</h4>
+    <p>"Put a blue button in the top right corner that says 'Export'" is an implementation detail, not a requirement. "Users need to export their data in CSV format from the dashboard" is a requirement that gives the designer freedom to find the best solution. Specify the what and the why; let design and engineering handle the how.</p>
+  </div>
+</div>
+
+<div class="pitfall">
+  <div class="pitfall-icon">!</div>
+  <div>
+    <h4>The 50-page PRD nobody reads</h4>
+    <p>If your spec is longer than 5 pages, most of it won't be read. Long PRDs feel thorough but they diffuse attention. The important decisions get buried among obvious details. If you need a long document, add an executive summary at the top with the 5 most important things. Better yet, break it into a one-pager for alignment and detailed stories for implementation.</p>
+  </div>
+</div>
+
+<div class="pitfall">
+  <div class="pitfall-icon">!</div>
+  <div>
+    <h4>Writing specs alone</h4>
+    <p>Requirements written in isolation — PM writes, then throws over the wall to engineering — produce specs that miss technical constraints and design opportunities. The best specs are co-authored: PM provides the context and constraints, engineering flags feasibility issues and suggests alternatives, design identifies UX implications. A 30-minute spec review with the trio catches problems that would take a week to fix during implementation.</p>
+  </div>
+</div>
+
+<div class="pitfall">
+  <div class="pitfall-icon">!</div>
+  <div>
+    <h4>Forgetting the "out of scope" section</h4>
+    <p>What you don't build is as important as what you do. Without explicit scope boundaries, well-intentioned engineers add "while I'm in there" improvements that expand scope, delay delivery, and muddy the success metric. "Out of scope: bulk scheduling, custom recurrence patterns, and calendar integration — all deferred to v2" prevents this.</p>
+  </div>
+</div>
+
+</section>
+
+<section id="when-to-use" data-section="practical">
+  <h2>When to use each format</h2>
+
+<div class="callout info">
+  <p class="callout-title">Decision guidance</p>
+  <p><strong>One-pager:</strong> Small features, bug fixes, improvements where the team has shared context. Enough to align on scope without over-documenting.</p>
+  <p><strong>User stories + acceptance criteria:</strong> Standard features. The default for most work. Stories for sprint planning, AC for the definition of done.</p>
+  <p><strong>Full PRD:</strong> Major features, cross-team initiatives, new product areas, or when the team is new and hasn't built shared context yet. Use sparingly.</p>
+  <p><strong>RFC:</strong> Architectural decisions, platform changes, or initiatives that affect multiple teams. When you need cross-company feedback before committing.</p>
+  <p><strong>Press release / pitch:</strong> New products, major pivots, or when you need to test whether the vision is compelling before investing in detailed specs.</p>
+</div>
+
+</section>
+
+<section id="connections">
+  <h2>Connected topics in your library</h2>
+
+<div class="cross-ref-grid">
+  <a href="#" class="cross-ref-card">
+    <span class="ref-number">PM.1.02</span>
+    <div class="ref-title">Product Discovery</div>
+    <div class="ref-reason">Discovery produces the evidence that requirements should reference</div>
+  </a>
+  <a href="#" class="cross-ref-card">
+    <span class="ref-number">PM.1.10</span>
+    <div class="ref-title">Agile Product Management</div>
+    <div class="ref-reason">Stories and ACs feed into sprint planning</div>
+  </a>
+  <a href="#" class="cross-ref-card">
+    <span class="ref-number">PM.2.11</span>
+    <div class="ref-title">Cross-Functional Collaboration</div>
+    <div class="ref-reason">Co-authoring specs with the product trio</div>
+  </a>
+  <a href="#" class="cross-ref-card">
+    <span class="ref-number">PM.1.05</span>
+    <div class="ref-title">Product Metrics</div>
+    <div class="ref-reason">Success metrics for every requirement</div>
+  </a>
+</div>
+
+<section id="deep-dive">
+<h2>Deep-dive appendix</h2>
+
+  <details class="expandable">
+    <summary><span class="chevron"><svg viewBox="0 0 14 14"><polyline points="4,2 10,7 4,12"/></svg></span> Writing requirements for AI-powered features</summary>
+    <div class="expand-content topic-content">
+      <h4>The unique challenge of AI specs</h4>
+      <p>Traditional acceptance criteria assume deterministic behavior: given X, then Y. AI features are probabilistic: given X, then Y most of the time, but sometimes Z. Requirements for AI features need quality thresholds instead of pass/fail criteria. "The summarization feature should produce summaries that users rate 4+ out of 5 in at least 80% of cases." This requires evaluation frameworks, not just QA checklists.</p>
+      <p>Specify failure modes and fallbacks: "When the model confidence is below 70%, show the user a 'low confidence' indicator and offer manual override." Edge cases for AI features are about model behavior under unusual inputs, not just UI states.</p>
+    </div>
+  </details>
+
+  <details class="expandable">
+    <summary><span class="chevron"><svg viewBox="0 0 14 14"><polyline points="4,2 10,7 4,12"/></svg></span> Further reading</summary>
+    <div class="expand-content topic-content">
+      <p><strong>"Shape Up" by Ryan Singer</strong> — The pitch format as an alternative to PRDs. Especially useful for teams that want to give engineers more creative latitude.</p>
+      <p><strong>"User Story Mapping" by Jeff Patton</strong> — The definitive guide to organizing stories into a coherent narrative. Goes beyond individual stories to show how they fit together.</p>
+      <p><strong>"Working Backwards" by Colin Bryar &amp; Bill Carr</strong> — Amazon's press release-driven development process explained by insiders.</p>
+    </div>
+  </details>
+
+</section>
+</section>
+
+<div class="topic-nav">
+  <a href="product-metrics.html" class="topic-nav-link prev">
+    <div class="nav-direction">Previous topic</div>
+    <div class="nav-title">&#8249; Product Metrics &amp; Analytics</div>
+  </a>
+  <a href="stakeholder-management.html" class="topic-nav-link next">
+    <div class="nav-direction">Next topic</div>
+    <div class="nav-title">Stakeholder Management &amp; Influence &#8250;</div>
+  </a>
+</div>
+
+<!-- SEARCH_INDEX
+{
+    topic: "Requirements: User Stories, PRDs & Specs",
+    url: "topics/requirements.html",
+    tier: "Tier 1",
+    sections: [
+      { title: "What it is & why it matters", id: "what-and-why", type: "theory", keywords: "requirements specification translation strategy execution ambiguity context" },
+      { title: "Requirements formats", id: "requirements-methods", type: "practical", keywords: "user stories INVEST acceptance criteria PRD one-pager edge case job story RFC" },
+      { title: "Templates and checklists", id: "templates-and-checklists", type: "practical", keywords: "spec review definition of done checklist template" },
+      { title: "Real-world examples", id: "real-world-examples", type: "examples", keywords: "Amazon press release Basecamp Shape Up pitch Stripe RFC" },
+      { title: "Common pitfalls", id: "common-pitfalls", type: "practical", keywords: "UI prescription long PRD writing alone out of scope" },
+      { title: "When to use each format", id: "when-to-use", type: "practical", keywords: "one-pager user stories PRD RFC press release pitch" },
+      { title: "Deep-dive appendix", id: "deep-dive", type: "deep-dive", keywords: "AI features probabilistic quality thresholds further reading" }
+    ],
+    methods: [
+      { name: "User Stories (INVEST)", section: "requirements-methods", keywords: "user story as a I want so that INVEST independent negotiable valuable estimable small testable" },
+      { name: "Acceptance Criteria (Given/When/Then)", section: "requirements-methods", keywords: "acceptance criteria given when then BDD done contract happy path error" },
+      { name: "PRD Template", section: "requirements-methods", keywords: "PRD product requirements document problem goals scope design dependencies launch" },
+      { name: "One-Pager Template", section: "requirements-methods", keywords: "one-pager lightweight problem solution metric scope questions" },
+      { name: "Edge Case Matrix", section: "requirements-methods", keywords: "edge case matrix states roles plans permissions error conditions" },
+      { name: "Job Story Format", section: "requirements-methods", keywords: "job story when situation motivation outcome context JTBD" }
+    ]
+  }
+SEARCH_INDEX -->
+
+<!-- MANIFEST
+{
+  "id": "PM.1.04",
+  "title": "Requirements: User Stories, PRDs & Specs",
+  "file": "topics/requirements.html",
+  "tier": 1,
+  "discipline": "PM",
+  "solves": [
+    "I need to write user stories that engineers can actually build from",
+    "I want to create a PRD that captures context, not just features",
+    "I need to define acceptance criteria that prevent scope creep",
+    "I want to choose the right level of specification detail for my team",
+    "I need to document edge cases and error states before development starts"
+  ],
+  "methods": [
+    "User Stories (INVEST)",
+    "Acceptance Criteria (Given/When/Then)",
+    "PRD Template",
+    "One-Pager Template",
+    "Edge Case Matrix",
+    "Job Story Format"
+  ],
+  "phase": "definition",
+  "prerequisites": ["PM.1.01", "PM.1.05"],
+  "pairs_with": ["PM.1.10", "PM.2.11"],
+  "cross_discipline": [],
+  "depth": "methods",
+  "keywords": [
+    "requirements", "user stories", "PRD", "spec", "acceptance criteria",
+    "INVEST", "given when then", "one-pager", "edge cases", "definition of done",
+    "job story", "scope", "RFC", "press release"
+  ]
+}
+MANIFEST -->

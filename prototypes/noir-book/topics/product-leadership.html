@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Leadership &amp; Team Building — Noir Book</title>
+  <link rel="stylesheet" href="../css/shared.css">
+  <link rel="stylesheet" href="../css/topic.css">
+  <script src="../js/theme.js"></script>
+  <script src="../js/topic-nav.js"></script>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="site-nav subpage-nav" data-discipline="pm">
+    <div class="nav-inner">
+      <a href="../index.html" class="site-logo">
+        <span class="logo-mark">PM</span>
+        <span class="nav-title">Noir Book</span>
+      </a>
+      <a href="../index.html" class="nav-back-link">&#8592; Library</a>
+      <div class="nav-filters">
+        <button class="disc-toggle ux-toggle active" data-disc="ux" onclick="toggleDisc('ux')" title="UX Design">
+          <span class="disc-dot disc-dot-ux"></span><span class="disc-label">UX Design</span><span class="disc-code">(UX)</span>
+        </button>
+        <button class="disc-toggle pm-toggle active" data-disc="pm" onclick="toggleDisc('pm')" title="Product Management">
+          <span class="disc-dot disc-dot-pm"></span><span class="disc-label">Product</span><span class="disc-code">(PM)</span>
+        </button>
+        <button class="disc-toggle mk-toggle active" data-disc="mk" onclick="toggleDisc('mk')" title="Marketing &amp; Growth">
+          <span class="disc-dot disc-dot-mk"></span><span class="disc-label">Marketing</span><span class="disc-code">(MK)</span>
+        </button>
+        <button class="disc-toggle cs-toggle active" data-disc="cs" onclick="toggleDisc('cs')" title="Content Strategy">
+          <span class="disc-dot disc-dot-cs"></span><span class="disc-label">Content</span><span class="disc-code">(CS)</span>
+        </button>
+        <div class="search-box nav-search-box">
+          <div class="nav-search-wrap">
+            <div class="nav-search-pills" id="navSearchPills"></div>
+            <input type="text" id="navSearchInput" placeholder="Search..." autocomplete="off"
+              oninput="topicNavSearch(this.value)"
+              onkeydown="handleNavSearchKey(event)"
+              onfocus="handleNavSearchFocus()"
+              onblur="handleNavSearchBlur()">
+            <button type="button" class="nav-search-clear" id="navSearchClear" onclick="clearNavSearch()" aria-label="Clear search">&times;</button>
+          </div>
+          <div class="search-dropdown" id="navSearchDropdown"></div>
+        </div>
+      </div>
+      <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle theme">&#9790;</button>
+      <button class="burger-btn" id="burgerBtn" onclick="openBurger()" aria-label="Menu">
+        <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="2" y1="4" x2="16" y2="4"/><line x1="2" y1="9" x2="16" y2="9"/><line x1="2" y1="14" x2="16" y2="14"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Burger Menu Overlay -->
+  <div class="burger-overlay" id="burgerOverlay" onclick="closeBurger(event)">
+    <div class="burger-panel" onclick="event.stopPropagation()">
+      <div class="burger-panel-header">
+        <h3>Menu</h3>
+        <button class="burger-close" onclick="closeBurger()" aria-label="Close">&times;</button>
+      </div>
+      <div class="burger-search">
+        <input type="text" id="burgerSearchInput" placeholder="Search topics, methods..." autocomplete="off" oninput="burgerSearch(this.value)">
+        <div class="burger-search-results" id="burgerSearchResults"></div>
+      </div>
+      <div class="burger-links">
+        <a href="../index.html">&#8592; Back to Library</a>
+        <a href="../design-system.html">Design System</a>
+        <a href="../request-topic.html">Suggest a topic or improvement</a>
+      </div>
+      <div class="burger-toc-section">
+        <p class="burger-toc-title">On this page</p>
+        <ul class="burger-toc-list">
+        <li><a href="#what-and-why" data-section="theory">What product leadership is and how it differs from product management</a></li>
+        <li><a href="#hiring" data-section="practical">Hiring PMs</a></li>
+        <li><a href="#coaching" data-section="practical">Coaching and developing PMs</a></li>
+        <li><a href="#org-design" data-section="practical">Product org design</a></li>
+        <li><a href="#examples" data-section="examples">Real-world examples</a></li>
+        <li><a href="#journey-org" data-section="practical">Journey-centric organizational design</a></li>
+        <li><a href="#pitfalls" data-section="practical">Common pitfalls</a></li>
+        <li><a href="#connections">Connected topics in your library</a></li>
+        <li><a href="#deep-dive">Deep-dive appendix</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Topic Header -->
+  <header class="topic-header container">
+    <div class="breadcrumb">
+      <a href="../index.html">Library</a>
+      <span class="sep">&#8250;</span>
+      <span class="breadcrumb-disc breadcrumb-pm">Product Management</span>
+      <span class="sep">&#8250;</span>
+      <span>Tier 4 — Reference</span>
+      <span class="sep">&#8250;</span>
+      <span>Product Leadership &amp; Team Building</span>
+    </div>
+    <div class="topic-meta">
+      <span class="tier-badge tier4">Tier 4</span>
+      <span style="font-size:14px;color:var(--ink-muted)">Topic PM.4.01</span>
+    </div>
+    <h1>Product Leadership &amp; Team Building</h1>
+    <p class="topic-subtitle">Lead PMs. Hiring, coaching, career ladders, org design, and building product culture where it doesn't yet exist.</p>
+    <div class="content-splits">
+      <span class="split-badge theory">35% Theory</span>
+      <span class="split-badge practical">40% Methods &amp; Templates</span>
+      <span class="split-badge examples">25% Examples</span>
+    </div>
+  </header>
+
+  <!-- Reading Progress Bar -->
+  <div class="reading-progress" id="readingProgress"></div>
+
+  <!-- Main Layout -->
+  <div class="container">
+    <div class="topic-layout">
+
+      <!-- Sidebar: Table of Contents -->
+      <aside class="topic-sidebar">
+        <nav class="toc">
+          <p class="sidebar-topic-title">Product Leadership &amp; Team Building</p>
+          <p class="toc-title">On this page</p>
+          <ul class="toc-list">
+            <li><a href="#what-and-why" data-section="theory">What product leadership is and how it differs from product management</a></li>
+            <li><a href="#hiring" data-section="practical">Hiring PMs</a></li>
+            <li><a href="#coaching" data-section="practical">Coaching and developing PMs</a></li>
+            <li><a href="#org-design" data-section="practical">Product org design</a></li>
+            <li><a href="#examples" data-section="examples">Real-world examples</a></li>
+            <li><a href="#journey-org" data-section="practical">Journey-centric organizational design</a></li>
+            <li><a href="#pitfalls" data-section="practical">Common pitfalls</a></li>
+            <li><a href="#connections">Connected topics in your library</a></li>
+            <li><a href="#deep-dive">Deep-dive appendix</a></li>
+          </ul>
+        </nav>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="topic-main topic-content">
+
+        <div class="section-marker" id="what-and-why">
+          <span class="split-badge theory">Theory</span>
+          <span class="marker-line"></span>
+        </div>
+
+        <section data-section="theory">
+  <h2>What product leadership is and how it differs from product management</h2>
+
+<p>Product leadership is the transition from making product decisions to enabling others to make good product decisions. An IC PM owns a product area, makes trade-offs, and ships features. A product leader (Director, VP, CPO) owns the product organization: hiring PMs, coaching them, designing the org structure, setting the strategic direction, and building the culture that produces great products. The skills that make a great IC PM (detailed analysis, hands-on customer research, feature-level decision-making) are necessary but insufficient for leadership. Leadership adds: hiring judgment, coaching patience, organizational design, and the ability to set context without prescribing solutions.</p>
+
+<p>The hardest transition is letting go of the product decisions you used to make. A PM who becomes a leader and continues making all the product decisions has not transitioned — they've just gotten a bigger title while doing the same job, with the added burden of denying their reports the opportunity to develop. The leader's job is to set the strategy, hire people who can execute it, give them enough context to make good decisions, and step in only when decisions are off-strategy or when a PM is stuck.</p>
+</section>
+
+        <div class="section-marker" id="hiring">
+          <span class="split-badge practical">Practical</span>
+          <span class="marker-line"></span>
+        </div>
+
+        <section data-section="practical">
+  <h2>Hiring PMs</h2>
+
+<div class="method-card">
+  <h4>PM Hiring Rubric <span class="method-tag">Core Method</span></h4>
+  <p class="method-when">Use when: defining what "good" looks like for a PM hire at your company.</p>
+  <p>Evaluate across five dimensions:</p>
+<ul>
+  <li><strong>Product sense</strong> — can they identify the right problem to solve and design a compelling solution? Test with a product critique exercise or a "design a solution for X" case.</li>
+  <li><strong>Analytical ability</strong> — can they use data to inform decisions? Test with a metrics case ("this metric dropped 15%, what would you investigate?").</li>
+  <li><strong>Execution</strong> — can they turn ambiguity into action? Test with a prioritization exercise or a past experience deep-dive.</li>
+  <li><strong>Communication</strong> — can they explain complex trade-offs clearly? Observe throughout the interview.</li>
+  <li><strong>Leadership &amp; influence</strong> — can they align people without authority? Test with a stakeholder conflict scenario.</li>
+</ul>
+  <p>Weight the dimensions based on the role: junior PMs need stronger analytical and execution skills. Senior PMs need stronger product sense and leadership. Platform PMs need stronger technical depth. Growth PMs need stronger analytical and experimentation skills.</p>
+</div>
+
+<div class="method-card">
+  <h4>PM Onboarding 30/60/90 <span class="method-tag">Template</span></h4>
+  <p class="method-when">Use when: a new PM joins and needs structured ramp-up.</p>
+  <p><strong>First 30 days (Learn):</strong> Read every product doc, attend every meeting, talk to 10+ customers, shadow support for a day, review the last 3 months of metrics, and understand the competitive landscape. No decisions — only questions. <strong>Days 31-60 (Contribute):</strong> Own a small, well-scoped project. Run a sprint planning session. Write a spec and get feedback. Conduct a user research session. Start forming a point of view on priorities. <strong>Days 61-90 (Own):</strong> Take full ownership of a product area. Propose a roadmap for the next quarter. Identify one thing that should change about how the team works. By day 90, the PM should be operating independently with your coaching, not your direction.</p>
+</div>
+</section>
+
+<section id="coaching" data-section="practical">
+  <h2>Coaching and developing PMs</h2>
+
+<div class="method-card">
+  <h4>PM Coaching Framework <span class="method-tag">Core Method</span></h4>
+  <p class="method-when">Use when: developing PMs on your team through structured feedback.</p>
+  <p>Coaching PMs is different from coaching engineers or designers because PM skills are harder to observe directly. You don't see a PM "working" the way you see code or designs. Coach through three mechanisms:</p>
+<ul>
+  <li><strong>Decision review</strong> — after a PM makes a significant decision, review the reasoning: what data did they consider, what trade-offs did they weigh, what did they miss? The review is about the thinking process, not just the outcome.</li>
+  <li><strong>Spec/artifact review</strong> — review PRDs, strategy docs, and presentations. Focus on clarity of thinking, not formatting.</li>
+  <li><strong>Stakeholder feedback</strong> — regularly ask engineers, designers, and cross-functional partners how the PM is performing. PMs often have blind spots about how they're perceived.</li>
+</ul>
+  <p>The coaching stance: ask questions more than give answers. "What other options did you consider?" builds more PM judgment than "You should do X." Reserve direct instruction for cases where the PM is about to make a consequential mistake.</p>
+</div>
+
+<div class="method-card">
+  <h4>Career Ladder Design <span class="method-tag">Framework</span></h4>
+  <p class="method-when">Use when: building or refining the PM career progression at your company.</p>
+  <p>A PM career ladder defines expectations at each level across 4-5 dimensions: <strong>Scope</strong> (feature → product area → product line → portfolio). <strong>Autonomy</strong> (supervised → guided → independent → defining direction for others). <strong>Impact</strong> (feature-level metrics → product-level outcomes → business-level results). <strong>Leadership</strong> (individual contributor → mentoring → managing PMs → setting product culture). <strong>Craft</strong> (executing established practices → adapting practices to context → creating new frameworks).</p>
+  <p>Common levels: APM/PM I (executing with guidance), PM II (independent ownership of a product area), Senior PM (cross-functional influence, mentoring), Staff/Principal PM (company-level impact, thought leadership), Director (managing PMs, organizational design), VP/CPO (setting product strategy for the company). Not every company needs all levels — a startup might have PM, Senior PM, and Head of Product.</p>
+</div>
+</section>
+
+<section id="org-design" data-section="practical">
+  <h2>Product org design</h2>
+
+<div class="method-card">
+  <h4>Org Model Comparison <span class="method-tag">Framework</span></h4>
+  <p class="method-when">Use when: designing or restructuring how product teams are organized.</p>
+  <p>Common models:</p>
+<ul>
+  <li><strong>Feature teams</strong> — each team owns a product area (search, payments, onboarding). High autonomy, risk of local optimization.</li>
+  <li><strong>Platform + product teams</strong> — platform teams provide shared infrastructure, product teams build user-facing features on top. Clear separation, risk of coordination overhead.</li>
+  <li><strong>Customer-journey teams</strong> — teams organized around lifecycle stages (acquisition, activation, retention). Good alignment with metrics, harder to own a coherent product area.</li>
+  <li><strong>Dual-track teams</strong> — each team has a discovery track (PM + designer researching) and a delivery track (engineers building). Good for continuous discovery, requires discipline to keep tracks connected.</li>
+</ul>
+  <p>The right model depends on your product's architecture, your team's size, and your strategic priorities. Feature teams work well under 20 engineers. Platform + product works well at 50-200 engineers. Journey teams work well for growth-stage companies optimizing funnels.</p>
+</div>
+
+<div class="method-card">
+  <h4>Product Culture Assessment <span class="method-tag">Tool</span></h4>
+  <p class="method-when">Use when: joining a company or team where product culture is weak or undefined.</p>
+  <p>Assess five indicators:</p>
+<ul>
+  <li><strong>Decision authority</strong> — do PMs make product decisions, or do executives?</li>
+  <li><strong>Customer proximity</strong> — do PMs talk to customers regularly, or rely on secondhand reports?</li>
+  <li><strong>Outcome orientation</strong> — is success measured by impact or by output (features shipped)?</li>
+  <li><strong>Experimentation safety</strong> — can teams run experiments that might fail without political consequences?</li>
+  <li><strong>Cross-functional health</strong> — do PM, design, and engineering operate as partners or in a handoff chain? Score each 1-5. A score below 3 on any indicator reveals where to invest first.</li>
+</ul>
+</div>
+</section>
+
+        <div class="section-marker" id="examples">
+          <span class="split-badge examples">Examples</span>
+          <span class="marker-line"></span>
+        </div>
+
+        <section data-section="examples">
+  <h2>Real-world examples</h2>
+
+<div class="case-study">
+  <p class="case-label">Case study</p>
+  <h4>Stripe: Product culture as competitive advantage</h4>
+  <p>Stripe's product culture is built around two principles: "move thoughtfully" (not "move fast") and "craft." PMs are expected to deeply understand the domain (payments, financial infrastructure) before making product decisions. Their hiring bar is extremely high — they famously ask PM candidates to explain a recent Stripe product decision and what they'd do differently. The culture produces PMs who are technically fluent, domain-expert, and quality-obsessed.</p>
+  <p><strong>Why it works:</strong> Product culture at Stripe isn't a poster on the wall — it's embedded in hiring (the questions filter for domain depth), in rituals (regular product reviews with Patrick Collison), and in standards (products ship when they meet a quality bar, not a deadline).</p>
+</div>
+</section>
+
+<section id="journey-org" data-section="practical">
+  <h2>Journey-centric organizational design</h2>
+
+  <div class="method-card">
+    <h4>Journey-Centric Org Design <span class="method-tag">Technique</span></h4>
+    <p class="method-when">Use when: your product organization is structured around features or platforms, and the end-to-end customer experience suffers as a result.</p>
+    <p>Most product orgs structure teams around product surfaces (the checkout team, the dashboard team, the onboarding team). This creates locally optimized features and globally incoherent journeys. Journey-centric design restructures accountability around customer journeys. A "new customer journey" owner has authority across onboarding, first-use, activation, and early retention — regardless of which product surfaces are involved. This doesn't require a full reorg. Start by adding a journey coordination layer: <strong>Journey owners</strong> work across feature teams with authority to prioritize cross-team work. <strong>Journey health metrics</strong> span team boundaries — end-to-end completion time, cross-team handoff quality, journey-level satisfaction. <strong>Journey reviews</strong> evaluate the complete experience rather than individual features. The PM leadership challenge: giving journey owners enough authority to coordinate without creating a matrix organization that slows everyone down.</p>
+  </div>
+</section>
+
+<section id="pitfalls" data-section="practical">
+  <h2>Common pitfalls</h2>
+
+<div class="pitfall">
+  <div class="pitfall-icon">!</div>
+  <div>
+    <h4>Promoting your best PM to manage PMs</h4>
+    <p>The best IC PM isn't necessarily the best PM manager. IC excellence is about product judgment and execution. Management excellence is about coaching, hiring, and organizational design. Some great ICs are terrible managers (they micromanage product decisions). Some average ICs become great managers (they excel at developing others). Evaluate management potential separately from IC performance.</p>
+  </div>
+</div>
+
+<div class="pitfall">
+  <div class="pitfall-icon">!</div>
+  <div>
+    <h4>Building a career ladder nobody uses</h4>
+    <p>A beautiful career ladder document that sits in Notion and is never referenced in promotion discussions is theater. The ladder must be used: in hiring (mapping candidates to levels), in performance reviews (measuring against level expectations), in promotion discussions (demonstrating readiness for the next level), and in coaching (identifying specific growth areas).</p>
+  </div>
+</div>
+</section>
+
+<section id="connections">
+  <h2>Connected topics in your library</h2>
+  <div class="cross-ref-grid">
+    <a href="stakeholder-management.html" class="cross-ref-card">
+      <span class="ref-number">PM Tier 1</span>
+      <div class="ref-title">Stakeholder Management</div>
+      <div class="ref-reason">Product leaders manage stakeholders at the executive level — different dynamics than IC stakeholder management.</div>
+    </a>
+    <a href="cross-functional-collaboration.html" class="cross-ref-card">
+      <span class="ref-number">PM Tier 2</span>
+      <div class="ref-title">Cross-Functional Collaboration</div>
+      <div class="ref-reason">Product leaders design the collaboration model that their teams operate within.</div>
+    </a>
+    <a href="okrs-goals.html" class="cross-ref-card">
+      <span class="ref-number">PM Tier 2</span>
+      <div class="ref-title">OKRs, Goals &amp; Accountability</div>
+      <div class="ref-reason">Product leaders own the OKR process for the product org — setting company-level objectives.</div>
+    </a>
+    <a href="ux-management.html" class="cross-ref-card">
+      <span class="ref-number">UX Tier 4</span>
+      <div class="ref-title">UX Management (UX)</div>
+      <div class="ref-reason">Design leadership — different hiring, coaching, and org models, but parallel challenges.</div>
+    </a>
+  </div>
+</section>
+
+<div class="deep-dive-section" id="deep-dive">
+          <div class="deep-dive-header">
+            <span class="deep-dive-badge">Deep Dive</span>
+            <h2 style="margin:0; border:none; padding:0;">Appendix</h2>
+          </div>
+  <details class="expandable">
+    <summary><span class="chevron"><svg viewBox="0 0 14 14"><polyline points="4,2 10,7 4,12"/></svg></span> Further reading and resources</summary>
+    <div class="expand-content topic-content">
+      <h4>Essential reading</h4>
+      <p><strong>"Empowered" by Marty Cagan</strong> — The argument for empowered product teams and what product leadership looks like.</p>
+      <p><strong>"The Making of a Manager" by Julie Zhuo</strong> — Practical management advice applicable to PM leadership.</p>
+      <p><strong>"An Elegant Puzzle" by Will Larson</strong> — Engineering management perspective valuable for product leaders who partner closely with engineering.</p>
+    </div>
+  </details>
+</div>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer container">
+    <div class="footer-inner">
+      <p>Noir Book — Built for the work, not the shelf.</p>
+      <div class="footer-links">
+        <a href="../design-system.html">Design System</a>
+        <a href="../library-manifest.json">Manifest</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to Top -->
+  <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">&#8593;</button>
+
+  <!-- Floating Mobile TOC -->
+  <button class="mobile-toc-btn" id="mobileTocBtn" aria-label="Open table of contents">&#9776; Contents</button>
+  <div class="mobile-toc-overlay" id="mobileTocOverlay">
+    <div class="mobile-toc-panel">
+      <div class="mobile-toc-panel-header">
+        <h3>On this page</h3>
+        <button class="mobile-toc-close" id="mobileTocClose" aria-label="Close">&times;</button>
+      </div>
+      <ul class="mobile-toc-list">
+        <li><a href="#what-and-why" data-section="theory">What product leadership is and how it differs from product management</a></li>
+        <li><a href="#hiring" data-section="practical">Hiring PMs</a></li>
+        <li><a href="#coaching" data-section="practical">Coaching and developing PMs</a></li>
+        <li><a href="#org-design" data-section="practical">Product org design</a></li>
+        <li><a href="#examples" data-section="examples">Real-world examples</a></li>
+        <li><a href="#journey-org" data-section="practical">Journey-centric organizational design</a></li>
+        <li><a href="#pitfalls" data-section="practical">Common pitfalls</a></li>
+        <li><a href="#connections">Connected topics in your library</a></li>
+        <li><a href="#deep-dive">Deep-dive appendix</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    // Scrollspy: highlight active TOC item
+    const tocLinks = document.querySelectorAll('.toc-list a');
+    const sections = [];
+    tocLinks.forEach(link => {
+      const href = link.getAttribute('href');
+      if (!href || !href.startsWith('#')) return;
+      const el = document.getElementById(href.slice(1));
+      if (el) sections.push({ el, link });
+    });
+
+    // Reading progress bar
+    const progressBar = document.getElementById('readingProgress');
+    const backToTop = document.getElementById('backToTop');
+
+    function onScroll() {
+      let current = sections[0];
+      for (const s of sections) {
+        if (s.el.getBoundingClientRect().top <= 120) current = s;
+      }
+      tocLinks.forEach(l => l.classList.remove('active'));
+      if (current) current.link.classList.add('active');
+
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrolled = window.scrollY;
+      const progress = docHeight > 0 ? (scrolled / docHeight) * 100 : 0;
+      if (progressBar) progressBar.style.width = progress + '%';
+      if (backToTop) backToTop.classList.toggle('visible', scrolled > 400);
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    // Split badges: click to scroll to section
+    document.querySelectorAll('.content-splits .split-badge').forEach(function(badge) {
+      badge.addEventListener('click', function() {
+        var type = badge.classList.contains('theory') ? 'theory' : badge.classList.contains('practical') ? 'practical' : 'examples';
+        var target = document.querySelector('section[data-section="' + type + '"]');
+        if (target) {
+          var marker = target.previousElementSibling;
+          (marker && marker.classList.contains('section-marker') ? marker : target).scrollIntoView({behavior:'smooth'});
+        }
+      });
+    });
+  </script>
+
+  <script src="../js/checklist.js"></script>
+  <script src="../js/mobile-toc.js"></script>
+  <script src="../js/search.js"></script>
+  <script>
+    function openBurger(){document.getElementById('burgerOverlay').classList.add('open');document.body.style.overflow='hidden'}
+    function closeBurger(e){if(e&&e.target&&e.target!==document.getElementById('burgerOverlay'))return;document.getElementById('burgerOverlay').classList.remove('open');document.body.style.overflow=''}
+    function burgerSearch(q){
+      var r=document.getElementById('burgerSearchResults');
+      if(!q||q.length<2){r.innerHTML='';return}
+      var ql=q.toLowerCase(),matches=[];
+      if(typeof SEARCH_INDEX!=='undefined'){
+        SEARCH_INDEX.forEach(function(t){
+          var hit=t.topic.toLowerCase().indexOf(ql)>-1;
+          if(!hit)t.sections.forEach(function(s){if((s.title+' '+s.keywords).toLowerCase().indexOf(ql)>-1)hit=true});
+          if(hit)matches.push(t);
+        });
+      }
+      if(!matches.length){r.innerHTML='<p style="padding:8px 0;font-size:13px;color:var(--ink-muted)">No results</p>';return}
+      r.innerHTML=matches.slice(0,8).map(function(m){return '<a href="../'+m.url+'">'+m.topic+'<span class="bsr-disc">'+m.discipline+'</span></a>'}).join('');
+    }
+    document.addEventListener('keydown',function(e){if(e.key==='Escape'){closeBurger();var dd=document.getElementById('searchDropdown');if(dd)dd.classList.remove('visible');}});
+    // Close burger when clicking a TOC link
+    document.querySelectorAll('.burger-toc-list a').forEach(function(a){a.addEventListener('click',function(){closeBurger()})});
+    // Search typeahead
+    function topicSearch(q){
+      var dd=document.getElementById('searchDropdown');
+      if(!q||q.length<2||typeof SEARCH_INDEX==='undefined'){if(dd)dd.classList.remove('visible');return}
+      var ql=q.toLowerCase(),grouped={};
+      SEARCH_INDEX.forEach(function(t){
+        var hit=t.topic.toLowerCase().indexOf(ql)>-1,sHits=[],mHits=[];
+        t.sections.forEach(function(s){if((s.title+' '+s.keywords).toLowerCase().indexOf(ql)>-1)sHits.push(s)});
+        (t.methods||[]).forEach(function(m){if((m.name+' '+(m.keywords||'')).toLowerCase().indexOf(ql)>-1)mHits.push(m)});
+        if(!hit&&!sHits.length&&!mHits.length&&ql.length>=3&&typeof levenshtein==='function'){
+          var words=t.topic.toLowerCase().split(/ +/);
+          for(var i=0;i<words.length;i++){if(levenshtein(ql,words[i].substring(0,ql.length+1))<=1){hit=true;break}}
+        }
+        if(hit||sHits.length||mHits.length)grouped[t.topic]={url:'../'+t.url,disc:t.discipline||'',sections:sHits,methods:mHits,topicHit:hit};
+      });
+      var keys=Object.keys(grouped);
+      if(!keys.length){dd.innerHTML='<div class="search-empty">No results</div>';dd.classList.add('visible');return}
+      var html='';
+      keys.slice(0,8).forEach(function(topic){
+        var g=grouped[topic];
+        html+='<div class="search-group"><div class="search-group-title">'+topic+'</div>';
+        if(g.topicHit)html+='<a class="search-result" href="'+g.url+'"><span class="search-result-title">'+topic+'</span><span class="search-result-type practical">'+g.disc+'</span></a>';
+        g.sections.forEach(function(s){html+='<a class="search-result" href="'+g.url+'#'+s.id+'"><span class="search-result-title">'+s.title+'</span><span class="search-result-type '+s.type+'">'+s.type+'</span></a>'});
+        g.methods.slice(0,3).forEach(function(m){html+='<a class="search-result" href="'+g.url+'#'+m.section+'"><span class="search-result-title">'+m.name+'</span><span class="search-result-type practical">method</span></a>'});
+        html+='</div>';
+      });
+      dd.innerHTML=html;dd.classList.add('visible');
+    }
+    document.addEventListener('click',function(e){if(!e.target.closest('.search-box')){var dd=document.getElementById('searchDropdown');if(dd)dd.classList.remove('visible')}});
+  </script>
+
+</body>
+</html>

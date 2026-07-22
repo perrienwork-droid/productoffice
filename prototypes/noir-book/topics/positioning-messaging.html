@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Positioning &amp; Messaging — Noir Book</title>
+  <link rel="stylesheet" href="../css/shared.css">
+  <link rel="stylesheet" href="../css/topic.css">
+  <script src="../js/theme.js"></script>
+  <script src="../js/topic-nav.js"></script>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="site-nav subpage-nav" data-discipline="mk">
+    <div class="nav-inner">
+      <a href="../index.html" class="site-logo">
+        <span class="logo-mark">MK</span>
+        <span class="nav-title">Noir Book</span>
+      </a>
+      <a href="../index.html" class="nav-back-link">&#8592; Library</a>
+      <div class="nav-filters">
+        <button class="disc-toggle ux-toggle active" data-disc="ux" onclick="toggleDisc('ux')" title="UX Design">
+          <span class="disc-dot disc-dot-ux"></span><span class="disc-label">UX Design</span><span class="disc-code">(UX)</span>
+        </button>
+        <button class="disc-toggle pm-toggle active" data-disc="pm" onclick="toggleDisc('pm')" title="Product Management">
+          <span class="disc-dot disc-dot-pm"></span><span class="disc-label">Product</span><span class="disc-code">(PM)</span>
+        </button>
+        <button class="disc-toggle mk-toggle active" data-disc="mk" onclick="toggleDisc('mk')" title="Marketing &amp; Growth">
+          <span class="disc-dot disc-dot-mk"></span><span class="disc-label">Marketing</span><span class="disc-code">(MK)</span>
+        </button>
+        <button class="disc-toggle cs-toggle active" data-disc="cs" onclick="toggleDisc('cs')" title="Content Strategy">
+          <span class="disc-dot disc-dot-cs"></span><span class="disc-label">Content</span><span class="disc-code">(CS)</span>
+        </button>
+        <div class="search-box nav-search-box">
+          <div class="nav-search-wrap">
+            <div class="nav-search-pills" id="navSearchPills"></div>
+            <input type="text" id="navSearchInput" placeholder="Search..." autocomplete="off"
+              oninput="topicNavSearch(this.value)"
+              onkeydown="handleNavSearchKey(event)"
+              onfocus="handleNavSearchFocus()"
+              onblur="handleNavSearchBlur()">
+            <button type="button" class="nav-search-clear" id="navSearchClear" onclick="clearNavSearch()" aria-label="Clear search">&times;</button>
+          </div>
+          <div class="search-dropdown" id="navSearchDropdown"></div>
+        </div>
+      </div>
+      <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle theme">&#9790;</button>
+      <button class="burger-btn" id="burgerBtn" onclick="openBurger()" aria-label="Menu">
+        <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="2" y1="4" x2="16" y2="4"/><line x1="2" y1="9" x2="16" y2="9"/><line x1="2" y1="14" x2="16" y2="14"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Burger Menu Overlay -->
+  <div class="burger-overlay" id="burgerOverlay" onclick="closeBurger(event)">
+    <div class="burger-panel" onclick="event.stopPropagation()">
+      <div class="burger-panel-header">
+        <h3>Menu</h3>
+        <button class="burger-close" onclick="closeBurger()" aria-label="Close">&times;</button>
+      </div>
+      <div class="burger-search">
+        <input type="text" id="burgerSearchInput" placeholder="Search topics, methods..." autocomplete="off" oninput="burgerSearch(this.value)">
+        <div class="burger-search-results" id="burgerSearchResults"></div>
+      </div>
+      <div class="burger-links">
+        <a href="../index.html">&#8592; Back to Library</a>
+        <a href="../design-system.html">Design System</a>
+        <a href="../request-topic.html">Suggest a topic or improvement</a>
+      </div>
+      <div class="burger-toc-section">
+        <p class="burger-toc-title">On this page</p>
+        <ul class="burger-toc-list">
+        <li><a href="#what-and-why" data-section="theory">What positioning is and why it's the foundation of everything</a></li>
+        <li><a href="#positioning-frameworks" data-section="practical">Positioning frameworks</a></li>
+        <li><a href="#messaging" data-section="practical">Messaging hierarchy</a></li>
+        <li><a href="#value-proposition" data-section="practical">Value proposition design</a></li>
+        <li><a href="#competitive-messaging" data-section="practical">Competitive messaging</a></li>
+        <li><a href="#examples" data-section="examples">Positioning and messaging in practice</a></li>
+        <li><a href="#ai-discovery" data-section="practical">AI-mediated discovery</a></li>
+        <li><a href="#pitfalls" data-section="practical">Common pitfalls</a></li>
+        <li><a href="#connected-topics" data-section="theory">Connected topics</a></li>
+        <li><a href="#appendix" data-section="theory">Deep-dive appendix</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Topic Header -->
+  <header class="topic-header container">
+    <div class="breadcrumb">
+      <a href="../index.html">Library</a>
+      <span class="sep">&#8250;</span>
+      <span class="breadcrumb-disc breadcrumb-mk">Marketing &amp; Growth</span>
+      <span class="sep">&#8250;</span>
+      <span>Tier 1 — Core Toolkit</span>
+      <span class="sep">&#8250;</span>
+      <span>Positioning &amp; Messaging</span>
+    </div>
+    <div class="topic-meta">
+      <span class="tier-badge tier1">Tier 1</span>
+      <span style="font-size:14px;color:var(--ink-muted)">Topic MK.1.01</span>
+    </div>
+    <h1>Positioning &amp; Messaging</h1>
+    <p class="topic-subtitle">Own a space in the customer's mind. Positioning frameworks, messaging hierarchies, value propositions, and the discipline of saying one thing clearly instead of everything vaguely.</p>
+    <div class="content-splits">
+      <span class="split-badge theory">30% Theory</span>
+      <span class="split-badge practical">50% Methods &amp; Templates</span>
+      <span class="split-badge examples">20% Examples</span>
+    </div>
+  </header>
+
+  <!-- Reading Progress Bar -->
+  <div class="reading-progress" id="readingProgress"></div>
+
+  <!-- Main Layout -->
+  <div class="container">
+    <div class="topic-layout">
+
+      <!-- Sidebar: Table of Contents -->
+      <aside class="topic-sidebar">
+        <nav class="toc">
+          <p class="sidebar-topic-title">Positioning &amp; Messaging</p>
+          <p class="toc-title">On this page</p>
+          <ul class="toc-list">
+            <li><a href="#what-and-why" data-section="theory">What positioning is and why it's the foundation of everything</a></li>
+            <li><a href="#positioning-frameworks" data-section="practical">Positioning frameworks</a></li>
+            <li><a href="#messaging" data-section="practical">Messaging hierarchy</a></li>
+            <li><a href="#value-proposition" data-section="practical">Value proposition design</a></li>
+            <li><a href="#competitive-messaging" data-section="practical">Competitive messaging</a></li>
+            <li><a href="#examples" data-section="examples">Positioning and messaging in practice</a></li>
+            <li><a href="#ai-discovery" data-section="practical">AI-mediated discovery</a></li>
+            <li><a href="#pitfalls" data-section="practical">Common pitfalls</a></li>
+            <li><a href="#connected-topics" data-section="theory">Connected topics</a></li>
+            <li><a href="#appendix" data-section="theory">Deep-dive appendix</a></li>
+          </ul>
+        </nav>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="topic-main topic-content">
+
+        <div class="section-marker" id="what-and-why">
+          <span class="split-badge theory">Theory</span>
+          <span class="marker-line"></span>
+        </div>
+
+        <section data-section="theory">
+  <h2>What positioning is and why it's the foundation of everything</h2>
+
+<p>Positioning is the act of defining how your product is perceived relative to alternatives in your customer's mind. It's not a tagline, a mission statement, or an elevator pitch — it's the strategic decision about what your product is, who it's for, and why those people should choose it over everything else they could do (including doing nothing). Every marketing activity that follows — messaging, content, campaigns, sales enablement — is downstream of positioning. Get positioning wrong and everything else is noise. Get it right and everything else amplifies.</p>
+
+<p>Most positioning fails because it tries to be everything to everyone. The startup that positions itself as "the all-in-one platform for teams" has said nothing. What kind of teams? What problem? Why this solution? Strong positioning is narrow enough to be meaningful: it tells a specific customer that this product solves their specific problem better than the specific alternatives they're considering. The narrower the positioning, the more powerful it is — because the customer who fits feels like the product was built for them.</p>
+
+<p>Positioning is not permanent. It evolves as the market changes, as the product matures, and as the customer base shifts. The positioning that worked for early adopters won't work for mainstream customers. The positioning that worked when you were the only player won't work when three competitors enter the market. Revisit positioning when: you're entering a new market, a significant competitor launches, your win rates change, or customer language about your product diverges from how you describe it.</p>
+</section>
+
+        <div class="section-marker" id="positioning-frameworks">
+          <span class="split-badge practical">Practical</span>
+          <span class="marker-line"></span>
+        </div>
+
+        <section data-section="practical">
+  <h2>Positioning frameworks</h2>
+
+<div class="method-card">
+  <h4>April Dunford's Positioning Canvas <span class="method-tag">Core Method</span></h4>
+  <p class="method-when">Use when: defining or refining positioning for a product, whether new or established. This is the go-to framework for technology products.</p>
+  <p>April Dunford's framework works through five components in a specific order — the order matters because each element constrains the next:</p>
+  <p><strong>1. Competitive alternatives.</strong> What would your best customers do if your product didn't exist? This is not your competitor list — it's what customers actually compare you to. For a project management tool, the competitive alternative might be spreadsheets and email, not other project management tools. Understanding the real alternative tells you what you're actually displacing.</p>
+  <p><strong>2. Unique attributes.</strong> What features or capabilities do you have that the competitive alternatives lack? Be specific and honest. "Better UX" is not a unique attribute — it's a claim. "Real-time collaboration with version history" is a verifiable attribute. List all of them; don't filter yet.</p>
+  <p><strong>3. Value.</strong> What benefit does each unique attribute enable for the customer? Map attributes to benefits. "Real-time collaboration" enables "no more emailing files back and forth." Customers buy benefits, not features. The value statement should be in customer language, not your internal terminology.</p>
+  <p><strong>4. Best-fit customers.</strong> Which customers care most about that value? The mistake is defining this too broadly. "Marketing teams" is too wide. "Marketing teams at B2B SaaS companies with 50-200 employees who manage content across 5+ channels" is a segment you can actually reach and serve better than anyone else.</p>
+  <p><strong>5. Market category.</strong> What market frame makes your value obvious? If you position yourself in the "project management" category, customers compare you to Asana and Monday. If you position as "client collaboration," the comparisons change. The category you choose sets expectations about features, pricing, and buying process.</p>
+  <p>Work through these components with your team — not alone. Positioning is organizational knowledge. If only the marketer understands the positioning, it won't survive contact with sales, support, or the product team.</p>
+</div>
+
+<div class="method-card">
+  <h4>Positioning Statement Formula <span class="method-tag">Core Method</span></h4>
+  <p class="method-when">Use when: distilling positioning into a single statement that the whole organization can align on.</p>
+  <p>The classic format: <strong>For [target customer] who [need/opportunity], [product name] is a [market category] that [key benefit]. Unlike [competitive alternative], we [key differentiator].</strong></p>
+  <p>Example: "For B2B SaaS marketing teams who struggle to maintain consistent messaging across channels, BrandSync is a content operations platform that ensures every piece of content is on-brand and on-strategy. Unlike generic content management tools, BrandSync connects messaging guidelines directly to content creation workflows."</p>
+  <p>The positioning statement is an internal tool, not a tagline. It's too long and technical for a website. Its purpose is to align the team: when anyone in the company reads it, they should understand exactly who the product is for, what it does, and how it's different. Every external communication is a translation of this statement for a specific audience and channel.</p>
+</div>
+
+<div class="method-card">
+  <h4>Category Entry Points <span class="method-tag">Specialized Method</span></h4>
+  <p class="method-when">Use when: you want to understand the buying triggers that bring customers into your category, so you can position to intercept them at the right moment.</p>
+  <p>Category Entry Points (CEPs) are the situations, needs, or triggers that cause a buyer to start thinking about your category. For CRM software, a CEP might be "just closed a funding round and need to scale sales." For a design tool, it might be "just got hired at a startup and need to create a pitch deck by Friday."</p>
+  <p>Map the CEPs for your category. For each one, ask: (1) Is our product well-positioned for this entry point? (2) Does our messaging address this trigger? (3) Are we present in the channels where this trigger occurs? Positioning that doesn't connect to CEPs is positioning that doesn't generate demand.</p>
+</div>
+</section>
+
+<section id="messaging" data-section="practical">
+  <h2>Messaging hierarchy</h2>
+
+<div class="method-card">
+  <h4>Messaging Hierarchy Template <span class="method-tag">Core Method</span></h4>
+  <p class="method-when">Use when: translating positioning into the specific messages used across website, ads, sales conversations, and content.</p>
+  <p>A messaging hierarchy is a structured document that cascades from the core positioning down to specific proof points. It ensures consistency: everyone in the organization tells the same story at different levels of detail.</p>
+  <p><strong>Level 1: Core positioning statement.</strong> The internal positioning statement from above. One sentence that captures who you're for, what you are, and why you're different.</p>
+  <p><strong>Level 2: Value pillars (3-4 max).</strong> The primary benefits your product delivers, each supported by specific capabilities. Example: "Pillar 1: Save time. Pillar 2: Reduce errors. Pillar 3: Scale without adding headcount." Each pillar should be independently meaningful — a customer who cares about only one pillar should still be compelled.</p>
+  <p><strong>Level 3: Supporting messages per pillar.</strong> For each value pillar, 2-3 specific claims with proof points. "Save time" becomes "Automates report generation, saving an average of 4 hours per week per analyst. Integrates with 20+ data sources — no manual imports. One-click scheduling for recurring reports."</p>
+  <p><strong>Level 4: Proof points.</strong> Evidence for each claim: customer quotes, case study results, third-party validation, product capabilities. "Acme Corp reduced reporting time by 72% in the first month" or "Named a Leader in Gartner's Magic Quadrant for the third consecutive year."</p>
+  <p>The hierarchy is a living document. Update it when you ship new capabilities, win new customers, or gather new competitive intelligence. Review quarterly at minimum.</p>
+</div>
+
+<div class="method-card">
+  <h4>Message Testing Protocol <span class="method-tag">Core Method</span></h4>
+  <p class="method-when">Use when: evaluating multiple messaging options before committing to a campaign, website redesign, or positioning shift.</p>
+  <p>Don't guess which message resonates. Test it. Three approaches, from cheapest to most rigorous:</p>
+  <p><strong>Preference testing.</strong> Show 3-5 message variants to target customers and ask which is most compelling and why. Can be done with 15-20 interviews or a survey of 100+ respondents. Quick and cheap. Best for headline and tagline decisions.</p>
+  <p><strong>Ad testing.</strong> Run the same ad creative with different headline/copy variants across paid channels. Measure click-through rate and conversion rate. Statistical significance in days. Best for short-form messaging.</p>
+  <p><strong>Landing page testing.</strong> Create landing pages with different messaging approaches and drive equivalent traffic to each. Measure conversion rate and time-on-page. Takes longer but tests the full message in context. Best for positioning-level decisions.</p>
+  <p>In all cases, test with your actual target audience. Messaging that resonates with the general public may not resonate with enterprise IT buyers. Messaging that wins with early adopters may not win with mainstream customers.</p>
+</div>
+</section>
+
+<section id="value-proposition" data-section="practical">
+  <h2>Value proposition design</h2>
+
+<div class="method-card">
+  <h4>Value Proposition Canvas <span class="method-tag">Core Method</span></h4>
+  <p class="method-when">Use when: ensuring your product's value proposition actually matches customer needs — not just what you think they need.</p>
+  <p>The Value Proposition Canvas (Osterwalder) maps customer jobs, pains, and gains against your product's pain relievers and gain creators. The magic is in the fit: a strong value proposition exists when your pain relievers address the customer's most intense pains, and your gain creators deliver the gains they care about most.</p>
+  <p><strong>Customer side:</strong> (1) Jobs-to-be-done — functional, social, and emotional jobs the customer needs to accomplish. (2) Pains — obstacles, risks, and negative outcomes the customer experiences. (3) Gains — benefits, desires, and positive outcomes the customer wants.</p>
+  <p><strong>Product side:</strong> (1) Products and services — what you offer. (2) Pain relievers — how your product addresses specific customer pains. (3) Gain creators — how your product delivers specific customer gains.</p>
+  <p>The most common failure: pain relievers that address pains the customer doesn't have, or gain creators that deliver gains the customer doesn't value. This happens when the canvas is filled out from the product side first. Always start with the customer side, based on actual research — not assumptions about what customers want.</p>
+</div>
+</section>
+
+<section id="competitive-messaging" data-section="practical">
+  <h2>Competitive messaging</h2>
+
+<div class="method-card">
+  <h4>Competitive Messaging Teardown <span class="method-tag">Specialized Method</span></h4>
+  <p class="method-when">Use when: analyzing how competitors position themselves to find gaps, differentiation opportunities, or messaging that you need to counter.</p>
+  <p>For each major competitor, analyze: (1) Their positioning statement (implicit or explicit). Who do they say they're for? What problem do they claim to solve? (2) Their messaging hierarchy. What value pillars do they emphasize? What proof points do they use? (3) Their category framing. What market category do they place themselves in? (4) Their tone and style. Are they authoritative, friendly, technical, aspirational?</p>
+  <p>Map all competitors on a messaging landscape. Where is everyone clustering? The cluster is where the market expects you to be — and where differentiation is hardest. The whitespace is where differentiation is easiest, but only if customers actually care about what lives there. The ideal position: meaningful whitespace where customer need is real but competitor messaging is absent.</p>
+</div>
+</section>
+
+        <div class="section-marker" id="examples">
+          <span class="split-badge examples">Examples</span>
+          <span class="marker-line"></span>
+        </div>
+
+        <section data-section="examples">
+  <h2>Positioning and messaging in practice</h2>
+
+<div class="case-study">
+  <div class="case-label">Pattern: The startup that repositioned to win</div>
+  <p>A B2B analytics tool initially positioned as "analytics for everyone." Market response was lukewarm — they were competing against Google Analytics (free), Mixpanel, and Amplitude. Customer interviews revealed that their happiest users were product teams at mid-market SaaS companies who valued one specific capability: cohort analysis without SQL. The company repositioned from "analytics for everyone" to "product analytics for teams that don't have data engineers." Messaging shifted from feature comparisons to the specific pain of non-technical PMs waiting days for a data team to run a query. Win rates against Amplitude doubled in the target segment.</p>
+</div>
+
+<div class="case-study">
+  <div class="case-label">Pattern: The messaging hierarchy that aligned five teams</div>
+  <p>A growing company found that sales, marketing, customer success, and product all described the product differently. Customers heard one thing on the website, another in the sales call, and a third during onboarding. The marketing team built a messaging hierarchy document: one positioning statement, three value pillars, and proof points for each. They workshopped it with all four teams, incorporated feedback, and published it as the single source of truth. They then created channel-specific translations: a sales one-pager, a website messaging guide, and an onboarding script — all derived from the same hierarchy. Customer confusion dropped, and NPS improved within one quarter.</p>
+</div>
+
+<div class="case-study">
+  <div class="case-label">Pattern: Message testing that changed the headline</div>
+  <p>A company was about to launch a redesigned homepage. The marketing team had two headline options: the aspirational approach ("Transform how your team works") and the specific approach ("Cut meeting time in half with async updates"). They ran a landing page test with 50/50 traffic split. The specific headline converted 2.3x better. The aspirational headline attracted broader traffic but lower intent. The lesson: specificity beats aspiration when the buyer already knows they have the problem. Aspirational works for awareness; specific works for conversion.</p>
+</div>
+</section>
+
+<section id="ai-discovery" data-section="practical">
+  <h2>AI-mediated discovery</h2>
+
+  <div class="method-card">
+    <h4>Positioning for AI-Mediated Discovery <span class="method-tag">Technique</span></h4>
+    <p class="method-when">Use when: AI search summaries, agent recommendations, and conversational AI are changing how your positioning reaches users.</p>
+    <p>Increasingly, your positioning doesn't reach humans directly — it's interpreted by AI systems first. AI search engines (Google AI Overviews, Perplexity, ChatGPT search) summarize your messaging before users see it. AI agents compare products on behalf of users, extracting and restructuring your positioning into their own frameworks. This changes the craft: <strong>Messaging for both audiences:</strong> Your positioning must work for humans who read it emotionally and for AI systems that parse it structurally. Clear, factual, differentiated claims survive AI summarization better than clever wordplay or emotional appeals. "Reduces deployment time by 60%" gets extracted accurately; "Unleash your team's potential" gets flattened into nothing. <strong>Structured differentiation:</strong> AI comparisons reward clearly articulated differences. If your positioning doesn't explicitly state how you differ from alternatives, AI systems will infer (often incorrectly) or omit the distinction. <strong>Source authority:</strong> AI systems weight positioning from authoritative sources (your website, recognized review sites, documentation) over secondary mentions. Ensure your canonical positioning is findable, crawlable, and unambiguous on your own properties.</p>
+  </div>
+</section>
+
+<section id="pitfalls" data-section="practical">
+  <h2>Common pitfalls</h2>
+
+<div class="pitfall">
+  <span class="pitfall-icon">⚠</span>
+  <p><strong>Positioning by committee.</strong> When everyone in the company contributes to positioning, the result is a watered-down statement that offends nobody and inspires nobody. Positioning requires trade-offs — deliberately choosing to be for one customer at the exclusion of others. Committees avoid trade-offs.</p>
+</div>
+
+<div class="pitfall">
+  <span class="pitfall-icon">⚠</span>
+  <p><strong>Confusing positioning with messaging.</strong> Positioning is strategic (who, what, why different). Messaging is tactical (the specific words used in specific channels). You can change messaging without changing positioning. Changing positioning without changing messaging is how you end up with a website that contradicts your sales pitch.</p>
+</div>
+
+<div class="pitfall">
+  <span class="pitfall-icon">⚠</span>
+  <p><strong>Feature-first positioning.</strong> "We have AI-powered analytics with real-time dashboards and 200+ integrations." This is a feature list, not positioning. Features don't differentiate because competitors match them. Benefits differentiate: "See what's happening in your business before it shows up in the spreadsheet."</p>
+</div>
+
+<div class="pitfall">
+  <span class="pitfall-icon">⚠</span>
+  <p><strong>Ignoring the competitive alternative.</strong> If you don't know what you're replacing, you can't articulate why you're better. And the competitive alternative is often not another product — it's a spreadsheet, a manual process, or doing nothing at all.</p>
+</div>
+</section>
+
+<section id="connected-topics" data-section="theory">
+  <h2>Connected topics</h2>
+
+  <div class="cross-ref-grid">
+    <a href="competitive-analysis.html" class="cross-ref-card">
+      <span class="ref-number">PM Tier 1</span>
+      <div class="ref-title">Competitive Analysis (PM)</div>
+      <div class="ref-reason">PM-side competitive intelligence — the input that informs positioning decisions.</div>
+    </a>
+    <a href="ux-writing.html" class="cross-ref-card">
+      <span class="ref-number">UX Tier 2</span>
+      <div class="ref-title">UX Writing &amp; Content Design (UX)</div>
+      <div class="ref-reason">Product voice and interface copy — positioning translated into the product experience itself.</div>
+    </a>
+    <a href="product-strategy.html" class="cross-ref-card">
+      <span class="ref-number">PM Tier 1</span>
+      <div class="ref-title">Product Strategy &amp; Vision (PM)</div>
+      <div class="ref-reason">Positioning is strategy made visible to the market. Strategy defines where you compete; positioning defines how you're perceived.</div>
+    </a>
+  </div>
+</section>
+
+<section id="appendix" data-section="theory">
+  <h2>Deep-dive appendix</h2>
+  <details class="expandable">
+    <summary><span class="chevron"><svg viewBox="0 0 14 14"><polyline points="4,2 10,7 4,12"/></svg></span> Further reading and resources</summary>
+    <div class="expand-content topic-content">
+      <h4>Essential reading</h4>
+      <p><strong>"Obviously Awesome" by April Dunford</strong> — The definitive guide to product positioning for technology companies.</p>
+      <p><strong>"Positioning: The Battle for Your Mind" by Al Ries &amp; Jack Trout</strong> — The classic that defined positioning as a discipline.</p>
+      <p><strong>"Play Bigger" by Al Ramadan et al.</strong> — Category design as a positioning strategy — creating and owning a new market category.</p>
+      <p><strong>"Building a StoryBrand" by Donald Miller</strong> — Messaging framework built on storytelling principles.</p>
+      <p><strong>"Value Proposition Design" by Alexander Osterwalder</strong> — The Value Proposition Canvas methodology in full detail.</p>
+    </div>
+  </details>
+</section>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer container">
+    <div class="footer-inner">
+      <p>Noir Book — Built for the work, not the shelf.</p>
+      <div class="footer-links">
+        <a href="../design-system.html">Design System</a>
+        <a href="../library-manifest.json">Manifest</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to Top -->
+  <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">&#8593;</button>
+
+  <!-- Floating Mobile TOC -->
+  <button class="mobile-toc-btn" id="mobileTocBtn" aria-label="Open table of contents">&#9776; Contents</button>
+  <div class="mobile-toc-overlay" id="mobileTocOverlay">
+    <div class="mobile-toc-panel">
+      <div class="mobile-toc-panel-header">
+        <h3>On this page</h3>
+        <button class="mobile-toc-close" id="mobileTocClose" aria-label="Close">&times;</button>
+      </div>
+      <ul class="mobile-toc-list">
+        <li><a href="#what-and-why" data-section="theory">What positioning is and why it's the foundation of everything</a></li>
+        <li><a href="#positioning-frameworks" data-section="practical">Positioning frameworks</a></li>
+        <li><a href="#messaging" data-section="practical">Messaging hierarchy</a></li>
+        <li><a href="#value-proposition" data-section="practical">Value proposition design</a></li>
+        <li><a href="#competitive-messaging" data-section="practical">Competitive messaging</a></li>
+        <li><a href="#examples" data-section="examples">Positioning and messaging in practice</a></li>
+        <li><a href="#ai-discovery" data-section="practical">AI-mediated discovery</a></li>
+        <li><a href="#pitfalls" data-section="practical">Common pitfalls</a></li>
+        <li><a href="#connected-topics" data-section="theory">Connected topics</a></li>
+        <li><a href="#appendix" data-section="theory">Deep-dive appendix</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    // Scrollspy: highlight active TOC item
+    const tocLinks = document.querySelectorAll('.toc-list a');
+    const sections = [];
+    tocLinks.forEach(link => {
+      const href = link.getAttribute('href');
+      if (!href || !href.startsWith('#')) return;
+      const el = document.getElementById(href.slice(1));
+      if (el) sections.push({ el, link });
+    });
+
+    // Reading progress bar
+    const progressBar = document.getElementById('readingProgress');
+    const backToTop = document.getElementById('backToTop');
+
+    function onScroll() {
+      let current = sections[0];
+      for (const s of sections) {
+        if (s.el.getBoundingClientRect().top <= 120) current = s;
+      }
+      tocLinks.forEach(l => l.classList.remove('active'));
+      if (current) current.link.classList.add('active');
+
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrolled = window.scrollY;
+      const progress = docHeight > 0 ? (scrolled / docHeight) * 100 : 0;
+      if (progressBar) progressBar.style.width = progress + '%';
+      if (backToTop) backToTop.classList.toggle('visible', scrolled > 400);
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    // Split badges: click to scroll to section
+    document.querySelectorAll('.content-splits .split-badge').forEach(function(badge) {
+      badge.addEventListener('click', function() {
+        var type = badge.classList.contains('theory') ? 'theory' : badge.classList.contains('practical') ? 'practical' : 'examples';
+        var target = document.querySelector('section[data-section="' + type + '"]');
+        if (target) {
+          var marker = target.previousElementSibling;
+          (marker && marker.classList.contains('section-marker') ? marker : target).scrollIntoView({behavior:'smooth'});
+        }
+      });
+    });
+  </script>
+
+  <script src="../js/checklist.js"></script>
+  <script src="../js/mobile-toc.js"></script>
+  <script src="../js/search.js"></script>
+  <script>
+    function openBurger(){document.getElementById('burgerOverlay').classList.add('open');document.body.style.overflow='hidden'}
+    function closeBurger(e){if(e&&e.target&&e.target!==document.getElementById('burgerOverlay'))return;document.getElementById('burgerOverlay').classList.remove('open');document.body.style.overflow=''}
+    function burgerSearch(q){
+      var r=document.getElementById('burgerSearchResults');
+      if(!q||q.length<2){r.innerHTML='';return}
+      var ql=q.toLowerCase(),matches=[];
+      if(typeof SEARCH_INDEX!=='undefined'){
+        SEARCH_INDEX.forEach(function(t){
+          var hit=t.topic.toLowerCase().indexOf(ql)>-1;
+          if(!hit)t.sections.forEach(function(s){if((s.title+' '+s.keywords).toLowerCase().indexOf(ql)>-1)hit=true});
+          if(hit)matches.push(t);
+        });
+      }
+      if(!matches.length){r.innerHTML='<p style="padding:8px 0;font-size:13px;color:var(--ink-muted)">No results</p>';return}
+      r.innerHTML=matches.slice(0,8).map(function(m){return '<a href="../'+m.url+'">'+m.topic+'<span class="bsr-disc">'+m.discipline+'</span></a>'}).join('');
+    }
+    document.addEventListener('keydown',function(e){if(e.key==='Escape'){closeBurger();var dd=document.getElementById('searchDropdown');if(dd)dd.classList.remove('visible');}});
+    // Close burger when clicking a TOC link
+    document.querySelectorAll('.burger-toc-list a').forEach(function(a){a.addEventListener('click',function(){closeBurger()})});
+    // Search typeahead
+    function topicSearch(q){
+      var dd=document.getElementById('searchDropdown');
+      if(!q||q.length<2||typeof SEARCH_INDEX==='undefined'){if(dd)dd.classList.remove('visible');return}
+      var ql=q.toLowerCase(),grouped={};
+      SEARCH_INDEX.forEach(function(t){
+        var hit=t.topic.toLowerCase().indexOf(ql)>-1,sHits=[],mHits=[];
+        t.sections.forEach(function(s){if((s.title+' '+s.keywords).toLowerCase().indexOf(ql)>-1)sHits.push(s)});
+        (t.methods||[]).forEach(function(m){if((m.name+' '+(m.keywords||'')).toLowerCase().indexOf(ql)>-1)mHits.push(m)});
+        if(!hit&&!sHits.length&&!mHits.length&&ql.length>=3&&typeof levenshtein==='function'){
+          var words=t.topic.toLowerCase().split(/ +/);
+          for(var i=0;i<words.length;i++){if(levenshtein(ql,words[i].substring(0,ql.length+1))<=1){hit=true;break}}
+        }
+        if(hit||sHits.length||mHits.length)grouped[t.topic]={url:'../'+t.url,disc:t.discipline||'',sections:sHits,methods:mHits,topicHit:hit};
+      });
+      var keys=Object.keys(grouped);
+      if(!keys.length){dd.innerHTML='<div class="search-empty">No results</div>';dd.classList.add('visible');return}
+      var html='';
+      keys.slice(0,8).forEach(function(topic){
+        var g=grouped[topic];
+        html+='<div class="search-group"><div class="search-group-title">'+topic+'</div>';
+        if(g.topicHit)html+='<a class="search-result" href="'+g.url+'"><span class="search-result-title">'+topic+'</span><span class="search-result-type practical">'+g.disc+'</span></a>';
+        g.sections.forEach(function(s){html+='<a class="search-result" href="'+g.url+'#'+s.id+'"><span class="search-result-title">'+s.title+'</span><span class="search-result-type '+s.type+'">'+s.type+'</span></a>'});
+        g.methods.slice(0,3).forEach(function(m){html+='<a class="search-result" href="'+g.url+'#'+m.section+'"><span class="search-result-title">'+m.name+'</span><span class="search-result-type practical">method</span></a>'});
+        html+='</div>';
+      });
+      dd.innerHTML=html;dd.classList.add('visible');
+    }
+    document.addEventListener('click',function(e){if(!e.target.closest('.search-box')){var dd=document.getElementById('searchDropdown');if(dd)dd.classList.remove('visible')}});
+  </script>
+
+</body>
+</html>

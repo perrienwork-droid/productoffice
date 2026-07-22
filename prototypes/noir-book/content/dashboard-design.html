@@ -1,0 +1,671 @@
+<!--
+TOPIC_ID: UX.2.09
+TOPIC_NUMBER: UX.2.09
+TITLE: Dashboard &amp; Data-Dense Interface Design
+SUBTITLE: How to compose multiple data elements — charts, metrics, tables, filters — into coherent interactive screens that support decisions. The unit of design is the screen, not the individual graphic.
+TIER: 2
+TIER_LABEL: Specialized
+THEORY: 20
+PRACTICAL: 55
+EXAMPLES: 25
+-->
+
+<section id="what-makes-dashboards-hard" data-section="theory">
+  <h2>What makes dashboards hard</h2>
+
+<p>Dashboards sit at the intersection of three disciplines: information design (how to represent data visually), interaction design (how users navigate and manipulate views), and product strategy (what decisions the dashboard supports). Most dashboards fail not because they&#8217;re ugly or broken, but because they were built feature-first instead of decision-first &#8212; someone asked &#8220;what data do we have?&#8221; instead of &#8220;what decisions do people need to make?&#8221;</p>
+
+<p>The core tension is between density and clarity. Users want to see everything at once &#8212; every metric, every trend, every segment. But the human eye can only process so much before a screen becomes overwhelming noise. A great dashboard resolves this tension by using hierarchy, progressive disclosure, and careful layout to present the right amount of information at each level of attention.</p>
+
+<p>Information Visualization (Topic 16) teaches you how to design a great chart. This topic teaches you how to arrange twelve of those charts on one screen so a product manager can make a decision in thirty seconds.</p>
+
+<div class="callout info">
+  <p class="callout-title">Why this matters for your projects</p>
+  <p>Nearly every digital product eventually needs a dashboard &#8212; an analytics view, an admin panel, a reporting page, a monitoring screen. The patterns in this topic apply whether you&#8217;re building a custom dashboard from scratch or configuring one in Metabase, Grafana, or Looker. The same principles of hierarchy, density, and state management apply regardless of the tool.</p>
+</div>
+
+<h3 id="decision-first">Decision-first design</h3>
+
+<p>Every dashboard exists to support specific decisions. Before designing any layout or choosing any widget, answer four questions:</p>
+
+<h4>1. Who looks at this?</h4>
+<p>A CEO, a product manager, a support team lead, and a data analyst need fundamentally different dashboards &#8212; even when they&#8217;re looking at the same underlying data. The CEO wants a five-second health check. The analyst wants raw, filterable data. Serving both on one screen serves neither.</p>
+
+<h4>2. What decisions do they make?</h4>
+<p>List the actual decisions: &#8220;Should we increase ad spend in EMEA?&#8221; &#8220;Do we need to hire more support agents this month?&#8221; &#8220;Is the new checkout flow performing?&#8221; Each decision implies specific metrics and comparisons. If a widget doesn&#8217;t help answer a decision, it doesn&#8217;t belong.</p>
+
+<h4>3. What data do they need for those decisions?</h4>
+<p>Work backward from decisions to metrics. &#8220;Should we hire more support agents?&#8221; requires: current ticket volume, trend over time, average resolution time, agent utilization, and SLA compliance. Now you have a widget list derived from need, not from &#8220;what data we have.&#8221;</p>
+
+<h4>4. How often do they look?</h4>
+<p>A dashboard checked hourly needs real-time data and instant scannability. One checked weekly can be denser and more analytical. One checked monthly might be better as a generated report. Frequency determines refresh strategy, data density, and the level of interactivity.</p>
+
+<div class="method-card">
+  <h4>The Five-Second Test <span class="method-tag">Validation</span></h4>
+  <p class="method-when">Use when: Evaluating any dashboard design before development.</p>
+  <p>Show the dashboard to a stakeholder for exactly five seconds. Then hide it. Ask: &#8220;Is everything OK, or is something wrong?&#8221; If they can&#8217;t answer that question from a five-second glance, the dashboard&#8217;s information hierarchy has failed. The most important signal &#8212; the headline health check &#8212; should be readable in under five seconds without any interaction.</p>
+</div>
+
+<h3 id="information-hierarchy">Information hierarchy and the inverted pyramid</h3>
+
+<p>Dashboard information should follow an inverted pyramid: the most important, most summarized information at the top, with detail increasing as the user scrolls or drills down.</p>
+
+<h4>Level 1: The answer (hero metrics)</h4>
+<p>The top of the dashboard shows 3&#8211;5 hero metrics &#8212; single numbers with trend indicators that tell the viewer whether things are OK. These should be answerable from across the room: revenue is up, churn is down, system is healthy. No interaction required.</p>
+
+<h4>Level 2: The evidence (supporting charts)</h4>
+<p>Below the hero metrics, charts and graphs provide context and evidence. &#8220;Revenue is up&#8221; becomes &#8220;revenue is up 12% driven by EMEA growth.&#8221; This level answers the natural follow-up question: &#8220;why?&#8221; or &#8220;how?&#8221;</p>
+
+<h4>Level 3: The investigation (detail and drill-down)</h4>
+<p>The bottom of the dashboard (or behind drill-down interactions) provides the raw data, detailed tables, and filters for investigation. This level serves the analyst who needs to dig into a specific segment or anomaly. Most users never reach this level &#8212; and that&#8217;s by design.</p>
+
+<div class="callout tip">
+  <p class="callout-title">The newspaper test</p>
+  <p>A well-designed dashboard reads like a newspaper: the headline (hero metric) tells you what happened; the subhead (trend chart) tells you why it matters; the article body (detail tables) gives you the full story. Most people read the headline. Some read the subhead. Few read the full article. Design for all three audiences in one screen.</p>
+</div>
+
+</section>
+
+<section id="what-makes-dashboards-hard" data-section="theory">
+  <h2>Density vs. usability: the Tufte tension</h2>
+
+<p>Tufte argues for maximum data density: more information per square inch, always. Interface usability argues for whitespace, breathing room, and progressive disclosure. Both are right, and reconciling them is the central design challenge of dashboards.</p>
+
+<p>The resolution is: <strong>density within widgets, breathing room between them.</strong> Each individual chart should be data-dense &#8212; maximize the data-ink ratio, strip away non-data elements, use direct labeling. But the overall layout should give each widget enough surrounding space to be individually comprehensible before the eye moves on.</p>
+
+<h4>Cluttered vs. dense</h4>
+<p>There is a crucial difference between &#8220;cluttered&#8221; and &#8220;dense.&#8221; A cluttered dashboard has many elements competing for attention with no hierarchy &#8212; everything is the same size, same weight, same visual treatment. A dense dashboard has many elements organized by hierarchy &#8212; hero metrics are large and prominent, supporting charts are medium, detail is small or behind interactions. The amount of information may be the same. The readability is not.</p>
+
+<p><strong>Dense:</strong> A financial terminal showing 40 data points organized in a clear grid with consistent typography, muted colors, and a clear reading order. Every pixel carries information. The operator can scan the entire screen in seconds because the hierarchy is rock-solid.</p>
+<p><strong>Cluttered:</strong> A marketing dashboard with 15 colorful charts of varying sizes, three different chart libraries&#8217; default styles, decorative icons, and no consistent reading order. It has half the data of the financial terminal but feels twice as busy because there&#8217;s no hierarchy to guide the eye.</p>
+
+</section>
+
+<section id="layout-systems-for-dashboards" data-section="theory">
+  <h2>Layout systems for dashboards</h2>
+
+<p>Dashboard layout is not creative expression &#8212; it&#8217;s information architecture. The layout system determines reading order, visual hierarchy, and how the dashboard responds to different screen sizes.</p>
+
+<div class="method-card">
+  <h4>Grid-Based Dashboard Layout <span class="method-tag">Core Pattern</span></h4>
+  <p class="method-when">Use when: Designing any multi-widget dashboard. The grid is the default starting point.</p>
+  <p>Use a 12-column grid. Standard widget widths: full-width (12 cols) for hero metrics and primary charts, half-width (6 cols) for secondary charts, third-width (4 cols) for KPI cards, quarter-width (3 cols) for compact metrics. Maintain consistent gutter spacing (16&#8211;24px) between all widgets.</p>
+  <div class="process-steps">
+    <div class="process-step">
+      <div class="process-step-content">
+        <h4>Row 1: Hero metrics (3&#8211;5 KPI cards)</h4>
+        <p>Full-width row containing 3&#8211;5 metric cards, each showing a single number with trend. This row answers &#8220;is everything OK?&#8221; at a glance. Use quarter or third-width cards.</p>
+      </div>
+    </div>
+    <div class="process-step">
+      <div class="process-step-content">
+        <h4>Row 2: Primary chart (full or two-thirds width)</h4>
+        <p>The most important time-series or comparison chart. Often accompanied by a secondary chart or summary panel in the remaining space. This row answers &#8220;what&#8217;s the main trend?&#8221;</p>
+      </div>
+    </div>
+    <div class="process-step">
+      <div class="process-step-content">
+        <h4>Row 3+: Supporting detail</h4>
+        <p>Half-width charts, data tables, segment breakdowns. Progressively more detailed as the user scrolls. This area serves investigation and deeper analysis.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<h4>Sidebar + main content</h4>
+<p>For dashboards with heavy filtering or navigation between views, use a collapsible left sidebar (200&#8211;280px) for filters, navigation, and saved views. The main content area holds the dashboard grid. The sidebar should collapse to icons on narrower screens, giving the data maximum space.</p>
+
+<h4>Fixed vs. fluid width</h4>
+<p>Dashboards that must work at both 1280px and 2560px need a fluid strategy. Options: fluid grid with max-width constraints on individual widgets (prevents charts from becoming absurdly wide), or a centered fixed-width layout with a max-width of 1440px that adds margins on wider screens. Avoid purely percentage-based widths that stretch charts beyond their useful size &#8212; a line chart at 2560px width with 12 data points is mostly empty space.</p>
+
+<h3 id="widget-patterns">Widget patterns</h3>
+
+<p>A dashboard is composed from a vocabulary of widget types. Understanding the strengths and minimum viable dimensions of each type prevents the most common layout mistakes.</p>
+
+<h4>KPI cards</h4>
+<p>Single number + trend. Minimum width: 200px. Shows one metric with a comparison (vs. last period), directional indicator (up/down arrow or color), and optionally a sparkline. The primary scanning element of any dashboard.</p>
+
+<h4>Time-series charts (line/area)</h4>
+<p>Trends over time. Minimum width: 400px, minimum height: 200px. Below these dimensions, the chart loses legibility. Use area charts when you want to emphasize volume; use line charts when you want to emphasize rate of change. Limit to 5 lines maximum on a single chart.</p>
+
+<h4>Bar charts</h4>
+<p>Category comparison. Minimum width: 300px for vertical, 250px for horizontal. Horizontal bars work better when labels are long. Sort by value unless there&#8217;s a natural order (time, severity). For dashboard contexts, consider using just the top 5&#8211;10 items with a &#8220;see all&#8221; link.</p>
+
+<h4>Data tables</h4>
+<p>Precise values, sortable and searchable. Minimum width: 500px (below this, switch to a card layout on mobile). Best for operational dashboards where users need exact numbers, not trends. See the Data Tables section below for detailed patterns.</p>
+
+<h4>Status indicators</h4>
+<p>System health, pipeline stages, task status. Can be as compact as a colored dot with a label. Use semantic colors (green/amber/red or blue/yellow/red for colorblind safety) with text labels &#8212; never color alone.</p>
+
+<h4>Maps</h4>
+<p>Geographic data only. Minimum size: 400&#215;300px. Only use maps when geography is the primary dimension of comparison. If the user just needs to know &#8220;which region has the highest revenue,&#8221; a bar chart sorted by value is faster and more accurate than a map.</p>
+
+<h3 id="kpi-cards">KPI and metric card design</h3>
+
+<div class="method-card">
+  <h4>Anatomy of a KPI Card <span class="method-tag">Core Pattern</span></h4>
+  <p class="method-when">Use when: Showing any single metric with context at the top of a dashboard.</p>
+  <p>A well-designed KPI card has five elements, in this visual hierarchy order:</p>
+  <p><strong>1. Current value</strong> &#8212; The number itself. Largest text element. Should be readable from 3 feet away.</p>
+  <p><strong>2. Metric label</strong> &#8212; What the number measures. Smaller, subdued text above or below the value. Keep it short: &#8220;Revenue&#8221; not &#8220;Total Revenue for Current Period.&#8221;</p>
+  <p><strong>3. Comparison</strong> &#8212; vs. last period, vs. target, vs. same period last year. Shows whether the number is good or bad in context. Format: &#8220;+12% vs. last month&#8221; or &#8220;&#8593; 12% MoM.&#8221;</p>
+  <p><strong>4. Trend direction</strong> &#8212; Visual indicator: arrow, color, or both. Up/green, down/red (but remember colorblind users &#8212; always use arrow direction alongside color).</p>
+  <p><strong>5. Sparkline (optional)</strong> &#8212; A tiny, unlabeled line chart showing the last 7&#8211;30 data points. Provides shape context (is this a sustained trend or a spike?) without taking much space.</p>
+</div>
+
+<h4>When to show percentage change vs. absolute change</h4>
+<p>Percentage change is meaningful when the base number is understood by the audience. &#8220;+15%&#8221; is useful when everyone knows revenue is typically $10M. It&#8217;s meaningless when the base could be $100 or $10M. When in doubt, show both: &#8220;$1.5M (+15%).&#8221;</p>
+
+<h4>Thresholds and conditional formatting</h4>
+<p>Define thresholds before building: what values are healthy, warning, and critical? Use consistent color coding across all KPI cards (green/amber/red or a colorblind-safe alternative). Don&#8217;t overdo it &#8212; if every card is red, the signal is lost. Reserve red for truly critical deviations.</p>
+
+<h3 id="filter-patterns">Filter and control patterns</h3>
+
+<p>Filters are the primary interaction pattern on dashboards. Get them wrong, and users either can&#8217;t find the view they need or don&#8217;t realize they&#8217;re looking at filtered data.</p>
+
+<h4>Global vs. widget-level filters</h4>
+<p><strong>Global filters</strong> affect all widgets simultaneously. Place them in a persistent, visible location &#8212; a filter bar at the top of the dashboard or a sidebar. The most common global filter is date range.</p>
+<p><strong>Widget-level filters</strong> affect only one chart or table. Place them within the widget&#8217;s header or as a dropdown on the widget itself. Use these sparingly &#8212; too many widget-level filters fragment the user&#8217;s mental model of what they&#8217;re looking at.</p>
+
+<div class="method-card">
+  <h4>Filter Bar Pattern <span class="method-tag">Core Pattern</span></h4>
+  <p class="method-when">Use when: A dashboard has 2+ global filters that users change frequently.</p>
+  <p>Place a horizontal bar below the header containing all global filters: date range picker, segment dropdown, comparison toggle. Key requirements:</p>
+  <p><strong>Persistent visibility:</strong> The filter bar should be visible at all times (sticky positioning or always above the fold). If users can&#8217;t see what&#8217;s filtered, they&#8217;ll misread the data.</p>
+  <p><strong>Active filter indicator:</strong> When any non-default filter is active, show a clear visual indicator (highlighted pills, a &#8220;Filtered&#8221; badge, or a count: &#8220;2 filters active&#8221;).</p>
+  <p><strong>Clear-all:</strong> A single action to reset all filters to defaults. Never make users undo filters one by one.</p>
+  <p><strong>Saved views:</strong> For power users, allow saving filter combinations as named views (&#8220;EMEA Q4 view&#8221;, &#8220;My team only&#8221;).</p>
+</div>
+
+<div class="callout warning">
+  <p class="callout-title">The invisible filter problem</p>
+  <p>The most dangerous dashboard bug is not a crashed widget &#8212; it&#8217;s a filter the user doesn&#8217;t know is active. If a date range filter is set to &#8220;Last 7 days&#8221; but the user thinks they&#8217;re looking at &#8220;All time,&#8221; every conclusion they draw is wrong. Always make the current filter state visible and unambiguous.</p>
+</div>
+
+<h3 id="data-tables">Data tables in dashboards</h3>
+
+<p>Tables are the most information-dense widget type. When users need exact values, sorting, and row-level actions, a table beats any chart. The challenge is making tables scannable at dashboard scale.</p>
+
+<h4>When a table beats a chart</h4>
+<p>Use a table when: the user needs to look up specific values, compare across many dimensions simultaneously, sort by different columns, or take actions on individual rows (approve, reject, edit). Use a chart when the user needs to see patterns, trends, or distributions.</p>
+
+<h4>Dashboard table patterns</h4>
+<p><strong>Sorting:</strong> All columns should be sortable. Default sort should match the most common query (usually by date descending or by the primary metric). Show the sort indicator clearly.</p>
+<p><strong>Pagination vs. infinite scroll:</strong> For operational dashboards where users scan a known set of items, pagination with 20&#8211;50 rows per page. For exploratory analysis, virtual scrolling (render only visible rows). Never load all rows at once for large data sets.</p>
+<p><strong>Sticky headers:</strong> Always. When a table scrolls, column headers must remain visible. Without sticky headers, users lose track of which column they&#8217;re reading after three rows.</p>
+<p><strong>Row density:</strong> Compact row height (32&#8211;36px) for data-dense operational tables. Comfortable row height (48&#8211;56px) for tables with actions or longer content. Let power users toggle density.</p>
+<p><strong>Inline actions:</strong> For tables where users take actions (approve, assign, delete), show action buttons on hover or as a persistent column. Don&#8217;t bury actions behind a menu for the primary action.</p>
+
+<h4>Responsive table strategies</h4>
+<p>Tables wider than the viewport need a strategy. Options, from most to least data preservation:</p>
+<p><strong>Horizontal scroll</strong> &#8212; Pin the first column (identifier), let remaining columns scroll. Best for data analysts who need all columns.</p>
+<p><strong>Column priority</strong> &#8212; Hide lower-priority columns at narrower breakpoints. Show a &#8220;columns&#8221; control to reveal them.</p>
+<p><strong>Card transformation</strong> &#8212; Below 600px, convert each table row into a card with key-value pairs stacked vertically. Best for mobile when row count is manageable.</p>
+
+<h3 id="drill-down">Drill-down and navigation</h3>
+
+<p>Drill-down is how users move from overview to detail without losing context. The goal is to let users investigate a data point without losing their place in the broader dashboard.</p>
+
+<h4>Drill-down patterns</h4>
+<p><strong>Click-to-filter:</strong> Clicking a bar in a chart filters the rest of the dashboard to that segment. The clicked element stays highlighted, and all other widgets update. Best for dashboards where all widgets share the same data source.</p>
+<p><strong>Slide-out panel:</strong> Clicking a data point opens a detail panel (300&#8211;500px) from the right, showing the detail view while keeping the dashboard visible behind it. Best for operational dashboards where users need detail without losing the overview.</p>
+<p><strong>Detail modal:</strong> A full-screen or large modal showing expanded data. Use sparingly &#8212; modals break the user&#8217;s spatial context. Best for infrequent, deep-dive investigations.</p>
+<p><strong>Linked dashboards:</strong> Clicking navigates to a completely different dashboard focused on that segment. Use breadcrumbs to show drill-down depth. Best when the detail view is complex enough to warrant its own full dashboard.</p>
+
+<div class="callout tip">
+  <p class="callout-title">Context preservation</p>
+  <p>The cardinal rule of drill-down: the user must always be able to get back. Use persistent breadcrumbs (&#8220;Overview &gt; EMEA &gt; Germany&#8221;), a visible &#8220;Back to overview&#8221; link, or the browser&#8217;s back button (which means drill-down states must be in the URL). If clicking &#8220;back&#8221; loses the user&#8217;s filter state or scroll position, the drill-down pattern is broken.</p>
+</div>
+
+</section>
+
+<section id="data-states-and-loading" data-section="theory">
+  <h2>Data states and loading</h2>
+
+<p>A dashboard is not a static design &#8212; it&#8217;s a living interface with multiple possible states. Designing for every state is what separates a polished dashboard from a fragile one.</p>
+
+<div class="method-card">
+  <h4>The Five Data States <span class="method-tag">Core Framework</span></h4>
+  <p class="method-when">Use when: Designing any dashboard widget. Every widget must handle all five states.</p>
+  <div class="process-steps">
+    <div class="process-step">
+      <div class="process-step-content">
+        <h4>Loading</h4>
+        <p>Data is being fetched. Show a skeleton screen (gray placeholders matching the widget&#8217;s final layout) rather than a spinner. Skeletons communicate that content is coming and what shape it will take. Each widget loads independently &#8212; don&#8217;t block the entire dashboard waiting for the slowest query.</p>
+      </div>
+    </div>
+    <div class="process-step">
+      <div class="process-step-content">
+        <h4>Populated</h4>
+        <p>Data is present and displayed. This is the primary design state &#8212; what most mockups show. But it&#8217;s only one of five states you must design.</p>
+      </div>
+    </div>
+    <div class="process-step">
+      <div class="process-step-content">
+        <h4>Empty</h4>
+        <p>The query returned zero results. Don&#8217;t show a blank space or a generic &#8220;No data.&#8221; Explain why it&#8217;s empty (&#8220;No sales in this region during the selected period&#8221;) and suggest what to do (&#8220;Try expanding the date range&#8221; or &#8220;Remove the filter on region&#8221;).</p>
+      </div>
+    </div>
+    <div class="process-step">
+      <div class="process-step-content">
+        <h4>Error</h4>
+        <p>The data fetch failed. Show a clear error message in the widget itself &#8212; not a toast notification that disappears. Include a &#8220;Retry&#8221; button. Other widgets that loaded successfully should continue to display normally &#8212; never blank the entire dashboard because one query failed.</p>
+      </div>
+    </div>
+    <div class="process-step">
+      <div class="process-step-content">
+        <h4>Stale</h4>
+        <p>Data was fetched previously but may be outdated. Show a timestamp (&#8220;Last updated 15 min ago&#8221;) and a refresh button. For real-time dashboards, use a subtle pulsing indicator when data is live, and a static indicator when the connection is stale.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<h4>Independent widget loading</h4>
+<p>Each widget should fetch its data independently and render as soon as its data arrives. A KPI card that loads in 200ms should appear immediately, not wait for a complex chart that takes 3 seconds. This creates a progressive loading experience where the dashboard &#8220;fills in&#8221; naturally rather than blocking behind a single loading screen.</p>
+
+<h3 id="dark-mode">Dark mode and theming</h3>
+
+<p>Dashboards are frequently used in dark mode &#8212; network operations centers, trading floors, presentation screens, and by users who work in low-light environments. Dark mode for dashboards has specific challenges beyond inverting colors.</p>
+
+<h4>Chart colors in dark mode</h4>
+<p>Colors that work on a light background often fail on dark. Saturated blues and greens that pop on white can feel harsh on dark gray. Use slightly desaturated, lighter versions of your chart palette for dark mode. Test every chart in both modes &#8212; a color that provides good contrast on white may vanish against dark gray.</p>
+
+<h4>Card hierarchy through background levels</h4>
+<p>In light mode, cards &#8220;float&#8221; above the background using shadows or borders. In dark mode, cards are distinguished by background level: the page is the darkest, cards are one step lighter, and interactive or highlighted elements are another step lighter. Use a 3&#8211;5 level background scale (not more &#8212; the differences become imperceptible).</p>
+
+<h4>Text contrast on dark backgrounds</h4>
+<p>Pure white text (#FFF) on dark backgrounds causes halation &#8212; a glowing effect that reduces readability. Use off-white or warm gray (e.g., #D8D0C4 or #E0DDD6) for body text. Reserve pure white for hero metrics and primary headings only.</p>
+
+<h3 id="responsive-dashboards">Responsive dashboard design</h3>
+
+<p>Dashboards face unique responsive challenges. A 12-widget grid that works at 1440px can&#8217;t simply reflow to a single column at 375px &#8212; the user would scroll through 20 screens of widgets. Responsive dashboards require priority-based decisions, not just layout reflow.</p>
+
+<h4>Which widgets survive the small screen?</h4>
+<p>At mobile widths, show only the Level 1 information: hero KPI cards and the single most important chart. Move everything else behind a &#8220;View full dashboard&#8221; link or a tab interface. The mobile dashboard answers &#8220;is everything OK?&#8221; and nothing more &#8212; detailed analysis happens on a larger screen.</p>
+
+<h4>Tablet strategies (768&#8211;1024px)</h4>
+<p>Tablets can accommodate a reduced dashboard: hero cards in a single row, primary chart at full width, secondary charts at half-width (2-column). Collapse the sidebar filter panel to a filter button that opens a slide-out. This is often the &#8220;minimum viable dashboard&#8221; &#8212; functional enough for meetings and quick checks.</p>
+
+<h4>Swipeable widgets on mobile</h4>
+<p>On mobile, consider a horizontally swipeable card carousel for KPI metrics and a vertically scrollable list for supporting charts. Each swipeable card should show one metric with full context. Pagination dots indicate how many cards are available. This pattern preserves the density of information while respecting the narrow viewport.</p>
+
+<h3 id="accessibility">Accessibility in data-dense interfaces</h3>
+
+<p>Dashboards pose unique accessibility challenges because they pack many data elements into a small space. The key is providing alternative paths to the same information for users who can&#8217;t access it visually.</p>
+
+<h4>Screen reader strategies</h4>
+<p><strong>Reading order:</strong> Ensure the DOM order matches the visual hierarchy. Hero metrics first, then primary chart, then supporting detail. A screen reader user should get the &#8220;is everything OK?&#8221; answer first, just like a sighted user.</p>
+<p><strong>Live regions:</strong> For real-time updating dashboards, use ARIA live regions (aria-live=&#8220;polite&#8221;) on KPI cards so screen readers announce when values change significantly. Don&#8217;t announce every minor fluctuation &#8212; set a threshold for what constitutes a meaningful change.</p>
+<p><strong>Chart alternatives:</strong> Every chart should have a text summary (via aria-label or a visually hidden summary) and a &#8220;View as table&#8221; toggle. The table alternative should present the same data in a fully accessible, sortable format.</p>
+
+<h4>Keyboard navigation</h4>
+<p>Users should be able to tab between widgets in a logical order, activate filters and drill-down interactions, and navigate data tables entirely by keyboard. Each widget should be a single tab stop, with arrow keys for internal navigation (e.g., moving between bars in a chart or cells in a table).</p>
+
+<h4>Zoom and text scaling</h4>
+<p>Dashboards must remain functional at 200% zoom (WCAG requirement). This means: avoid fixed pixel heights that clip content, use rem/em for typography, and ensure layouts reflow gracefully rather than requiring horizontal scrolling. Test by setting browser zoom to 200% and verifying every widget is still usable.</p>
+
+</section>
+
+<section id="templates-and-checklists" data-section="practical">
+  <h2>Templates and checklists</h2>
+
+<div class="template-box">
+  <div class="template-header">
+    <span class="template-label">Checklist</span>
+    <span class="template-title">Dashboard Design Pre-Flight</span>
+  </div>
+  <ul class="checklist">
+    <li>Decision clarity: can you list the 3&#8211;5 decisions this dashboard supports?</li>
+    <li>Audience defined: who is the primary user, and what is their skill level?</li>
+    <li>Hero metrics: 3&#8211;5 KPIs at top with trend, comparison, and directional indicator</li>
+    <li>Information hierarchy: inverted pyramid from summary to detail</li>
+    <li>Filter discoverability: current filter state is always visible</li>
+    <li>Clear-all filter: one action resets to defaults</li>
+    <li>All five data states designed: loading, populated, empty, error, stale</li>
+    <li>Independent widget loading: no single slow query blocks the entire dashboard</li>
+    <li>Drill-down has breadcrumbs or back navigation</li>
+    <li>Responsive behavior: mobile shows hero KPIs at minimum</li>
+    <li>Dark mode: chart colors tested in both themes</li>
+    <li>Accessibility: reading order matches visual hierarchy, charts have table alternatives</li>
+    <li>200% zoom: layout reflows without horizontal scrolling</li>
+    <li>Five-second test: a stakeholder can tell if things are OK in a glance</li>
+  </ul>
+</div>
+
+<div class="template-box">
+  <div class="template-header">
+    <span class="template-label">Template</span>
+    <span class="template-title">Dashboard Scoping Questions</span>
+  </div>
+  <div class="template-grid">
+    <div class="template-field">
+      <div class="template-field-label">Who is the primary audience?</div>
+      <div class="template-field-hint">Role, skill level, and what they do after looking at this dashboard</div>
+    </div>
+    <div class="template-field">
+      <div class="template-field-label">What 3&#8211;5 decisions does this support?</div>
+      <div class="template-field-hint">Write as complete sentences: &#8220;Should we increase spend in EMEA this quarter?&#8221;</div>
+    </div>
+    <div class="template-field">
+      <div class="template-field-label">How often is it checked?</div>
+      <div class="template-field-hint">Hourly &#8594; real-time, minimal interaction. Daily &#8594; scannable, moderate depth. Weekly &#8594; analytical, full detail.</div>
+    </div>
+    <div class="template-field">
+      <div class="template-field-label">What is the hero metric?</div>
+      <div class="template-field-hint">The single most important number. If you could only show one thing, what would it be?</div>
+    </div>
+    <div class="template-field">
+      <div class="template-field-label">What does &#8220;bad&#8221; look like?</div>
+      <div class="template-field-hint">Define thresholds: at what values does the user need to take action? This determines conditional formatting.</div>
+    </div>
+    <div class="template-field">
+      <div class="template-field-label">Where will it be displayed?</div>
+      <div class="template-field-hint">Desktop app, browser, TV screen, mobile. Each context demands different density and interaction.</div>
+    </div>
+  </div>
+</div>
+
+</section>
+
+<section id="dashboard-anatomy-three-case-studies" data-section="examples">
+  <h2>Dashboard anatomy: three case studies</h2>
+
+<div class="case-study">
+  <p class="case-label">Case study</p>
+  <h4>Analytics dashboard (product metrics)</h4>
+  <p>A SaaS product dashboard for a product manager, checked daily. Hero metrics: DAU, activation rate, 7-day retention, MRR. Primary chart: DAU trend over 30 days with cohort overlay. Supporting: feature adoption table (sortable by usage), funnel chart (signup to activation to conversion), and a segment comparison (free vs. paid users).</p>
+  <p><strong>Why it works:</strong> The hierarchy answers three questions in order: &#8220;Are we growing?&#8221; (DAU + MRR cards), &#8220;Are users sticking?&#8221; (retention card + cohort chart), &#8220;What should we build next?&#8221; (feature adoption table). Each level provides context for the one above it. Global filter: date range. Widget-level filter: user segment on the funnel chart.</p>
+</div>
+
+<div class="case-study">
+  <p class="case-label">Case study</p>
+  <h4>Operational dashboard (system monitoring)</h4>
+  <p>An infrastructure monitoring dashboard for a DevOps team, displayed on a TV screen in the office. Hero metrics: uptime percentage (green/red), p95 latency, error rate, active incidents. Primary chart: request volume over the last hour with error rate overlaid. Supporting: server status grid (green/amber/red dots per service), recent alerts list, and deployment timeline.</p>
+  <p><strong>Why it works:</strong> Designed for wall display: high contrast, large type for hero metrics readable from 15 feet. The five-second test is critical here &#8212; an engineer glancing at the TV while walking by must instantly know if something is wrong. Auto-refreshes every 30 seconds. Dark mode default (wall-mounted displays). No interaction required for the primary view &#8212; drill-down happens on a laptop when investigating an alert.</p>
+</div>
+
+<div class="case-study">
+  <p class="case-label">Case study</p>
+  <h4>Financial dashboard (portfolio reporting)</h4>
+  <p>A financial reporting dashboard for a CFO, reviewed weekly with the leadership team. Hero metrics: total revenue, burn rate, runway (months), revenue growth rate. Primary chart: revenue vs. plan over 12 months (actual line + forecast line + plan shading). Supporting: revenue by product line (stacked bar), expense breakdown (horizontal bar sorted by amount), and AR aging table.</p>
+  <p><strong>Why it works:</strong> Emphasis on comparison-to-plan. Every metric shows actual vs. target. The primary chart uses the &#8220;plan as shading&#8221; technique &#8212; a filled area showing the plan range, with the actual line drawn on top. Variance is visible at a glance: the line inside the shading means on-track; the line above or below means deviation. Exported as PDF for board meetings &#8212; the dashboard works both as interactive tool and static report.</p>
+</div>
+
+</section>
+
+<section id="dashboard-anatomy-three-case-studies" data-section="examples">
+  <h2>Before/after: dashboard redesigns</h2>
+
+<div class="case-study">
+  <p class="case-label">Redesign</p>
+  <h4>The &#8220;everything dashboard&#8221; &#8594; Focused decision support</h4>
+  <p><strong>Before:</strong> 18 widgets on one screen. Three different chart libraries with inconsistent styling. No clear reading order. Six pie charts (none with fewer than 8 slices). No KPI cards &#8212; every metric was buried inside a chart title. The team added every available metric because &#8220;someone might need it.&#8221;</p>
+  <p><strong>After:</strong> Split into three dashboards: Executive (5 KPI cards + 2 charts), Operational (8 widgets with drill-down), and Analytical (dense, filterable, for data team). Each serves one audience with one purpose. Total widgets increased from 18 to 24 &#8212; but spread across three focused screens instead of one chaotic one. Usage went from &#8220;nobody opens it&#8221; to daily check-ins by each team.</p>
+  <p><strong>Lesson:</strong> A dashboard that tries to serve three audiences serves none. Split by audience and decision type, not by available data.</p>
+</div>
+
+<div class="case-study">
+  <p class="case-label">Redesign</p>
+  <h4>The &#8220;beautiful but useless&#8221; dashboard &#8594; Decision-first layout</h4>
+  <p><strong>Before:</strong> Visually stunning &#8212; smooth gradients, custom illustrations, animated transitions. Won an internal design award. Nobody used it. The CEO couldn&#8217;t tell if revenue was up or down without hovering over a chart, reading a tooltip, and doing mental math. The primary metric was a donut chart with 12 segments showing revenue distribution &#8212; but not total revenue.</p>
+  <p><strong>After:</strong> Hero row with four KPI cards (revenue, growth, burn, runway). Each card shows: value, comparison, direction. The donut chart was replaced with a sorted horizontal bar showing the top 5 segments. Total revenue added as a KPI card. Five-second test: pass. The CEO now checks it every morning.</p>
+  <p><strong>Lesson:</strong> Decoration is not design. A dashboard&#8217;s job is to communicate, not to impress. If the primary user can&#8217;t answer &#8220;is everything OK?&#8221; in five seconds, the dashboard has failed regardless of how it looks.</p>
+</div>
+
+<!-- SECTION: Common Pitfalls                     -->
+</section>
+
+<section id="templates-and-checklists" data-section="practical">
+  <h2>Common pitfalls</h2>
+
+<div class="pitfall">
+  <div class="pitfall-icon">!</div>
+  <div>
+    <h4>Serving three audiences on one screen</h4>
+    <p>A CEO, a product manager, and a data analyst need different dashboards. Cramming all three views into one screen means every user sees 60% noise. Split by audience, not by data availability.</p>
+  </div>
+</div>
+
+<div class="pitfall">
+  <div class="pitfall-icon">!</div>
+  <div>
+    <h4>No information hierarchy</h4>
+    <p>When every widget is the same size with the same visual weight, nothing is important &#8212; which means everything is noise. Hero metrics should be visually dominant. Supporting detail should be visually subordinate. The eye should have a clear reading order.</p>
+  </div>
+</div>
+
+<div class="pitfall">
+  <div class="pitfall-icon">!</div>
+  <div>
+    <h4>Designing only the &#8220;populated&#8221; state</h4>
+    <p>Most dashboard designs only show what happens when data is present. But loading, empty, error, and stale states are equally important. A dashboard that shows a blank white space when a query fails is broken, even if the mockup looked perfect.</p>
+  </div>
+</div>
+
+<div class="pitfall">
+  <div class="pitfall-icon">!</div>
+  <div>
+    <h4>Inconsistent chart styles</h4>
+    <p>Mixing chart libraries (one widget using Chart.js defaults, another using D3 with custom styles, a third using Recharts) creates visual chaos. All charts on one dashboard should share the same color palette, typography, grid line style, and animation behavior.</p>
+  </div>
+</div>
+
+<div class="pitfall">
+  <div class="pitfall-icon">!</div>
+  <div>
+    <h4>Using pie charts for comparison</h4>
+    <p>Pie charts encode data as angles, which humans are poor at comparing accurately. For comparing values across categories on a dashboard, use horizontal bar charts sorted by value. They&#8217;re more compact, more accurate, and more scannable.</p>
+  </div>
+</div>
+
+<div class="pitfall">
+  <div class="pitfall-icon">!</div>
+  <div>
+    <h4>Real-time data without timestamps</h4>
+    <p>A dashboard showing &#8220;live&#8221; data without a visible last-updated timestamp is a liability. Users don&#8217;t know if they&#8217;re seeing data from 10 seconds ago or 10 hours ago. Always show when data was last refreshed and provide a manual refresh action.</p>
+  </div>
+</div>
+
+<!-- SECTION: When to Use This                    -->
+</section>
+
+<section id="when-to-use" data-section="practical">
+  <h2>When to use this</h2>
+
+<div class="callout info">
+  <p class="callout-title">Decision guidance</p>
+  <p><strong>Use this topic when:</strong> You&#8217;re designing any screen that displays multiple data elements together &#8212; an analytics dashboard, an admin panel, a monitoring view, a reporting page, or a settings overview with metrics. Applies whether building custom or configuring a tool like Grafana, Metabase, or Looker.</p>
+  <p><strong>Pair with Information Visualization when:</strong> You need guidance on the individual charts and graphics within each widget. This topic tells you how to arrange widgets; Info Viz tells you how to design each one.</p>
+  <p><strong>Pair with Data-Driven Design when:</strong> You need to decide <em>what</em> to measure. Choosing the right metrics comes before designing the dashboard that displays them.</p>
+  <p><strong>Don&#8217;t use this for:</strong> Single-chart views, data-light pages, or editorial/storytelling data pieces. Those are Information Visualization territory, not dashboard design.</p>
+</div>
+
+<!-- SECTION: Connections                         -->
+</section>
+
+<section id="connections">
+  <h2>Connected topics in your library</h2>
+
+<div class="cross-ref-grid">
+  <a href="information-visualization.html" class="cross-ref-card">
+    <span class="ref-number">16</span>
+    <div class="ref-title">Information Visualization</div>
+    <div class="ref-reason">Design individual charts and graphics</div>
+  </a>
+  <a href="#" class="cross-ref-card">
+    <span class="ref-number">11</span>
+    <div class="ref-title">Data-Driven Design</div>
+    <div class="ref-reason">Choose what to measure</div>
+  </a>
+  <a href="#" class="cross-ref-card">
+    <span class="ref-number">05</span>
+    <div class="ref-title">UI Design Patterns</div>
+    <div class="ref-reason">Component-level patterns</div>
+  </a>
+  <a href="#" class="cross-ref-card">
+    <span class="ref-number">06</span>
+    <div class="ref-title">Visual Design</div>
+    <div class="ref-reason">Color, hierarchy, layout</div>
+  </a>
+  <a href="#" class="cross-ref-card">
+    <span class="ref-number">07</span>
+    <div class="ref-title">Accessibility in Practice</div>
+    <div class="ref-reason">WCAG for data-dense interfaces</div>
+  </a>
+  <a href="#" class="cross-ref-card">
+    <span class="ref-number">04</span>
+    <div class="ref-title">Usability</div>
+    <div class="ref-reason">Principles for complex interfaces</div>
+  </a>
+</div>
+
+<!-- SECTION: Deep Dive Appendix                  -->
+<section id="deep-dive">
+<h2>Deep-dive appendix</h2>
+<p>Extended material for when you want to go deeper. Covers widget sizing, grid configurations, frameworks, and further reading.</p>
+
+  <details class="expandable">
+    <summary><span class="chevron"><svg viewBox="0 0 14 14"><polyline points="4,2 10,7 4,12"/></svg></span> Widget sizing reference</summary>
+    <div class="expand-content topic-content">
+      <h4>Minimum viable dimensions by widget type</h4>
+      <p><strong>KPI card:</strong> Min 200px wide &#215; 100px tall. Shows value, label, comparison.</p>
+      <p><strong>Sparkline:</strong> Min 120px wide &#215; 32px tall. Unlabeled, context only.</p>
+      <p><strong>Line/area chart:</strong> Min 400px wide &#215; 200px tall. Below this, axis labels collide and trends are unreadable.</p>
+      <p><strong>Bar chart (vertical):</strong> Min 300px wide &#215; 200px tall. Need room for category labels below.</p>
+      <p><strong>Bar chart (horizontal):</strong> Min 250px wide &#215; varies. Height = (bar height &#215; number of items) + padding.</p>
+      <p><strong>Pie/donut:</strong> Min 200px &#215; 200px. But consider replacing with a bar chart.</p>
+      <p><strong>Data table:</strong> Min 500px wide. Below this, switch to card layout or horizontal scroll.</p>
+      <p><strong>Map:</strong> Min 400px wide &#215; 300px tall. Smaller maps lose geographic context.</p>
+    </div>
+  </details>
+
+  <details class="expandable">
+    <summary><span class="chevron"><svg viewBox="0 0 14 14"><polyline points="4,2 10,7 4,12"/></svg></span> Common grid configurations</summary>
+    <div class="expand-content topic-content">
+      <h4>Executive dashboard (5&#8211;8 widgets)</h4>
+      <p>Row 1: 4 KPI cards (3 cols each). Row 2: Primary chart (8 cols) + summary panel (4 cols). Row 3: Two half-width supporting charts. Total: 7 widgets. Optimized for scanning, not analysis.</p>
+
+      <h4>Operational dashboard (8&#8211;12 widgets)</h4>
+      <p>Row 1: 4&#8211;5 KPI cards. Row 2: Primary chart (full width). Row 3: 3 half-width or third-width charts. Row 4: Data table (full width). Total: 10 widgets. Balanced between scanning and investigation.</p>
+
+      <h4>Analytical dashboard (12&#8211;20 widgets)</h4>
+      <p>Sidebar: filters + saved views (240px). Main: Multi-row grid with varying widget sizes. Tabs or scroll for additional views. Data tables prominent. Designed for daily use by analysts who will spend 10+ minutes per session. Progressive disclosure is critical &#8212; don&#8217;t show everything at once.</p>
+    </div>
+  </details>
+
+  <details class="expandable">
+    <summary><span class="chevron"><svg viewBox="0 0 14 14"><polyline points="4,2 10,7 4,12"/></svg></span> Dashboard frameworks and tools</summary>
+    <div class="expand-content topic-content">
+      <h4>Build vs. buy decision</h4>
+      <p><strong>Use a dashboard tool when:</strong> The data source is a database or API with standard metrics, the audience is internal, customization needs are moderate, and time to ship matters more than pixel-perfect design. Tools: Metabase (open source, SQL-based), Grafana (monitoring/infra), Looker (enterprise analytics), Tableau (business intelligence).</p>
+      <p><strong>Build custom when:</strong> The dashboard is user-facing (part of your product), you need precise control over UX and branding, you need complex interactions (drill-down, inline editing, real-time), or when the dashboard is a core product feature (not an internal tool). Stack: React + Chart.js/Recharts/D3 + your design system.</p>
+
+      <h4>Recommended reading</h4>
+      <p><strong>&#8220;Information Dashboard Design&#8221; by Stephen Few</strong> &#8212; The most practical book on dashboard design specifically. Covers layout, widget selection, and common mistakes with extensive before/after examples.</p>
+      <p><strong>&#8220;Storytelling with Data&#8221; by Cole Nussbaumer Knaflic</strong> &#8212; Covers how to present data persuasively. Particularly useful for dashboards that will be shared with executives or presented in meetings.</p>
+      <p><strong>&#8220;The Big Book of Dashboards&#8221; by Steve Wexler, Jeffrey Shaffer, and Andy Cotgreave</strong> &#8212; 28 real-world dashboard case studies from diverse industries. Each analyzed for what works and what doesn&#8217;t.</p>
+    </div>
+  </details>
+</section>
+
+<!-- Topic Navigation -->
+<div class="topic-nav">
+  <a href="information-visualization.html" class="topic-nav-link prev">
+    <div class="nav-direction">Related topic</div>
+    <div class="nav-title">&#8249; Information Visualization</div>
+  </a>
+  <div></div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- SEARCH_INDEX
+{
+    topic: "Dashboard & Data-Dense Interface Design",
+    url: "topics/dashboard-design.html",
+    tier: "Tier 2",
+    sections: [
+      { title: "What makes dashboards hard", id: "what-makes-dashboards-hard", type: "theory", keywords: "density clarity feature-first decision-first intersection information interaction product" },
+      { title: "Decision-first design", id: "decision-first", type: "theory", keywords: "audience decisions metrics frequency five-second test who what how often" },
+      { title: "Information hierarchy", id: "information-hierarchy", type: "theory", keywords: "inverted pyramid hero metrics KPI level summary detail drill-down newspaper" },
+      { title: "Density vs. usability", id: "density-vs-usability", type: "theory", keywords: "Tufte tension cluttered dense whitespace breathing room within between widgets" },
+      { title: "Layout systems", id: "layout-systems", type: "practical", keywords: "12-column grid sidebar fixed fluid responsive row widget width gutter" },
+      { title: "Widget patterns", id: "widget-patterns", type: "practical", keywords: "KPI card chart table sparkline status indicator map minimum dimensions" },
+      { title: "KPI & metric cards", id: "kpi-cards", type: "practical", keywords: "hero metric value trend comparison sparkline threshold conditional formatting" },
+      { title: "Filter & control patterns", id: "filter-patterns", type: "practical", keywords: "global widget-level filter bar date range segment clear-all saved views" },
+      { title: "Data tables", id: "data-tables", type: "practical", keywords: "sorting pagination sticky headers row density inline actions responsive card horizontal scroll" },
+      { title: "Drill-down & navigation", id: "drill-down", type: "practical", keywords: "click-to-filter slide-out panel modal linked breadcrumbs context back" },
+      { title: "Data states & loading", id: "data-states", type: "practical", keywords: "loading skeleton populated empty error stale refresh timestamp independent widget" },
+      { title: "Dark mode & theming", id: "dark-mode", type: "practical", keywords: "dark mode chart colors background levels card hierarchy text contrast halation" },
+      { title: "Responsive dashboards", id: "responsive-dashboards", type: "practical", keywords: "mobile tablet priority widgets swipeable carousel collapse sidebar breakpoint" },
+      { title: "Accessibility", id: "accessibility", type: "practical", keywords: "screen reader ARIA live region keyboard navigation zoom 200% chart table alternative" },
+      { title: "Templates & checklists", id: "templates", type: "practical", keywords: "pre-flight checklist scoping questions design review" },
+      { title: "Dashboard case studies", id: "case-studies", type: "examples", keywords: "analytics operational monitoring financial portfolio SaaS DevOps CFO" },
+      { title: "Before/after redesigns", id: "redesigns", type: "examples", keywords: "everything dashboard beautiful useless redesign split audience focused" },
+      { title: "Common pitfalls", id: "pitfalls", type: "practical", keywords: "three audiences hierarchy populated state pie chart inconsistent real-time timestamp" },
+      { title: "When to use this", id: "when-to-use", type: "practical", keywords: "decision guidance admin panel monitoring reporting Grafana Metabase Looker" },
+      { title: "Deep-dive appendix", id: "deep-dive", type: "deep-dive", keywords: "widget sizing grid configurations executive operational analytical build buy Metabase Grafana Few Wexler Knaflic" }
+    ],
+    methods: [
+      { name: "Five-Second Test", section: "decision-first", keywords: "validation stakeholder glance health check hierarchy" },
+      { name: "Grid-Based Dashboard Layout", section: "layout-systems", keywords: "12-column hero row primary chart supporting detail" },
+      { name: "KPI Card Anatomy", section: "kpi-cards", keywords: "value label comparison trend sparkline threshold" },
+      { name: "Filter Bar Pattern", section: "filter-patterns", keywords: "global persistent visible active indicator clear-all saved views" },
+      { name: "Five Data States", section: "data-states", keywords: "loading skeleton populated empty error stale refresh" },
+      { name: "Dashboard Scoping Questions", section: "templates", keywords: "audience decisions frequency hero metric bad thresholds" }
+    ]
+  }
+SEARCH_INDEX -->
+
+<!-- MANIFEST
+{
+  "id": "UX.2.09",
+  "title": "Dashboard & Data-Dense Design",
+  "file": "topics/dashboard-design.html",
+  "tier": 2,
+  "discipline": "UX",
+  "solves": [
+    "I need to design a dashboard that supports real decisions",
+    "I want to lay out a data-dense interface without overwhelming users",
+    "I need to design KPI cards, filter bars, and data tables that work together",
+    "I want to handle all five data states (loading, populated, empty, error, stale)",
+    "I need to make a dashboard work across desktop and mobile",
+    "I need to design a dark-mode version of a data-heavy interface"
+  ],
+  "methods": [
+    "Decision-First Design",
+    "Inverted Pyramid Hierarchy",
+    "KPI Card Anatomy",
+    "Filter Bar Pattern",
+    "Five Data States Framework",
+    "12-Column Grid Layout",
+    "Widget Sizing Reference"
+  ],
+  "phase": "design",
+  "prerequisites": [
+    "UX.1.04"
+  ],
+  "pairs_with": [
+    "UX.3.02",
+    "UX.2.04"
+  ],
+  "depth": "methods",
+  "keywords": [
+    "dashboard",
+    "data-dense",
+    "KPI",
+    "metrics",
+    "filter bar",
+    "data table",
+    "widget",
+    "grid layout",
+    "empty state",
+    "loading state",
+    "error state",
+    "responsive dashboard",
+    "dark mode"
+  ]
+}
+MANIFEST -->

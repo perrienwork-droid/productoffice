@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Immersive &amp; Voice Interfaces — Noir Book</title>
+  <link rel="stylesheet" href="../css/shared.css">
+  <link rel="stylesheet" href="../css/topic.css">
+  <script src="../js/theme.js"></script>
+  <script src="../js/topic-nav.js"></script>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="site-nav subpage-nav" data-discipline="ux">
+    <div class="nav-inner">
+      <a href="../index.html" class="site-logo">
+        <span class="logo-mark">UX</span>
+        <span class="nav-title">Noir Book</span>
+      </a>
+      <a href="../index.html" class="nav-back-link">&#8592; Library</a>
+      <div class="nav-filters">
+        <button class="disc-toggle ux-toggle active" data-disc="ux" onclick="toggleDisc('ux')" title="UX Design">
+          <span class="disc-dot disc-dot-ux"></span><span class="disc-label">UX Design</span><span class="disc-code">(UX)</span>
+        </button>
+        <button class="disc-toggle pm-toggle active" data-disc="pm" onclick="toggleDisc('pm')" title="Product Management">
+          <span class="disc-dot disc-dot-pm"></span><span class="disc-label">Product</span><span class="disc-code">(PM)</span>
+        </button>
+        <button class="disc-toggle mk-toggle active" data-disc="mk" onclick="toggleDisc('mk')" title="Marketing &amp; Growth">
+          <span class="disc-dot disc-dot-mk"></span><span class="disc-label">Marketing</span><span class="disc-code">(MK)</span>
+        </button>
+        <button class="disc-toggle cs-toggle active" data-disc="cs" onclick="toggleDisc('cs')" title="Content Strategy">
+          <span class="disc-dot disc-dot-cs"></span><span class="disc-label">Content</span><span class="disc-code">(CS)</span>
+        </button>
+        <div class="search-box nav-search-box">
+          <div class="nav-search-wrap">
+            <div class="nav-search-pills" id="navSearchPills"></div>
+            <input type="text" id="navSearchInput" placeholder="Search..." autocomplete="off"
+              oninput="topicNavSearch(this.value)"
+              onkeydown="handleNavSearchKey(event)"
+              onfocus="handleNavSearchFocus()"
+              onblur="handleNavSearchBlur()">
+            <button type="button" class="nav-search-clear" id="navSearchClear" onclick="clearNavSearch()" aria-label="Clear search">&times;</button>
+          </div>
+          <div class="search-dropdown" id="navSearchDropdown"></div>
+        </div>
+      </div>
+      <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle theme">&#9790;</button>
+      <button class="burger-btn" id="burgerBtn" onclick="openBurger()" aria-label="Menu">
+        <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="2" y1="4" x2="16" y2="4"/><line x1="2" y1="9" x2="16" y2="9"/><line x1="2" y1="14" x2="16" y2="14"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Burger Menu Overlay -->
+  <div class="burger-overlay" id="burgerOverlay" onclick="closeBurger(event)">
+    <div class="burger-panel" onclick="event.stopPropagation()">
+      <div class="burger-panel-header">
+        <h3>Menu</h3>
+        <button class="burger-close" onclick="closeBurger()" aria-label="Close">&times;</button>
+      </div>
+      <div class="burger-search">
+        <input type="text" id="burgerSearchInput" placeholder="Search topics, methods..." autocomplete="off" oninput="burgerSearch(this.value)">
+        <div class="burger-search-results" id="burgerSearchResults"></div>
+      </div>
+      <div class="burger-links">
+        <a href="../index.html">&#8592; Back to Library</a>
+        <a href="../design-system.html">Design System</a>
+        <a href="../request-topic.html">Suggest a topic or improvement</a>
+      </div>
+      <div class="burger-toc-section">
+        <p class="burger-toc-title">On this page</p>
+        <ul class="burger-toc-list">
+        <li><a href="#what-and-why" data-section="theory">What immersive and voice design is</a></li>
+        <li><a href="#ar-design" data-section="practical">AR design principles</a></li>
+        <li><a href="#vr-design" data-section="practical">VR design principles</a></li>
+        <li><a href="#voice-ui" data-section="practical">Voice UI fundamentals</a></li>
+        <li><a href="#multimodal" data-section="practical">Multi-modal interfaces</a></li>
+        <li><a href="#templates" data-section="practical">Templates and checklists</a></li>
+        <li><a href="#real-world-examples" data-section="examples">Real-world examples</a></li>
+        <li><a href="#pitfalls" data-section="practical">Common pitfalls</a></li>
+        <li><a href="#connections">Connected topics in your library</a></li>
+        <li><a href="#deep-dive">Deep-dive appendix</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Topic Header -->
+  <header class="topic-header container">
+    <div class="breadcrumb">
+      <a href="../index.html">Library</a>
+      <span class="sep">&#8250;</span>
+      <span class="breadcrumb-disc breadcrumb-ux">UX Design</span>
+      <span class="sep">&#8250;</span>
+      <span>Tier 4 — Reference</span>
+      <span class="sep">&#8250;</span>
+      <span>Immersive &amp; Voice Interfaces</span>
+    </div>
+    <div class="topic-meta">
+      <span class="tier-badge tier4">Tier 4</span>
+      <span style="font-size:14px;color:var(--ink-muted)">Topic UX.4.02</span>
+    </div>
+    <h1>Immersive &amp; Voice Interfaces</h1>
+    <p class="topic-subtitle">Beyond screens. AR/VR spatial design, voice user interfaces, conversational design, and interaction models that don't rely on a screen.</p>
+    <div class="content-splits">
+      <span class="split-badge theory">30% Theory</span>
+      <span class="split-badge practical">45% Methods &amp; Templates</span>
+      <span class="split-badge examples">25% Examples</span>
+    </div>
+  </header>
+
+  <!-- Reading Progress Bar -->
+  <div class="reading-progress" id="readingProgress"></div>
+
+  <!-- Main Layout -->
+  <div class="container">
+    <div class="topic-layout">
+
+      <!-- Sidebar: Table of Contents -->
+      <aside class="topic-sidebar">
+        <nav class="toc">
+          <p class="sidebar-topic-title">Immersive &amp; Voice Interfaces</p>
+          <p class="toc-title">On this page</p>
+          <ul class="toc-list">
+            <li><a href="#what-and-why" data-section="theory">What immersive and voice design is</a></li>
+            <li><a href="#ar-design" data-section="practical">AR design principles</a></li>
+            <li><a href="#vr-design" data-section="practical">VR design principles</a></li>
+            <li><a href="#voice-ui" data-section="practical">Voice UI fundamentals</a></li>
+            <li><a href="#multimodal" data-section="practical">Multi-modal interfaces</a></li>
+            <li><a href="#templates" data-section="practical">Templates and checklists</a></li>
+            <li><a href="#real-world-examples" data-section="examples">Real-world examples</a></li>
+            <li><a href="#pitfalls" data-section="practical">Common pitfalls</a></li>
+            <li><a href="#connections">Connected topics in your library</a></li>
+            <li><a href="#deep-dive">Deep-dive appendix</a></li>
+          </ul>
+        </nav>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="topic-main topic-content">
+
+        <div class="section-marker" id="what-and-why">
+          <span class="split-badge theory">Theory</span>
+          <span class="marker-line"></span>
+        </div>
+
+        <section data-section="theory">
+  <h2>What immersive and voice design is</h2>
+
+  <p>Immersive and voice interfaces represent design beyond the rectangular screen. Augmented reality overlays digital information onto the physical world. Virtual reality replaces the physical world with a digital one. Voice interfaces let users interact through speech alone. Conversational interfaces use natural language — typed or spoken — as the primary interaction model. These aren't novelties — AR navigation is in Google Maps, voice assistants are in billions of devices, and spatial computing is Apple's bet on the next computing platform.</p>
+
+  <p>What unites these modalities is that traditional UI design principles — grids, buttons, hover states, scroll — don't apply or apply very differently. There's no cursor in VR. There's no visual hierarchy in a voice-only interface. There's no "above the fold" when the canvas is the entire physical world. Designing for these interfaces requires rethinking interaction from first principles while carrying forward the deeper design values: clarity, feedback, user control, and error recovery.</p>
+</section>
+
+        <div class="section-marker" id="ar-design">
+          <span class="split-badge practical">Practical</span>
+          <span class="marker-line"></span>
+        </div>
+
+        <section data-section="practical">
+  <h2>AR design principles</h2>
+
+  <div class="method-card">
+    <h4>Spatial Interaction Design <span class="method-tag">Core Method</span></h4>
+    <p class="method-when">Use when: designing augmented reality overlays or spatial computing experiences.</p>
+    <p>AR design principles: <strong>Context-first:</strong> Digital content should enhance the physical environment, not obscure it. A navigation arrow on the road surface is helpful; a full-screen overlay is not. <strong>Spatial anchoring:</strong> Digital objects should feel physically grounded — attached to surfaces, respecting perspective, responding to lighting. Floating elements feel wrong in AR. <strong>Minimal chrome:</strong> AR UI elements should be as unobtrusive as possible. The real world is the primary interface; digital elements are annotations. <strong>Depth and distance:</strong> Content at arm's length is easy to read; content 10 meters away should be larger and simpler. <strong>Peripheral awareness:</strong> Important information can sit at the edge of vision; critical alerts should center. <strong>Respect attention:</strong> AR competes with the real world for attention — never block the user's view of physical hazards or important real-world information.</p>
+  </div>
+</section>
+
+<section id="vr-design" data-section="practical">
+  <h2>VR design principles</h2>
+
+  <div class="method-card">
+    <h4>VR Comfort and Presence <span class="method-tag">Core Method</span></h4>
+    <p class="method-when">Use when: designing virtual reality experiences that users can use comfortably.</p>
+    <p>VR's unique challenge is physical comfort. <strong>Motion sickness:</strong> Occurs when visual motion doesn't match vestibular (inner ear) input. Avoid: camera movements the user doesn't control, acceleration/deceleration, rotating the viewpoint. Use: teleportation locomotion, vignetting during movement, fixed reference points. <strong>Eye strain:</strong> VR headsets have a fixed focal distance (~2 meters). UI elements closer than 0.5m or farther than 20m cause eye strain. Keep primary content in the comfort zone (1–5 meters). <strong>Presence:</strong> The feeling of "being there." Maintained by consistent physics (objects behave as expected), responsive interaction (hand tracking or controllers respond immediately), and environmental sound (spatial audio matching visual position). Broken by: loading screens, system UI intrusions, and inconsistent scale.</p>
+  </div>
+
+  <div class="callout warning">
+    <p class="callout-title">The 20-minute wall</p>
+    <p>Most users experience fatigue after 20–30 minutes in VR. Design for this: provide natural break points, save progress frequently, and don't punish users for taking the headset off. Long-form VR experiences need session-aware design — welcome users back, summarize what happened, and make re-entry frictionless.</p>
+  </div>
+</section>
+
+<section id="voice-ui" data-section="practical">
+  <h2>Voice UI fundamentals</h2>
+
+  <div class="method-card">
+    <h4>Voice Intent Design <span class="method-tag">Core Method</span></h4>
+    <p class="method-when">Use when: designing voice-activated features or voice-first products.</p>
+    <p>Voice interaction has three components: <strong>Intents</strong> (what the user wants to do — "play music," "set alarm," "check weather"), <strong>Utterances</strong> (the many ways a user might express an intent — "play some jazz," "put on music," "I want to listen to jazz"), and <strong>Slots</strong> (the variables within an utterance — "jazz" is the genre slot, "7am" is the time slot). Design the intent map first: what can your voice interface do? Then enumerate utterances: how might users ask for each thing? Users will phrase requests in ways you don't expect. Plan for: incomplete requests ("play music" without specifying what), ambiguous requests ("the usual" means different things), and mid-sentence corrections ("set an alarm for 7 — no, 7:30").</p>
+  </div>
+
+  <div class="method-card">
+    <h4>Conversational Design Patterns <span class="method-tag">Core Method</span></h4>
+    <p class="method-when">Use when: designing dialogue flows for voice or chat interfaces.</p>
+    <p><strong>Confirmation:</strong> Repeat critical information before acting ("Setting alarm for 7:30 AM tomorrow. Shall I go ahead?"). Skip confirmation for low-stakes actions. <strong>Disambiguation:</strong> When the request is ambiguous, ask a clarifying question — but limit to one question at a time ("Did you mean John Smith or John Anderson?"). <strong>Error recovery:</strong> When the system doesn't understand, don't just say "I didn't understand." Offer guidance: "I can help with weather, alarms, and music. What would you like?" <strong>Progressive disclosure:</strong> Start with the answer; offer detail on request ("It's 72°F and sunny. Want the full forecast?"). <strong>Handoff:</strong> When voice fails, offer a visual fallback ("I've sent the search results to your phone").</p>
+  </div>
+</section>
+
+<section id="multimodal" data-section="practical">
+  <h2>Multi-modal interfaces</h2>
+
+  <div class="method-card">
+    <h4>Multi-Modal Design <span class="method-tag">Technique</span></h4>
+    <p class="method-when">Use when: combining voice, touch, gesture, and visual modalities in one experience.</p>
+    <p>Most real-world interfaces aren't purely one modality. Smart displays combine voice and touch. AR headsets combine gaze, gesture, and voice. Cars combine voice, touch, and physical controls. Design principles for multi-modal: <strong>Modality switching:</strong> Let users start in one mode and switch to another seamlessly ("Show me Italian restaurants" → [taps one on screen] → "Navigate there"). <strong>Redundant input:</strong> Critical actions should be accessible through multiple modalities (voice or touch to dismiss an alarm). <strong>Appropriate modality:</strong> Use voice for eyes-busy or hands-busy contexts (driving, cooking). Use visual for information-dense content (comparing products). Use gesture for spatial tasks (rotating a 3D model). <strong>Consistent feedback:</strong> Regardless of input modality, the system should confirm actions through the modality the user is currently attending to.</p>
+  </div>
+</section>
+
+<section id="templates" data-section="practical">
+  <h2>Templates and checklists</h2>
+
+  <div class="template-box">
+    <div class="template-header">
+      <span class="template-label">Checklist</span>
+      <span class="template-title">Voice Interface Review</span>
+    </div>
+    <ul class="checklist">
+      <li>Every intent has at least 10 utterance variations mapped</li>
+      <li>The system confirms high-stakes actions before executing</li>
+      <li>Error responses suggest what the user can do, not just what went wrong</li>
+      <li>Users can interrupt the system mid-response (barge-in support)</li>
+      <li>A visual or physical fallback exists for complex tasks</li>
+      <li>The voice personality is consistent and documented</li>
+      <li>Privacy: the user knows when the microphone is active</li>
+      <li>The system handles ambient noise, accents, and speech variations</li>
+    </ul>
+  </div>
+</section>
+
+        <div class="section-marker" id="real-world-examples">
+          <span class="split-badge examples">Examples</span>
+          <span class="marker-line"></span>
+        </div>
+
+        <section data-section="examples">
+  <h2>Real-world examples</h2>
+
+  <div class="case-study">
+    <p class="case-label">Case study</p>
+    <h4>Apple Vision Pro: spatial UI conventions</h4>
+    <p>Apple Vision Pro establishes emerging conventions for spatial computing. Windows float in 3D space, anchored relative to the user's environment. Eye tracking replaces the cursor — you look at an element and pinch to select it. The system uses subtle visual feedback (elements slightly enlarge when gazed at) to confirm tracking accuracy. Apps can exist as floating windows alongside physical reality or expand into immersive environments. The design respects a core principle: spatial computing should enhance the physical world by default, with full immersion as an opt-in mode.</p>
+    <p><strong>Why it matters:</strong> Vision Pro is establishing the interaction patterns that future spatial computing devices will likely follow — just as iPhone established touch interaction conventions.</p>
+  </div>
+
+  <div class="case-study">
+    <p class="case-label">Case study</p>
+    <h4>Amazon Alexa: voice interaction at scale</h4>
+    <p>Alexa demonstrates both the potential and limitations of voice-first design. The "wake word" model (say "Alexa" to activate) solves the always-listening privacy concern. The skill ecosystem shows how voice interfaces handle scope: core features (timers, music, weather) work reliably; third-party skills often fail because users can't discover or remember the exact phrases needed. The addition of the Echo Show (screen + voice) demonstrates that pure voice has limits — visual confirmation, lists, and browsing are better on screen. The lesson: voice is best for known, simple, hands-busy tasks; it struggles with discovery and complex workflows.</p>
+    <p><strong>Why it works (and doesn't):</strong> Voice excels at reducing friction for frequent, simple tasks. It fails when users need to browse, compare, or discover capabilities — problems that visual interfaces solve well.</p>
+  </div>
+</section>
+
+<section id="pitfalls" data-section="practical">
+  <h2>Common pitfalls</h2>
+
+  <div class="pitfall">
+    <div class="pitfall-icon">!</div>
+    <div>
+      <h4>Designing voice interactions without a screen fallback</h4>
+      <p>Voice-only interactions fail for: complex options (choosing from a long list), sensitive information (speaking a password in public), noisy environments, and users with speech differences. Always provide an alternative modality for critical paths.</p>
+    </div>
+  </div>
+
+  <div class="pitfall">
+    <div class="pitfall-icon">!</div>
+    <div>
+      <h4>Applying screen design patterns to spatial interfaces</h4>
+      <p>Flat menus, scrolling lists, and tiny text don't work in 3D space. Spatial interfaces need spatial solutions: objects you can walk around, information arranged in depth, and interactions that use the body's natural movements. Design for the medium, not the previous medium.</p>
+    </div>
+  </div>
+</section>
+
+<section id="connections">
+  <h2>Connected topics in your library</h2>
+  <div class="cross-ref-grid">
+    <a href="interaction-design.html" class="cross-ref-card">
+      <span class="ref-number">Tier 1</span>
+      <div class="ref-title">Interaction Design</div>
+      <div class="ref-reason">Micro-interactions, feedback, and state management apply to all modalities — they just manifest differently in voice, AR, and VR.</div>
+    </a>
+    <a href="accessibility.html" class="cross-ref-card">
+      <span class="ref-number">Tier 1</span>
+      <div class="ref-title">Accessibility in Practice</div>
+      <div class="ref-reason">Voice interfaces are accessibility tools for visually impaired users. AR/VR accessibility is an emerging challenge requiring new solutions.</div>
+    </a>
+    <a href="ai-for-designers.html" class="cross-ref-card">
+      <span class="ref-number">Tier 3</span>
+      <div class="ref-title">AI for Designers</div>
+      <div class="ref-reason">Conversational AI powers voice interfaces. Trust calibration, error handling, and explainability from AI design apply to voice and conversational UX.</div>
+    </a>
+    <a href="affordances.html" class="cross-ref-card">
+      <span class="ref-number">Tier 4</span>
+      <div class="ref-title">Affordances &amp; Physical Intuition</div>
+      <div class="ref-reason">Spatial interfaces rely heavily on physical affordances — objects in VR should behave like their real-world counterparts.</div>
+    </a>
+  </div>
+</section>
+
+<div class="deep-dive-section" id="deep-dive">
+          <div class="deep-dive-header">
+            <span class="deep-dive-badge">Deep Dive</span>
+            <h2 style="margin:0; border:none; padding:0;">Appendix</h2>
+          </div>
+
+  <details class="expandable">
+    <summary><span class="chevron"><svg viewBox="0 0 14 14"><polyline points="4,2 10,7 4,12"/></svg></span> Further reading and resources</summary>
+    <div class="expand-content topic-content">
+      <h4>Essential reading</h4>
+      <p><strong>"Designing Voice User Interfaces" by Cathy Pearl</strong> — The definitive guide to voice interaction design. Covers dialogue flow, error handling, personality, and testing.</p>
+      <p><strong>"Designing Across Senses" by Christine Wodtke</strong> — Multi-sensory design beyond screens. Covers sound, haptics, spatial, and voice interaction design.</p>
+      <p><strong>Apple Spatial Design Guidelines</strong> — The most comprehensive current reference for AR/spatial computing design patterns.</p>
+      <p><strong>Google Conversation Design Guidelines</strong> — Practical guidance for designing conversational interactions across voice and chat.</p>
+    </div>
+  </details>
+</div>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer container">
+    <div class="footer-inner">
+      <p>Noir Book — Built for the work, not the shelf.</p>
+      <div class="footer-links">
+        <a href="../design-system.html">Design System</a>
+        <a href="../library-manifest.json">Manifest</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to Top -->
+  <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">&#8593;</button>
+
+  <!-- Floating Mobile TOC -->
+  <button class="mobile-toc-btn" id="mobileTocBtn" aria-label="Open table of contents">&#9776; Contents</button>
+  <div class="mobile-toc-overlay" id="mobileTocOverlay">
+    <div class="mobile-toc-panel">
+      <div class="mobile-toc-panel-header">
+        <h3>On this page</h3>
+        <button class="mobile-toc-close" id="mobileTocClose" aria-label="Close">&times;</button>
+      </div>
+      <ul class="mobile-toc-list">
+        <li><a href="#what-and-why" data-section="theory">What immersive and voice design is</a></li>
+        <li><a href="#ar-design" data-section="practical">AR design principles</a></li>
+        <li><a href="#vr-design" data-section="practical">VR design principles</a></li>
+        <li><a href="#voice-ui" data-section="practical">Voice UI fundamentals</a></li>
+        <li><a href="#multimodal" data-section="practical">Multi-modal interfaces</a></li>
+        <li><a href="#templates" data-section="practical">Templates and checklists</a></li>
+        <li><a href="#real-world-examples" data-section="examples">Real-world examples</a></li>
+        <li><a href="#pitfalls" data-section="practical">Common pitfalls</a></li>
+        <li><a href="#connections">Connected topics in your library</a></li>
+        <li><a href="#deep-dive">Deep-dive appendix</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    // Scrollspy: highlight active TOC item
+    const tocLinks = document.querySelectorAll('.toc-list a');
+    const sections = [];
+    tocLinks.forEach(link => {
+      const href = link.getAttribute('href');
+      if (!href || !href.startsWith('#')) return;
+      const el = document.getElementById(href.slice(1));
+      if (el) sections.push({ el, link });
+    });
+
+    // Reading progress bar
+    const progressBar = document.getElementById('readingProgress');
+    const backToTop = document.getElementById('backToTop');
+
+    function onScroll() {
+      let current = sections[0];
+      for (const s of sections) {
+        if (s.el.getBoundingClientRect().top <= 120) current = s;
+      }
+      tocLinks.forEach(l => l.classList.remove('active'));
+      if (current) current.link.classList.add('active');
+
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrolled = window.scrollY;
+      const progress = docHeight > 0 ? (scrolled / docHeight) * 100 : 0;
+      if (progressBar) progressBar.style.width = progress + '%';
+      if (backToTop) backToTop.classList.toggle('visible', scrolled > 400);
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    // Split badges: click to scroll to section
+    document.querySelectorAll('.content-splits .split-badge').forEach(function(badge) {
+      badge.addEventListener('click', function() {
+        var type = badge.classList.contains('theory') ? 'theory' : badge.classList.contains('practical') ? 'practical' : 'examples';
+        var target = document.querySelector('section[data-section="' + type + '"]');
+        if (target) {
+          var marker = target.previousElementSibling;
+          (marker && marker.classList.contains('section-marker') ? marker : target).scrollIntoView({behavior:'smooth'});
+        }
+      });
+    });
+  </script>
+
+  <script src="../js/checklist.js"></script>
+  <script src="../js/mobile-toc.js"></script>
+  <script src="../js/search.js"></script>
+  <script>
+    function openBurger(){document.getElementById('burgerOverlay').classList.add('open');document.body.style.overflow='hidden'}
+    function closeBurger(e){if(e&&e.target&&e.target!==document.getElementById('burgerOverlay'))return;document.getElementById('burgerOverlay').classList.remove('open');document.body.style.overflow=''}
+    function burgerSearch(q){
+      var r=document.getElementById('burgerSearchResults');
+      if(!q||q.length<2){r.innerHTML='';return}
+      var ql=q.toLowerCase(),matches=[];
+      if(typeof SEARCH_INDEX!=='undefined'){
+        SEARCH_INDEX.forEach(function(t){
+          var hit=t.topic.toLowerCase().indexOf(ql)>-1;
+          if(!hit)t.sections.forEach(function(s){if((s.title+' '+s.keywords).toLowerCase().indexOf(ql)>-1)hit=true});
+          if(hit)matches.push(t);
+        });
+      }
+      if(!matches.length){r.innerHTML='<p style="padding:8px 0;font-size:13px;color:var(--ink-muted)">No results</p>';return}
+      r.innerHTML=matches.slice(0,8).map(function(m){return '<a href="../'+m.url+'">'+m.topic+'<span class="bsr-disc">'+m.discipline+'</span></a>'}).join('');
+    }
+    document.addEventListener('keydown',function(e){if(e.key==='Escape'){closeBurger();var dd=document.getElementById('searchDropdown');if(dd)dd.classList.remove('visible');}});
+    // Close burger when clicking a TOC link
+    document.querySelectorAll('.burger-toc-list a').forEach(function(a){a.addEventListener('click',function(){closeBurger()})});
+    // Search typeahead
+    function topicSearch(q){
+      var dd=document.getElementById('searchDropdown');
+      if(!q||q.length<2||typeof SEARCH_INDEX==='undefined'){if(dd)dd.classList.remove('visible');return}
+      var ql=q.toLowerCase(),grouped={};
+      SEARCH_INDEX.forEach(function(t){
+        var hit=t.topic.toLowerCase().indexOf(ql)>-1,sHits=[],mHits=[];
+        t.sections.forEach(function(s){if((s.title+' '+s.keywords).toLowerCase().indexOf(ql)>-1)sHits.push(s)});
+        (t.methods||[]).forEach(function(m){if((m.name+' '+(m.keywords||'')).toLowerCase().indexOf(ql)>-1)mHits.push(m)});
+        if(!hit&&!sHits.length&&!mHits.length&&ql.length>=3&&typeof levenshtein==='function'){
+          var words=t.topic.toLowerCase().split(/ +/);
+          for(var i=0;i<words.length;i++){if(levenshtein(ql,words[i].substring(0,ql.length+1))<=1){hit=true;break}}
+        }
+        if(hit||sHits.length||mHits.length)grouped[t.topic]={url:'../'+t.url,disc:t.discipline||'',sections:sHits,methods:mHits,topicHit:hit};
+      });
+      var keys=Object.keys(grouped);
+      if(!keys.length){dd.innerHTML='<div class="search-empty">No results</div>';dd.classList.add('visible');return}
+      var html='';
+      keys.slice(0,8).forEach(function(topic){
+        var g=grouped[topic];
+        html+='<div class="search-group"><div class="search-group-title">'+topic+'</div>';
+        if(g.topicHit)html+='<a class="search-result" href="'+g.url+'"><span class="search-result-title">'+topic+'</span><span class="search-result-type practical">'+g.disc+'</span></a>';
+        g.sections.forEach(function(s){html+='<a class="search-result" href="'+g.url+'#'+s.id+'"><span class="search-result-title">'+s.title+'</span><span class="search-result-type '+s.type+'">'+s.type+'</span></a>'});
+        g.methods.slice(0,3).forEach(function(m){html+='<a class="search-result" href="'+g.url+'#'+m.section+'"><span class="search-result-title">'+m.name+'</span><span class="search-result-type practical">method</span></a>'});
+        html+='</div>';
+      });
+      dd.innerHTML=html;dd.classList.add('visible');
+    }
+    document.addEventListener('click',function(e){if(!e.target.closest('.search-box')){var dd=document.getElementById('searchDropdown');if(dd)dd.classList.remove('visible')}});
+  </script>
+
+</body>
+</html>

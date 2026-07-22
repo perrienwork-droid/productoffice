@@ -1,0 +1,1055 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Data-Driven Design — Noir Book</title>
+  <link rel="stylesheet" href="../css/shared.css">
+  <link rel="stylesheet" href="../css/topic.css">
+  <script src="../js/theme.js"></script>
+  <script src="../js/topic-nav.js"></script>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="site-nav subpage-nav" data-discipline="ux">
+    <div class="nav-inner">
+      <a href="../index.html" class="site-logo">
+        <span class="logo-mark">UX</span>
+        <span class="nav-title">Noir Book</span>
+      </a>
+      <a href="../index.html" class="nav-back-link">&#8592; Library</a>
+      <div class="nav-filters">
+        <button class="disc-toggle ux-toggle active" data-disc="ux" onclick="toggleDisc('ux')" title="UX Design">
+          <span class="disc-dot disc-dot-ux"></span><span class="disc-label">UX Design</span><span class="disc-code">(UX)</span>
+        </button>
+        <button class="disc-toggle pm-toggle active" data-disc="pm" onclick="toggleDisc('pm')" title="Product Management">
+          <span class="disc-dot disc-dot-pm"></span><span class="disc-label">Product</span><span class="disc-code">(PM)</span>
+        </button>
+        <button class="disc-toggle mk-toggle active" data-disc="mk" onclick="toggleDisc('mk')" title="Marketing &amp; Growth">
+          <span class="disc-dot disc-dot-mk"></span><span class="disc-label">Marketing</span><span class="disc-code">(MK)</span>
+        </button>
+        <button class="disc-toggle cs-toggle active" data-disc="cs" onclick="toggleDisc('cs')" title="Content Strategy">
+          <span class="disc-dot disc-dot-cs"></span><span class="disc-label">Content</span><span class="disc-code">(CS)</span>
+        </button>
+        <div class="search-box nav-search-box">
+          <div class="nav-search-wrap">
+            <div class="nav-search-pills" id="navSearchPills"></div>
+            <input type="text" id="navSearchInput" placeholder="Search..." autocomplete="off"
+              oninput="topicNavSearch(this.value)"
+              onkeydown="handleNavSearchKey(event)"
+              onfocus="handleNavSearchFocus()"
+              onblur="handleNavSearchBlur()">
+            <button type="button" class="nav-search-clear" id="navSearchClear" onclick="clearNavSearch()" aria-label="Clear search">&times;</button>
+          </div>
+          <div class="search-dropdown" id="navSearchDropdown"></div>
+        </div>
+      </div>
+      <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle theme">&#9790;</button>
+      <button class="burger-btn" id="burgerBtn" onclick="openBurger()" aria-label="Menu">
+        <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="2" y1="4" x2="16" y2="4"/><line x1="2" y1="9" x2="16" y2="9"/><line x1="2" y1="14" x2="16" y2="14"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Burger Menu Overlay -->
+  <div class="burger-overlay" id="burgerOverlay" onclick="closeBurger(event)">
+    <div class="burger-panel" onclick="event.stopPropagation()">
+      <div class="burger-panel-header">
+        <h3>Menu</h3>
+        <button class="burger-close" onclick="closeBurger()" aria-label="Close">&times;</button>
+      </div>
+      <div class="burger-search">
+        <input type="text" id="burgerSearchInput" placeholder="Search topics, methods..." autocomplete="off" oninput="burgerSearch(this.value)">
+        <div class="burger-search-results" id="burgerSearchResults"></div>
+      </div>
+      <div class="burger-links">
+        <a href="../index.html">&#8592; Back to Library</a>
+        <a href="../design-system.html">Design System</a>
+        <a href="../request-topic.html">Suggest a topic or improvement</a>
+      </div>
+      <div class="burger-toc-section">
+        <p class="burger-toc-title">On this page</p>
+        <ul class="burger-toc-list">
+        <li><a href="#what-and-why" data-section="theory">What data-driven design is and isn't</a></li>
+        <li><a href="#analytics-data" data-section="theory">What analytics data tells you NN/g</a></li>
+        <li><a href="#metrics" data-section="theory">Choosing the right metrics</a></li>
+        <li><a href="#analytics" data-section="practical">Analytics setup and event taxonomy</a></li>
+        <li><a href="#metric-interpretation" data-section="practical">Interpreting analytics metrics NN/g</a></li>
+        <li><a href="#search-analytics" data-section="practical">Search log analysis NN/g</a></li>
+        <li><a href="#funnel-analysis" data-section="practical">Funnel analysis</a></li>
+        <li><a href="#ab-testing" data-section="practical">A/B testing</a></li>
+        <li><a href="#cohort-analysis" data-section="practical">Cohort analysis and retention curves</a></li>
+        <li><a href="#segmentation-paths" data-section="practical">Segmentation and path analysis NN/g</a></li>
+        <li><a href="#quant-usability" data-section="practical">Quantitative usability methods</a></li>
+        <li><a href="#templates" data-section="practical">Templates and checklists</a></li>
+        <li><a href="#benchmarking" data-section="practical">UX benchmarking NN/g</a></li>
+        <li><a href="#data-storytelling" data-section="practical">Communicating data as story NN/g</a></li>
+        <li><a href="#roi" data-section="practical">Calculating UX ROI NN/g</a></li>
+        <li><a href="#improvement-magnitude" data-section="theory">The magnitude of UX improvements NN/g</a></li>
+        <li><a href="#real-world-examples" data-section="examples">Real-world examples</a></li>
+        <li><a href="#pitfalls" data-section="practical">Common pitfalls</a></li>
+        <li><a href="#connections">Connected topics in your library</a></li>
+        <li><a href="#deep-dive">Deep-dive appendix</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Topic Header -->
+  <header class="topic-header container">
+    <div class="breadcrumb">
+      <a href="../index.html">Library</a>
+      <span class="sep">&#8250;</span>
+      <span class="breadcrumb-disc breadcrumb-ux">UX Design</span>
+      <span class="sep">&#8250;</span>
+      <span>Tier 2 — Specialized</span>
+      <span class="sep">&#8250;</span>
+      <span>Data-Driven Design</span>
+    </div>
+    <div class="topic-meta">
+      <span class="tier-badge tier2">Tier 2</span>
+      <span style="font-size:14px;color:var(--ink-muted)">Topic UX.2.05</span>
+    </div>
+    <h1>Data-Driven Design</h1>
+    <p class="topic-subtitle">Measure what matters. Analytics, A/B testing, funnel analysis, UX benchmarking, and ROI — using quantitative data to inform design decisions and demonstrate their value.</p>
+    <div class="content-splits">
+      <span class="split-badge theory">20% Theory</span>
+      <span class="split-badge practical">55% Methods &amp; Templates</span>
+      <span class="split-badge examples">25% Examples</span>
+    </div>
+  </header>
+
+  <!-- Reading Progress Bar -->
+  <div class="reading-progress" id="readingProgress"></div>
+
+  <!-- Main Layout -->
+  <div class="container">
+    <div class="topic-layout">
+
+      <!-- Sidebar: Table of Contents -->
+      <aside class="topic-sidebar">
+        <nav class="toc">
+          <p class="sidebar-topic-title">Data-Driven Design</p>
+          <p class="toc-title">On this page</p>
+          <ul class="toc-list">
+            <li><a href="#what-and-why" data-section="theory">What data-driven design is and isn't</a></li>
+            <li><a href="#analytics-data" data-section="theory">What analytics data tells you NN/g</a></li>
+            <li><a href="#metrics" data-section="theory">Choosing the right metrics</a></li>
+            <li><a href="#analytics" data-section="practical">Analytics setup and event taxonomy</a></li>
+            <li><a href="#metric-interpretation" data-section="practical">Interpreting analytics metrics NN/g</a></li>
+            <li><a href="#search-analytics" data-section="practical">Search log analysis NN/g</a></li>
+            <li><a href="#funnel-analysis" data-section="practical">Funnel analysis</a></li>
+            <li><a href="#ab-testing" data-section="practical">A/B testing</a></li>
+            <li><a href="#cohort-analysis" data-section="practical">Cohort analysis and retention curves</a></li>
+            <li><a href="#segmentation-paths" data-section="practical">Segmentation and path analysis NN/g</a></li>
+            <li><a href="#quant-usability" data-section="practical">Quantitative usability methods</a></li>
+            <li><a href="#templates" data-section="practical">Templates and checklists</a></li>
+            <li><a href="#benchmarking" data-section="practical">UX benchmarking NN/g</a></li>
+            <li><a href="#data-storytelling" data-section="practical">Communicating data as story NN/g</a></li>
+            <li><a href="#roi" data-section="practical">Calculating UX ROI NN/g</a></li>
+            <li><a href="#improvement-magnitude" data-section="theory">The magnitude of UX improvements NN/g</a></li>
+            <li><a href="#real-world-examples" data-section="examples">Real-world examples</a></li>
+            <li><a href="#pitfalls" data-section="practical">Common pitfalls</a></li>
+            <li><a href="#connections">Connected topics in your library</a></li>
+            <li><a href="#deep-dive">Deep-dive appendix</a></li>
+          </ul>
+        </nav>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="topic-main topic-content">
+
+        <div class="section-marker" id="what-and-why">
+          <span class="split-badge theory">Theory</span>
+          <span class="marker-line"></span>
+        </div>
+
+        <section data-section="theory">
+  <h2>What data-driven design is and isn't</h2>
+
+  <p>Data-driven design means using quantitative evidence — analytics, experiments, metrics — to inform design decisions. It answers "what is happening" with precision: which pages do users visit, where do they drop off, which version converts better. It complements qualitative research, which answers "why" — why users drop off, why they prefer one version, why they're frustrated.</p>
+
+  <p>The danger is treating data as the only input. Data tells you what happened but not what should happen. It can tell you that 40% of users abandon checkout at the address step, but it can't tell you whether to simplify the form, add autofill, or redesign the entire flow. Data informs design decisions; it doesn't make them. The best design teams use quantitative data to identify problems and qualitative research to understand them.</p>
+
+  <div class="callout warning">
+    <p class="callout-title">Data-driven vs data-informed</p>
+    <p>Data-driven means "the data decides." Data-informed means "the data contributes to the decision alongside judgment, research, and context." Most design decisions should be data-informed, not data-driven. Optimizing a button color based on A/B test results is appropriate. Redesigning your entire navigation based solely on click heatmaps — without understanding why users click where they click — is dangerous.</p>
+  </div>
+</section>
+
+<section id="analytics-data" data-section="theory" data-source="NN/g">
+  <h2>What analytics data tells you <span class="source-label">NN/g</span></h2>
+
+  <p>Analytics data describes four things about real user interactions:</p>
+<ul>
+  <li><strong>Places</strong> — how many times a page or screen was visited.</li>
+  <li><strong>Actions</strong> — which UI elements users interacted with (clicks, taps, scrolls, form submissions).</li>
+  <li><strong>Paths</strong> — how different pages and actions relate to each other in sequences.</li>
+  <li><strong>People</strong> — how different types of users behave and how to prioritize them. Every analytics question maps to one or more of these four dimensions. When you're lost in a dashboard, ask: "Am I asking about a place, an action, a path, or a person?".</li>
+</ul>
+
+  <div class="method-card" data-source="NN/g">
+    <h4>Triangulation <span class="method-tag">Core Principle</span></h4>
+    <p class="method-when">Use when: any analytics finding needs validation before acting on it.</p>
+    <p>All methods have limitations and blind spots. Analytics shows <em>what</em> is happening but not <em>why</em>. Usability testing reveals <em>why</em> but with small samples. Surveys capture attitudes but are self-reported. Support calls reflect the loudest problems, not the most common. Triangulation means using multiple methods to study the same phenomenon — when analytics, usability testing, and support data all point to the same issue, you can act with confidence. When they diverge, the discrepancy itself is the insight. Start with analytics to identify the problem area, then triangulate with qualitative methods to understand causes before designing solutions.</p>
+  </div>
+
+  <div class="callout tip" data-source="NN/g">
+    <p class="callout-title">Discovery starts with questions, not data</p>
+    <p>The most common analytics mistake is opening a dashboard and browsing. Effective analytics use starts with a question: "Which features are most popular among paying users?" "Which content leads to the most conversions?" "At which step do people abandon the onboarding flow?" The question determines which reports to examine. Without a question, you'll find patterns everywhere — and most of them will be noise.</p>
+  </div>
+</section>
+
+<section id="metrics" data-section="theory">
+  <h2>Choosing the right metrics</h2>
+
+  <div class="method-card">
+    <h4>HEART Framework <span class="method-tag">Framework</span></h4>
+    <p class="method-when">Use this to define user-centered metrics for any product or feature.</p>
+    <p>Google's HEART framework organizes metrics into five categories: <strong>Happiness:</strong> Satisfaction, perceived ease of use (NPS, SUS, CSAT surveys). <strong>Engagement:</strong> Frequency and depth of interaction (sessions per week, features used, time in app). <strong>Adoption:</strong> New users successfully onboarding (signup-to-first-action rate, feature adoption). <strong>Retention:</strong> Users returning over time (Day 1/7/30 retention, churn rate). <strong>Task effectiveness &amp; efficiency:</strong> How well and how quickly users complete specific flows (completion rate, time-on-task, error rate, productivity). Don't track all five for every feature — pick 1-2 that match your current question.</p>
+  </div>
+
+  <div class="method-card" data-source="NN/g">
+    <h4>HEART Metric Source Mapping <span class="method-tag">Reference</span></h4>
+    <p class="method-when">Use this to decide which measurement method will produce the HEART metrics you need.</p>
+    <p>Different methods produce different HEART metrics. <strong>Happiness</strong> comes only from surveys (satisfaction rating, ease-of-use, perceived usability, questionnaire scores). <strong>Engagement</strong> comes primarily from analytics (frequency of return, average time spent, sessions per user, feature usage, conversion rate). <strong>Adoption &amp; Retention</strong> come from analytics (new accounts, returning users, churn rate, renewal rate, repeat purchases). <strong>Task effectiveness &amp; efficiency</strong> come from quantitative usability testing (success rate, time on task, error counts, productivity) and from analytics (completion rate, time on page). Surveys capture the subjective side of any category — combine them with behavioral methods for a complete picture.</p>
+  </div>
+
+  <div class="callout tip">
+    <p class="callout-title">Vanity metrics vs actionable metrics</p>
+    <p>Page views, total signups, and app downloads are vanity metrics — they go up over time and feel good but don't tell you if anything is working. Actionable metrics answer a specific question and can change based on your actions: conversion rate (not total conversions), retention at Day 7 (not total users), task completion rate (not total tasks attempted). If a metric can't change your next decision, it's vanity.</p>
+  </div>
+</section>
+
+        <div class="section-marker" id="analytics">
+          <span class="split-badge practical">Practical</span>
+          <span class="marker-line"></span>
+        </div>
+
+        <section data-section="practical">
+  <h2>Analytics setup and event taxonomy</h2>
+
+  <div class="method-card">
+    <h4>Event Taxonomy Design <span class="method-tag">Core Method</span></h4>
+    <p class="method-when">Use when: setting up analytics for a new product or feature.</p>
+    <p>An event taxonomy is a structured naming system for everything you track. Without one, analytics becomes a mess of inconsistently named events that no one trusts. Structure: <strong>Object + Action</strong> naming. "Button Clicked" is useless. "Checkout_Payment_Submit" tells you what, where, and when. Maintain a tracking spreadsheet: event name, trigger condition, properties captured, who requested it, and why. Review quarterly — remove events no one looks at, add events for new questions.</p>
+  </div>
+
+  <div class="method-card" data-source="NN/g">
+    <h4>Event Metadata Model <span class="method-tag">Technique</span></h4>
+    <p class="method-when">Use when: structuring in-page event tracking for comparison and filtering.</p>
+    <p>Structure event data with three metadata fields: <strong>Category</strong> (page or content type — "Blog," "Product," "Help"), <strong>Action</strong> (interaction type — "Scroll," "Button Click," "Form Submit"), <strong>Label</strong> (specific element — "Related Links," "Add to Comparison," "Contact Us Form"). This structure lets you filter and compare events across dimensions: filter by Category to see all Blog interactions, filter by Action to compare all scroll events across page types, filter by Label to track a specific element's usage across the site. Plan naming conventions carefully and maintain them — inconsistent metadata makes event data useless.</p>
+  </div>
+
+  <div class="method-card" data-source="NN/g">
+    <h4>Heatmap Analysis <span class="method-tag">Technique</span></h4>
+    <p class="method-when">Use when: understanding how users interact with a specific page layout.</p>
+    <p>Heatmaps are "heat" visualizations overlaid on a screen showing where users interacted — clicks, scrolling depth, hovering, taps, and gestures. <strong>Click heatmaps</strong> reveal which elements attract attention and which are ignored. <strong>Scroll heatmaps</strong> show how far down users actually get — critical for knowing if important content is seen. <strong>Hover heatmaps</strong> show mouse movement patterns (loosely correlated with visual attention on desktop). Key practices: always review heatmaps after releasing new layouts, look for attempted interactions (users clicking non-clickable elements — a signal of unmet expectations), and compare heatmaps across device types. Heatmaps tell you where users interact, not why — triangulate with usability testing to understand the behavior.</p>
+  </div>
+
+  <div class="callout info" data-source="NN/g">
+    <p class="callout-title">Analytics tool landscape</p>
+    <p><strong>General web analytics:</strong> Google Analytics, Adobe Analytics, Matomo/Piwik PRO. <strong>Product analytics:</strong> Amplitude, Heap, FullStory, Pendo, Mixpanel (and for mobile: Localytics, Firebase, Flurry). <strong>Heatmaps and session recordings:</strong> Hotjar, Clarity (free, Microsoft), CrazyEgg, Mouseflow. <strong>A/B testing:</strong> VWO, Optimizely, Convert, Google Optimize, SiteSpect. <strong>Privacy-centric:</strong> Fathom, Plausible (cookie-free); Matomo, Snowplow (self-hosted). <strong>Competitive intelligence:</strong> SimilarWeb, Ahrefs, SEMRush. Choose based on your product type (website vs. app), traffic volume, privacy requirements, and whether you need automatic event capture (Heap, FullStory) or manual instrumentation (Google Analytics, Amplitude).</p>
+  </div>
+</section>
+
+<section id="metric-interpretation" data-section="practical" data-source="NN/g">
+  <h2>Interpreting analytics metrics <span class="source-label">NN/g</span></h2>
+
+  <div class="method-card" data-source="NN/g">
+    <h4>Metric Interpretation Framework <span class="method-tag">Reference</span></h4>
+    <p class="method-when">Use when: reading analytics reports — to avoid misinterpreting common metrics.</p>
+    <p><strong>Pageviews vs. unique pageviews:</strong> Pageviews count every view including repeated visits in the same session. Unique pageviews count one view per session. When pageviews are drastically higher than unique pageviews for a page, it suggests pogo-sticking — users leaving and returning repeatedly, indicating navigation or information architecture problems. <strong>Entrances</strong> are sessions where a page was the first viewed. <strong>Exits</strong> are sessions where it was the last. A high exit rate on a checkout confirmation page is expected; a high exit rate on a product page is a problem. <strong>Bounce rate</strong> is the percentage of sessions with only one page interaction. Interpretation depends entirely on context: 60% is normal for blogs and landing pages, 40% for ecommerce, and exceptionally low rates (under 5%) are almost always tracking errors. Always consider the source of traffic, the volume, and the type of page before reacting to a bounce rate.</p>
+  </div>
+
+  <div class="method-card" data-source="NN/g">
+    <h4>Time-on-Page Inference <span class="method-tag">Technique</span></h4>
+    <p class="method-when">Use when: interpreting time-based metrics in web analytics.</p>
+    <p>Most web analytics tools calculate time on page by subtracting the current page load time from the next page load time. This means the last page in a session has no measured time — the user might have spent 20 minutes reading it or abandoned after 5 seconds. Application analytics tools often measure exact session end times, but web analytics cannot. Consequences: average time-on-page metrics are systematically underestimated because exit pages show as zero, and long reading times can be indistinguishable from users who left a tab open. Combine time-on-page with scroll depth and event data for a more accurate picture of engagement.</p>
+  </div>
+
+  <div class="callout warning" data-source="NN/g">
+    <p class="callout-title">Twyman's Law</p>
+    <p>Any figure that looks interesting or different is usually wrong. Exceptionally low bounce rates (2%), impossibly high conversion rates, or sudden traffic spikes should trigger investigation before celebration. The most common cause is a tracking error — a pageview firing twice, a filter misconfigured, or a bot inflating numbers. Verify anomalies with a second data source before reporting them.</p>
+  </div>
+</section>
+
+<section id="search-analytics" data-section="practical" data-source="NN/g">
+  <h2>Search log analysis <span class="source-label">NN/g</span></h2>
+
+  <div class="method-card" data-source="NN/g">
+    <h4>Internal Search Log Analysis <span class="method-tag">Technique</span></h4>
+    <p class="method-when">Use when: understanding what users are looking for and whether your navigation supports them.</p>
+    <p>Internal site search data reveals user needs in their own words. <strong>For content strategy:</strong> the most common search terms tell you what users value — prioritize that content and use their terminology. <strong>For navigation and layout:</strong> frequently searched terms that should be easy to find without searching indicate navigation or labeling problems. <strong>For feature prioritization:</strong> compare segments of users who search vs. those who browse — do searchers stay longer or convert more often? Typical search usage: 30-70% for ecommerce, support, and government sites; lower for news, banking, and transactional sites. High search rates can mean users rely on search as primary navigation — which may indicate poor information architecture rather than a well-designed search experience.</p>
+  </div>
+
+  <div class="callout tip" data-source="NN/g">
+    <p class="callout-title">Search analytics triangulation</p>
+    <p>When users say "search doesn't work," the problem often isn't the search algorithm. Triangulate: analytics reveals the most common queries and their result patterns; usability testing reveals root causes — users searching the wrong system, not finding the correct result page, or finding the page but overlooking the answer because of poor layout. The fix might be content, navigation, or page design rather than search technology.</p>
+  </div>
+</section>
+
+<section id="funnel-analysis" data-section="practical">
+  <h2>Funnel analysis</h2>
+
+  <div class="method-card">
+    <h4>Funnel Analysis <span class="method-tag">Core Method</span></h4>
+    <p class="method-when">Use when: understanding where users drop off in a multi-step flow.</p>
+    <p>A funnel shows the percentage of users who complete each step in a sequence: landing page → signup form → email verification → first project → active use. The drop-off between each step reveals where the experience breaks. A 60% drop-off between "signup form" and "email verification" suggests the email process is the problem, not the form itself. Funnels are most useful when segmented — compare funnels by traffic source, device type, user segment, or date range to identify which users are dropping off and when.</p>
+  </div>
+
+  <div class="callout tip">
+    <p class="callout-title">The 3-question funnel diagnosis</p>
+    <p>For every significant drop-off, ask: (1) Is it a motivation problem? (Users don't see the value of completing this step.) (2) Is it a friction problem? (Users want to complete it but the step is too difficult.) (3) Is it a technical problem? (Errors, loading failures, broken flows.) The answer determines the fix: motivation needs better copy or value communication, friction needs UX improvement, technical needs engineering.</p>
+  </div>
+
+  <div class="method-card" data-source="NN/g">
+    <h4>Goal Architecture <span class="method-tag">Framework</span></h4>
+    <p class="method-when">Use when: defining what to measure for non-linear user paths.</p>
+    <p>Not every user flow is a funnel. For non-linear paths, define goals (success events) at two levels. <strong>Macro-conversions:</strong> transaction completions — purchasing, registering, downloading. <strong>Micro-conversions</strong> split into two types: <em>process milestones</em> are steps toward a macro-conversion (adding to cart, starting checkout); <em>secondary actions</em> are desirable behaviors that indicate future macro-conversions (adding to favorites, writing a comment, playing a video, clicking an external partner link, starting a live chat). Three goal types by business model:</p>
+<ul>
+  <li><strong>Revenue</strong> — orders, quotes, upgrades.</li>
+  <li><strong>Acquisition</strong> — accounts created, trials started, contact forms completed, newsletter subscriptions.</li>
+  <li><strong>Engagement</strong> — feature usage, specific pages visited, content interactions. Assign relative goal values — either through stakeholder prioritization or by estimating monetary value (e.g., email subscription value = total revenue from subscribers ÷ number of subscribers).</li>
+</ul>
+  </div>
+
+  <div class="method-card" data-source="NN/g">
+    <h4>Page Value Analysis <span class="method-tag">Technique</span></h4>
+    <p class="method-when">Use when: prioritizing which pages to improve based on their contribution to goals.</p>
+    <p>Page value is the average value of a page based on which pages were visited in sessions that led to goal completions. High page value indicates that visitors to this page frequently complete valuable goals. Low page value indicates the page is not often viewed by users who convert. This lets you prioritize by value rather than just traffic volume — a page with moderate traffic but high page value is more important to optimize than a high-traffic page that doesn't contribute to conversions. Combine with qualitative research to understand <em>why</em> certain pages contribute to conversions.</p>
+  </div>
+</section>
+
+<section id="ab-testing" data-section="practical">
+  <h2>A/B testing</h2>
+
+  <div class="method-card">
+    <h4>A/B Test Design <span class="method-tag">Core Method</span></h4>
+    <p class="method-when">Use when: choosing between two design alternatives with a measurable outcome.</p>
+    <p><strong>1. Hypothesis:</strong> "Changing the CTA from 'Sign Up' to 'Start Free Trial' will increase signup conversion by 10% because it reduces perceived commitment." Always state what you're changing, what you expect to happen, and why. <strong>2. Primary metric:</strong> One metric that determines the winner. Don't track 20 metrics and pick the one that looks best — that's p-hacking. <strong>3. Sample size:</strong> Calculate before running. Too few users = unreliable results. Use an online calculator (Evan Miller's is standard). Most tests need 1,000-10,000 users per variant for meaningful results. <strong>4. Duration:</strong> Run for at least 1-2 full business cycles (typically 2-4 weeks) to account for day-of-week and time-of-day variation. <strong>5. Decision:</strong> Did the variant beat control with statistical significance (p &lt; 0.05)? If yes, ship it. If no, keep the control.</p>
+  </div>
+
+  <div class="callout warning">
+    <p class="callout-title">When not to A/B test</p>
+    <p>A/B testing is for optimization, not exploration. Don't A/B test two fundamentally different products — the test won't tell you why one won. Don't test when you don't have enough traffic (you'll never reach significance). Don't test things that don't matter (button corner radius). Don't test when the answer is obvious (accessibility improvements, bug fixes). And never test something unethical against the current experience just because "the data will tell us." Four prerequisites for a valid A/B test: (1) a hypothesis based on data, (2) easy-to-implement design changes, (3) unambiguous outcome metrics (a clear conversion action), and (4) ample traffic from novel users. If any prerequisite is missing, use qualitative methods instead.</p>
+  </div>
+
+  <div class="method-card" data-source="NN/g">
+    <h4>Multivariate Testing <span class="method-tag">Advanced Technique</span></h4>
+    <p class="method-when">Use when: you need to test combinations of page elements to determine which specific elements contribute to conversion lifts.</p>
+    <p>Unlike A/B testing (which compares whole-page variants), multivariate testing compares combinations of individual elements — heading A with image 1 vs. heading B with image 2 vs. heading A with image 2, and so on. This reveals which specific elements drive the lift, not just which overall page performs better. The tradeoff: multivariate testing requires significantly more traffic because each combination needs its own sample. Use A/B testing for major design changes and multivariate testing for fine-tuning within a proven design.</p>
+  </div>
+
+  <div class="method-card" data-source="NN/g">
+    <h4>Iterative A/B Testing Plan <span class="method-tag">Technique</span></h4>
+    <p class="method-when">Use when: optimizing a page or flow through sequential experiments rather than a single test.</p>
+    <p>Rather than testing one variant and stopping, plan a sequence: test version A vs. B, then take the winner and test it against a new variant C, then the winner against D. Each iteration builds on validated improvements. This approach is more reliable than testing many variants simultaneously (which increases false positive risk) and produces compounding gains. Document each phase's hypothesis, result, and learning to build an institutional knowledge base of what works in your context.</p>
+  </div>
+
+  <div class="callout warning" data-source="NN/g">
+    <p class="callout-title">The false positive problem</p>
+    <p>Research shows that false positives can comprise as much as 80% of "winning" A/B test results. Two primary causes: running concurrent experiments on the same traffic (interactions between tests create phantom effects), and stopping tests too early before reaching adequate statistical power. Don't stop a test the moment one variant looks ahead — cumulative conversion rates oscillate wildly in the first days. Run for at least one full business cycle (typically 1-2 weeks minimum), and consider repeat testing for critical findings. A 5% p-value threshold means that if you run 20 experiments, statistically at least one "winner" is likely a false positive.</p>
+  </div>
+
+  <div class="callout info" data-source="NN/g">
+    <p class="callout-title">Initial negative results may be temporary</p>
+    <p>When testing changes for repeat users, expect an adoption curve: (1) Status quo → (2) Disruption (shock, denial — metrics dip) → (3) Exploration (acceptance — metrics stabilize) → (4) Rebuilding (commitment — metrics improve). A change that looks negative in week one may be positive by week four. If your audience includes many repeat users, extend test duration to account for the adoption curve. This doesn't mean all negative results are temporary — but it means you shouldn't kill a test on day three with repeat-heavy traffic.</p>
+  </div>
+</section>
+
+<section id="cohort-analysis" data-section="practical">
+  <h2>Cohort analysis and retention curves</h2>
+
+  <div class="method-card">
+    <h4>Cohort Analysis <span class="method-tag">Core Method</span></h4>
+    <p class="method-when">Use when: understanding how user behavior changes over time or across groups.</p>
+    <p>A cohort is a group of users defined by a shared characteristic — usually their signup date. Cohort analysis tracks how each group behaves over time. January signups: 40% returned in week 2, 25% in week 4. February signups (after onboarding redesign): 55% returned in week 2, 38% in week 4. This comparison shows whether your changes improved retention for new users without being confused by the behavior of older users. Retention curves flatten where users become habitual — the goal is to raise the curve and flatten it earlier.</p>
+  </div>
+</section>
+
+<section id="segmentation-paths" data-section="practical" data-source="NN/g">
+  <h2>Segmentation and path analysis <span class="source-label">NN/g</span></h2>
+
+  <div class="method-card" data-source="NN/g">
+    <h4>Analytics Segmentation <span class="method-tag">Core Method</span></h4>
+    <p class="method-when">Use when: aggregate data obscures meaningful differences between user types.</p>
+    <p>A segment is a filter that excludes data not relevant to your question. Analytics data aggregates all activity — segmenting reveals hidden patterns. Segments can be based on: <strong>traffic source</strong> (referring URLs, campaigns, keywords, social channels), <strong>technical info</strong> (device, screen size, browser), <strong>activity performed</strong> (landing page, pages viewed, events triggered, conversions), <strong>user history</strong> (new vs. returning, visit count, days since last visit), and <strong>session characteristics</strong> (pages per session, time of visit, location). Behavior can differ greatly between segments — a high bounce rate might be entirely driven by mobile users from paid ads, while organic desktop users convert well. Segmenting reveals where to focus improvement efforts.</p>
+  </div>
+
+  <div class="method-card" data-source="NN/g">
+    <h4>Persona Validation via Analytics <span class="method-tag">Technique</span></h4>
+    <p class="method-when">Use when: you have personas and want to test whether they reflect real behavior patterns.</p>
+    <p>Create analytics segments based on each persona's unique behavioral traits — devices used, pages visited, features used, visit frequency. Then ask two questions: (1) Does the volume of visitors in that segment match your expectations? If you estimated 30% of users are "power users" but the segment shows 5%, either the persona definition is wrong or the behavioral proxy is wrong. (2) Do visitor outcomes (conversion rate, retention) for that segment match your persona's described goals? If your "comparison shopper" persona should browse many products but rarely buy immediately, the segment should confirm that pattern. Analytics segments can validate, refine, or invalidate personas with real behavioral data.</p>
+  </div>
+
+  <div class="method-card" data-source="NN/g">
+    <h4>Path Analysis <span class="method-tag">Core Method</span></h4>
+    <p class="method-when">Use when: understanding how users navigate between pages, features, or actions.</p>
+    <p>Path analysis shows the distribution of all pages or events users visit as their next step from any given point. Three types of paths to analyze:</p>
+<ul>
+  <li><strong>Exploratory tracking</strong> — see which pages users visit after a specific page, revealing unexpected navigation patterns and dead ends.</li>
+  <li><strong>Linear workflow progress</strong> — track steps through a defined process (onboarding, checkout).</li>
+  <li><strong>Multi-session engagement</strong> — track how behavior evolves across return visits. For conversion optimization, segment by users who converted and examine their <strong>time lag</strong> (days between first visit and conversion) and <strong>path length</strong> (number of interactions before converting). If most converters take 14 days and 3+ visits, a one-session conversion flow is unrealistic — design for the return visit instead.</li>
+</ul>
+  </div>
+
+  <div class="method-card" data-source="NN/g">
+    <h4>Recency-Frequency Analysis <span class="method-tag">Technique</span></h4>
+    <p class="method-when">Use when: understanding retention patterns and identifying opportunities to increase return visits.</p>
+    <p><strong>Recency:</strong> number of days since each user's last session — reveals patterns in return visit timing. If most users return within 7 days, align system touchpoints (emails, notifications) to that natural rhythm. <strong>Frequency:</strong> number of visits per user within a time period — reveals engagement depth. Look for correlations between first-visit feature usage and likelihood of returning. Identify which features or content types predict retention, then prioritize making those features more discoverable during first visits.</p>
+  </div>
+
+  <div class="callout tip" data-source="NN/g">
+    <p class="callout-title">The long tail and 80/20 patterns</p>
+    <p>Two recurring patterns in analytics data: the <strong>80/20 pattern</strong> — most activity concentrates in a few places (20% of pages drive 80% of traffic, 20% of features get 80% of usage). Focus optimization effort on the vital few. The <strong>long tail</strong> — activity is distributed across many places or user types, each with small individual volumes but significant aggregate impact. Don't ignore the long tail — it often represents niche but high-value user segments. Recognizing which pattern applies to your data prevents both over-investing in minor pages and ignoring significant aggregate effects.</p>
+  </div>
+</section>
+
+<section id="quant-usability" data-section="practical">
+  <h2>Quantitative usability methods</h2>
+
+  <div class="method-card">
+    <h4>Quantitative Usability Methods Cluster <span class="method-tag">Core Method</span></h4>
+    <p class="method-when">Use when: you need measurable usability data to complement qualitative observations, benchmark performance, or track improvements over time.</p>
+    <p>Quantitative usability goes beyond "did users struggle?" to "how much did they struggle, and is that improving?" Key methods: <strong>System Usability Scale (SUS)</strong> is a 10-item questionnaire producing a score from 0–100. Scores above 68 are above average; above 80 is good; above 90 is exceptional. Administer it immediately after a task session. <strong>Time-on-task</strong> measures efficiency — how long does a representative task take? Track geometric means (not averages) because task times are skewed. Compare against benchmarks or prior versions. <strong>Task success rate</strong> is the percentage of users who complete a task without critical errors. Binary (pass/fail) or graded (complete, partial, fail). <strong>Error rates</strong> count the number and severity of errors per task. Distinguish slips (mechanical mistakes) from errors (conceptual misunderstandings) — they have different design implications. <strong>Post-task questionnaires</strong> like the Single Ease Question (SEQ: "How easy was this task?" on a 7-point scale) capture subjective difficulty immediately after each task, giving you per-task satisfaction data alongside performance metrics.</p>
+  </div>
+
+  <div class="method-card" data-source="NN/g">
+    <h4>Standardized Questionnaire Instruments <span class="method-tag">Reference</span></h4>
+    <p class="method-when">Use this to select the right pre-made questionnaire for your benchmarking context.</p>
+    <p>Beyond SUS and SEQ, several standardized instruments serve specific purposes. <strong>SUPR-Q</strong> measures usability, appearance, and trust for websites — useful when you need a holistic website quality score, not just usability. <strong>UMUX-Lite</strong> is a two-item alternative to SUS — faster to administer and strongly correlated with SUS scores, useful when you can't afford 10 questions. <strong>NASA-TLX</strong> measures subjective workload across six dimensions (mental demand, physical demand, temporal demand, performance, effort, frustration) — essential for complex or safety-critical domains where task difficulty matters more than satisfaction. <strong>NPS</strong> measures likelihood to recommend on a 0–10 scale — popular with executives but tells you nothing about why. <strong>CSAT</strong> measures satisfaction with a specific interaction — more actionable than NPS because it's tied to a moment. Choose based on what you need to know: task difficulty (SEQ), overall usability (SUS/UMUX-Lite), website quality (SUPR-Q), workload (NASA-TLX), or loyalty trending (NPS).</p>
+  </div>
+
+  <div class="method-card" data-source="NN/g">
+    <h4>Post-Task vs Post-Test Survey Design <span class="method-tag">Technique</span></h4>
+    <p class="method-when">Use when: designing the survey component of a quantitative usability study.</p>
+    <p>Surveys within usability testing come in two forms. <strong>Post-task surveys</strong> are administered immediately after each task — typically a single question like SEQ asking how easy the task was. These capture per-task subjective data that pairs with performance metrics (time on task, success rate) for that same task. <strong>Post-test surveys</strong> are administered after the entire session — typically a multi-question instrument like SUS that captures overall product perception. Always use post-task for per-task difficulty data and post-test for holistic assessment. When distributing surveys outside of usability testing — via email, embedded intercepts, or popups — aim for 100+ respondents. Within usability testing, 40 respondents is usually sufficient for statistical significance on rating scale comparisons.</p>
+  </div>
+
+  <div class="method-card">
+    <h4>Practical vs. Statistical Significance <span class="method-tag">Technique</span></h4>
+    <p class="method-when">Use when: interpreting A/B test results or quantitative usability data and deciding whether a difference is meaningful enough to act on.</p>
+    <p>A statistically significant result means the difference is unlikely due to chance. A practically significant result means the difference is large enough to matter. These are not the same thing. A test with 500,000 users might find that version B has a 0.02% higher click rate with p&lt;0.01 — statistically significant but practically meaningless. Conversely, a test with 50 users might show a 15% task completion improvement with p=0.08 — statistically borderline but practically important. For UX decisions: always consider effect size alongside p-values. A 2-second reduction in task time matters more than whether the p-value crosses 0.05. Set your minimum detectable effect before running the test — decide how big a difference would change your design decision, then calculate the sample size needed to detect that difference reliably.</p>
+  </div>
+
+  <div class="method-card">
+    <h4>RAS: Recommendation-Adoption Score <span class="method-tag">Technique</span></h4>
+    <p class="method-when">Use when: tracking whether research findings actually influence product decisions, or when you need to demonstrate research team impact.</p>
+    <p>Most research teams track output (studies completed, reports delivered) rather than impact (recommendations acted upon). The Recommendation-Adoption Score (RAS) measures what matters: what percentage of research recommendations were adopted by the product team? Track each study's key recommendations, follow up after 30/60/90 days to see which were implemented, and calculate the ratio. A low RAS signals a disconnect between research and product — either the research isn't actionable, the findings aren't communicated effectively, or the product team doesn't value research input. A healthy RAS is above 60%. Below 40% means your research practice needs structural changes, not more studies.</p>
+  </div>
+
+  <div class="method-card">
+    <h4>Eyetracking Evidence as Design Input <span class="method-tag">Technique</span></h4>
+    <p class="method-when">Use when: optimizing content layout, headline placement, or visual hierarchy based on how users actually scan pages.</p>
+    <p>Decades of eyetracking research reveal consistent scanning patterns that should inform layout decisions. <strong>F-pattern:</strong> On text-heavy pages, users scan the first few lines horizontally, then scan down the left side — content placed in the right column of long pages gets less attention. <strong>Layer-cake pattern:</strong> On well-structured pages with clear headings, users scan the headings (the "cake layers") and read the content beneath headings that interest them — making heading quality critical. <strong>Spotted pattern:</strong> Users scan for specific visual features (numbers, links, bold text, images) and skip everything else — useful for search results and data-rich pages. <strong>Commitment pattern:</strong> Users read content thoroughly from top to bottom — this only occurs when motivation is high (health information, financial decisions, legal text). Designers don't need to run eyetracking studies — but they should use these established patterns to predict where attention will fall and place critical content accordingly.</p>
+  </div>
+</section>
+
+<section id="templates" data-section="practical">
+  <h2>Templates and checklists</h2>
+
+  <div class="template-box">
+    <div class="template-header">
+      <span class="template-label">Template</span>
+      <span class="template-title">A/B Test Plan</span>
+    </div>
+    <div class="template-grid">
+      <div class="template-field">
+        <div class="template-field-label">Hypothesis</div>
+        <p>[Changing X will improve Y by Z% because...]</p>
+      </div>
+      <div class="template-field">
+        <div class="template-field-label">Primary metric</div>
+        <p>[One metric that determines the winner]</p>
+      </div>
+      <div class="template-field">
+        <div class="template-field-label">Sample size needed</div>
+        <p>[Calculate with MDE and baseline conversion rate]</p>
+      </div>
+      <div class="template-field">
+        <div class="template-field-label">Duration</div>
+        <p>[Minimum 2 weeks, covering full business cycles]</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="template-box">
+    <div class="template-header">
+      <span class="template-label">Checklist</span>
+      <span class="template-title">Analytics Health Check</span>
+    </div>
+    <ul class="checklist">
+      <li>Event taxonomy documented and maintained</li>
+      <li>Core funnel tracked end-to-end (acquisition → activation → retention)</li>
+      <li>Key metrics are actionable (not vanity)</li>
+      <li>Metrics are segmented by user type, source, and device</li>
+      <li>Dashboards exist for the metrics the team reviews weekly</li>
+      <li>A/B tests have pre-registered hypotheses and sample size calculations</li>
+      <li>Retention is tracked by cohort, not just aggregate</li>
+      <li>Qualitative research complements quantitative findings</li>
+    </ul>
+  </div>
+</section>
+
+<section id="benchmarking" data-section="practical" data-source="NN/g">
+  <h2>UX benchmarking <span class="source-label">NN/g</span></h2>
+
+  <p>UX benchmarking means evaluating a product's experience by using UX metrics to gauge its relative performance against a meaningful standard. Unlike formative evaluation (which happens during design to inform decisions), benchmarking is summative — it measures how well a complete design performs compared to what it used to be, a competitor, or a target. Benchmarking is the practice that makes ROI calculation possible and gives UX teams concrete evidence of their impact over time.</p>
+
+  <div class="method-card" data-source="NN/g">
+    <h4>UX Benchmarking Process (Seven Steps) <span class="method-tag">Core Method</span></h4>
+    <p class="method-when">Use when: establishing a measurement practice to track UX quality over time and demonstrate design impact.</p>
+    <p>The process has three setup steps and four recurring steps. <strong>Setup (once):</strong> (1) Choose what to measure — identify the product, its top tasks, and select 5-8 UX metrics considering what UX changes will impact, what your team and stakeholders value, and what connects to business KPIs. (2) Choose how to measure — select from analytics (cheap, fast, uncontrolled), quantitative usability testing (controlled, expensive, 40+ participants), and surveys (self-reported, 40-100+ respondents). Ideally combine a behavioral method with a survey method. (3) Collect the first measurement — this baseline gives you a starting point. Even without prior data, compare against competitors, industry benchmarks, or stakeholder-determined goals. <strong>Recurring:</strong> (4) Redesign the product. (5) Collect another measurement — wait for users to adapt after a major redesign before measuring. (6) Interpret findings — watch for confounding variables, calculate statistical significance, make comparisons. (7) Calculate ROI (optional) — connect UX metrics to business KPIs. Repeat steps 4-7 after each major iteration, quarterly, or annually.</p>
+  </div>
+
+  <div class="method-card" data-source="NN/g">
+    <h4>Four Comparison Types <span class="method-tag">Technique</span></h4>
+    <p class="method-when">Use when: you need context for your UX metrics — a number alone is meaningless without something to compare it to.</p>
+    <p>Benchmarking requires meaningful comparisons. <strong>Previous version:</strong> Compare the current design against the prior version — the most common approach and the core of longitudinal benchmarking. <strong>Competitor:</strong> Conduct the same study on a competitor's product to see how you compare — requires quantitative usability testing or surveys since you can't access competitor analytics. <strong>Industry benchmark:</strong> Compare against published industry averages from sources like MeasuringU, ACM Digital Library, or NN/g reports. <strong>Stakeholder-determined goal:</strong> Compare against a target agreed upon with stakeholders — useful for setting concrete expectations and tracking progress toward them. Use at least two comparison types for maximum persuasive power.</p>
+  </div>
+
+  <div class="method-card" data-source="NN/g">
+    <h4>Goals Pyramid <span class="method-tag">Framework</span></h4>
+    <p class="method-when">Use when: you need to connect your UX metrics to the organization's broader objectives — essential for choosing metrics that stakeholders care about.</p>
+    <p>Four levels, top to bottom:</p>
+<ul>
+  <li><strong>Long-term vision</strong> — what are we doing here?</li>
+  <li><strong>Organization goals</strong> — what is success for our company?</li>
+  <li><strong>Product goals</strong> — what is success for this product?</li>
+  <li><strong>Metrics</strong> — what will we measure? Work top-down: each level constrains the next, ensuring your metrics connect to strategy rather than measuring what's convenient. For example, an e-commerce site's vision might be to be the most trusted marketplace; organization goal is increasing customer lifetime value; product goal is making repeat purchasing effortless; metrics become repeat purchase rate, time-to-reorder, and ease-of-use rating for the reorder flow.</li>
+</ul>
+  </div>
+
+  <div class="method-card" data-source="NN/g">
+    <h4>Benchmarking Philosophies <span class="method-tag">Framework</span></h4>
+    <p class="method-when">Use when: deciding your overall approach to metrics measurement — holistic monitoring vs. focused tracking.</p>
+    <p>Two contrasting approaches: <strong>Holistic/Lifecycle Model:</strong> systematic monitoring of outcomes at each stage of the user lifecycle — Discovery (new users, sources, channels, onboarding), Usage (task completion, task efficiency), Operations (delivery efficiency, support efficiency), and Retention (repeat users, frequency, duration). This approach catches problems across the entire experience and works well for mature teams with resources for comprehensive measurement. <strong>North Star Model:</strong> identify one metric that indicates whether your product is providing value to users. Facebook uses daily active users. Airbnb uses nights booked. Dropbox uses files downloaded. The North Star metric should be measurable, controllable by the product team, and clearly connected to user value. This approach provides focus but risks blind spots in areas the single metric doesn't capture. Most teams benefit from a hybrid — a North Star metric for strategic alignment, supplemented by holistic lifecycle monitoring to catch what the North Star misses.</p>
+  </div>
+
+  <div class="method-card" data-source="NN/g">
+    <h4>KPI-to-Metric Mapping Process <span class="method-tag">Core Method</span></h4>
+    <p class="method-when">Use when: selecting metrics for a benchmarking program — ensures you measure things that connect to real outcomes.</p>
+    <p>Three levels, top-down:</p>
+<ul>
+  <li><strong>(1) Describe success outcomes</strong> — what will the world look like if our product is working well? "More people use our product." "Users complete their tasks efficiently.".</li>
+  <li><strong>(2) Identify contributing user actions</strong> — what specific behaviors signal the outcome has occurred? "People download the app who haven't installed it before." "Users complete the checkout flow without errors.".</li>
+  <li><strong>(3) Select metrics to track</strong> — which numbers accurately detect changes in those user actions? App store page visits, daily downloads, checkout completion rate, error counts. Articulating the first two levels ensures you (a) only select metrics connected to real-world outcomes you want to achieve, and (b) broaden your view of what data could measure success — avoiding the trap of measuring only what's convenient.</li>
+</ul>
+  </div>
+
+  <div class="method-card" data-source="NN/g">
+    <h4>Benchmarking Method Comparison <span class="method-tag">Reference</span></h4>
+    <p class="method-when">Use when: deciding which quantitative method to use for your benchmarking program.</p>
+    <p>Three primary methods compared on data collection, context, cost, and difficulty. <strong>Quantitative usability testing:</strong> observed data, task-based context, medium cost, medium collection difficulty, medium analysis difficulty. Best for controlled measurements of specific tasks, and the only reliable method for comparing against competitors. Minimum 40 participants. <strong>Surveys:</strong> reported data, natural or task-based context, low cost, low collection difficulty, high analysis difficulty. Best for capturing user perceptions and attitudes. Minimum 40 within usability testing, 100+ for online distribution. <strong>Analytics:</strong> observed data, natural context, low cost, low collection difficulty, high analysis difficulty. Best for tracking real-world behavior at scale. Collect 2-4 weeks of data per measurement period. Analytics is uncontrolled — confounding variables (competitor sales, seasonality, global events) can influence results and must be acknowledged in reporting.</p>
+  </div>
+
+  <div class="callout warning" data-source="NN/g">
+    <p class="callout-title">Confounding variables</p>
+    <p>Ideally, the only thing that changes between measurements is the design. In practice, external factors can influence your metrics — a competitor's sale, a seasonal traffic shift, a global pandemic. Analytics is especially vulnerable because it captures uncontrolled real-world behavior. Be transparent about potential confounds in your reporting. Acknowledging them increases your credibility rather than undermining it. Teams that said "we can't take full credit — there were other factors" earned more trust from stakeholders than those who presented inflated claims.</p>
+  </div>
+
+  <div class="callout tip" data-source="NN/g">
+    <p class="callout-title">Combining quant and qual cyclically</p>
+    <p>The most effective teams use quantitative and qualitative data cyclically: qualitative usability testing identifies problems, analytics quantifies how many people are affected, redesign addresses the issues, benchmarking measures the improvement. Or the reverse: analytics reveals a large drop-off, qualitative research explains why, the fix is designed and tested, benchmarking confirms the improvement. Neither method works as well alone.</p>
+  </div>
+</section>
+
+<section id="data-storytelling" data-section="practical" data-source="NN/g">
+  <h2>Communicating data as story <span class="source-label">NN/g</span></h2>
+
+  <div class="method-card" data-source="NN/g">
+    <h4>Data Storytelling Framework <span class="method-tag">Core Method</span></h4>
+    <p class="method-when">Use when: presenting analytics findings or benchmarking results to stakeholders.</p>
+    <p>Effective data communication combines narrative and visualization. The narrative follows five story elements:</p>
+<ul>
+  <li><strong>Setting</strong> — the time and place the data originates from (which product, which time period, which users).</li>
+  <li><strong>Characters</strong> — connect the data to real people to give stakeholders a reason to care (users, customers, specific personas).</li>
+  <li><strong>Plot</strong> — describe causes and effects, what happened before and after, to create curiosity.</li>
+  <li><strong>Conflict</strong> — highlight the challenge, surprise, or discrepancy that demands action (a counter-intuitive finding, a gap between expectation and reality).</li>
+  <li><strong>Resolution</strong> — recommend a next step for investigation or implementation. Example: "Many potential customers visit the pricing page [Setting], indicating serious interest [Characters]. Yet compared to other pages, this page is less likely to lead to conversions [Conflict]. With 5M+ annual visitors, even small conversion increases make a significant impact [Plot]. We should experiment with adjusting this page [Resolution].".</li>
+</ul>
+  </div>
+
+  <div class="method-card" data-source="NN/g">
+    <h4>Data Visualization Principles <span class="method-tag">Technique</span></h4>
+    <p class="method-when">Use when: creating charts, graphs, or dashboards to present analytics findings.</p>
+    <p>Visualize numbers as symbolic shapes using easily recognized visual attributes — shapes, colors, size, and position. Key principles: <strong>Show just enough context</strong> to explain the data — strip away gridlines, legends, and decoration that don't serve the question. <strong>Emphasize the main takeaway</strong> with color, callouts, and titles — the title should state the insight, not describe the chart ("Login rates increased 25% after redesign" not "Login rates over time"). <strong>Eliminate unnecessary comparisons</strong> — if you're showing desktop and tablet separately but the story is "logins increased overall," combine them. Tables lack focus and emphasis; dashboards don't answer specific questions. Build each visualization to answer exactly one question and make that answer immediately visible.</p>
+  </div>
+
+  <div class="callout warning" data-source="NN/g">
+    <p class="callout-title">Tables and dashboards are not stories</p>
+    <p>Raw data tables lack focus and emphasis — the reader must do the analytical work themselves. Dashboards show many metrics but don't answer specific questions — they report status without providing insight. Both have their place (tables for appendices, dashboards for monitoring), but neither is effective for persuading stakeholders to act. When you need action, build a visualization that answers one question, embed it in a narrative, and make the recommended action explicit.</p>
+  </div>
+</section>
+
+<section id="roi" data-section="practical" data-source="NN/g">
+  <h2>Calculating UX ROI <span class="source-label">NN/g</span></h2>
+
+  <p>ROI calculation connects UX metrics to business KPIs — translating design improvements into revenue, cost savings, or other outcomes stakeholders care about. It's essentially a unit conversion: turning seconds saved or completion rates improved into dollars, just as you'd convert gallons to liters. ROI calculations are strategic exercises for comparing project value, not financial projections — they don't need to be perfect, but they do need to be transparent.</p>
+
+  <div class="method-card" data-source="NN/g">
+    <h4>UX ROI Calculation (Three Steps) <span class="method-tag">Core Method</span></h4>
+    <p class="method-when">Use when: you need to demonstrate the business value of a design improvement to secure funding, justify UX investment, or prioritize projects.</p>
+    <p><strong>Step 1 — Choose a KPI.</strong> Ask what your organization cares about. Common KPIs include profit, cost savings, customer lifetime value, employee productivity, support ticket volume, and customer satisfaction. Study your stakeholders the way you'd study users — find out what resonates. The same UX improvement might be pitched as time savings to one stakeholder and cost reduction to another. <strong>Step 2 — Convert the UX metric into the KPI.</strong> Find the conversion ratio. Reduced support tickets × cost per ticket = cost savings. Increased completion rate × number of users × average sale value = revenue gain. You'll need assumptions: number of people impacted, frequency of use, transfer rates (e.g., percentage of leads that become paying customers), financial data (average sale value, hourly wage), and unit conversions (seconds to hours). Reach out to analytics, HR, finance, or marketing teams for these numbers. <strong>Step 3 — Report responsibly.</strong> Always state your assumptions explicitly, acknowledge that these are estimates, project returns over 2-5 years (design improvements are cumulative), and subtract project costs.</p>
+  </div>
+
+  <div class="method-card" data-source="NN/g">
+    <h4>Predictive ROI <span class="method-tag">Technique</span></h4>
+    <p class="method-when">Use when: pitching a redesign project before the work is done — estimating the potential return to secure funding.</p>
+    <p>Predictive ROI uses your baseline measurement plus a reasonable estimate of improvement to project future gains. The estimate should be informed by your understanding of users and the product, how much room for improvement exists (a terrible design has more upside than a good one), and any related data sources (industry benchmarks, past redesign results). NN/g's longitudinal data across dozens of organizations suggests an average improvement score of 75% for redesigns, with an interquartile range of 13% to 157%. Use the lower bound for conservative estimates and the median for realistic ones. After the redesign ships, replace the prediction with actual measured data.</p>
+  </div>
+
+  <div class="method-card" data-source="NN/g">
+    <h4>ROI Reporting Template <span class="method-tag">Template</span></h4>
+    <p class="method-when">Use when: presenting ROI findings to stakeholders — this framing sets expectations correctly.</p>
+    <p>Follow this structure: "We observed a [percent increase/decrease] in [UX metric]. Assuming [list each assumption], this improvement could potentially translate to an estimated [amount increase/decrease] in [KPI]. Since the design project cost approximately [project cost], our estimated return over [timeframe] is [projected return]." The word "potentially" matters. The word "estimated" matters. Never present ROI as a guarantee — present it as a directional indicator of value.</p>
+  </div>
+
+  <div class="method-card" data-source="NN/g">
+    <h4>Correlation-Based ROI (UX-Revenue Chain) <span class="method-tag">Advanced Technique</span></h4>
+    <p class="method-when">Use when: your UX metrics don't directly translate to revenue — common in enterprise products where the link between ease of use and business outcomes is indirect.</p>
+    <p>When UX metrics can't be directly converted to dollars, look for chains of correlations. The UX-Revenue Chain model hypothesizes that UX factors (usability, product quality, customer support) drive overall satisfaction, which drives loyalty (retention, referrals), which drives revenue. Build the chain by starting with qualitative data to identify which experience factors matter most to your users, then collect large-scale survey data to test correlations between those factors and business metrics. Breaking the analysis into multiple steps reduces noise — ease-of-use ratings don't directly predict referrals, but they predict satisfaction, which predicts loyalty, which predicts referrals. Even if you don't succeed in proving the correlation, the pursuit forces you to understand stakeholder priorities and business models more deeply.</p>
+  </div>
+
+  <div class="callout info" data-source="NN/g">
+    <p class="callout-title">ROI difficulty spectrum</p>
+    <p>Some ROI calculations are straightforward: increased sign-up rate × customer lifetime value = profit. Reduced support calls × cost per call = savings. Others are harder: satisfaction ratings don't convert directly to dollars, and the connection between user perception and business outcomes requires correlation analysis. When direct conversion isn't possible, consider whether a non-monetary KPI works just as well — feature usage, returning visitors, time saved, or donor growth. Not every ROI argument needs a dollar sign to be persuasive.</p>
+  </div>
+
+  <div class="callout warning" data-source="NN/g">
+    <p class="callout-title">When NOT to calculate ROI</p>
+    <p>Skip ROI calculation when: your organization already has high UX maturity and buy-in (the benchmarking results speak for themselves), your benchmarking results aren't positive (don't manufacture value that doesn't exist — use the data to argue for more investment in getting it right), or a high-priority KPI isn't monetary (donors, community members, student outcomes — use those directly).</p>
+  </div>
+</section>
+
+<section id="improvement-magnitude" data-section="theory" data-source="NN/g">
+  <h2>The magnitude of UX improvements <span class="source-label">NN/g</span></h2>
+
+  <p>NN/g's longitudinal study across 44 organizations (80 metric pairs, 5th edition 2020) provides the most comprehensive data on what to expect from UX redesigns. Averaged across all organizations, the average improvement score was 75%, with an interquartile range of 13% to 157%. In other words, across a wide variety of products and industries, the typical redesign was 75% better than the original on the measured metrics — but with enormous variability.</p>
+
+  <div class="method-card" data-source="NN/g">
+    <h4>Improvement Score Formula <span class="method-tag">Calculation</span></h4>
+    <p class="method-when">Use when: computing the relative magnitude of a design change's impact on any metric.</p>
+    <p>The formula depends on whether the metric is "good" (higher = better) or "bad" (lower = better). <strong>Good metrics</strong> (conversion rate, satisfaction, success rate): improvement = (after ÷ before) – 1. If conversion went from 2% to 5%, the improvement score is 5/2 – 1 = 150%. <strong>Bad metrics</strong> (time on task, error rate, support tickets): improvement = (before ÷ after) – 1. If time on task went from 3 minutes to 2 minutes, the improvement score is 3/2 – 1 = 50%. This formula standardizes improvements across different metric types, allowing you to compare the relative impact of projects that measured different things.</p>
+  </div>
+
+  <div class="callout info" data-source="NN/g">
+    <p class="callout-title">Improvements by metric category</p>
+    <p>Not all metrics move equally. From NN/g's data: <strong>Satisfaction/Perception:</strong> average improvement 19% — the hardest to move because changing how users feel requires more than changing what they do. <strong>Engagement/Usage:</strong> average 87%. <strong>Adoption/Retention:</strong> average 93%. <strong>Efficiency:</strong> average 104%. <strong>Effectiveness:</strong> average 131% — the largest improvements, but also the widest variation (confidence interval from -9% to 271%). Consider these ranges when setting improvement targets and when deciding which metric category to focus your benchmarking program on.</p>
+  </div>
+
+  <div class="callout info" data-source="NN/g">
+    <p class="callout-title">Improvements are shrinking — and that's good</p>
+    <p>Average improvement scores dropped from 247% (2006-2008) to 75% (2020) — a statistically significant 69% decrease. This doesn't mean designers are doing worse; it means the industry has addressed the biggest problems. In the early 2000s, designs were often so poor that any usability intervention produced dramatic gains. As the collective standard has risen, each incremental improvement is smaller in magnitude but no less important — because user expectations have risen in lockstep. Even small UX improvements are worth pursuing because competitors are improving too, creating what amounts to a UX arms race. The areas with the most remaining opportunity: efficiency and satisfaction, where improvement scores have stayed relatively stable over time.</p>
+  </div>
+
+  <div class="callout tip" data-source="NN/g">
+    <p class="callout-title">Why impact varies</p>
+    <p>Five factors explain why one project might see an 8% improvement and another a 500% improvement: (1) the existing quality of the experience (worse products have more room for big gains), (2) the expertise of the team, (3) the quantity and quality of changes implemented (though small smart changes sometimes outperform large overhauls), (4) the precision and sensitivity of the methods used (A/B tests detect smaller effects than quant usability with 40 participants), and (5) how resistant the behavior being measured is to change (getting someone to complete a task is easier than getting them to feel differently about a product).</p>
+  </div>
+</section>
+
+        <div class="section-marker" id="real-world-examples">
+          <span class="split-badge examples">Examples</span>
+          <span class="marker-line"></span>
+        </div>
+
+        <section data-section="examples">
+  <h2>Real-world examples</h2>
+
+  <div class="case-study">
+    <p class="case-label">Case study</p>
+    <h4>Airbnb: the $1B photo quality experiment</h4>
+    <p>Airbnb's data showed that listings with professional-quality photos had 2-3× the booking rate. Rather than A/B testing photo styles, they launched a program to send professional photographers to hosts — then measured the impact. Listings with professional photos saw a significant increase in bookings, and hosts with better photos earned substantially more. The data identified the opportunity (photo quality correlates with bookings), qualitative research explained why (professional photos build trust and set accurate expectations), and the intervention was a service change, not a UI change.</p>
+    <p><strong>Why it works:</strong> Data identified the lever; research explained the mechanism; the solution was operational, not just design. Data-informed, not data-driven.</p>
+  </div>
+
+  <div class="case-study">
+    <p class="case-label">Case study</p>
+    <h4>Netflix: the artwork personalization system</h4>
+    <p>Netflix discovered that the artwork shown for each title dramatically affects click-through rates. They built a system that tests multiple artwork variants per title per user, using viewing history to predict which image will resonate. A romantic comedy might show the lead actors to one user and a scenic backdrop to another, based on what that user has previously engaged with. This is A/B testing at scale — thousands of simultaneous experiments, personalized per user. The system increased engagement measurably across the platform.</p>
+    <p><strong>Why it works:</strong> Personalized A/B testing at scale, driven by behavioral data, with clear primary metrics (click-through → watch).</p>
+  </div>
+
+  <div class="case-study">
+    <p class="case-label">Case study</p>
+    <h4>Slack: the magic number for retention</h4>
+    <p>Slack's data team found that teams who sent 2,000 messages were almost certain to become long-term customers. This "magic number" became their North Star metric for activation — instead of tracking generic "signups," they focused on getting new teams to 2,000 messages as quickly as possible. The onboarding was redesigned around this goal: pre-populated channels, Slackbot tutorials, integration prompts — all designed to generate the initial message volume that predicted retention.</p>
+    <p><strong>Why it works:</strong> Cohort analysis identified the leading indicator (2,000 messages). Design and product decisions were then focused on accelerating that specific metric.</p>
+  </div>
+
+  <div class="case-study" data-source="NN/g">
+    <p class="case-label">Case study</p>
+    <h4>HelloFresh: building a benchmarking practice from scratch</h4>
+    <p>HelloFresh's UX research team established a longitudinal benchmarking program using quantitative usability testing combined with surveys. For each key task in their meal-kit delivery app, they collected six metrics per task: time on task, success rate, subjective success rate, SUS score, ease-of-use rating, and confidence rating. After redesigning the home screen to separate upcoming and past deliveries with distinct visual treatments, they measured again. For the task of finding a recent delivery: time on task dropped 50%, success rate rose from 25% to 100%, and SUS improved from 75 to 90. The cadence — measuring after each major iteration — created a continuous improvement loop rather than one-time validation.</p>
+    <p><strong>Why it works:</strong> Multiple metrics per task, consistent methodology across iterations, combining observed performance with self-reported satisfaction. The benchmarking practice itself became the argument for continued UX investment.</p>
+  </div>
+
+  <div class="case-study" data-source="NN/g">
+    <p class="case-label">Case study</p>
+    <h4>Intranet search redesign: $340,000 in annual savings</h4>
+    <p>A company with 10,000 employees benchmarked their intranet search task. Average time on task dropped from 66 seconds to 19 seconds after a redesign. The ROI calculation: if each employee searches once per week for 52 weeks, the old design cost 0.95 hours per employee per year; the new design costs 0.27 hours. At $50/hour average wage across 10,000 employees, the old design cost $475,000/year and the new one $135,000/year — a savings of $340,000 annually. The assumptions (frequency, wage, weeks worked) were clearly stated alongside the result.</p>
+    <p><strong>Why it works:</strong> Straightforward time-savings × wage conversion. Transparent assumptions. The fact that salaried employees don't literally save cash doesn't diminish the argument — those hours are redirected to higher-value work.</p>
+  </div>
+
+  <div class="case-study" data-source="NN/g">
+    <p class="case-label">Case study</p>
+    <h4>Mobile ecommerce: 850% ROI over three years</h4>
+    <p>A mobile accessories ecommerce site had an 18% checkout completion rate against an industry benchmark of 30%. After qualitative research and iterative redesign, completion rose to 37%. Predictive ROI before the project: with 50,000 yearly shoppers and $20 average sale, even reaching 28% would mean $100,000 in additional annual revenue. Actual result at 37%: $190,000/year in new revenue. Against a $60,000 project cost, the three-year return was $510,000 — an 850% ROI.</p>
+    <p><strong>Why it works:</strong> Industry benchmark motivated the project. Predictive ROI secured funding. Actual post-redesign measurement validated the investment. The three-year projection acknowledged that design improvements compound.</p>
+  </div>
+
+  <div class="case-study" data-source="NN/g">
+    <p class="case-label">Case study</p>
+    <h4>PetSmart Charities: 163% lift from removing form fields</h4>
+    <p>Qualitative usability testing revealed that users were surprised by the length of the newsletter signup form — "Why do they need my address?" Analytics confirmed: 73% of people who started the form abandoned it. The fix was simple: remove all fields except first name, email, and ZIP code. A/B testing showed the shortened form converted 71% of starters, up from 27% — a 163% improvement with 100% statistical confidence. Related KPIs (adoptable pet searches, adoption event interest) rose alongside.</p>
+    <p><strong>Why it works:</strong> Qual identified the problem, quant sized it, A/B testing validated the fix. A small change to a small form produced a massive metric shift because the friction was concentrated in one place.</p>
+  </div>
+
+  <div class="case-study" data-source="NN/g">
+    <p class="case-label">Case study</p>
+    <h4>Anonymous real estate: 277% more leads by removing a feature</h4>
+    <p>A multistate apartment-finder company saw leads drop 60% after a site redesign. Qualitative research identified 50+ problems. The breakthrough came when the marketing director realized most users jumped to the property search tool, got poor results, and left — never seeing the content explaining why a leasing agent was valuable. The controversial hypothesis: remove the search feature entirely. A/B testing produced a 277% increase in leads with 95% confidence in under a week. The feature users defaulted to was the feature preventing conversions.</p>
+    <p><strong>Why it works:</strong> Combining qualitative observation with analytics quantification, then using A/B testing to validate a counterintuitive solution. Sometimes better UX means removing functionality, not adding it.</p>
+  </div>
+
+  <div class="case-study" data-source="NN/g">
+    <p class="case-label">Case study</p>
+    <h4>athenahealth: proving UX drives revenue through correlations</h4>
+    <p>athenahealth's enterprise healthcare products couldn't connect ease-of-use ratings directly to revenue. Over two years, they collected 50,000+ survey responses and combined them with business metrics. They built a multi-step correlation model: UX factors (ease of use, reliability) predicted satisfaction, which predicted loyalty (retention, referrals), which predicted revenue sources. Each link was statistically significant (p &lt; 0.000001). Breaking the analysis into steps reduced noise — individual ease-of-use ratings alone wouldn't predict referrals, but satisfaction as an intermediary made the chain visible. The model became a strategic tool for prioritizing where to invest design effort.</p>
+    <p><strong>Why it works:</strong> Multi-step correlation modeling connected UX metrics to revenue in a context where direct conversion was impossible. Large sample size and rigorous statistical analysis built credibility with executive stakeholders.</p>
+  </div>
+
+  <div class="case-study" data-source="NN/g">
+    <p class="case-label">Case study</p>
+    <h4>Airline seat upgrade: triangulation drives 19.8% revenue increase</h4>
+    <p>An airline wanted to increase paid seat upgrades during booking and check-in. The UX team combined three methods: analytics identified that only 55% of bookers opened the seat map, and only 10.5% paid for upgrades. Eyetracking revealed users spent 30+ seconds scanning the seat map with intense fixation on the map and "save" buttons but almost no attention on pricing or passenger information. Usability testing uncovered confusion switching between passengers and flight segments, and many users not understanding seat categories. The redesign simplified multi-passenger selection, added a vertical scrollable map, showed upgrade costs directly on seats, and auto-advanced between passengers. Results: 9.7% increase in seat upgrades during booking, 19.8% increase during check-in.</p>
+    <p><strong>Why it works:</strong> Analytics sized the opportunity, eyetracking revealed where attention went (and didn't), usability testing explained why. Three methods converged on the same problem from different angles — the triangulation made the diagnosis and the solution convincing.</p>
+  </div>
+
+  <div class="case-study" data-source="NN/g">
+    <p class="case-label">Case study</p>
+    <h4>KinderCare pricing page: data storytelling drives A/B test</h4>
+    <p>KinderCare's pricing page was the 3rd most visited page on the website but the 13th in conversion rate — a significant gap between traffic and performance. The data was wrapped in a story: "Many potential customers visit the pricing page, indicating serious interest in enrollment. Yet compared to other high-traffic pages, this page is far less likely to lead to conversions. With over 5M annual visitors, even small conversion increases have large impact." The hypothesis: prospects assumed prices were too high because costs weren't disclosed. Version B used more transparent language about why pricing varied. Result: 11% increase in live chat initiations, 5% increase in contact form submissions. The A/B test validated the hypothesis, and the downstream CRM data confirmed that chat users converted to enrolled families at higher rates.</p>
+    <p><strong>Why it works:</strong> The data story (Setting/Characters/Conflict/Resolution) secured stakeholder buy-in for the experiment. The hypothesis was based on data, not opinion. Downstream conversion tracking connected the UX change to business outcomes.</p>
+  </div>
+
+  <div class="case-study" data-source="NN/g">
+    <p class="case-label">Case study</p>
+    <h4>Museum of New Zealand: analytics reveals unexpected audience</h4>
+    <p>The Museum of New Zealand live-streamed events through their website, expecting the audience to be local visitors planning an in-person trip. Analytics segmentation revealed the opposite — most live-stream traffic came from outside the local metropolitan area. These were people who would never visit in person, using live-streams to experience the museum remotely. The UX action: capitalize on this unexpected audience by creating more live-streamed events to expand the museum's digital reach and influence. A separate search query analysis found that the most common search on the museum website was "opening hours" — so they added hours to the site header, reducing hour-related searches by 85%.</p>
+    <p><strong>Why it works:</strong> Segmentation challenged assumptions about who users were. Search log analysis identified a simple navigation fix with measurable impact. Both insights came from looking at existing data with the right questions.</p>
+  </div>
+
+  <div class="case-study" data-source="NN/g">
+    <p class="case-label">Case study</p>
+    <h4>NPR: feature-retention correlation guides prioritization</h4>
+    <p>NPR's digital team asked: which features should we prioritize to encourage repeat visitors? They analyzed the likelihood of new users returning within one week based on which features they used during their first visit. Of the many features available on each page, only a few had a strong association with repeat visits. This feature-retention correlation data directly informed prioritization — features that predicted return visits received more investment and prominence, while features with no retention correlation were deprioritized. The insight wasn't "which features are most used" (a traffic question) but "which features predict the behavior we care about" (a strategic question).</p>
+    <p><strong>Why it works:</strong> Reframed prioritization from popularity (which features get the most clicks) to strategic impact (which features drive the outcome we care about — retention). Correlation analysis turned analytics from a reporting tool into a strategy tool.</p>
+  </div>
+
+  <div class="case-study" data-source="NN/g">
+    <p class="case-label">Case study</p>
+    <h4>Faction Media: analytics saves a navigation element from removal</h4>
+    <p>During a website redesign, the client wanted to remove the Resource Center from the global navigation. The UX team used analytics triangulation to test this decision. Analytics showed Resources was the 3rd most popular section, and key personas visited it frequently. Competitive analysis confirmed that competitors offered Resources in global navigation. Usability testing revealed that Resources supported important decision-making tasks and that the company's content quality was a competitive advantage. When they prototype-tested the proposed removal (Resources moved to utility navigation), task success for finding research content dropped dramatically. The recommendation: keep Resources in the global navigation, but improve the related links that were being overlooked. Analytics prevented a decision that would have harmed a high-value user path.</p>
+    <p><strong>Why it works:</strong> Multiple methods (analytics, competitive analysis, current-site usability testing, prototype testing) converged to answer a strategic question. The quantitative data (3rd most popular) stopped an opinion-based decision; qualitative data (task success, competitive advantage) explained why removal would hurt.</p>
+  </div>
+</section>
+
+<section id="pitfalls" data-section="practical">
+  <h2>Common pitfalls</h2>
+
+  <div class="pitfall">
+    <div class="pitfall-icon">!</div>
+    <div>
+      <h4>Optimizing for the wrong metric</h4>
+      <p>Increasing signup conversion is meaningless if those users churn in week 1. Click-through rate on an ad is vanity if the traffic doesn't convert. Always connect your metric to a business outcome. The metric you optimize should be a leading indicator of the outcome you actually care about — revenue, retention, or user satisfaction.</p>
+    </div>
+  </div>
+
+  <div class="pitfall">
+    <div class="pitfall-icon">!</div>
+    <div>
+      <h4>Running tests without enough traffic</h4>
+      <p>An A/B test with 200 users per variant will produce a "winner" — but the result is noise, not signal. Small samples produce large confidence intervals and unreliable results. Calculate sample size before running. If you don't have enough traffic, don't A/B test — use qualitative methods (usability testing, interviews) instead.</p>
+    </div>
+  </div>
+
+  <div class="pitfall">
+    <div class="pitfall-icon">!</div>
+    <div>
+      <h4>Letting data override ethical judgment</h4>
+      <p>Dark patterns often test well. Hiding the unsubscribe button increases short-term retention metrics. Adding urgency timers increases conversion. Pre-selecting the most expensive plan increases revenue per user. Data will tell you these things work. Ethics tells you they're wrong. Data should never override your responsibility to treat users honestly.</p>
+    </div>
+  </div>
+
+  <div class="pitfall" data-source="NN/g">
+    <div class="pitfall-icon">!</div>
+    <div>
+      <h4>Treating ROI calculations as financial projections</h4>
+      <p>ROI estimates are strategic tools for comparing project value and securing investment — they are not financial forecasts. Don't show these numbers to the finance department and promise they'll appear on the balance sheet. State your assumptions clearly, use words like "potentially" and "estimated," and be transparent about the limitations. Teams that present ROI as precise predictions lose credibility when reality doesn't match the number exactly. Teams that present ROI as directional indicators build lasting trust.</p>
+    </div>
+  </div>
+
+  <div class="pitfall" data-source="NN/g">
+    <div class="pitfall-icon">!</div>
+    <div>
+      <h4>Browsing dashboards without a question</h4>
+      <p>Opening analytics and looking for "anything interesting" is the most common analytics mistake. Without a specific question, every metric spike or dip looks meaningful — and most are noise. You'll find patterns in random variation, chase phantom problems, and miss the real ones. Always start with a question ("Why did conversion drop last week?" "Which features predict retention?"), then select the report that answers it. If you don't have a question, you don't need analytics — you need a conversation with your product team about what they're trying to learn.</p>
+    </div>
+  </div>
+
+  <div class="pitfall">
+    <div class="pitfall-icon">!</div>
+    <div>
+      <h4>Ignoring confounding variables in analytics benchmarks</h4>
+      <p>Analytics captures everything — including the effects of competitor actions, seasonal shifts, marketing campaigns, and global events. If you launch a redesign during a competitor's major sale and your conversion drops, the data can't tell you which factor caused the change. Report all known confounds alongside your findings. Paradoxically, acknowledging uncertainty increases stakeholder trust. Hiding it makes you look naive when someone spots the flaw.</p>
+    </div>
+  </div>
+</section>
+
+<section id="connections">
+  <h2>Connected topics in your library</h2>
+  <div class="cross-ref-grid">
+    <a href="usability-testing.html" class="cross-ref-card">
+      <span class="ref-number">Tier 2</span>
+      <div class="ref-title">Conducting Usability Testing</div>
+      <div class="ref-reason">Qualitative complement to quantitative data. Data shows what; usability testing shows why.</div>
+    </a>
+    <a href="user-research.html" class="cross-ref-card">
+      <span class="ref-number">Tier 1</span>
+      <div class="ref-title">User Research</div>
+      <div class="ref-reason">Analytics is one research method. User Research covers the full toolkit and when to use each.</div>
+    </a>
+    <a href="dashboard-design.html" class="cross-ref-card">
+      <span class="ref-number">Tier 2</span>
+      <div class="ref-title">Dashboard & Data-Dense Design</div>
+      <div class="ref-reason">How to visualize the data you're collecting — dashboard design for analytics interfaces.</div>
+    </a>
+    <div class="cross-ref-card">
+      <span class="ref-number">Tier 2</span>
+      <div class="ref-title">Behavioral Design & Persuasion</div>
+      <div class="ref-reason">Data-driven optimization intersects with behavioral design — and with ethical boundaries.</div>
+    </div>
+    <a href="product-thinking.html" class="cross-ref-card">
+      <span class="ref-number">Tier 4</span>
+      <div class="ref-title">Product Thinking: Mental Models & Decision-Making</div>
+      <div class="ref-reason">UX-to-business cost translation and decision frameworks complement ROI calculation with stakeholder persuasion techniques.</div>
+    </a>
+    <a href="presentation-communication.html" class="cross-ref-card">
+      <span class="ref-number">Tier 4</span>
+      <div class="ref-title">Presentation and Communication</div>
+      <div class="ref-reason">How to present benchmarking results and ROI calculations to stakeholders — storytelling with data, evidence frameworks, and feedback management.</div>
+    </a>
+    <a href="product-metrics.html" class="cross-ref-card">
+      <span class="ref-number">Tier 2</span>
+      <div class="ref-title">Product Metrics & KPIs</div>
+      <div class="ref-reason">North Star metrics, AARRR, and measurement practice — the product-side counterpart to UX benchmarking.</div>
+    </a>
+    <a href="personas.html" class="cross-ref-card">
+      <span class="ref-number">Tier 2</span>
+      <div class="ref-title">Personas & User Segmentation</div>
+      <div class="ref-reason">Analytics segments can validate, refine, or invalidate personas — connect behavioral data to persona definitions.</div>
+    </a>
+    <a href="content-analytics-performance.html" class="cross-ref-card">
+      <span class="ref-number">Tier 2</span>
+      <div class="ref-title">Content Analytics & Performance</div>
+      <div class="ref-reason">Search log analysis and content metrics — the content strategy perspective on analytics data.</div>
+    </a>
+  </div>
+</section>
+
+<div class="deep-dive-section" id="deep-dive">
+          <div class="deep-dive-header">
+            <span class="deep-dive-badge">Deep Dive</span>
+            <h2 style="margin:0; border:none; padding:0;">Appendix</h2>
+          </div>
+
+  <details class="expandable">
+    <summary><span class="chevron"><svg viewBox="0 0 14 14"><polyline points="4,2 10,7 4,12"/></svg></span> Statistical significance explained for designers</summary>
+    <div class="expand-content topic-content">
+      <h4>What p &lt; 0.05 actually means</h4>
+      <p>A p-value of 0.05 means there's a 5% chance the observed difference happened by random chance. It does NOT mean there's a 95% chance the variant is better. The distinction matters: statistical significance tells you the result is unlikely to be noise, but it doesn't tell you the result is large enough to matter. A test could be statistically significant (p &lt; 0.05) but practically meaningless (0.01% improvement). Always report effect size alongside significance.</p>
+
+      <h4>Bayesian vs frequentist testing</h4>
+      <p>Traditional A/B testing (frequentist) requires a fixed sample size and produces a binary answer: significant or not. Bayesian testing produces a probability: "There's a 92% chance the variant is better." Bayesian approaches allow you to stop tests early when results are clearly positive or negative, and they're more intuitive to interpret. Tools like Google Optimize and VWO offer Bayesian analysis.</p>
+    </div>
+  </details>
+
+  <details class="expandable">
+    <summary><span class="chevron"><svg viewBox="0 0 14 14"><polyline points="4,2 10,7 4,12"/></svg></span> Further reading and resources</summary>
+    <div class="expand-content topic-content">
+      <h4>Essential reading</h4>
+      <p><strong>"Lean Analytics" by Alistair Croll &amp; Benjamin Yoskovitz</strong> — Practical guide to choosing the right metric for your stage and business model. Covers the One Metric That Matters concept.</p>
+      <p><strong>"Trustworthy Online Controlled Experiments" by Kohavi, Tang &amp; Xu</strong> — The definitive guide to A/B testing, written by practitioners from Microsoft and Amazon. Covers statistical rigor, common pitfalls, and organizational challenges.</p>
+      <p><strong>"UX Metrics and ROI" by Moran &amp; Liu (NN/g, 5th edition)</strong> — 44 case studies of UX benchmarking and ROI across industries, plus longitudinal data on the magnitude of UX improvements from 2006 to 2020.</p>
+      <p><strong>"Measuring the User Experience" by Tullis &amp; Albert</strong> — Comprehensive guide to quantitative UX methods, from task metrics to surveys to physiological measures.</p>
+      <p><strong>"Quantifying the User Experience" by Sauro &amp; Lewis</strong> — Deep statistical methods for UX research, including confidence intervals, sample size calculations, and questionnaire analysis.</p>
+      <p><strong>"Practical Web Analytics for User Experience" by Michael Beasley</strong> — Bridges the gap between analytics tools and UX practice, with practical techniques for extracting UX insights from analytics data.</p>
+      <p><strong>"Search Analytics for Your Site" by Lou Rosenfeld</strong> — Comprehensive guide to using internal search data for information architecture, content strategy, and navigation design improvements.</p>
+      <p><strong>"Web Analytics 2.0" by Avinash Kaushik</strong> — Strategic framework for analytics beyond reporting, including segmentation, competitive analysis, and testing culture.</p>
+      <p><strong>"The Visual Display of Quantitative Information" by Edward R. Tufte</strong> — The foundational text on data visualization — principles for presenting numbers honestly and effectively.</p>
+
+      <h4>Tools</h4>
+      <p><strong>Amplitude / Mixpanel:</strong> Product analytics with funnel analysis, cohort retention, and user path tracking.</p>
+      <p><strong>Hotjar / FullStory:</strong> Session recordings and heatmaps — qualitative context for quantitative data.</p>
+      <p><strong>LaunchDarkly / Statsig:</strong> Feature flags and experimentation platforms for A/B testing in production.</p>
+    </div>
+  </details>
+</div>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer container">
+    <div class="footer-inner">
+      <p>Noir Book — Built for the work, not the shelf.</p>
+      <div class="footer-links">
+        <a href="../design-system.html">Design System</a>
+        <a href="../library-manifest.json">Manifest</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to Top -->
+  <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">&#8593;</button>
+
+  <!-- Floating Mobile TOC -->
+  <button class="mobile-toc-btn" id="mobileTocBtn" aria-label="Open table of contents">&#9776; Contents</button>
+  <div class="mobile-toc-overlay" id="mobileTocOverlay">
+    <div class="mobile-toc-panel">
+      <div class="mobile-toc-panel-header">
+        <h3>On this page</h3>
+        <button class="mobile-toc-close" id="mobileTocClose" aria-label="Close">&times;</button>
+      </div>
+      <ul class="mobile-toc-list">
+        <li><a href="#what-and-why" data-section="theory">What data-driven design is and isn't</a></li>
+        <li><a href="#analytics-data" data-section="theory">What analytics data tells you NN/g</a></li>
+        <li><a href="#metrics" data-section="theory">Choosing the right metrics</a></li>
+        <li><a href="#analytics" data-section="practical">Analytics setup and event taxonomy</a></li>
+        <li><a href="#metric-interpretation" data-section="practical">Interpreting analytics metrics NN/g</a></li>
+        <li><a href="#search-analytics" data-section="practical">Search log analysis NN/g</a></li>
+        <li><a href="#funnel-analysis" data-section="practical">Funnel analysis</a></li>
+        <li><a href="#ab-testing" data-section="practical">A/B testing</a></li>
+        <li><a href="#cohort-analysis" data-section="practical">Cohort analysis and retention curves</a></li>
+        <li><a href="#segmentation-paths" data-section="practical">Segmentation and path analysis NN/g</a></li>
+        <li><a href="#quant-usability" data-section="practical">Quantitative usability methods</a></li>
+        <li><a href="#templates" data-section="practical">Templates and checklists</a></li>
+        <li><a href="#benchmarking" data-section="practical">UX benchmarking NN/g</a></li>
+        <li><a href="#data-storytelling" data-section="practical">Communicating data as story NN/g</a></li>
+        <li><a href="#roi" data-section="practical">Calculating UX ROI NN/g</a></li>
+        <li><a href="#improvement-magnitude" data-section="theory">The magnitude of UX improvements NN/g</a></li>
+        <li><a href="#real-world-examples" data-section="examples">Real-world examples</a></li>
+        <li><a href="#pitfalls" data-section="practical">Common pitfalls</a></li>
+        <li><a href="#connections">Connected topics in your library</a></li>
+        <li><a href="#deep-dive">Deep-dive appendix</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    // Scrollspy: highlight active TOC item
+    const tocLinks = document.querySelectorAll('.toc-list a');
+    const sections = [];
+    tocLinks.forEach(link => {
+      const href = link.getAttribute('href');
+      if (!href || !href.startsWith('#')) return;
+      const el = document.getElementById(href.slice(1));
+      if (el) sections.push({ el, link });
+    });
+
+    // Reading progress bar
+    const progressBar = document.getElementById('readingProgress');
+    const backToTop = document.getElementById('backToTop');
+
+    function onScroll() {
+      let current = sections[0];
+      for (const s of sections) {
+        if (s.el.getBoundingClientRect().top <= 120) current = s;
+      }
+      tocLinks.forEach(l => l.classList.remove('active'));
+      if (current) current.link.classList.add('active');
+
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrolled = window.scrollY;
+      const progress = docHeight > 0 ? (scrolled / docHeight) * 100 : 0;
+      if (progressBar) progressBar.style.width = progress + '%';
+      if (backToTop) backToTop.classList.toggle('visible', scrolled > 400);
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    // Split badges: click to scroll to section
+    document.querySelectorAll('.content-splits .split-badge').forEach(function(badge) {
+      badge.addEventListener('click', function() {
+        var type = badge.classList.contains('theory') ? 'theory' : badge.classList.contains('practical') ? 'practical' : 'examples';
+        var target = document.querySelector('section[data-section="' + type + '"]');
+        if (target) {
+          var marker = target.previousElementSibling;
+          (marker && marker.classList.contains('section-marker') ? marker : target).scrollIntoView({behavior:'smooth'});
+        }
+      });
+    });
+  </script>
+
+  <script src="../js/checklist.js"></script>
+  <script src="../js/mobile-toc.js"></script>
+  <script src="../js/search.js"></script>
+  <script>
+    function openBurger(){document.getElementById('burgerOverlay').classList.add('open');document.body.style.overflow='hidden'}
+    function closeBurger(e){if(e&&e.target&&e.target!==document.getElementById('burgerOverlay'))return;document.getElementById('burgerOverlay').classList.remove('open');document.body.style.overflow=''}
+    function burgerSearch(q){
+      var r=document.getElementById('burgerSearchResults');
+      if(!q||q.length<2){r.innerHTML='';return}
+      var ql=q.toLowerCase(),matches=[];
+      if(typeof SEARCH_INDEX!=='undefined'){
+        SEARCH_INDEX.forEach(function(t){
+          var hit=t.topic.toLowerCase().indexOf(ql)>-1;
+          if(!hit)t.sections.forEach(function(s){if((s.title+' '+s.keywords).toLowerCase().indexOf(ql)>-1)hit=true});
+          if(hit)matches.push(t);
+        });
+      }
+      if(!matches.length){r.innerHTML='<p style="padding:8px 0;font-size:13px;color:var(--ink-muted)">No results</p>';return}
+      r.innerHTML=matches.slice(0,8).map(function(m){return '<a href="../'+m.url+'">'+m.topic+'<span class="bsr-disc">'+m.discipline+'</span></a>'}).join('');
+    }
+    document.addEventListener('keydown',function(e){if(e.key==='Escape'){closeBurger();var dd=document.getElementById('searchDropdown');if(dd)dd.classList.remove('visible');}});
+    // Close burger when clicking a TOC link
+    document.querySelectorAll('.burger-toc-list a').forEach(function(a){a.addEventListener('click',function(){closeBurger()})});
+    // Search typeahead
+    function topicSearch(q){
+      var dd=document.getElementById('searchDropdown');
+      if(!q||q.length<2||typeof SEARCH_INDEX==='undefined'){if(dd)dd.classList.remove('visible');return}
+      var ql=q.toLowerCase(),grouped={};
+      SEARCH_INDEX.forEach(function(t){
+        var hit=t.topic.toLowerCase().indexOf(ql)>-1,sHits=[],mHits=[];
+        t.sections.forEach(function(s){if((s.title+' '+s.keywords).toLowerCase().indexOf(ql)>-1)sHits.push(s)});
+        (t.methods||[]).forEach(function(m){if((m.name+' '+(m.keywords||'')).toLowerCase().indexOf(ql)>-1)mHits.push(m)});
+        if(!hit&&!sHits.length&&!mHits.length&&ql.length>=3&&typeof levenshtein==='function'){
+          var words=t.topic.toLowerCase().split(/ +/);
+          for(var i=0;i<words.length;i++){if(levenshtein(ql,words[i].substring(0,ql.length+1))<=1){hit=true;break}}
+        }
+        if(hit||sHits.length||mHits.length)grouped[t.topic]={url:'../'+t.url,disc:t.discipline||'',sections:sHits,methods:mHits,topicHit:hit};
+      });
+      var keys=Object.keys(grouped);
+      if(!keys.length){dd.innerHTML='<div class="search-empty">No results</div>';dd.classList.add('visible');return}
+      var html='';
+      keys.slice(0,8).forEach(function(topic){
+        var g=grouped[topic];
+        html+='<div class="search-group"><div class="search-group-title">'+topic+'</div>';
+        if(g.topicHit)html+='<a class="search-result" href="'+g.url+'"><span class="search-result-title">'+topic+'</span><span class="search-result-type practical">'+g.disc+'</span></a>';
+        g.sections.forEach(function(s){html+='<a class="search-result" href="'+g.url+'#'+s.id+'"><span class="search-result-title">'+s.title+'</span><span class="search-result-type '+s.type+'">'+s.type+'</span></a>'});
+        g.methods.slice(0,3).forEach(function(m){html+='<a class="search-result" href="'+g.url+'#'+m.section+'"><span class="search-result-title">'+m.name+'</span><span class="search-result-type practical">method</span></a>'});
+        html+='</div>';
+      });
+      dd.innerHTML=html;dd.classList.add('visible');
+    }
+    document.addEventListener('click',function(e){if(!e.target.closest('.search-box')){var dd=document.getElementById('searchDropdown');if(dd)dd.classList.remove('visible')}});
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Discovery &amp; Customer Research — Noir Book</title>
+  <link rel="stylesheet" href="../css/shared.css">
+  <link rel="stylesheet" href="../css/topic.css">
+  <script src="../js/theme.js"></script>
+  <script src="../js/topic-nav.js"></script>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="site-nav subpage-nav" data-discipline="pm">
+    <div class="nav-inner">
+      <a href="../index.html" class="site-logo">
+        <span class="logo-mark">PM</span>
+        <span class="nav-title">Noir Book</span>
+      </a>
+      <a href="../index.html" class="nav-back-link">&#8592; Library</a>
+      <div class="nav-filters">
+        <button class="disc-toggle ux-toggle active" data-disc="ux" onclick="toggleDisc('ux')" title="UX Design">
+          <span class="disc-dot disc-dot-ux"></span><span class="disc-label">UX Design</span><span class="disc-code">(UX)</span>
+        </button>
+        <button class="disc-toggle pm-toggle active" data-disc="pm" onclick="toggleDisc('pm')" title="Product Management">
+          <span class="disc-dot disc-dot-pm"></span><span class="disc-label">Product</span><span class="disc-code">(PM)</span>
+        </button>
+        <button class="disc-toggle mk-toggle active" data-disc="mk" onclick="toggleDisc('mk')" title="Marketing &amp; Growth">
+          <span class="disc-dot disc-dot-mk"></span><span class="disc-label">Marketing</span><span class="disc-code">(MK)</span>
+        </button>
+        <button class="disc-toggle cs-toggle active" data-disc="cs" onclick="toggleDisc('cs')" title="Content Strategy">
+          <span class="disc-dot disc-dot-cs"></span><span class="disc-label">Content</span><span class="disc-code">(CS)</span>
+        </button>
+        <div class="search-box nav-search-box">
+          <div class="nav-search-wrap">
+            <div class="nav-search-pills" id="navSearchPills"></div>
+            <input type="text" id="navSearchInput" placeholder="Search..." autocomplete="off"
+              oninput="topicNavSearch(this.value)"
+              onkeydown="handleNavSearchKey(event)"
+              onfocus="handleNavSearchFocus()"
+              onblur="handleNavSearchBlur()">
+            <button type="button" class="nav-search-clear" id="navSearchClear" onclick="clearNavSearch()" aria-label="Clear search">&times;</button>
+          </div>
+          <div class="search-dropdown" id="navSearchDropdown"></div>
+        </div>
+      </div>
+      <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle theme">&#9790;</button>
+      <button class="burger-btn" id="burgerBtn" onclick="openBurger()" aria-label="Menu">
+        <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="2" y1="4" x2="16" y2="4"/><line x1="2" y1="9" x2="16" y2="9"/><line x1="2" y1="14" x2="16" y2="14"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Burger Menu Overlay -->
+  <div class="burger-overlay" id="burgerOverlay" onclick="closeBurger(event)">
+    <div class="burger-panel" onclick="event.stopPropagation()">
+      <div class="burger-panel-header">
+        <h3>Menu</h3>
+        <button class="burger-close" onclick="closeBurger()" aria-label="Close">&times;</button>
+      </div>
+      <div class="burger-search">
+        <input type="text" id="burgerSearchInput" placeholder="Search topics, methods..." autocomplete="off" oninput="burgerSearch(this.value)">
+        <div class="burger-search-results" id="burgerSearchResults"></div>
+      </div>
+      <div class="burger-links">
+        <a href="../index.html">&#8592; Back to Library</a>
+        <a href="../design-system.html">Design System</a>
+        <a href="../request-topic.html">Suggest a topic or improvement</a>
+      </div>
+      <div class="burger-toc-section">
+        <p class="burger-toc-title">On this page</p>
+        <ul class="burger-toc-list">
+        <li><a href="#what-and-why" data-section="theory">What product discovery is and why it matters</a></li>
+        <li><a href="#discovery-methods" data-section="practical">Discovery methods</a></li>
+        <li><a href="#synthesis-and-output" data-section="practical">Synthesis and discovery outputs</a></li>
+        <li><a href="#ai-research" data-section="practical">AI in discovery research</a></li>
+        <li><a href="#templates-and-checklists" data-section="practical">Templates and checklists</a></li>
+        <li><a href="#real-world-examples" data-section="examples">Real-world examples</a></li>
+        <li><a href="#common-pitfalls" data-section="practical">Common pitfalls</a></li>
+        <li><a href="#when-to-use" data-section="practical">When to do discovery</a></li>
+        <li><a href="#connections">Connected topics in your library</a></li>
+        <li><a href="#deep-dive">Deep-dive appendix</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Topic Header -->
+  <header class="topic-header container">
+    <div class="breadcrumb">
+      <a href="../index.html">Library</a>
+      <span class="sep">&#8250;</span>
+      <span class="breadcrumb-disc breadcrumb-pm">Product Management</span>
+      <span class="sep">&#8250;</span>
+      <span>Tier 1 — Core Toolkit</span>
+      <span class="sep">&#8250;</span>
+      <span>Product Discovery &amp; Customer Research</span>
+    </div>
+    <div class="topic-meta">
+      <span class="tier-badge tier1">Tier 1</span>
+      <span style="font-size:14px;color:var(--ink-muted)">Topic PM.1.02</span>
+    </div>
+    <h1>Product Discovery &amp; Customer Research</h1>
+    <p class="topic-subtitle">Validate problems before building solutions. Customer interviews, opportunity assessment, assumption mapping, and the full discovery toolkit from a PM perspective.</p>
+    <div class="content-splits">
+      <span class="split-badge theory">25% Theory</span>
+      <span class="split-badge practical">50% Methods &amp; Templates</span>
+      <span class="split-badge examples">25% Examples</span>
+    </div>
+  </header>
+
+  <!-- Reading Progress Bar -->
+  <div class="reading-progress" id="readingProgress"></div>
+
+  <!-- Main Layout -->
+  <div class="container">
+    <div class="topic-layout">
+
+      <!-- Sidebar: Table of Contents -->
+      <aside class="topic-sidebar">
+        <nav class="toc">
+          <p class="sidebar-topic-title">Product Discovery &amp; Customer Research</p>
+          <p class="toc-title">On this page</p>
+          <ul class="toc-list">
+            <li><a href="#what-and-why" data-section="theory">What product discovery is and why it matters</a></li>
+            <li><a href="#discovery-methods" data-section="practical">Discovery methods</a></li>
+            <li><a href="#synthesis-and-output" data-section="practical">Synthesis and discovery outputs</a></li>
+            <li><a href="#ai-research" data-section="practical">AI in discovery research</a></li>
+            <li><a href="#templates-and-checklists" data-section="practical">Templates and checklists</a></li>
+            <li><a href="#real-world-examples" data-section="examples">Real-world examples</a></li>
+            <li><a href="#common-pitfalls" data-section="practical">Common pitfalls</a></li>
+            <li><a href="#when-to-use" data-section="practical">When to do discovery</a></li>
+            <li><a href="#connections">Connected topics in your library</a></li>
+            <li><a href="#deep-dive">Deep-dive appendix</a></li>
+          </ul>
+        </nav>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="topic-main topic-content">
+
+        <div class="section-marker" id="what-and-why">
+          <span class="split-badge theory">Theory</span>
+          <span class="marker-line"></span>
+        </div>
+
+        <section data-section="theory">
+  <h2>What product discovery is and why it matters</h2>
+
+<p>Product discovery is the process of deciding what to build before you build it. It's the work that separates PMs who ship things users want from PMs who ship things that seemed like good ideas at the time. Discovery answers four risks simultaneously: value risk (will customers buy or use it?), usability risk (can they figure it out?), feasibility risk (can we build it?), and business viability risk (does it work for our business?).</p>
+
+<p>The distinction between discovery and delivery is fundamental. Delivery is building the product — writing code, designing interfaces, shipping features. Discovery is determining whether the product should be built at all, and what form it should take. Most product teams spend 80%+ of their time on delivery and wonder why half their features go unused. The fix isn't better delivery — it's better discovery.</p>
+
+<p>Customer research is the engine of discovery. But PM-driven customer research has a different focus than UX research. A UX researcher asks: "How do users experience this workflow?" A PM asks: "Is this problem worth solving? Will users switch from their current solution? Will they pay?" Both use interviews, observation, and synthesis — but the questions, the analysis framework, and the outputs are different.</p>
+
+<div class="callout info">
+  <p class="callout-title">Why this matters for your projects</p>
+  <p>The cost of skipping discovery is staggering. Industry data consistently shows that 50–70% of product features are rarely or never used. Each unused feature represents engineering time, design time, testing, documentation, and ongoing maintenance — all wasted. Discovery doesn't eliminate all risk, but it systematically reduces the chance of building something nobody wants. A week of discovery can save months of wasted delivery.</p>
+</div>
+
+<h3 id="continuous-vs-project">Continuous discovery vs. project-based research</h3>
+
+<p>Traditional product research happens in projects: you spend 3 weeks doing research, synthesize findings, and then don't talk to customers again until the next research project 6 months later. The problem is that customer needs shift, competitive landscapes evolve, and your understanding decays.</p>
+
+<p>Continuous discovery (Teresa Torres) means talking to customers every week — not in big research projects but in regular, lightweight touchpoints. At minimum, one customer interview per week, every week. This cadence keeps your understanding fresh and prevents "research as an event" that's easy to skip under delivery pressure.</p>
+
+<p>The two approaches aren't mutually exclusive. Use continuous discovery for ongoing learning and assumption validation. Use project-based research for deep dives into specific opportunity areas, new markets, or major strategic questions.</p>
+
+</section>
+
+        <div class="section-marker" id="discovery-methods">
+          <span class="split-badge practical">Practical</span>
+          <span class="marker-line"></span>
+        </div>
+
+        <section data-section="practical">
+  <h2>Discovery methods</h2>
+
+<div class="method-card">
+  <h4>Customer Interview (PM Version) <span class="method-tag">Core Method</span></h4>
+  <p class="method-when">Use when: You need to understand whether a problem is real, how users currently solve it, and whether they'd switch to a new solution. This is different from a UX research interview, which focuses on experience and usability.</p>
+  <p>PM interviews focus on three areas that UX interviews typically don't: the switching moment (what made them seek a new solution), willingness to pay (how they value the solution), and the decision-making process (who else is involved, what's the timeline, what could kill the deal).</p>
+  <div class="process-steps">
+    <div class="process-step">
+      <div class="process-step-content">
+        <h4>Open with context, not your product</h4>
+        <p>"Tell me about the last time you had to [problem area]." Don't mention your product. Don't describe what you're building. Let them describe their world first. If you pitch first, every subsequent answer is colored by what you've told them.</p>
+      </div>
+    </div>
+    <div class="process-step">
+      <div class="process-step-content">
+        <h4>Find the switching moment</h4>
+        <p>"You mentioned you started using [current tool]. What was happening that made you look for something new?" The switching moment reveals the real trigger — not abstract dissatisfaction but a specific event that made the status quo intolerable. This is where product-market fit lives.</p>
+      </div>
+    </div>
+    <div class="process-step">
+      <div class="process-step-content">
+        <h4>Map the current workflow and workarounds</h4>
+        <p>"Walk me through exactly how you do this today, step by step." Document every tool, every handoff, every manual step. Workarounds are gold — they reveal unmet needs that users have already tried to solve. A spreadsheet that supplements a SaaS tool is a feature request in disguise.</p>
+      </div>
+    </div>
+    <div class="process-step">
+      <div class="process-step-content">
+        <h4>Test value, not opinions</h4>
+        <p>Don't ask "Would you use this?" (everyone says yes). Instead: "You mentioned you spend 3 hours a week on this. If a tool reduced that to 30 minutes, what would that be worth to your team?" Or: "You said you built a spreadsheet to track this. How long did that take? Would you have paid to skip building it?"</p>
+      </div>
+    </div>
+  </div>
+  <div class="callout warning">
+    <p class="callout-title">Common mistake</p>
+    <p>Asking "What features would you want?" This produces a wish list of solutions, not an understanding of problems. Users are experts on their problems; they're not experts on product design. Extract the problems, then design the solutions.</p>
+  </div>
+</div>
+
+<div class="method-card">
+  <h4>Assumption Mapping <span class="method-tag">Risk Reduction</span></h4>
+  <p class="method-when">Use when: You're about to commit resources to a new initiative and need to identify which assumptions carry the most risk. Do this before building anything.</p>
+  <p>Every product idea rests on assumptions — beliefs you hold that, if wrong, would invalidate the initiative. Assumption mapping makes these explicit so you can test the dangerous ones before investing.</p>
+  <div class="process-steps">
+    <div class="process-step">
+      <div class="process-step-content">
+        <h4>List all assumptions</h4>
+        <p>Brainstorm every belief the initiative depends on. "Users will understand the value proposition from the landing page." "Users will connect their data source within the trial period." "The API can handle 10K concurrent connections." Include value, usability, feasibility, and viability assumptions.</p>
+      </div>
+    </div>
+    <div class="process-step">
+      <div class="process-step-content">
+        <h4>Map on two axes: importance × evidence</h4>
+        <p>Plot each assumption on a 2×2. Y-axis: How critical is this? (If wrong, does the initiative fail?) X-axis: How much evidence do we have? Assumptions in the high-importance, low-evidence quadrant are your riskiest assumptions. Test these first.</p>
+      </div>
+    </div>
+    <div class="process-step">
+      <div class="process-step-content">
+        <h4>Design the cheapest test for each risky assumption</h4>
+        <p>Don't build the product to test an assumption. Use interviews, landing page tests, fake door experiments, Wizard-of-Oz prototypes, or competitive analysis. The goal is to reduce uncertainty at the lowest possible cost.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="method-card">
+  <h4>Opportunity Solution Tree <span class="method-tag">Discovery Framework</span></h4>
+  <p class="method-when">Use when: You have a clear outcome to achieve but aren't sure which opportunities to pursue or which solutions to build. Teresa Torres's framework for structured continuous discovery.</p>
+  <p>The tree has four levels: desired outcome (the metric you're trying to move) → opportunities (user needs, pain points, and desires discovered through research) → solutions (possible ways to address each opportunity) → experiments (tests to validate each solution).</p>
+  <div class="process-steps">
+    <div class="process-step">
+      <div class="process-step-content">
+        <h4>Start with the outcome</h4>
+        <p>A clear, measurable business or product outcome. "Increase trial-to-paid conversion from 8% to 14%." This prevents solutioning — you're working backward from what matters.</p>
+      </div>
+    </div>
+    <div class="process-step">
+      <div class="process-step-content">
+        <h4>Discover opportunities through research</h4>
+        <p>Interview users, analyze support tickets, review session recordings, and mine analytics to find opportunities — the unmet needs, pain points, and desires that, if addressed, would move the outcome. Each opportunity is a branch on the tree.</p>
+      </div>
+    </div>
+    <div class="process-step">
+      <div class="process-step-content">
+        <h4>Generate multiple solutions per opportunity</h4>
+        <p>For each opportunity, brainstorm at least three possible solutions. This prevents "first idea" bias and creates optionality. Some solutions will be small (copy change), others large (new feature). Compare them on impact and effort.</p>
+      </div>
+    </div>
+    <div class="process-step">
+      <div class="process-step-content">
+        <h4>Run experiments to validate</h4>
+        <p>For each promising solution, design the smallest possible experiment that tests whether it actually moves the outcome. A/B tests, prototype tests, fake door tests, concierge tests. Ship the ones that pass.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="method-card">
+  <h4>Problem Interview vs. Solution Interview <span class="method-tag">Interview Types</span></h4>
+  <p class="method-when">Use when: You need to decide whether to invest more in understanding the problem or start testing solutions.</p>
+  <p><strong>Problem interviews</strong> validate that the problem exists, is painful enough to solve, and affects enough people. You ask about the user's current situation, not about your product. Run these when you're exploring a new opportunity area.</p>
+  <p><strong>Solution interviews</strong> validate that your proposed solution addresses the problem effectively. You show a prototype, mockup, or concept and observe whether it resonates. Run these after you've confirmed the problem and have a specific solution hypothesis.</p>
+  <p>The mistake is jumping to solution interviews before problem interviews are done. You end up optimizing a solution to a problem that doesn't exist — or doesn't matter enough.</p>
+</div>
+
+<div class="method-card">
+  <h4>Competitive Discovery <span class="method-tag">Market Research</span></h4>
+  <p class="method-when">Use when: Entering a market with existing solutions, or when users frequently mention competitors during interviews.</p>
+  <p>Sign up for every competitor. Use them for real tasks. Read their reviews (G2, Capterra, Product Hunt). Join their community forums. Watch their demo videos. Don't just catalog features — understand the experience. Where do they delight? Where do they frustrate? Where do users build workarounds?</p>
+  <p>The most valuable competitive insight isn't "they have feature X and we don't" — it's "their users are frustrated by Y, and we could solve Y in a fundamentally different way." That's where strategic differentiation lives.</p>
+</div>
+
+</section>
+
+<section id="synthesis-and-output" data-section="practical">
+  <h2>Synthesis and discovery outputs</h2>
+
+<div class="method-card">
+  <h4>Research Synthesis (PM Version) <span class="method-tag">Core Method</span></h4>
+  <p class="method-when">Use when: You've completed a round of interviews or research and need to convert raw observations into actionable product decisions.</p>
+  <p>PM synthesis differs from UX synthesis in its outputs. UX synthesis produces personas, journey maps, and design principles. PM synthesis produces opportunity assessments, assumption validations, and go/no-go recommendations.</p>
+  <div class="process-steps">
+    <div class="process-step">
+      <div class="process-step-content">
+        <h4>Pattern extraction</h4>
+        <p>Review all interview notes and highlight recurring themes. Look for patterns that appeared in 3+ interviews — isolated observations from a single user are interesting but not actionable. Tag each pattern as a pain point, a need, a behavior, or a desire.</p>
+      </div>
+    </div>
+    <div class="process-step">
+      <div class="process-step-content">
+        <h4>Assumption validation check</h4>
+        <p>Compare your pre-research assumptions against what you learned. Which assumptions were confirmed? Which were invalidated? Which need more evidence? Update your assumption map.</p>
+      </div>
+    </div>
+    <div class="process-step">
+      <div class="process-step-content">
+        <h4>Opportunity ranking</h4>
+        <p>Rank discovered opportunities by frequency (how many users mentioned it), intensity (how much pain it causes), and strategic fit (does it align with our product strategy). The intersection of frequent, intense, and strategically aligned is where you should invest.</p>
+      </div>
+    </div>
+    <div class="process-step">
+      <div class="process-step-content">
+        <h4>One-pager output</h4>
+        <p>Summarize findings in a one-page document: the question you set out to answer, what you learned (3–5 key insights with evidence), what assumptions changed, and the recommended next step (build, iterate, or abandon). This is what you share with stakeholders — not the raw data.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+</section>
+
+<section id="ai-research" data-section="practical">
+  <h2>AI in discovery research</h2>
+
+  <div class="method-card">
+    <h4>AI-Moderated Research Evaluation <span class="method-tag">Technique</span></h4>
+    <p class="method-when">Use when: evaluating whether AI-moderated interviews or AI research synthesis tools are appropriate for your discovery questions.</p>
+    <p>AI tools can now conduct interviews, synthesize transcripts, and cluster qualitative data at scale. The PM must know when they help versus mislead. <strong>Where AI helps:</strong> Processing large volumes of support tickets or survey responses to spot patterns, generating initial interview question banks, summarizing long transcripts for faster team review, and running lightweight concept tests at scale. <strong>Where AI misleads:</strong> Semistructured discovery interviews where the most important findings come from adaptive follow-up questions the interviewer improvises, emotionally sensitive topics where rapport matters, and any context where reading body language and environmental cues changes interpretation. <strong>The decision rule:</strong> Use AI for breadth (processing volume) and humans for depth (understanding nuance). AI-moderated interviews work for structured, closed-ended validation; human-moderated interviews remain essential for open-ended discovery where you don't yet know what questions to ask.</p>
+  </div>
+</section>
+
+<section id="templates-and-checklists" data-section="practical">
+  <h2>Templates and checklists</h2>
+
+<div class="template-box">
+  <div class="template-header">
+    <span class="template-label">Checklist</span>
+    <span class="template-title">Discovery Sprint Readiness</span>
+  </div>
+  <ul class="checklist">
+    <li>Outcome defined — clear metric you're trying to move</li>
+    <li>Assumptions mapped — riskiest assumptions identified</li>
+    <li>Interview guide prepared — open-ended questions, no leading prompts</li>
+    <li>5–8 participants recruited matching target user profile</li>
+    <li>Current workflow documented — how users solve this problem today</li>
+    <li>Competitors evaluated — signed up, used for real tasks</li>
+    <li>Synthesis completed — patterns extracted, assumptions updated</li>
+    <li>Opportunities ranked by frequency, intensity, and strategic fit</li>
+    <li>Go/no-go recommendation written with evidence</li>
+    <li>Findings shared with stakeholders before solution design begins</li>
+  </ul>
+</div>
+
+<div class="template-box">
+  <div class="template-header">
+    <span class="template-label">Template</span>
+    <span class="template-title">Customer Interview Guide (PM)</span>
+  </div>
+  <div class="template-grid">
+    <div class="template-field">
+      <div class="template-field-label">Context questions (5 min)</div>
+      <div class="template-field-hint">"Tell me about your role." "Walk me through a typical week." "What tools do you use daily?"</div>
+    </div>
+    <div class="template-field">
+      <div class="template-field-label">Problem exploration (15 min)</div>
+      <div class="template-field-hint">"Tell me about the last time you had to [problem area]." "What was the hardest part?" "What happened next?"</div>
+    </div>
+    <div class="template-field">
+      <div class="template-field-label">Current solution (10 min)</div>
+      <div class="template-field-hint">"How do you handle this today?" "Walk me through the process step by step." "What do you wish was different?"</div>
+    </div>
+    <div class="template-field">
+      <div class="template-field-label">Switching trigger (5 min)</div>
+      <div class="template-field-hint">"Have you looked for alternatives? What prompted that?" "What would need to change for you to try something new?"</div>
+    </div>
+    <div class="template-field">
+      <div class="template-field-label">Value assessment (5 min)</div>
+      <div class="template-field-hint">"How much time/money does this cost you?" "If this was solved, what would you do with that time?"</div>
+    </div>
+  </div>
+</div>
+
+</section>
+
+        <div class="section-marker" id="real-world-examples">
+          <span class="split-badge examples">Examples</span>
+          <span class="marker-line"></span>
+        </div>
+
+        <section data-section="examples">
+  <h2>Real-world examples</h2>
+
+<div class="case-study">
+  <p class="case-label">Case study</p>
+  <h4>Intercom: Continuous discovery to find Jobs-to-be-Done</h4>
+  <p>Intercom's product team popularized the practice of interviewing customers who had recently signed up — within their first week. They weren't asking about features or satisfaction. They were asking: "What were you doing right before you signed up for Intercom? What was happening in your business that made you look for a solution?"</p>
+  <p>These "switching moment" interviews revealed that Intercom's users weren't hiring the product as a "live chat tool" (the category they thought they were in). They were hiring it to "connect with users at scale without losing the personal touch." This reframing shaped the product's evolution from chat widget to customer engagement platform.</p>
+</div>
+
+<div class="case-study">
+  <p class="case-label">Case study</p>
+  <h4>Figma: Discovery through competitive gaps</h4>
+  <p>Dylan Field didn't start Figma by asking designers what features they wanted. He started by observing what frustrated them about existing tools. The discovery insight wasn't about design features — it was about collaboration. Designers were exporting PNGs to share work, version-controlling files manually, and struggling with the handoff to developers. Sketch was a superior design tool, but it was single-player.</p>
+  <p>Figma's discovery process identified that the switching trigger wasn't "I want a better design tool" but "I'm tired of managing files and explaining my work through screenshots." This meant the product strategy wasn't "build a better Sketch" but "build design collaboration" — a fundamentally different product with different success metrics.</p>
+</div>
+
+<div class="case-study">
+  <p class="case-label">Case study</p>
+  <h4>Superhuman: The PMF survey as continuous discovery</h4>
+  <p>Rahul Vohra at Superhuman built an elegant discovery mechanism: asking every user "How would you feel if you could no longer use Superhuman?" with three options — very disappointed, somewhat disappointed, not disappointed. When 40%+ say "very disappointed," you have product-market fit (Sean Ellis's benchmark).</p>
+  <p>But the real discovery happened in the follow-up questions. Users who said "very disappointed" described why — those were the features to double down on. Users who said "somewhat disappointed" described what was missing — those were the features to build next. Users who said "not disappointed" described why — those were the user segments to deprioritize. One survey, three discovery insights, run continuously.</p>
+</div>
+
+</section>
+
+<section id="common-pitfalls" data-section="practical">
+  <h2>Common pitfalls</h2>
+
+<div class="pitfall">
+  <div class="pitfall-icon">!</div>
+  <div>
+    <h4>Discovery as validation theater</h4>
+    <p>Running interviews to confirm what you've already decided to build. If you've already written the spec and you're interviewing to "validate," you'll unconsciously hear what confirms your plan and dismiss what contradicts it. Discovery should genuinely influence what you build. If it never changes your mind, you're not doing discovery — you're doing documentation.</p>
+  </div>
+</div>
+
+<div class="pitfall">
+  <div class="pitfall-icon">!</div>
+  <div>
+    <h4>Interviewing the wrong people</h4>
+    <p>Talking only to your happiest power users tells you what they love — not what the market needs. Talk to recent churns, to people who evaluated and chose a competitor, to people in your target segment who've never heard of you. The most valuable discovery insights come from people at the edges of your user base, not the center.</p>
+  </div>
+</div>
+
+<div class="pitfall">
+  <div class="pitfall-icon">!</div>
+  <div>
+    <h4>Asking what people want instead of observing what they do</h4>
+    <p>Customers say they want faster horses. Observing them reveals they want to get places faster with less hassle. Stated preferences are unreliable. Observed behavior — what tools they use, what workarounds they've built, what they actually spend money on — is the ground truth.</p>
+  </div>
+</div>
+
+<div class="pitfall">
+  <div class="pitfall-icon">!</div>
+  <div>
+    <h4>Discovery without synthesis</h4>
+    <p>Talking to 15 customers and then not synthesizing means you have 15 individual stories but no patterns. The value of discovery is in the patterns — the recurring themes that indicate a real, widespread problem. Set aside time immediately after each interview round to extract and cluster patterns. Waiting kills the signal.</p>
+  </div>
+</div>
+
+</section>
+
+<section id="when-to-use" data-section="practical">
+  <h2>When to do discovery</h2>
+
+<div class="callout info">
+  <p class="callout-title">Decision guidance</p>
+  <p><strong>Do heavy discovery when:</strong> Entering a new market or user segment. Building a major new feature or product line. Your last three launches underperformed expectations. You're not sure whether the problem you're solving is the right one. The team disagrees about what to build next.</p>
+  <p><strong>Do lightweight discovery when:</strong> Iterating on an existing feature with clear usage data. You already have strong signal from support tickets, analytics, and recent research. The change is small and easily reversible (two-way door).</p>
+  <p><strong>Always do:</strong> At least one customer conversation per week (continuous discovery). Review support tickets and feature requests monthly. Competitive check-ins quarterly. These are baseline discovery activities, not optional extras.</p>
+</div>
+
+</section>
+
+<section id="connections">
+  <h2>Connected topics in your library</h2>
+
+<div class="cross-ref-grid">
+  <a href="#" class="cross-ref-card">
+    <span class="ref-number">PM.1.09</span>
+    <div class="ref-title">Problem Framing &amp; Opportunity Sizing</div>
+    <div class="ref-reason">Frame the problem before starting discovery</div>
+  </a>
+  <a href="#" class="cross-ref-card">
+    <span class="ref-number">PM.1.03</span>
+    <div class="ref-title">Roadmapping &amp; Prioritization</div>
+    <div class="ref-reason">Discovery findings feed prioritization decisions</div>
+  </a>
+  <a href="#" class="cross-ref-card">
+    <span class="ref-number">PM.2.01</span>
+    <div class="ref-title">Experimentation &amp; A/B Testing</div>
+    <div class="ref-reason">Test discovery hypotheses with experiments</div>
+  </a>
+  <a href="#" class="cross-ref-card cross-discipline">
+    <span class="ref-number">UX.1.02</span>
+    <div class="ref-title">User Research (UX)</div>
+    <div class="ref-reason">UX lens: research for design decisions, personas, synthesis for interfaces</div>
+  </a>
+</div>
+
+<div class="deep-dive-section" id="deep-dive">
+          <div class="deep-dive-header">
+            <span class="deep-dive-badge">Deep Dive</span>
+            <h2 style="margin:0; border:none; padding:0;">Appendix</h2>
+          </div>
+
+  <details class="expandable">
+    <summary><span class="chevron"><svg viewBox="0 0 14 14"><polyline points="4,2 10,7 4,12"/></svg></span> Building a continuous discovery practice</summary>
+    <div class="expand-content topic-content">
+      <h4>The weekly interview habit</h4>
+      <p>Block 2 hours per week for customer conversations. Recruit through in-app prompts, customer success introductions, or a standing research panel. Keep a running interview log — date, participant, key insights, assumption updates. After 8 weeks, you'll have talked to 8+ customers and your assumption map will be dramatically more informed than when you started.</p>
+
+      <h4>Automating recruitment</h4>
+      <p>Set up an in-app prompt asking: "Would you be willing to chat with our product team for 20 minutes? We'd love your input." Offer a small incentive ($25 gift card, early access to features). Target the prompt to specific user segments based on your current discovery focus. Rotate segments quarterly.</p>
+
+      <h4>Making discovery visible to the team</h4>
+      <p>Share a weekly "discovery digest" — 3 bullet points from this week's conversations. Post customer quotes in Slack. Invite engineers and designers to join interviews (they often hear things PMs miss). The goal is making customer reality a constant presence in the team's decision-making, not a periodic report.</p>
+    </div>
+  </details>
+
+  <details class="expandable">
+    <summary><span class="chevron"><svg viewBox="0 0 14 14"><polyline points="4,2 10,7 4,12"/></svg></span> Further reading</summary>
+    <div class="expand-content topic-content">
+      <h4>Essential reading</h4>
+      <p><strong>"Continuous Discovery Habits" by Teresa Torres</strong> — The definitive guide to building a weekly discovery practice. Introduces the Opportunity Solution Tree and makes a compelling case for sustained, lightweight discovery over big-bang research projects.</p>
+      <p><strong>"The Mom Test" by Rob Fitzpatrick</strong> — How to ask questions that reveal truth instead of producing polite lies. Essential for anyone conducting customer interviews.</p>
+      <p><strong>"Inspired" by Marty Cagan</strong> — Chapters on discovery techniques, including the distinction between problem discovery and solution discovery.</p>
+      <p><strong>"Competing Against Luck" by Clayton Christensen</strong> — The Jobs-to-be-Done framework for understanding why customers "hire" and "fire" products.</p>
+    </div>
+  </details>
+
+</div>
+</section>
+
+<div class="topic-nav">
+  <a href="problem-framing.html" class="topic-nav-link prev">
+    <div class="nav-direction">Previous topic</div>
+    <div class="nav-title">&#8249; Problem Framing &amp; Opportunity Sizing</div>
+  </a>
+  <a href="roadmapping.html" class="topic-nav-link next">
+    <div class="nav-direction">Next topic</div>
+    <div class="nav-title">Roadmapping &amp; Prioritization &#8250;</div>
+  </a>
+</div>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer container">
+    <div class="footer-inner">
+      <p>Noir Book — Built for the work, not the shelf.</p>
+      <div class="footer-links">
+        <a href="../design-system.html">Design System</a>
+        <a href="../library-manifest.json">Manifest</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to Top -->
+  <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">&#8593;</button>
+
+  <!-- Floating Mobile TOC -->
+  <button class="mobile-toc-btn" id="mobileTocBtn" aria-label="Open table of contents">&#9776; Contents</button>
+  <div class="mobile-toc-overlay" id="mobileTocOverlay">
+    <div class="mobile-toc-panel">
+      <div class="mobile-toc-panel-header">
+        <h3>On this page</h3>
+        <button class="mobile-toc-close" id="mobileTocClose" aria-label="Close">&times;</button>
+      </div>
+      <ul class="mobile-toc-list">
+        <li><a href="#what-and-why" data-section="theory">What product discovery is and why it matters</a></li>
+        <li><a href="#discovery-methods" data-section="practical">Discovery methods</a></li>
+        <li><a href="#synthesis-and-output" data-section="practical">Synthesis and discovery outputs</a></li>
+        <li><a href="#ai-research" data-section="practical">AI in discovery research</a></li>
+        <li><a href="#templates-and-checklists" data-section="practical">Templates and checklists</a></li>
+        <li><a href="#real-world-examples" data-section="examples">Real-world examples</a></li>
+        <li><a href="#common-pitfalls" data-section="practical">Common pitfalls</a></li>
+        <li><a href="#when-to-use" data-section="practical">When to do discovery</a></li>
+        <li><a href="#connections">Connected topics in your library</a></li>
+        <li><a href="#deep-dive">Deep-dive appendix</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    // Scrollspy: highlight active TOC item
+    const tocLinks = document.querySelectorAll('.toc-list a');
+    const sections = [];
+    tocLinks.forEach(link => {
+      const href = link.getAttribute('href');
+      if (!href || !href.startsWith('#')) return;
+      const el = document.getElementById(href.slice(1));
+      if (el) sections.push({ el, link });
+    });
+
+    // Reading progress bar
+    const progressBar = document.getElementById('readingProgress');
+    const backToTop = document.getElementById('backToTop');
+
+    function onScroll() {
+      let current = sections[0];
+      for (const s of sections) {
+        if (s.el.getBoundingClientRect().top <= 120) current = s;
+      }
+      tocLinks.forEach(l => l.classList.remove('active'));
+      if (current) current.link.classList.add('active');
+
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrolled = window.scrollY;
+      const progress = docHeight > 0 ? (scrolled / docHeight) * 100 : 0;
+      if (progressBar) progressBar.style.width = progress + '%';
+      if (backToTop) backToTop.classList.toggle('visible', scrolled > 400);
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    // Split badges: click to scroll to section
+    document.querySelectorAll('.content-splits .split-badge').forEach(function(badge) {
+      badge.addEventListener('click', function() {
+        var type = badge.classList.contains('theory') ? 'theory' : badge.classList.contains('practical') ? 'practical' : 'examples';
+        var target = document.querySelector('section[data-section="' + type + '"]');
+        if (target) {
+          var marker = target.previousElementSibling;
+          (marker && marker.classList.contains('section-marker') ? marker : target).scrollIntoView({behavior:'smooth'});
+        }
+      });
+    });
+  </script>
+
+  <script src="../js/checklist.js"></script>
+  <script src="../js/mobile-toc.js"></script>
+  <script src="../js/search.js"></script>
+  <script>
+    function openBurger(){document.getElementById('burgerOverlay').classList.add('open');document.body.style.overflow='hidden'}
+    function closeBurger(e){if(e&&e.target&&e.target!==document.getElementById('burgerOverlay'))return;document.getElementById('burgerOverlay').classList.remove('open');document.body.style.overflow=''}
+    function burgerSearch(q){
+      var r=document.getElementById('burgerSearchResults');
+      if(!q||q.length<2){r.innerHTML='';return}
+      var ql=q.toLowerCase(),matches=[];
+      if(typeof SEARCH_INDEX!=='undefined'){
+        SEARCH_INDEX.forEach(function(t){
+          var hit=t.topic.toLowerCase().indexOf(ql)>-1;
+          if(!hit)t.sections.forEach(function(s){if((s.title+' '+s.keywords).toLowerCase().indexOf(ql)>-1)hit=true});
+          if(hit)matches.push(t);
+        });
+      }
+      if(!matches.length){r.innerHTML='<p style="padding:8px 0;font-size:13px;color:var(--ink-muted)">No results</p>';return}
+      r.innerHTML=matches.slice(0,8).map(function(m){return '<a href="../'+m.url+'">'+m.topic+'<span class="bsr-disc">'+m.discipline+'</span></a>'}).join('');
+    }
+    document.addEventListener('keydown',function(e){if(e.key==='Escape'){closeBurger();var dd=document.getElementById('searchDropdown');if(dd)dd.classList.remove('visible');}});
+    // Close burger when clicking a TOC link
+    document.querySelectorAll('.burger-toc-list a').forEach(function(a){a.addEventListener('click',function(){closeBurger()})});
+    // Search typeahead
+    function topicSearch(q){
+      var dd=document.getElementById('searchDropdown');
+      if(!q||q.length<2||typeof SEARCH_INDEX==='undefined'){if(dd)dd.classList.remove('visible');return}
+      var ql=q.toLowerCase(),grouped={};
+      SEARCH_INDEX.forEach(function(t){
+        var hit=t.topic.toLowerCase().indexOf(ql)>-1,sHits=[],mHits=[];
+        t.sections.forEach(function(s){if((s.title+' '+s.keywords).toLowerCase().indexOf(ql)>-1)sHits.push(s)});
+        (t.methods||[]).forEach(function(m){if((m.name+' '+(m.keywords||'')).toLowerCase().indexOf(ql)>-1)mHits.push(m)});
+        if(!hit&&!sHits.length&&!mHits.length&&ql.length>=3&&typeof levenshtein==='function'){
+          var words=t.topic.toLowerCase().split(/ +/);
+          for(var i=0;i<words.length;i++){if(levenshtein(ql,words[i].substring(0,ql.length+1))<=1){hit=true;break}}
+        }
+        if(hit||sHits.length||mHits.length)grouped[t.topic]={url:'../'+t.url,disc:t.discipline||'',sections:sHits,methods:mHits,topicHit:hit};
+      });
+      var keys=Object.keys(grouped);
+      if(!keys.length){dd.innerHTML='<div class="search-empty">No results</div>';dd.classList.add('visible');return}
+      var html='';
+      keys.slice(0,8).forEach(function(topic){
+        var g=grouped[topic];
+        html+='<div class="search-group"><div class="search-group-title">'+topic+'</div>';
+        if(g.topicHit)html+='<a class="search-result" href="'+g.url+'"><span class="search-result-title">'+topic+'</span><span class="search-result-type practical">'+g.disc+'</span></a>';
+        g.sections.forEach(function(s){html+='<a class="search-result" href="'+g.url+'#'+s.id+'"><span class="search-result-title">'+s.title+'</span><span class="search-result-type '+s.type+'">'+s.type+'</span></a>'});
+        g.methods.slice(0,3).forEach(function(m){html+='<a class="search-result" href="'+g.url+'#'+m.section+'"><span class="search-result-title">'+m.name+'</span><span class="search-result-type practical">method</span></a>'});
+        html+='</div>';
+      });
+      dd.innerHTML=html;dd.classList.add('visible');
+    }
+    document.addEventListener('click',function(e){if(!e.target.closest('.search-box')){var dd=document.getElementById('searchDropdown');if(dd)dd.classList.remove('visible')}});
+  </script>
+
+</body>
+</html>

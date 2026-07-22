@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Design Systems — Noir Book</title>
+  <link rel="stylesheet" href="../css/shared.css">
+  <link rel="stylesheet" href="../css/topic.css">
+  <script src="../js/theme.js"></script>
+  <script src="../js/topic-nav.js"></script>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="site-nav subpage-nav" data-discipline="ux">
+    <div class="nav-inner">
+      <a href="../index.html" class="site-logo">
+        <span class="logo-mark">UX</span>
+        <span class="nav-title">Noir Book</span>
+      </a>
+      <a href="../index.html" class="nav-back-link">&#8592; Library</a>
+      <div class="nav-filters">
+        <button class="disc-toggle ux-toggle active" data-disc="ux" onclick="toggleDisc('ux')" title="UX Design">
+          <span class="disc-dot disc-dot-ux"></span><span class="disc-label">UX Design</span><span class="disc-code">(UX)</span>
+        </button>
+        <button class="disc-toggle pm-toggle active" data-disc="pm" onclick="toggleDisc('pm')" title="Product Management">
+          <span class="disc-dot disc-dot-pm"></span><span class="disc-label">Product</span><span class="disc-code">(PM)</span>
+        </button>
+        <button class="disc-toggle mk-toggle active" data-disc="mk" onclick="toggleDisc('mk')" title="Marketing &amp; Growth">
+          <span class="disc-dot disc-dot-mk"></span><span class="disc-label">Marketing</span><span class="disc-code">(MK)</span>
+        </button>
+        <button class="disc-toggle cs-toggle active" data-disc="cs" onclick="toggleDisc('cs')" title="Content Strategy">
+          <span class="disc-dot disc-dot-cs"></span><span class="disc-label">Content</span><span class="disc-code">(CS)</span>
+        </button>
+        <div class="search-box nav-search-box">
+          <div class="nav-search-wrap">
+            <div class="nav-search-pills" id="navSearchPills"></div>
+            <input type="text" id="navSearchInput" placeholder="Search..." autocomplete="off"
+              oninput="topicNavSearch(this.value)"
+              onkeydown="handleNavSearchKey(event)"
+              onfocus="handleNavSearchFocus()"
+              onblur="handleNavSearchBlur()">
+            <button type="button" class="nav-search-clear" id="navSearchClear" onclick="clearNavSearch()" aria-label="Clear search">&times;</button>
+          </div>
+          <div class="search-dropdown" id="navSearchDropdown"></div>
+        </div>
+      </div>
+      <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle theme">&#9790;</button>
+      <button class="burger-btn" id="burgerBtn" onclick="openBurger()" aria-label="Menu">
+        <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="2" y1="4" x2="16" y2="4"/><line x1="2" y1="9" x2="16" y2="9"/><line x1="2" y1="14" x2="16" y2="14"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Burger Menu Overlay -->
+  <div class="burger-overlay" id="burgerOverlay" onclick="closeBurger(event)">
+    <div class="burger-panel" onclick="event.stopPropagation()">
+      <div class="burger-panel-header">
+        <h3>Menu</h3>
+        <button class="burger-close" onclick="closeBurger()" aria-label="Close">&times;</button>
+      </div>
+      <div class="burger-search">
+        <input type="text" id="burgerSearchInput" placeholder="Search topics, methods..." autocomplete="off" oninput="burgerSearch(this.value)">
+        <div class="burger-search-results" id="burgerSearchResults"></div>
+      </div>
+      <div class="burger-links">
+        <a href="../index.html">&#8592; Back to Library</a>
+        <a href="../design-system.html">Design System</a>
+        <a href="../request-topic.html">Suggest a topic or improvement</a>
+      </div>
+      <div class="burger-toc-section">
+        <p class="burger-toc-title">On this page</p>
+        <ul class="burger-toc-list">
+        <li><a href="#what-and-why" data-section="theory">What a design system is and isn't</a></li>
+        <li><a href="#anatomy" data-section="theory">Anatomy of a design system</a></li>
+        <li><a href="#tokens" data-section="practical">Design tokens</a></li>
+        <li><a href="#components" data-section="practical">Component architecture</a></li>
+        <li><a href="#documentation" data-section="practical">Documentation that gets used</a></li>
+        <li><a href="#versioning" data-section="practical">Versioning and change management</a></li>
+        <li><a href="#governance" data-section="practical">Governance models</a></li>
+        <li><a href="#adoption" data-section="practical">Adoption and measuring impact</a></li>
+        <li><a href="#design-tokens" data-section="practical">Design token architecture</a></li>
+        <li><a href="#templates" data-section="practical">Templates and checklists</a></li>
+        <li><a href="#real-world-examples" data-section="examples">Real-world examples</a></li>
+        <li><a href="#pitfalls" data-section="practical">Common pitfalls</a></li>
+        <li><a href="#connections">Connected topics in your library</a></li>
+        <li><a href="#deep-dive">Deep-dive appendix</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Topic Header -->
+  <header class="topic-header container">
+    <div class="breadcrumb">
+      <a href="../index.html">Library</a>
+      <span class="sep">&#8250;</span>
+      <span class="breadcrumb-disc breadcrumb-ux">UX Design</span>
+      <span class="sep">&#8250;</span>
+      <span>Tier 2 — Specialized</span>
+      <span class="sep">&#8250;</span>
+      <span>Design Systems</span>
+    </div>
+    <div class="topic-meta">
+      <span class="tier-badge tier2">Tier 2</span>
+      <span style="font-size:14px;color:var(--ink-muted)">Topic UX.2.11</span>
+    </div>
+    <h1>Design Systems</h1>
+    <p class="topic-subtitle">Component libraries, design tokens, documentation standards, versioning, and governing design at scale across teams and products.</p>
+    <div class="content-splits">
+      <span class="split-badge theory">25% Theory</span>
+      <span class="split-badge practical">50% Methods &amp; Templates</span>
+      <span class="split-badge examples">25% Examples</span>
+    </div>
+  </header>
+
+  <!-- Reading Progress Bar -->
+  <div class="reading-progress" id="readingProgress"></div>
+
+  <!-- Main Layout -->
+  <div class="container">
+    <div class="topic-layout">
+
+      <!-- Sidebar: Table of Contents -->
+      <aside class="topic-sidebar">
+        <nav class="toc">
+          <p class="sidebar-topic-title">Design Systems</p>
+          <p class="toc-title">On this page</p>
+          <ul class="toc-list">
+            <li><a href="#what-and-why" data-section="theory">What a design system is and isn't</a></li>
+            <li><a href="#anatomy" data-section="theory">Anatomy of a design system</a></li>
+            <li><a href="#tokens" data-section="practical">Design tokens</a></li>
+            <li><a href="#components" data-section="practical">Component architecture</a></li>
+            <li><a href="#documentation" data-section="practical">Documentation that gets used</a></li>
+            <li><a href="#versioning" data-section="practical">Versioning and change management</a></li>
+            <li><a href="#governance" data-section="practical">Governance models</a></li>
+            <li><a href="#adoption" data-section="practical">Adoption and measuring impact</a></li>
+            <li><a href="#design-tokens" data-section="practical">Design token architecture</a></li>
+            <li><a href="#templates" data-section="practical">Templates and checklists</a></li>
+            <li><a href="#real-world-examples" data-section="examples">Real-world examples</a></li>
+            <li><a href="#pitfalls" data-section="practical">Common pitfalls</a></li>
+            <li><a href="#connections">Connected topics in your library</a></li>
+            <li><a href="#deep-dive">Deep-dive appendix</a></li>
+          </ul>
+        </nav>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="topic-main topic-content">
+
+<!-- ============================================ -->
+
+<!-- ============================================ -->
+
+        <div class="section-marker" id="what-and-why">
+          <span class="split-badge theory">Theory</span>
+          <span class="marker-line"></span>
+        </div>
+
+        <section data-section="theory">
+  <h2>What a design system is and isn't</h2>
+
+  <p>A design system is the single source of truth for a product's design — a collection of reusable components, design tokens, patterns, and guidelines that teams use to build consistent experiences at scale. It's not a style guide (which documents visual identity), not a component library (which is just the building blocks), and not a pattern library (which documents solutions to common problems). A design system includes all three, plus the governance, documentation, and tooling that make them usable across teams.</p>
+
+  <p>The purpose is consistency and velocity. Without a design system, every designer and developer makes independent decisions about button sizes, spacing values, color usage, and interaction patterns. The result is a product that looks and feels slightly different on every screen — "almost consistent," which is worse than intentionally different. A design system eliminates these micro-decisions by providing tested, documented, accessible components. Teams ship faster because they're assembling from a library, not designing from scratch. The system compounds: every component built once is reused hundreds of times.</p>
+
+  <div class="callout info">
+    <p class="callout-title">When you don't need one (yet)</p>
+    <p>A design system is overhead. For a solo designer building one product, a simple style guide and a well-organized Figma file is sufficient. Design systems become valuable when: multiple designers work on the same product, a product spans multiple platforms (web, iOS, Android), multiple products share a brand identity, or hand-off friction between design and engineering is a bottleneck. If you're shipping faster without a system than you would with one, you don't need one yet.</p>
+  </div>
+</section>
+
+<section id="anatomy" data-section="theory">
+  <h2>Anatomy of a design system</h2>
+
+  <p>A design system has layers, from abstract to concrete. <strong>Design principles</strong> guide decisions when the system doesn't have a specific rule ("clarity over cleverness," "progressive disclosure"). <strong>Design tokens</strong> are the atomic values — colors, spacing, typography, shadows, motion curves — that define the visual language. <strong>Components</strong> are the reusable UI building blocks — buttons, inputs, cards, modals, tooltips. <strong>Patterns</strong> are solutions to common design problems using components — a search-and-filter pattern, an onboarding flow pattern, a settings page pattern. <strong>Guidelines</strong> document when and how to use each element — the "why" behind the "what."</p>
+
+  <div class="method-card">
+    <h4>Atomic Design (Frost) <span class="method-tag">Framework</span></h4>
+    <p class="method-when">Use when: structuring your component hierarchy from smallest to largest.</p>
+    <p>Brad Frost's Atomic Design provides a mental model for organizing components. <strong>Atoms:</strong> The smallest indivisible elements — buttons, labels, input fields, icons. <strong>Molecules:</strong> Simple groups of atoms that function together — a search field (input + button), a form field (label + input + help text). <strong>Organisms:</strong> Complex, distinct sections composed of molecules — a navigation header, a product card, a comment thread. <strong>Templates:</strong> Page-level layouts that arrange organisms — the structure of a settings page, a dashboard layout. <strong>Pages:</strong> Specific instances of templates with real content. The hierarchy helps teams think in layers: atoms are designed once and used everywhere; organisms are where most customization happens.</p>
+  </div>
+</section>
+
+<!-- ============================================ -->
+
+<!-- ============================================ -->
+
+        <div class="section-marker" id="tokens">
+          <span class="split-badge practical">Practical</span>
+          <span class="marker-line"></span>
+        </div>
+
+        <section data-section="practical">
+  <h2>Design tokens</h2>
+
+  <div class="method-card">
+    <h4>Token Architecture <span class="method-tag">Core Method</span></h4>
+    <p class="method-when">Use when: defining the foundational values your system is built on.</p>
+    <p>Design tokens are named values that store design decisions. Instead of hardcoding #1A73E8 in fifty places, you define --color-primary: #1A73E8 once, and reference the token everywhere. When the brand color changes, you change one value. Tokens fall into categories: <strong>Color</strong> (brand, semantic, surface, text, border), <strong>Typography</strong> (font family, size scale, weight, line height, letter spacing), <strong>Spacing</strong> (padding/margin scale, typically 4px or 8px base), <strong>Sizing</strong> (icon sizes, touch targets, container widths), <strong>Shadow</strong> (elevation levels), <strong>Motion</strong> (duration, easing curves), <strong>Border</strong> (width, radius). Good token systems use semantic naming: --color-error rather than --color-red, --spacing-comfortable rather than --spacing-16.</p>
+  </div>
+
+  <div class="method-card">
+    <h4>Token Naming Convention <span class="method-tag">Technique</span></h4>
+    <p class="method-when">Use when: establishing a naming system that scales without confusion.</p>
+    <p>A three-tier naming convention prevents conflicts as your system grows. <strong>Global tokens</strong> define raw values: --blue-500: #1A73E8. <strong>Semantic tokens</strong> assign meaning: --color-action: var(--blue-500). <strong>Component tokens</strong> scope to context: --button-primary-bg: var(--color-action). This layering means changing "our primary action color is blue" requires changing one semantic token, not every component token. The naming pattern: category-property-variant-state (e.g., color-text-secondary, spacing-inline-sm, shadow-elevation-high).</p>
+  </div>
+
+  <div class="callout tip">
+    <p class="callout-title">Start with what you have</p>
+    <p>Don't try to define tokens in the abstract. Audit your existing product's CSS: collect every color value, spacing value, font size, and shadow. You'll find dozens of near-duplicates (14px and 15px, #333 and #2D2D2D). Rationalize these into a coherent scale. A real audit of a real product is worth more than a theoretically perfect token set designed in isolation.</p>
+  </div>
+</section>
+
+<section id="components" data-section="practical">
+  <h2>Component architecture</h2>
+
+  <div class="method-card">
+    <h4>Component Inventory <span class="method-tag">Core Method</span></h4>
+    <p class="method-when">Use when: starting a design system by cataloging what already exists.</p>
+    <p>Before building new components, inventory what exists. Screenshot every unique button, form field, card, modal, and navigation element across your product. Group them by type and identify inconsistencies: how many visually different buttons exist? How many variations of card layouts? This inventory reveals the scope of the problem (often 30+ button variants when 5 would suffice) and provides the basis for consolidation. Use tools like CSS Stats to audit the codebase, and compare with a visual audit of actual screens to catch inconsistencies that code analysis misses.</p>
+  </div>
+
+  <div class="method-card">
+    <h4>Component API Design <span class="method-tag">Technique</span></h4>
+    <p class="method-when">Use when: defining how components are configured and composed.</p>
+    <p>Every component needs a clear API — the props, variants, and slots that determine how it's used. <strong>Props:</strong> What can be configured? A Button component might accept: variant (primary, secondary, ghost), size (sm, md, lg), disabled (boolean), icon (optional). <strong>Composition:</strong> How does it combine with other components? A Card component might accept any child content, or it might have named slots (header, body, footer). <strong>States:</strong> What states does it support? Default, hover, focus, active, disabled, loading, error. Document all states — missing state designs are the most common cause of implementation inconsistency.</p>
+  </div>
+</section>
+
+<section id="documentation" data-section="practical">
+  <h2>Documentation that gets used</h2>
+
+  <div class="method-card">
+    <h4>Component Documentation Template <span class="method-tag">Core Method</span></h4>
+    <p class="method-when">Use when: documenting any design system component.</p>
+    <p>Every component page should include: <strong>What it is:</strong> A one-sentence description. <strong>When to use it:</strong> Common scenarios where this component is appropriate. <strong>When NOT to use it:</strong> Scenarios where a different component is better (often more valuable than "when to use"). <strong>Anatomy:</strong> A labeled diagram of the component's parts. <strong>Variants:</strong> All available variants with visual examples. <strong>States:</strong> All interactive states (default, hover, focus, disabled, loading, error). <strong>Behavior:</strong> How it responds to interaction, including responsive behavior. <strong>Accessibility:</strong> ARIA roles, keyboard interaction, screen reader behavior. <strong>Do/Don't:</strong> Visual examples of correct and incorrect usage. <strong>Code:</strong> Copy-pasteable implementation snippets.</p>
+  </div>
+
+  <div class="callout warning">
+    <p class="callout-title">The documentation gap</p>
+    <p>The most common design system failure is documentation that's either missing or outdated. A component without documentation will be used incorrectly or not used at all. A component with outdated documentation is worse — teams follow wrong guidance and create inconsistencies while believing they're using the system correctly. Treat documentation as part of the component — a component isn't "done" until it's documented, and updating the component means updating the docs in the same commit.</p>
+  </div>
+</section>
+
+<section id="versioning" data-section="practical">
+  <h2>Versioning and change management</h2>
+
+  <div class="method-card">
+    <h4>Semantic Versioning for Design <span class="method-tag">Technique</span></h4>
+    <p class="method-when">Use when: managing how changes to the design system are communicated and adopted.</p>
+    <p>Apply semantic versioning (semver) principles to your design system. <strong>Patch</strong> (1.0.x): Bug fixes, small visual tweaks, documentation updates. No action needed by consumers. <strong>Minor</strong> (1.x.0): New components, new variants, non-breaking additions. Consumers can adopt at their convenience. <strong>Major</strong> (x.0.0): Breaking changes — renamed props, removed components, changed behavior. Requires migration effort from consumers. Communicate changes through a changelog, and provide migration guides for major versions. Teams using the system need to trust that updates won't break their product without warning.</p>
+  </div>
+</section>
+
+<section id="governance" data-section="practical">
+  <h2>Governance models</h2>
+
+  <div class="method-card">
+    <h4>Governance Models <span class="method-tag">Framework</span></h4>
+    <p class="method-when">Use when: deciding who builds, maintains, and evolves the design system.</p>
+    <p>Three common models: <strong>Centralized:</strong> A dedicated design system team builds and maintains everything. Products consume but don't contribute. Best for: large organizations with many product teams. Risk: bottleneck — the system team can't keep pace with product team needs. <strong>Federated:</strong> Representatives from each product team contribute to the system. No dedicated team. Best for: smaller organizations with collaborative culture. Risk: inconsistent quality and nobody "owns" it. <strong>Hybrid:</strong> A small core team sets standards and reviews contributions; product teams contribute components. Best for: most organizations. The core team maintains tokens, core components, and documentation standards; product teams contribute domain-specific patterns.</p>
+  </div>
+
+  <div class="method-card">
+    <h4>Contribution Process <span class="method-tag">Technique</span></h4>
+    <p class="method-when">Use when: product teams need components that don't exist in the system yet.</p>
+    <p>A clear contribution process prevents both bottlenecks and chaos.</p>
+<ul>
+  <li><strong>Step 1: Propose</strong> — the team describes the component they need, why existing components don't suffice, and whether it's product-specific or broadly useful.</li>
+  <li><strong>Step 2: Design review</strong> — the system team evaluates the proposal against existing patterns, accessibility requirements, and naming conventions.</li>
+  <li><strong>Step 3: Build</strong> — the contributing team builds the component following system standards.</li>
+  <li><strong>Step 4: Quality gate</strong> — the system team reviews implementation, documentation, accessibility, and test coverage.</li>
+  <li><strong>Step 5: Publish</strong> — the component is added to the system with full documentation. This process takes time — communicate realistic timelines and provide escape hatches for urgent needs.</li>
+</ul>
+  </div>
+</section>
+
+<section id="adoption" data-section="practical">
+  <h2>Adoption and measuring impact</h2>
+
+  <div class="method-card">
+    <h4>Adoption Tracking <span class="method-tag">Technique</span></h4>
+    <p class="method-when">Use when: measuring whether the design system is actually being used.</p>
+    <p>A design system's value is proportional to its adoption. Track:</p>
+<ul>
+  <li><strong>Component coverage</strong> — what percentage of product UI uses system components vs. custom implementations?</li>
+  <li><strong>Token compliance</strong> — are products using system tokens or hardcoding values?</li>
+  <li><strong>Version currency</strong> — are teams on the latest version or lagging behind?</li>
+  <li><strong>Contribution velocity</strong> — are teams contributing back to the system?</li>
+  <li><strong>Design-to-code fidelity</strong> — do implemented screens match the design system Figma library? These metrics reveal whether the system is driving consistency (the goal) or sitting unused (expensive shelf-ware).</li>
+</ul>
+  </div>
+
+  <div class="callout tip">
+    <p class="callout-title">Sell value, not compliance</p>
+    <p>Teams adopt a design system because it makes their work easier and faster, not because they're told to. If adoption is low, the system isn't solving real problems for its consumers. Talk to product teams: what components do they need? What's missing? What's too rigid? A design system team that listens to its users (the product teams) builds adoption naturally. A team that mandates compliance builds resentment.</p>
+  </div>
+</section>
+
+<section id="design-tokens" data-section="practical">
+  <h2>Design token architecture</h2>
+
+  <div class="method-card">
+    <h4>Design Token Architecture <span class="method-tag">Core Method</span></h4>
+    <p class="method-when">Use when: building or scaling a design system that needs to bridge design tools and production code, or when supporting multiple platforms and themes.</p>
+    <p>Design tokens are the atomic values of a design system — colors, spacing, typography, shadows, borders — stored as platform-agnostic data rather than hardcoded CSS values. A robust token architecture has three layers. <strong>Global tokens</strong> are the raw values: color-blue-500: #2563EB, space-4: 16px. These are the palette — not meant for direct use in components. <strong>Semantic tokens</strong> map global tokens to meaning: color-action-primary: color-blue-500, space-section-gap: space-8. These express intent and enable theming — swap the mapping for dark mode or a sub-brand. <strong>Component tokens</strong> map semantic tokens to specific component properties: button-primary-bg: color-action-primary, card-padding: space-section-gap. These enable component-level overrides without breaking the system. The design-to-code bridge connects token definitions in design tools (Figma variables, Tokens Studio) to production code through automated pipelines. Changes flow from design → token definition file (JSON/YAML) → build tool (Style Dictionary, Theo) → platform outputs (CSS custom properties, iOS/Android constants, React theme objects). This automation eliminates the manual translation step where design-engineering drift historically occurs.</p>
+  </div>
+
+  <div class="callout info">
+    <p class="callout-title">Content in design systems</p>
+    <p>Design systems typically govern visual components and interaction patterns — but content patterns (error messages, empty states, confirmation dialogs, naming conventions) are equally important for consistency. Integrating content into the design system means adding voice and tone tokens, content pattern documentation alongside component documentation, and naming convention guidelines that writers and designers both reference. For the full treatment of content integration into design systems, see <strong>CS.2.07 Content &amp; Design Systems</strong>.</p>
+  </div>
+</section>
+
+<section id="templates" data-section="practical">
+  <h2>Templates and checklists</h2>
+
+  <div class="template-box">
+    <div class="template-header">
+      <span class="template-label">Checklist</span>
+      <span class="template-title">Design System Health Check</span>
+    </div>
+    <ul class="checklist">
+      <li>Design tokens are defined for color, typography, spacing, shadow, and motion</li>
+      <li>Token naming follows a consistent semantic convention</li>
+      <li>Core components (button, input, card, modal, toast) are documented with all states</li>
+      <li>Each component has "when to use" and "when NOT to use" guidance</li>
+      <li>Accessibility requirements (ARIA, keyboard, contrast) are documented per component</li>
+      <li>A contribution process exists and is documented</li>
+      <li>Versioning follows semver with a maintained changelog</li>
+      <li>Figma library and code implementation are in sync</li>
+      <li>Adoption metrics are tracked and reviewed quarterly</li>
+      <li>The system has an identified owner (person or team)</li>
+    </ul>
+  </div>
+</section>
+
+        <div class="section-marker" id="real-world-examples">
+          <span class="split-badge examples">Examples</span>
+          <span class="marker-line"></span>
+        </div>
+
+        <section data-section="examples">
+  <h2>Real-world examples</h2>
+
+  <div class="case-study">
+    <p class="case-label">Case study</p>
+    <h4>Shopify Polaris: a system built for merchants and developers</h4>
+    <p>Shopify's Polaris design system serves hundreds of internal developers and thousands of third-party app developers building on the Shopify platform. Its strength is its dual audience: it provides design guidance for Shopify employees and enforces consistency across the third-party app ecosystem. Polaris includes design tokens, components, pattern guidance, content guidelines (voice, grammar, naming conventions), and Figma libraries. The public documentation is comprehensive enough that external developers can build apps that feel native to the Shopify experience.</p>
+    <p><strong>Why it works:</strong> Polaris treats the design system as a product with its own users (developers), roadmap, and support process. It's not just documentation — it's a service.</p>
+  </div>
+
+  <div class="case-study">
+    <p class="case-label">Case study</p>
+    <h4>IBM Carbon: token-driven theming at enterprise scale</h4>
+    <p>IBM's Carbon Design System uses a sophisticated token architecture that enables theming across IBM's vast product portfolio. Products can adopt one of four built-in themes (White, Gray 10, Gray 90, Gray 100) or create custom themes by overriding semantic tokens. This means a healthcare product and a financial product can use the same components but feel distinct. Carbon also demonstrates mature governance: a dedicated team maintains the core system, and a federated model allows business units to contribute domain-specific patterns through a structured proposal and review process.</p>
+    <p><strong>Why it works:</strong> The token architecture solves the enterprise problem of consistency-with-flexibility. Products look like they belong together without looking identical.</p>
+  </div>
+
+  <div class="case-study">
+    <p class="case-label">Case study</p>
+    <h4>Gov.uk Design System: accessibility-first, evidence-based</h4>
+    <p>The UK Government Digital Service's design system is notable for its rigorous, evidence-based approach. Every component is tested with real users, including users of assistive technologies. Patterns are added only when there's evidence of a shared need across government services. The documentation is exceptionally clear — plain language, specific guidance on when to use and not use each component, and researched accessibility annotations. The contribution process requires evidence of user need, tested implementations, and accessibility audits before a pattern is accepted.</p>
+    <p><strong>Why it works:</strong> The evidence bar ensures that every component in the system has been validated. Teams trust the system because they know each component has been tested, not just designed.</p>
+  </div>
+</section>
+
+<section id="pitfalls" data-section="practical">
+  <h2>Common pitfalls</h2>
+
+  <div class="pitfall">
+    <div class="pitfall-icon">!</div>
+    <div>
+      <h4>Building a system nobody asked for</h4>
+      <p>A design system built in isolation, without input from product teams, solves theoretical problems instead of real ones. Start by understanding what product teams struggle with: inconsistency? Slow handoff? Accessibility gaps? Design the system to solve those specific problems, not to be architecturally elegant.</p>
+    </div>
+  </div>
+
+  <div class="pitfall">
+    <div class="pitfall-icon">!</div>
+    <div>
+      <h4>Over-engineering tokens</h4>
+      <p>A token system with five levels of abstraction (global → alias → semantic → component → variant) is impressive engineering and unusable in practice. Start with two levels (global values and semantic names) and add complexity only when you hit real problems that demand it. Most products never need more than three levels.</p>
+    </div>
+  </div>
+
+  <div class="pitfall">
+    <div class="pitfall-icon">!</div>
+    <div>
+      <h4>Figma library ≠ design system</h4>
+      <p>A Figma component library is a tool, not a system. Without documentation, guidelines, code implementation, versioning, and governance, it's just organized files. Teams that mistake their Figma library for a design system wonder why developers implement components differently from the designs — because the designs don't include the specification a developer needs.</p>
+    </div>
+  </div>
+</section>
+
+<section id="connections">
+  <h2>Connected topics in your library</h2>
+  <div class="cross-ref-grid">
+    <a href="visual-design.html" class="cross-ref-card">
+      <span class="ref-number">Tier 1</span>
+      <div class="ref-title">Visual Design</div>
+      <div class="ref-reason">Design tokens encode visual design decisions — color systems, type scales, spacing grids. Visual Design provides the theory that tokens implement.</div>
+    </a>
+    <a href="ui-design-patterns.html" class="cross-ref-card">
+      <span class="ref-number">Tier 1</span>
+      <div class="ref-title">UI Design Patterns</div>
+      <div class="ref-reason">UI patterns are implemented as design system components and patterns. The pattern library is a subset of the design system.</div>
+    </a>
+    <a href="accessibility.html" class="cross-ref-card">
+      <span class="ref-number">Tier 1</span>
+      <div class="ref-title">Accessibility in Practice</div>
+      <div class="ref-reason">Accessibility baked into design system components means every product that uses the system inherits accessible defaults. It's the highest-leverage accessibility investment.</div>
+    </a>
+    <a href="interaction-design.html" class="cross-ref-card">
+      <span class="ref-number">Tier 1</span>
+      <div class="ref-title">Interaction Design</div>
+      <div class="ref-reason">Motion tokens (duration, easing) and interaction states (hover, focus, loading) are core parts of the design system specification.</div>
+    </a>
+  </div>
+</section>
+
+<div class="deep-dive-section" id="deep-dive">
+          <div class="deep-dive-header">
+            <span class="deep-dive-badge">Deep Dive</span>
+            <h2 style="margin:0; border:none; padding:0;">Appendix</h2>
+          </div>
+
+  <details class="expandable">
+    <summary><span class="chevron"><svg viewBox="0 0 14 14"><polyline points="4,2 10,7 4,12"/></svg></span> Figma-to-code sync strategies</summary>
+    <div class="expand-content topic-content">
+      <h4>Keeping design and code aligned</h4>
+      <p>The Figma library and code library will drift apart unless you actively prevent it. Strategies: <strong>Tokens as source of truth:</strong> Store design tokens in a format both Figma and code can consume (JSON via Style Dictionary, or specialized tools like Tokens Studio). Changes propagate to both environments. <strong>Code-first components:</strong> Build components in code first, then create Figma components that match. This ensures design is constrained to what's implementable. <strong>Visual regression testing:</strong> Automatically compare rendered components against design specs to catch drift. <strong>Shared changelog:</strong> Track changes in both Figma and code in the same log, making discrepancies visible.</p>
+    </div>
+  </details>
+
+  <details class="expandable">
+    <summary><span class="chevron"><svg viewBox="0 0 14 14"><polyline points="4,2 10,7 4,12"/></svg></span> Measuring design system ROI</summary>
+    <div class="expand-content topic-content">
+      <h4>Quantifying the value</h4>
+      <p>Design systems require significant investment. Stakeholders want to see return. Measure: <strong>Development velocity:</strong> Compare time-to-build for features using system components vs. custom implementations. Systems typically reduce development time by 30–50% for new features. <strong>Consistency score:</strong> Audit product screens for visual inconsistencies before and after system adoption. <strong>Accessibility compliance:</strong> Compare accessibility audit results before and after — system components should eliminate common accessibility defects. <strong>Designer time allocation:</strong> Track how much designer time shifts from pixel-pushing (recreating components) to strategic design work (solving user problems). <strong>Bug reduction:</strong> Compare UI-related bug reports before and after system adoption.</p>
+    </div>
+  </details>
+
+  <details class="expandable">
+    <summary><span class="chevron"><svg viewBox="0 0 14 14"><polyline points="4,2 10,7 4,12"/></svg></span> Further reading and resources</summary>
+    <div class="expand-content topic-content">
+      <h4>Essential reading</h4>
+      <p><strong>"Design Systems" by Alla Kholmatova</strong> — The best book on design system strategy. Covers when to build one, how to structure it, and how to evolve it. Less about code, more about thinking.</p>
+      <p><strong>"Atomic Design" by Brad Frost</strong> — The foundational methodology for structuring component hierarchies. Available free online at atomicdesign.bradfrost.com.</p>
+      <p><strong>"Expressive Design Systems" by Yesenia Perez-Cruz</strong> — How to build design systems that support brand expression and flexibility, not just consistency.</p>
+      <h4>Reference systems</h4>
+      <p><strong>Shopify Polaris, Google Material Design, IBM Carbon, Atlassian Design System, Gov.uk</strong> — All publicly documented. Study how different organizations solve the same problems at different scales.</p>
+    </div>
+  </details>
+</div>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer container">
+    <div class="footer-inner">
+      <p>Noir Book — Built for the work, not the shelf.</p>
+      <div class="footer-links">
+        <a href="../design-system.html">Design System</a>
+        <a href="../library-manifest.json">Manifest</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to Top -->
+  <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">&#8593;</button>
+
+  <!-- Floating Mobile TOC -->
+  <button class="mobile-toc-btn" id="mobileTocBtn" aria-label="Open table of contents">&#9776; Contents</button>
+  <div class="mobile-toc-overlay" id="mobileTocOverlay">
+    <div class="mobile-toc-panel">
+      <div class="mobile-toc-panel-header">
+        <h3>On this page</h3>
+        <button class="mobile-toc-close" id="mobileTocClose" aria-label="Close">&times;</button>
+      </div>
+      <ul class="mobile-toc-list">
+        <li><a href="#what-and-why" data-section="theory">What a design system is and isn't</a></li>
+        <li><a href="#anatomy" data-section="theory">Anatomy of a design system</a></li>
+        <li><a href="#tokens" data-section="practical">Design tokens</a></li>
+        <li><a href="#components" data-section="practical">Component architecture</a></li>
+        <li><a href="#documentation" data-section="practical">Documentation that gets used</a></li>
+        <li><a href="#versioning" data-section="practical">Versioning and change management</a></li>
+        <li><a href="#governance" data-section="practical">Governance models</a></li>
+        <li><a href="#adoption" data-section="practical">Adoption and measuring impact</a></li>
+        <li><a href="#design-tokens" data-section="practical">Design token architecture</a></li>
+        <li><a href="#templates" data-section="practical">Templates and checklists</a></li>
+        <li><a href="#real-world-examples" data-section="examples">Real-world examples</a></li>
+        <li><a href="#pitfalls" data-section="practical">Common pitfalls</a></li>
+        <li><a href="#connections">Connected topics in your library</a></li>
+        <li><a href="#deep-dive">Deep-dive appendix</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    // Scrollspy: highlight active TOC item
+    const tocLinks = document.querySelectorAll('.toc-list a');
+    const sections = [];
+    tocLinks.forEach(link => {
+      const href = link.getAttribute('href');
+      if (!href || !href.startsWith('#')) return;
+      const el = document.getElementById(href.slice(1));
+      if (el) sections.push({ el, link });
+    });
+
+    // Reading progress bar
+    const progressBar = document.getElementById('readingProgress');
+    const backToTop = document.getElementById('backToTop');
+
+    function onScroll() {
+      let current = sections[0];
+      for (const s of sections) {
+        if (s.el.getBoundingClientRect().top <= 120) current = s;
+      }
+      tocLinks.forEach(l => l.classList.remove('active'));
+      if (current) current.link.classList.add('active');
+
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrolled = window.scrollY;
+      const progress = docHeight > 0 ? (scrolled / docHeight) * 100 : 0;
+      if (progressBar) progressBar.style.width = progress + '%';
+      if (backToTop) backToTop.classList.toggle('visible', scrolled > 400);
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    // Split badges: click to scroll to section
+    document.querySelectorAll('.content-splits .split-badge').forEach(function(badge) {
+      badge.addEventListener('click', function() {
+        var type = badge.classList.contains('theory') ? 'theory' : badge.classList.contains('practical') ? 'practical' : 'examples';
+        var target = document.querySelector('section[data-section="' + type + '"]');
+        if (target) {
+          var marker = target.previousElementSibling;
+          (marker && marker.classList.contains('section-marker') ? marker : target).scrollIntoView({behavior:'smooth'});
+        }
+      });
+    });
+  </script>
+
+  <script src="../js/checklist.js"></script>
+  <script src="../js/mobile-toc.js"></script>
+  <script src="../js/search.js"></script>
+  <script>
+    function openBurger(){document.getElementById('burgerOverlay').classList.add('open');document.body.style.overflow='hidden'}
+    function closeBurger(e){if(e&&e.target&&e.target!==document.getElementById('burgerOverlay'))return;document.getElementById('burgerOverlay').classList.remove('open');document.body.style.overflow=''}
+    function burgerSearch(q){
+      var r=document.getElementById('burgerSearchResults');
+      if(!q||q.length<2){r.innerHTML='';return}
+      var ql=q.toLowerCase(),matches=[];
+      if(typeof SEARCH_INDEX!=='undefined'){
+        SEARCH_INDEX.forEach(function(t){
+          var hit=t.topic.toLowerCase().indexOf(ql)>-1;
+          if(!hit)t.sections.forEach(function(s){if((s.title+' '+s.keywords).toLowerCase().indexOf(ql)>-1)hit=true});
+          if(hit)matches.push(t);
+        });
+      }
+      if(!matches.length){r.innerHTML='<p style="padding:8px 0;font-size:13px;color:var(--ink-muted)">No results</p>';return}
+      r.innerHTML=matches.slice(0,8).map(function(m){return '<a href="../'+m.url+'">'+m.topic+'<span class="bsr-disc">'+m.discipline+'</span></a>'}).join('');
+    }
+    document.addEventListener('keydown',function(e){if(e.key==='Escape'){closeBurger();var dd=document.getElementById('searchDropdown');if(dd)dd.classList.remove('visible');}});
+    // Close burger when clicking a TOC link
+    document.querySelectorAll('.burger-toc-list a').forEach(function(a){a.addEventListener('click',function(){closeBurger()})});
+    // Search typeahead
+    function topicSearch(q){
+      var dd=document.getElementById('searchDropdown');
+      if(!q||q.length<2||typeof SEARCH_INDEX==='undefined'){if(dd)dd.classList.remove('visible');return}
+      var ql=q.toLowerCase(),grouped={};
+      SEARCH_INDEX.forEach(function(t){
+        var hit=t.topic.toLowerCase().indexOf(ql)>-1,sHits=[],mHits=[];
+        t.sections.forEach(function(s){if((s.title+' '+s.keywords).toLowerCase().indexOf(ql)>-1)sHits.push(s)});
+        (t.methods||[]).forEach(function(m){if((m.name+' '+(m.keywords||'')).toLowerCase().indexOf(ql)>-1)mHits.push(m)});
+        if(!hit&&!sHits.length&&!mHits.length&&ql.length>=3&&typeof levenshtein==='function'){
+          var words=t.topic.toLowerCase().split(/ +/);
+          for(var i=0;i<words.length;i++){if(levenshtein(ql,words[i].substring(0,ql.length+1))<=1){hit=true;break}}
+        }
+        if(hit||sHits.length||mHits.length)grouped[t.topic]={url:'../'+t.url,disc:t.discipline||'',sections:sHits,methods:mHits,topicHit:hit};
+      });
+      var keys=Object.keys(grouped);
+      if(!keys.length){dd.innerHTML='<div class="search-empty">No results</div>';dd.classList.add('visible');return}
+      var html='';
+      keys.slice(0,8).forEach(function(topic){
+        var g=grouped[topic];
+        html+='<div class="search-group"><div class="search-group-title">'+topic+'</div>';
+        if(g.topicHit)html+='<a class="search-result" href="'+g.url+'"><span class="search-result-title">'+topic+'</span><span class="search-result-type practical">'+g.disc+'</span></a>';
+        g.sections.forEach(function(s){html+='<a class="search-result" href="'+g.url+'#'+s.id+'"><span class="search-result-title">'+s.title+'</span><span class="search-result-type '+s.type+'">'+s.type+'</span></a>'});
+        g.methods.slice(0,3).forEach(function(m){html+='<a class="search-result" href="'+g.url+'#'+m.section+'"><span class="search-result-title">'+m.name+'</span><span class="search-result-type practical">method</span></a>'});
+        html+='</div>';
+      });
+      dd.innerHTML=html;dd.classList.add('visible');
+    }
+    document.addEventListener('click',function(e){if(!e.target.closest('.search-box')){var dd=document.getElementById('searchDropdown');if(dd)dd.classList.remove('visible')}});
+  </script>
+
+</body>
+</html>

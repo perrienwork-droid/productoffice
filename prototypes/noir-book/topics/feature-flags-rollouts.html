@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Feature Flags, Rollouts &amp; Release Management — Noir Book</title>
+  <link rel="stylesheet" href="../css/shared.css">
+  <link rel="stylesheet" href="../css/topic.css">
+  <script src="../js/theme.js"></script>
+  <script src="../js/topic-nav.js"></script>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="site-nav subpage-nav" data-discipline="pm">
+    <div class="nav-inner">
+      <a href="../index.html" class="site-logo">
+        <span class="logo-mark">PM</span>
+        <span class="nav-title">Noir Book</span>
+      </a>
+      <a href="../index.html" class="nav-back-link">&#8592; Library</a>
+      <div class="nav-filters">
+        <button class="disc-toggle ux-toggle active" data-disc="ux" onclick="toggleDisc('ux')" title="UX Design">
+          <span class="disc-dot disc-dot-ux"></span><span class="disc-label">UX Design</span><span class="disc-code">(UX)</span>
+        </button>
+        <button class="disc-toggle pm-toggle active" data-disc="pm" onclick="toggleDisc('pm')" title="Product Management">
+          <span class="disc-dot disc-dot-pm"></span><span class="disc-label">Product</span><span class="disc-code">(PM)</span>
+        </button>
+        <button class="disc-toggle mk-toggle active" data-disc="mk" onclick="toggleDisc('mk')" title="Marketing &amp; Growth">
+          <span class="disc-dot disc-dot-mk"></span><span class="disc-label">Marketing</span><span class="disc-code">(MK)</span>
+        </button>
+        <button class="disc-toggle cs-toggle active" data-disc="cs" onclick="toggleDisc('cs')" title="Content Strategy">
+          <span class="disc-dot disc-dot-cs"></span><span class="disc-label">Content</span><span class="disc-code">(CS)</span>
+        </button>
+        <div class="search-box nav-search-box">
+          <div class="nav-search-wrap">
+            <div class="nav-search-pills" id="navSearchPills"></div>
+            <input type="text" id="navSearchInput" placeholder="Search..." autocomplete="off"
+              oninput="topicNavSearch(this.value)"
+              onkeydown="handleNavSearchKey(event)"
+              onfocus="handleNavSearchFocus()"
+              onblur="handleNavSearchBlur()">
+            <button type="button" class="nav-search-clear" id="navSearchClear" onclick="clearNavSearch()" aria-label="Clear search">&times;</button>
+          </div>
+          <div class="search-dropdown" id="navSearchDropdown"></div>
+        </div>
+      </div>
+      <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle theme">&#9790;</button>
+      <button class="burger-btn" id="burgerBtn" onclick="openBurger()" aria-label="Menu">
+        <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="2" y1="4" x2="16" y2="4"/><line x1="2" y1="9" x2="16" y2="9"/><line x1="2" y1="14" x2="16" y2="14"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Burger Menu Overlay -->
+  <div class="burger-overlay" id="burgerOverlay" onclick="closeBurger(event)">
+    <div class="burger-panel" onclick="event.stopPropagation()">
+      <div class="burger-panel-header">
+        <h3>Menu</h3>
+        <button class="burger-close" onclick="closeBurger()" aria-label="Close">&times;</button>
+      </div>
+      <div class="burger-search">
+        <input type="text" id="burgerSearchInput" placeholder="Search topics, methods..." autocomplete="off" oninput="burgerSearch(this.value)">
+        <div class="burger-search-results" id="burgerSearchResults"></div>
+      </div>
+      <div class="burger-links">
+        <a href="../index.html">&#8592; Back to Library</a>
+        <a href="../design-system.html">Design System</a>
+        <a href="../request-topic.html">Suggest a topic or improvement</a>
+      </div>
+      <div class="burger-toc-section">
+        <p class="burger-toc-title">On this page</p>
+        <ul class="burger-toc-list">
+        <li><a href="#what-and-why" data-section="theory">What feature flags and release management mean for PMs</a></li>
+        <li><a href="#flag-strategy" data-section="practical">Feature flag strategy</a></li>
+        <li><a href="#canary-dark" data-section="practical">Canary releases and dark launches</a></li>
+        <li><a href="#kill-switch" data-section="practical">Kill switches and incident response</a></li>
+        <li><a href="#beta-programs" data-section="practical">Beta program design</a></li>
+        <li><a href="#examples" data-section="examples">Real-world examples</a></li>
+        <li><a href="#pitfalls" data-section="practical">Common pitfalls</a></li>
+        <li><a href="#connections">Connected topics in your library</a></li>
+        <li><a href="#deep-dive">Deep-dive appendix</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Topic Header -->
+  <header class="topic-header container">
+    <div class="breadcrumb">
+      <a href="../index.html">Library</a>
+      <span class="sep">&#8250;</span>
+      <span class="breadcrumb-disc breadcrumb-pm">Product Management</span>
+      <span class="sep">&#8250;</span>
+      <span>Tier 2 — Specialized</span>
+      <span class="sep">&#8250;</span>
+      <span>Feature Flags</span>
+    </div>
+    <div class="topic-meta">
+      <span class="tier-badge tier2">Tier 2</span>
+      <span style="font-size:14px;color:var(--ink-muted)">Topic PM.2.10</span>
+    </div>
+    <h1>Feature Flags, Rollouts &amp; Release Management</h1>
+    <p class="topic-subtitle">Ship safely. Feature flagging strategy, percentage rollouts, canary releases, kill switches, and the operational discipline of getting code to users without breaking things.</p>
+    <div class="content-splits">
+      <span class="split-badge theory">20% Theory</span>
+      <span class="split-badge practical">55% Methods &amp; Templates</span>
+      <span class="split-badge examples">25% Examples</span>
+    </div>
+  </header>
+
+  <!-- Reading Progress Bar -->
+  <div class="reading-progress" id="readingProgress"></div>
+
+  <!-- Main Layout -->
+  <div class="container">
+    <div class="topic-layout">
+
+      <!-- Sidebar: Table of Contents -->
+      <aside class="topic-sidebar">
+        <nav class="toc">
+          <p class="sidebar-topic-title">Feature Flags, Rollouts &amp; Release Management</p>
+          <p class="toc-title">On this page</p>
+          <ul class="toc-list">
+            <li><a href="#what-and-why" data-section="theory">What feature flags and release management mean for PMs</a></li>
+            <li><a href="#flag-strategy" data-section="practical">Feature flag strategy</a></li>
+            <li><a href="#canary-dark" data-section="practical">Canary releases and dark launches</a></li>
+            <li><a href="#kill-switch" data-section="practical">Kill switches and incident response</a></li>
+            <li><a href="#beta-programs" data-section="practical">Beta program design</a></li>
+            <li><a href="#examples" data-section="examples">Real-world examples</a></li>
+            <li><a href="#pitfalls" data-section="practical">Common pitfalls</a></li>
+            <li><a href="#connections">Connected topics in your library</a></li>
+            <li><a href="#deep-dive">Deep-dive appendix</a></li>
+          </ul>
+        </nav>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="topic-main topic-content">
+
+        <div class="section-marker" id="what-and-why">
+          <span class="split-badge theory">Theory</span>
+          <span class="marker-line"></span>
+        </div>
+
+        <section data-section="theory">
+  <h2>What feature flags and release management mean for PMs</h2>
+
+<p>Feature flags are conditional switches that let you enable or disable functionality for specific users without deploying new code. They decouple <em>deployment</em> (code reaches production) from <em>release</em> (users see the feature). This distinction changes how PMs think about shipping: instead of "this feature goes live when the code ships," it becomes "we deploy the code, then gradually release to users, watching metrics at each stage."</p>
+
+<p>For PMs, feature flags unlock four capabilities that change your operating model:</p>
+<ul>
+  <li><strong>Gradual rollout</strong> — show a new feature to 5% of users, monitor for issues, then expand to 20%, 50%, 100%.</li>
+  <li><strong>Targeting</strong> — show a feature only to enterprise users, or beta testers, or users in a specific region.</li>
+  <li><strong>Kill switch</strong> — instantly disable a feature if it causes problems, without a code rollback.</li>
+  <li><strong>Experimentation</strong> — run A/B tests by showing different feature variants to different groups.</li>
+</ul>
+
+<p>The PM's role isn't implementing flags — it's owning the release strategy: deciding who sees what when, defining the metrics that trigger expansion or rollback, and managing the lifecycle of flags from creation through cleanup. Unmanaged feature flags become their own form of tech debt — "flag debt" — where nobody knows which flags are still active, which are permanent, and which control abandoned experiments.</p>
+</section>
+
+        <div class="section-marker" id="flag-strategy">
+          <span class="split-badge practical">Practical</span>
+          <span class="marker-line"></span>
+        </div>
+
+        <section data-section="practical">
+  <h2>Feature flag strategy</h2>
+
+<div class="method-card">
+  <h4>Feature Flag Strategy Matrix <span class="method-tag">Core Method</span></h4>
+  <p class="method-when">Use when: deciding what type of flag to use for a new feature.</p>
+  <p>Not all flags are equal. Categorize by purpose:</p>
+<ul>
+  <li><strong>Release flags</strong> — temporary switches for gradual rollout. Remove after 100% rollout. Lifespan: days to weeks.</li>
+  <li><strong>Experiment flags</strong> — control A/B test variants. Remove after experiment concludes. Lifespan: weeks.</li>
+  <li><strong>Ops flags</strong> — kill switches for critical functionality. Keep permanently. Lifespan: forever.</li>
+  <li><strong>Permission flags</strong> — feature access by plan tier or user role. Part of the product, not temporary. Lifespan: forever.</li>
+  <li><strong>Development flags</strong> — hide work-in-progress from users. Remove before or at launch.</li>
+</ul>
+  <p>The strategy matrix helps because each type has different lifecycle management. Release flags have a defined removal date. Experiment flags have a defined analysis date. Permission flags are part of your packaging strategy. Treating all flags the same leads to flag debt: 200 flags in production, half of which nobody remembers creating.</p>
+</div>
+
+<div class="method-card">
+  <h4>Percentage Rollout Plan <span class="method-tag">Core Method</span></h4>
+  <p class="method-when">Use when: releasing a new feature gradually to catch problems before full exposure.</p>
+  <p>Define rollout stages with clear criteria for advancing or rolling back. A typical plan:</p>
+<ul>
+  <li><strong>Stage 1 (1-5%)</strong> — internal team + small user sample. Monitor for crashes, errors, and edge cases. Duration: 1-2 days.</li>
+  <li><strong>Stage 2 (10-20%)</strong> — broader exposure. Monitor core metrics (conversion rate, error rate, latency). Duration: 2-3 days.</li>
+  <li><strong>Stage 3 (50%)</strong> — half your users. Statistically meaningful for metric comparison. Duration: 3-5 days.</li>
+  <li><strong>Stage 4 (100%)</strong> — full rollout. Clean up the flag within 1 sprint.</li>
+</ul>
+  <p>Define advance criteria ("error rate stays below 0.5%, no P1 incidents, core metric doesn't drop more than 2%") and rollback criteria ("error rate exceeds 1%, any P1 incident, core metric drops more than 5%"). Write these before the rollout starts, not during a crisis.</p>
+</div>
+
+<div class="callout tip">
+  <p class="callout-title">Practical tip</p>
+  <p>Always include yourself and your PM peers in Stage 1. Dogfooding catches UX issues that metrics miss: confusing error messages, broken edge cases, unexpected behavior. If you wouldn't ship this to your own workflow, don't ship it to 50% of users.</p>
+</div>
+</section>
+
+<section id="canary-dark" data-section="practical">
+  <h2>Canary releases and dark launches</h2>
+
+<div class="method-card">
+  <h4>Canary Release Protocol <span class="method-tag">Technique</span></h4>
+  <p class="method-when">Use when: deploying infrastructure changes or backend modifications where user-facing behavior should be identical.</p>
+  <p>A canary release routes a small percentage of traffic to the new version while the majority stays on the old version. Unlike feature flags (which show different features), canary releases show the same feature but run it on different infrastructure. Monitor: error rate comparison, latency percentiles (P50, P95, P99), resource consumption, and downstream service health. If the canary shows degradation, route traffic back to the old version instantly. Canary releases are the safety net for database migrations, API version upgrades, and infrastructure changes.</p>
+</div>
+
+<div class="method-card">
+  <h4>Dark Launch Pattern <span class="method-tag">Technique</span></h4>
+  <p class="method-when">Use when: you need to test a feature's backend under production load without users seeing it.</p>
+  <p>A dark launch runs new code in production but hides the results from users. The system processes requests through both the old and new paths, compares results, and only shows the old path to users. This lets you validate correctness and performance under real traffic without risk. Use dark launches for: search algorithm changes (run both algorithms, compare relevance), recommendation engines (generate recommendations from both models, measure quality), and data pipeline changes (process data through both pipelines, compare outputs).</p>
+</div>
+</section>
+
+<section id="kill-switch" data-section="practical">
+  <h2>Kill switches and incident response</h2>
+
+<div class="method-card">
+  <h4>Kill Switch Checklist <span class="method-tag">Core Method</span></h4>
+  <p class="method-when">Use when: a feature is causing problems in production and needs to be disabled immediately.</p>
+  <p>Every critical feature should have a kill switch — a feature flag that disables the feature instantly without a code deployment. The kill switch checklist: <strong>Before launch:</strong> Verify the kill switch works in staging. Confirm it fully disables the feature (including dependent UI, API endpoints, and background jobs). Document the flag name and location. <strong>During incident:</strong> Disable the flag. Verify the feature is fully off (check from a user's perspective, not just the flag state). Notify stakeholders. <strong>After incident:</strong> Root-cause analysis. Fix the bug. Test the fix behind the flag before re-enabling. Gradual re-rollout.</p>
+  <p>The PM's kill switch responsibility: know where the switch is, know who can flip it (on-call engineer, not just the tech lead), and have a communication template ready. An incident is not the time to figure out how to tell customers what happened.</p>
+</div>
+
+<div class="callout warning">
+  <p class="callout-title">Common mistake</p>
+  <p>Kill switches that don't fully kill the feature. The flag disables the UI, but the background job keeps running. Or the flag disables the web version but not the mobile app. Test kill switches end-to-end before you need them in an emergency. A kill switch that leaves partial functionality running can cause worse problems than no kill switch at all.</p>
+</div>
+</section>
+
+<section id="beta-programs" data-section="practical">
+  <h2>Beta program design</h2>
+
+<div class="method-card">
+  <h4>Beta Program Design <span class="method-tag">Framework</span></h4>
+  <p class="method-when">Use when: you want structured early feedback before a general release.</p>
+  <p>A beta program is more than "give some users early access." Design it with:</p>
+<ul>
+  <li><strong>Selection criteria</strong> — who should be in the beta? Mix of power users (stress-test edge cases), new users (test learnability), and strategic accounts (validate enterprise fit).</li>
+  <li><strong>Feedback mechanisms</strong> — in-app feedback widget, dedicated Slack channel, weekly survey, or scheduled calls.</li>
+  <li><strong>Success criteria</strong> — what signals tell you the beta is ready for GA? (Bug count below X, satisfaction score above Y, key workflow completion rate above Z.).</li>
+  <li><strong>Timeline</strong> — defined start and end dates. Open-ended betas become permanent pre-release limbo.</li>
+</ul>
+  <p>Limit beta size. 20-50 users gives you enough feedback diversity without overwhelming your team with support requests. For enterprise products, 5-10 accounts is often sufficient.</p>
+</div>
+
+<div class="template-box">
+  <div class="template-header">
+    <span class="template-label">Checklist</span>
+    <span class="template-title">Release Readiness Checklist</span>
+  </div>
+  <ul class="checklist">
+    <li>Feature flag created and tested (on/off/targeting verified in staging)</li>
+    <li>Rollout plan documented (stages, percentages, duration, advance/rollback criteria)</li>
+    <li>Kill switch tested end-to-end (UI, API, background jobs all disabled)</li>
+    <li>Monitoring dashboards configured (error rate, latency, core metrics)</li>
+    <li>Alerting set up (PagerDuty/Slack alerts for rollback-trigger thresholds)</li>
+    <li>On-call team briefed (knows about the rollout, knows where the kill switch is)</li>
+    <li>Rollback plan tested (verified that disabling the flag cleanly reverts behavior)</li>
+    <li>Communication templates ready (internal incident comms, external status page update)</li>
+    <li>Analytics instrumented (events tracking feature usage for post-launch analysis)</li>
+    <li>Flag cleanup ticket created (scheduled for removal after 100% rollout)</li>
+  </ul>
+</div>
+</section>
+
+        <div class="section-marker" id="examples">
+          <span class="split-badge examples">Examples</span>
+          <span class="marker-line"></span>
+        </div>
+
+        <section data-section="examples">
+  <h2>Real-world examples</h2>
+
+<div class="case-study">
+  <p class="case-label">Case study</p>
+  <h4>GitHub: Feature flags as a development culture</h4>
+  <p>GitHub uses feature flags (via their internal tool, later open-sourced as "Scientist") for virtually every change. Engineers deploy to production multiple times per day, but features are only visible when their flag is enabled. This lets GitHub ship small increments continuously without big-bang releases. Their PM team owns the rollout strategy for each feature: which user segments see it first, what metrics define success, and when to advance or roll back.</p>
+  <p><strong>Why it works:</strong> By making feature flags the default, GitHub eliminated the concept of a "release day" — and all the stress, coordination, and risk that comes with it. Every change is reversible, every rollout is gradual, and every feature has a defined success metric before it reaches 100%.</p>
+</div>
+
+<div class="case-study">
+  <p class="case-label">Case study</p>
+  <h4>Netflix: Canary deployments at planetary scale</h4>
+  <p>Netflix runs canary deployments for every infrastructure change, routing a small percentage of traffic to the new version while monitoring hundreds of metrics in real-time. Their automated canary analysis (ACA) system compares the canary's metrics against the baseline and automatically promotes or rolls back without human intervention. The PM role in this system is defining which business metrics (stream starts, playback quality, error rates) are included in the canary analysis — not just infrastructure metrics, but user experience metrics.</p>
+  <p><strong>Why it works:</strong> Automation removes the human bottleneck from release decisions. Instead of an engineer manually checking dashboards at 2am, the system makes the rollback decision based on pre-defined criteria. The PM's contribution is ensuring those criteria include business impact, not just technical health.</p>
+</div>
+</section>
+
+<section id="pitfalls" data-section="practical">
+  <h2>Common pitfalls</h2>
+
+<div class="pitfall">
+  <div class="pitfall-icon">!</div>
+  <div>
+    <h4>Flag debt: never cleaning up temporary flags</h4>
+    <p>After a feature reaches 100% rollout, the flag should be removed within 1-2 sprints. In practice, teams forget. Six months later, you have 150 flags in production, nobody knows which ones are safe to remove, and the codebase is littered with <code>if (flag.enabled)</code> branches. Create a flag cleanup ritual: every sprint, review flags older than 30 days and remove any that are at 100%.</p>
+  </div>
+</div>
+
+<div class="pitfall">
+  <div class="pitfall-icon">!</div>
+  <div>
+    <h4>Testing only the "on" state</h4>
+    <p>Teams test the feature with the flag on but forget to test the experience with the flag off. What do users see when the flag is disabled? An empty state? A broken layout? A confusing error? The "off" state is the experience for 95% of users during a gradual rollout — it needs to be clean.</p>
+  </div>
+</div>
+
+<div class="pitfall">
+  <div class="pitfall-icon">!</div>
+  <div>
+    <h4>Rolling out to 100% without analysis</h4>
+    <p>Skipping from 50% to 100% because "nothing broke" without analyzing the impact on your core metrics. "Nothing broke" means no incidents — it doesn't mean the feature is performing well. Compare activation, retention, and engagement metrics between the flag-on and flag-off groups before going to 100%.</p>
+  </div>
+</div>
+</section>
+
+<section id="connections">
+  <h2>Connected topics in your library</h2>
+  <div class="cross-ref-grid">
+    <a href="go-to-market.html" class="cross-ref-card">
+      <span class="ref-number">PM Tier 1</span>
+      <div class="ref-title">Go-to-Market &amp; Launches</div>
+      <div class="ref-reason">Feature flags are the technical mechanism behind phased rollout strategies.</div>
+    </a>
+    <a href="experimentation.html" class="cross-ref-card">
+      <span class="ref-number">PM Tier 2</span>
+      <div class="ref-title">Experimentation &amp; A/B Testing</div>
+      <div class="ref-reason">Feature flags are the infrastructure that makes A/B testing possible.</div>
+    </a>
+    <a href="technical-pm.html" class="cross-ref-card">
+      <span class="ref-number">PM Tier 2</span>
+      <div class="ref-title">Technical PM</div>
+      <div class="ref-reason">Release management is core technical PM discipline.</div>
+    </a>
+    <a href="agile-pm.html" class="cross-ref-card">
+      <span class="ref-number">PM Tier 1</span>
+      <div class="ref-title">Agile Product Management</div>
+      <div class="ref-reason">Feature flags enable continuous delivery within sprint-based development.</div>
+    </a>
+  </div>
+</section>
+
+<div class="deep-dive-section" id="deep-dive">
+          <div class="deep-dive-header">
+            <span class="deep-dive-badge">Deep Dive</span>
+            <h2 style="margin:0; border:none; padding:0;">Appendix</h2>
+          </div>
+  <details class="expandable">
+    <summary><span class="chevron"><svg viewBox="0 0 14 14"><polyline points="4,2 10,7 4,12"/></svg></span> Feature flag tool comparison</summary>
+    <div class="expand-content topic-content">
+      <h4>Choosing a feature flag platform</h4>
+      <ul>
+  <li><strong>LaunchDarkly</strong> — Enterprise-grade, feature-rich, expensive. Best for large teams with complex targeting needs and high-volume experimentation.</li>
+  <li><strong>PostHog Feature Flags</strong> — bundled with analytics and session replay. Good for teams that want one tool for flags + experimentation + analytics.</li>
+  <li><strong>Statsig</strong> — strong experimentation integration, automatic statistical analysis. Good for data-driven teams.</li>
+  <li><strong>Flagsmith</strong> — open-source option for teams that want self-hosted control.</li>
+  <li><strong>Unleash</strong> — another open-source option with a managed cloud tier.</li>
+  <li><strong>DIY</strong> — a database table and a few helper functions. Fine for small teams, but you'll eventually need targeting, audit logs, and a UI for non-engineers to manage flags.</li>
+</ul>
+    </div>
+  </details>
+  <details class="expandable">
+    <summary><span class="chevron"><svg viewBox="0 0 14 14"><polyline points="4,2 10,7 4,12"/></svg></span> Further reading and resources</summary>
+    <div class="expand-content topic-content">
+      <h4>Essential reading</h4>
+      <p><strong>"Release It!" by Michael Nygard</strong> — Comprehensive patterns for deploying and operating production systems safely.</p>
+      <p><strong>"Accelerate" by Forsgren, Humble &amp; Kim</strong> — Research on deployment practices that correlate with high-performing teams.</p>
+      <h4>References</h4>
+      <p><strong>Martin Fowler's "Feature Toggles" article</strong> — Canonical reference on feature flag types and management strategies.</p>
+    </div>
+  </details>
+</div>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer container">
+    <div class="footer-inner">
+      <p>Noir Book — Built for the work, not the shelf.</p>
+      <div class="footer-links">
+        <a href="../design-system.html">Design System</a>
+        <a href="../library-manifest.json">Manifest</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to Top -->
+  <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">&#8593;</button>
+
+  <!-- Floating Mobile TOC -->
+  <button class="mobile-toc-btn" id="mobileTocBtn" aria-label="Open table of contents">&#9776; Contents</button>
+  <div class="mobile-toc-overlay" id="mobileTocOverlay">
+    <div class="mobile-toc-panel">
+      <div class="mobile-toc-panel-header">
+        <h3>On this page</h3>
+        <button class="mobile-toc-close" id="mobileTocClose" aria-label="Close">&times;</button>
+      </div>
+      <ul class="mobile-toc-list">
+        <li><a href="#what-and-why" data-section="theory">What feature flags and release management mean for PMs</a></li>
+        <li><a href="#flag-strategy" data-section="practical">Feature flag strategy</a></li>
+        <li><a href="#canary-dark" data-section="practical">Canary releases and dark launches</a></li>
+        <li><a href="#kill-switch" data-section="practical">Kill switches and incident response</a></li>
+        <li><a href="#beta-programs" data-section="practical">Beta program design</a></li>
+        <li><a href="#examples" data-section="examples">Real-world examples</a></li>
+        <li><a href="#pitfalls" data-section="practical">Common pitfalls</a></li>
+        <li><a href="#connections">Connected topics in your library</a></li>
+        <li><a href="#deep-dive">Deep-dive appendix</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    // Scrollspy: highlight active TOC item
+    const tocLinks = document.querySelectorAll('.toc-list a');
+    const sections = [];
+    tocLinks.forEach(link => {
+      const href = link.getAttribute('href');
+      if (!href || !href.startsWith('#')) return;
+      const el = document.getElementById(href.slice(1));
+      if (el) sections.push({ el, link });
+    });
+
+    // Reading progress bar
+    const progressBar = document.getElementById('readingProgress');
+    const backToTop = document.getElementById('backToTop');
+
+    function onScroll() {
+      let current = sections[0];
+      for (const s of sections) {
+        if (s.el.getBoundingClientRect().top <= 120) current = s;
+      }
+      tocLinks.forEach(l => l.classList.remove('active'));
+      if (current) current.link.classList.add('active');
+
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrolled = window.scrollY;
+      const progress = docHeight > 0 ? (scrolled / docHeight) * 100 : 0;
+      if (progressBar) progressBar.style.width = progress + '%';
+      if (backToTop) backToTop.classList.toggle('visible', scrolled > 400);
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    // Split badges: click to scroll to section
+    document.querySelectorAll('.content-splits .split-badge').forEach(function(badge) {
+      badge.addEventListener('click', function() {
+        var type = badge.classList.contains('theory') ? 'theory' : badge.classList.contains('practical') ? 'practical' : 'examples';
+        var target = document.querySelector('section[data-section="' + type + '"]');
+        if (target) {
+          var marker = target.previousElementSibling;
+          (marker && marker.classList.contains('section-marker') ? marker : target).scrollIntoView({behavior:'smooth'});
+        }
+      });
+    });
+  </script>
+
+  <script src="../js/checklist.js"></script>
+  <script src="../js/mobile-toc.js"></script>
+  <script src="../js/search.js"></script>
+  <script>
+    function openBurger(){document.getElementById('burgerOverlay').classList.add('open');document.body.style.overflow='hidden'}
+    function closeBurger(e){if(e&&e.target&&e.target!==document.getElementById('burgerOverlay'))return;document.getElementById('burgerOverlay').classList.remove('open');document.body.style.overflow=''}
+    function burgerSearch(q){
+      var r=document.getElementById('burgerSearchResults');
+      if(!q||q.length<2){r.innerHTML='';return}
+      var ql=q.toLowerCase(),matches=[];
+      if(typeof SEARCH_INDEX!=='undefined'){
+        SEARCH_INDEX.forEach(function(t){
+          var hit=t.topic.toLowerCase().indexOf(ql)>-1;
+          if(!hit)t.sections.forEach(function(s){if((s.title+' '+s.keywords).toLowerCase().indexOf(ql)>-1)hit=true});
+          if(hit)matches.push(t);
+        });
+      }
+      if(!matches.length){r.innerHTML='<p style="padding:8px 0;font-size:13px;color:var(--ink-muted)">No results</p>';return}
+      r.innerHTML=matches.slice(0,8).map(function(m){return '<a href="../'+m.url+'">'+m.topic+'<span class="bsr-disc">'+m.discipline+'</span></a>'}).join('');
+    }
+    document.addEventListener('keydown',function(e){if(e.key==='Escape'){closeBurger();var dd=document.getElementById('searchDropdown');if(dd)dd.classList.remove('visible');}});
+    // Close burger when clicking a TOC link
+    document.querySelectorAll('.burger-toc-list a').forEach(function(a){a.addEventListener('click',function(){closeBurger()})});
+    // Search typeahead
+    function topicSearch(q){
+      var dd=document.getElementById('searchDropdown');
+      if(!q||q.length<2||typeof SEARCH_INDEX==='undefined'){if(dd)dd.classList.remove('visible');return}
+      var ql=q.toLowerCase(),grouped={};
+      SEARCH_INDEX.forEach(function(t){
+        var hit=t.topic.toLowerCase().indexOf(ql)>-1,sHits=[],mHits=[];
+        t.sections.forEach(function(s){if((s.title+' '+s.keywords).toLowerCase().indexOf(ql)>-1)sHits.push(s)});
+        (t.methods||[]).forEach(function(m){if((m.name+' '+(m.keywords||'')).toLowerCase().indexOf(ql)>-1)mHits.push(m)});
+        if(!hit&&!sHits.length&&!mHits.length&&ql.length>=3&&typeof levenshtein==='function'){
+          var words=t.topic.toLowerCase().split(/ +/);
+          for(var i=0;i<words.length;i++){if(levenshtein(ql,words[i].substring(0,ql.length+1))<=1){hit=true;break}}
+        }
+        if(hit||sHits.length||mHits.length)grouped[t.topic]={url:'../'+t.url,disc:t.discipline||'',sections:sHits,methods:mHits,topicHit:hit};
+      });
+      var keys=Object.keys(grouped);
+      if(!keys.length){dd.innerHTML='<div class="search-empty">No results</div>';dd.classList.add('visible');return}
+      var html='';
+      keys.slice(0,8).forEach(function(topic){
+        var g=grouped[topic];
+        html+='<div class="search-group"><div class="search-group-title">'+topic+'</div>';
+        if(g.topicHit)html+='<a class="search-result" href="'+g.url+'"><span class="search-result-title">'+topic+'</span><span class="search-result-type practical">'+g.disc+'</span></a>';
+        g.sections.forEach(function(s){html+='<a class="search-result" href="'+g.url+'#'+s.id+'"><span class="search-result-title">'+s.title+'</span><span class="search-result-type '+s.type+'">'+s.type+'</span></a>'});
+        g.methods.slice(0,3).forEach(function(m){html+='<a class="search-result" href="'+g.url+'#'+m.section+'"><span class="search-result-title">'+m.name+'</span><span class="search-result-type practical">method</span></a>'});
+        html+='</div>';
+      });
+      dd.innerHTML=html;dd.classList.add('visible');
+    }
+    document.addEventListener('click',function(e){if(!e.target.closest('.search-box')){var dd=document.getElementById('searchDropdown');if(dd)dd.classList.remove('visible')}});
+  </script>
+
+</body>
+</html>

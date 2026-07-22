@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Heuristic Evaluation — Noir Book</title>
+  <link rel="stylesheet" href="../css/shared.css">
+  <link rel="stylesheet" href="../css/topic.css">
+  <script src="../js/theme.js"></script>
+  <script src="../js/topic-nav.js"></script>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="site-nav subpage-nav" data-discipline="ux">
+    <div class="nav-inner">
+      <a href="../index.html" class="site-logo">
+        <span class="logo-mark">UX</span>
+        <span class="nav-title">Noir Book</span>
+      </a>
+      <a href="../index.html" class="nav-back-link">&#8592; Library</a>
+      <div class="nav-filters">
+        <button class="disc-toggle ux-toggle active" data-disc="ux" onclick="toggleDisc('ux')" title="UX Design">
+          <span class="disc-dot disc-dot-ux"></span><span class="disc-label">UX Design</span><span class="disc-code">(UX)</span>
+        </button>
+        <button class="disc-toggle pm-toggle active" data-disc="pm" onclick="toggleDisc('pm')" title="Product Management">
+          <span class="disc-dot disc-dot-pm"></span><span class="disc-label">Product</span><span class="disc-code">(PM)</span>
+        </button>
+        <button class="disc-toggle mk-toggle active" data-disc="mk" onclick="toggleDisc('mk')" title="Marketing &amp; Growth">
+          <span class="disc-dot disc-dot-mk"></span><span class="disc-label">Marketing</span><span class="disc-code">(MK)</span>
+        </button>
+        <button class="disc-toggle cs-toggle active" data-disc="cs" onclick="toggleDisc('cs')" title="Content Strategy">
+          <span class="disc-dot disc-dot-cs"></span><span class="disc-label">Content</span><span class="disc-code">(CS)</span>
+        </button>
+        <div class="search-box nav-search-box">
+          <div class="nav-search-wrap">
+            <div class="nav-search-pills" id="navSearchPills"></div>
+            <input type="text" id="navSearchInput" placeholder="Search..." autocomplete="off"
+              oninput="topicNavSearch(this.value)"
+              onkeydown="handleNavSearchKey(event)"
+              onfocus="handleNavSearchFocus()"
+              onblur="handleNavSearchBlur()">
+            <button type="button" class="nav-search-clear" id="navSearchClear" onclick="clearNavSearch()" aria-label="Clear search">&times;</button>
+          </div>
+          <div class="search-dropdown" id="navSearchDropdown"></div>
+        </div>
+      </div>
+      <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle theme">&#9790;</button>
+      <button class="burger-btn" id="burgerBtn" onclick="openBurger()" aria-label="Menu">
+        <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="2" y1="4" x2="16" y2="4"/><line x1="2" y1="9" x2="16" y2="9"/><line x1="2" y1="14" x2="16" y2="14"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Burger Menu Overlay -->
+  <div class="burger-overlay" id="burgerOverlay" onclick="closeBurger(event)">
+    <div class="burger-panel" onclick="event.stopPropagation()">
+      <div class="burger-panel-header">
+        <h3>Menu</h3>
+        <button class="burger-close" onclick="closeBurger()" aria-label="Close">&times;</button>
+      </div>
+      <div class="burger-search">
+        <input type="text" id="burgerSearchInput" placeholder="Search topics, methods..." autocomplete="off" oninput="burgerSearch(this.value)">
+        <div class="burger-search-results" id="burgerSearchResults"></div>
+      </div>
+      <div class="burger-links">
+        <a href="../index.html">&#8592; Back to Library</a>
+        <a href="../design-system.html">Design System</a>
+        <a href="../request-topic.html">Suggest a topic or improvement</a>
+      </div>
+      <div class="burger-toc-section">
+        <p class="burger-toc-title">On this page</p>
+        <ul class="burger-toc-list">
+        <li><a href="#what-and-why" data-section="theory">What heuristic evaluation is and when to use it</a></li>
+        <li><a href="#nielsen-heuristics" data-section="practical">Nielsen's 10 usability heuristics</a></li>
+        <li><a href="#conducting" data-section="practical">Conducting a heuristic evaluation</a></li>
+        <li><a href="#cognitive-walkthrough" data-section="practical">Cognitive walkthrough</a></li>
+        <li><a href="#severity" data-section="practical">Severity rating scale</a></li>
+        <li><a href="#templates" data-section="practical">Templates and checklists</a></li>
+        <li><a href="#real-world-examples" data-section="examples">Real-world examples</a></li>
+        <li><a href="#pitfalls" data-section="practical">Common pitfalls</a></li>
+        <li><a href="#connections">Connected topics in your library</a></li>
+        <li><a href="#deep-dive">Deep-dive appendix</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Topic Header -->
+  <header class="topic-header container">
+    <div class="breadcrumb">
+      <a href="../index.html">Library</a>
+      <span class="sep">&#8250;</span>
+      <span class="breadcrumb-disc breadcrumb-ux">UX Design</span>
+      <span class="sep">&#8250;</span>
+      <span>Tier 2 — Specialized</span>
+      <span class="sep">&#8250;</span>
+      <span>Heuristic Evaluation</span>
+    </div>
+    <div class="topic-meta">
+      <span class="tier-badge tier2">Tier 2</span>
+      <span style="font-size:14px;color:var(--ink-muted)">Topic UX.2.04</span>
+    </div>
+    <h1>Heuristic Evaluation</h1>
+    <p class="topic-subtitle">Expert review methods without recruiting users. Nielsen's heuristics, cognitive walkthroughs, and structured accessibility audits.</p>
+    <div class="content-splits">
+      <span class="split-badge theory">25% Theory</span>
+      <span class="split-badge practical">50% Methods &amp; Templates</span>
+      <span class="split-badge examples">25% Examples</span>
+    </div>
+  </header>
+
+  <!-- Reading Progress Bar -->
+  <div class="reading-progress" id="readingProgress"></div>
+
+  <!-- Main Layout -->
+  <div class="container">
+    <div class="topic-layout">
+
+      <!-- Sidebar: Table of Contents -->
+      <aside class="topic-sidebar">
+        <nav class="toc">
+          <p class="sidebar-topic-title">Heuristic Evaluation</p>
+          <p class="toc-title">On this page</p>
+          <ul class="toc-list">
+            <li><a href="#what-and-why" data-section="theory">What heuristic evaluation is and when to use it</a></li>
+            <li><a href="#nielsen-heuristics" data-section="practical">Nielsen's 10 usability heuristics</a></li>
+            <li><a href="#conducting" data-section="practical">Conducting a heuristic evaluation</a></li>
+            <li><a href="#cognitive-walkthrough" data-section="practical">Cognitive walkthrough</a></li>
+            <li><a href="#severity" data-section="practical">Severity rating scale</a></li>
+            <li><a href="#templates" data-section="practical">Templates and checklists</a></li>
+            <li><a href="#real-world-examples" data-section="examples">Real-world examples</a></li>
+            <li><a href="#pitfalls" data-section="practical">Common pitfalls</a></li>
+            <li><a href="#connections">Connected topics in your library</a></li>
+            <li><a href="#deep-dive">Deep-dive appendix</a></li>
+          </ul>
+        </nav>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="topic-main topic-content">
+
+        <div class="section-marker" id="what-and-why">
+          <span class="split-badge theory">Theory</span>
+          <span class="marker-line"></span>
+        </div>
+
+        <section data-section="theory">
+  <h2>What heuristic evaluation is and when to use it</h2>
+
+  <p>A heuristic evaluation is an expert review of an interface against a set of established usability principles (heuristics). Instead of testing with real users, one or more evaluators systematically inspect the interface, identify violations of the heuristics, and rate their severity. It's faster, cheaper, and more accessible than usability testing — and catches a different class of problems.</p>
+
+  <p>Heuristic evaluation is not a replacement for usability testing. It catches violations of known principles (a form without labels, inconsistent navigation, no error recovery) but misses problems that only emerge from real user behavior (unexpected mental models, unfamiliar terminology, confusing flows). Use heuristic evaluation to find the obvious problems first, so usability testing can focus on the deeper, behavior-driven issues.</p>
+
+  <div class="callout info">
+    <p class="callout-title">When to use expert review vs user testing</p>
+    <p><strong>Expert review first when:</strong> Budget is limited, timeline is tight, the product has obvious usability issues, or you want to clean up known problems before testing with users. <strong>User testing first when:</strong> The product is novel (no established conventions to evaluate against), you need to validate a concept, or you suspect the problems are in user comprehension rather than interface mechanics. <strong>Best practice:</strong> Heuristic evaluation first (fix the low-hanging fruit), then usability testing (find the deeper issues).</p>
+  </div>
+</section>
+
+        <div class="section-marker" id="nielsen-heuristics">
+          <span class="split-badge practical">Practical</span>
+          <span class="marker-line"></span>
+        </div>
+
+        <section data-section="practical">
+  <h2>Nielsen's 10 usability heuristics</h2>
+
+  <div class="method-card">
+    <h4>1. Visibility of system status <span class="method-tag">Heuristic</span></h4>
+    <p class="method-when">Check: Does the system always tell the user what's happening?</p>
+    <p>The system should keep users informed through appropriate feedback within reasonable time. Loading indicators, progress bars, confirmation messages, active state indicators, breadcrumbs showing location. Violations: silent form submissions, no loading state, no confirmation after an action, unclear which page/section is active.</p>
+  </div>
+
+  <div class="method-card">
+    <h4>2. Match between system and the real world <span class="method-tag">Heuristic</span></h4>
+    <p class="method-when">Check: Does the system speak the user's language?</p>
+    <p>Use familiar words, phrases, and concepts rather than internal jargon. Follow real-world conventions — information should appear in a natural, logical order. Violations: technical error messages ("Error 403: Forbidden"), internal terminology ("SKU," "CRM record"), illogical ordering (alphabetical when chronological makes more sense).</p>
+  </div>
+
+  <div class="method-card">
+    <h4>3. User control and freedom <span class="method-tag">Heuristic</span></h4>
+    <p class="method-when">Check: Can users undo, redo, and escape from unwanted states?</p>
+    <p>Users often make mistakes or explore. Provide clearly marked exits — undo, cancel, back, close. Support redo. Don't trap users in flows they can't escape. Violations: no undo after deletion, no cancel button in multi-step forms, modal dialogs with no close button, forced completion of abandoned wizards.</p>
+  </div>
+
+  <div class="method-card">
+    <h4>4. Consistency and standards <span class="method-tag">Heuristic</span></h4>
+    <p class="method-when">Check: Do similar things look and behave the same way?</p>
+    <p>Users shouldn't have to wonder whether different words, situations, or actions mean the same thing. Follow platform conventions. Be internally consistent. Violations: "Save" in one place, "Submit" in another for the same action. Different button styles for equivalent actions. Navigation that moves between pages. Icons that mean different things in different contexts.</p>
+  </div>
+
+  <div class="method-card">
+    <h4>5. Error prevention <span class="method-tag">Heuristic</span></h4>
+    <p class="method-when">Check: Does the design prevent errors before they happen?</p>
+    <p>Better than good error messages is preventing the error in the first place. Eliminate error-prone conditions. Offer confirmation for irreversible actions. Use constraints (date pickers instead of free-text date entry, dropdown menus instead of free-text fields). Violations: free-text input where a picker would work, no confirmation before destructive actions, allowing invalid data entry.</p>
+  </div>
+
+  <div class="method-card">
+    <h4>6. Recognition rather than recall <span class="method-tag">Heuristic</span></h4>
+    <p class="method-when">Check: Does the user have to remember information from one screen to another?</p>
+    <p>Minimize memory load by making objects, actions, and options visible. Users shouldn't need to remember information from one part of the dialogue to another. Violations: requiring users to remember a code from a previous page, hiding recently used items, showing cryptic IDs instead of human-readable names, empty search boxes with no recent searches or suggestions.</p>
+  </div>
+
+  <div class="method-card">
+    <h4>7. Flexibility and efficiency of use <span class="method-tag">Heuristic</span></h4>
+    <p class="method-when">Check: Can expert users speed up their workflow?</p>
+    <p>Provide accelerators — keyboard shortcuts, saved preferences, recent items, bulk actions — that expert users can leverage while remaining invisible to novices. Violations: no keyboard shortcuts for frequent actions, no way to set defaults, no batch operations, forcing experts through the same tutorial every time.</p>
+  </div>
+
+  <div class="method-card">
+    <h4>8. Aesthetic and minimalist design <span class="method-tag">Heuristic</span></h4>
+    <p class="method-when">Check: Does every element serve a purpose?</p>
+    <p>Every extra unit of information competes with the relevant information and diminishes its relative visibility. Interfaces should not contain information that is irrelevant or rarely needed. Violations: decorative elements that distract from content, overly verbose copy, displaying advanced options by default, visual clutter that obscures primary actions.</p>
+  </div>
+
+  <div class="method-card">
+    <h4>9. Help users recognize, diagnose, and recover from errors <span class="method-tag">Heuristic</span></h4>
+    <p class="method-when">Check: Are error messages helpful, specific, and constructive?</p>
+    <p>Error messages should be expressed in plain language (no codes), precisely indicate the problem, and constructively suggest a solution. Violations: "An error occurred," "Invalid input," error codes without explanation, errors that don't indicate which field is problematic, no suggestion for how to fix the issue.</p>
+  </div>
+
+  <div class="method-card">
+    <h4>10. Help and documentation <span class="method-tag">Heuristic</span></h4>
+    <p class="method-when">Check: Is help available, searchable, and task-focused?</p>
+    <p>Even though it's better if the system can be used without documentation, it may be necessary to provide help. Help should be easy to search, focused on the user's task, list concrete steps, and not be too large. Violations: no help section, help that doesn't cover common tasks, unsearchable documentation, help that opens in a new window and loses context.</p>
+  </div>
+</section>
+
+<section id="conducting" data-section="practical">
+  <h2>Conducting a heuristic evaluation</h2>
+
+  <div class="method-card">
+    <h4>Evaluation Process <span class="method-tag">Core Method</span></h4>
+    <p class="method-when">Use when: running a heuristic evaluation on any digital product.</p>
+    <p><strong>Step 1: Define scope.</strong> Which pages, flows, or features will you evaluate? You can't evaluate everything at once — pick the most critical user journeys. <strong>Step 2: Individual evaluation.</strong> Each evaluator reviews the interface independently, noting every heuristic violation with its location, the violated heuristic, and a severity rating. Independent evaluation prevents groupthink. <strong>Step 3: Consolidation.</strong> Evaluators compare findings, merge duplicates, and discuss disagreements. Multiple evaluators are important — one evaluator finds about 35% of problems; 3-5 evaluators collectively find 60-75%. <strong>Step 4: Prioritize.</strong> Rank findings by severity. Present to the team with recommendations.</p>
+  </div>
+
+  <div class="callout tip">
+    <p class="callout-title">The two-pass technique</p>
+    <p>First pass: walk through the interface freely to get a general sense of the flow and scope. Second pass: go through each screen systematically against each heuristic. The free-form first pass catches contextual and flow-level issues; the systematic second pass catches specific violations that you'd miss if only browsing casually.</p>
+  </div>
+</section>
+
+<section id="cognitive-walkthrough" data-section="practical">
+  <h2>Cognitive walkthrough</h2>
+
+  <div class="method-card">
+    <h4>Cognitive Walkthrough <span class="method-tag">Core Method</span></h4>
+    <p class="method-when">Use when: evaluating learnability — can a new user figure out how to complete a task without instruction?</p>
+    <p>Walk through a specific task step by step, asking four questions at each step: (1) Will the user try to achieve the right effect? (Do they know what to do next?) (2) Will the user notice the correct action is available? (Is the right button/link visible?) (3) Will the user associate the correct action with the desired effect? (Does the label make sense?) (4) After the action, will the user know they've made progress? (Is there feedback?) A "no" to any question is a learnability problem. This method is particularly good at finding first-use issues that heuristic evaluation misses.</p>
+  </div>
+</section>
+
+<section id="severity" data-section="practical">
+  <h2>Severity rating scale</h2>
+
+  <div class="method-card">
+    <h4>Nielsen's Severity Scale <span class="method-tag">Framework</span></h4>
+    <p class="method-when">Use when: rating any usability finding from heuristic evaluation or usability testing.</p>
+    <p><strong>0 — Not a usability problem.</strong> Disagree that this is an issue. <strong>1 — Cosmetic.</strong> Fix only if extra time is available. <strong>2 — Minor.</strong> Low priority. Users can work around it. <strong>3 — Major.</strong> Important to fix. Causes significant difficulty or confusion. High priority. <strong>4 — Catastrophe.</strong> Must fix before release. Users cannot complete the task or the error has serious consequences. Severity is a function of three factors: frequency (how often does it occur?), impact (how difficult is it to overcome?), and persistence (is it a one-time issue or does it keep happening?).</p>
+  </div>
+</section>
+
+<section id="templates" data-section="practical">
+  <h2>Templates and checklists</h2>
+
+  <div class="template-box">
+    <div class="template-header">
+      <span class="template-label">Template</span>
+      <span class="template-title">Heuristic Evaluation Finding</span>
+    </div>
+    <div class="template-grid">
+      <div class="template-field">
+        <div class="template-field-label">Location</div>
+        <p>[Page, screen, or component where the issue occurs]</p>
+      </div>
+      <div class="template-field">
+        <div class="template-field-label">Heuristic violated</div>
+        <p>[Which of the 10 heuristics — or which accessibility guideline]</p>
+      </div>
+      <div class="template-field">
+        <div class="template-field-label">Description</div>
+        <p>[What the problem is, with screenshot if possible]</p>
+      </div>
+      <div class="template-field">
+        <div class="template-field-label">Severity (0-4)</div>
+        <p>[Rating + justification based on frequency, impact, persistence]</p>
+      </div>
+      <div class="template-field">
+        <div class="template-field-label">Recommendation</div>
+        <p>[Suggested fix]</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="template-box">
+    <div class="template-header">
+      <span class="template-label">Checklist</span>
+      <span class="template-title">Heuristic Evaluation Setup</span>
+    </div>
+    <ul class="checklist">
+      <li>Scope defined: which flows, pages, or features to evaluate</li>
+      <li>3-5 evaluators identified (ideally with UX experience)</li>
+      <li>Heuristic reference sheet provided to all evaluators</li>
+      <li>Each evaluator reviews independently before group discussion</li>
+      <li>Finding template used consistently (location, heuristic, severity, recommendation)</li>
+      <li>Two-pass approach: free exploration first, systematic review second</li>
+      <li>Findings consolidated and deduplicated across evaluators</li>
+      <li>Severity ratings agreed upon by group consensus</li>
+      <li>Top findings presented with recommendations and screenshots</li>
+    </ul>
+  </div>
+</section>
+
+        <div class="section-marker" id="real-world-examples">
+          <span class="split-badge examples">Examples</span>
+          <span class="marker-line"></span>
+        </div>
+
+        <section data-section="examples">
+  <h2>Real-world examples</h2>
+
+  <div class="case-study">
+    <p class="case-label">Case study</p>
+    <h4>E-commerce checkout: heuristic violations in the wild</h4>
+    <p>A heuristic evaluation of a major e-commerce checkout found 23 issues across 5 screens. The most severe: no visibility of system status during payment processing (the page went blank for 8 seconds — users thought it crashed and clicked "Pay" again, resulting in double charges). A form field labeled "Address 2" with no explanation (what goes here?). No error prevention on the phone number field (accepts any text, validates only on submit). The fix for the payment processing issue alone — adding a spinner with "Processing your payment..." — reduced support tickets by 40%.</p>
+    <p><strong>Why it works:</strong> A 2-hour expert review found a problem that was costing the company thousands in double-charge refunds and support costs.</p>
+  </div>
+
+  <div class="case-study">
+    <p class="case-label">Case study</p>
+    <h4>Cognitive walkthrough: onboarding a SaaS product</h4>
+    <p>A cognitive walkthrough of a project management tool's onboarding revealed that new users couldn't create their first project. The "Create Project" button existed — but it was in a dropdown menu under their avatar, which no one expected. The walkthrough question "Will the user notice the correct action is available?" got a clear "no" from all three evaluators. The fix: a prominent "Create your first project" card on the empty dashboard, plus a persistent "+" button in the top navigation. First-project creation rate went from 34% to 78%.</p>
+    <p><strong>Why it works:</strong> The cognitive walkthrough caught a discoverability problem that a standard heuristic evaluation might have missed because the button technically existed and was consistent with the design system.</p>
+  </div>
+
+  <div class="case-study">
+    <p class="case-label">Case study</p>
+    <h4>Government form: combining heuristic evaluation with accessibility audit</h4>
+    <p>A government benefits application form was evaluated against both Nielsen's heuristics and WCAG 2.1 AA. The combined review found 47 issues — 18 usability, 29 accessibility. The overlap was significant: 12 issues violated both usability heuristics and accessibility guidelines (e.g., form fields without labels violated both "recognition rather than recall" and WCAG 1.3.1). Running both evaluations simultaneously was more efficient than running them separately because the overlap reduced total evaluation time by about 30%.</p>
+    <p><strong>Why it works:</strong> Usability and accessibility evaluations reinforce each other. Many accessibility violations are also usability violations.</p>
+  </div>
+</section>
+
+<section id="pitfalls" data-section="practical">
+  <h2>Common pitfalls</h2>
+
+  <div class="pitfall">
+    <div class="pitfall-icon">!</div>
+    <div>
+      <h4>Using heuristic evaluation as a substitute for user testing</h4>
+      <p>Expert evaluators find different problems than real users. Heuristic evaluation catches violations of known principles; usability testing catches problems with mental models, comprehension, and real-world workflows. They're complementary methods, not alternatives. A product that passes a heuristic evaluation can still confuse users; a product that tests well with users can still have heuristic violations.</p>
+    </div>
+  </div>
+
+  <div class="pitfall">
+    <div class="pitfall-icon">!</div>
+    <div>
+      <h4>Single-evaluator reviews</h4>
+      <p>One evaluator finds roughly 35% of problems. Three evaluators find about 60%. Five find about 75%. A single-evaluator review is better than nothing, but it gives false confidence — the 65% of problems you didn't find are still there. If you can only have one evaluator, acknowledge the limitation explicitly in your findings.</p>
+    </div>
+  </div>
+
+  <div class="pitfall">
+    <div class="pitfall-icon">!</div>
+    <div>
+      <h4>Listing problems without severity or recommendations</h4>
+      <p>A list of 50 unsorted findings with no severity ratings is overwhelming and unactionable. Teams don't know where to start. Always rate severity and provide a prioritized recommendation for each finding. The development team needs to know: "Fix these 5 things first; these 10 can wait; these 15 are cosmetic."</p>
+    </div>
+  </div>
+</section>
+
+<section id="connections">
+  <h2>Connected topics in your library</h2>
+  <div class="cross-ref-grid">
+    <a href="usability.html" class="cross-ref-card">
+      <span class="ref-number">Tier 1</span>
+      <div class="ref-title">Usability</div>
+      <div class="ref-reason">The heuristics come from usability principles. This topic teaches how to apply them as an evaluation method.</div>
+    </a>
+    <a href="usability-testing.html" class="cross-ref-card">
+      <span class="ref-number">Tier 2</span>
+      <div class="ref-title">Conducting Usability Testing</div>
+      <div class="ref-reason">The complementary method — heuristic evaluation finds principle violations, usability testing finds behavior-driven problems.</div>
+    </a>
+    <a href="accessibility.html" class="cross-ref-card">
+      <span class="ref-number">Tier 1</span>
+      <div class="ref-title">Accessibility</div>
+      <div class="ref-reason">Accessibility audits follow the same expert-review approach. Many accessibility issues overlap with heuristic violations.</div>
+    </a>
+    <a href="cognitive-emotional-design.html" class="cross-ref-card">
+      <span class="ref-number">Tier 2</span>
+      <div class="ref-title">Cognitive and Emotional Design</div>
+      <div class="ref-reason">Cognitive walkthroughs are grounded in cognitive psychology — how users perceive, learn, and form expectations.</div>
+    </a>
+  </div>
+</section>
+
+<div class="deep-dive-section" id="deep-dive">
+          <div class="deep-dive-header">
+            <span class="deep-dive-badge">Deep Dive</span>
+            <h2 style="margin:0; border:none; padding:0;">Appendix</h2>
+          </div>
+
+  <details class="expandable">
+    <summary><span class="chevron"><svg viewBox="0 0 14 14"><polyline points="4,2 10,7 4,12"/></svg></span> Shneiderman's 8 golden rules</summary>
+    <div class="expand-content topic-content">
+      <p>An alternative to Nielsen's heuristics, Ben Shneiderman's rules emphasize interaction design: (1) Strive for consistency. (2) Seek universal usability. (3) Offer informative feedback. (4) Design dialogues to yield closure. (5) Prevent errors. (6) Permit easy reversal of actions. (7) Keep users in control. (8) Reduce short-term memory load. These overlap significantly with Nielsen's heuristics but add emphasis on closure (every sequence of actions should have a clear beginning, middle, and end) and user control (the user should feel in charge, not the system).</p>
+    </div>
+  </details>
+
+  <details class="expandable">
+    <summary><span class="chevron"><svg viewBox="0 0 14 14"><polyline points="4,2 10,7 4,12"/></svg></span> Gerhardt-Powals cognitive engineering principles</summary>
+    <div class="expand-content topic-content">
+      <p>A more cognitive-science-grounded alternative: (1) Automate unwanted workload. (2) Reduce uncertainty. (3) Fuse data to reduce cognitive load. (4) Present new information with meaningful aids to interpretation. (5) Use names that are conceptually related to function. (6) Group data in consistently meaningful ways. (7) Limit data-driven tasks. (8) Include only information needed at any given time. (9) Provide multiple coding of data when appropriate. (10) Practice judicious redundancy. These principles are particularly useful for data-heavy interfaces and dashboards.</p>
+    </div>
+  </details>
+
+  <details class="expandable">
+    <summary><span class="chevron"><svg viewBox="0 0 14 14"><polyline points="4,2 10,7 4,12"/></svg></span> Further reading and resources</summary>
+    <div class="expand-content topic-content">
+      <h4>Essential reading</h4>
+      <p><strong>"Usability Inspection Methods" by Nielsen &amp; Mack</strong> — The original academic reference for heuristic evaluation, cognitive walkthrough, and related inspection methods.</p>
+      <p><strong>"Don't Make Me Think" by Steve Krug</strong> — While not specifically about heuristic evaluation, Krug's approach to assessing usability by inspection is essentially an informal heuristic evaluation. Great for building intuition.</p>
+      <p><strong>NN/g: "10 Usability Heuristics" article series</strong> — Nielsen Norman Group's detailed breakdown of each heuristic with modern examples. Free online reference.</p>
+    </div>
+  </details>
+</div>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer container">
+    <div class="footer-inner">
+      <p>Noir Book — Built for the work, not the shelf.</p>
+      <div class="footer-links">
+        <a href="../design-system.html">Design System</a>
+        <a href="../library-manifest.json">Manifest</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to Top -->
+  <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">&#8593;</button>
+
+  <!-- Floating Mobile TOC -->
+  <button class="mobile-toc-btn" id="mobileTocBtn" aria-label="Open table of contents">&#9776; Contents</button>
+  <div class="mobile-toc-overlay" id="mobileTocOverlay">
+    <div class="mobile-toc-panel">
+      <div class="mobile-toc-panel-header">
+        <h3>On this page</h3>
+        <button class="mobile-toc-close" id="mobileTocClose" aria-label="Close">&times;</button>
+      </div>
+      <ul class="mobile-toc-list">
+        <li><a href="#what-and-why" data-section="theory">What heuristic evaluation is and when to use it</a></li>
+        <li><a href="#nielsen-heuristics" data-section="practical">Nielsen's 10 usability heuristics</a></li>
+        <li><a href="#conducting" data-section="practical">Conducting a heuristic evaluation</a></li>
+        <li><a href="#cognitive-walkthrough" data-section="practical">Cognitive walkthrough</a></li>
+        <li><a href="#severity" data-section="practical">Severity rating scale</a></li>
+        <li><a href="#templates" data-section="practical">Templates and checklists</a></li>
+        <li><a href="#real-world-examples" data-section="examples">Real-world examples</a></li>
+        <li><a href="#pitfalls" data-section="practical">Common pitfalls</a></li>
+        <li><a href="#connections">Connected topics in your library</a></li>
+        <li><a href="#deep-dive">Deep-dive appendix</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    // Scrollspy: highlight active TOC item
+    const tocLinks = document.querySelectorAll('.toc-list a');
+    const sections = [];
+    tocLinks.forEach(link => {
+      const href = link.getAttribute('href');
+      if (!href || !href.startsWith('#')) return;
+      const el = document.getElementById(href.slice(1));
+      if (el) sections.push({ el, link });
+    });
+
+    // Reading progress bar
+    const progressBar = document.getElementById('readingProgress');
+    const backToTop = document.getElementById('backToTop');
+
+    function onScroll() {
+      let current = sections[0];
+      for (const s of sections) {
+        if (s.el.getBoundingClientRect().top <= 120) current = s;
+      }
+      tocLinks.forEach(l => l.classList.remove('active'));
+      if (current) current.link.classList.add('active');
+
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrolled = window.scrollY;
+      const progress = docHeight > 0 ? (scrolled / docHeight) * 100 : 0;
+      if (progressBar) progressBar.style.width = progress + '%';
+      if (backToTop) backToTop.classList.toggle('visible', scrolled > 400);
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    // Split badges: click to scroll to section
+    document.querySelectorAll('.content-splits .split-badge').forEach(function(badge) {
+      badge.addEventListener('click', function() {
+        var type = badge.classList.contains('theory') ? 'theory' : badge.classList.contains('practical') ? 'practical' : 'examples';
+        var target = document.querySelector('section[data-section="' + type + '"]');
+        if (target) {
+          var marker = target.previousElementSibling;
+          (marker && marker.classList.contains('section-marker') ? marker : target).scrollIntoView({behavior:'smooth'});
+        }
+      });
+    });
+  </script>
+
+  <script src="../js/checklist.js"></script>
+  <script src="../js/mobile-toc.js"></script>
+  <script src="../js/search.js"></script>
+  <script>
+    function openBurger(){document.getElementById('burgerOverlay').classList.add('open');document.body.style.overflow='hidden'}
+    function closeBurger(e){if(e&&e.target&&e.target!==document.getElementById('burgerOverlay'))return;document.getElementById('burgerOverlay').classList.remove('open');document.body.style.overflow=''}
+    function burgerSearch(q){
+      var r=document.getElementById('burgerSearchResults');
+      if(!q||q.length<2){r.innerHTML='';return}
+      var ql=q.toLowerCase(),matches=[];
+      if(typeof SEARCH_INDEX!=='undefined'){
+        SEARCH_INDEX.forEach(function(t){
+          var hit=t.topic.toLowerCase().indexOf(ql)>-1;
+          if(!hit)t.sections.forEach(function(s){if((s.title+' '+s.keywords).toLowerCase().indexOf(ql)>-1)hit=true});
+          if(hit)matches.push(t);
+        });
+      }
+      if(!matches.length){r.innerHTML='<p style="padding:8px 0;font-size:13px;color:var(--ink-muted)">No results</p>';return}
+      r.innerHTML=matches.slice(0,8).map(function(m){return '<a href="../'+m.url+'">'+m.topic+'<span class="bsr-disc">'+m.discipline+'</span></a>'}).join('');
+    }
+    document.addEventListener('keydown',function(e){if(e.key==='Escape'){closeBurger();var dd=document.getElementById('searchDropdown');if(dd)dd.classList.remove('visible');}});
+    // Close burger when clicking a TOC link
+    document.querySelectorAll('.burger-toc-list a').forEach(function(a){a.addEventListener('click',function(){closeBurger()})});
+    // Search typeahead
+    function topicSearch(q){
+      var dd=document.getElementById('searchDropdown');
+      if(!q||q.length<2||typeof SEARCH_INDEX==='undefined'){if(dd)dd.classList.remove('visible');return}
+      var ql=q.toLowerCase(),grouped={};
+      SEARCH_INDEX.forEach(function(t){
+        var hit=t.topic.toLowerCase().indexOf(ql)>-1,sHits=[],mHits=[];
+        t.sections.forEach(function(s){if((s.title+' '+s.keywords).toLowerCase().indexOf(ql)>-1)sHits.push(s)});
+        (t.methods||[]).forEach(function(m){if((m.name+' '+(m.keywords||'')).toLowerCase().indexOf(ql)>-1)mHits.push(m)});
+        if(!hit&&!sHits.length&&!mHits.length&&ql.length>=3&&typeof levenshtein==='function'){
+          var words=t.topic.toLowerCase().split(/ +/);
+          for(var i=0;i<words.length;i++){if(levenshtein(ql,words[i].substring(0,ql.length+1))<=1){hit=true;break}}
+        }
+        if(hit||sHits.length||mHits.length)grouped[t.topic]={url:'../'+t.url,disc:t.discipline||'',sections:sHits,methods:mHits,topicHit:hit};
+      });
+      var keys=Object.keys(grouped);
+      if(!keys.length){dd.innerHTML='<div class="search-empty">No results</div>';dd.classList.add('visible');return}
+      var html='';
+      keys.slice(0,8).forEach(function(topic){
+        var g=grouped[topic];
+        html+='<div class="search-group"><div class="search-group-title">'+topic+'</div>';
+        if(g.topicHit)html+='<a class="search-result" href="'+g.url+'"><span class="search-result-title">'+topic+'</span><span class="search-result-type practical">'+g.disc+'</span></a>';
+        g.sections.forEach(function(s){html+='<a class="search-result" href="'+g.url+'#'+s.id+'"><span class="search-result-title">'+s.title+'</span><span class="search-result-type '+s.type+'">'+s.type+'</span></a>'});
+        g.methods.slice(0,3).forEach(function(m){html+='<a class="search-result" href="'+g.url+'#'+m.section+'"><span class="search-result-title">'+m.name+'</span><span class="search-result-type practical">method</span></a>'});
+        html+='</div>';
+      });
+      dd.innerHTML=html;dd.classList.add('visible');
+    }
+    document.addEventListener('click',function(e){if(!e.target.closest('.search-box')){var dd=document.getElementById('searchDropdown');if(dd)dd.classList.remove('visible')}});
+  </script>
+
+</body>
+</html>

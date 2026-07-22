@@ -1,0 +1,280 @@
+<!--
+TOPIC_ID: PM.2.10
+TOPIC_NUMBER: PM.2.10
+TITLE: Feature Flags, Rollouts &amp; Release Management
+SUBTITLE: Ship safely. Feature flagging strategy, percentage rollouts, canary releases, kill switches, and the operational discipline of getting code to users without breaking things.
+TIER: 2
+TIER_LABEL: Specialized
+THEORY: 20
+PRACTICAL: 55
+EXAMPLES: 25
+-->
+
+<section id="what-and-why" data-section="theory">
+  <h2>What feature flags and release management mean for PMs</h2>
+
+<p>Feature flags are conditional switches that let you enable or disable functionality for specific users without deploying new code. They decouple <em>deployment</em> (code reaches production) from <em>release</em> (users see the feature). This distinction changes how PMs think about shipping: instead of "this feature goes live when the code ships," it becomes "we deploy the code, then gradually release to users, watching metrics at each stage."</p>
+
+<p>For PMs, feature flags unlock four capabilities that change your operating model:</p>
+<ul>
+  <li><strong>Gradual rollout</strong> — show a new feature to 5% of users, monitor for issues, then expand to 20%, 50%, 100%.</li>
+  <li><strong>Targeting</strong> — show a feature only to enterprise users, or beta testers, or users in a specific region.</li>
+  <li><strong>Kill switch</strong> — instantly disable a feature if it causes problems, without a code rollback.</li>
+  <li><strong>Experimentation</strong> — run A/B tests by showing different feature variants to different groups.</li>
+</ul>
+
+<p>The PM's role isn't implementing flags — it's owning the release strategy: deciding who sees what when, defining the metrics that trigger expansion or rollback, and managing the lifecycle of flags from creation through cleanup. Unmanaged feature flags become their own form of tech debt — "flag debt" — where nobody knows which flags are still active, which are permanent, and which control abandoned experiments.</p>
+</section>
+
+<section id="flag-strategy" data-section="practical">
+  <h2>Feature flag strategy</h2>
+
+<div class="method-card">
+  <h4>Feature Flag Strategy Matrix <span class="method-tag">Core Method</span></h4>
+  <p class="method-when">Use when: deciding what type of flag to use for a new feature.</p>
+  <p>Not all flags are equal. Categorize by purpose:</p>
+<ul>
+  <li><strong>Release flags</strong> — temporary switches for gradual rollout. Remove after 100% rollout. Lifespan: days to weeks.</li>
+  <li><strong>Experiment flags</strong> — control A/B test variants. Remove after experiment concludes. Lifespan: weeks.</li>
+  <li><strong>Ops flags</strong> — kill switches for critical functionality. Keep permanently. Lifespan: forever.</li>
+  <li><strong>Permission flags</strong> — feature access by plan tier or user role. Part of the product, not temporary. Lifespan: forever.</li>
+  <li><strong>Development flags</strong> — hide work-in-progress from users. Remove before or at launch.</li>
+</ul>
+  <p>The strategy matrix helps because each type has different lifecycle management. Release flags have a defined removal date. Experiment flags have a defined analysis date. Permission flags are part of your packaging strategy. Treating all flags the same leads to flag debt: 200 flags in production, half of which nobody remembers creating.</p>
+</div>
+
+<div class="method-card">
+  <h4>Percentage Rollout Plan <span class="method-tag">Core Method</span></h4>
+  <p class="method-when">Use when: releasing a new feature gradually to catch problems before full exposure.</p>
+  <p>Define rollout stages with clear criteria for advancing or rolling back. A typical plan:</p>
+<ul>
+  <li><strong>Stage 1 (1-5%)</strong> — internal team + small user sample. Monitor for crashes, errors, and edge cases. Duration: 1-2 days.</li>
+  <li><strong>Stage 2 (10-20%)</strong> — broader exposure. Monitor core metrics (conversion rate, error rate, latency). Duration: 2-3 days.</li>
+  <li><strong>Stage 3 (50%)</strong> — half your users. Statistically meaningful for metric comparison. Duration: 3-5 days.</li>
+  <li><strong>Stage 4 (100%)</strong> — full rollout. Clean up the flag within 1 sprint.</li>
+</ul>
+  <p>Define advance criteria ("error rate stays below 0.5%, no P1 incidents, core metric doesn't drop more than 2%") and rollback criteria ("error rate exceeds 1%, any P1 incident, core metric drops more than 5%"). Write these before the rollout starts, not during a crisis.</p>
+</div>
+
+<div class="callout tip">
+  <p class="callout-title">Practical tip</p>
+  <p>Always include yourself and your PM peers in Stage 1. Dogfooding catches UX issues that metrics miss: confusing error messages, broken edge cases, unexpected behavior. If you wouldn't ship this to your own workflow, don't ship it to 50% of users.</p>
+</div>
+</section>
+
+<section id="canary-dark" data-section="practical">
+  <h2>Canary releases and dark launches</h2>
+
+<div class="method-card">
+  <h4>Canary Release Protocol <span class="method-tag">Technique</span></h4>
+  <p class="method-when">Use when: deploying infrastructure changes or backend modifications where user-facing behavior should be identical.</p>
+  <p>A canary release routes a small percentage of traffic to the new version while the majority stays on the old version. Unlike feature flags (which show different features), canary releases show the same feature but run it on different infrastructure. Monitor: error rate comparison, latency percentiles (P50, P95, P99), resource consumption, and downstream service health. If the canary shows degradation, route traffic back to the old version instantly. Canary releases are the safety net for database migrations, API version upgrades, and infrastructure changes.</p>
+</div>
+
+<div class="method-card">
+  <h4>Dark Launch Pattern <span class="method-tag">Technique</span></h4>
+  <p class="method-when">Use when: you need to test a feature's backend under production load without users seeing it.</p>
+  <p>A dark launch runs new code in production but hides the results from users. The system processes requests through both the old and new paths, compares results, and only shows the old path to users. This lets you validate correctness and performance under real traffic without risk. Use dark launches for: search algorithm changes (run both algorithms, compare relevance), recommendation engines (generate recommendations from both models, measure quality), and data pipeline changes (process data through both pipelines, compare outputs).</p>
+</div>
+</section>
+
+<section id="kill-switch" data-section="practical">
+  <h2>Kill switches and incident response</h2>
+
+<div class="method-card">
+  <h4>Kill Switch Checklist <span class="method-tag">Core Method</span></h4>
+  <p class="method-when">Use when: a feature is causing problems in production and needs to be disabled immediately.</p>
+  <p>Every critical feature should have a kill switch — a feature flag that disables the feature instantly without a code deployment. The kill switch checklist: <strong>Before launch:</strong> Verify the kill switch works in staging. Confirm it fully disables the feature (including dependent UI, API endpoints, and background jobs). Document the flag name and location. <strong>During incident:</strong> Disable the flag. Verify the feature is fully off (check from a user's perspective, not just the flag state). Notify stakeholders. <strong>After incident:</strong> Root-cause analysis. Fix the bug. Test the fix behind the flag before re-enabling. Gradual re-rollout.</p>
+  <p>The PM's kill switch responsibility: know where the switch is, know who can flip it (on-call engineer, not just the tech lead), and have a communication template ready. An incident is not the time to figure out how to tell customers what happened.</p>
+</div>
+
+<div class="callout warning">
+  <p class="callout-title">Common mistake</p>
+  <p>Kill switches that don't fully kill the feature. The flag disables the UI, but the background job keeps running. Or the flag disables the web version but not the mobile app. Test kill switches end-to-end before you need them in an emergency. A kill switch that leaves partial functionality running can cause worse problems than no kill switch at all.</p>
+</div>
+</section>
+
+<section id="beta-programs" data-section="practical">
+  <h2>Beta program design</h2>
+
+<div class="method-card">
+  <h4>Beta Program Design <span class="method-tag">Framework</span></h4>
+  <p class="method-when">Use when: you want structured early feedback before a general release.</p>
+  <p>A beta program is more than "give some users early access." Design it with:</p>
+<ul>
+  <li><strong>Selection criteria</strong> — who should be in the beta? Mix of power users (stress-test edge cases), new users (test learnability), and strategic accounts (validate enterprise fit).</li>
+  <li><strong>Feedback mechanisms</strong> — in-app feedback widget, dedicated Slack channel, weekly survey, or scheduled calls.</li>
+  <li><strong>Success criteria</strong> — what signals tell you the beta is ready for GA? (Bug count below X, satisfaction score above Y, key workflow completion rate above Z.).</li>
+  <li><strong>Timeline</strong> — defined start and end dates. Open-ended betas become permanent pre-release limbo.</li>
+</ul>
+  <p>Limit beta size. 20-50 users gives you enough feedback diversity without overwhelming your team with support requests. For enterprise products, 5-10 accounts is often sufficient.</p>
+</div>
+
+<div class="template-box">
+  <div class="template-header">
+    <span class="template-label">Checklist</span>
+    <span class="template-title">Release Readiness Checklist</span>
+  </div>
+  <ul class="checklist">
+    <li>Feature flag created and tested (on/off/targeting verified in staging)</li>
+    <li>Rollout plan documented (stages, percentages, duration, advance/rollback criteria)</li>
+    <li>Kill switch tested end-to-end (UI, API, background jobs all disabled)</li>
+    <li>Monitoring dashboards configured (error rate, latency, core metrics)</li>
+    <li>Alerting set up (PagerDuty/Slack alerts for rollback-trigger thresholds)</li>
+    <li>On-call team briefed (knows about the rollout, knows where the kill switch is)</li>
+    <li>Rollback plan tested (verified that disabling the flag cleanly reverts behavior)</li>
+    <li>Communication templates ready (internal incident comms, external status page update)</li>
+    <li>Analytics instrumented (events tracking feature usage for post-launch analysis)</li>
+    <li>Flag cleanup ticket created (scheduled for removal after 100% rollout)</li>
+  </ul>
+</div>
+</section>
+
+<section id="examples" data-section="examples">
+  <h2>Real-world examples</h2>
+
+<div class="case-study">
+  <p class="case-label">Case study</p>
+  <h4>GitHub: Feature flags as a development culture</h4>
+  <p>GitHub uses feature flags (via their internal tool, later open-sourced as "Scientist") for virtually every change. Engineers deploy to production multiple times per day, but features are only visible when their flag is enabled. This lets GitHub ship small increments continuously without big-bang releases. Their PM team owns the rollout strategy for each feature: which user segments see it first, what metrics define success, and when to advance or roll back.</p>
+  <p><strong>Why it works:</strong> By making feature flags the default, GitHub eliminated the concept of a "release day" — and all the stress, coordination, and risk that comes with it. Every change is reversible, every rollout is gradual, and every feature has a defined success metric before it reaches 100%.</p>
+</div>
+
+<div class="case-study">
+  <p class="case-label">Case study</p>
+  <h4>Netflix: Canary deployments at planetary scale</h4>
+  <p>Netflix runs canary deployments for every infrastructure change, routing a small percentage of traffic to the new version while monitoring hundreds of metrics in real-time. Their automated canary analysis (ACA) system compares the canary's metrics against the baseline and automatically promotes or rolls back without human intervention. The PM role in this system is defining which business metrics (stream starts, playback quality, error rates) are included in the canary analysis — not just infrastructure metrics, but user experience metrics.</p>
+  <p><strong>Why it works:</strong> Automation removes the human bottleneck from release decisions. Instead of an engineer manually checking dashboards at 2am, the system makes the rollback decision based on pre-defined criteria. The PM's contribution is ensuring those criteria include business impact, not just technical health.</p>
+</div>
+</section>
+
+<section id="pitfalls" data-section="practical">
+  <h2>Common pitfalls</h2>
+
+<div class="pitfall">
+  <div class="pitfall-icon">!</div>
+  <div>
+    <h4>Flag debt: never cleaning up temporary flags</h4>
+    <p>After a feature reaches 100% rollout, the flag should be removed within 1-2 sprints. In practice, teams forget. Six months later, you have 150 flags in production, nobody knows which ones are safe to remove, and the codebase is littered with <code>if (flag.enabled)</code> branches. Create a flag cleanup ritual: every sprint, review flags older than 30 days and remove any that are at 100%.</p>
+  </div>
+</div>
+
+<div class="pitfall">
+  <div class="pitfall-icon">!</div>
+  <div>
+    <h4>Testing only the "on" state</h4>
+    <p>Teams test the feature with the flag on but forget to test the experience with the flag off. What do users see when the flag is disabled? An empty state? A broken layout? A confusing error? The "off" state is the experience for 95% of users during a gradual rollout — it needs to be clean.</p>
+  </div>
+</div>
+
+<div class="pitfall">
+  <div class="pitfall-icon">!</div>
+  <div>
+    <h4>Rolling out to 100% without analysis</h4>
+    <p>Skipping from 50% to 100% because "nothing broke" without analyzing the impact on your core metrics. "Nothing broke" means no incidents — it doesn't mean the feature is performing well. Compare activation, retention, and engagement metrics between the flag-on and flag-off groups before going to 100%.</p>
+  </div>
+</div>
+</section>
+
+<section id="connections">
+  <h2>Connected topics in your library</h2>
+  <div class="cross-ref-grid">
+    <a href="go-to-market.html" class="cross-ref-card">
+      <span class="ref-number">PM Tier 1</span>
+      <div class="ref-title">Go-to-Market &amp; Launches</div>
+      <div class="ref-reason">Feature flags are the technical mechanism behind phased rollout strategies.</div>
+    </a>
+    <a href="experimentation.html" class="cross-ref-card">
+      <span class="ref-number">PM Tier 2</span>
+      <div class="ref-title">Experimentation &amp; A/B Testing</div>
+      <div class="ref-reason">Feature flags are the infrastructure that makes A/B testing possible.</div>
+    </a>
+    <a href="technical-pm.html" class="cross-ref-card">
+      <span class="ref-number">PM Tier 2</span>
+      <div class="ref-title">Technical PM</div>
+      <div class="ref-reason">Release management is core technical PM discipline.</div>
+    </a>
+    <a href="agile-pm.html" class="cross-ref-card">
+      <span class="ref-number">PM Tier 1</span>
+      <div class="ref-title">Agile Product Management</div>
+      <div class="ref-reason">Feature flags enable continuous delivery within sprint-based development.</div>
+    </a>
+  </div>
+</section>
+
+<section id="deep-dive">
+  <h2>Deep-dive appendix</h2>
+  <details class="expandable">
+    <summary><span class="chevron"><svg viewBox="0 0 14 14"><polyline points="4,2 10,7 4,12"/></svg></span> Feature flag tool comparison</summary>
+    <div class="expand-content topic-content">
+      <h4>Choosing a feature flag platform</h4>
+      <ul>
+  <li><strong>LaunchDarkly</strong> — Enterprise-grade, feature-rich, expensive. Best for large teams with complex targeting needs and high-volume experimentation.</li>
+  <li><strong>PostHog Feature Flags</strong> — bundled with analytics and session replay. Good for teams that want one tool for flags + experimentation + analytics.</li>
+  <li><strong>Statsig</strong> — strong experimentation integration, automatic statistical analysis. Good for data-driven teams.</li>
+  <li><strong>Flagsmith</strong> — open-source option for teams that want self-hosted control.</li>
+  <li><strong>Unleash</strong> — another open-source option with a managed cloud tier.</li>
+  <li><strong>DIY</strong> — a database table and a few helper functions. Fine for small teams, but you'll eventually need targeting, audit logs, and a UI for non-engineers to manage flags.</li>
+</ul>
+    </div>
+  </details>
+  <details class="expandable">
+    <summary><span class="chevron"><svg viewBox="0 0 14 14"><polyline points="4,2 10,7 4,12"/></svg></span> Further reading and resources</summary>
+    <div class="expand-content topic-content">
+      <h4>Essential reading</h4>
+      <p><strong>"Release It!" by Michael Nygard</strong> — Comprehensive patterns for deploying and operating production systems safely.</p>
+      <p><strong>"Accelerate" by Forsgren, Humble &amp; Kim</strong> — Research on deployment practices that correlate with high-performing teams.</p>
+      <h4>References</h4>
+      <p><strong>Martin Fowler's "Feature Toggles" article</strong> — Canonical reference on feature flag types and management strategies.</p>
+    </div>
+  </details>
+</section>
+
+<!-- SEARCH_INDEX
+{
+  topic: "Feature Flags, Rollouts & Release Management",
+  url: "topics/feature-flags-rollouts.html",
+  tier: "Tier 2",
+  discipline: "PM",
+  sections: [
+    { title: "What feature flags mean for PMs", id: "what-and-why", type: "theory", keywords: "feature flag toggle rollout release deploy" },
+    { title: "Feature flag strategy", id: "flag-strategy", type: "practical", keywords: "flag type release experiment ops permission" },
+    { title: "Canary releases and dark launches", id: "canary-dark", type: "practical", keywords: "canary dark launch shadow traffic" },
+    { title: "Kill switches and incidents", id: "kill-switch", type: "practical", keywords: "kill switch incident rollback disable" },
+    { title: "Beta program design", id: "beta-programs", type: "practical", keywords: "beta program early access feedback" },
+    { title: "Real-world examples", id: "examples", type: "examples", keywords: "GitHub Netflix canary feature flag" },
+    { title: "Common pitfalls", id: "pitfalls", type: "practical", keywords: "flag debt cleanup testing off state" }
+  ],
+  methods: [
+    { name: "Feature Flag Strategy Matrix", section: "flag-strategy", keywords: "flag type release experiment ops permission" },
+    { name: "Percentage Rollout Plan", section: "flag-strategy", keywords: "percentage gradual stage advance rollback" },
+    { name: "Canary Release Protocol", section: "canary-dark", keywords: "canary traffic comparison latency" },
+    { name: "Dark Launch Pattern", section: "canary-dark", keywords: "dark launch shadow compare production" },
+    { name: "Kill Switch Checklist", section: "kill-switch", keywords: "kill switch disable incident emergency" },
+    { name: "Beta Program Design", section: "beta-programs", keywords: "beta feedback selection criteria timeline" }
+  ]
+}
+SEARCH_INDEX -->
+
+<!-- MANIFEST
+{
+  "id": "PM.2.10",
+  "title": "Feature Flags, Rollouts & Release Management",
+  "file": "topics/feature-flags-rollouts.html",
+  "tier": 2,
+  "discipline": "PM",
+  "solves": [
+    "I need to roll out a risky feature gradually",
+    "I want feature flags for targeting user segments",
+    "I need a kill switch for quick revert",
+    "I want to decouple deployments from releases",
+    "I need to manage a complex multi-region rollout"
+  ],
+  "methods": ["Feature Flag Strategy Matrix", "Percentage Rollout Plan", "Canary Release Protocol", "Dark Launch Pattern", "Kill Switch Checklist", "Beta Program Design"],
+  "phase": "delivery",
+  "prerequisites": ["PM.1.07"],
+  "pairs_with": ["PM.2.01", "PM.2.08", "PM.1.10"],
+  "depth": "methods",
+  "keywords": ["feature flag", "rollout", "release", "canary", "dark launch", "kill switch", "beta", "percentage", "deploy", "toggle"]
+}
+MANIFEST -->

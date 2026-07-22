@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About — Noir Book</title>
+  <link rel="stylesheet" href="css/shared.css">
+  <style>
+    body{margin:0;min-height:100vh;display:flex;flex-direction:column}
+
+    .about-page{max-width:680px;margin:0 auto;padding:80px 40px 80px}
+
+    .back-link{display:inline-flex;align-items:center;gap:6px;font-size:var(--fs-micro);font-weight:var(--fw-semibold);color:var(--ink-soft);text-decoration:none;margin-bottom:48px;letter-spacing:var(--ls-wide)}
+    .back-link:hover{color:var(--ink)}
+    .back-link svg{width:14px;height:14px}
+
+    /* Photo area */
+    .about-photo-wrap{margin-bottom:40px}
+    .about-photo-placeholder{width:80px;height:80px;background:var(--ink);color:var(--paper-white);display:flex;align-items:center;justify-content:center;font-family:var(--font-body);font-weight:var(--fw-bold);font-size:var(--fs-h3);border-radius:var(--radius-xs)}
+
+    /* Intro header */
+    .about-intro h1{font-family:var(--font-display);font-size:var(--fs-h1);font-weight:var(--fw-thin);letter-spacing:var(--ls-tight);line-height:var(--lh-tight);margin:0 0 16px}
+    .about-intro h1 em{font-style:normal;font-weight:var(--fw-bold);color:var(--ink)}
+    .about-intro p{font-size:var(--fs-body-lg);color:var(--ink-soft);line-height:var(--lh-body);margin:0}
+
+    /* Sections */
+    .about-divider{border:none;border-top:1px solid var(--ink-hairline);margin:48px 0}
+    .about-section h2{font-family:var(--font-display);font-size:var(--fs-h3);font-weight:var(--fw-semibold);letter-spacing:var(--ls-snug);color:var(--ink);margin:0 0 16px}
+    .about-section p{font-size:var(--fs-body);color:var(--ink-soft);line-height:var(--lh-body);margin:0}
+
+    /* Newsletter stub */
+    .about-signup-stub{margin-top:48px;padding:28px 32px;border:1px solid var(--ink-hairline);border-radius:var(--radius-xs);background:var(--paper-warm)}
+    .about-signup-stub p.stub-label{font-size:var(--fs-nano);font-weight:var(--fw-regular);text-transform:uppercase;letter-spacing:var(--ls-wider);color:var(--ink);margin:0 0 10px}
+    .about-signup-stub p.stub-desc{font-size:var(--fs-micro);color:var(--ink-soft);line-height:var(--lh-body);margin:0 0 20px}
+    .stub-input-row{display:flex;gap:10px;flex-wrap:wrap}
+    .stub-input-row input{flex:1;min-width:180px;padding:10px 14px;font-family:var(--font-body);font-size:var(--fs-micro);color:var(--ink-soft);background:var(--paper);border:1px solid var(--ink-hairline);border-radius:var(--radius-xs);outline:none;cursor:not-allowed;opacity:0.6}
+    .stub-input-row button{padding:10px 24px;font-family:var(--font-body);font-size:var(--fs-micro);font-weight:var(--fw-semibold);color:var(--paper-white);background:var(--ink-soft);border:none;border-radius:var(--radius-xs);cursor:not-allowed;opacity:0.5;letter-spacing:var(--ls-wide)}
+
+    @media(max-width:640px){
+      .about-page{padding:48px 24px 64px}
+      .about-intro h1{font-size:var(--fs-h2)}
+      .about-signup-stub{padding:20px 20px}
+    }
+  </style>
+  <script src="js/theme.js"></script>
+</head>
+<body>
+
+  <div class="about-page">
+
+    <a href="index.html" class="back-link">
+      <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="8,3 4,7 8,11"/></svg>
+      Back to library
+    </a>
+
+    <!-- Photo placeholder -->
+    <div class="about-photo-wrap">
+      <div class="about-photo-placeholder" title="Photo coming soon">M</div>
+    </div>
+
+    <!-- Intro -->
+    <div class="about-intro">
+      <h1>Hi, I'm <em>Malgo.</em></h1>
+      <p>I'm a product designer and strategist who works across design, product, marketing, and content. Noir Book is my personal reference library, built for the kind of work I actually do.</p>
+    </div>
+
+    <hr class="about-divider">
+
+    <!-- Why this exists -->
+    <div class="about-section">
+      <h2>Why this exists</h2>
+      <p>Most reference material is written to rank, not to be used. The good stuff is buried in paywalled books, niche newsletters, or a Medium post with six paragraphs of preamble before it says anything. Paid courses are better, but they take weeks, and by the time you finish, the project has moved on. I wanted a place where I could look something up mid-project and find a real answer in 30 seconds. Something I could actually use right now, not a starting point for more research. A cheat sheet, but a smart one, with everything easy to find.</p>
+    </div>
+
+    <hr class="about-divider">
+
+    <!-- What's in it -->
+    <div class="about-section">
+      <h2>What's in it</h2>
+      <p>Topics across UX design, product management, marketing and growth, and content strategy. Every topic follows the same structure: theory first, then practical methods with templates, then real examples. Cross-disciplinary by design, because the best work rarely lives in one lane. Opinionated enough to be useful, referenced enough to be trusted.</p>
+    </div>
+
+    <hr class="about-divider">
+
+    <!-- How it's maintained -->
+    <div class="about-section">
+      <h2>How it's maintained</h2>
+      <p>I add topics when I need them. The bar is simple: would I look this up again? If yes, it goes in. No schedule, no backlog, just the gaps I keep hitting. The format stays the same: theory, methods, examples. Short enough to scan, deep enough to actually use.</p>
+    </div>
+
+    <!-- Newsletter stub -->
+    <div class="about-signup-stub">
+      <p class="stub-label">Newsletter</p>
+      <p class="stub-desc">One topic per week, sent as a standalone read. No paywall, no upsell. Coming soon.</p>
+      <div class="stub-input-row">
+        <input type="email" placeholder="your@email.com" disabled>
+        <button type="button" disabled>Notify me</button>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>
