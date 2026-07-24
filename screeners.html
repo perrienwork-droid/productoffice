@@ -1,327 +1,356 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<title>Clinical Screeners Case Study, Malgo Perrien</title>
-<meta name="description" content="A neurodivergent traits self-screener rigorous enough to act on, honest enough not to diagnose — a self-initiated Product Office study.">
-<meta name="robots" content="noindex, nofollow">
-<link rel="canonical" href="https://mperrien.com/screeners.html">
-<meta property="og:type" content="article">
-<meta property="og:url" content="https://mperrien.com/screeners.html">
-<meta property="og:site_name" content="The Product Office">
-<meta property="og:title" content="Clinical Screeners Case Study, Malgo Perrien">
-<meta property="og:description" content="A neurodivergent traits self-screener rigorous enough to act on, honest enough not to diagnose — a self-initiated Product Office study.">
-<meta property="og:image" content="https://mperrien.com/img/og/og-screeners.png">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Clinical Screeners case study — 8 dimensions, 96 reliability-tuned items">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Clinical Screeners Case Study, Malgo Perrien">
-<meta name="twitter:description" content="A neurodivergent traits self-screener rigorous enough to act on, honest enough not to diagnose — a self-initiated Product Office study.">
-<meta name="twitter:image" content="https://mperrien.com/img/og/og-screeners.png">
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Neurodivergent Traits Screener - The Product Office</title>
+<meta name="description" content="A 0 to 1 self-screener, rigorous enough to act on and honest enough not to diagnose, that routes people onward rather than concluding.">
 <link rel="icon" type="image/svg+xml" href="img/favicon.svg">
-<link rel="icon" type="image/png" sizes="64x64" href="img/favicon-64.png">
-<link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="tokens.css">
-<link rel="stylesheet" href="case-study.css">
-<link rel="stylesheet" href="components.css">
-<script src="case-study.js" defer></script>
-<style>
-/* Page-specific rules. Shared layout lives in case-study.css. */
-
-.diagram-card { background: var(--bg-cream); }
-
-/* Text-forward hero, no visual column, so let the text span full width */
-.case-hero-inner { grid-template-columns: 1fr; }
-.case-hero-text { max-width: 820px; }
-
-/* Design-decision compact cards */
-.decisions { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.75rem 0 0; }
-.decision { padding: 1.35rem 1.5rem; background: var(--bg-cream-deep); border: 1px solid var(--border-cream); }
-.decision h4 { font-size: .95rem; font-weight: 600; color: var(--text-dark); letter-spacing: -.01em; margin-bottom: .4rem; }
-.decision p { font-size: .84rem; color: var(--text-body-light); line-height: 1.65; font-weight: 400; margin: 0; }
-@media (max-width: 768px) { .decisions { grid-template-columns: 1fr; } }
-
-/* Callout tag, reused from reframe for the honesty labels */
-.callout.hyp p + p { margin-top: .6rem; }
-.callout .tag { display:inline-block; font-size:.62rem; font-weight:600; letter-spacing:.06em; text-transform:uppercase; color:var(--copper-on-light); background:rgba(163,62,78,.16); padding:.15rem .5rem; border-radius:3px; margin-bottom:.6rem; }
-
-/* Two-door architecture, compact */
-.doors { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.75rem 0 0; }
-.door { padding: 1.35rem 1.5rem; background: var(--white); border: 1px solid var(--border-cream); }
-.door .door-tag { font-size:.62rem; font-weight:600; letter-spacing:.06em; text-transform:uppercase; color:var(--copper-on-light); margin-bottom:.5rem; }
-.door h4 { font-size: 1rem; font-weight: 600; color: var(--text-dark); margin-bottom: .4rem; }
-.door p { font-size: .84rem; color: var(--text-body-light); line-height: 1.65; margin: 0; }
-.door .badge { display:inline-block; margin-top:.7rem; font-size:.72rem; font-weight:600; color:var(--copper-on-light); }
-@media (max-width: 768px) { .doors { grid-template-columns: 1fr; } }
-</style>
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://productoffice.pm/screeners.html">
+<meta property="og:title" content="Neurodivergent Traits Screener - The Product Office">
+<meta property="og:description" content="A 0 to 1 self-screener, rigorous enough to act on and honest enough not to diagnose, that routes people onward rather than concluding.">
+<meta property="og:image" content="https://productoffice.pm/img/screener/poster.svg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Neurodivergent Traits Screener - The Product Office">
+<meta name="twitter:description" content="A 0 to 1 self-screener, rigorous enough to act on and honest enough not to diagnose, that routes people onward rather than concluding.">
+<meta name="twitter:image" content="https://productoffice.pm/img/screener/poster.svg">
+<script>window.__resources={"https://unpkg.com/react@18.3.1/umd/react.production.min.js":"vendor/react.production.min.js","https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js":"vendor/react-dom.production.min.js"};</script>
+<script src="./support.js"></script>
 </head>
 <body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,300&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;--read:680px;--wide:1120px;}
+  body{font-family:'Inter',system-ui,sans-serif;background:#12213F;color:#EDEFF6;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+  a{color:inherit;text-decoration:none;}
+  a.tpo-navlink:hover{color:#D48D98;}
+  ::selection{background:#C26A79;color:#FAF7F0;}
+  .cs-body p{font-size:1.12rem;font-weight:300;line-height:1.75;color:#C4CAD8;margin-bottom:1.5rem;}
+  .cs-body p strong{color:#EDEFF6;font-weight:600;}
+  .cs-body p em{font-style:italic;color:#D48D98;}
+  .cs-h2{font-size:clamp(1.9rem,3.8vw,3rem);font-weight:200;letter-spacing:-.03em;line-height:1.12;color:#EDEFF6;margin-bottom:2.2rem;max-width:22ch;}
+  .cs-h2 strong{font-weight:200;font-style:italic;color:#D48D98;}
+</style>
+</helmet>
+<div style="background:#12213F;">
 
-<div class="nav-wrap">
-<nav>
-  <a href="index.html" class="logo" aria-label="The Product Office home">
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--copper-bright)" stroke-width="2" stroke-linecap="square" aria-hidden="true"><path d="M3 8V3h5M21 8V3h-5M3 16v5h5M21 16v5h-5"/><circle cx="12" cy="12" r="1.6" fill="var(--copper-bright)" stroke="none"/></svg>
-    <span>The Product Office</span>
-  </a>
-  <div class="nav-links">
-    <a href="index.html#work">Work</a>
-    <a href="index.html#about">About</a>
-    <a href="index.html#contact" class="cta">Get in touch &rarr;</a>
+  <div style="position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(18,33,63,.66);backdrop-filter:blur(16px);">
+    <nav style="max-width:1200px;margin:0 auto;padding:1.15rem 2.5rem;display:flex;justify-content:space-between;align-items:center;">
+      <a href="index.html" style="color:#fff;font-size:1.02rem;font-weight:500;display:flex;align-items:center;gap:.55rem;letter-spacing:-.01em;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#D48D98" stroke-width="2" stroke-linecap="square"><path d="M3 8V3h5M21 8V3h-5M3 16v5h5M21 16v5h-5"/><circle cx="12" cy="12" r="1.6" fill="#D48D98" stroke="none"/></svg>
+        <span>The Product Office</span>
+      </a>
+      <div style="display:flex;gap:2.4rem;align-items:center;">
+        <a class="tpo-navlink" href="index.html#work" style="color:#C4CAD8;font-size:.82rem;transition:color .2s;">Work</a>
+        <a class="tpo-navlink" href="index.html#about" style="color:#C4CAD8;font-size:.82rem;transition:color .2s;">About</a>
+        <a class="tpo-navlink" href="index.html#contact" style="color:#D48D98;font-size:.82rem;font-weight:500;transition:color .2s;">Get in touch →</a>
+      </div>
+    </nav>
   </div>
-</nav>
-</div>
 
-<section class="case-hero">
-  <div class="case-hero-inner">
-    <div class="case-hero-text">
-      <a href="index.html#work" class="back-link">&larr; All work</a>
-      <div class="case-meta"><span>Self-initiated study</span><span>HealthTech</span><span>Clinical-adjacent</span><span>Measurement design</span><span>0 to 1</span></div>
-      <h1>A self-screener rigorous enough to <strong>act on</strong>, honest enough not to <strong>diagnose</strong></h1>
-      <p class="subtitle">Neurodivergent Traits Screener, a self-initiated Product Office study, 2026</p>
+  <!-- HERO (text-forward) -->
+  <section style="background:#C26A79;color:#FAF7F0;padding:11rem 2.5rem 6rem;">
+    <div style="max-width:var(--read);margin:0 auto;">
+      <a href="index.html#work" data-reveal style="opacity:0;transform:translateY(24px);transition:opacity 1s ease,transform 1s ease;display:inline-block;font-size:.9rem;font-weight:500;color:#12213F;margin-bottom:2.5rem;">← All work</a>
+      <div data-reveal style="opacity:0;transform:translateY(24px);transition:opacity 1s ease .06s,transform 1s ease .06s;display:flex;flex-wrap:wrap;gap:.5rem 1.6rem;font-size:.82rem;font-weight:500;letter-spacing:.04em;color:#12213F;margin-bottom:2rem;">
+        <span>Self-initiated study</span><span>HealthTech</span><span>Clinical-adjacent</span><span>Measurement design</span><span>0 to 1</span>
+      </div>
+      <h1 data-reveal style="opacity:0;transform:translateY(24px);transition:opacity 1.1s ease .12s,transform 1.1s ease .12s;font-size:clamp(2.2rem,5vw,4.1rem);font-weight:200;line-height:1.08;letter-spacing:-.04em;max-width:24ch;margin-bottom:1.8rem;">A self-screener rigorous enough to <em style="font-style:italic;color:#12213F;">act on</em>, honest enough not to <em style="font-style:italic;color:#12213F;">diagnose</em></h1>
+      <p data-reveal style="opacity:0;transform:translateY(24px);transition:opacity 1.1s ease .18s,transform 1.1s ease .18s;font-size:1.15rem;font-weight:400;color:#12213F;letter-spacing:.01em;">Neurodivergent Traits Screener · A self-initiated Product Office study · 2026</p>
     </div>
-    <div class="stats-bar">
-      <div class="stat"><div class="num">8</div><div class="label">Trait dimensions screened in one tool</div></div>
-      <div class="stat"><div class="num">96</div><div class="label">Items, engineered for reliability, not speed</div></div>
-      <div class="stat"><div class="num">60%</div><div class="label">The flag line, labelled pragmatic, not clinical</div></div>
-      <div class="stat"><div class="num">0&rarr;1</div><div class="label">Intent, architecture, scoring, content, build</div></div>
-    </div>
-  </div>
-</section>
+  </section>
 
-<div class="case-body">
+  <!-- STATS -->
+  <section style="padding:5rem 2.5rem 3rem;">
+    <div data-reveal style="opacity:0;transform:translateY(30px);transition:opacity 1.1s ease,transform 1.1s ease;max-width:var(--read);margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:2.5rem;">
+      <div><div style="font-size:clamp(2.4rem,4vw,3.4rem);font-weight:200;color:#C26A79;line-height:1;letter-spacing:-.03em;">8</div><div style="font-size:.82rem;color:#98A0B3;margin-top:.6rem;">Trait dimensions screened in one tool</div></div>
+      <div><div style="font-size:clamp(2.4rem,4vw,3.4rem);font-weight:200;color:#C26A79;line-height:1;letter-spacing:-.03em;">96</div><div style="font-size:.82rem;color:#98A0B3;margin-top:.6rem;">Items, engineered for reliability, not speed</div></div>
+      <div><div style="font-size:clamp(2.4rem,4vw,3.4rem);font-weight:200;color:#C26A79;line-height:1;letter-spacing:-.03em;">60%</div><div style="font-size:.82rem;color:#98A0B3;margin-top:.6rem;">The flag line, labelled pragmatic, not clinical</div></div>
+      <div><div style="font-size:clamp(2.4rem,4vw,3.4rem);font-weight:200;color:#C26A79;line-height:1;letter-spacing:-.03em;">0→1</div><div style="font-size:.82rem;color:#98A0B3;margin-top:.6rem;">Intent, architecture, scoring, content, build</div></div>
+    </div>
+  </section>
 
   <!-- OUTCOME FIRST -->
-  <div class="case-section">
-    <h2>The outcome first: a health tool that knows what it can't know</h2>
-    <div class="callout"><p><strong>What I owned:</strong> The whole thing. I set the product intent, designed the two-path flow, wrote the scoring model, engineered a 96-item question bank for reliability, resolved every open decision in a written record, and specced the build. A self-directed study in how to make a measurement product honest.</p></div>
-    <p>I designed an intro-level self-screener that helps an adult work out which neurodivergent traits, if any, are worth a closer look, across eight dimensions from ADHD to dyspraxia to OCD. The hard part was never the questions. It was the restraint. A self-test in a health context can do real harm two ways: scare someone with a false positive, or falsely reassure them with a false negative. So the entire product is built to point, never to conclude. It routes people to the right specialised test and, past that, to a clinician. Every design call defends that line.</p>
-  </div>
+  <section class="cs-body" style="padding:3rem 2.5rem;">
+    <div style="max-width:var(--read);margin:0 auto;">
+      <h2 class="cs-h2" data-reveal style="opacity:0;transform:translateY(28px);transition:opacity 1.1s ease,transform 1.1s ease;">The outcome first: a health tool that knows what it can't know</h2>
+      <div data-reveal style="opacity:0;transform:translateY(28px);transition:opacity 1.1s ease .06s,transform 1.1s ease .06s;">
+        <div style="border-left:2px solid #C26A79;padding-left:1.6rem;margin-bottom:2rem;">
+          <p style="margin-bottom:0;"><strong>What I owned:</strong> The whole thing. I set the product intent, designed the two-path flow, wrote the scoring model, engineered a 96-item question bank for reliability, resolved every open decision in a written record, and specced the build. A self-directed study in how to make a measurement product honest.</p>
+        </div>
+        <p>I designed an intro-level self-screener that helps an adult work out which neurodivergent traits, if any, are worth a closer look, across eight dimensions from ADHD to dyspraxia to OCD. The hard part was never the questions. It was the restraint. A self-test in a health context can do real harm two ways: scare someone with a false positive, or falsely reassure them with a false negative. So the entire product is built to point, never to conclude. It routes people to the right specialised test and, past that, to a clinician. Every design call defends that line.</p>
+      </div>
+    </div>
+  </section>
 
   <!-- PROBLEM -->
-  <div class="case-section">
-    <h2>The problem I chose to solve: people screen themselves too narrowly</h2>
-    <p>An adult who suspects they are neurodivergent hits a wall. The validated tools are long, siloed, and one per condition, so you have to already know what to test for. Most people don't. They land on a single label from a social feed ("I think it's ADHD") and screen only for that, missing the conditions that co-occur or the ordinary things (trauma, thyroid, chronic sleep loss, perimenopause) that mimic the same profile.</p>
-    <p>Nothing helps at the step before the specialised tests: figuring out <em>where to look first</em>. That gap, surfacing what you didn't think to consider without overclaiming, is the product.</p>
-  </div>
+  <section class="cs-body" style="padding:3rem 2.5rem;">
+    <div style="max-width:var(--read);margin:0 auto;">
+      <h2 class="cs-h2" data-reveal style="opacity:0;transform:translateY(28px);transition:opacity 1.1s ease,transform 1.1s ease;">The problem I chose to solve: people screen themselves too narrowly</h2>
+      <div data-reveal style="opacity:0;transform:translateY(28px);transition:opacity 1.1s ease .06s,transform 1.1s ease .06s;">
+        <p>An adult who suspects they are neurodivergent hits a wall. The validated tools are long, siloed, and one per condition, so you have to already know what to test for. Most people don't. They land on a single label from a social feed ("I think it's ADHD") and screen only for that, missing the conditions that co-occur or the ordinary things (trauma, thyroid, chronic sleep loss, perimenopause) that mimic the same profile.</p>
+        <p>Nothing helps at the step before the specialised tests: figuring out <em>where to look first</em>. That gap, surfacing what you didn't think to consider without overclaiming, is the product.</p>
+      </div>
+    </div>
+  </section>
 
   <!-- ARCHITECTURE -->
-  <div class="case-section">
-    <h2>The core decision: a router, not a verdict</h2>
-    <p>Most self-tests online either hand you an authoritative-sounding result or keep you clicking. I designed this one to sit deliberately at the bottom of a three-layer funnel, and to say so out loud on the results page. That single framing decision drives everything downstream: what it may claim, how results are worded, where it sends you next.</p>
-    <p class="diagram-label">Where the tool sits, and what it refuses to be</p>
-  </div>
-</div>
-
-<div class="diagram-wrap diagram-card">
-  <svg viewBox="0 0 900 360" xmlns="http://www.w3.org/2000/svg" style="max-width:900px;">
-    <g font-family="'Fira Sans',sans-serif">
-      <text x="60" y="42" font-size="18" font-weight="600" fill="#1A1815">A three-layer funnel. This tool is layer one, on purpose.</text>
-      <text x="60" y="68" font-size="14" font-weight="400" fill="#6B665E">Each layer down is narrower, slower, and more certain. The screener's job is to get you to the right layer two.</text>
-
-      <!-- Layer 1 -->
-      <rect x="60" y="98" width="780" height="60" rx="8" fill="rgba(194,106,121,.85)"/>
-      <text x="82" y="126" font-size="15.5" font-weight="600" fill="#FFFFFF">Layer 1 &middot; Quick screen (this tool)</text>
-      <text x="82" y="147" font-size="12.5" font-weight="400" fill="rgba(255,255,255,.9)">Broad, intro-level. Points you toward which areas to look at. Not reliable enough to decide on alone.</text>
-      <rect x="700" y="110" width="120" height="24" rx="12" fill="#FFFFFF"/>
-      <text x="760" y="126" font-size="11.5" font-weight="700" fill="#A33E4E" text-anchor="middle">YOU ARE HERE</text>
-
-      <!-- Layer 2 -->
-      <rect x="150" y="176" width="600" height="60" rx="8" fill="rgba(90,122,79,.85)"/>
-      <text x="172" y="204" font-size="15.5" font-weight="600" fill="#FFFFFF">Layer 2 &middot; Specialised self-report</text>
-      <text x="172" y="225" font-size="12.5" font-weight="400" fill="rgba(255,255,255,.92)">ASRS, RAADS-R, OCI-R, etc. More reliable, but still self-report, not a diagnosis.</text>
-
-      <!-- Layer 3 -->
-      <rect x="255" y="254" width="390" height="60" rx="8" fill="rgba(26,24,21,.82)"/>
-      <text x="277" y="282" font-size="15.5" font-weight="600" fill="#FFFFFF">Layer 3 &middot; Clinical assessment</text>
-      <text x="277" y="303" font-size="12.5" font-weight="400" fill="rgba(255,255,255,.85)">A professional. Formal diagnosis via a GP referral.</text>
-
-      <line x1="60" y1="336" x2="840" y2="336" stroke="rgba(26,24,21,.12)" stroke-width="1"/>
-      <text x="60" y="354" font-size="12.5" fill="#8A857C">The results page teaches the user this map, so "elevated" reads as "take the next step", never "you have this".</text>
-    </g>
-  </svg>
-</div>
-
-<div class="case-body">
-  <div class="case-section">
-    <p>From that spine, the flow splits into two entry paths, matched to how much the user already knows.</p>
-    <div class="doors">
-      <div class="door">
-        <div class="door-tag">Door 1</div>
-        <h4>Targeted screen</h4>
-        <p>For people who already have a hunch. Pick the dimensions you want, answer the full 12-item screen for each. A "screen everything" option exists too, behind a length warning so nobody sleepwalks into 96 items.</p>
-        <span class="badge">"I know what I want to check"</span>
-      </div>
-      <div class="door">
-        <div class="door-tag">Door 2, the recommended default</div>
-        <h4>Broad scan</h4>
-        <p>A 24-item triage across all dimensions flags what's worth a closer look. The user then confirms which to explore in full, and their triage answers carry forward so nothing is asked twice.</p>
-        <span class="badge">"I'm not sure what applies"</span>
+  <section class="cs-body" style="padding:3rem 2.5rem;">
+    <div style="max-width:var(--read);margin:0 auto;">
+      <h2 class="cs-h2" data-reveal style="opacity:0;transform:translateY(28px);transition:opacity 1.1s ease,transform 1.1s ease;">The core decision: a router, not a verdict</h2>
+      <div data-reveal style="opacity:0;transform:translateY(28px);transition:opacity 1.1s ease .06s,transform 1.1s ease .06s;">
+        <p>Most self-tests online either hand you an authoritative-sounding result or keep you clicking. I designed this one to sit deliberately at the bottom of a three-layer funnel, and to say so out loud on the results page. That single framing decision drives everything downstream: what it may claim, how results are worded, where it sends you next.</p>
       </div>
     </div>
-  </div>
-</div>
+  </section>
 
-<div class="case-body">
-  <div class="case-section">
-    <h2>The entry screen, live: the two doors</h2>
-    <p><strong>The screen below is the real, clickable entry point</strong>, drawn straight from the build. The broad scan leads as the recommended default and the targeted path sits quieter beside it, so the person who doesn't know where to start is guided, not met with a wall of tests. The "not a diagnosis" line and the reminder about conditions that can mimic these profiles are on screen from the very first moment, not buried at the end.</p>
-  </div>
-</div>
-
-<div class="prototype-wrap">
-  <div class="prototype-frame">
-    <div class="pf-chrome">
-      <div class="pf-dots" aria-hidden="true"><span></span><span></span><span></span></div>
-      <div class="pf-url"><span class="pf-url-label">traits-screener.app</span>/start</div>
+  <!-- DIAGRAM: funnel -->
+  <section style="padding:1rem 2.5rem 2rem;">
+    <div data-reveal style="opacity:0;transform:translateY(30px);transition:opacity 1.1s ease,transform 1.1s ease;max-width:var(--read);margin:0 auto;background:#FAF7F0;border-radius:24px;padding:2.5rem 2rem;">
+      <div style="text-align:center;font-size:.82rem;font-weight:600;letter-spacing:.06em;color:#A33E4E;margin-bottom:1rem;">WHERE THE TOOL SITS, AND WHAT IT REFUSES TO BE</div>
+      <svg viewBox="0 0 900 360" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;" font-family="Inter, sans-serif">
+        <g>
+          <text x="60" y="42" font-size="18" font-weight="600" fill="#1A1815">A three-layer funnel. This tool is layer one, on purpose.</text>
+          <text x="60" y="68" font-size="14" font-weight="400" fill="#6B665E">Each layer down is narrower, slower, and more certain. The screener's job is to get you to the right layer two.</text>
+          <rect x="60" y="98" width="780" height="60" rx="8" fill="rgba(194,106,121,.9)"/>
+          <text x="82" y="126" font-size="15.5" font-weight="600" fill="#FFFFFF">Layer 1 · Quick screen (this tool)</text>
+          <text x="82" y="147" font-size="12.5" font-weight="400" fill="rgba(255,255,255,.9)">Broad, intro-level. Points you toward which areas to look at. Not reliable enough to decide on alone.</text>
+          <rect x="700" y="110" width="120" height="24" rx="12" fill="#FFFFFF"/>
+          <text x="760" y="126" font-size="11.5" font-weight="700" fill="#A33E4E" text-anchor="middle">YOU ARE HERE</text>
+          <rect x="150" y="176" width="600" height="60" rx="8" fill="rgba(90,122,79,.9)"/>
+          <text x="172" y="204" font-size="15.5" font-weight="600" fill="#FFFFFF">Layer 2 · Specialised self-report</text>
+          <text x="172" y="225" font-size="12.5" font-weight="400" fill="rgba(255,255,255,.92)">ASRS, RAADS-R, OCI-R, etc. More reliable, but still self-report, not a diagnosis.</text>
+          <rect x="255" y="254" width="390" height="60" rx="8" fill="rgba(26,24,21,.85)"/>
+          <text x="277" y="282" font-size="15.5" font-weight="600" fill="#FFFFFF">Layer 3 · Clinical assessment</text>
+          <text x="277" y="303" font-size="12.5" font-weight="400" fill="rgba(255,255,255,.85)">A professional. Formal diagnosis via a GP referral.</text>
+          <line x1="60" y1="336" x2="840" y2="336" stroke="rgba(26,24,21,.12)" stroke-width="1"/>
+          <text x="60" y="354" font-size="12.5" fill="#8A857C">The results page teaches the user this map, so "elevated" reads as "take the next step", never "you have this".</text>
+        </g>
+      </svg>
     </div>
-    <div class="pf-stage">
-      <iframe src="prototypes/screener/index.html" loading="lazy" title="Screener entry screen, the two-door choice"></iframe>
-    </div>
-    <div class="pf-caption"><span class="pf-badge">Live prototype</span>The landing and its two entry paths. Recommended broad scan first, targeted screen second. Open the targeted door to reveal the dimension picker with plain-language descriptions.</div>
-  </div>
-</div>
+  </section>
 
-<div class="case-body">
+  <!-- TWO DOORS -->
+  <section class="cs-body" style="padding:2rem 2.5rem 3rem;">
+    <div style="max-width:var(--read);margin:0 auto;">
+      <p data-reveal style="opacity:0;transform:translateY(28px);transition:opacity 1.1s ease,transform 1.1s ease;">From that spine, the flow splits into two entry paths, matched to how much the user already knows.</p>
+      <div data-reveal style="opacity:0;transform:translateY(30px);transition:opacity 1.1s ease .06s,transform 1.1s ease .06s;display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-top:1.5rem;">
+        <div style="background:#1C2E52;border-radius:16px;padding:1.6rem;">
+          <div style="font-size:.62rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#98A0B3;margin-bottom:.5rem;">Door 1</div>
+          <h4 style="font-size:1rem;font-weight:600;color:#EDEFF6;margin-bottom:.4rem;">Targeted screen</h4>
+          <p style="font-size:.85rem;color:#98A0B3;line-height:1.65;font-weight:300;margin:0;">For people who already have a hunch. Pick the dimensions you want, answer the full 12-item screen for each. A "screen everything" option exists too, behind a length warning so nobody sleepwalks into 96 items.</p>
+          <span style="display:inline-block;margin-top:.8rem;font-size:.78rem;font-weight:600;color:#D48D98;">"I know what I want to check"</span>
+        </div>
+        <div style="background:#1C2E52;border-radius:16px;padding:1.6rem;border:1px solid #C26A79;">
+          <div style="font-size:.62rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#D48D98;margin-bottom:.5rem;">Door 2, the recommended default</div>
+          <h4 style="font-size:1rem;font-weight:600;color:#EDEFF6;margin-bottom:.4rem;">Broad scan</h4>
+          <p style="font-size:.85rem;color:#98A0B3;line-height:1.65;font-weight:300;margin:0;">A 24-item triage across all dimensions flags what's worth a closer look. The user then confirms which to explore in full, and their triage answers carry forward so nothing is asked twice.</p>
+          <span style="display:inline-block;margin-top:.8rem;font-size:.78rem;font-weight:600;color:#D48D98;">"I'm not sure what applies"</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LIVE PROTOTYPE: entry -->
+  <section class="cs-body" style="padding:3rem 2.5rem 2rem;">
+    <div style="max-width:var(--read);margin:0 auto;">
+      <h2 class="cs-h2" data-reveal style="opacity:0;transform:translateY(28px);transition:opacity 1.1s ease,transform 1.1s ease;">The entry screen, live: the two doors</h2>
+      <div data-reveal style="opacity:0;transform:translateY(28px);transition:opacity 1.1s ease .06s,transform 1.1s ease .06s;">
+        <p><strong>The screen below is the real, clickable entry point</strong>, drawn straight from the build. The broad scan leads as the recommended default and the targeted path sits quieter beside it, so the person who doesn't know where to start is guided, not met with a wall of tests. The "not a diagnosis" line and the reminder about conditions that can mimic these profiles are on screen from the very first moment, not buried at the end.</p>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding:1rem 2.5rem 3rem;">
+    <div data-reveal data-pf-frame style="opacity:0;transform:translateY(30px);transition:opacity 1.1s ease,transform 1.1s ease;max-width:var(--wide);margin:0 auto;">
+      <div style="background:#1C2E52;border-radius:20px;overflow:hidden;box-shadow:0 34px 80px rgba(0,0,0,.4);">
+        <div style="display:flex;align-items:center;gap:12px;padding:.7rem 1.1rem;border-bottom:1px solid #2F4570;">
+          <div style="display:flex;gap:6px;"><span style="width:11px;height:11px;border-radius:50%;background:#3a4d78;"></span><span style="width:11px;height:11px;border-radius:50%;background:#3a4d78;"></span><span style="width:11px;height:11px;border-radius:50%;background:#3a4d78;"></span></div>
+          <div style="font-size:.75rem;color:#98A0B3;"><span style="color:#D48D98;">traits-screener.app</span>/start</div>
+          <a href="prototypes/screener/index.html" target="_blank" rel="noopener" style="margin-left:auto;font-size:.72rem;color:#D48D98;">Open full prototype ↗</a>
+        </div>
+        <div data-pf-stage style="position:relative;width:100%;overflow:hidden;background:#FBF3EE;">
+          <iframe src="prototypes/screener/index.html" loading="lazy" title="Screener entry screen, the two-door choice" data-pf-h="860" style="width:1280px;height:860px;border:0;transform-origin:top left;"></iframe>
+        </div>
+      </div>
+      <p style="font-size:.95rem;font-weight:300;line-height:1.7;color:#98A0B3;margin:1.4rem auto 0;max-width:var(--read);"><span style="display:inline-block;font-size:.7rem;font-weight:600;letter-spacing:.06em;color:#D48D98;border:1px solid #2F4570;border-radius:100px;padding:.2rem .7rem;margin-right:.6rem;">LIVE PROTOTYPE</span>The landing and its two entry paths. Recommended broad scan first, targeted screen second. Open the targeted door to reveal the dimension picker with plain-language descriptions.</p>
+    </div>
+  </section>
+
   <!-- RELIABILITY DECISION -->
-  <div class="case-section">
-    <h2>The decision that shaped the whole tool: twelve items per dimension, not five</h2>
-    <p>Earlier versions used five items per dimension. I killed that. At five items, a single misread or ambiguous question moves the dimension score by twenty points, enough to flip someone between "low" and "elevated". A tool people might act on cannot swing on one question.</p>
-    <p>So I rebuilt each screen to twelve items, sized to clear the reliability floor a screener needs before anyone should trust it, and to properly cover the sub-facets of each dimension rather than rewording one idea. The cost is length. I paid for it deliberately, and then bought it back with the Door 2 triage and modular selection, so no one answers more than they chose to.</p>
-    <p class="diagram-label">Why five items wasn't safe: one misread, and the band flips</p>
-  </div>
-</div>
+  <section class="cs-body" style="padding:4rem 2.5rem 2rem;">
+    <div style="max-width:var(--read);margin:0 auto;">
+      <h2 class="cs-h2" data-reveal style="opacity:0;transform:translateY(28px);transition:opacity 1.1s ease,transform 1.1s ease;">The decision that shaped the whole tool: twelve items per dimension, not five</h2>
+      <div data-reveal style="opacity:0;transform:translateY(28px);transition:opacity 1.1s ease .06s,transform 1.1s ease .06s;">
+        <p>Earlier versions used five items per dimension. I killed that. At five items, a single misread or ambiguous question moves the dimension score by twenty points, enough to flip someone between "low" and "elevated". A tool people might act on cannot swing on one question.</p>
+        <p>So I rebuilt each screen to twelve items, sized to clear the reliability floor a screener needs before anyone should trust it, and to properly cover the sub-facets of each dimension rather than rewording one idea. The cost is length. I paid for it deliberately, and then bought it back with the Door 2 triage and modular selection, so no one answers more than they chose to.</p>
+      </div>
+    </div>
+  </section>
 
-<div class="diagram-wrap diagram-card">
-  <svg viewBox="0 0 860 448" xmlns="http://www.w3.org/2000/svg" style="max-width:860px;">
-    <g font-family="'Fira Sans',sans-serif">
-      <text x="430" y="34" font-size="15" font-weight="600" fill="#1A1815" text-anchor="middle">The effect of one misread answer on the dimension score</text>
-
-      <!-- band backdrop: Low 0-39, Moderate 40-59, Elevated 60-100. x: 120..800 for 0..100 (6.8px/pt) -->
-      <!-- Low -->
-      <rect x="120" y="150" width="265.2" height="200" fill="rgba(26,24,21,.04)"/>
-      <!-- Moderate -->
-      <rect x="385.2" y="150" width="136" height="200" fill="rgba(18,33,63,.10)"/>
-      <!-- Elevated -->
-      <rect x="521.2" y="150" width="278.8" height="200" fill="rgba(184,84,107,.12)"/>
-      <text x="252" y="170" font-size="12.5" font-weight="600" fill="#8A857C" text-anchor="middle">LOW &middot; 0 to 39</text>
-      <text x="453" y="170" font-size="12.5" font-weight="600" fill="#12213F" text-anchor="middle">MODERATE &middot; 40 to 59</text>
-      <text x="660" y="170" font-size="12.5" font-weight="600" fill="#8B3A4D" text-anchor="middle">ELEVATED &middot; 60 to 100</text>
-
-      <!-- axis -->
-      <line x1="120" y1="350" x2="800" y2="350" stroke="rgba(26,24,21,.28)" stroke-width="1.2"/>
-      <text x="120" y="372" font-size="12" fill="#8A857C" text-anchor="middle">0</text>
-      <text x="800" y="372" font-size="12" fill="#8A857C" text-anchor="middle">100</text>
-
-      <!-- Row A: 5 items, centre 52, swing +/-20 => 32..72 -->
-      <text x="120" y="212" font-size="13.5" font-weight="600" fill="#1A1815">5 items</text>
-      <text x="120" y="230" font-size="11.5" fill="#8A857C">one answer = 20 pts</text>
-      <line x1="337.6" y1="250" x2="609.6" y2="250" stroke="#B8546B" stroke-width="3"/>
-      <line x1="337.6" y1="242" x2="337.6" y2="258" stroke="#B8546B" stroke-width="3"/>
-      <line x1="609.6" y1="242" x2="609.6" y2="258" stroke="#B8546B" stroke-width="3"/>
-      <circle cx="473.6" cy="250" r="5.5" fill="#B8546B"/>
-      <text x="473.6" y="286" font-size="11.5" fill="#8B3A4D" text-anchor="middle">crosses two thresholds: low to elevated</text>
-
-      <!-- Row B: 12 items, centre 52, swing +/-8 => 44..60 -->
-      <text x="120" y="316" font-size="13.5" font-weight="600" fill="#1A1815">12 items</text>
-      <text x="120" y="334" font-size="11.5" fill="#8A857C">one answer = ~8 pts</text>
-      <line x1="419.2" y1="322" x2="528" y2="322" stroke="#5A7A4F" stroke-width="3"/>
-      <line x1="419.2" y1="314" x2="419.2" y2="330" stroke="#5A7A4F" stroke-width="3"/>
-      <line x1="528" y1="314" x2="528" y2="330" stroke="#5A7A4F" stroke-width="3"/>
-      <circle cx="473.6" cy="322" r="5.5" fill="#5A7A4F"/>
-
-      <line x1="120" y1="398" x2="800" y2="398" stroke="rgba(26,24,21,.12)" stroke-width="1"/>
-      <text x="120" y="416" font-size="12" fill="#8A857C">Illustrative. Reliability depends on item quality and correlation, not count alone,</text>
-      <text x="120" y="434" font-size="12" fill="#8A857C">but more items means each answer moves the score less.</text>
-    </g>
-  </svg>
-</div>
-
-<div class="case-body">
+  <!-- DIAGRAM: reliability bands -->
+  <section style="padding:1rem 2.5rem 2rem;">
+    <div data-reveal style="opacity:0;transform:translateY(30px);transition:opacity 1.1s ease,transform 1.1s ease;max-width:var(--read);margin:0 auto;background:#FAF7F0;border-radius:24px;padding:2.5rem 2rem;">
+      <div style="text-align:center;font-size:.82rem;font-weight:600;letter-spacing:.06em;color:#A33E4E;margin-bottom:1rem;">WHY FIVE ITEMS WASN'T SAFE — ONE MISREAD, AND THE BAND FLIPS</div>
+      <svg viewBox="0 0 860 448" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;" font-family="Inter, sans-serif">
+        <g>
+          <text x="430" y="34" font-size="15" font-weight="600" fill="#1A1815" text-anchor="middle">The effect of one misread answer on the dimension score</text>
+          <rect x="120" y="150" width="265.2" height="200" fill="rgba(26,24,21,.04)"/>
+          <rect x="385.2" y="150" width="136" height="200" fill="rgba(18,33,63,.10)"/>
+          <rect x="521.2" y="150" width="278.8" height="200" fill="rgba(184,84,107,.12)"/>
+          <text x="252" y="170" font-size="12.5" font-weight="600" fill="#8A857C" text-anchor="middle">LOW · 0 to 39</text>
+          <text x="453" y="170" font-size="12.5" font-weight="600" fill="#12213F" text-anchor="middle">MODERATE · 40 to 59</text>
+          <text x="660" y="170" font-size="12.5" font-weight="600" fill="#8B3A4D" text-anchor="middle">ELEVATED · 60 to 100</text>
+          <line x1="120" y1="350" x2="800" y2="350" stroke="rgba(26,24,21,.28)" stroke-width="1.2"/>
+          <text x="120" y="372" font-size="12" fill="#8A857C" text-anchor="middle">0</text>
+          <text x="800" y="372" font-size="12" fill="#8A857C" text-anchor="middle">100</text>
+          <text x="120" y="212" font-size="13.5" font-weight="600" fill="#1A1815">5 items</text>
+          <text x="120" y="230" font-size="11.5" fill="#8A857C">one answer = 20 pts</text>
+          <line x1="337.6" y1="250" x2="609.6" y2="250" stroke="#B8546B" stroke-width="3"/>
+          <line x1="337.6" y1="242" x2="337.6" y2="258" stroke="#B8546B" stroke-width="3"/>
+          <line x1="609.6" y1="242" x2="609.6" y2="258" stroke="#B8546B" stroke-width="3"/>
+          <circle cx="473.6" cy="250" r="5.5" fill="#B8546B"/>
+          <text x="473.6" y="286" font-size="11.5" fill="#8B3A4D" text-anchor="middle">crosses two thresholds: low to elevated</text>
+          <text x="120" y="316" font-size="13.5" font-weight="600" fill="#1A1815">12 items</text>
+          <text x="120" y="334" font-size="11.5" fill="#8A857C">one answer = ~8 pts</text>
+          <line x1="419.2" y1="322" x2="528" y2="322" stroke="#5A7A4F" stroke-width="3"/>
+          <line x1="419.2" y1="314" x2="419.2" y2="330" stroke="#5A7A4F" stroke-width="3"/>
+          <line x1="528" y1="314" x2="528" y2="330" stroke="#5A7A4F" stroke-width="3"/>
+          <circle cx="473.6" cy="322" r="5.5" fill="#5A7A4F"/>
+          <line x1="120" y1="398" x2="800" y2="398" stroke="rgba(26,24,21,.12)" stroke-width="1"/>
+          <text x="120" y="416" font-size="12" fill="#8A857C">Illustrative. Reliability depends on item quality and correlation, not count alone,</text>
+          <text x="120" y="434" font-size="12" fill="#8A857C">but more items means each answer moves the score less.</text>
+        </g>
+      </svg>
+    </div>
+  </section>
 
   <!-- COMPLIANCE AS DESIGN -->
-  <div class="case-section">
-    <h2>Designing against harm: restraint is the feature</h2>
-    <p>The interesting product work was everywhere the honest choice fought the engaging one. I took the honest one each time, because in this domain trust compounds and overclaiming is a one-time con. A few of the calls:</p>
-    <div class="decisions">
-      <div class="decision"><h4>Frequency scale, not agreement</h4><p>"How often does this happen" instead of "do you agree this is you". It sidesteps self-image filtering and the acquiescence and central-tendency biases of agree/disagree scales, and it matches the real clinical tools, so scores translate cleanly if the user moves to the validated version.</p></div>
-      <div class="decision"><h4>A gentle flag, not a silent penalty</h4><p>Reverse-scored attention checks catch straight-lining. When answers contradict, results say so kindly ("some answers seemed contradictory, consider retaking") rather than quietly degrading a score the user can't see.</p></div>
-      <div class="decision"><h4>Traits are not a diagnosis, built into results</h4><p>A single impairment follow-up per elevated dimension. A 75% trait score with no daily impact means something different from the same score with severe impact, and the results show both, so "I have these traits" never reads as "I have this condition".</p></div>
-      <div class="decision"><h4>Name the mimics at the right moment</h4><p>A differentials card (trauma, depression, anxiety, thyroid, sleep, perimenopause) shown on results, not before. That is the moment a user can actually act on "consider these alongside your score" when they take it to a GP.</p></div>
+  <section class="cs-body" style="padding:4rem 2.5rem 3rem;">
+    <div style="max-width:var(--read);margin:0 auto;">
+      <h2 class="cs-h2" data-reveal style="opacity:0;transform:translateY(28px);transition:opacity 1.1s ease,transform 1.1s ease;">Designing against harm: restraint is the feature</h2>
+      <div data-reveal style="opacity:0;transform:translateY(28px);transition:opacity 1.1s ease .06s,transform 1.1s ease .06s;">
+        <p>The interesting product work was everywhere the honest choice fought the engaging one. I took the honest one each time, because in this domain trust compounds and overclaiming is a one-time con. A few of the calls:</p>
+      </div>
+      <div data-reveal style="opacity:0;transform:translateY(30px);transition:opacity 1.1s ease .1s,transform 1.1s ease .1s;display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-top:1.5rem;">
+        <div style="background:#1C2E52;border-radius:16px;padding:1.5rem;"><h4 style="font-size:.95rem;font-weight:600;color:#EDEFF6;margin-bottom:.5rem;">Frequency scale, not agreement</h4><p style="font-size:.84rem;color:#98A0B3;line-height:1.65;font-weight:300;margin:0;">"How often does this happen" instead of "do you agree this is you". It sidesteps self-image filtering and the acquiescence and central-tendency biases of agree/disagree scales, and it matches the real clinical tools, so scores translate cleanly if the user moves to the validated version.</p></div>
+        <div style="background:#1C2E52;border-radius:16px;padding:1.5rem;"><h4 style="font-size:.95rem;font-weight:600;color:#EDEFF6;margin-bottom:.5rem;">A gentle flag, not a silent penalty</h4><p style="font-size:.84rem;color:#98A0B3;line-height:1.65;font-weight:300;margin:0;">Reverse-scored attention checks catch straight-lining. When answers contradict, results say so kindly ("some answers seemed contradictory, consider retaking") rather than quietly degrading a score the user can't see.</p></div>
+        <div style="background:#1C2E52;border-radius:16px;padding:1.5rem;"><h4 style="font-size:.95rem;font-weight:600;color:#EDEFF6;margin-bottom:.5rem;">Traits are not a diagnosis, built into results</h4><p style="font-size:.84rem;color:#98A0B3;line-height:1.65;font-weight:300;margin:0;">A single impairment follow-up per elevated dimension. A 75% trait score with no daily impact means something different from the same score with severe impact, and the results show both, so "I have these traits" never reads as "I have this condition".</p></div>
+        <div style="background:#1C2E52;border-radius:16px;padding:1.5rem;"><h4 style="font-size:.95rem;font-weight:600;color:#EDEFF6;margin-bottom:.5rem;">Name the mimics at the right moment</h4><p style="font-size:.84rem;color:#98A0B3;line-height:1.65;font-weight:300;margin:0;">A differentials card (trauma, depression, anxiety, thyroid, sleep, perimenopause) shown on results, not before. That is the moment a user can actually act on "consider these alongside your score" when they take it to a GP.</p></div>
+      </div>
+      <div data-reveal style="opacity:0;transform:translateY(28px);transition:opacity 1.1s ease .06s,transform 1.1s ease .06s;background:#1C2E52;border-radius:18px;padding:1.75rem 2rem;margin-top:1.75rem;">
+        <div style="display:inline-block;font-size:.62rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#D48D98;background:rgba(212,141,152,.16);padding:.2rem .6rem;border-radius:4px;margin-bottom:1rem;">Honesty as a feature</div>
+        <p style="color:#C4CAD8;font-weight:300;font-size:1rem;line-height:1.7;margin-bottom:.6rem;">The 60% "elevated" line is a pragmatic cutoff, not a validated one, and the copy says exactly that wherever the number appears.</p>
+        <p style="color:#C4CAD8;font-weight:300;font-size:1rem;line-height:1.7;margin-bottom:0;">The items are written in the style of real instruments but are not empirically validated. The tool states this plainly. Owning the limit is what earns the right to be useful at all.</p>
+      </div>
     </div>
-    <div class="callout hyp" style="margin-top:1.75rem;">
-      <span class="tag">Honesty as a feature</span>
-      <p>The 60% "elevated" line is a pragmatic cutoff, not a validated one, and the copy says exactly that wherever the number appears.</p>
-      <p>The items are written in the style of real instruments but are not empirically validated. The tool states this plainly. Owning the limit is what earns the right to be useful at all.</p>
-    </div>
-  </div>
+  </section>
 
-  <!-- PROCESS / DECISIONS LOG -->
-  <div class="case-section">
-    <h2>How I made the calls: decisions first, facts second, build last</h2>
-    <p>I ran this like a product, not a side project. Ten open questions, from "should the broad scan auto-run or force a confirm" to "which extra dimensions earn inclusion", were each resolved in a written record: the decision, the options considered, and, crucially, what I rejected and why. That last part is the one people skip and later regret.</p>
-    <p>Before a single clinical claim could ship, I split the work by type. Design choices I could just make. Factual claims (follow-up test details, co-occurrence rates, diagnostic criteria) went into a separate verification track, sixteen research prompts sent out to be sourced before they were allowed near the copy. Knowing the difference between a decision and a fact is most of the discipline.</p>
-    <div class="decisions">
-      <div class="decision"><h4>Add what you can operationalise honestly</h4><p>Alexithymia earned a full dimension because a real adult instrument exists to route people to. Tics and auditory processing were deferred, not faked, until a valid self-screen is confirmed. Demand avoidance became a sub-flag inside autism, matching the clinical reality rather than inventing a dimension.</p></div>
-      <div class="decision"><h4>Give context its own shape</h4><p>Giftedness doesn't screen cleanly as twelve items, so it isn't a dimension. It's a results-page note explaining why neurodivergence gets missed, alongside masking and late diagnosis. Different kinds of truth get different kinds of treatment.</p></div>
+  <!-- PROCESS -->
+  <section class="cs-body" style="padding:3rem 2.5rem;">
+    <div style="max-width:var(--read);margin:0 auto;">
+      <h2 class="cs-h2" data-reveal style="opacity:0;transform:translateY(28px);transition:opacity 1.1s ease,transform 1.1s ease;">How I made the calls: decisions first, facts second, build last</h2>
+      <div data-reveal style="opacity:0;transform:translateY(28px);transition:opacity 1.1s ease .06s,transform 1.1s ease .06s;">
+        <p>I ran this like a product, not a side project. Ten open questions, from "should the broad scan auto-run or force a confirm" to "which extra dimensions earn inclusion", were each resolved in a written record: the decision, the options considered, and, crucially, what I rejected and why. That last part is the one people skip and later regret.</p>
+        <p>Before a single clinical claim could ship, I split the work by type. Design choices I could just make. Factual claims (follow-up test details, co-occurrence rates, diagnostic criteria) went into a separate verification track, sixteen research prompts sent out to be sourced before they were allowed near the copy. Knowing the difference between a decision and a fact is most of the discipline.</p>
+      </div>
+      <div data-reveal style="opacity:0;transform:translateY(30px);transition:opacity 1.1s ease .1s,transform 1.1s ease .1s;display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-top:1.5rem;">
+        <div style="background:#1C2E52;border-radius:16px;padding:1.5rem;"><h4 style="font-size:.95rem;font-weight:600;color:#EDEFF6;margin-bottom:.5rem;">Add what you can operationalise honestly</h4><p style="font-size:.84rem;color:#98A0B3;line-height:1.65;font-weight:300;margin:0;">Alexithymia earned a full dimension because a real adult instrument exists to route people to. Tics and auditory processing were deferred, not faked, until a valid self-screen is confirmed. Demand avoidance became a sub-flag inside autism, matching the clinical reality rather than inventing a dimension.</p></div>
+        <div style="background:#1C2E52;border-radius:16px;padding:1.5rem;"><h4 style="font-size:.95rem;font-weight:600;color:#EDEFF6;margin-bottom:.5rem;">Give context its own shape</h4><p style="font-size:.84rem;color:#98A0B3;line-height:1.65;font-weight:300;margin:0;">Giftedness doesn't screen cleanly as twelve items, so it isn't a dimension. It's a results-page note explaining why neurodivergence gets missed, alongside masking and late diagnosis. Different kinds of truth get different kinds of treatment.</p></div>
+      </div>
     </div>
-  </div>
+  </section>
 
   <!-- OUTCOMES -->
-  <div class="case-section">
-    <h2>Outcomes: what the study produced</h2>
-    <div class="outcomes-grid">
-      <div class="outcome-card"><div class="num">8 in 1</div><div class="desc">Eight trait dimensions unified into one coherent screen with two flows, replacing a scatter of siloed single-condition tests</div></div>
-      <div class="outcome-card"><div class="num">96 items</div><div class="desc">A question bank rebuilt from 5 to 12 items per dimension to clear the reliability floor a tool people act on actually needs</div></div>
-      <div class="outcome-card"><div class="num">10 ADRs</div><div class="desc">Every product decision resolved and written down with its rejected alternatives, so the reasoning survives the session</div></div>
-      <div class="outcome-card"><div class="num">16 checks</div><div class="desc">Clinical claims separated from design choices and sent for source verification before any of them reached the copy</div></div>
+  <section style="background:#FAF7F0;color:#1A1815;padding:6rem 2.5rem;">
+    <div style="max-width:var(--read);margin:0 auto;">
+      <h2 data-reveal style="opacity:0;transform:translateY(28px);transition:opacity 1.1s ease,transform 1.1s ease;font-size:clamp(1.9rem,3.8vw,3rem);font-weight:200;letter-spacing:-.03em;line-height:1.12;color:#1A1815;margin-bottom:3rem;">Outcomes: what the study produced</h2>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:3rem 4rem;">
+        <div data-reveal style="opacity:0;transform:translateY(28px);transition:opacity 1.1s ease,transform 1.1s ease;"><div style="font-size:clamp(2.2rem,3.6vw,3.2rem);font-weight:200;color:#A33E4E;line-height:1;letter-spacing:-.03em;margin-bottom:.8rem;">8 in 1</div><p style="font-size:1.02rem;font-weight:300;line-height:1.7;color:#48443C;">Eight trait dimensions unified into one coherent screen with two flows, replacing a scatter of siloed single-condition tests.</p></div>
+        <div data-reveal style="opacity:0;transform:translateY(28px);transition:opacity 1.1s ease .06s,transform 1.1s ease .06s;"><div style="font-size:clamp(2.2rem,3.6vw,3.2rem);font-weight:200;color:#A33E4E;line-height:1;letter-spacing:-.03em;margin-bottom:.8rem;">96 items</div><p style="font-size:1.02rem;font-weight:300;line-height:1.7;color:#48443C;">A question bank rebuilt from 5 to 12 items per dimension to clear the reliability floor a tool people act on actually needs.</p></div>
+        <div data-reveal style="opacity:0;transform:translateY(28px);transition:opacity 1.1s ease .1s,transform 1.1s ease .1s;"><div style="font-size:clamp(2.2rem,3.6vw,3.2rem);font-weight:200;color:#A33E4E;line-height:1;letter-spacing:-.03em;margin-bottom:.8rem;">10 ADRs</div><p style="font-size:1.02rem;font-weight:300;line-height:1.7;color:#48443C;">Every product decision resolved and written down with its rejected alternatives, so the reasoning survives the session.</p></div>
+        <div data-reveal style="opacity:0;transform:translateY(28px);transition:opacity 1.1s ease .14s,transform 1.1s ease .14s;"><div style="font-size:clamp(2.2rem,3.6vw,3.2rem);font-weight:200;color:#A33E4E;line-height:1;letter-spacing:-.03em;margin-bottom:.8rem;">16 checks</div><p style="font-size:1.02rem;font-weight:300;line-height:1.7;color:#48443C;">Clinical claims separated from design choices and sent for source verification before any of them reached the copy.</p></div>
+      </div>
     </div>
-  </div>
+  </section>
 
   <!-- REFLECTION -->
-  <div class="case-section">
-    <h2>What I'd take from this: the product was the discipline</h2>
-    <p>Anyone can write a personality quiz. The work here was refusing to let it become one. Every strong decision came from the same place: a clear-eyed view of what the tool could honestly claim, and the discipline to design against the temptation to claim more. In a regulated, health-adjacent product, that restraint isn't a constraint on the work. It is the work.</p>
-  </div>
-</div>
-
-<div class="next-case-wrap">
-  <div class="next-case">
-    <a href="reframe.html">
-      <div>
-        <div class="next-label">Next case study</div>
-        <div class="next-title">Reframe, turning an optician's instinct into an explainable product</div>
+  <section class="cs-body" style="padding:6rem 2.5rem;">
+    <div style="max-width:var(--read);margin:0 auto;">
+      <h2 class="cs-h2" data-reveal style="opacity:0;transform:translateY(28px);transition:opacity 1.1s ease,transform 1.1s ease;">What I'd take from this: the product was the discipline</h2>
+      <div data-reveal style="opacity:0;transform:translateY(28px);transition:opacity 1.1s ease .06s,transform 1.1s ease .06s;">
+        <p>Anyone can write a personality quiz. The work here was refusing to let it become one. Every strong decision came from the same place: a clear-eyed view of what the tool could honestly claim, and the discipline to design against the temptation to claim more. In a regulated, health-adjacent product, that restraint isn't a constraint on the work. It is the work.</p>
       </div>
-      <div class="arrow">&rarr;</div>
-    </a>
-  </div>
-</div>
-<div class="case-footer-wrap">
-  <div class="case-footer">
-    <a href="index.html#work">&larr; Back to all work</a>
-    <a href="https://linkedin.com/in/perrien" target="_blank" class="cta-link">Discuss a project</a>
-  </div>
-</div>
-<footer>&copy; <script>document.write(new Date().getFullYear())</script> Malgo Perrien</footer>
+    </div>
+  </section>
 
-<script>
-(function(){
-  function fitPrototypeFrames(){
-    document.querySelectorAll('.pf-stage').forEach(function(stage){
-      var iframe = stage.querySelector('iframe');
-      if(!iframe) return;
-      var scale = stage.clientWidth / 1280;
-      iframe.style.transform = 'scale(' + scale + ')';
+  <!-- NEXT CASE -->
+  <section style="padding:0 2.5rem 5rem;">
+    <a href="neurofenix.html" data-reveal style="opacity:0;transform:translateY(28px);transition:opacity 1.1s ease,transform 1.1s ease;display:flex;align-items:center;justify-content:space-between;gap:2rem;max-width:var(--read);margin:0 auto;background:#1C2E52;border-radius:24px;padding:3rem 3.5rem;">
+      <div>
+        <div style="font-size:.8rem;font-weight:500;letter-spacing:.05em;color:#D48D98;margin-bottom:.8rem;">NEXT CASE STUDY</div>
+        <div style="font-size:clamp(1.4rem,2.6vw,2rem);font-weight:300;letter-spacing:-.02em;color:#EDEFF6;">Neurofenix — driving a B2C→B2B2C pivot for enterprise healthcare</div>
+      </div>
+      <div style="font-size:2.2rem;color:#C26A79;flex-shrink:0;">→</div>
+    </a>
+  </section>
+
+  <footer style="background:#0f1a30;padding:3rem 2.5rem;">
+    <div style="max-width:var(--read);margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1.5rem;">
+      <a href="index.html#work" style="font-size:.9rem;color:#98A0B3;">← Back to all work</a>
+      <a href="mailto:perrien.work@gmail.com?subject=Let%27s%20talk%3A%20Clinical%20Screeners%20case%20study" style="font-size:.9rem;font-weight:500;color:#D48D98;">Discuss a project →</a>
+    </div>
+    <div style="max-width:var(--read);margin:2rem auto 0;font-size:.78rem;color:#5a6a8a;">© 2026 Malgo Perrien · The Product Office</div>
+  </footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  syncImgs() {
+    document.querySelectorAll('img[data-src]').forEach(im => {
+      const s = im.getAttribute('data-src');
+      if (s && s.indexOf('{{') === -1 && im.getAttribute('src') !== s) im.setAttribute('src', s);
     });
   }
-  fitPrototypeFrames();
-  window.addEventListener('resize', fitPrototypeFrames);
-  window.addEventListener('load', fitPrototypeFrames);
-  if(document.fonts && document.fonts.ready){ document.fonts.ready.then(fitPrototypeFrames); }
-})();
+  protoFit() {
+    document.querySelectorAll('[data-pf-stage]').forEach(stage => {
+      const iframe = stage.querySelector('iframe');
+      if (!iframe) return;
+      const h = parseInt(iframe.getAttribute('data-pf-h') || '860', 10);
+      const scale = stage.clientWidth / 1280;
+      iframe.style.transform = 'scale(' + scale + ')';
+      stage.style.height = (h * scale) + 'px';
+    });
+  }
+  componentDidMount() {
+    this.syncImgs();
+    this.protoFit();
+    const check = () => {
+      const els = [...document.querySelectorAll('[data-reveal]')].filter(e => !e.__rev);
+      const vh = window.innerHeight || 800;
+      els.forEach(e => {
+        const r = e.getBoundingClientRect();
+        if (r.top < vh * 0.92 && r.bottom > -40) { e.__rev = 1; e.style.opacity = 1; e.style.transform = 'none'; }
+      });
+    };
+    requestAnimationFrame(check);
+    const onScroll = () => requestAnimationFrame(check);
+    const onResize = () => { this.protoFit(); onScroll(); };
+    document.addEventListener('scroll', onScroll, { capture: true, passive: true });
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onResize, { passive: true });
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { this.protoFit(); check(); });
+    let ticks = 0;
+    this._iv = setInterval(() => { check(); this.protoFit(); if (++ticks > 40) clearInterval(this._iv); }, 250);
+  }
+  componentWillUnmount() { if (this._iv) clearInterval(this._iv); }
+}
 </script>
 </body>
 </html>

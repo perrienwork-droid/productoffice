@@ -1,854 +1,268 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Malgo Perrien, a product manager who designs · The Product Office</title>
-<meta name="description" content="The Product Office is the independent product practice of Malgo Perrien, a product manager who designs. Owning complex, high-stakes products from strategy through design to engineering handoff.">
-<link rel="canonical" href="https://mperrien.com/">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://mperrien.com/">
-<meta property="og:site_name" content="The Product Office">
-<meta property="og:title" content="Malgo Perrien, a product manager who designs · The Product Office">
-<meta property="og:description" content="The Product Office is the independent product practice of Malgo Perrien, a product manager who designs. Owning complex, high-stakes products from strategy through design to engineering handoff.">
-<meta property="og:image" content="https://mperrien.com/img/og/og-home.png">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="The Product Office — Malgo Perrien, a product manager who designs">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Malgo Perrien, a product manager who designs · The Product Office">
-<meta name="twitter:description" content="The Product Office is the independent product practice of Malgo Perrien, a product manager who designs. Owning complex, high-stakes products from strategy through design to engineering handoff.">
-<meta name="twitter:image" content="https://mperrien.com/img/og/og-home.png">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Product Office - Malgo Perrien, Product Manager</title>
+<meta name="description" content="A product manager who designs. I turn complex problems into products people actually use, across MedTech, FinTech and Telecom.">
 <link rel="icon" type="image/svg+xml" href="img/favicon.svg">
-<link rel="icon" type="image/png" sizes="64x64" href="img/favicon-64.png">
-<link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="tokens.css">
-<link rel="stylesheet" href="components.css">
-<style>
-/* tokens defined in tokens.css */
-*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-html { font-size: 18px; scroll-behavior: smooth; overflow-x: hidden; }
-body { font-family: var(--ff); color: var(--text-dark); background: var(--bg-dark); line-height: 1.7; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
-a { color: inherit; text-decoration: none; }
-
-.nav-wrap { background: var(--dark-a94); backdrop-filter: blur(14px); position: fixed; top: 0; left: 0; right: 0; z-index: 100; border-bottom: 1px solid var(--border-dark); }
-nav { max-width: 1135px; margin: 0 auto; padding: 1.1rem 2.5rem; display: flex; justify-content: space-between; align-items: center; }
-nav .logo { color: var(--white); font-size: 1.05rem; font-weight: 500; display: flex; align-items: center; gap: .55rem; letter-spacing: .01em; }
-nav .logo svg { flex-shrink: 0; }
-nav .nav-links { display: flex; gap: 2.2rem; align-items: center; }
-nav .nav-links a { color: var(--text-body-dark); font-size: .82rem; font-weight: 400; transition: color .2s; }
-nav .nav-links a:hover { color: var(--copper-bright); }
-nav .nav-links a.cta { color: var(--copper-bright); font-weight: 500; }
-
-.hero { background: var(--copper); }
-.hero-inner { max-width: 1180px; margin: 0 auto; display: grid; grid-template-columns: 1.15fr 1fr; align-items: stretch; min-height: 90vh; }
-.hero-copy { padding: 8.5rem 3rem 5rem 2.5rem; align-self: center; }
-.hero-label { font-size: .82rem; color: #200B0F; font-weight: 600; letter-spacing: .02em; margin-bottom: 1.4rem; }
-.hero h1 { font-size: clamp(2.3rem, 4.4vw, 3.3rem); color: var(--bg-cream); font-weight: 200; line-height: 1.14; letter-spacing: -.03em; max-width: 560px; margin: 0 0 1.4rem; }
-.hero h1 strong { font-weight: 700; }
-.hero h1 .accent { font-weight: 700; color: #130608; }
-.hero-sub { font-size: 1.05rem; color: #280F14; line-height: 1.65; max-width: 400px; margin: 0 0 2rem; font-weight: 400; }
-.hero-tags { display: flex; flex-wrap: wrap; gap: .45rem; max-width: 500px; margin: 0 0 2.2rem; }
-.hero-tags span { font-size: .74rem; color: #130608; letter-spacing: .01em; font-weight: 500; padding: .35rem .85rem; border: 1px solid rgba(19,6,8,.28); transition: background .2s; }
-.hero-tags span:hover { background: rgba(19,6,8,.08); }
-.hero-cta { display: inline-block; background: var(--text-dark); color: var(--bg-cream); font-size: .92rem; font-weight: 500; padding: .8rem 2.1rem; transition: opacity .2s; }
-.hero-cta:hover { opacity: .88; }
-.hero-media { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2rem 2.5rem 2rem 0.5rem; }
-.hero-frame { width: 100%; max-width: 420px; background: var(--bg-cream); padding: 13px; box-shadow: 0 22px 60px rgba(19,6,8,.32); }
-.hero-frame img { width: 100%; display: block; aspect-ratio: 4/5; object-fit: cover; object-position: center 20%; transform: scaleX(-1); }
-
-.section-inner { max-width: 1135px; margin: 0 auto; padding: 0 2.5rem; }
-.section-label { font-size: .88rem; color: var(--copper-on-light); font-weight: 500; letter-spacing: .03em; margin-bottom: .5rem; }
-.section-title { font-size: 1.9rem; font-weight: 700; letter-spacing: -.02em; line-height: 1.15; margin-bottom: 1rem; }
-.section-title strong { font-weight: 700; }
-.section-subtitle { font-size: 1.08rem; line-height: 1.75; max-width: 600px; margin-bottom: 3rem; font-weight: 400; }
-
-.how-i-work { background: var(--bg-cream); padding: 6rem 0; }
-.how-i-work .section-subtitle { color: var(--text-body-light); }
-.how-i-work .centered { text-align: center; }
-.how-i-work .centered .section-subtitle { margin-left: auto; margin-right: auto; }
-
-.lotus-wrap { display: flex; justify-content: center; padding: 1rem 0 3rem; }
-
-.depth-phases { max-width: 680px; margin: 0 auto; }
-.depth-phase { padding: 1.8rem 0; border-bottom: 1px solid var(--border-cream); }
-.depth-phase:last-child { border-bottom: none; }
-.depth-phase-num { font-size: 2rem; font-weight: 200; color: var(--copper-on-light); line-height: 1; margin-bottom: .4rem; }
-.depth-phase h3 { font-size: 1.05rem; font-weight: 600; color: var(--text-dark); margin-bottom: .4rem; }
-.depth-phase p { font-size: .92rem; color: var(--text-body-light); line-height: 1.7; font-weight: 400; }
-
-.ai-section { background: var(--bg-dark); padding: 6rem 0; }
-.ai-section .section-label { color: var(--copper-bright); }
-.ai-section .section-title { color: var(--text-light); }
-.ai-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-top: 2rem; }
-.ai-card { padding: 2rem; border: 1px solid var(--border-dark); background: var(--bg-dark-surface); transition: background .2s ease, border-color .2s ease; cursor: default; }
-.ai-card:hover { background: var(--white); border-color: var(--border-cream); }
-.ai-card h3 { font-size: 1.05rem; font-weight: 600; color: var(--text-light); margin-bottom: .5rem; transition: color .2s ease; }
-.ai-card:hover h3 { color: var(--text-dark); }
-.ai-card p { font-size: .92rem; color: var(--text-body-dark); line-height: 1.7; font-weight: 400; transition: color .2s ease; }
-.ai-card:hover p { color: var(--text-body-light); }
-
-/* ── Services: What I help with ── */
-.services { background: var(--bg-cream); padding: 6rem 0; }
-.services .section-title { color: var(--text-dark); }
-.services .section-subtitle { color: var(--text-body-light); }
-.services-list { margin-top: 2.5rem; border-top: 1px solid var(--border-cream); }
-.service-item { display: grid; grid-template-columns: 1fr 1.55fr; gap: 3.5rem; padding: 2.6rem 0; border-bottom: 1px solid var(--border-cream); align-items: start; }
-.service-item .s-head { display: flex; align-items: baseline; gap: .9rem; }
-.service-item .s-num { font-size: .82rem; font-weight: 500; color: var(--copper-on-light); letter-spacing: .06em; padding-top: .15rem; }
-.service-item h3 { font-size: 1.4rem; font-weight: 600; color: var(--text-dark); line-height: 1.25; letter-spacing: -.015em; }
-.service-item p { font-size: 1rem; color: var(--text-body-light); line-height: 1.85; font-weight: 400; }
-.service-item p strong { color: var(--text-dark); font-weight: 600; }
-
-.cases { background: var(--bg-dark); padding: 6rem 0; border-top: 1px solid var(--border-dark); }
-.cases .section-label { color: var(--copper-bright); }
-.cases .section-title { color: var(--text-light); }
-.cases .section-subtitle { color: var(--text-body-dark); }
-.case-item { display: grid; grid-template-columns: 1fr 1.1fr; gap: 3.5rem; padding: 3rem 0; border-bottom: 1px solid var(--border-dark); align-items: center; text-decoration: none; transition: opacity .2s; }
-.case-item:last-child { border-bottom: none; }
-.case-item:hover { opacity: .85; }
-.case-item.locked { opacity: .85; position: relative; }
-.case-item.locked:hover { opacity: 1; }
-.case-img-wrap { aspect-ratio: 4/3; overflow: hidden; border: 1px solid var(--border-dark); background: var(--bg-dark-surface); }
-.case-img-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.case-meta { display: flex; flex-wrap: wrap; gap: .4rem; margin-bottom: .8rem; }
-/* .case-meta span (category tag) + .case-status pills live in components.css — single source of truth. */
-.case-item h3 { font-size: 1.3rem; color: var(--text-light); font-weight: 600; line-height: 1.3; margin-bottom: .4rem; }
-.case-card-link { color: inherit; text-decoration: none; }
-.case-card-link::after { content: ''; position: absolute; inset: 0; z-index: 1; }
-.case-item .company { font-size: .88rem; color: var(--text-body-dark); margin-bottom: .8rem; font-weight: 400; }
-.case-item p { font-size: .92rem; color: var(--text-body-dark); line-height: 1.7; margin-bottom: 1.8rem; max-width: 500px; font-weight: 400; }
-.case-stats { display: flex; gap: 2.5rem; }
-.case-request-link { position: relative; z-index: 2; display: inline-flex; margin-top: 1.5rem; font-size: .85rem; font-weight: 500; color: var(--copper-bright); transition: color .2s; }
-.case-request-link:hover { color: var(--white); }
-.case-stat-num { font-size: 1.8rem; font-weight: 700; color: var(--copper); line-height: 1.1; }
-.case-stat-label { font-size: .72rem; color: var(--text-body-dark); margin-top: .2rem; font-weight: 400; }
-
-.about { background: var(--bg-cream); padding: 6rem 0; }
-.about .section-title { color: var(--text-dark); }
-.about-intro { display: grid; grid-template-columns: 1fr 1fr; gap: 3.5rem; align-items: start; }
-.about-intro-head .about-text--lead { margin-top: 1.4rem; }
-.about-portrait { width: 140px; height: 140px; border-radius: 50%; overflow: hidden; margin-bottom: 1.6rem; }
-.about-portrait img { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; }
-.hero-caption { font-size: .85rem; color: #280F14; font-weight: 400; letter-spacing: .01em; margin: .9rem 0 0; text-align: left; width: 100%; max-width: 420px; }
-.about-text p { font-size: 1rem; color: var(--text-body-light); line-height: 1.8; margin-bottom: 1.2rem; font-weight: 400; }
-.about-text strong { color: var(--text-dark); font-weight: 600; }
-.about-details-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin-top: 3rem; border-top: 1px solid var(--border-cream); }
-.about-detail-block { padding: 1.6rem 1.4rem; border-bottom: 1px solid var(--border-cream); border-right: 1px solid var(--border-cream); position: relative; }
-.about-detail-block:nth-child(even) { border-right: none; }
-.about-detail-block::before { content: ''; position: absolute; top: 0; left: 0; width: 2px; height: 2.2rem; background: var(--copper-on-light); opacity: .5; }
-.about-detail-label { font-size: .82rem; color: var(--copper-on-light); font-weight: 600; margin-bottom: .5rem; letter-spacing: .02em; }
-.about-detail-text { font-size: .88rem; color: var(--text-body-light); line-height: 1.7; font-weight: 400; }
-
-.contact { background: var(--copper); padding: 7rem 2.5rem; }
-.contact-split-inner { max-width: 980px; margin: 0 auto; display: grid; grid-template-columns: 300px 1fr; gap: 3.5rem; align-items: center; }
-.contact-photo img { width: 100%; aspect-ratio: 4/5; object-fit: cover; object-position: center 20%; display: block; background: var(--bg-cream); padding: 10px; box-shadow: 0 22px 60px rgba(19,6,8,.32); transform: scaleX(-1); }
-.contact h2 { color: white; font-weight: 300; font-size: 2.4rem; letter-spacing: -.02em; margin-bottom: .6rem; }
-.contact h2 strong { font-weight: 700; }
-.contact p { color: var(--white-a85); font-size: 1.05rem; font-weight: 400; max-width: 34rem; line-height: 1.55; }
-.contact-actions { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 2rem; }
-.contact a.cta-btn { display: inline-block; padding: .85rem 2.1rem; font-size: .95rem; font-weight: 600; transition: transform .15s, box-shadow .15s, background .15s; }
-.cta-btn--primary { background: var(--bg-cream-deep); color: var(--text-dark); border: 1px solid var(--border-cream); box-shadow: 0 6px 24px var(--shadow-a18), 0 2px 6px var(--shadow-a10); }
-.cta-btn--ghost { background: transparent; color: #fff; border: 1px solid rgba(255,255,255,.55); }
-.contact a.cta-btn:hover { transform: translateY(-3px); box-shadow: 0 14px 36px var(--shadow-a26), 0 4px 10px var(--shadow-a12); }
-.cta-btn--ghost:hover { background: rgba(255,255,255,.12); }
-
-footer { background: var(--bg-dark); text-align: center; padding: 1.8rem 2.5rem; font-size: .78rem; color: var(--text-muted-dark); border-top: 1px solid var(--border-dark); font-weight: 400; }
-
-@media (max-width: 768px) {
-  html { font-size: 16px; }
-  nav { padding: 1rem 1.5rem; }
-  nav .nav-links { gap: 1.2rem; }
-  .hero-inner { grid-template-columns: 1fr; min-height: auto; }
-  .hero-copy { padding: 2rem 1.5rem 3rem; order: 2; }
-  .hero-media { order: 1; padding: 6rem 1.5rem 0.5rem; }
-  .hero-frame { max-width: 230px; }
-  .hero h1 { font-size: clamp(2rem, 8vw, 2.8rem); max-width: none; }
-  .hero-sub, .hero-tags { max-width: none; }
-  .section-inner { padding: 0 1.5rem; }
-  .section-title { font-size: 1.6rem; }
-  .how-i-work { padding: 4rem 0; }
-  .ai-grid { grid-template-columns: 1fr; }
-  .services { padding: 4rem 0; }
-  .service-item { grid-template-columns: 1fr; gap: 1rem; padding: 2rem 0; }
-  .service-item h3 { font-size: 1.2rem; }
-  .about-intro { grid-template-columns: 1fr; gap: 1.5rem; }
-  .cases { padding: 4rem 0; }
-  .case-item { grid-template-columns: 1fr; gap: 1.5rem; padding: 2.5rem 0; }
-  .case-stats { gap: 1.5rem; flex-wrap: wrap; }
-  .case-stat-num { font-size: 1.5rem; }
-  .about { padding: 4rem 0; }
-  .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
-  .contact { padding: 4.5rem 1.5rem; }
-  .contact h2 { font-size: 1.8rem; }
-  .contact-split-inner { grid-template-columns: 1fr; gap: 2rem; text-align: center; }
-  .contact-photo { max-width: 190px; margin: 0 auto; }
-  .contact p { margin: 0 auto; }
-  .contact-actions { justify-content: center; }
-}
-
-@media (max-width: 480px) {
-  nav { padding: 1rem 1.1rem; }
-  nav .logo span { display: none; }
-  nav .logo { gap: 0; }
-  nav .nav-links { gap: .8rem; }
-  nav .nav-links a { font-size: .72rem; }
-}
-
-/* ── Lens card stack ── */
-.card-stack-wrap { display: flex; justify-content: center; padding: 2rem 0 1rem; }
-.card-stack { position: relative; width: 360px; height: 360px; cursor: pointer; margin: 0 auto; }
-.process-card {
-  position: absolute; inset: 0;
-  background: var(--bg-cream-deep);
-  border: 1px solid var(--border-cream);
-  border-radius: 4px;
-  padding: 2.6rem;
-  display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;
-  box-shadow: 0 4px 20px var(--shadow-a10);
-  transition: transform .42s cubic-bezier(.34,1.46,.64,1), box-shadow .3s ease, opacity .3s ease;
-  will-change: transform;
-  user-select: none;
-}
-/* front card: centre, straight */
-.process-card[data-pos="0"] {
-  z-index: 3;
-  transform: rotate(0deg) translateX(0) translateY(0);
-  opacity: 1;
-  box-shadow: 0 6px 28px var(--shadow-a14);
-}
-/* left card: rotated CCW, offset left */
-.process-card[data-pos="1"] {
-  z-index: 2;
-  transform: rotate(-10deg) translateX(-54px) translateY(18px);
-  opacity: .72;
-}
-/* right card: rotated CW, offset right */
-.process-card[data-pos="2"] {
-  z-index: 1;
-  transform: rotate(10deg) translateX(54px) translateY(18px);
-  opacity: .52;
-}
-.card-stack:hover .process-card[data-pos="0"] {
-  transform: rotate(0deg) translateX(0) translateY(-10px);
-  box-shadow: 0 18px 44px var(--shadow-a20);
-}
-.process-card-num { font-size: 2.8rem; font-weight: 200; color: var(--copper-on-light); line-height: 1; margin-bottom: .4rem; }
-.process-card-title { font-size: 1.1rem; font-weight: 600; color: var(--text-dark); margin-bottom: .6rem; }
-.process-card-body { font-size: .95rem; color: var(--text-body-light); line-height: 1.7; font-weight: 400; }
-.card-counter { text-align: center; font-size: .78rem; color: var(--text-body-light); font-weight: 400; margin-top: 2rem; letter-spacing: .04em; }
-.card-counter span { color: var(--copper-on-light); font-weight: 600; }
-
-/* ── About card stack ── */
-.about-cards-wrap { display: flex; justify-content: center; flex-direction: column; align-items: center; padding: 3rem 0 1rem; }
-.about-card-stack { position: relative; width: 360px; height: 360px; cursor: pointer; margin: 0 auto; }
-.about-card {
-  position: absolute; inset: 0;
-  background: var(--bg-cream-deep);
-  border: 1px solid var(--border-cream);
-  border-radius: 4px;
-  padding: 2.6rem;
-  display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;
-  box-shadow: 0 4px 20px var(--shadow-a10);
-  transition: transform .42s cubic-bezier(.34,1.46,.64,1), box-shadow .3s ease, opacity .3s ease;
-  will-change: transform;
-  user-select: none;
-}
-.about-card[data-pos="0"] {
-  z-index: 4;
-  transform: rotate(0deg) translateX(0) translateY(0);
-  opacity: 1;
-  box-shadow: 0 6px 28px var(--shadow-a14);
-}
-.about-card[data-pos="1"] {
-  z-index: 3;
-  transform: rotate(-10deg) translateX(-54px) translateY(18px);
-  opacity: .72;
-}
-.about-card[data-pos="2"] {
-  z-index: 2;
-  transform: rotate(10deg) translateX(54px) translateY(18px);
-  opacity: .50;
-}
-.about-card[data-pos="3"] {
-  z-index: 1;
-  transform: rotate(-5deg) translateX(-20px) translateY(28px);
-  opacity: .32;
-}
-.about-card-stack:hover .about-card[data-pos="0"] {
-  transform: rotate(0deg) translateX(0) translateY(-10px);
-  box-shadow: 0 18px 44px var(--shadow-a20);
-}
-/* Shared typography with process cards */
-.about-card-num { font-size: 2.8rem; font-weight: 200; color: var(--copper-on-light); line-height: 1; margin-bottom: .4rem; }
-.about-card-title { font-size: 1.1rem; font-weight: 600; color: var(--text-dark); margin-bottom: .6rem; }
-.about-card-text { font-size: .95rem; color: var(--text-body-light); line-height: 1.7; font-weight: 400; }
-
-/* ── Card navigation pills ── */
-.card-nav-pills {
-  display: flex; flex-wrap: wrap; gap: .4rem;
-  justify-content: center; margin-top: 1.6rem;
-}
-.card-nav-pill {
-  font-size: .72rem; font-weight: 400; letter-spacing: .02em;
-  padding: .3rem .85rem;
-  border: 1px solid var(--copper-a28);
-  background: var(--copper-a06);
-  color: var(--copper-on-light);
-  cursor: pointer;
-  transition: background .18s, border-color .18s, color .18s;
-  user-select: none;
-}
-.card-nav-pill:hover,
-.card-nav-pill.active {
-  background: var(--copper-a16);
-  border-color: var(--copper-a55);
-  color: var(--copper-on-light);
-}
-
-/* ── Hero pill tooltips + glow ── */
-.hero-tags span { position: relative; cursor: pointer; }
-/* Default tooltip: above */
-.hero-tags span::after {
-  content: attr(data-tip);
-  position: absolute; bottom: calc(100% + 10px); top: auto; left: 50%;
-  transform: translateX(-50%) translateY(4px);
-  background: var(--dark-a96);
-  color: var(--text-body-dark);
-  font-size: .72rem; font-weight: 400;
-  white-space: nowrap;
-  padding: .45rem .9rem;
-  border: 1px solid var(--border-dark);
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity .18s ease, transform .18s ease;
-  z-index: 10;
-}
-.hero-tags span:hover::after {
-  opacity: 1;
-  transform: translateX(-50%) translateY(0);
-}
-/* Bottom-row pills: tooltip below */
-.hero-tags span.tip-below::after {
-  bottom: auto;
-  top: calc(100% + 10px);
-  transform: translateX(-50%) translateY(-4px);
-}
-.hero-tags span.tip-below:hover::after {
-  transform: translateX(-50%) translateY(0);
-}
-/* Glow/pulse on hover */
-@keyframes pill-pulse {
-  0%   { box-shadow: 0 0 0 0 var(--copper-glow-a55); }
-  60%  { box-shadow: 0 0 0 7px var(--copper-glow-a0); }
-  100% { box-shadow: 0 0 0 0 var(--copper-glow-a0); }
-}
-.hero-tags span:hover {
-  background: var(--copper-bright-a18);
-  border-color: var(--white);
-  color: var(--white);
-  animation: pill-pulse .7s ease-out forwards;
-}
-/* Active flash on click */
-.hero-tags span:active {
-  background: var(--copper-bright-a28);
-  transform: scale(.97);
-}
-</style>
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://productoffice.pm/">
+<meta property="og:title" content="The Product Office - Malgo Perrien, Product Manager">
+<meta property="og:description" content="A product manager who designs. I turn complex problems into products people actually use, across MedTech, FinTech and Telecom.">
+<meta property="og:image" content="https://productoffice.pm/img/malgo-portrait.webp">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The Product Office - Malgo Perrien, Product Manager">
+<meta name="twitter:description" content="A product manager who designs. I turn complex problems into products people actually use, across MedTech, FinTech and Telecom.">
+<meta name="twitter:image" content="https://productoffice.pm/img/malgo-portrait.webp">
+<script>window.__resources={"https://unpkg.com/react@18.3.1/umd/react.production.min.js":"vendor/react.production.min.js","https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js":"vendor/react-dom.production.min.js"};</script>
+<script src="./support.js"></script>
 </head>
 <body>
-
-<div class="nav-wrap">
-<nav>
-  <a href="./" class="logo" aria-label="The Product Office home">
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--copper-bright)" stroke-width="2" stroke-linecap="square" aria-hidden="true"><path d="M3 8V3h5M21 8V3h-5M3 16v5h5M21 16v5h-5"/><circle cx="12" cy="12" r="1.6" fill="var(--copper-bright)" stroke="none"/></svg>
-    <span>The Product Office</span>
-  </a>
-  <div class="nav-links">
-    <a href="#services">Services</a>
-    <a href="#work">Work</a>
-    <a href="#about">About</a>
-    <a href="#contact" class="cta">Get in touch →</a>
-  </div>
-</nav>
-</div>
-
-<section class="hero">
-  <div class="hero-inner">
-    <div class="hero-copy">
-      <h1>I turn <strong>complex problems</strong> into products people <span class="accent">actually use</span></h1>
-      <p class="hero-sub">A product manager who designs, owning complex products from strategy to launch.</p>
-      <div class="hero-tags">
-        <span data-tip="Strategy, roadmaps, OKRs, from discovery to shipped" data-anchor="work">Product strategy</span>
-        <span data-tip="I read every layer (structure, trust, conversion) to sharpen product calls" data-anchor="how-i-work">Design depth</span>
-        <span data-tip="Analytics platforms, enterprise tools – Opensignal" data-anchor="work">B2B SaaS</span>
-        <span data-tip="MedTech, neurorehab, regulated clinical products" data-anchor="work">HealthTech</span>
-        <span data-tip="Consumer &amp; enterprise fintech products" data-anchor="about">FinTech</span>
-        <span data-tip="WCAG, clinical compliance, multi-stakeholder systems" data-anchor="about">Regulated environments</span>
-      </div>
-      <a href="#contact" class="hero-cta">Get in touch</a>
-    </div>
-    <div class="hero-media">
-      <div class="hero-frame">
-        <img src="img/hero-warm.webp" alt="Malgo Perrien, founder of The Product Office">
-      </div>
-      <div class="hero-caption">Malgo Perrien - Founder &amp; Principal Consultant,<br>The Product Office</div>
-    </div>
-  </div>
-</section>
-
-<!-- AI SECTION HIDDEN (signal preserved via hero pill). Re-enable by removing the HTML comment wrappers.
-<section class="ai-section">
-  <div class="section-inner">
-    <div class="section-label">AI in my workflow</div>
-    <h2 class="section-title" style="color:var(--text-light);">AI makes me <strong>faster</strong> – the judgment stays <strong>mine</strong></h2>
-    <p class="section-subtitle" style="color:var(--text-body-dark);margin-left:auto;margin-right:auto;">I integrate AI into every stage of my process – not as a shortcut, but as leverage. The quality goes up, the cycle time comes down, and the product decisions stay human.</p>
-
-    <div class="ai-bubbles-wrap">
-      <div class="ai-bubble" style="width:240px;height:240px;align-self:flex-end;margin-bottom:20px;">
-        <div class="ai-bubble-inner">
-          <div class="ai-bubble-title">Research &amp;<br>synthesis</div>
-          <div class="ai-bubble-sub">I decide what matters</div>
-          <div class="ai-bubble-detail">Pattern recognition, interview synthesis, competitive research – compressed from days to hours. I decide what matters.</div>
-        </div>
-      </div>
-      <div class="ai-bubble" style="width:270px;height:270px;align-self:flex-start;margin-top:10px;">
-        <div class="ai-bubble-inner">
-          <div class="ai-bubble-title">Rapid<br>prototyping</div>
-          <div class="ai-bubble-sub">I set the direction</div>
-          <div class="ai-bubble-detail">First drafts in minutes, not days. I explore 10 directions fast, then apply judgment to pick one and push it further.</div>
-        </div>
-      </div>
-      <div class="ai-bubble" style="width:256px;height:256px;align-self:center;">
-        <div class="ai-bubble-inner">
-          <div class="ai-bubble-title">Content &amp;<br>communication</div>
-          <div class="ai-bubble-sub">I ensure precision</div>
-          <div class="ai-bubble-detail">Specs, PRDs, stakeholder updates, release notes – AI drafts, I refine. Tighter and faster without losing my voice.</div>
-        </div>
-      </div>
-      <div class="ai-bubble ai-bubble--sm" style="width:210px;height:210px;align-self:flex-end;margin-bottom:30px;">
-        <div class="ai-bubble-inner">
-          <div class="ai-bubble-title">Experiment<br>acceleration</div>
-          <div class="ai-bubble-sub">I interpret results</div>
-          <div class="ai-bubble-detail">Faster hypothesis generation, quicker result interpretation. AI surfaces patterns – the conclusions stay mine.</div>
-        </div>
-      </div>
-    </div>
-
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,300&display=swap" rel="stylesheet">
 <style>
-.ai-bubbles-wrap {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 1rem 0 3rem;
-  flex-wrap: nowrap;
-  overflow: visible;
-  min-height: 300px;
-}
-.ai-bubble {
-  position: relative;
-  width: 256px; height: 256px;
-  border-radius: 50%;
-  background: var(--copper-bright-a28);
-  border: 1.5px solid var(--copper-bright-a14);
-  margin-left: -56px;
-  cursor: pointer;
-  transition: transform .38s cubic-bezier(.34,1.46,.64,1),
-              box-shadow .3s ease,
-              background .3s ease;
-  display: flex; align-items: center; justify-content: center;
-  flex-shrink: 0;
-  z-index: 1;
-}
-.ai-bubble:first-child { margin-left: 0; }
-.ai-bubble--sm { width: 224px; height: 224px; }
-.ai-bubble-inner {
-  text-align: center; padding: 1.6rem;
-  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .35rem;
-  pointer-events: none;
-  width: 100%;
-}
-.ai-bubble-title {
-  font-size: 14px; font-weight: 500; color: var(--text-light); line-height: 1.35;
-  transition: opacity .18s ease;
-}
-.ai-bubble-sub {
-  font-size: 11px; font-weight: 400; color: var(--text-body-dark-a75); font-style: italic;
-  transition: opacity .18s ease;
-}
-.ai-bubble-detail {
-  font-size: 0;
-  color: var(--text-light); font-weight: 400; line-height: 1.6;
-  opacity: 0;
-  max-width: 200px;
-  transition: font-size .22s ease, opacity .22s ease;
-}
-/* Hover: scale up + light up + swap content, uses scale so inline sizes are preserved */
-.ai-bubble:hover {
-  background: var(--white);
-  border-color: var(--copper-a30);
-  box-shadow: 0 0 0 8px var(--copper-glow-a10), 0 0 44px var(--copper-glow-a28);
-  z-index: 10;
-  transform: translateY(-12px) scale(1.12);
-}
-.ai-bubble--sm:hover { transform: translateY(-12px) scale(1.12); }
-.ai-bubble:hover .ai-bubble-title { opacity: 0; font-size: 0; }
-.ai-bubble:hover .ai-bubble-sub   { opacity: 0; font-size: 0; }
-.ai-bubble:hover .ai-bubble-detail { font-size: .84rem; opacity: 1; color: var(--text-dark); }
-@keyframes bubble-pulse {
-  0%   { box-shadow: 0 0 0 0 var(--copper-glow-a55), 0 0 44px var(--copper-glow-a28); }
-  70%  { box-shadow: 0 0 0 16px var(--copper-glow-a0), 0 0 44px var(--copper-glow-a28); }
-  100% { box-shadow: 0 0 8px var(--copper-glow-a10), 0 0 44px var(--copper-glow-a28); }
-}
-.ai-bubble:hover { animation: bubble-pulse .9s ease-out forwards; }
-@media (max-width: 900px) {
-  .ai-bubbles-wrap { flex-wrap: wrap; gap: 1.4rem; padding-bottom: 2rem; min-height: auto; }
-  .ai-bubble, .ai-bubble--sm { margin-left: 0 !important; width: 180px !important; height: 180px !important; }
-  .ai-bubble:hover, .ai-bubble--sm:hover { width: 200px !important; height: 200px !important; transform: translateY(-6px); }
-}
+  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{font-family:'Inter',system-ui,sans-serif;background:#12213F;color:#EDEFF6;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+  a{color:inherit;text-decoration:none;}
+  a.tpo-navlink:hover{color:#D48D98;}
+  ::selection{background:#C26A79;color:#FAF7F0;}
+  @keyframes tpo-bob{0%,100%{transform:translateY(0);}50%{transform:translateY(7px);}}
 </style>
+</helmet>
+<div style="background:#12213F;">
+
+  <div style="position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(18,33,63,.66);backdrop-filter:blur(16px);">
+    <nav style="max-width:1200px;margin:0 auto;padding:1.15rem 2.5rem;display:flex;justify-content:space-between;align-items:center;">
+      <a href="#top" style="color:#fff;font-size:1.02rem;font-weight:500;display:flex;align-items:center;gap:.55rem;letter-spacing:-.01em;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#D48D98" stroke-width="2" stroke-linecap="square"><path d="M3 8V3h5M21 8V3h-5M3 16v5h5M21 16v5h-5"/><circle cx="12" cy="12" r="1.6" fill="#D48D98" stroke="none"/></svg>
+        <span>The Product Office</span>
+      </a>
+      <div style="display:flex;gap:2.4rem;align-items:center;">
+        <a class="tpo-navlink" href="#services" style="color:#C4CAD8;font-size:.82rem;transition:color .2s;">Services</a>
+        <a class="tpo-navlink" href="#work" style="color:#C4CAD8;font-size:.82rem;transition:color .2s;">Work</a>
+        <a class="tpo-navlink" href="#about" style="color:#C4CAD8;font-size:.82rem;transition:color .2s;">About</a>
+        <a class="tpo-navlink" href="#contact" style="color:#D48D98;font-size:.82rem;font-weight:500;transition:color .2s;">Get in touch →</a>
+      </div>
+    </nav>
   </div>
-</section>
--->
 
-<section class="services" id="services">
-  <div class="section-inner">
-    <h2 class="section-title">What I'm hired to <strong>do</strong></h2>
-    <p class="section-subtitle">Four areas where a strategy-led PM with design depth moves the needle fastest.</p>
-
-    <div class="services-list">
-      <div class="service-item">
-        <div class="s-head"><span class="s-num">01</span><h3>Product strategy &amp; discovery</h3></div>
-        <p>Frame the problem, not just the feature. I run discovery, pressure-test assumptions, and turn messy signals into a roadmap engineering and leadership can commit to. <strong>Outcome:</strong> fewer wasted quarters, sharper bets.</p>
-      </div>
-      <div class="service-item">
-        <div class="s-head"><span class="s-num">02</span><h3>Activation &amp; retention</h3></div>
-        <p>First use to habit is where most products leak value. I diagnose funnels, prioritise with RICE, run experiments, and ship the changes that move the metric (not the ones that demo well). <strong>Neurofenix:</strong> +50% activation. <strong>Meteor:</strong> 0 to 5M, #1 retention in category.</p>
-      </div>
-      <div class="service-item">
-        <div class="s-head"><span class="s-num">03</span><h3>Multi-stakeholder platforms in regulated environments</h3></div>
-        <p>Products where patients, clinicians, executives, and engineers all need different things from the same system, with compliance baked in from day one. Ten years across <strong>MedTech, FinTech, and Telecom</strong>, including B2B2C pivots and enterprise platform builds.</p>
-      </div>
-      <div class="service-item">
-        <div class="s-head"><span class="s-num">04</span><h3>Design-led product calls</h3></div>
-        <p>I read design at a level most PMs never touch (structure, hierarchy, trust, emotional impact), and I use that depth to sharpen prioritisation, specs, and trade-offs. <strong>Not to own Figma</strong>, to make the roadmap better.</p>
+  <!-- 1 · HERO (wine banner) -->
+  <section id="top" style="min-height:100vh;display:flex;flex-direction:column;justify-content:center;background:#C26A79;color:#FAF7F0;padding:8rem 2.5rem 6rem;">
+    <div style="max-width:1200px;margin:0 auto;width:100%;">
+      <div data-reveal style="opacity:0;transform:translateY(30px);transition:opacity 1.1s ease,transform 1.1s ease;font-size:.82rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#12213F;margin-bottom:2.5rem;">The Product Office</div>
+      <h1 data-reveal style="opacity:0;transform:translateY(30px);transition:opacity 1.1s ease .12s,transform 1.1s ease .12s;font-size:clamp(3rem,8vw,7rem);font-weight:200;line-height:1.02;letter-spacing:-.045em;max-width:16ch;">I turn complex problems into products people <span style="font-weight:600;color:#12213F;">actually use</span></h1>
+      <div data-reveal style="opacity:0;transition:opacity 1.4s ease 1s;margin-top:5rem;display:flex;align-items:center;gap:.8rem;color:rgba(18,33,63,.62);font-size:.85rem;letter-spacing:.02em;">
+        <span>Scroll</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(18,33,63,.62)" stroke-width="1.6" style="animation:tpo-bob 2.4s ease-in-out infinite;"><path d="M12 4v16M6 14l6 6 6-6"/></svg>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section class="cases" id="work">
-  <div class="section-inner">
-    <h2 class="section-title" style="color:var(--text-light);">Selected work: <strong>case studies</strong></h2>
-    <p class="section-subtitle">Real products shipped in regulated environments – with the outcomes to show for it.</p>
-
-    <a href="neurofenix.html" class="case-item">
-      <div class="case-img-wrap"><img src="img/neurofenix/hero-composite.webp" alt="Neurofenix platform"></div>
-      <div>
-        <div class="case-meta"><span class="case-status open"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 7.5-2"/></svg>Open access</span><span>MedTech</span><span>B2B2C</span><span>Platform pivot</span></div>
-        <h3>Driving a B2C to B2B2C pivot for a neurorehab platform</h3>
-        <div class="company">Neurofenix – 2021–2025</div>
-        <p>Led product strategy and design for a platform serving patients, clinicians, and health systems. Defined the enterprise roadmap, ran user research, and designed the product that delivered a 50% activation lift.</p>
-        <div class="case-stats">
-          <div><div class="case-stat-num">+50%</div><div class="case-stat-label">Activation</div></div>
-          <div><div class="case-stat-num">31M+</div><div class="case-stat-label">User actions</div></div>
-          <div><div class="case-stat-num">5.5</div><div class="case-stat-label">Days/wk</div></div>
-        </div>
-      </div>
-    </a>
-
-    <a href="meteor.html" class="case-item">
-      <div class="case-img-wrap"><img src="img/meteor/hero-test-screens.webp" alt="Meteor app"></div>
-      <div>
-        <div class="case-meta"><span class="case-status open"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 7.5-2"/></svg>Open access</span><span>Consumer app</span><span>Growth & retention</span><span>Data strategy</span></div>
-        <h3>From concept to 5M downloads – a consumer product that became an enterprise data asset</h3>
-        <div class="company">Opensignal – 2016–2021</div>
-        <p>Conceptualized, validated, and shipped a consumer app that redefined its category. Led feature prioritization, retention strategy, and built a consumer-to-enterprise data pipeline.</p>
-        <div class="case-stats">
-          <div><div class="case-stat-num">0→5M</div><div class="case-stat-label">Downloads</div></div>
-          <div><div class="case-stat-num">4.8★</div><div class="case-stat-label">App rating</div></div>
-          <div><div class="case-stat-num">~30%</div><div class="case-stat-label">Of dataset</div></div>
-        </div>
-      </div>
-    </a>
-
-    <a href="opensignal-b2b.html" class="case-item">
-      <div class="case-img-wrap"><img src="img/intel/dash-together.webp" alt="CI and PI dashboards"></div>
-      <div>
-        <div class="case-meta"><span class="case-status open"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 7.5-2"/></svg>Open access</span><span>B2B SaaS</span><span>Enterprise</span><span>Multi-audience</span></div>
-        <h3>An analytics platform that closed enterprise deals before engineering started</h3>
-        <div class="company">Opensignal – 2016–2021</div>
-        <p>Led product discovery and design for a family of B2B analytics products. Defined information architecture, prioritized with RICE, and created prototypes that directly closed enterprise contracts.</p>
-        <div class="case-stats">
-          <div><div class="case-stat-num">4</div><div class="case-stat-label">Products</div></div>
-          <div><div class="case-stat-num">Pre-dev</div><div class="case-stat-label">Deals closed</div></div>
-          <div><div class="case-stat-num">20→300</div><div class="case-stat-label">Team growth</div></div>
-        </div>
-      </div>
-    </a>
-
-    <a href="reframe.html" class="case-item">
-      <div class="case-img-wrap"><img src="img/eyewear/hero-stilllife.webp" alt="Reframe, eyewear frames on a marble counter beside a scored recommendation card"></div>
-      <div>
-        <div class="case-meta"><span class="case-status open"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 7.5-2"/></svg>Open access</span><span>Self-initiated</span><span>Retail SaaS</span><span>Explainable AI</span></div>
-        <h3>Turning an optician's instinct into an explainable product</h3>
-        <div class="company">Reframe, a Product Office venture &ndash; 2026</div>
-        <p>A 0 to 1 venture. Built a seven-criteria scoring engine for in-store frame recommendations, then let real on-face evidence overturn a third of my own rankings. Designed and shipped the clickable product myself.</p>
-        <div class="case-stats">
-          <div><div class="case-stat-num">7</div><div class="case-stat-label">Weighted criteria</div></div>
-          <div><div class="case-stat-num">~1/3</div><div class="case-stat-label">Rankings overturned</div></div>
-          <div><div class="case-stat-num">0→1</div><div class="case-stat-label">Concept to product</div></div>
-        </div>
-      </div>
-    </a>
-
-        <a href="screeners.html" class="case-item">
-      <div class="case-img-wrap"><img src="img/screener/poster.svg" alt="Neurodivergent Traits Screener, scored dimension bars against an elevated threshold"></div>
-      <div>
-        <div class="case-meta"><span class="case-status open"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 7.5-2"/></svg>Open access</span><span>Self-initiated</span><span>HealthTech</span><span>Measurement design</span></div>
-        <h3>A self-screener rigorous enough to act on, honest enough not to diagnose</h3>
-        <div class="company">Neurodivergent Traits Screener, a Product Office study – 2026</div>
-        <p>A 0 to 1 study in making a health tool honest. Designed the two-path flow and a scoring model built to route people onward, never to conclude, then engineered a 96-item bank for reliability and logged every decision.</p>
-        <div class="case-stats">
-          <div><div class="case-stat-num">8</div><div class="case-stat-label">Dimensions in one screen</div></div>
-          <div><div class="case-stat-num">96</div><div class="case-stat-label">Reliability-tuned items</div></div>
-          <div><div class="case-stat-num">0→1</div><div class="case-stat-label">Intent to prototype</div></div>
-        </div>
-      </div>
-    </a>
-
-    <a href="noir-book.html" class="case-item">
-      <div class="case-img-wrap"><img src="img/noir/hero-banner.webp" alt="Noir Book, a cross-disciplinary reference library"></div>
-      <div>
-        <div class="case-meta"><span class="case-status open"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 7.5-2"/></svg>Open access</span><span>Self-initiated</span><span>Reference library</span><span>Cross-disciplinary</span></div>
-        <h3>The reference my bookmarks were trying to be</h3>
-        <div class="company">Noir Book, a Product Office project – 2026</div>
-        <p>Built the cross-disciplinary reference I always wanted: UX, product, marketing, and content in one usable format. Defined the structure, distilled the content, and shipped the whole library solo, live and clickable in the case study.</p>
-        <div class="case-stats">
-          <div><div class="case-stat-num">127</div><div class="case-stat-label">Topics, one format</div></div>
-          <div><div class="case-stat-num">200+</div><div class="case-stat-label">Frameworks with templates</div></div>
-          <div><div class="case-stat-num">0→1</div><div class="case-stat-label">Shipped solo</div></div>
-        </div>
-      </div>
-    </a>
-  </div>
-</section>
-
-<section class="how-i-work">
-  <div class="section-inner">
-    <div class="centered">
-      <h2 class="section-title" style="color:var(--text-dark);">My operating model: from <strong>signal</strong> to shipped product</h2>
-      <p class="section-subtitle">The process is iterative, it loops, and the goal is always a measured outcome.</p>
-    </div>
-
-    <!-- Process Arc diagram -->
-    <div class="diagram-wrap" style="background:var(--bg-cream);padding:3rem 1rem 2.5rem;margin-bottom:3rem;width:100vw;max-width:1232px;position:relative;left:50%;transform:translateX(-50%);">
-      <svg width="100%" viewBox="0 0 1000 480" style="max-width:1232px;display:block;margin:0 auto;" font-family="'Fira Sans', sans-serif">
-        <defs>
-          <filter id="arc-cs" x="-40%" y="-40%" width="180%" height="180%">
-            <feDropShadow dx="0" dy="6" stdDeviation="10" flood-color="rgba(114,49,58,.13)"/>
-          </filter>
-          <filter id="arc-csp" x="-40%" y="-40%" width="180%" height="180%">
-            <feDropShadow dx="0" dy="8" stdDeviation="14" flood-color="rgba(114,49,58,.18)"/>
-          </filter>
-          <marker id="arc-arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto">
-            <path d="M2 1L8 5L2 9" fill="none" stroke="#A33E4E" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-          </marker>
-          <marker id="arc-arr-back" viewBox="0 0 10 10" refX="2" refY="5" markerWidth="5" markerHeight="5" orient="auto">
-            <path d="M8 1L2 5L8 9" fill="none" stroke="#A33E4E" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-          </marker>
-        </defs>
-
-        <!-- Semicircle arc: centre(500,370) r=250 -->
-        <path d="M 250,370 A 250,250 0 0 1 750,370"
-              fill="none" stroke="rgba(163,62,78,.5)" stroke-width="1.7"/>
-
-        <!-- Arrowheads between nodes, floating on arc -->
-        <path d="M 256,274 L 261,267" fill="none" stroke="#A33E4E" stroke-width="1.7" marker-end="url(#arc-arr)"/>
-        <path d="M 408,132 L 415,127" fill="none" stroke="#A33E4E" stroke-width="1.7" marker-end="url(#arc-arr)"/>
-        <path d="M 587,127 L 594,132" fill="none" stroke="#A33E4E" stroke-width="1.7" marker-end="url(#arc-arr)"/>
-        <path d="M 740,267 L 746,274" fill="none" stroke="#A33E4E" stroke-width="1.7" marker-end="url(#arc-arr)"/>
-
-        <!-- Loopback dashed arc -->
-        <path d="M 744,402 C 730,444 640,456 500,456 C 360,456 270,444 256,402"
-              fill="none" stroke="rgba(163,62,78,.5)" stroke-width="1.3"
-              stroke-dasharray="5 4" marker-start="url(#arc-arr-back)"/>
-        <text x="500" y="453" font-size="12" font-weight="400" fill="#1A1815"
-              text-anchor="middle" font-style="italic">iteration</text>
-
-        <!-- NODE 01, Signal  cx=250 cy=370 r=68 -->
-        <g filter="url(#arc-cs)">
-          <circle cx="250" cy="370" r="68" fill="rgba(163,62,78,.10)" stroke="rgba(163,62,78,.30)" stroke-width="1.5"/>
-          <circle cx="250" cy="370" r="68" fill="#F2EDE5" stroke="rgba(221,214,200,.65)" stroke-width="1.5"/>
-        </g>
-        <text x="250" y="362" font-size="15" font-weight="700" fill="#1A1815" text-anchor="middle">Signal</text>
-        <text x="250" y="380" font-size="12" font-weight="400" fill="#3D3A35" text-anchor="middle" font-style="italic">What's the</text>
-        <text x="250" y="396" font-size="12" font-weight="400" fill="#3D3A35" text-anchor="middle" font-style="italic">real problem?</text>
-
-        <!-- NODE 02, Frame  cx=323 cy=193 r=68 -->
-        <g filter="url(#arc-cs)">
-          <circle cx="323" cy="193" r="68" fill="rgba(163,62,78,.10)" stroke="rgba(163,62,78,.30)" stroke-width="1.5"/>
-          <circle cx="323" cy="193" r="68" fill="#F2EDE5" stroke="rgba(221,214,200,.65)" stroke-width="1.5"/>
-        </g>
-        <text x="323" y="185" font-size="15" font-weight="700" fill="#1A1815" text-anchor="middle">Frame</text>
-        <text x="323" y="203" font-size="12" font-weight="400" fill="#3D3A35" text-anchor="middle" font-style="italic">Who needs</text>
-        <text x="323" y="219" font-size="12" font-weight="400" fill="#3D3A35" text-anchor="middle" font-style="italic">what outcome?</text>
-
-        <!-- NODE 03, Prioritise  cx=500 cy=120 r=82 -->
-        <g filter="url(#arc-csp)">
-          <circle cx="500" cy="120" r="82" fill="rgba(163,62,78,.14)" stroke="rgba(163,62,78,.42)" stroke-width="1.5"/>
-          <circle cx="500" cy="120" r="82" fill="#F2EDE5" stroke="rgba(221,214,200,.70)" stroke-width="1.5"/>
-        </g>
-        <text x="500" y="106" font-size="17" font-weight="700" fill="#1A1815" text-anchor="middle">Prioritise</text>
-        <text x="500" y="125" font-size="12" font-weight="400" fill="#3D3A35" text-anchor="middle" font-style="italic">What moves the needle?</text>
-        <text x="500" y="144" font-size="11" font-weight="700" fill="#A33E4E" text-anchor="middle">RICE · OKR</text>
-        <text x="500" y="159" font-size="11" font-weight="700" fill="#A33E4E" text-anchor="middle">trade-offs</text>
-
-        <!-- NODE 04, Build  cx=677 cy=193 r=68 -->
-        <g filter="url(#arc-cs)">
-          <circle cx="677" cy="193" r="68" fill="rgba(163,62,78,.10)" stroke="rgba(163,62,78,.30)" stroke-width="1.5"/>
-          <circle cx="677" cy="193" r="68" fill="#F2EDE5" stroke="rgba(221,214,200,.65)" stroke-width="1.5"/>
-        </g>
-        <text x="677" y="185" font-size="15" font-weight="700" fill="#1A1815" text-anchor="middle">Build</text>
-        <text x="677" y="203" font-size="12" font-weight="400" fill="#3D3A35" text-anchor="middle" font-style="italic">Ship with</text>
-        <text x="677" y="219" font-size="12" font-weight="400" fill="#3D3A35" text-anchor="middle" font-style="italic">full context</text>
-
-        <!-- NODE 05, Measure  cx=750 cy=370 r=68 -->
-        <g filter="url(#arc-cs)">
-          <circle cx="750" cy="370" r="68" fill="rgba(163,62,78,.10)" stroke="rgba(163,62,78,.30)" stroke-width="1.5"/>
-          <circle cx="750" cy="370" r="68" fill="#F2EDE5" stroke="rgba(221,214,200,.65)" stroke-width="1.5"/>
-        </g>
-        <text x="750" y="362" font-size="15" font-weight="700" fill="#1A1815" text-anchor="middle">Measure</text>
-        <text x="750" y="380" font-size="12" font-weight="400" fill="#3D3A35" text-anchor="middle" font-style="italic">Did it</text>
-        <text x="750" y="396" font-size="12" font-weight="400" fill="#3D3A35" text-anchor="middle" font-style="italic">actually work?</text>
-      </svg>
-    </div>
-
-  </div>
-</section>
-
-<section class="about" id="about">
-  <div class="section-inner">
-    <div class="about-intro">
-      <div class="about-intro-head">
-        <h2 class="section-title" style="color:var(--text-dark);">Strategy-led PM with <strong>rare design depth</strong></h2>
-        <div class="about-text about-text--lead">
-          <p>I'm Malgo Perrien, the product manager behind <strong>The Product Office</strong>, my independent product practice.</p>
-          <p><strong>10 years across MedTech, FinTech, and Telecom.</strong> Strategy, discovery, roadmaps, experiments, stakeholder alignment, across engineering, clinical, and commercial teams.</p>
-          <p><strong>Based in Paris.</strong> English and French. Working mostly with teams across the UK and the US.</p>
-        </div>
-      </div>
-      <div class="about-text">
-        <p>I specialize in <strong>multi-stakeholder platforms in regulated environments</strong>, products where patients, clinicians, executives, and engineers all need different things from the same system. That's a product problem most people avoid. I go deep into it.</p>
-        <p>What makes me different: <strong>I read design at the level most PMs never touch.</strong> Structure, hierarchy, emotional impact. I use that depth to make sharper roadmap calls, not to own Figma. That's why the products I ship don't just work, they get used.</p>
+  <!-- 2 · STATEMENT -->
+  <section style="min-height:100vh;display:flex;flex-direction:column;justify-content:center;background:#FAF7F0;color:#1A1815;padding:8rem 2.5rem;">
+    <div style="max-width:1200px;margin:0 auto;width:100%;">
+      <p data-reveal style="opacity:0;transform:translateY(30px);transition:opacity 1.1s ease,transform 1.1s ease;font-size:clamp(2.2rem,5.5vw,4.6rem);font-weight:200;line-height:1.14;letter-spacing:-.03em;max-width:20ch;">A product manager who <span style="font-weight:500;">designs</span> — owning complex products from strategy to launch.</p>
+      <div data-reveal style="opacity:0;transform:translateY(30px);transition:opacity 1.1s ease .2s,transform 1.1s ease .2s;margin-top:4.5rem;display:flex;flex-wrap:wrap;gap:.6rem 2.2rem;">
+        <sc-for list="{{ domains }}" as="d" hint-placeholder-count="6">
+          <span style="font-size:1rem;font-weight:400;color:#48443C;">{{ d }}</span>
+        </sc-for>
       </div>
     </div>
-    <div class="about-cards-wrap">
-      <div class="about-card-stack" id="aboutCardStack" title="Click to browse">
-        <div class="about-card" data-pos="0">
-          <div class="about-card-num">01</div>
-          <div class="about-card-title">Domain expertise</div>
-          <div class="about-card-text">HealthTech, MedTech, FinTech, Wellness Tech, Telecom, regulated environments with complex compliance requirements</div>
+  </section>
+
+  <!-- 3 · SERVICES (expandable) -->
+  <section id="services" style="min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:8rem 2.5rem;">
+    <div style="max-width:1200px;margin:0 auto;width:100%;">
+      <h2 data-reveal style="opacity:0;transform:translateY(30px);transition:opacity 1.1s ease,transform 1.1s ease;font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;letter-spacing:-.02em;color:#98A0B3;margin-bottom:3.5rem;">What I'm hired to do</h2>
+      <sc-for list="{{ services }}" as="s" hint-placeholder-count="4">
+        <div data-reveal style="opacity:0;transform:translateY(30px);transition:opacity 1.1s ease,transform 1.1s ease;">
+          <div onClick="{{ s.toggle }}" style="cursor:pointer;padding:1.4rem 0;display:flex;gap:2rem;align-items:baseline;">
+            <span style="font-size:1rem;font-weight:400;color:#D48D98;letter-spacing:.04em;flex-shrink:0;padding-top:.7rem;">{{ s.num }}</span>
+            <h3 style="flex:1;font-size:clamp(1.6rem,3.6vw,2.8rem);font-weight:200;line-height:1.1;letter-spacing:-.03em;transition:color .35s ease;color:{{ s.titleColor }};">{{ s.title }}</h3>
+          </div>
+          <div style="{{ s.bodyStyle }}">
+            <p style="padding-left:3.5rem;padding-bottom:1.6rem;font-size:1.12rem;font-weight:300;line-height:1.75;color:#C4CAD8;max-width:60ch;">{{ s.body }}</p>
+          </div>
         </div>
-        <div class="about-card" data-pos="1">
-          <div class="about-card-num">02</div>
-          <div class="about-card-title">Product skills</div>
-          <div class="about-card-text">Product strategy, roadmaps, OKRs, user research, activation &amp; retention, A/B testing, funnel analysis, RICE prioritization, stakeholder alignment, GTM planning</div>
-        </div>
-        <div class="about-card" data-pos="2">
-          <div class="about-card-num">03</div>
-          <div class="about-card-title">Design literacy</div>
-          <div class="about-card-text">Information architecture, interaction patterns, accessible design (WCAG), prototyping, data visualization, usability testing, engineering handoff. Used to sharpen product calls, not to own delivery.</div>
-        </div>
-        <div class="about-card" data-pos="3">
-          <div class="about-card-num">04</div>
-          <div class="about-card-title">Education</div>
-          <div class="about-card-text">Product Management, IBM<br>M.A. Visual Communication, University of Arts Poznań<br>NN/g UX Certification, Nielsen Norman Group</div>
-        </div>
-      </div>
-      <div class="card-nav-pills" id="aboutNavPills" style="display:none;">
-        <span class="card-nav-pill active" data-idx="0">Domain expertise</span>
-        <span class="card-nav-pill" data-idx="1">Product skills</span>
-        <span class="card-nav-pill" data-idx="2">Design literacy</span>
-        <span class="card-nav-pill" data-idx="3">Education</span>
-      </div>
-      <div class="card-counter"><span id="aboutCardCurrent">1</span> / 4</div>
+      </sc-for>
     </div>
+  </section>
 
-    <script>
-    (function(){
-      var stack = document.getElementById('aboutCardStack');
-      var cards = Array.from(stack.querySelectorAll('.about-card'));
-      var counter = document.getElementById('aboutCardCurrent');
-      var n = cards.length;
-      var current = 0;
+  <!-- 4-6 · FLAGSHIP CASES (one per screen, number-led) -->
+  <sc-for list="{{ cases }}" as="c">
+    <section id="{{ c.anchor }}" style="min-height:100vh;display:flex;align-items:center;background:{{ c.bg }};color:#EDEFF6;padding:8rem 2.5rem;">
+      <a href="{{ c.href }}" style="max-width:1200px;margin:0 auto;width:100%;display:grid;grid-template-columns:1.05fr .95fr;gap:5rem;align-items:center;">
+        <div>
+          <div data-reveal style="opacity:0;transform:translateY(30px);transition:opacity 1.1s ease,transform 1.1s ease;font-size:.8rem;font-weight:500;letter-spacing:.06em;color:#D48D98;margin-bottom:1.5rem;">{{ c.tags }}</div>
+          <div data-reveal style="opacity:0;transform:translateY(30px);transition:opacity 1.1s ease .08s,transform 1.1s ease .08s;font-size:clamp(4rem,11vw,9.5rem);font-weight:200;color:#C26A79;line-height:.9;letter-spacing:-.04em;margin-bottom:.6rem;">{{ c.hero }}</div>
+          <div data-reveal style="opacity:0;transform:translateY(30px);transition:opacity 1.1s ease .12s,transform 1.1s ease .12s;font-size:1rem;font-weight:400;color:#98A0B3;letter-spacing:.04em;margin-bottom:2.6rem;">{{ c.heroLabel }}</div>
+          <h3 data-reveal style="opacity:0;transform:translateY(30px);transition:opacity 1.1s ease .16s,transform 1.1s ease .16s;font-size:clamp(1.5rem,2.6vw,2.2rem);font-weight:300;line-height:1.18;letter-spacing:-.02em;margin-bottom:1rem;max-width:22ch;">{{ c.title }}</h3>
+          <div data-reveal style="opacity:0;transform:translateY(30px);transition:opacity 1.1s ease .2s,transform 1.1s ease .2s;font-size:.9rem;color:#98A0B3;margin-bottom:1.6rem;">{{ c.company }}</div>
+          <p data-reveal style="opacity:0;transform:translateY(30px);transition:opacity 1.1s ease .24s,transform 1.1s ease .24s;font-size:1.08rem;font-weight:300;line-height:1.7;color:#C4CAD8;max-width:48ch;margin-bottom:1.4rem;">{{ c.blurb }}</p>
+          <div data-reveal style="opacity:0;transition:opacity 1.1s ease .3s;display:flex;gap:2.6rem;margin-top:.6rem;">
+            <sc-for list="{{ c.rest }}" as="st" hint-placeholder-count="2">
+              <div>
+                <div style="font-size:1.5rem;font-weight:300;color:#EDEFF6;line-height:1;">{{ st.num }}</div>
+                <div style="font-size:.72rem;color:#98A0B3;margin-top:.4rem;">{{ st.label }}</div>
+              </div>
+            </sc-for>
+          </div>
+          <span data-reveal style="opacity:0;transition:opacity 1.1s ease .34s;display:inline-block;margin-top:2.2rem;font-size:.9rem;font-weight:500;color:#C26A79;">Read the case study →</span>
+        </div>
+        <div data-reveal style="opacity:0;transform:translateY(30px);transition:opacity 1.2s ease .1s,transform 1.2s ease .1s;overflow:hidden;border-radius:24px;">
+          <img data-src="{{ c.img }}" alt="{{ c.title }}" style="width:100%;display:block;aspect-ratio:4/5;object-fit:cover;">
+        </div>
+      </a>
+    </section>
+  </sc-for>
 
-      function goTo(idx) {
-        current = idx;
-        cards.forEach(function(card, i){
-          card.setAttribute('data-pos', Math.min((i - current + n) % n, 3));
-        });
-        counter.textContent = current + 1;
-      }
-
-      stack.addEventListener('click', function(){ goTo((current + 1) % n); });
-    })();
-    </script>
-  </div>
-</section>
-
-<section class="contact contact--split" id="contact">
-  <div class="contact-split-inner">
-    <div class="contact-photo">
-      <img src="img/malgo-portrait.webp" alt="Malgo Perrien, founder of The Product Office">
-    </div>
-    <div class="contact-copy">
-      <h2>Let's <strong>talk!</strong></h2>
-      <p>Fractional PM, product audits, or a full-time role. Tell me what you're building.</p>
-      <div class="contact-actions">
-        <a href="https://linkedin.com/in/perrien" target="_blank" class="cta-btn cta-btn--primary">Get in touch on LinkedIn &rarr;</a>
-        <a href="mailto:perrien.work@gmail.com" class="cta-btn cta-btn--ghost">Email me</a>
+  <!-- 7 · SELF-INITIATED (grouped) -->
+  <section id="ventures" style="min-height:100vh;display:flex;flex-direction:column;justify-content:center;background:#1C2E52;padding:8rem 2.5rem;">
+    <div style="max-width:1200px;margin:0 auto;width:100%;">
+      <h2 data-reveal style="opacity:0;transform:translateY(30px);transition:opacity 1.1s ease .08s,transform 1.1s ease .08s;font-size:clamp(2rem,4.4vw,3.4rem);font-weight:200;letter-spacing:-.03em;line-height:1.1;max-width:20ch;margin-bottom:4rem;">Ventures I designed and shipped solo, end to end.</h2>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:3.5rem;">
+        <sc-for list="{{ ventures }}" as="v">
+          <a href="{{ v.href }}" data-reveal style="opacity:0;transform:translateY(30px);transition:opacity 1.1s ease,transform 1.1s ease;display:block;">
+            <div style="overflow:hidden;border-radius:22px;margin-bottom:1.6rem;">
+              <img data-src="{{ v.img }}" alt="{{ v.title }}" style="width:100%;display:block;aspect-ratio:4/3;object-fit:cover;">
+            </div>
+            <h3 style="font-size:1.3rem;font-weight:400;line-height:1.3;letter-spacing:-.01em;color:#EDEFF6;margin-bottom:.7rem;">{{ v.title }}</h3>
+            <div style="font-size:.82rem;color:#98A0B3;margin-bottom:1rem;">{{ v.company }}</div>
+            <p style="font-size:.96rem;font-weight:300;line-height:1.65;color:#C4CAD8;margin-bottom:1.2rem;">{{ v.blurb }}</p>
+            <span style="font-size:.85rem;font-weight:500;color:#C26A79;">Read the case study →</span>
+          </a>
+        </sc-for>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<footer>&copy; <script>document.write(new Date().getFullYear())</script> Malgo Perrien · The Product Office</footer>
+  <!-- 8 · OPERATING MODEL (click to reveal) -->
+  <section id="how" style="min-height:100vh;display:flex;flex-direction:column;justify-content:center;background:#FAF7F0;color:#1A1815;padding:8rem 2.5rem;">
+    <div style="max-width:1200px;margin:0 auto;width:100%;">
+      <h2 data-reveal style="opacity:0;transform:translateY(30px);transition:opacity 1.1s ease,transform 1.1s ease;font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;letter-spacing:-.02em;color:#48443C;margin-bottom:1rem;max-width:24ch;">My operating model — from signal to shipped product.</h2>
+      <p data-reveal style="opacity:0;transform:translateY(30px);transition:opacity 1.1s ease .1s,transform 1.1s ease .1s;font-size:1rem;font-weight:300;color:#A33E4E;margin-bottom:3.5rem;">Tap a phase.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:.5rem 2.2rem;align-items:baseline;">
+        <sc-for list="{{ steps }}" as="step" hint-placeholder-count="5">
+          <div onClick="{{ step.select }}" style="cursor:pointer;font-size:clamp(2.4rem,7vw,5.2rem);font-weight:200;line-height:1.05;letter-spacing:-.04em;transition:color .35s ease;color:{{ step.color }};">{{ step.label }}</div>
+        </sc-for>
+      </div>
+      <div data-reveal style="opacity:0;transform:translateY(30px);transition:opacity 1.1s ease .2s,transform 1.1s ease .2s;margin-top:2.6rem;min-height:3.5rem;">
+        <p style="font-size:clamp(1.3rem,2.4vw,1.9rem);font-weight:200;font-style:italic;letter-spacing:-.01em;color:#1A1815;">{{ activeDetail }}</p>
+        <p style="font-size:.9rem;font-weight:600;letter-spacing:.06em;color:#A33E4E;margin-top:.6rem;">{{ activeNote }}</p>
+      </div>
+    </div>
+  </section>
 
-<script>
-// Ensure how-i-work section has an id
-var hiw = document.querySelector('.how-i-work');
-if (hiw && !hiw.id) hiw.id = 'how-i-work';
+  <!-- 9 · ABOUT -->
+  <section id="about" style="min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:8rem 2.5rem;">
+    <div style="max-width:1200px;margin:0 auto;width:100%;">
+      <h2 data-reveal style="opacity:0;transform:translateY(30px);transition:opacity 1.1s ease,transform 1.1s ease;font-size:clamp(2.4rem,6vw,5rem);font-weight:200;line-height:1.06;letter-spacing:-.035em;max-width:16ch;margin-bottom:3rem;">Strategy-led PM with <span style="font-weight:500;color:#D48D98;">rare design depth</span>.</h2>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:4rem;max-width:1000px;">
+        <p data-reveal style="opacity:0;transform:translateY(30px);transition:opacity 1.1s ease .1s,transform 1.1s ease .1s;font-size:1.2rem;font-weight:300;line-height:1.75;color:#C4CAD8;">10 years across MedTech, FinTech, and Telecom. I specialize in multi-stakeholder platforms in regulated environments — where patients, clinicians, executives, and engineers all need different things from the same system. That's a product problem most people avoid. I go deep into it.</p>
+        <p data-reveal style="opacity:0;transform:translateY(30px);transition:opacity 1.1s ease .18s,transform 1.1s ease .18s;font-size:1.2rem;font-weight:300;line-height:1.75;color:#C4CAD8;">What makes me different: I read design at the level most PMs never touch. Structure, hierarchy, emotional impact. I use that depth to make sharper roadmap calls, not to own Figma. That's why the products I ship don't just work, they get used. Based in Paris. English and French.</p>
+      </div>
+    </div>
+  </section>
 
-// Hero pill click → scroll to anchor, with offset for fixed nav
-document.querySelectorAll('.hero-tags span[data-anchor]').forEach(function(el) {
-  el.addEventListener('click', function() {
-    var target = document.getElementById(el.dataset.anchor);
-    if (!target) return;
-    var navH = document.querySelector('.nav-wrap') ? document.querySelector('.nav-wrap').offsetHeight : 80;
-    var top = target.getBoundingClientRect().top + window.pageYOffset - navH - 16;
-    window.scrollTo({ top: top, behavior: 'smooth' });
-  });
-});
+  <!-- 10 · CONTACT -->
+  <section id="contact" style="min-height:100vh;display:flex;flex-direction:column;justify-content:center;background:#C26A79;color:#fff;padding:8rem 2.5rem;">
+    <div style="max-width:1200px;margin:0 auto;width:100%;">
+      <h2 data-reveal style="opacity:0;transform:translateY(30px);transition:opacity 1.1s ease,transform 1.1s ease;font-size:clamp(3.5rem,12vw,10rem);font-weight:200;line-height:.95;letter-spacing:-.04em;margin-bottom:2.5rem;">Let's talk.</h2>
+      <p data-reveal style="opacity:0;transform:translateY(30px);transition:opacity 1.1s ease .12s,transform 1.1s ease .12s;font-size:1.4rem;font-weight:300;color:rgba(255,255,255,.92);max-width:34ch;line-height:1.5;margin-bottom:3rem;">Fractional PM, product audits, or a full-time role. Tell me what you're building.</p>
+      <div data-reveal style="opacity:0;transform:translateY(30px);transition:opacity 1.1s ease .2s,transform 1.1s ease .2s;display:flex;gap:1.2rem;flex-wrap:wrap;">
+        <a href="https://linkedin.com/in/perrien" target="_blank" style="display:inline-block;padding:1.05rem 2.6rem;font-size:1rem;font-weight:600;background:#FAF7F0;color:#1A1815;border-radius:14px;">Get in touch on LinkedIn →</a>
+        <a href="mailto:perrien.work@gmail.com" style="display:inline-block;padding:1.05rem 2.6rem;font-size:1rem;font-weight:600;background:transparent;color:#fff;border:1px solid rgba(255,255,255,.6);border-radius:14px;">Email me</a>
+      </div>
+    </div>
+  </section>
 
-// Detect bottom-row pills → tooltip goes below so it doesn't overlap content above
-function tagBottomPills() {
-  var pills = Array.from(document.querySelectorAll('.hero-tags span'));
-  if (!pills.length) return;
-  // Find max top offset (= last row's offsetTop)
-  var maxTop = Math.max.apply(null, pills.map(function(p){ return p.offsetTop; }));
-  pills.forEach(function(p) {
-    if (p.offsetTop >= maxTop) {
-      p.classList.add('tip-below');
-    } else {
-      p.classList.remove('tip-below');
-    }
-  });
+  <footer style="background:#12213F;text-align:center;padding:2rem 2.5rem;font-size:.78rem;color:#98A0B3;">© 2026 Malgo Perrien · The Product Office</footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { open: {}, step: 0 };
+
+  renderVals() {
+    const svc = [
+      {num:'01', title:'Product strategy & discovery', body:'Frame the problem, not just the feature. I run discovery, pressure-test assumptions, and turn messy signals into a roadmap engineering and leadership can commit to. Outcome: fewer wasted quarters, sharper bets.'},
+      {num:'02', title:'Activation & retention', body:'First use to habit is where most products leak value. I diagnose funnels, prioritise with RICE, run experiments, and ship the changes that move the metric (not the ones that demo well). Neurofenix: +50% activation. Meteor: 0 to 5M, #1 retention in category.'},
+      {num:'03', title:'Multi-stakeholder platforms in regulated environments', body:'Products where patients, clinicians, executives, and engineers all need different things from the same system, with compliance baked in from day one. Ten years across MedTech, FinTech, and Telecom, including B2B2C pivots and enterprise platform builds.'},
+      {num:'04', title:'Design-led product calls', body:'I read design at a level most PMs never touch (structure, hierarchy, trust, emotional impact), and I use that depth to sharpen prioritisation, specs, and trade-offs. Not to own Figma, to make the roadmap better.'}
+    ];
+    const services = svc.map((s, i) => {
+      const open = !!this.state.open[i];
+      return Object.assign({}, s, {
+        toggle: () => this.setState(st => ({ open: Object.assign({}, st.open, { [i]: !st.open[i] }) })),
+        bodyStyle: `overflow:hidden;transition:max-height .5s ease,opacity .4s ease;max-height:${open ? '460px' : '0'};opacity:${open ? '1' : '0'};`,
+        titleColor: open ? '#D48D98' : '#EDEFF6'
+      });
+    });
+
+    const stepData = [
+      {label:'Signal', detail:"What's the real problem?", note:''},
+      {label:'Frame', detail:'Who needs what outcome?', note:''},
+      {label:'Prioritise', detail:'What moves the needle?', note:'RICE · OKR · trade-offs'},
+      {label:'Build', detail:'Ship with full context.', note:''},
+      {label:'Measure', detail:'Did it actually work?', note:''}
+    ];
+    const steps = stepData.map((s, i) => ({
+      label: s.label,
+      color: i === this.state.step ? '#A33E4E' : 'rgba(26,24,21,.28)',
+      select: () => this.setState({ step: i })
+    }));
+
+    return {
+      domains: ['Product strategy','Design depth','B2B SaaS','HealthTech','FinTech','Regulated environments'],
+      services,
+      steps,
+      activeDetail: stepData[this.state.step].detail,
+      activeNote: stepData[this.state.step].note,
+      cases: [
+        {anchor:'work', href:'neurofenix.html', img:'img/neurofenix/hero-composite.webp', bg:'#12213F', tags:'MedTech · B2B2C · Platform pivot', hero:'+50%', heroLabel:'Activation lift', title:'Driving a B2C to B2B2C pivot for a neurorehab platform', company:'Neurofenix — 2021–2025', blurb:'Led product strategy and design for a platform serving patients, clinicians, and health systems. Defined the enterprise roadmap, ran user research, and designed the product that delivered a 50% activation lift.', rest:[{num:'31M+',label:'User actions'},{num:'5.5',label:'Days/wk'}]},
+        {anchor:'case-meteor', href:'meteor.html', img:'img/meteor/hero-test-screens.webp', bg:'#1C2E52', tags:'Consumer app · Growth & retention · Data strategy', hero:'0→5M', heroLabel:'Downloads', title:'From concept to 5M downloads — a consumer product that became an enterprise data asset', company:'Opensignal — 2016–2021', blurb:'Conceptualized, validated, and shipped a consumer app that redefined its category. Led feature prioritization, retention strategy, and built a consumer-to-enterprise data pipeline.', rest:[{num:'4.8★',label:'App rating'},{num:'~30%',label:'Of dataset'}]},
+        {anchor:'case-b2b', href:'opensignal.html', img:'img/intel/dash-together.webp', bg:'#12213F', tags:'B2B SaaS · Enterprise · Multi-audience', hero:'Pre-dev', heroLabel:'Enterprise deals closed', title:'An analytics platform that closed enterprise deals before engineering started', company:'Opensignal — 2016–2021', blurb:'Led product discovery and design for a family of B2B analytics products. Defined information architecture, prioritized with RICE, and created prototypes that directly closed enterprise contracts.', rest:[{num:'4',label:'Products'},{num:'20→300',label:'Team growth'}]}
+      ],
+      ventures: [
+        {href:'reframe.html', img:'img/eyewear/hero-stilllife.webp', title:"Turning an optician's instinct into an explainable product", company:'Reframe — 2026', blurb:'A 0 to 1 venture. A seven-criteria scoring engine for in-store frame recommendations, then let real on-face evidence overturn a third of my own rankings. Designed and shipped the clickable product myself.'},
+        {href:'screeners.html', img:'img/screener/poster.svg', title:'A self-screener rigorous enough to act on, honest enough not to diagnose', company:'Neurodivergent Traits Screener — 2026', blurb:'A 0 to 1 study in making a health tool honest. Designed the two-path flow and a scoring model built to route people onward, never to conclude, then engineered a 96-item bank for reliability.'},
+        {href:'noir-book.html', img:'img/noir/hero-banner.webp', title:'The reference my bookmarks were trying to be', company:'Noir Book — 2026', blurb:'Built the cross-disciplinary reference I always wanted: UX, product, marketing, and content in one usable format. Defined the structure, distilled the content, and shipped the whole library solo.'}
+      ]
+    };
+  }
+
+  syncImgs() {
+    document.querySelectorAll('img[data-src]').forEach(im => {
+      const s = im.getAttribute('data-src');
+      if (s && s.indexOf('{{') === -1 && im.getAttribute('src') !== s) im.setAttribute('src', s);
+    });
+  }
+  componentDidUpdate() { this.syncImgs(); }
+  componentDidMount() {
+    this.syncImgs();
+    const check = () => {
+      const els = [...document.querySelectorAll('[data-reveal]')].filter(e => !e.__rev);
+      const vh = window.innerHeight || 800;
+      els.forEach(e => {
+        const r = e.getBoundingClientRect();
+        if (r.top < vh * 0.9 && r.bottom > -40) { e.__rev = 1; e.style.opacity = 1; e.style.transform = 'none'; }
+      });
+    };
+    requestAnimationFrame(check);
+    const onScroll = () => requestAnimationFrame(check);
+    document.addEventListener('scroll', onScroll, { capture: true, passive: true });
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+    let ticks = 0;
+    this._iv = setInterval(() => { check(); if (++ticks > 60) clearInterval(this._iv); }, 200);
+  }
+  componentWillUnmount() { if (this._iv) clearInterval(this._iv); }
 }
-tagBottomPills();
-window.addEventListener('resize', tagBottomPills);
 </script>
 </body>
 </html>

@@ -1,1 +1,6 @@
 .DS_Store
+._*
+*.thumbnail
+Thumbs.db
+
+screenshots/

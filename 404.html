@@ -1,40 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Page not found · The Product Office</title>
-<meta name="robots" content="noindex, follow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Page not found - The Product Office</title>
+<meta name="robots" content="noindex">
 <link rel="icon" type="image/svg+xml" href="img/favicon.svg">
-<link rel="icon" type="image/png" sizes="64x64" href="img/favicon-64.png">
-<link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="tokens.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400;500;600&display=swap" rel="stylesheet">
 <style>
-*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-html { font-size: 18px; }
-body { font-family: var(--ff); color: var(--text-body-dark); background: var(--bg-dark); line-height: 1.7; -webkit-font-smoothing: antialiased; min-height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 2rem; }
-a { color: inherit; text-decoration: none; }
-.wrap { max-width: 480px; }
-.mark { display: flex; justify-content: center; margin-bottom: 2rem; }
-.eyebrow { font-size: .82rem; color: var(--copper-bright); font-weight: 600; letter-spacing: .04em; margin-bottom: 1rem; }
-h1 { font-size: clamp(2.4rem, 8vw, 3.2rem); color: var(--bg-cream); font-weight: 200; line-height: 1.1; letter-spacing: -.02em; margin-bottom: 1rem; }
-h1 strong { font-weight: 700; }
-p { font-size: 1rem; color: var(--text-body-dark); margin-bottom: 2.2rem; }
-.home-link { display: inline-flex; align-items: center; gap: .5rem; font-size: .9rem; font-weight: 500; color: var(--copper-bright); border: 1px solid var(--border-dark); padding: .8rem 1.6rem; transition: background .2s, border-color .2s; }
-.home-link:hover { background: var(--bg-dark-surface); border-color: var(--copper-bright); }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Inter',system-ui,sans-serif;background:#12213F;color:#EDEFF6;-webkit-font-smoothing:antialiased;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:2.5rem;text-align:center}
+  a{color:inherit;text-decoration:none}
+  .code{font-size:.82rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#D48D98;margin-bottom:1.6rem}
+  h1{font-size:clamp(2.4rem,6vw,4.2rem);font-weight:200;line-height:1.05;letter-spacing:-.03em;max-width:16ch;margin:0 auto 1.4rem}
+  p{font-size:1.05rem;font-weight:300;line-height:1.7;color:#C4CAD8;max-width:44ch;margin:0 auto 2.6rem}
+  .home{display:inline-block;font-size:.9rem;font-weight:500;color:#12213F;background:#D48D98;padding:.8rem 1.6rem;border-radius:100px;transition:opacity .2s}
+  .home:hover{opacity:.88}
 </style>
 </head>
 <body>
-  <div class="wrap">
-    <div class="mark">
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--copper-bright)" stroke-width="2" stroke-linecap="square" aria-hidden="true"><path d="M3 8V3h5M21 8V3h-5M3 16v5h5M21 16v5h-5"/><circle cx="12" cy="12" r="1.6" fill="var(--copper-bright)" stroke="none"/></svg>
-    </div>
-    <div class="eyebrow">404</div>
-    <h1>This page <strong>doesn't exist</strong></h1>
-    <p>The link may be broken, or the page may have moved. Let's get you back on track.</p>
-    <a href="index.html" class="home-link">&larr; Back to The Product Office</a>
+  <div>
+    <div class="code">404</div>
+    <h1>This page took a wrong turn</h1>
+    <p>The page you were looking for isn't here. It may have moved, or the link was mistyped.</p>
+    <a class="home" href="/">Back to The Product Office &rarr;</a>
   </div>
 </body>
 </html>

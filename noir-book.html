@@ -1,230 +1,275 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<title>Noir Book Case Study, Malgo Perrien</title>
-<meta name="description" content="Noir Book: a cross-disciplinary reference library, 127 topics and 200+ frameworks in one format, shipped solo.">
-<meta name="robots" content="noindex, nofollow">
-<link rel="canonical" href="https://mperrien.com/noir-book.html">
-<meta property="og:type" content="article">
-<meta property="og:url" content="https://mperrien.com/noir-book.html">
-<meta property="og:site_name" content="The Product Office">
-<meta property="og:title" content="Noir Book Case Study, Malgo Perrien">
-<meta property="og:description" content="Noir Book: a cross-disciplinary reference library, 127 topics and 200+ frameworks in one format, shipped solo.">
-<meta property="og:image" content="https://mperrien.com/img/og/og-noir-book.png">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Noir Book case study — 127 topics, 200+ frameworks">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Noir Book Case Study, Malgo Perrien">
-<meta name="twitter:description" content="Noir Book: a cross-disciplinary reference library, 127 topics and 200+ frameworks in one format, shipped solo.">
-<meta name="twitter:image" content="https://mperrien.com/img/og/og-noir-book.png">
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Noir Book: a cross-disciplinary reference - The Product Office</title>
+<meta name="description" content="A cross-disciplinary reference covering UX, product, marketing and content in one usable format, structured and shipped solo.">
 <link rel="icon" type="image/svg+xml" href="img/favicon.svg">
-<link rel="icon" type="image/png" sizes="64x64" href="img/favicon-64.png">
-<link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="tokens.css">
-<link rel="stylesheet" href="case-study.css">
-<link rel="stylesheet" href="components.css">
-<script src="case-study.js" defer></script>
-<style>
-/* Page-specific rules. Shared layout lives in case-study.css. */
-
-/* Four-discipline strip */
-.disc-strip { display: grid; grid-template-columns: repeat(4,1fr); gap: 1rem; margin: 2rem 0 .5rem; }
-.disc-strip figure { margin: 0; background: var(--white); border: 1px solid var(--border-cream); overflow: hidden; text-align: center; }
-.disc-strip img { width: 100%; height: auto; display: block; aspect-ratio: 4/3; object-fit: cover; background: var(--bg-cream); }
-.disc-strip figcaption { padding: .55rem .4rem; font-size: .72rem; color: var(--text-dark); font-weight: 500; letter-spacing: .02em; }
-@media (max-width: 768px) { .disc-strip { grid-template-columns: 1fr 1fr; } }
-
-/* Fun-fact compact cards */
-.facts { display: grid; grid-template-columns: repeat(2,1fr); gap: 1rem; margin: 1.75rem 0 0; }
-.fact { padding: 1.35rem 1.5rem; background: var(--bg-cream-deep); border: 1px solid var(--border-cream); }
-.fact h4 { font-size: 1.5rem; font-weight: 700; color: var(--copper-on-light); letter-spacing: -.02em; margin-bottom: .25rem; }
-.fact p { font-size: .84rem; color: var(--text-body-light); line-height: 1.6; font-weight: 400; margin: 0; }
-@media (max-width: 768px) { .facts { grid-template-columns: 1fr; } }
-</style>
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://productoffice.pm/noir-book.html">
+<meta property="og:title" content="Noir Book: a cross-disciplinary reference - The Product Office">
+<meta property="og:description" content="A cross-disciplinary reference covering UX, product, marketing and content in one usable format, structured and shipped solo.">
+<meta property="og:image" content="https://productoffice.pm/img/noir/hero-banner.webp">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Noir Book: a cross-disciplinary reference - The Product Office">
+<meta name="twitter:description" content="A cross-disciplinary reference covering UX, product, marketing and content in one usable format, structured and shipped solo.">
+<meta name="twitter:image" content="https://productoffice.pm/img/noir/hero-banner.webp">
+<script>window.__resources={"https://unpkg.com/react@18.3.1/umd/react.production.min.js":"vendor/react.production.min.js","https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js":"vendor/react-dom.production.min.js"};</script>
+<script src="./support.js"></script>
 </head>
 <body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,300&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;--read:680px;--wide:1120px;}
+  body{font-family:'Inter',system-ui,sans-serif;background:#12213F;color:#EDEFF6;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+  a{color:inherit;text-decoration:none;}
+  a.tpo-navlink:hover{color:#D48D98;}
+  ::selection{background:#C26A79;color:#FAF7F0;}
+  .cs-body p{font-size:1.12rem;font-weight:300;line-height:1.75;color:#C4CAD8;margin-bottom:1.5rem;}
+  .cs-body p strong{color:#EDEFF6;font-weight:600;}
+  .cs-h2{font-size:clamp(1.9rem,3.8vw,3rem);font-weight:200;letter-spacing:-.03em;line-height:1.12;color:#EDEFF6;margin-bottom:2.2rem;max-width:22ch;}
+  .cs-h2 strong{font-weight:200;font-style:italic;color:#D48D98;}
+</style>
+</helmet>
+<div style="background:#12213F;">
 
-<div class="nav-wrap">
-<nav>
-  <a href="index.html" class="logo" aria-label="The Product Office home">
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--copper-bright)" stroke-width="2" stroke-linecap="square" aria-hidden="true"><path d="M3 8V3h5M21 8V3h-5M3 16v5h5M21 16v5h-5"/><circle cx="12" cy="12" r="1.6" fill="var(--copper-bright)" stroke="none"/></svg>
-    <span>The Product Office</span>
-  </a>
-  <div class="nav-links">
-    <a href="index.html#work">Work</a>
-    <a href="index.html#about">About</a>
-    <a href="index.html#contact" class="cta">Get in touch &rarr;</a>
+  <div style="position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(18,33,63,.66);backdrop-filter:blur(16px);">
+    <nav style="max-width:1200px;margin:0 auto;padding:1.15rem 2.5rem;display:flex;justify-content:space-between;align-items:center;">
+      <a href="index.html" style="color:#fff;font-size:1.02rem;font-weight:500;display:flex;align-items:center;gap:.55rem;letter-spacing:-.01em;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#D48D98" stroke-width="2" stroke-linecap="square"><path d="M3 8V3h5M21 8V3h-5M3 16v5h5M21 16v5h-5"/><circle cx="12" cy="12" r="1.6" fill="#D48D98" stroke="none"/></svg>
+        <span>The Product Office</span>
+      </a>
+      <div style="display:flex;gap:2.4rem;align-items:center;">
+        <a class="tpo-navlink" href="index.html#work" style="color:#C4CAD8;font-size:.82rem;transition:color .2s;">Work</a>
+        <a class="tpo-navlink" href="index.html#about" style="color:#C4CAD8;font-size:.82rem;transition:color .2s;">About</a>
+        <a class="tpo-navlink" href="index.html#contact" style="color:#D48D98;font-size:.82rem;font-weight:500;transition:color .2s;">Get in touch →</a>
+      </div>
+    </nav>
   </div>
-</nav>
-</div>
 
-<section class="case-hero">
-  <div class="case-hero-inner">
-    <div class="case-hero-text">
-      <a href="index.html#work" class="back-link">&larr; All work</a>
-      <div class="case-meta"><span>Self-initiated venture</span><span>Reference library</span><span>Cross-disciplinary</span><span>Solo build</span></div>
-      <h1>The reference my bookmarks were <strong>trying to be</strong></h1>
-      <p class="subtitle">Noir Book, a self-initiated Product Office project, 2026</p>
+  <!-- HERO -->
+  <section style="background:#C26A79;color:#FAF7F0;padding:11rem 2.5rem 6rem;">
+    <div style="max-width:var(--read);margin:0 auto;">
+      <a href="index.html#work" data-reveal style="opacity:0;transform:translateY(24px);transition:opacity 1s ease,transform 1s ease;display:inline-block;font-size:.9rem;font-weight:500;color:#12213F;margin-bottom:2.5rem;">← All work</a>
+      <div data-reveal style="opacity:0;transform:translateY(24px);transition:opacity 1s ease .06s,transform 1s ease .06s;display:flex;flex-wrap:wrap;gap:.5rem 1.6rem;font-size:.82rem;font-weight:500;letter-spacing:.04em;color:#12213F;margin-bottom:2rem;">
+        <span>Self-initiated venture</span><span>Reference library</span><span>Cross-disciplinary</span><span>Solo build</span>
+      </div>
+      <h1 data-reveal style="opacity:0;transform:translateY(24px);transition:opacity 1.1s ease .12s,transform 1.1s ease .12s;font-size:clamp(2.4rem,5.6vw,4.6rem);font-weight:200;line-height:1.06;letter-spacing:-.04em;max-width:20ch;margin-bottom:1.8rem;">The reference my bookmarks were <em style="font-style:italic;color:#12213F;">trying to be</em></h1>
+      <p data-reveal style="opacity:0;transform:translateY(24px);transition:opacity 1.1s ease .18s,transform 1.1s ease .18s;font-size:1.15rem;font-weight:400;color:#12213F;letter-spacing:.01em;">Noir Book · A self-initiated Product Office project · 2026</p>
     </div>
-    <div class="case-hero-visual">
-      <figure class="case-img"><img src="img/noir/hero-banner.webp" alt="Noir Book, a cross-disciplinary reference library"></figure>
-    </div>
-    <div class="stats-bar">
-      <div class="stat"><div class="num">127</div><div class="label">Topics, one consistent format</div></div>
-      <div class="stat"><div class="num">200+</div><div class="label">Frameworks and methods with templates</div></div>
-      <div class="stat"><div class="num">4</div><div class="label">Disciplines in one place</div></div>
-      <div class="stat"><div class="num">~350K</div><div class="label">Words, built and shipped solo</div></div>
-    </div>
-  </div>
-</section>
+  </section>
 
-<div class="case-body">
+  <!-- HERO IMAGE + STATS -->
+  <section style="padding:5rem 2.5rem;">
+    <div style="max-width:var(--wide);margin:0 auto;">
+      <div data-reveal style="opacity:0;transform:translateY(30px);transition:opacity 1.1s ease,transform 1.1s ease;border-radius:24px;overflow:hidden;margin-bottom:4.5rem;background:#1C2E52;">
+        <img data-src="img/noir/hero-banner.webp" alt="Noir Book, a cross-disciplinary reference library" style="width:100%;display:block;">
+      </div>
+      <div data-reveal style="opacity:0;transform:translateY(30px);transition:opacity 1.1s ease .1s,transform 1.1s ease .1s;max-width:var(--read);margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:2.5rem;">
+        <div><div style="font-size:clamp(2.2rem,3.6vw,3.2rem);font-weight:200;color:#C26A79;line-height:1;letter-spacing:-.03em;">127</div><div style="font-size:.82rem;color:#98A0B3;margin-top:.6rem;">Topics, one consistent format</div></div>
+        <div><div style="font-size:clamp(2.2rem,3.6vw,3.2rem);font-weight:200;color:#C26A79;line-height:1;letter-spacing:-.03em;">200+</div><div style="font-size:.82rem;color:#98A0B3;margin-top:.6rem;">Frameworks and methods with templates</div></div>
+        <div><div style="font-size:clamp(2.2rem,3.6vw,3.2rem);font-weight:200;color:#C26A79;line-height:1;letter-spacing:-.03em;">4</div><div style="font-size:.82rem;color:#98A0B3;margin-top:.6rem;">Disciplines in one place</div></div>
+        <div><div style="font-size:clamp(2.2rem,3.6vw,3.2rem);font-weight:200;color:#C26A79;line-height:1;letter-spacing:-.03em;">~350K</div><div style="font-size:.82rem;color:#98A0B3;margin-top:.6rem;">Words, built and shipped solo</div></div>
+      </div>
+    </div>
+  </section>
 
   <!-- WHY -->
-  <div class="case-section">
-    <h2>Why I made it: I kept hunting for my own references</h2>
-    <div class="callout"><p><strong>My role:</strong> the whole thing, end to end. I chose the problem, defined the structure, curated and distilled the content, designed the system, and shipped it myself.</p></div>
-    <p>Good frameworks were saved across scattered bookmarks, notes from courses faded after a month, useful things sat somewhere I could not quickly find again. Not always lost, but it usually took far too long to get back to the thing I needed.</p>
-    <p>I also wanted one place that covered the disciplines together, UX, product, marketing, and content, instead of a different site for each. On real work they overlap constantly, so it helps to see them side by side. And I wanted every topic in one format I already know, so finding what I need is quick.</p>
-  </div>
+  <section class="cs-body" style="padding:5rem 2.5rem 3rem;">
+    <div style="max-width:var(--read);margin:0 auto;">
+      <h2 class="cs-h2" data-reveal style="opacity:0;transform:translateY(28px);transition:opacity 1.1s ease,transform 1.1s ease;">Why I made it: I kept hunting for my own references</h2>
+      <div data-reveal style="opacity:0;transform:translateY(28px);transition:opacity 1.1s ease .06s,transform 1.1s ease .06s;">
+        <div style="border-left:2px solid #C26A79;padding-left:1.6rem;margin-bottom:2rem;">
+          <p style="margin-bottom:0;"><strong>My role:</strong> the whole thing, end to end. I chose the problem, defined the structure, curated and distilled the content, designed the system, and shipped it myself.</p>
+        </div>
+        <p>Good frameworks were saved across scattered bookmarks, notes from courses faded after a month, useful things sat somewhere I could not quickly find again. Not always lost, but it usually took far too long to get back to the thing I needed.</p>
+        <p>I also wanted one place that covered the disciplines together, UX, product, marketing, and content, instead of a different site for each. On real work they overlap constantly, so it helps to see them side by side. And I wanted every topic in one format I already know, so finding what I need is quick.</p>
+      </div>
+    </div>
+  </section>
 
   <!-- WHAT -->
-  <div class="case-section">
-    <h2>What it is: a working library, not a course</h2>
-    <p>Noir Book grew into a fairly big library. 127 topics across the four disciplines, each with the idea, a method with a template, and a real example. You arrive with a problem, search, find the framework, and use it in a couple of minutes. No signup, no lessons to unlock.</p>
-    <div class="facts">
-      <div class="fact"><h4>200+</h4><p>Frameworks and methods, each with a template you can lift straight into a project.</p></div>
-      <div class="fact"><h4>~350K words</h4><p>Roughly 25 hours of reading if you ever went front to back, which is the opposite of the point.</p></div>
-      <div class="fact"><h4>4 disciplines</h4><p>UX, product, marketing, and content, in one format so they can be cross-examined side by side.</p></div>
-      <div class="fact"><h4>Ask an agent</h4><p>A machine-readable layer lets an AI assistant pull the right topic straight into your workflow.</p></div>
+  <section class="cs-body" style="padding:3rem 2.5rem;">
+    <div style="max-width:var(--read);margin:0 auto;">
+      <h2 class="cs-h2" data-reveal style="opacity:0;transform:translateY(28px);transition:opacity 1.1s ease,transform 1.1s ease;">What it is: a working library, not a course</h2>
+      <div data-reveal style="opacity:0;transform:translateY(28px);transition:opacity 1.1s ease .06s,transform 1.1s ease .06s;">
+        <p>Noir Book grew into a fairly big library. 127 topics across the four disciplines, each with the idea, a method with a template, and a real example. You arrive with a problem, search, find the framework, and use it in a couple of minutes. No signup, no lessons to unlock.</p>
+      </div>
+      <div data-reveal style="opacity:0;transform:translateY(30px);transition:opacity 1.1s ease .1s,transform 1.1s ease .1s;display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin:2rem 0;">
+        <div style="background:#1C2E52;border-radius:16px;padding:1.5rem;"><div style="font-size:1.5rem;font-weight:700;color:#D48D98;letter-spacing:-.02em;margin-bottom:.35rem;">200+</div><p style="font-size:.85rem;color:#98A0B3;line-height:1.6;font-weight:300;margin:0;">Frameworks and methods, each with a template you can lift straight into a project.</p></div>
+        <div style="background:#1C2E52;border-radius:16px;padding:1.5rem;"><div style="font-size:1.5rem;font-weight:700;color:#D48D98;letter-spacing:-.02em;margin-bottom:.35rem;">~350K words</div><p style="font-size:.85rem;color:#98A0B3;line-height:1.6;font-weight:300;margin:0;">Roughly 25 hours of reading if you ever went front to back, which is the opposite of the point.</p></div>
+        <div style="background:#1C2E52;border-radius:16px;padding:1.5rem;"><div style="font-size:1.5rem;font-weight:700;color:#D48D98;letter-spacing:-.02em;margin-bottom:.35rem;">4 disciplines</div><p style="font-size:.85rem;color:#98A0B3;line-height:1.6;font-weight:300;margin:0;">UX, product, marketing, and content, in one format so they can be cross-examined side by side.</p></div>
+        <div style="background:#1C2E52;border-radius:16px;padding:1.5rem;"><div style="font-size:1.5rem;font-weight:700;color:#D48D98;letter-spacing:-.02em;margin-bottom:.35rem;">Ask an agent</div><p style="font-size:.85rem;color:#98A0B3;line-height:1.6;font-weight:300;margin:0;">A machine-readable layer lets an AI assistant pull the right topic straight into your workflow.</p></div>
+      </div>
+      <div data-reveal style="opacity:0;transform:translateY(30px);transition:opacity 1.1s ease .1s,transform 1.1s ease .1s;display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;">
+        <figure style="margin:0;"><div style="border-radius:14px;overflow:hidden;"><img data-src="img/noir/disc-ux.webp" alt="UX Design" style="width:100%;aspect-ratio:4/3;object-fit:cover;display:block;"></div><figcaption style="font-size:.78rem;color:#C4CAD8;font-weight:500;margin-top:.6rem;text-align:center;">UX Design</figcaption></figure>
+        <figure style="margin:0;"><div style="border-radius:14px;overflow:hidden;"><img data-src="img/noir/disc-pm.webp" alt="Product Management" style="width:100%;aspect-ratio:4/3;object-fit:cover;display:block;"></div><figcaption style="font-size:.78rem;color:#C4CAD8;font-weight:500;margin-top:.6rem;text-align:center;">Product</figcaption></figure>
+        <figure style="margin:0;"><div style="border-radius:14px;overflow:hidden;"><img data-src="img/noir/disc-mk.webp" alt="Marketing and Growth" style="width:100%;aspect-ratio:4/3;object-fit:cover;display:block;"></div><figcaption style="font-size:.78rem;color:#C4CAD8;font-weight:500;margin-top:.6rem;text-align:center;">Marketing</figcaption></figure>
+        <figure style="margin:0;"><div style="border-radius:14px;overflow:hidden;"><img data-src="img/noir/disc-cs.webp" alt="Content Strategy" style="width:100%;aspect-ratio:4/3;object-fit:cover;display:block;"></div><figcaption style="font-size:.78rem;color:#C4CAD8;font-weight:500;margin-top:.6rem;text-align:center;">Content</figcaption></figure>
+      </div>
     </div>
-    <div class="disc-strip">
-      <figure><img src="img/noir/disc-ux.webp" alt="UX Design">
-        <figcaption>UX Design</figcaption></figure>
-      <figure><img src="img/noir/disc-pm.webp" alt="Product Management">
-        <figcaption>Product</figcaption></figure>
-      <figure><img src="img/noir/disc-mk.webp" alt="Marketing and Growth">
-        <figcaption>Marketing</figcaption></figure>
-      <figure><img src="img/noir/disc-cs.webp" alt="Content Strategy">
-        <figcaption>Content</figcaption></figure>
-    </div>
-  </div>
-</div>
+  </section>
 
-<!-- LIVE PROTOTYPE: the library homepage -->
-<div class="case-body">
-  <div class="case-section">
-    <h2>The product, live: search first, find what you need</h2>
-    <p><strong>The library below is the real, working product.</strong> Search it, toggle a discipline, filter by depth, open a topic. It runs on a design system I built myself, with light and dark mode.</p>
-  </div>
-</div>
-
-<div class="prototype-wrap">
-  <div class="prototype-frame">
-    <div class="pf-chrome">
-      <div class="pf-dots" aria-hidden="true"><span></span><span></span><span></span></div>
-      <div class="pf-url"><span class="pf-url-label">noirbook</span>/library</div>
-      <a href="prototypes/noir-book/index.html" target="_blank" rel="noopener" class="pf-open">Open the library<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg></a>
+  <!-- LIVE PROTOTYPE: library home -->
+  <section class="cs-body" style="padding:3rem 2.5rem 2rem;">
+    <div style="max-width:var(--read);margin:0 auto;">
+      <h2 class="cs-h2" data-reveal style="opacity:0;transform:translateY(28px);transition:opacity 1.1s ease,transform 1.1s ease;">The product, live: search first, find what you need</h2>
+      <div data-reveal style="opacity:0;transform:translateY(28px);transition:opacity 1.1s ease .06s,transform 1.1s ease .06s;">
+        <p><strong>The library below is the real, working product.</strong> Search it, toggle a discipline, filter by depth, open a topic. It runs on a design system I built myself, with light and dark mode.</p>
+      </div>
     </div>
-    <div class="pf-stage">
-      <iframe src="prototypes/noir-book/index.html" loading="lazy" title="Noir Book, the reference library homepage"></iframe>
-    </div>
-    <div class="pf-caption"><span class="pf-badge">Live product</span>The homepage leads with search. Toggle a discipline, filter by tier of depth, and browse 127 topics grouped and cross-linked. The whole catalogue is one consistent shape, so scanning is fast.</div>
-  </div>
-</div>
+  </section>
 
-<div class="case-body">
-  <div class="case-section">
-    <p>Every topic follows the same three-part structure, the idea, a method with a template, and a worked example, so once you know one page, you know them all. That consistency is the point: it is what turns scattered reading into something you can use mid-project.</p>
-  </div>
-</div>
-
-<div class="prototype-wrap">
-  <div class="prototype-frame">
-    <div class="pf-chrome">
-      <div class="pf-dots" aria-hidden="true"><span></span><span></span><span></span></div>
-      <div class="pf-url"><span class="pf-url-label">noirbook</span>/topics/problem-framing</div>
-      <a href="prototypes/noir-book/topics/problem-framing.html" target="_blank" rel="noopener" class="pf-open">Open full topic<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg></a>
+  <section style="padding:1rem 2.5rem;">
+    <div data-reveal data-pf-frame style="opacity:0;transform:translateY(30px);transition:opacity 1.1s ease,transform 1.1s ease;max-width:var(--wide);margin:0 auto;">
+      <div style="background:#1C2E52;border-radius:20px;overflow:hidden;box-shadow:0 34px 80px rgba(0,0,0,.4);">
+        <div style="display:flex;align-items:center;gap:12px;padding:.7rem 1.1rem;border-bottom:1px solid #2F4570;">
+          <div style="display:flex;gap:6px;"><span style="width:11px;height:11px;border-radius:50%;background:#3a4d78;"></span><span style="width:11px;height:11px;border-radius:50%;background:#3a4d78;"></span><span style="width:11px;height:11px;border-radius:50%;background:#3a4d78;"></span></div>
+          <div style="font-size:.75rem;color:#98A0B3;"><span style="color:#D48D98;">noirbook</span>/library</div>
+          <a href="https://noirbook.org/" target="_blank" rel="noopener" style="margin-left:auto;font-size:.72rem;color:#D48D98;">Open the library ↗</a>
+        </div>
+        <div data-pf-stage style="position:relative;width:100%;overflow:hidden;background:#12100E;">
+          <iframe src="https://noirbook.org/" loading="lazy" title="Noir Book, the reference library homepage" data-pf-h="860" style="width:1280px;height:860px;border:0;transform-origin:top left;"></iframe>
+        </div>
+      </div>
+      <p style="font-size:.95rem;font-weight:300;line-height:1.7;color:#98A0B3;margin:1.4rem auto 0;max-width:var(--read);"><span style="display:inline-block;font-size:.7rem;font-weight:600;letter-spacing:.06em;color:#D48D98;border:1px solid #2F4570;border-radius:100px;padding:.2rem .7rem;margin-right:.6rem;">LIVE PRODUCT</span>The homepage leads with search. Toggle a discipline, filter by tier of depth, and browse 127 topics grouped and cross-linked. The whole catalogue is one consistent shape, so scanning is fast.</p>
     </div>
-    <div class="pf-stage">
-      <iframe src="prototypes/noir-book/topics/problem-framing.html" loading="lazy" title="A single topic page, showing the consistent structure"></iframe>
-    </div>
-    <div class="pf-caption"><span class="pf-badge">Live product</span>One topic page: sidebar contents, reading-progress, the idea up top, then methods with templates and real examples. Same shape on all 127.</div>
-  </div>
-</div>
+  </section>
 
-<div class="case-body">
+  <section class="cs-body" style="padding:2rem 2.5rem;">
+    <div style="max-width:var(--read);margin:0 auto;">
+      <p data-reveal style="opacity:0;transform:translateY(28px);transition:opacity 1.1s ease,transform 1.1s ease;">Every topic follows the same three-part structure, the idea, a method with a template, and a worked example, so once you know one page, you know them all. That consistency is the point: it is what turns scattered reading into something you can use mid-project.</p>
+    </div>
+  </section>
+
+  <section style="padding:1rem 2.5rem 3rem;">
+    <div data-reveal data-pf-frame style="opacity:0;transform:translateY(30px);transition:opacity 1.1s ease,transform 1.1s ease;max-width:var(--wide);margin:0 auto;">
+      <div style="background:#1C2E52;border-radius:20px;overflow:hidden;box-shadow:0 34px 80px rgba(0,0,0,.4);">
+        <div style="display:flex;align-items:center;gap:12px;padding:.7rem 1.1rem;border-bottom:1px solid #2F4570;">
+          <div style="display:flex;gap:6px;"><span style="width:11px;height:11px;border-radius:50%;background:#3a4d78;"></span><span style="width:11px;height:11px;border-radius:50%;background:#3a4d78;"></span><span style="width:11px;height:11px;border-radius:50%;background:#3a4d78;"></span></div>
+          <div style="font-size:.75rem;color:#98A0B3;"><span style="color:#D48D98;">noirbook</span>/topics/problem-framing</div>
+          <a href="https://noirbook.org/topics/problem-framing" target="_blank" rel="noopener" style="margin-left:auto;font-size:.72rem;color:#D48D98;">Open full topic ↗</a>
+        </div>
+        <div data-pf-stage style="position:relative;width:100%;overflow:hidden;background:#12100E;">
+          <iframe src="https://noirbook.org/topics/problem-framing" loading="lazy" title="A single topic page, showing the consistent structure" data-pf-h="860" style="width:1280px;height:860px;border:0;transform-origin:top left;"></iframe>
+        </div>
+      </div>
+      <p style="font-size:.95rem;font-weight:300;line-height:1.7;color:#98A0B3;margin:1.4rem auto 0;max-width:var(--read);"><span style="display:inline-block;font-size:.7rem;font-weight:600;letter-spacing:.06em;color:#D48D98;border:1px solid #2F4570;border-radius:100px;padding:.2rem .7rem;margin-right:.6rem;">LIVE PRODUCT</span>One topic page: sidebar contents, reading-progress, the idea up top, then methods with templates and real examples. Same shape on all 127.</p>
+    </div>
+  </section>
+
   <!-- HOW I BUILT IT -->
-  <div class="case-section">
-    <h2>How I built it: mostly editing and structuring</h2>
-    <p>I started from the frameworks I already used in product and UX, listed them out, then settled on one page structure for every topic: the core idea, a practical method with a template, and a real example. Writing each page meant pulling from the strongest sources and distilling them into that same tight format, cutting the padding so what is left is usable mid-project. Most of the work was that editing and structuring, turning scattered, long-winded material into one consistent, findable shape.</p>
-    <p>For UX especially, there are courses that go deeper on the theory, and that is fine. But on a live project you often need the practical version more than the deep one, and that gap is where this library comes from.</p>
-    <p>Later I added topics people asked for, some outside my own day-to-day experience. Since that knowledge is well established and public, the job there was the same as everywhere else: read the good sources, fit them to the structure, make them usable. The person who requested each one told me whether it actually helped.</p>
-  </div>
+  <section class="cs-body" style="padding:4rem 2.5rem 3rem;">
+    <div style="max-width:var(--read);margin:0 auto;">
+      <h2 class="cs-h2" data-reveal style="opacity:0;transform:translateY(28px);transition:opacity 1.1s ease,transform 1.1s ease;">How I built it: mostly editing and structuring</h2>
+      <div data-reveal style="opacity:0;transform:translateY(28px);transition:opacity 1.1s ease .06s,transform 1.1s ease .06s;">
+        <p>I started from the frameworks I already used in product and UX, listed them out, then settled on one page structure for every topic: the core idea, a practical method with a template, and a real example. Writing each page meant pulling from the strongest sources and distilling them into that same tight format, cutting the padding so what is left is usable mid-project. Most of the work was that editing and structuring, turning scattered, long-winded material into one consistent, findable shape.</p>
+        <p>For UX especially, there are courses that go deeper on the theory, and that is fine. But on a live project you often need the practical version more than the deep one, and that gap is where this library comes from.</p>
+        <p>Later I added topics people asked for, some outside my own day-to-day experience. Since that knowledge is well established and public, the job there was the same as everywhere else: read the good sources, fit them to the structure, make them usable. The person who requested each one told me whether it actually helped.</p>
+      </div>
+    </div>
+  </section>
 
   <!-- HOW IT WENT -->
-  <div class="case-section">
-    <h2>How it went: fun to make, and it stuck</h2>
-    <p>Honestly, it was a lot of fun to build, and it turned out genuinely useful. The best sign was that people I shared it with kept coming back with "oh nice, can you add this too?" That kept it growing, and it is how a good share of the topics got added.</p>
-  </div>
+  <section class="cs-body" style="padding:3rem 2.5rem;">
+    <div style="max-width:var(--read);margin:0 auto;">
+      <h2 class="cs-h2" data-reveal style="opacity:0;transform:translateY(28px);transition:opacity 1.1s ease,transform 1.1s ease;">How it went: fun to make, and it stuck</h2>
+      <div data-reveal style="opacity:0;transform:translateY(28px);transition:opacity 1.1s ease .06s,transform 1.1s ease .06s;">
+        <p>Honestly, it was a lot of fun to build, and it turned out genuinely useful. The best sign was that people I shared it with kept coming back with "oh nice, can you add this too?" That kept it growing, and it is how a good share of the topics got added.</p>
+      </div>
+    </div>
+  </section>
 
   <!-- OUTCOMES -->
-  <div class="case-section">
-    <h2>By the numbers: the shape of it</h2>
-    <div class="outcomes-grid">
-      <div class="outcome-card"><div class="num">127</div><div class="desc">Topics across UX, product, marketing, and content, each in the same three-part format</div></div>
-      <div class="outcome-card"><div class="num">200+</div><div class="desc">Frameworks and methods, every one paired with a template to use directly</div></div>
-      <div class="outcome-card"><div class="num">1 system</div><div class="desc">A design system I built from scratch, with search, filtering, and light and dark mode</div></div>
-      <div class="outcome-card"><div class="num">0&rarr;1</div><div class="desc">Structure, content, design, and a machine-readable layer, researched and shipped solo</div></div>
+  <section style="background:#FAF7F0;color:#1A1815;padding:6rem 2.5rem;">
+    <div style="max-width:var(--read);margin:0 auto;">
+      <h2 data-reveal style="opacity:0;transform:translateY(28px);transition:opacity 1.1s ease,transform 1.1s ease;font-size:clamp(1.9rem,3.8vw,3rem);font-weight:200;letter-spacing:-.03em;line-height:1.12;color:#1A1815;margin-bottom:3rem;">By the numbers: the shape of it</h2>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:3rem 4rem;">
+        <div data-reveal style="opacity:0;transform:translateY(28px);transition:opacity 1.1s ease,transform 1.1s ease;"><div style="font-size:clamp(2.4rem,4vw,3.4rem);font-weight:200;color:#A33E4E;line-height:1;letter-spacing:-.03em;margin-bottom:.8rem;">127</div><p style="font-size:1.02rem;font-weight:300;line-height:1.7;color:#48443C;">Topics across UX, product, marketing, and content, each in the same three-part format.</p></div>
+        <div data-reveal style="opacity:0;transform:translateY(28px);transition:opacity 1.1s ease .06s,transform 1.1s ease .06s;"><div style="font-size:clamp(2.4rem,4vw,3.4rem);font-weight:200;color:#A33E4E;line-height:1;letter-spacing:-.03em;margin-bottom:.8rem;">200+</div><p style="font-size:1.02rem;font-weight:300;line-height:1.7;color:#48443C;">Frameworks and methods, every one paired with a template to use directly.</p></div>
+        <div data-reveal style="opacity:0;transform:translateY(28px);transition:opacity 1.1s ease .1s,transform 1.1s ease .1s;"><div style="font-size:clamp(2.4rem,4vw,3.4rem);font-weight:200;color:#A33E4E;line-height:1;letter-spacing:-.03em;margin-bottom:.8rem;">1 system</div><p style="font-size:1.02rem;font-weight:300;line-height:1.7;color:#48443C;">A design system I built from scratch, with search, filtering, and light and dark mode.</p></div>
+        <div data-reveal style="opacity:0;transform:translateY(28px);transition:opacity 1.1s ease .14s,transform 1.1s ease .14s;"><div style="font-size:clamp(2.4rem,4vw,3.4rem);font-weight:200;color:#A33E4E;line-height:1;letter-spacing:-.03em;margin-bottom:.8rem;">0→1</div><p style="font-size:1.02rem;font-weight:300;line-height:1.7;color:#48443C;">Structure, content, design, and a machine-readable layer, researched and shipped solo.</p></div>
+      </div>
     </div>
-  </div>
+  </section>
 
   <!-- REFLECTION -->
-  <div class="case-section">
-    <h2>Why it is in my portfolio: notice a real problem, build the whole fix</h2>
-    <p>It is a straightforward example of how I like to work: notice a real, everyday problem, decide what would actually fix it, and build the whole thing, rather than stopping at a plan or a mockup. Not a deck, not a concept, a working tool people use on real projects.</p>
-  </div>
-</div>
-
-<div class="next-case-wrap">
-  <div class="next-case">
-    <a href="reframe.html">
-      <div>
-        <div class="next-label">Next case study</div>
-        <div class="next-title">Reframe, turning an optician's instinct into a product</div>
+  <section class="cs-body" style="padding:6rem 2.5rem;">
+    <div style="max-width:var(--read);margin:0 auto;">
+      <h2 class="cs-h2" data-reveal style="opacity:0;transform:translateY(28px);transition:opacity 1.1s ease,transform 1.1s ease;">Why it is in my portfolio: notice a real problem, build the whole fix</h2>
+      <div data-reveal style="opacity:0;transform:translateY(28px);transition:opacity 1.1s ease .06s,transform 1.1s ease .06s;">
+        <p>It is a straightforward example of how I like to work: notice a real, everyday problem, decide what would actually fix it, and build the whole thing, rather than stopping at a plan or a mockup. Not a deck, not a concept, a working tool people use on real projects.</p>
       </div>
-      <div class="arrow">&rarr;</div>
-    </a>
-  </div>
-</div>
-<div class="case-footer-wrap">
-  <div class="case-footer">
-    <a href="index.html#work">&larr; Back to all work</a>
-    <a href="https://linkedin.com/in/perrien" target="_blank" class="cta-link">Discuss a project</a>
-  </div>
-</div>
-<footer>&copy; <script>document.write(new Date().getFullYear())</script> Malgo Perrien</footer>
+    </div>
+  </section>
 
-<script>
-(function(){
-  function fitPrototypeFrames(){
-    document.querySelectorAll('.pf-stage').forEach(function(stage){
-      var iframe = stage.querySelector('iframe');
-      if(!iframe) return;
-      var scale = stage.clientWidth / 1280;
-      iframe.style.transform = 'scale(' + scale + ')';
+  <!-- NEXT CASE -->
+  <section style="padding:0 2.5rem 5rem;">
+    <a href="screeners.html" data-reveal style="opacity:0;transform:translateY(28px);transition:opacity 1.1s ease,transform 1.1s ease;display:flex;align-items:center;justify-content:space-between;gap:2rem;max-width:var(--read);margin:0 auto;background:#1C2E52;border-radius:24px;padding:3rem 3.5rem;">
+      <div>
+        <div style="font-size:.8rem;font-weight:500;letter-spacing:.05em;color:#D48D98;margin-bottom:.8rem;">NEXT CASE STUDY</div>
+        <div style="font-size:clamp(1.4rem,2.6vw,2rem);font-weight:300;letter-spacing:-.02em;color:#EDEFF6;">Clinical Screeners — rigorous enough to act on, honest enough not to diagnose</div>
+      </div>
+      <div style="font-size:2.2rem;color:#C26A79;flex-shrink:0;">→</div>
+    </a>
+  </section>
+
+  <footer style="background:#0f1a30;padding:3rem 2.5rem;">
+    <div style="max-width:var(--read);margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1.5rem;">
+      <a href="index.html#work" style="font-size:.9rem;color:#98A0B3;">← Back to all work</a>
+      <a href="mailto:perrien.work@gmail.com?subject=Let%27s%20talk%3A%20Noir%20Book%20case%20study" style="font-size:.9rem;font-weight:500;color:#D48D98;">Discuss a project →</a>
+    </div>
+    <div style="max-width:var(--read);margin:2rem auto 0;font-size:.78rem;color:#5a6a8a;">© 2026 Malgo Perrien · The Product Office</div>
+  </footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  syncImgs() {
+    document.querySelectorAll('img[data-src]').forEach(im => {
+      const s = im.getAttribute('data-src');
+      if (s && s.indexOf('{{') === -1 && im.getAttribute('src') !== s) im.setAttribute('src', s);
     });
   }
-  fitPrototypeFrames();
-  window.addEventListener('resize', fitPrototypeFrames);
-  window.addEventListener('load', fitPrototypeFrames);
-  if(document.fonts && document.fonts.ready){ document.fonts.ready.then(fitPrototypeFrames); }
-})();
+  protoFit() {
+    document.querySelectorAll('[data-pf-stage]').forEach(stage => {
+      const iframe = stage.querySelector('iframe');
+      if (!iframe) return;
+      const h = parseInt(iframe.getAttribute('data-pf-h') || '860', 10);
+      const scale = stage.clientWidth / 1280;
+      iframe.style.transform = 'scale(' + scale + ')';
+      stage.style.height = (h * scale) + 'px';
+    });
+  }
+  componentDidMount() {
+    this.syncImgs();
+    this.protoFit();
+    const check = () => {
+      const els = [...document.querySelectorAll('[data-reveal]')].filter(e => !e.__rev);
+      const vh = window.innerHeight || 800;
+      els.forEach(e => {
+        const r = e.getBoundingClientRect();
+        if (r.top < vh * 0.92 && r.bottom > -40) { e.__rev = 1; e.style.opacity = 1; e.style.transform = 'none'; }
+      });
+    };
+    requestAnimationFrame(check);
+    const onScroll = () => requestAnimationFrame(check);
+    const onResize = () => { this.protoFit(); onScroll(); };
+    document.addEventListener('scroll', onScroll, { capture: true, passive: true });
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onResize, { passive: true });
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { this.protoFit(); check(); });
+    let ticks = 0;
+    this._iv = setInterval(() => { check(); this.protoFit(); if (++ticks > 40) clearInterval(this._iv); }, 250);
+  }
+  componentWillUnmount() { if (this._iv) clearInterval(this._iv); }
+}
 </script>
 </body>
 </html>

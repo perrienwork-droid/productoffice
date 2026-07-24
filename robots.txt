@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://mperrien.com/sitemap.xml
+Sitemap: https://productoffice.pm/sitemap.xml
