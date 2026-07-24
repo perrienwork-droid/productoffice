@@ -51,4 +51,8 @@
   --ink-3-rgb: 90,86,78;
   --ink-3: rgb(var(--ink-3-rgb));
   --ink-black: #12100e;
+
+  /* Illustration annotation tones (used inline in the SVG artwork) */
+  --label-muted: #8a857c;   /* chart axes, tick labels, footnotes */
+  --wine-emphasis: #8b3a4d; /* score numbers + emphasis on wine/rose bars */
 }
