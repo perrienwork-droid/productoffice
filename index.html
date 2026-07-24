@@ -53,9 +53,9 @@
   <!-- 1 · HERO (wine banner) -->
   <section id="top" style="min-height:100vh;display:flex;flex-direction:column;justify-content:center;background:#C26A79;color:#FAF7F0;padding:8rem 2.5rem 6rem;">
     <div style="max-width:1200px;margin:0 auto;width:100%;">
-      <div data-reveal style="opacity:0;transform:translateY(30px);transition:opacity 1.1s ease,transform 1.1s ease;font-size:.82rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#12213F;margin-bottom:2.5rem;">The Product Office</div>
+      <div data-reveal style="opacity:0;transform:translateY(30px);transition:opacity 1.1s ease,transform 1.1s ease;font-size:.9rem;font-weight:600;letter-spacing:.02em;color:#12213F;margin-bottom:2.5rem;">The Product Office</div>
       <h1 data-reveal style="opacity:0;transform:translateY(30px);transition:opacity 1.1s ease .12s,transform 1.1s ease .12s;font-size:clamp(3rem,8vw,7rem);font-weight:200;line-height:1.02;letter-spacing:-.045em;max-width:16ch;">I turn complex problems into <span style="font-weight:600;color:#12213F;">products people actually use</span></h1>
-      <div data-reveal style="opacity:0;transition:opacity 1.4s ease 1s;margin-top:5rem;display:inline-flex;align-items:center;gap:.65rem;color:#12213F;font-size:.95rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;">
+      <div data-reveal style="opacity:0;transition:opacity 1.4s ease 1s;margin-top:5rem;display:inline-flex;align-items:center;gap:.65rem;color:#12213F;font-size:.95rem;font-weight:600;letter-spacing:.02em;">
         <span>Scroll</span>
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#12213F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="animation:tpo-bob 2.4s ease-in-out infinite;"><path d="M12 4v16M6 14l6 6 6-6"/></svg>
       </div>
@@ -81,10 +81,10 @@
       <p data-reveal style="opacity:0;transition:opacity 1.1s ease .1s;font-size:.95rem;font-weight:400;color:#D48D98;margin-bottom:2.8rem;">Tap a service to expand.</p>
       <sc-for list="{{ services }}" as="s" hint-placeholder-count="4">
         <div data-reveal style="opacity:0;transform:translateY(30px);transition:opacity 1.1s ease,transform 1.1s ease;">
-          <div onClick="{{ s.toggle }}" style="cursor:pointer;padding:1.4rem 0;display:flex;gap:2rem;align-items:baseline;">
-            <span style="font-size:1rem;font-weight:400;color:#D48D98;letter-spacing:.04em;flex-shrink:0;padding-top:.7rem;">{{ s.num }}</span>
+          <div onClick="{{ s.toggle }}" style="cursor:pointer;padding:1.4rem 0;display:flex;gap:1.3rem;align-items:baseline;">
+            <span style="{{ s.chevronStyle }}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></span>
+            <span style="font-size:1rem;font-weight:400;color:#D48D98;letter-spacing:.04em;flex-shrink:0;padding-top:.55rem;">{{ s.num }}</span>
             <h3 style="flex:1;font-size:clamp(1.6rem,3.6vw,2.8rem);font-weight:200;line-height:1.1;letter-spacing:-.03em;transition:color .35s ease;color:{{ s.titleColor }};">{{ s.title }}</h3>
-            <span style="{{ s.chevronStyle }}"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></span>
           </div>
           <div style="{{ s.bodyStyle }}">
             <p style="padding-left:3.5rem;padding-bottom:1.6rem;font-size:1.12rem;font-weight:300;line-height:1.75;color:#C4CAD8;max-width:60ch;">{{ s.body }}</p>
@@ -164,8 +164,8 @@
     <div style="max-width:1200px;margin:0 auto;width:100%;">
       <h2 data-reveal style="opacity:0;transform:translateY(30px);transition:opacity 1.1s ease,transform 1.1s ease;font-size:clamp(2.4rem,6vw,5rem);font-weight:200;line-height:1.06;letter-spacing:-.035em;max-width:16ch;margin-bottom:3rem;">Strategy-led PM with <span style="font-weight:500;color:#D48D98;">rare design depth</span>.</h2>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:4rem;max-width:1000px;">
-        <p data-reveal style="opacity:0;transform:translateY(30px);transition:opacity 1.1s ease .1s,transform 1.1s ease .1s;font-size:1.2rem;font-weight:300;line-height:1.75;color:#C4CAD8;">10 years across MedTech, FinTech, and Telecom. I specialize in multi-stakeholder platforms in regulated environments – where patients, clinicians, executives, and engineers all need different things from the same system. That's a product problem most people avoid. I go deep into it.</p>
-        <p data-reveal style="opacity:0;transform:translateY(30px);transition:opacity 1.1s ease .18s,transform 1.1s ease .18s;font-size:1.2rem;font-weight:300;line-height:1.75;color:#C4CAD8;">What makes me different: I read design at the level most PMs never touch. Structure, hierarchy, emotional impact. I use that depth to make sharper roadmap calls, not to own Figma. That's why the products I ship don't just work, they get used. Based in Paris. English and French.</p>
+        <p data-reveal style="opacity:0;transform:translateY(30px);transition:opacity 1.1s ease .1s,transform 1.1s ease .1s;font-size:1.2rem;font-weight:300;line-height:1.75;color:#C4CAD8;">10 years across MedTech, FinTech, and Telecom. I specialized in multi-stakeholder platforms in regulated environments – where patients, clinicians, executives, and engineers all need different things from the same system. That's a product problem some people would avoid. I go deep into it.</p>
+        <p data-reveal style="opacity:0;transform:translateY(30px);transition:opacity 1.1s ease .18s,transform 1.1s ease .18s;font-size:1.2rem;font-weight:300;line-height:1.75;color:#C4CAD8;">What makes me different: I read design at the level most PMs never touch: structure, hierarchy, emotional impact. I use that depth to make sharper roadmap calls and not to own Figma. That's why the products I ship don't just work, they get used. I'm based in Paris. Speaking Polish, English and French.</p>
       </div>
     </div>
   </section>
