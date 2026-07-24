@@ -6,6 +6,7 @@
 <title>Reframe: an explainable recommendation engine - The Product Office</title>
 <meta name="description" content="A 0 to 1 venture: a seven-criteria scoring engine for in-store frame recommendations, designed and shipped end to end.">
 <link rel="icon" type="image/svg+xml" href="img/favicon.svg">
+<link rel="stylesheet" href="tokens.css">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://productoffice.pm/reframe.html">
 <meta property="og:title" content="Reframe: an explainable recommendation engine - The Product Office">
@@ -36,45 +37,45 @@
   .cs-h2 strong{font-weight:200;font-style:italic;color:#D48D98;}
 </style>
 </helmet>
-<div style="background:#12213F;">
+<div style="background:var(--navy);">
 
-  <div style="position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(18,33,63,.66);backdrop-filter:blur(16px);">
+  <div style="position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(var(--navy-rgb),.66);backdrop-filter:blur(16px);">
     <nav style="max-width:1200px;margin:0 auto;padding:1.15rem 2.5rem;display:flex;justify-content:space-between;align-items:center;">
-      <a href="index.html" style="color:#fff;font-size:1.02rem;font-weight:500;display:flex;align-items:center;gap:.55rem;letter-spacing:-.01em;">
+      <a href="index.html" style="color:var(--white);font-size:1.02rem;font-weight:500;display:flex;align-items:center;gap:.55rem;letter-spacing:-.01em;">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#D48D98" stroke-width="2" stroke-linecap="square"><path d="M3 8V3h5M21 8V3h-5M3 16v5h5M21 16v5h-5"/><circle cx="12" cy="12" r="1.6" fill="#D48D98" stroke="none"/></svg>
         <span>The Product Office</span>
       </a>
       <div style="display:flex;gap:2.4rem;align-items:center;">
-        <a class="tpo-navlink" href="index.html#work" style="color:#C4CAD8;font-size:.82rem;transition:color .2s;">Work</a>
-        <a class="tpo-navlink" href="index.html#about" style="color:#C4CAD8;font-size:.82rem;transition:color .2s;">About</a>
-        <a class="tpo-navlink" href="index.html#contact" style="color:#D48D98;font-size:.82rem;font-weight:500;transition:color .2s;">Get in touch →</a>
+        <a class="tpo-navlink" href="index.html#work" style="color:var(--text-muted);font-size:.82rem;transition:color .2s;">Work</a>
+        <a class="tpo-navlink" href="index.html#about" style="color:var(--text-muted);font-size:.82rem;transition:color .2s;">About</a>
+        <a class="tpo-navlink" href="index.html#contact" style="color:var(--rose);font-size:.82rem;font-weight:500;transition:color .2s;">Get in touch →</a>
       </div>
     </nav>
   </div>
 
   <!-- HERO -->
-  <section style="background:#C26A79;color:#FAF7F0;padding:11rem 2.5rem 6rem;">
+  <section style="background:var(--wine);color:var(--cream);padding:11rem 2.5rem 6rem;">
     <div style="max-width:var(--read);margin:0 auto;">
-      <a href="index.html#work" data-reveal style="opacity:0;transform:translateY(24px);transition:opacity 1s ease,transform 1s ease;display:inline-block;font-size:.9rem;font-weight:500;color:#12213F;margin-bottom:2.5rem;">← All work</a>
-      <div data-reveal style="opacity:0;transform:translateY(24px);transition:opacity 1s ease .06s,transform 1s ease .06s;display:flex;flex-wrap:wrap;gap:.5rem 1.6rem;font-size:.82rem;font-weight:500;letter-spacing:.04em;color:#12213F;margin-bottom:2rem;">
+      <a href="index.html#work" data-reveal style="opacity:0;transform:translateY(24px);transition:opacity 1s ease,transform 1s ease;display:inline-block;font-size:.9rem;font-weight:500;color:var(--navy);margin-bottom:2.5rem;">← All work</a>
+      <div data-reveal style="opacity:0;transform:translateY(24px);transition:opacity 1s ease .06s,transform 1s ease .06s;display:flex;flex-wrap:wrap;gap:.5rem 1.6rem;font-size:.82rem;font-weight:500;letter-spacing:.04em;color:var(--navy);margin-bottom:2rem;">
         <span>Self-initiated venture</span><span>Retail SaaS</span><span>Eyewear</span><span>Explainable AI</span><span>0 to 1</span>
       </div>
-      <h1 data-reveal style="opacity:0;transform:translateY(24px);transition:opacity 1.1s ease .12s,transform 1.1s ease .12s;font-size:clamp(2.4rem,5.6vw,4.6rem);font-weight:200;line-height:1.06;letter-spacing:-.04em;max-width:20ch;margin-bottom:1.8rem;">Turning an optician's <em style="font-style:italic;color:#12213F;">instinct</em> into a product</h1>
-      <p data-reveal style="opacity:0;transform:translateY(24px);transition:opacity 1.1s ease .18s,transform 1.1s ease .18s;font-size:1.15rem;font-weight:400;color:#12213F;letter-spacing:.01em;">Reframe · A self-initiated Product Office study · 2026</p>
+      <h1 data-reveal style="opacity:0;transform:translateY(24px);transition:opacity 1.1s ease .12s,transform 1.1s ease .12s;font-size:clamp(2.4rem,5.6vw,4.6rem);font-weight:200;line-height:1.06;letter-spacing:-.04em;max-width:20ch;margin-bottom:1.8rem;">Turning an optician's <em style="font-style:italic;color:var(--navy);">instinct</em> into a product</h1>
+      <p data-reveal style="opacity:0;transform:translateY(24px);transition:opacity 1.1s ease .18s,transform 1.1s ease .18s;font-size:1.15rem;font-weight:400;color:var(--navy);letter-spacing:.01em;">Reframe · A self-initiated Product Office study · 2026</p>
     </div>
   </section>
 
   <!-- HERO IMAGE + STATS -->
   <section style="padding:5rem 2.5rem;">
     <div style="max-width:var(--wide);margin:0 auto;">
-      <div data-reveal style="opacity:0;transform:translateY(30px);transition:opacity 1.1s ease,transform 1.1s ease;border-radius:24px;overflow:hidden;margin-bottom:4.5rem;background:#1C2E52;">
+      <div data-reveal style="opacity:0;transform:translateY(30px);transition:opacity 1.1s ease,transform 1.1s ease;border-radius:24px;overflow:hidden;margin-bottom:4.5rem;background:var(--navy-2);">
         <img data-src="img/eyewear/hero-stilllife.webp" alt="Four eyewear frames on a marble counter beside a scored recommendation card" style="width:100%;display:block;">
       </div>
       <div data-reveal style="opacity:0;transform:translateY(30px);transition:opacity 1.1s ease .1s,transform 1.1s ease .1s;max-width:var(--read);margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:2.5rem;">
-        <div><div style="font-size:clamp(1.7rem,2.9vw,2.5rem);font-weight:200;color:#C26A79;line-height:1.05;letter-spacing:-.03em;">35–45%</div><div style="font-size:.82rem;color:#98A0B3;margin-top:.6rem;">Typical in-store conversion, the number to lift</div></div>
-        <div><div style="font-size:clamp(1.7rem,2.9vw,2.5rem);font-weight:200;color:#C26A79;line-height:1.05;letter-spacing:-.03em;">~28,000</div><div style="font-size:.82rem;color:#98A0B3;margin-top:.6rem;">Independent opticians in target markets</div></div>
-        <div><div style="font-size:clamp(1.7rem,2.9vw,2.5rem);font-weight:200;color:#C26A79;line-height:1.05;letter-spacing:-.03em;">~1/3</div><div style="font-size:.82rem;color:#98A0B3;margin-top:.6rem;">Of my first rankings the evidence overturned</div></div>
-        <div><div style="font-size:clamp(1.7rem,2.9vw,2.5rem);font-weight:200;color:#C26A79;line-height:1.05;letter-spacing:-.03em;">7 reads</div><div style="font-size:.82rem;color:#98A0B3;margin-top:.6rem;">Every pick traces to a stated rule</div></div>
+        <div><div style="font-size:clamp(1.7rem,2.9vw,2.5rem);font-weight:200;color:var(--wine);line-height:1.05;letter-spacing:-.03em;">35–45%</div><div style="font-size:.82rem;color:var(--text-dim);margin-top:.6rem;">Typical in-store conversion, the number to lift</div></div>
+        <div><div style="font-size:clamp(1.7rem,2.9vw,2.5rem);font-weight:200;color:var(--wine);line-height:1.05;letter-spacing:-.03em;">~28,000</div><div style="font-size:.82rem;color:var(--text-dim);margin-top:.6rem;">Independent opticians in target markets</div></div>
+        <div><div style="font-size:clamp(1.7rem,2.9vw,2.5rem);font-weight:200;color:var(--wine);line-height:1.05;letter-spacing:-.03em;">~1/3</div><div style="font-size:.82rem;color:var(--text-dim);margin-top:.6rem;">Of my first rankings the evidence overturned</div></div>
+        <div><div style="font-size:clamp(1.7rem,2.9vw,2.5rem);font-weight:200;color:var(--wine);line-height:1.05;letter-spacing:-.03em;">7 reads</div><div style="font-size:.82rem;color:var(--text-dim);margin-top:.6rem;">Every pick traces to a stated rule</div></div>
       </div>
     </div>
   </section>
@@ -84,7 +85,7 @@
     <div style="max-width:var(--read);margin:0 auto;">
       <h2 class="cs-h2" data-reveal style="opacity:0;transform:translateY(28px);transition:opacity 1.1s ease,transform 1.1s ease;">The outcome first: confident on paper, corrected by a real face</h2>
       <div data-reveal style="opacity:0;transform:translateY(28px);transition:opacity 1.1s ease .06s,transform 1.1s ease .06s;">
-        <div style="border-left:2px solid #C26A79;padding-left:1.6rem;margin-bottom:2rem;">
+        <div style="border-left:2px solid var(--wine);padding-left:1.6rem;margin-bottom:2rem;">
           <p style="margin-bottom:0;"><strong>What I owned:</strong> The whole thing, end to end. I chose the problem, wrote the scoring logic, stress-tested it against real evidence, sized the market, and designed and shipped the in-store product front end myself.</p>
         </div>
         <p>I built a recommendation engine that scores any eyewear frame against a face on seven weighted criteria, each with an explainable reason instead of a black-box guess. The scoring rests on established styling logic: how colour, shape and size play against a face. On studio product shots it looked right. Against real on-face photos, about a third of the rankings didn't hold, because a real face carries variables a rulebook flattens. That gap, model versus reality, is now the product's engine, and it is built to keep closing it.</p>
@@ -116,8 +117,8 @@
 
   <!-- DIAGRAM: worked example -->
   <section style="padding:1rem 2.5rem 2rem;">
-    <div data-reveal style="opacity:0;transform:translateY(30px);transition:opacity 1.1s ease,transform 1.1s ease;max-width:var(--read);margin:0 auto;background:#FAF7F0;border-radius:24px;padding:2.5rem 2rem;">
-      <div style="text-align:center;font-size:.82rem;font-weight:600;letter-spacing:.06em;color:#A33E4E;margin-bottom:1rem;">WORKED EXAMPLE – HOW ONE FRAME EARNS ITS SCORE</div>
+    <div data-reveal style="opacity:0;transform:translateY(30px);transition:opacity 1.1s ease,transform 1.1s ease;max-width:var(--read);margin:0 auto;background:var(--cream);border-radius:24px;padding:2.5rem 2rem;">
+      <div style="text-align:center;font-size:.82rem;font-weight:600;letter-spacing:.06em;color:var(--wine-deep);margin-bottom:1rem;">WORKED EXAMPLE – HOW ONE FRAME EARNS ITS SCORE</div>
       <svg viewBox="0 0 900 336" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;" font-family="Inter, sans-serif">
         <g>
           <text x="60" y="46" font-size="18" font-weight="600" fill="#1A1815">Warm Tortoise, scored 9.5 / 10</text>
@@ -162,17 +163,17 @@
 
   <section style="padding:1rem 2.5rem;">
     <div data-reveal data-pf-frame style="opacity:0;transform:translateY(30px);transition:opacity 1.1s ease,transform 1.1s ease;max-width:var(--wide);margin:0 auto;">
-      <div style="background:#1C2E52;border-radius:20px;overflow:hidden;box-shadow:0 34px 80px rgba(0,0,0,.4);">
-        <div style="display:flex;align-items:center;gap:12px;padding:.7rem 1.1rem;border-bottom:1px solid #2F4570;">
-          <div style="display:flex;gap:6px;"><span style="width:11px;height:11px;border-radius:50%;background:#3a4d78;"></span><span style="width:11px;height:11px;border-radius:50%;background:#3a4d78;"></span><span style="width:11px;height:11px;border-radius:50%;background:#3a4d78;"></span></div>
-          <div style="font-size:.75rem;color:#98A0B3;"><span style="color:#D48D98;">reframe.app</span>/shortlist</div>
-          <a href="prototypes/reframe/01-session.html" target="_blank" rel="noopener" style="margin-left:auto;font-size:.72rem;color:#D48D98;">Open full prototype ↗</a>
+      <div style="background:var(--navy-2);border-radius:20px;overflow:hidden;box-shadow:0 34px 80px rgba(var(--black-rgb),.4);">
+        <div style="display:flex;align-items:center;gap:12px;padding:.7rem 1.1rem;border-bottom:1px solid var(--navy-border);">
+          <div style="display:flex;gap:6px;"><span style="width:11px;height:11px;border-radius:50%;background:var(--navy-line);"></span><span style="width:11px;height:11px;border-radius:50%;background:var(--navy-line);"></span><span style="width:11px;height:11px;border-radius:50%;background:var(--navy-line);"></span></div>
+          <div style="font-size:.75rem;color:var(--text-dim);"><span style="color:var(--rose);">reframe.app</span>/shortlist</div>
+          <a href="prototypes/reframe/01-session.html" target="_blank" rel="noopener" style="margin-left:auto;font-size:.72rem;color:var(--rose);">Open full prototype ↗</a>
         </div>
-        <div data-pf-stage style="position:relative;width:100%;overflow:hidden;background:#FBF3EE;">
+        <div data-pf-stage style="position:relative;width:100%;overflow:hidden;background:var(--cream-2);">
           <iframe src="prototypes/reframe/05-shortlist.html" loading="lazy" title="Scored shortlist, the core product surface" data-pf-h="860" style="width:1280px;height:860px;border:0;transform-origin:top left;"></iframe>
         </div>
       </div>
-      <p style="font-size:.95rem;font-weight:300;line-height:1.7;color:#98A0B3;margin:1.4rem auto 0;max-width:var(--read);"><span style="display:inline-block;font-size:.7rem;font-weight:600;letter-spacing:.06em;color:#D48D98;border:1px solid #2F4570;border-radius:100px;padding:.2rem .7rem;margin-right:.6rem;">LIVE PROTOTYPE</span>Each frame comes from the store's own inventory, scored and explained, with a live stock signal (in stock, low stock, order in) and an optician override the system learns from. During the fitting the optician taps each frame loved, refused, or didn't survive once worn; loved frames turn green and cap at six, ready to build the client's report.</p>
+      <p style="font-size:.95rem;font-weight:300;line-height:1.7;color:var(--text-dim);margin:1.4rem auto 0;max-width:var(--read);"><span style="display:inline-block;font-size:.7rem;font-weight:600;letter-spacing:.06em;color:var(--rose);border:1px solid var(--navy-border);border-radius:100px;padding:.2rem .7rem;margin-right:.6rem;">LIVE PROTOTYPE</span>Each frame comes from the store's own inventory, scored and explained, with a live stock signal (in stock, low stock, order in) and an optician override the system learns from. During the fitting the optician taps each frame loved, refused, or didn't survive once worn; loved frames turn green and cap at six, ready to build the client's report.</p>
     </div>
   </section>
 
@@ -185,34 +186,34 @@
   <section style="padding:1rem 2.5rem 3rem;">
     <div style="max-width:var(--wide);margin:0 auto;display:flex;flex-direction:column;gap:2.5rem;">
       <div data-reveal data-pf-frame style="opacity:0;transform:translateY(30px);transition:opacity 1.1s ease,transform 1.1s ease;">
-        <div style="background:#1C2E52;border-radius:20px;overflow:hidden;box-shadow:0 34px 80px rgba(0,0,0,.4);">
-          <div style="display:flex;align-items:center;gap:12px;padding:.7rem 1.1rem;border-bottom:1px solid #2F4570;">
-            <div style="display:flex;gap:6px;"><span style="width:11px;height:11px;border-radius:50%;background:#3a4d78;"></span><span style="width:11px;height:11px;border-radius:50%;background:#3a4d78;"></span><span style="width:11px;height:11px;border-radius:50%;background:#3a4d78;"></span></div>
-            <div style="font-size:.75rem;color:#98A0B3;"><span style="color:#D48D98;">reframe.app</span>/face-profile</div>
-            <a href="prototypes/reframe/01-session.html" target="_blank" rel="noopener" style="margin-left:auto;font-size:.72rem;color:#D48D98;">Open full prototype ↗</a>
+        <div style="background:var(--navy-2);border-radius:20px;overflow:hidden;box-shadow:0 34px 80px rgba(var(--black-rgb),.4);">
+          <div style="display:flex;align-items:center;gap:12px;padding:.7rem 1.1rem;border-bottom:1px solid var(--navy-border);">
+            <div style="display:flex;gap:6px;"><span style="width:11px;height:11px;border-radius:50%;background:var(--navy-line);"></span><span style="width:11px;height:11px;border-radius:50%;background:var(--navy-line);"></span><span style="width:11px;height:11px;border-radius:50%;background:var(--navy-line);"></span></div>
+            <div style="font-size:.75rem;color:var(--text-dim);"><span style="color:var(--rose);">reframe.app</span>/face-profile</div>
+            <a href="prototypes/reframe/01-session.html" target="_blank" rel="noopener" style="margin-left:auto;font-size:.72rem;color:var(--rose);">Open full prototype ↗</a>
           </div>
-          <div data-pf-stage style="position:relative;width:100%;overflow:hidden;background:#FBF3EE;">
+          <div data-pf-stage style="position:relative;width:100%;overflow:hidden;background:var(--cream-2);">
             <iframe src="prototypes/reframe/04-profile.html" loading="lazy" title="Face profile, seven detected reads with override" data-pf-h="860" style="width:1280px;height:860px;border:0;transform-origin:top left;"></iframe>
           </div>
         </div>
-        <p style="font-size:.95rem;font-weight:300;line-height:1.7;color:#98A0B3;margin:1.4rem auto 0;max-width:var(--read);"><span style="display:inline-block;font-size:.7rem;font-weight:600;letter-spacing:.06em;color:#D48D98;border:1px solid #2F4570;border-radius:100px;padding:.2rem .7rem;margin-right:.6rem;">LIVE PROTOTYPE</span>The seven reads, explainable and reversible. Tap any read to change it; the edit is obvious, does something, and can be undone.</p>
+        <p style="font-size:.95rem;font-weight:300;line-height:1.7;color:var(--text-dim);margin:1.4rem auto 0;max-width:var(--read);"><span style="display:inline-block;font-size:.7rem;font-weight:600;letter-spacing:.06em;color:var(--rose);border:1px solid var(--navy-border);border-radius:100px;padding:.2rem .7rem;margin-right:.6rem;">LIVE PROTOTYPE</span>The seven reads, explainable and reversible. Tap any read to change it; the edit is obvious, does something, and can be undone.</p>
       </div>
       <div data-reveal data-pf-frame style="opacity:0;transform:translateY(30px);transition:opacity 1.1s ease,transform 1.1s ease;">
-        <div style="background:#1C2E52;border-radius:20px;overflow:hidden;box-shadow:0 34px 80px rgba(0,0,0,.4);">
-          <div style="display:flex;align-items:center;gap:12px;padding:.7rem 1.1rem;border-bottom:1px solid #2F4570;">
-            <div style="display:flex;gap:6px;"><span style="width:11px;height:11px;border-radius:50%;background:#3a4d78;"></span><span style="width:11px;height:11px;border-radius:50%;background:#3a4d78;"></span><span style="width:11px;height:11px;border-radius:50%;background:#3a4d78;"></span></div>
-            <div style="font-size:.75rem;color:#98A0B3;"><span style="color:#D48D98;">reframe.app</span>/report</div>
-            <a href="prototypes/reframe/01-session.html" target="_blank" rel="noopener" style="margin-left:auto;font-size:.72rem;color:#D48D98;">Open full prototype ↗</a>
+        <div style="background:var(--navy-2);border-radius:20px;overflow:hidden;box-shadow:0 34px 80px rgba(var(--black-rgb),.4);">
+          <div style="display:flex;align-items:center;gap:12px;padding:.7rem 1.1rem;border-bottom:1px solid var(--navy-border);">
+            <div style="display:flex;gap:6px;"><span style="width:11px;height:11px;border-radius:50%;background:var(--navy-line);"></span><span style="width:11px;height:11px;border-radius:50%;background:var(--navy-line);"></span><span style="width:11px;height:11px;border-radius:50%;background:var(--navy-line);"></span></div>
+            <div style="font-size:.75rem;color:var(--text-dim);"><span style="color:var(--rose);">reframe.app</span>/report</div>
+            <a href="prototypes/reframe/01-session.html" target="_blank" rel="noopener" style="margin-left:auto;font-size:.72rem;color:var(--rose);">Open full prototype ↗</a>
           </div>
-          <div data-pf-stage style="position:relative;width:100%;overflow:hidden;background:#FBF3EE;">
+          <div data-pf-stage style="position:relative;width:100%;overflow:hidden;background:var(--cream-2);">
             <iframe src="prototypes/reframe/06-report.html" loading="lazy" title="Client take-home report" data-pf-h="860" style="width:1280px;height:860px;border:0;transform-origin:top left;"></iframe>
           </div>
         </div>
-        <p style="font-size:.95rem;font-weight:300;line-height:1.7;color:#98A0B3;margin:1.4rem auto 0;max-width:var(--read);"><span style="display:inline-block;font-size:.7rem;font-weight:600;letter-spacing:.06em;color:#D48D98;border:1px solid #2F4570;border-radius:100px;padding:.2rem .7rem;margin-right:.6rem;">LIVE PROTOTYPE</span>The take-home report always shows a focused six: the frames the client loved come first, marked, then the next best matches round it out, so it feels complete without overwhelming. It carries the reason each frame suits rather than a score, and every report is branded, a marketing surface for the store.</p>
+        <p style="font-size:.95rem;font-weight:300;line-height:1.7;color:var(--text-dim);margin:1.4rem auto 0;max-width:var(--read);"><span style="display:inline-block;font-size:.7rem;font-weight:600;letter-spacing:.06em;color:var(--rose);border:1px solid var(--navy-border);border-radius:100px;padding:.2rem .7rem;margin-right:.6rem;">LIVE PROTOTYPE</span>The take-home report always shows a focused six: the frames the client loved come first, marked, then the next best matches round it out, so it feels complete without overwhelming. It carries the reason each frame suits rather than a score, and every report is branded, a marketing surface for the store.</p>
       </div>
     </div>
     <div data-reveal style="opacity:0;transform:translateY(28px);transition:opacity 1.1s ease,transform 1.1s ease;text-align:center;margin-top:2.5rem;">
-      <a href="prototypes/reframe/01-session.html" target="_blank" rel="noopener" style="font-size:.92rem;font-weight:500;color:#D48D98;">Start the full six-screen flow from the top ↗</a>
+      <a href="prototypes/reframe/01-session.html" target="_blank" rel="noopener" style="font-size:.92rem;font-weight:500;color:var(--rose);">Start the full six-screen flow from the top ↗</a>
     </div>
   </section>
 
@@ -229,8 +230,8 @@
 
   <!-- DIAGRAM: two faces -->
   <section style="padding:1rem 2.5rem 2rem;">
-    <div data-reveal style="opacity:0;transform:translateY(30px);transition:opacity 1.1s ease,transform 1.1s ease;max-width:var(--read);margin:0 auto;background:#FAF7F0;border-radius:24px;padding:2.5rem 2rem 2rem;">
-      <div style="text-align:center;font-size:.82rem;font-weight:600;letter-spacing:.06em;color:#A33E4E;margin-bottom:1rem;">THE SAME FRAME, TWO FACES, TWO SCORES</div>
+    <div data-reveal style="opacity:0;transform:translateY(30px);transition:opacity 1.1s ease,transform 1.1s ease;max-width:var(--read);margin:0 auto;background:var(--cream);border-radius:24px;padding:2.5rem 2rem 2rem;">
+      <div style="text-align:center;font-size:.82rem;font-weight:600;letter-spacing:.06em;color:var(--wine-deep);margin-bottom:1rem;">THE SAME FRAME, TWO FACES, TWO SCORES</div>
       <svg viewBox="0 0 860 480" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;" font-family="Inter, sans-serif">
         <g>
           <rect x="250" y="52" width="12" height="12" rx="2" fill="#B8546B"/><text x="268" y="62" font-size="12.5" fill="#48443C">Bold, high-contrast frame</text>
@@ -262,7 +263,7 @@
           <text x="586" y="444" font-size="12" fill="#8A857C" text-anchor="middle">defined features, high contrast</text>
         </g>
       </svg>
-      <p style="max-width:560px;margin:1rem auto 0;color:#5A564E;font-style:italic;font-weight:300;font-size:.9rem;line-height:1.6;text-align:center;">No frame suits everyone. The bold frame a soft face can't carry is exactly right on a strong one, and the light frame flips the other way. So the engine scores visual weight against each individual face, not a fixed ideal, which is also why one test on one face was only the start of the loop.</p>
+      <p style="max-width:560px;margin:1rem auto 0;color:var(--ink-3);font-style:italic;font-weight:300;font-size:.9rem;line-height:1.6;text-align:center;">No frame suits everyone. The bold frame a soft face can't carry is exactly right on a strong one, and the light frame flips the other way. So the engine scores visual weight against each individual face, not a fixed ideal, which is also why one test on one face was only the start of the loop.</p>
     </div>
   </section>
 
@@ -273,12 +274,12 @@
       <div data-reveal style="opacity:0;transform:translateY(28px);transition:opacity 1.1s ease .06s,transform 1.1s ease .06s;">
         <p>With the logic validated, I framed it as a product: a tablet app the optician runs in-store. A 30-second guided photo capture, a scored shortlist drawn from the store's own inventory (not a universal catalogue), an override the system learns from, and a branded one-page report the client takes home. A nervous walk-in can even take the tablet and explore the shortlist themselves while the optician serves someone else.</p>
       </div>
-      <div data-reveal style="opacity:0;transform:translateY(28px);transition:opacity 1.1s ease .1s,transform 1.1s ease .1s;background:#1C2E52;border-radius:18px;padding:1.75rem 2rem;margin:1rem 0 2rem;">
-        <div style="display:inline-block;font-size:.62rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#D48D98;background:rgba(212,141,152,.16);padding:.2rem .6rem;border-radius:4px;margin-bottom:1rem;">Directional, labelled as hypotheses</div>
-        <p style="color:#C4CAD8;font-weight:300;font-size:1rem;line-height:1.7;margin-bottom:.5rem;"><strong style="color:#EDEFF6;font-weight:600;">~28,000</strong> independent opticians across my target European markets.</p>
-        <p style="color:#C4CAD8;font-weight:300;font-size:1rem;line-height:1.7;margin-bottom:.5rem;"><strong style="color:#EDEFF6;font-weight:600;">~50M EUR ARR</strong> serviceable market.</p>
-        <p style="color:#C4CAD8;font-weight:300;font-size:1rem;line-height:1.7;margin-bottom:.9rem;"><strong style="color:#EDEFF6;font-weight:600;">560 to 1,400 stores</strong> as a realistic three-year target.</p>
-        <p style="color:#98A0B3;font-weight:300;font-size:.92rem;line-height:1.6;margin-bottom:0;">These are hypotheses to test with optician interviews, not booked revenue.</p>
+      <div data-reveal style="opacity:0;transform:translateY(28px);transition:opacity 1.1s ease .1s,transform 1.1s ease .1s;background:var(--navy-2);border-radius:18px;padding:1.75rem 2rem;margin:1rem 0 2rem;">
+        <div style="display:inline-block;font-size:.62rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--rose);background:rgba(var(--rose-rgb),.16);padding:.2rem .6rem;border-radius:4px;margin-bottom:1rem;">Directional, labelled as hypotheses</div>
+        <p style="color:var(--text-muted);font-weight:300;font-size:1rem;line-height:1.7;margin-bottom:.5rem;"><strong style="color:var(--text-on-dark);font-weight:600;">~28,000</strong> independent opticians across my target European markets.</p>
+        <p style="color:var(--text-muted);font-weight:300;font-size:1rem;line-height:1.7;margin-bottom:.5rem;"><strong style="color:var(--text-on-dark);font-weight:600;">~50M EUR ARR</strong> serviceable market.</p>
+        <p style="color:var(--text-muted);font-weight:300;font-size:1rem;line-height:1.7;margin-bottom:.9rem;"><strong style="color:var(--text-on-dark);font-weight:600;">560 to 1,400 stores</strong> as a realistic three-year target.</p>
+        <p style="color:var(--text-dim);font-weight:300;font-size:.92rem;line-height:1.6;margin-bottom:0;">These are hypotheses to test with optician interviews, not booked revenue.</p>
       </div>
       <div data-reveal style="opacity:0;transform:translateY(28px);transition:opacity 1.1s ease .06s,transform 1.1s ease .06s;">
         <p>I also designed and shipped the front end myself, the editorial brand, the tier system, the interactive card layout, so the concept could be shown and used, not just described.</p>
@@ -294,22 +295,22 @@
         <p>The flow is used by an optician but read by a client, so the tone shifts mid-flow: working language for the professional (reads, scores, stock, overrides), warm plain language for the client (the welcome and the report). One product, two voices, switched on purpose. A few of the calls behind the prototype:</p>
       </div>
       <div data-reveal style="opacity:0;transform:translateY(30px);transition:opacity 1.1s ease .1s,transform 1.1s ease .1s;display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.25rem;margin-top:2rem;">
-        <div style="background:#1C2E52;border-radius:16px;padding:1.5rem;"><h4 style="font-size:.95rem;font-weight:600;color:#EDEFF6;letter-spacing:-.01em;margin-bottom:.5rem;">Guide the choice, don't just offer it</h4><p style="font-size:.85rem;color:#98A0B3;line-height:1.65;font-weight:300;margin:0;">The criteria screen leads with one recommended path (read the face automatically) and a quiet secondary option for control. A default that is easy to accept and easy to override, not two equal options that make people hesitate.</p></div>
-        <div style="background:#1C2E52;border-radius:16px;padding:1.5rem;"><h4 style="font-size:.95rem;font-weight:600;color:#EDEFF6;letter-spacing:-.01em;margin-bottom:.5rem;">Turn the fitting into signal</h4><p style="font-size:.85rem;color:#98A0B3;line-height:1.65;font-weight:300;margin:0;">As frames go on and off, the optician taps each one loved, refused, or didn't suit once worn. One familiar gesture captures what actually happened in the fitting, feeds the client's report, and trains the model. Three tags, a lot of depth, no extra work.</p></div>
-        <div style="background:#1C2E52;border-radius:16px;padding:1.5rem;"><h4 style="font-size:.95rem;font-weight:600;color:#EDEFF6;letter-spacing:-.01em;margin-bottom:.5rem;">Cap the report at six</h4><p style="font-size:.85rem;color:#98A0B3;line-height:1.65;font-weight:300;margin:0;">Customers who try 5 to 12 frames hit decision fatigue and walk. The take-home report stops at six on purpose: enough to show range across colour and shape, few enough to actually decide from. Fewer, well-explained options convert better than a longer list.</p></div>
+        <div style="background:var(--navy-2);border-radius:16px;padding:1.5rem;"><h4 style="font-size:.95rem;font-weight:600;color:var(--text-on-dark);letter-spacing:-.01em;margin-bottom:.5rem;">Guide the choice, don't just offer it</h4><p style="font-size:.85rem;color:var(--text-dim);line-height:1.65;font-weight:300;margin:0;">The criteria screen leads with one recommended path (read the face automatically) and a quiet secondary option for control. A default that is easy to accept and easy to override, not two equal options that make people hesitate.</p></div>
+        <div style="background:var(--navy-2);border-radius:16px;padding:1.5rem;"><h4 style="font-size:.95rem;font-weight:600;color:var(--text-on-dark);letter-spacing:-.01em;margin-bottom:.5rem;">Turn the fitting into signal</h4><p style="font-size:.85rem;color:var(--text-dim);line-height:1.65;font-weight:300;margin:0;">As frames go on and off, the optician taps each one loved, refused, or didn't suit once worn. One familiar gesture captures what actually happened in the fitting, feeds the client's report, and trains the model. Three tags, a lot of depth, no extra work.</p></div>
+        <div style="background:var(--navy-2);border-radius:16px;padding:1.5rem;"><h4 style="font-size:.95rem;font-weight:600;color:var(--text-on-dark);letter-spacing:-.01em;margin-bottom:.5rem;">Cap the report at six</h4><p style="font-size:.85rem;color:var(--text-dim);line-height:1.65;font-weight:300;margin:0;">Customers who try 5 to 12 frames hit decision fatigue and walk. The take-home report stops at six on purpose: enough to show range across colour and shape, few enough to actually decide from. Fewer, well-explained options convert better than a longer list.</p></div>
       </div>
     </div>
   </section>
 
   <!-- OUTCOMES -->
-  <section style="background:#FAF7F0;color:#1A1815;padding:6rem 2.5rem;">
+  <section style="background:var(--cream);color:var(--ink);padding:6rem 2.5rem;">
     <div style="max-width:var(--read);margin:0 auto;">
-      <h2 data-reveal style="opacity:0;transform:translateY(28px);transition:opacity 1.1s ease,transform 1.1s ease;font-size:clamp(1.9rem,3.8vw,3rem);font-weight:200;letter-spacing:-.03em;line-height:1.12;color:#1A1815;margin-bottom:3rem;">Outcomes: what it delivered</h2>
+      <h2 data-reveal style="opacity:0;transform:translateY(28px);transition:opacity 1.1s ease,transform 1.1s ease;font-size:clamp(1.9rem,3.8vw,3rem);font-weight:200;letter-spacing:-.03em;line-height:1.12;color:var(--ink);margin-bottom:3rem;">Outcomes: what it delivered</h2>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:3rem 4rem;">
-        <div data-reveal style="opacity:0;transform:translateY(28px);transition:opacity 1.1s ease,transform 1.1s ease;"><div style="font-size:clamp(2.2rem,3.6vw,3.2rem);font-weight:200;color:#A33E4E;line-height:1;letter-spacing:-.03em;margin-bottom:.8rem;">~1/3</div><p style="font-size:1.02rem;font-weight:300;line-height:1.7;color:#48443C;">Of my first rankings overturned once tested against a real face, then recalibrated mid-process.</p></div>
-        <div data-reveal style="opacity:0;transform:translateY(28px);transition:opacity 1.1s ease .06s,transform 1.1s ease .06s;"><div style="font-size:clamp(2.2rem,3.6vw,3.2rem);font-weight:200;color:#A33E4E;line-height:1;letter-spacing:-.03em;margin-bottom:.8rem;">7 reads</div><p style="font-size:1.02rem;font-weight:300;line-height:1.7;color:#48443C;">A weighted, explainable model where every pick traces to a stated rule, and out-of-scope factors can't move a number.</p></div>
-        <div data-reveal style="opacity:0;transform:translateY(28px);transition:opacity 1.1s ease .1s,transform 1.1s ease .1s;"><div style="font-size:clamp(2.2rem,3.6vw,3.2rem);font-weight:200;color:#A33E4E;line-height:1;letter-spacing:-.03em;margin-bottom:.8rem;">~50M EUR</div><p style="font-size:1.02rem;font-weight:300;line-height:1.7;color:#48443C;">Serviceable market I sized from the ground up, with a segmented three-year go-to-market thesis to test.</p></div>
-        <div data-reveal style="opacity:0;transform:translateY(28px);transition:opacity 1.1s ease .14s,transform 1.1s ease .14s;"><div style="font-size:clamp(2.2rem,3.6vw,3.2rem);font-weight:200;color:#A33E4E;line-height:1;letter-spacing:-.03em;margin-bottom:.8rem;">0→1</div><p style="font-size:1.02rem;font-weight:300;line-height:1.7;color:#48443C;">Problem, logic, brand, and a clickable in-store product, researched and shipped end to end.</p></div>
+        <div data-reveal style="opacity:0;transform:translateY(28px);transition:opacity 1.1s ease,transform 1.1s ease;"><div style="font-size:clamp(2.2rem,3.6vw,3.2rem);font-weight:200;color:var(--wine-deep);line-height:1;letter-spacing:-.03em;margin-bottom:.8rem;">~1/3</div><p style="font-size:1.02rem;font-weight:300;line-height:1.7;color:var(--ink-2);">Of my first rankings overturned once tested against a real face, then recalibrated mid-process.</p></div>
+        <div data-reveal style="opacity:0;transform:translateY(28px);transition:opacity 1.1s ease .06s,transform 1.1s ease .06s;"><div style="font-size:clamp(2.2rem,3.6vw,3.2rem);font-weight:200;color:var(--wine-deep);line-height:1;letter-spacing:-.03em;margin-bottom:.8rem;">7 reads</div><p style="font-size:1.02rem;font-weight:300;line-height:1.7;color:var(--ink-2);">A weighted, explainable model where every pick traces to a stated rule, and out-of-scope factors can't move a number.</p></div>
+        <div data-reveal style="opacity:0;transform:translateY(28px);transition:opacity 1.1s ease .1s,transform 1.1s ease .1s;"><div style="font-size:clamp(2.2rem,3.6vw,3.2rem);font-weight:200;color:var(--wine-deep);line-height:1;letter-spacing:-.03em;margin-bottom:.8rem;">~50M EUR</div><p style="font-size:1.02rem;font-weight:300;line-height:1.7;color:var(--ink-2);">Serviceable market I sized from the ground up, with a segmented three-year go-to-market thesis to test.</p></div>
+        <div data-reveal style="opacity:0;transform:translateY(28px);transition:opacity 1.1s ease .14s,transform 1.1s ease .14s;"><div style="font-size:clamp(2.2rem,3.6vw,3.2rem);font-weight:200;color:var(--wine-deep);line-height:1;letter-spacing:-.03em;margin-bottom:.8rem;">0→1</div><p style="font-size:1.02rem;font-weight:300;line-height:1.7;color:var(--ink-2);">Problem, logic, brand, and a clickable in-store product, researched and shipped end to end.</p></div>
       </div>
     </div>
   </section>
@@ -326,21 +327,21 @@
 
   <!-- NEXT CASE -->
   <section style="padding:0 2.5rem 5rem;">
-    <a href="noir-book.html" data-reveal style="opacity:0;transform:translateY(28px);transition:opacity 1.1s ease,transform 1.1s ease;display:flex;align-items:center;justify-content:space-between;gap:2rem;max-width:var(--read);margin:0 auto;background:#1C2E52;border-radius:24px;padding:3rem 3.5rem;">
+    <a href="noir-book.html" data-reveal style="opacity:0;transform:translateY(28px);transition:opacity 1.1s ease,transform 1.1s ease;display:flex;align-items:center;justify-content:space-between;gap:2rem;max-width:var(--read);margin:0 auto;background:var(--navy-2);border-radius:24px;padding:3rem 3.5rem;">
       <div>
-        <div style="font-size:.8rem;font-weight:500;letter-spacing:.05em;color:#D48D98;margin-bottom:.8rem;">NEXT CASE STUDY</div>
-        <div style="font-size:clamp(1.4rem,2.6vw,2rem);font-weight:300;letter-spacing:-.02em;color:#EDEFF6;">Noir Book – the reference my bookmarks were trying to be</div>
+        <div style="font-size:.8rem;font-weight:500;letter-spacing:.05em;color:var(--rose);margin-bottom:.8rem;">NEXT CASE STUDY</div>
+        <div style="font-size:clamp(1.4rem,2.6vw,2rem);font-weight:300;letter-spacing:-.02em;color:var(--text-on-dark);">Noir Book – the reference my bookmarks were trying to be</div>
       </div>
-      <div style="font-size:2.2rem;color:#C26A79;flex-shrink:0;">→</div>
+      <div style="font-size:2.2rem;color:var(--wine);flex-shrink:0;">→</div>
     </a>
   </section>
 
-  <footer style="background:#0f1a30;padding:3rem 2.5rem;">
+  <footer style="background:var(--navy-deep);padding:3rem 2.5rem;">
     <div style="max-width:var(--read);margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1.5rem;">
-      <a href="index.html#work" style="font-size:.9rem;color:#98A0B3;">← Back to all work</a>
-      <a href="mailto:perrien.work@gmail.com?subject=Let%27s%20talk%3A%20Reframe%20case%20study" style="font-size:.9rem;font-weight:500;color:#D48D98;">Discuss a project →</a>
+      <a href="index.html#work" style="font-size:.9rem;color:var(--text-dim);">← Back to all work</a>
+      <a href="mailto:perrien.work@gmail.com?subject=Let%27s%20talk%3A%20Reframe%20case%20study" style="font-size:.9rem;font-weight:500;color:var(--rose);">Discuss a project →</a>
     </div>
-    <div style="max-width:var(--read);margin:2rem auto 0;font-size:.78rem;color:#5a6a8a;">© 2026 Malgo Perrien · The Product Office</div>
+    <div style="max-width:var(--read);margin:2rem auto 0;font-size:.78rem;color:var(--navy-muted);">© 2026 Malgo Perrien · The Product Office</div>
   </footer>
 
 </div>
