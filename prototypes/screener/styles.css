@@ -257,7 +257,7 @@ body { font-family: var(--font); font-weight: 400; font-size: 1.05rem;
    SCREENER / QUIZ ENGINE
 ═══════════════════════════════════ */
 
-/* Screen container — only active screen shown */
+/* Screen container – only active screen shown */
 .screen { display: none; }
 .screen.active { display: block; }
 
@@ -878,7 +878,7 @@ body { font-family: var(--font); font-weight: 400; font-size: 1.05rem;
 }
 
 /* ═══════════════════════════════════
-   QUESTION SCREEN — IMMERSIVE LAYOUT
+   QUESTION SCREEN – IMMERSIVE LAYOUT
    Full viewport, card fills the space.
 ═══════════════════════════════════ */
 
@@ -890,7 +890,7 @@ body { font-family: var(--font); font-weight: 400; font-size: 1.05rem;
   overflow: hidden;
 }
 
-/* Compact progress bar — fixed height at top */
+/* Compact progress bar – fixed height at top */
 #questionScreen .progress-section {
   padding: 16px 28px 14px;
   flex-shrink: 0;
@@ -930,7 +930,7 @@ body { font-family: var(--font); font-weight: 400; font-size: 1.05rem;
   #questionScreen .question-card { padding: 24px 22px 20px; }
 }
 
-/* Question focus group — centered vertically in the card */
+/* Question focus group – centered vertically in the card */
 #questionScreen .question-focus {
   flex: 1;
   display: flex;
@@ -962,7 +962,7 @@ body { font-family: var(--font); font-weight: 400; font-size: 1.05rem;
   padding: 18px 4px 14px;
 }
 
-/* Bigger dots — scaled up from original sizes */
+/* Bigger dots – scaled up from original sizes */
 #questionScreen .scale-btn:nth-child(1) .dot { width: 32px; height: 32px; }
 #questionScreen .scale-btn:nth-child(2) .dot { width: 24px; height: 24px; }
 #questionScreen .scale-btn:nth-child(3) .dot { width: 16px; height: 16px; }
@@ -974,14 +974,14 @@ body { font-family: var(--font); font-weight: 400; font-size: 1.05rem;
   font-size: .74rem;
 }
 
-/* Quality warning — remove outer spacing (now inside card) */
+/* Quality warning – remove outer spacing (now inside card) */
 #questionScreen .quality-warning {
   max-width: none;
   margin: 16px 0 0;
   padding: 0;
 }
 
-/* Card nav — inside card, no outer positioning */
+/* Card nav – inside card, no outer positioning */
 #questionScreen .card-nav {
   max-width: none;
   margin: 14px 0 0;
@@ -991,7 +991,7 @@ body { font-family: var(--font); font-weight: 400; font-size: 1.05rem;
   align-items: center;
 }
 
-/* Continue ghost button — hidden by default, shown by JS when reviewing */
+/* Continue ghost button – hidden by default, shown by JS when reviewing */
 .btn-continue-ghost {
   display: none;
   align-items: center;
@@ -1008,7 +1008,7 @@ body { font-family: var(--font); font-weight: 400; font-size: 1.05rem;
 }
 .btn-continue-ghost:hover { color: var(--text); }
 
-/* Childhood screen — vertically centered */
+/* Childhood screen – vertically centered */
 #childhoodScreen.active {
   display: flex;
   align-items: center;
